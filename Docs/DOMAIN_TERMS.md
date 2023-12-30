@@ -34,6 +34,6 @@
 
 - **Warunki wyróżniające** (`Distinguishing conditions`) - warunki, które muszą być spełnione przez osobnika, aby został uznany za osobnika powracającego. Warunki wyróżniające są ustalane przez użytkownika i dotyczą wartości kluczowych - np. osobnik musi być tego samego gatunku, płci, musi być zaobserwowany w tym samym miejscu, dystans pomiędzy obserwacjami musi być nie mniejszy niż pół roku, obserwacja musi być nie wcześniej niż 1 sierpnia następnego roku, etc.
 
-- **Ustawienia** (`Settings`) - kompletny zestaw wszystkich warunków, filtrów, kolumn etc. pozwalający na całkowite przetworzenie bazy danych, od załadowania aż do zapisu wyników.
+- **Zbiór warunków** (`Conditions set`) - kompletny zestaw wszystkich warunków, filtrów, kolumn etc. pozwalający na całkowite przetworzenie bazy danych, od załadowania aż do zapisu wyników.
 
 - **Wyniki** (`Results`) - zbiór wyników zawierający listę osobników powracających wraz z wartościami kluczowymi, wartościami pomiarowymi oraz wartościami statystycznymi. Wyniki są zapisywane w pliku `.csv` lub `.xlsx`. W wynikach jest również całkowity zbiór ustawień.
