@@ -16,7 +16,7 @@
 
 - **Wartości statystyczne** (`Statistical values`) - wartości liczbowe obliczane na podstawie wartości pomiarowych - np. średnia masa, odchylenie standardowe długości, etc. Wartości statystyczne są wyznaczane na podstawie wartości pomiarowych populacji. Operacje statystyczne są wybierane przez użytkownika.
 
-- **Filtr** (`Filter`) - pojedynczy warunek, który musi być spełniony przez obserwację, aby był wliczony w badany podzbiór obserwacji. Filtry są ustalane przez użytkownika i dotyczą wartości kluczowych - np. wybierane są tylko samice, wybierany jest konkretny gatunek, wybierane są obserwacje z lat 1960-1980, etc.
+- **Filtr** / **Warunek** (`Filter` / `Condition`) - pojedynczy warunek, który musi być spełniony przez obserwację, aby był wliczony w badany podzbiór obserwacji. Filtry są ustalane przez użytkownika i dotyczą wartości kluczowych - np. wybierane są tylko samice, wybierany jest konkretny gatunek, wybierane są obserwacje z lat 1960-1980, etc.
 
 - **Pętla** (`Loop`) - warunek powtórzenia tych samych obliczeń dla różnych podzbiorów bazy obserwacji. Pętle są ustalane przez użytkownika i dotyczą wartości kluczowych - np. te same operacje są wykonywane dla różnych gatunków, płci, etc. Pętle mogą być zagnieżdżone.
 
@@ -36,4 +36,4 @@
 
 - **Zbiór warunków** (`Conditions set`) - kompletny zestaw wszystkich warunków, filtrów, kolumn etc. pozwalający na całkowite przetworzenie bazy danych, od załadowania aż do zapisu wyników.
 
-- **Wyniki** (`Results`) - zbiór wyników zawierający listę osobników powracających wraz z wartościami kluczowymi, wartościami pomiarowymi oraz wartościami statystycznymi. Wyniki są zapisywane w pliku `.csv` lub `.xlsx`. W wynikach jest również całkowity zbiór ustawień.
+- **Wyniki dla powracających osobników** (`Returning specimen results`) - zbiór wyników zawierający listę osobników powracających wraz z wartościami kluczowymi, wartościami pomiarowymi oraz wartościami statystycznymi. Wyniki są zapisywane w pliku `.csv` lub `.xlsx`. W wynikach jest również całkowity zbiór ustawień.
