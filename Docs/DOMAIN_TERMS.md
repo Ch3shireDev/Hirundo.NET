@@ -28,7 +28,7 @@
 
 - **Okno czasowe** (`Time window`) - wyznaczany na podstawie sezonu i roku obserwacji, np. dla sezonu od 1 sierpnia do 30 września i roku 2018 okno czasowe wynosi od 1 sierpnia 2018 do 30 września 2018. Dla obserwacji z 10 grudnia 2010 i sezonu od 1 grudnia do 31 stycznia okno czasowe wynosi od 1 grudnia 2010 do 31 stycznia 2011. Okna czasowe są istotne dla określania populacji dla danego osobnika powracającego.
 
-- **Obserwacja odstająca** (`Outliner`) - obserwacja która nie spełnia warunków populacji, np. różnią się od średniej o więcej niż trzy odchylenia standardowe, należą do 1% najbardziej skrajnych wartości, etc. Obserwacje odstające są wyznaczane na podstawie wartości statystycznych populacji poprzez operacje wykluczające dla danej wartości statystycznej. Operacje wykluczające są ustalane przez użytkownika.
+- **Obserwacja odstająca** (`Outlier`) - obserwacja która nie spełnia warunków populacji, np. różnią się od średniej o więcej niż trzy odchylenia standardowe, należą do 1% najbardziej skrajnych wartości, etc. Obserwacje odstające są wyznaczane na podstawie wartości statystycznych populacji poprzez operacje wykluczające dla danej wartości statystycznej. Operacje wykluczające są ustalane przez użytkownika.
 
 - **Operacja wykluczająca** (`Excluding operation`) - operacja wykluczająca obserwacje odstające z populacji. Operacje wykluczające są ustalane przez użytkownika i dotyczą wartości statystycznych - np. wykluczanie obserwacji odstających na podstawie odchylenia standardowego, wykluczanie 1% najbardziej skrajnych wartości, etc.
 
@@ -36,4 +36,4 @@
 
 - **Zbiór warunków** (`Conditions set`) - kompletny zestaw wszystkich warunków, filtrów, kolumn etc. pozwalający na całkowite przetworzenie bazy danych, od załadowania aż do zapisu wyników.
 
-- **Wyniki dla powracających osobników** (`Returning specimen results`) - zbiór wyników zawierający listę osobników powracających wraz z wartościami kluczowymi, wartościami pomiarowymi oraz wartościami statystycznymi. Wyniki są zapisywane w pliku `.csv` lub `.xlsx`. W wynikach jest również całkowity zbiór ustawień.
+- **Wyniki dla powracających osobników** / **Wyniki** (`Returning specimen summaries` / `Summary`) - zbiór wyników zawierający listę osobników powracających wraz z wartościami kluczowymi, wartościami pomiarowymi oraz wartościami statystycznymi. Wyniki są zapisywane w pliku `.csv` lub `.xlsx`. W wynikach jest również całkowity zbiór ustawień.

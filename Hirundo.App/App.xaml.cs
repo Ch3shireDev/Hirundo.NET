@@ -1,14 +1,21 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿using System.Windows;
 
-namespace Hirundo.App
+namespace Hirundo.App;
+
+/// <summary>
+///     Interaction logic for App.xaml
+/// </summary>
+public partial class App : Application
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    protected override void OnStartup(StartupEventArgs e)
     {
-    }
+        var viewModel = new MainViewModel();
 
+        viewModel.Items.Add("Hello");
+        viewModel.Items.Add("World");
+
+
+        var view = new MainWindow { DataContext = viewModel };
+        view.Show();
+    }
 }

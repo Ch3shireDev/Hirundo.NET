@@ -1,0 +1,17 @@
+﻿using Hirundo.Commons;
+
+namespace Hirundo.Filters.Specimens;
+
+/// <summary>
+///     Interfejs dla filtrów powracających osobników. Na podstawie osobnika i jego listy obserwacji określa, czy dany
+///     osobnik jest interesującym nas osobnikiem powracającym.
+/// </summary>
+public interface IReturningSpecimenFilter
+{
+    /// <summary>
+    ///     Sprawdza, czy dany osobnik jest interesującym nas osobnikiem powracającym.
+    /// </summary>
+    /// <param name="specimen">Osobnik.</param>
+    /// <returns>Czy osobnik jest powracający?</returns>
+    bool IsReturningSpecimen(Specimen specimen);
+}
