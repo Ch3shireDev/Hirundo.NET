@@ -9,6 +9,9 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: ./Src
 
     steps:
     - uses: actions/checkout@v3
@@ -36,7 +39,7 @@ jobs:
       run: dotnet build --configuration Release --no-restore
 
     - name: Run ODBC installer for Access
-      run: Start-Process -FilePath "./Assets/accessdatabaseengine_X64.exe" -ArgumentList "/quiet /norestart" -Wait
+      run: Start-Process -FilePath "../Assets/accessdatabaseengine_X64.exe" -ArgumentList "/quiet /norestart" -Wait
 
     - name: Run tests
       run: dotnet test --no-restore --verbosity normal

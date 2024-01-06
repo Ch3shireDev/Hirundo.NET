@@ -12,7 +12,7 @@
             <Setter Property="Margin" Value="5,5" />
             <Setter Property="Padding" Value="15,5" />
             <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="BorderBrush" Value="LightGray" />
+            <Setter Property="BorderBrush" Value="#FFABADB3" />
             <Setter Property="MinWidth" Value="120" />
         </Style>
         <Style TargetType="TextBlock">
