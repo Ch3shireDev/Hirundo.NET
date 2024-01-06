@@ -25,6 +25,11 @@ internal class Program
             RingValueName = "RING"
         };
 
+        var csvSummaryWriterParameters = new CsvSummaryWriterParameters
+        {
+            SummaryFilepath = @"summary.csv"
+        };
+
         var databaseBuilder = new DatabaseBuilder();
         var specimensProcessorBuilder = new SpecimensProcessorBuilder();
         var observationFiltersBuilder = new ObservationFiltersBuilder();
@@ -52,7 +57,7 @@ internal class Program
             .Build();
 
         var resultsWriter = summaryWriterBuilder
-            .WithFilename("results.csv")
+            .WithCsvSummaryWriterParameters(csvSummaryWriterParameters)
             .Build();
 
         var specimensProcessor = specimensProcessorBuilder

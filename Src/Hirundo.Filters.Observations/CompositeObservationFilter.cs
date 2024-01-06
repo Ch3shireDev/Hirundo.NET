@@ -9,3 +9,11 @@ public class CompositeObservationFilter : IObservationFilter
         return true;
     }
 }
+
+public class OnlyGivenValueFilter(string valueName, object value) : IObservationFilter
+{
+    public bool IsSelected(Observation observation)
+    {
+        return observation.GetValue(valueName) == value;
+    }
+}

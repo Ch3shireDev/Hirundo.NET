@@ -1,7 +1,7 @@
 ﻿namespace Hirundo.Writers.Summary;
 
 /// <summary>
-/// Budowniczy dla <see cref="ISummaryWriter"/>.
+///     Budowniczy dla <see cref="ISummaryWriter" />.
 /// </summary>
 public class SummaryWriterBuilder
 {
@@ -10,6 +10,12 @@ public class SummaryWriterBuilder
     public SummaryWriterBuilder WithFilename(string filename)
     {
         _filename = filename;
+        return this;
+    }
+
+    public SummaryWriterBuilder WithCsvSummaryWriterParameters(CsvSummaryWriterParameters parameters)
+    {
+        _filename = parameters.SummaryFilepath;
         return this;
     }
 
