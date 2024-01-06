@@ -9,6 +9,9 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: ./Src
 
     steps:
     - uses: actions/checkout@v3
@@ -36,7 +39,7 @@ jobs:
       run: dotnet build --configuration Release --no-restore
 
     - name: Run ODBC installer for Access
-      run: Start-Process -FilePath "./Assets/accessdatabaseengine_X64.exe" -ArgumentList "/quiet /norestart" -Wait
+      run: Start-Process -FilePath "../Assets/accessdatabaseengine_X64.exe" -ArgumentList "/quiet /norestart" -Wait
 
     - name: Run tests
       run: dotnet test --no-restore --verbosity normal
@@ -61,7 +64,7 @@ jobs:
       if: env.RELEASE_TRIGGERED
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: Compress-Archive -Path ./publish/* -DestinationPath hirundo-net-${{ env.VERSION }}.zip
+      run: Compress-Archive -Path ./publish/* -DestinationPath ./hirundo-net-${{ env.VERSION }}.zip
 
     - name: Create Release
       if: env.RELEASE_TRIGGERED
@@ -82,6 +85,6 @@ jobs:
       uses: actions/upload-release-asset@v1
       with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: hirundo-net-${{ env.VERSION }}.zip
+          asset_path: ./hirundo-net-${{ env.VERSION }}.zip
           asset_name: hirundo-net-${{ env.VERSION }}.zip
           asset_content_type: application/zip

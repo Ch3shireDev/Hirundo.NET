@@ -20,8 +20,13 @@ internal class Program
         var oldDatabaseParameters = GetOldAccessDatabaseParameters();
         var newDatabaseParameters = GetNewAccessDatabaseParameters();
 
+        var specimensProcessorParameters = new SpecimensProcessorParameters
+        {
+            RingValueName = "RING"
+        };
+
         var databaseBuilder = new DatabaseBuilder();
-        var specimensProcessor = new SpecimensProcessor();
+        var specimensProcessorBuilder = new SpecimensProcessorBuilder();
         var observationFiltersBuilder = new ObservationFiltersBuilder();
         var returningSpecimenFiltersBuilder = new ReturningSpecimenFiltersBuilder();
         var populationProcessorBuilder = new PopulationProcessorBuilder();
@@ -48,6 +53,10 @@ internal class Program
 
         var resultsWriter = summaryWriterBuilder
             .WithFilename("results.csv")
+            .Build();
+
+        var specimensProcessor = specimensProcessorBuilder
+            .WithSpecimensProcessorParameters(specimensProcessorParameters)
             .Build();
 
         var observations = compositeDatabase.GetObservations().ToArray();

@@ -10,7 +10,7 @@ public class Specimen
     /// <summary>
     ///     Unikalny identyfikator osobnika, np. numer obrączki.
     /// </summary>
-    public string Identifier { get; set; } = null!;
+    public object Identifier { get; set; } = null!;
 
     /// <summary>
     ///     Lista obserwacji osobnika.
