@@ -5,12 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Hirundo.App"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800" d:Background="AliceBlue"
+             d:DesignHeight="600" d:DesignWidth="1000" Background="#FFF7FFF7"
              d:DataContext="{d:DesignInstance local:MainViewModel}">
     <UserControl.Resources>
         <Style TargetType="Button">
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="Padding" Value="15,1" />
+            <Setter Property="Margin" Value="5,5" />
+            <Setter Property="Padding" Value="15,5" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="LightGray" />
+            <Setter Property="MinWidth" Value="120" />
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Padding" Value="15,5" />
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -19,9 +25,9 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0">
-            <Label FontWeight="Bold">Nagłówek</Label>
-            <Label>Opis opis opis opis</Label>
+        <StackPanel Grid.Row="0" Margin="10,5">
+            <Label FontWeight="Bold">Źródło danych</Label>
+            <Label>Panel wyboru źródła danych.</Label>
         </StackPanel>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -34,30 +40,49 @@
                         <Setter Property="HeaderTemplate">
                             <Setter.Value>
                                 <DataTemplate>
-                                    <StackPanel HorizontalAlignment="Center" Width="200">
-                                        <TextBlock Text="{Binding}" HorizontalAlignment="Center" />
-                                    </StackPanel>
+                                    <TextBlock Text="{Binding}"
+                                               Margin="10"
+                                               HorizontalAlignment="Center"
+                                               FontWeight="DemiBold"
+                                               FontSize="12" />
                                 </DataTemplate>
                             </Setter.Value>
                         </Setter>
                     </Style>
                 </TabControl.Resources>
-                <TabItem Header="Tab 1">
-                    <Label>Tab 1</Label>
+                <TabItem Header="Źródło danych">
+                    <TextBlock TextWrapping="WrapWithOverflow">W tym panelu wybierasz źródło danych.</TextBlock>
                 </TabItem>
-                <TabItem Header="Tab 2">
-                    <Label>Tab 2</Label>
+                <TabItem Header="Obserwacje">
+                    <TextBlock TextWrapping="WrapWithOverflow">W tym panelu ustalasz warunki jakie mają spełniać wybierane obserwacje do obliczeń.</TextBlock>
                 </TabItem>
-                <TabItem Header="Tab 3">
-                    <Label>Tab 3</Label>
+                <TabItem Header="Wszystkie osobniki">
+                    <TextBlock TextWrapping="WrapWithOverflow">W tym panelu decydujesz, w jaki sposób grupować obserwacje w grupy reprezentujące pojedyncze osobniki.</TextBlock>
+                </TabItem>
+                <TabItem Header="Osobniki powracające">
+                    <TextBlock TextWrapping="WrapWithOverflow">W tym panelu ustalasz warunki wyróżniające osobniki powracające spośród wszystkich osobników.</TextBlock>
+                </TabItem>
+                <TabItem Header="Populacja">
+                    <TextBlock TextWrapping="WrapWithOverflow">W tym panelu określasz warunki określające populację dla danego osobnika powracającego.</TextBlock>
+                </TabItem>
+                <TabItem Header="Statystyki">
+                    <TextBlock TextWrapping="WrapWithOverflow">W tym panelu wybierasz dane statystyczne, które mają być obliczone dla populacji dla każdego osobnika powracającego.</TextBlock>
+                </TabItem>
+                <TabItem Header="Obserwacje odstające">
+                    <TextBlock TextWrapping="WrapWithOverflow">W tym panelu określasz warunki wykluczania danych odstających.</TextBlock>
+                </TabItem>
+                <TabItem Header="Zapis wyników">
+                    <TextBlock TextWrapping="WrapWithOverflow">W tym panelu wybierasz sposób zapisu wyników.</TextBlock>
                 </TabItem>
             </TabControl>
             <ListBox Grid.Column="1" ItemsSource="{Binding Items}" Margin="5,0">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding}" />
+                        <TextBlock Text="{Binding}" Padding="0" Margin="0" />
                     </DataTemplate>
                 </ListBox.ItemTemplate>
+                <d:ListBoxItem Content="First line" />
+                <d:ListBoxItem Content="Second line" />
             </ListBox>
         </Grid>
         <DockPanel Grid.Row="2">

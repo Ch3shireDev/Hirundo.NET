@@ -17,43 +17,49 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Databases.Tests.Int
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Commons", "Hirundo.Commons\Hirundo.Commons.csproj", "{6757E022-BBFF-41B1-84DA-747A23D4466F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Filters.Observations", "Hirundo.Filters.Observations\Hirundo.Filters.Observations.csproj", "{D1B5D4CD-E13D-45E7-908D-A7FD16D5A609}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Filters.Observations", "Hirundo.Filters.Observations\Hirundo.Filters.Observations.csproj", "{D1B5D4CD-E13D-45E7-908D-A7FD16D5A609}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Filters.Specimens", "Hirundo.Filters.Specimens\Hirundo.Filters.Specimens.csproj", "{A5759142-BF89-4F28-BD27-BAD3D90543DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Filters.Specimens", "Hirundo.Filters.Specimens\Hirundo.Filters.Specimens.csproj", "{A5759142-BF89-4F28-BD27-BAD3D90543DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Filters.Population", "Hirundo.Filters.Population\Hirundo.Filters.Population.csproj", "{433F2A9A-F0B8-4AEE-A4D1-4F161FDA76A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Filters.Population", "Hirundo.Filters.Population\Hirundo.Filters.Population.csproj", "{433F2A9A-F0B8-4AEE-A4D1-4F161FDA76A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Filters.Outliers", "Hirundo.Filters.Outliers\Hirundo.Filters.Outliers.csproj", "{90D7A866-A94A-4095-A888-D6DC2500392C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Filters.Outliers", "Hirundo.Filters.Outliers\Hirundo.Filters.Outliers.csproj", "{90D7A866-A94A-4095-A888-D6DC2500392C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Filters.Observations.Tests", "Hirundo.Filters.Observations.Tests\Hirundo.Filters.Observations.Tests.csproj", "{FF6B74AB-205C-4E01-82AA-E39D1B6065CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Filters.Observations.Tests", "Hirundo.Filters.Observations.Tests\Hirundo.Filters.Observations.Tests.csproj", "{FF6B74AB-205C-4E01-82AA-E39D1B6065CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Filters.Outliers.Tests", "Hirundo.Filters.Outliers.Tests\Hirundo.Filters.Outliers.Tests.csproj", "{A408FE17-9E35-4D6C-A880-B0FCBB09AE8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Filters.Outliers.Tests", "Hirundo.Filters.Outliers.Tests\Hirundo.Filters.Outliers.Tests.csproj", "{A408FE17-9E35-4D6C-A880-B0FCBB09AE8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Filters.Population.Tests", "Hirundo.Filters.Population.Tests\Hirundo.Filters.Population.Tests.csproj", "{B158048C-FBBD-4201-8649-1499FFF6DEAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Filters.Population.Tests", "Hirundo.Filters.Population.Tests\Hirundo.Filters.Population.Tests.csproj", "{B158048C-FBBD-4201-8649-1499FFF6DEAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Filters.Specimens.Tests", "Hirundo.Filters.Specimens.Tests\Hirundo.Filters.Specimens.Tests.csproj", "{B077853B-EBDD-4368-9649-5E9989FDE1BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Filters.Specimens.Tests", "Hirundo.Filters.Specimens.Tests\Hirundo.Filters.Specimens.Tests.csproj", "{B077853B-EBDD-4368-9649-5E9989FDE1BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Processors.Population", "Hirundo.Processors.Population\Hirundo.Processors.Population.csproj", "{7D84BC30-9BBE-430D-92FC-F0E00F61AFFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Processors.Population", "Hirundo.Processors.Population\Hirundo.Processors.Population.csproj", "{7D84BC30-9BBE-430D-92FC-F0E00F61AFFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Processors.Population.Tests", "Hirundo.Processors.Population.Tests\Hirundo.Processors.Population.Tests.csproj", "{BCA5891F-9277-4BDC-A82F-D5A6194B54AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Processors.Population.Tests", "Hirundo.Processors.Population.Tests\Hirundo.Processors.Population.Tests.csproj", "{BCA5891F-9277-4BDC-A82F-D5A6194B54AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Processors.Statistics", "Hirundo.Processors.Statistics\Hirundo.Processors.Statistics.csproj", "{1235259F-89C6-4C9A-A4B2-B243ED17AA42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Processors.Statistics", "Hirundo.Processors.Statistics\Hirundo.Processors.Statistics.csproj", "{1235259F-89C6-4C9A-A4B2-B243ED17AA42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Processors.Statistics.Tests", "Hirundo.Processors.Statistics.Tests\Hirundo.Processors.Statistics.Tests.csproj", "{A6431268-65DD-4AD5-860F-39FA6D1F28CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Processors.Statistics.Tests", "Hirundo.Processors.Statistics.Tests\Hirundo.Processors.Statistics.Tests.csproj", "{A6431268-65DD-4AD5-860F-39FA6D1F28CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Processors.Specimens", "Hirundo.Processors.Specimens\Hirundo.Processors.Specimens.csproj", "{CE9ED348-A83B-4130-93A5-9C1367C9EC8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Processors.Specimens", "Hirundo.Processors.Specimens\Hirundo.Processors.Specimens.csproj", "{CE9ED348-A83B-4130-93A5-9C1367C9EC8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Processors.Specimens.Tests", "Hirundo.Processors.Specimens.Tests\Hirundo.Processors.Specimens.Tests.csproj", "{A09C7B25-0D22-4DD5-B844-F7AB2DFCB897}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Processors.Specimens.Tests", "Hirundo.Processors.Specimens.Tests\Hirundo.Processors.Specimens.Tests.csproj", "{A09C7B25-0D22-4DD5-B844-F7AB2DFCB897}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Processors.Summary", "Hirundo.Processors.Summary\Hirundo.Processors.Summary.csproj", "{D7548D59-9495-4FA9-A4D2-11D360917E38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Processors.Summary", "Hirundo.Processors.Summary\Hirundo.Processors.Summary.csproj", "{D7548D59-9495-4FA9-A4D2-11D360917E38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Processors.Summary.Tests", "Hirundo.Processors.Summary.Tests\Hirundo.Processors.Summary.Tests.csproj", "{54D2B821-FB36-4A86-AA89-D4AD4CCD9F1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Processors.Summary.Tests", "Hirundo.Processors.Summary.Tests\Hirundo.Processors.Summary.Tests.csproj", "{54D2B821-FB36-4A86-AA89-D4AD4CCD9F1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Writers.Summary", "Hirundo.Writers.Summary\Hirundo.Writers.Summary.csproj", "{9941113F-6477-4644-8DCF-DB0FBB6E5E07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Writers.Summary", "Hirundo.Writers.Summary\Hirundo.Writers.Summary.csproj", "{9941113F-6477-4644-8DCF-DB0FBB6E5E07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Writers.Summary.Tests", "Hirundo.Writers.Summary.Tests\Hirundo.Writers.Summary.Tests.csproj", "{BD87AFDB-936C-4735-9B52-B5919BB80437}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Writers.Summary.Tests", "Hirundo.Writers.Summary.Tests\Hirundo.Writers.Summary.Tests.csproj", "{BD87AFDB-936C-4735-9B52-B5919BB80437}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.App.CLI", "Hirundo.App.CLI\Hirundo.App.CLI.csproj", "{180EE763-64C2-444E-A3E4-43204C51B0DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.App.CLI", "Hirundo.App.CLI\Hirundo.App.CLI.csproj", "{180EE763-64C2-444E-A3E4-43204C51B0DD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{66952413-DE19-442D-BD7E-05B457715E11}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{08F44D1D-B8D6-4172-B8D0-B0383A77C5AE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{095ED9C4-38CC-415A-92E4-1E5EADBDD439}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -168,6 +174,34 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{14071E3F-E4EC-40A6-9792-10FAC1283407} = {08F44D1D-B8D6-4172-B8D0-B0383A77C5AE}
+		{E3CD5E6A-452F-4229-B46F-4ADEAA3648A7} = {095ED9C4-38CC-415A-92E4-1E5EADBDD439}
+		{F7D6A02E-FEC7-4491-832E-C0418C00E3C2} = {66952413-DE19-442D-BD7E-05B457715E11}
+		{58E8EC4A-0F4C-4115-8DC3-7339F76F7D26} = {095ED9C4-38CC-415A-92E4-1E5EADBDD439}
+		{08194132-B25D-46B8-A12D-F734DC214FB6} = {66952413-DE19-442D-BD7E-05B457715E11}
+		{3F2FC052-29B9-4089-B659-C6DD59C89719} = {66952413-DE19-442D-BD7E-05B457715E11}
+		{6757E022-BBFF-41B1-84DA-747A23D4466F} = {095ED9C4-38CC-415A-92E4-1E5EADBDD439}
+		{D1B5D4CD-E13D-45E7-908D-A7FD16D5A609} = {095ED9C4-38CC-415A-92E4-1E5EADBDD439}
+		{A5759142-BF89-4F28-BD27-BAD3D90543DF} = {095ED9C4-38CC-415A-92E4-1E5EADBDD439}
+		{433F2A9A-F0B8-4AEE-A4D1-4F161FDA76A5} = {095ED9C4-38CC-415A-92E4-1E5EADBDD439}
+		{90D7A866-A94A-4095-A888-D6DC2500392C} = {095ED9C4-38CC-415A-92E4-1E5EADBDD439}
+		{FF6B74AB-205C-4E01-82AA-E39D1B6065CE} = {66952413-DE19-442D-BD7E-05B457715E11}
+		{A408FE17-9E35-4D6C-A880-B0FCBB09AE8B} = {66952413-DE19-442D-BD7E-05B457715E11}
+		{B158048C-FBBD-4201-8649-1499FFF6DEAE} = {66952413-DE19-442D-BD7E-05B457715E11}
+		{B077853B-EBDD-4368-9649-5E9989FDE1BB} = {66952413-DE19-442D-BD7E-05B457715E11}
+		{7D84BC30-9BBE-430D-92FC-F0E00F61AFFF} = {095ED9C4-38CC-415A-92E4-1E5EADBDD439}
+		{BCA5891F-9277-4BDC-A82F-D5A6194B54AA} = {66952413-DE19-442D-BD7E-05B457715E11}
+		{1235259F-89C6-4C9A-A4B2-B243ED17AA42} = {095ED9C4-38CC-415A-92E4-1E5EADBDD439}
+		{A6431268-65DD-4AD5-860F-39FA6D1F28CA} = {66952413-DE19-442D-BD7E-05B457715E11}
+		{CE9ED348-A83B-4130-93A5-9C1367C9EC8B} = {095ED9C4-38CC-415A-92E4-1E5EADBDD439}
+		{A09C7B25-0D22-4DD5-B844-F7AB2DFCB897} = {66952413-DE19-442D-BD7E-05B457715E11}
+		{D7548D59-9495-4FA9-A4D2-11D360917E38} = {095ED9C4-38CC-415A-92E4-1E5EADBDD439}
+		{54D2B821-FB36-4A86-AA89-D4AD4CCD9F1C} = {66952413-DE19-442D-BD7E-05B457715E11}
+		{9941113F-6477-4644-8DCF-DB0FBB6E5E07} = {095ED9C4-38CC-415A-92E4-1E5EADBDD439}
+		{BD87AFDB-936C-4735-9B52-B5919BB80437} = {66952413-DE19-442D-BD7E-05B457715E11}
+		{180EE763-64C2-444E-A3E4-43204C51B0DD} = {08F44D1D-B8D6-4172-B8D0-B0383A77C5AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7BB2E5CA-3E12-4544-8827-61B4CF679997}

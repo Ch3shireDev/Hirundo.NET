@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Reflection;
+using System.Windows;
 
 namespace Hirundo.App;
 
@@ -14,8 +15,13 @@ public partial class App : Application
         viewModel.Items.Add("Hello");
         viewModel.Items.Add("World");
 
+        var view = new MainWindow
+        {
+            DataContext = viewModel,
+            Title = $"Hirundo ver. {Assembly.GetExecutingAssembly().GetName().Version}",
+            WindowStartupLocation = WindowStartupLocation.CenterScreen
+        };
 
-        var view = new MainWindow { DataContext = viewModel };
         view.Show();
     }
 }
