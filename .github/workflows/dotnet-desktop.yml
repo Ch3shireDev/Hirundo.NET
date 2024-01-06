@@ -1,0 +1,87 @@
+name: Hirundo.NET for Windows
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+
+    - name: Check Commit for Release Trigger
+      id: check_commit
+      run: |
+        $commitMessage = "${{ github.event.head_commit.message }}"
+        if ($commitMessage.StartsWith(":rocket:")) {
+          "RELEASE_TRIGGERED=true" | Out-File -FilePath $env:GITHUB_ENV -Append
+        } else {
+          "RELEASE_TRIGGERED=false" | Out-File -FilePath $env:GITHUB_ENV -Append
+        }
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore --runtime win-x64
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Run ODBC installer for Access
+      run: Start-Process -FilePath "./Assets/accessdatabaseengine_X64.exe" -ArgumentList "/quiet /norestart" -Wait
+
+    - name: Run tests
+      run: dotnet test --no-restore --verbosity normal
+    - name: Publish Release
+      if: env.RELEASE_TRIGGERED
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: dotnet publish Hirundo.App --self-contained --configuration Release -o ./publish
+
+    - name: Get Version
+      id: get_version
+      if: env.RELEASE_TRIGGERED
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        $exePath = "./publish/Hirundo.App.exe"
+        $versionInfo = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($exePath)
+        $version = $versionInfo.FileVersion
+        "VERSION=$version" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+    - name: Zip Release
+      if: env.RELEASE_TRIGGERED
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: Compress-Archive -Path ./publish/* -DestinationPath hirundo-net-${{ env.VERSION }}.zip
+
+    - name: Create Release
+      if: env.RELEASE_TRIGGERED
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      id: create_release
+      uses: actions/create-release@v1
+      with:
+          tag_name: v${{ env.VERSION }}
+          release_name: Hirundo.NET ver. ${{ env.VERSION }}
+          draft: false
+          prerelease: false
+
+    - name: Upload Release Asset
+      if: env.RELEASE_TRIGGERED
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: actions/upload-release-asset@v1
+      with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: hirundo-net-${{ env.VERSION }}.zip
+          asset_name: hirundo-net-${{ env.VERSION }}.zip
+          asset_content_type: application/zip
