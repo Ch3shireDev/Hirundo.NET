@@ -1,8 +1,8 @@
 ﻿namespace Hirundo.Commons;
 
 /// <summary>
-///     Zbiór wyników zawierający listę osobników powracających wraz z wartościami kluczowymi, wartościami pomiarowymi oraz
-///     wartościami statystycznymi.
+///     Zbiór wyników zawierający listę osobników powracających wraz z wartościami kluczowymi,
+///     wartościami pomiarowymi oraz wartościami statystycznymi.
 ///     zbiór ustawień.
 /// </summary>
 public class ReturningSpecimenSummary
@@ -15,7 +15,7 @@ public class ReturningSpecimenSummary
     /// <summary>
     ///     Dane populacji.
     /// </summary>
-    public PopulationData PopulationData { get; set; } = null!;
+    public PopulationData Population { get; set; } = null!;
 
     /// <summary>
     ///     Dane statystyczne.

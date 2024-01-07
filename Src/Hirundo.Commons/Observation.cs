@@ -1,14 +1,16 @@
 ﻿namespace Hirundo.Commons;
 
 /// <summary>
-///     Klasa reprezentująca zaobserwowanego osobnika w danym miejscu i czasie. Obserwacja charakteryzuje się zestawem
-///     cech, które są zapisane w bazie danych. Obserwacja zawsze jest związana z konkretnym osobnikiem. Obserwacja jest
-///     związana z zestawem kolumn w bazie danych, które reprezentują wartości kluczowe oraz wartości pomiarowe.
+///     Klasa reprezentująca zaobserwowanego osobnika w danym miejscu i czasie. 
+///     Obserwacja charakteryzuje się zestawem wartości zapisanych w bazie danych. 
+///     Obserwacja zawsze jest związana z konkretnym osobnikiem. Obserwacja jest
+///     związana z zestawem kolumn w bazie danych, które reprezentują wartości kluczowe 
+///     oraz wartości pomiarowe.
 /// </summary>
 public class Observation
 {
     private readonly string[] _names = null!;
-    private readonly object[] _values = null!;
+    private readonly object?[] _values = null!;
 
     /// <summary>
     ///     Konstruktor bezparametrowy.
@@ -22,7 +24,7 @@ public class Observation
     /// </summary>
     /// <param name="names">Nazwy kolumn danych.</param>
     /// <param name="values">Wartości.</param>
-    public Observation(string[] names, object[] values)
+    public Observation(string[] names, object?[] values)
     {
         _names = names;
         _values = values;
@@ -33,7 +35,7 @@ public class Observation
     /// </summary>
     /// <param name="columnName">Nazwa kolumny danych.</param>
     /// <returns></returns>
-    public object GetValue(string columnName)
+    public object? GetValue(string columnName)
     {
         var index = GetIndex(columnName);
         return _values[index];
@@ -47,7 +49,9 @@ public class Observation
     /// <returns></returns>
     public T GetValue<T>(string columnName)
     {
-        return (T)GetValue(columnName);
+        var value = GetValue(columnName);
+        if (value == null) return default!;
+        return (T)value;
     }
 
     /// <summary>
@@ -82,8 +86,8 @@ public class Observation
     ///     Zwraca listę typów.
     /// </summary>
     /// <returns></returns>
-    public Type[] GetTypes()
+    public Type?[] GetTypes()
     {
-        return _values.Select(x => x.GetType()).ToArray();
+        return _values.Select(x => x?.GetType()).ToArray();
     }
 }

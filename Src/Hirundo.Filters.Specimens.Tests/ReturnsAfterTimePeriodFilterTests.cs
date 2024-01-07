@@ -4,13 +4,13 @@ using NUnit.Framework;
 namespace Hirundo.Filters.Specimens.Tests;
 
 [TestFixture]
-public class SpecimenReturnsAfterTimePeriodFilterTests
+public class ReturnsAfterTimePeriodFilterTests
 {
     [Test]
     public void GivenTwoObservationsWithDistantDates_WhenIsReturning_ReturnsTrue()
     {
         // Arrange
-        var filter = new SpecimenReturnsAfterTimePeriodFilter("DATE", 20);
+        var filter = new ReturnsAfterTimePeriodFilter("DATE", 20);
 
         var specimen = new Specimen
         {
@@ -32,7 +32,7 @@ public class SpecimenReturnsAfterTimePeriodFilterTests
     public void GivenMoreThanTwoObservationsWithDistantDates_WhenIsReturning_ReturnsTrue()
     {
         // Arrange
-        var filter = new SpecimenReturnsAfterTimePeriodFilter("DATE", 20);
+        var filter = new ReturnsAfterTimePeriodFilter("DATE", 20);
 
         var specimen = new Specimen
         {
@@ -55,7 +55,7 @@ public class SpecimenReturnsAfterTimePeriodFilterTests
     public void GivenMoreThanTwoObservationsWithDistanceLessThanTimePeriod_WhenIsReturning_ReturnsFalse()
     {
         // Arrange
-        var filter = new SpecimenReturnsAfterTimePeriodFilter("DATE", 20);
+        var filter = new ReturnsAfterTimePeriodFilter("DATE", 20);
 
         var specimen = new Specimen
         {

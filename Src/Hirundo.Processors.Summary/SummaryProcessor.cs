@@ -29,7 +29,7 @@ public class SummaryProcessor(
         return new ReturningSpecimenSummary
         {
             ReturningSpecimen = returningSpecimen,
-            PopulationData = population,
+            Population = population,
             Statistics = statistics
         };
     }

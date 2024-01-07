@@ -11,6 +11,6 @@ public class ReturningSpecimenFiltersBuilder
     /// <returns></returns>
     public IReturningSpecimenFilter Build()
     {
-        return new ReturningSpecimenFilters();
+        return new CompositeReturningSpecimenFilter();
     }
 }

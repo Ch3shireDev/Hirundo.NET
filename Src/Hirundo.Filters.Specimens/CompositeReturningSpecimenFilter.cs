@@ -5,7 +5,7 @@ namespace Hirundo.Filters.Specimens;
 /// <summary>
 ///     Implementacja filtra zwracającego wszystkie okazy.
 /// </summary>
-public class ReturningSpecimenFilters : IReturningSpecimenFilter
+public class CompositeReturningSpecimenFilter : IReturningSpecimenFilter
 {
     public bool IsReturning(Specimen specimen)
     {

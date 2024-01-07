@@ -55,40 +55,67 @@
       ]
     }
   ],
-  "ObservationConditions": [
-    {
-      "Type": "IsEqual",
-      "ValueName": "SPECIES",
-      "Value": "REG.REG"
-    },
-    {
-      "Type": "IsInTimeBlock",
-      "ValueName": "HOUR",
-      "TimeBlock": {
-        "StartHour": 4,
-        "EndHour": 10
+  "Observations": {
+    "Conditions": [
+      {
+        "Type": "IsEqual",
+        "ValueName": "SPECIES",
+        "Value": "REG.REG"
+      },
+      {
+        "Type": "IsInTimeBlock",
+        "ValueName": "HOUR",
+        "TimeBlock": {
+          "StartHour": 4,
+          "EndHour": 10
+        }
       }
-    }
-  ],
+    ]
+  },
   "Specimens": {
     "SpecimenIdentifier": "RING",
     "IncludeEmptyValues": false
   },
-  "ReturningSpecimenConditions": [
-    {
-      "Type": "ReturnsAfterTimePeriod",
-      "Days": 20
-    },
-    {
-      "Type": "ReturnsNotEarlierThanGivenDateNextYear",
-      "Month": 6,
-      "Day": 15
+  "ReturningSpecimens": {
+    "Conditions": [
+      {
+        "Type": "ReturnsAfterTimePeriod",
+        "DateValueName": "DATE",
+        "Days": 20
+      },
+      {
+        "Type": "ReturnsNotEarlierThanGivenDateNextYear",
+        "DateValueName": "DATE",
+        "Month": 6,
+        "Day": 15
+      }
+    ]
+  },
+  "Population": {
+    "Conditions": [
+      {
+        "Type": "IsInSharedTimeWindow",
+        "DateValueName": "DATE",
+        "MaxDaysDistance": 20
+      }
+    ]
+  },
+  "Statistics": {
+    "Operations": [
+      {
+        "Type": "Average",
+        "ValueName": "WEIGHT",
+        "ResultName": "AVERAGE_WEIGHT"
+      }
+    ],
+    "Outliers": {
+      "Conditions": []
     }
-  ],
-  "PopulationConditions": [
-    {
-      "Type": "IsInSharedTimeWindow",
-      "MaxDaysDistance": 20
+  },
+  "Results": {
+    "Writer": {
+      "Type": "Csv",
+      "FileName": "REG-REG.csv"
     }
-  ]
+  }
 }

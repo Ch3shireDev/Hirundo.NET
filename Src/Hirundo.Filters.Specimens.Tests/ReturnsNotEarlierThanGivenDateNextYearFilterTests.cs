@@ -4,13 +4,13 @@ using NUnit.Framework;
 namespace Hirundo.Filters.Specimens.Tests;
 
 [TestFixture]
-public class SpecimenReturnsNotEarlierThanGivenDateNextYearFilterTests
+public class ReturnsNotEarlierThanGivenDateNextYearFilterTests
 {
     [Test]
     public void GivenTwoObservationsWithDistantDates_WhenIsReturning_ReturnsTrue()
     {
         // Arrange
-        var filter = new SpecimenReturnsNotEarlierThanGivenDateNextYearFilter("DATE", 06, 01);
+        var filter = new ReturnsNotEarlierThanGivenDateNextYearFilter("DATE", 06, 01);
 
         var specimen = new Specimen
         {
@@ -32,7 +32,7 @@ public class SpecimenReturnsNotEarlierThanGivenDateNextYearFilterTests
     public void GivenTwoObservationsBeforeDateNextYear_WhenIsReturning_ReturnsFalse()
     {
         // Arrange
-        var filter = new SpecimenReturnsNotEarlierThanGivenDateNextYearFilter("DATE", 06, 15);
+        var filter = new ReturnsNotEarlierThanGivenDateNextYearFilter("DATE", 06, 15);
 
         var specimen = new Specimen
         {
@@ -54,7 +54,7 @@ public class SpecimenReturnsNotEarlierThanGivenDateNextYearFilterTests
     public void GivenMoreThanTwoObservations_WhenIsReturning_ReturnsTrueIfDistanceIsGreaterThanTimePeriod()
     {
         // Arrange
-        var filter = new SpecimenReturnsNotEarlierThanGivenDateNextYearFilter("DATE", 06, 15);
+        var filter = new ReturnsNotEarlierThanGivenDateNextYearFilter("DATE", 06, 15);
 
         var specimen = new Specimen
         {
@@ -77,7 +77,7 @@ public class SpecimenReturnsNotEarlierThanGivenDateNextYearFilterTests
     public void GivenMoreThanTwoObservations_WhenIsReturning_ReturnsFalseIfNoPairGivesDistance()
     {
         // Arrange
-        var filter = new SpecimenReturnsNotEarlierThanGivenDateNextYearFilter("DATE", 06, 15);
+        var filter = new ReturnsNotEarlierThanGivenDateNextYearFilter("DATE", 06, 15);
 
         var specimen = new Specimen
         {

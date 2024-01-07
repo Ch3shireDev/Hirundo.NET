@@ -26,14 +26,6 @@ jobs:
           "RELEASE_TRIGGERED=false" | Out-File -FilePath $env:GITHUB_ENV -Append
         }
 
-    - name: Test Release Trigger
-      if: env.RELEASE_TRIGGERED == 'true'
-      run: echo "Release Triggered"
-
-    - name: Test Commit Message
-      if: env.RELEASE_TRIGGERED == 'false'
-      run: echo "Release Not Triggered"
-
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:

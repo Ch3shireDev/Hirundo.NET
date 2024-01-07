@@ -2,7 +2,16 @@
 
 namespace Hirundo.Filters.Population;
 
+/// <summary>
+///     Filtr populacji - na podstawie parametrów wejściowych podejmowana jest decyzja, czy obserwowany dany
+///     osobnik należy do populacji.
+/// </summary>
 public interface IPopulationFilter
 {
-    bool IsAccepted(Observation observation);
+    /// <summary>
+    ///     Informacja, czy dany osobnik należy do populacji.
+    /// </summary>
+    /// <param name="specimen">Osobnik.</param>
+    /// <returns>Informacja, czy osobnik należy do populacji.</returns>
+    bool IsAccepted(Specimen specimen);
 }

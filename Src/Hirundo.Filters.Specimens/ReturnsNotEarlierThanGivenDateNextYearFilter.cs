@@ -2,7 +2,7 @@
 
 namespace Hirundo.Filters.Specimens;
 
-public class SpecimenReturnsNotEarlierThanGivenDateNextYearFilter(string dateValueName, int month, int day) : IReturningSpecimenFilter
+public class ReturnsNotEarlierThanGivenDateNextYearFilter(string dateValueName, int month, int day) : IReturningSpecimenFilter
 {
     public bool IsReturning(Specimen specimen)
     {

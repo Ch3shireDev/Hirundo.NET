@@ -9,7 +9,7 @@ namespace Hirundo.Filters.Specimens;
 /// </summary>
 /// <param name="dateValueName">Nazwa kolumny danych reprezentującej datę.</param>
 /// <param name="days">Minimalna liczba dni różnicy pomiędzy obserwacjami.</param>
-public class SpecimenReturnsAfterTimePeriodFilter(string dateValueName, int days) : IReturningSpecimenFilter
+public class ReturnsAfterTimePeriodFilter(string dateValueName, int days) : IReturningSpecimenFilter
 {
     public bool IsReturning(Specimen specimen)
     {

@@ -36,7 +36,11 @@ public class MdbAccessDatabase(AccessDatabaseParameters parameters) : IDatabase
 
         connection.Open();
 
-        var query = _queryBuilder.WithTable(parameters.TableName).WithColumns(parameters.ValuesColumns).Build();
+        var query = _queryBuilder
+            .WithTable(parameters.TableName)
+            .WithColumns(parameters.ValuesColumns)
+            .Build();
+
         using var command = new OdbcCommand(query, connection);
         using var reader = command.ExecuteReader();
 

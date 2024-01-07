@@ -56,12 +56,12 @@ internal class Program
         var statisticsProcessor = statisticsProcessorBuilder
             .Build();
 
-        var resultsWriter = summaryWriterBuilder
-            .WithCsvSummaryWriterParameters(csvSummaryWriterParameters)
-            .Build();
-
         var specimensProcessor = specimensProcessorBuilder
             .WithSpecimensProcessorParameters(specimensProcessorParameters)
+            .Build();
+
+        var resultsWriter = summaryWriterBuilder
+            .WithCsvSummaryWriterParameters(csvSummaryWriterParameters)
             .Build();
 
         var observations = compositeDatabase.GetObservations().ToArray();
