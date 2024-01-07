@@ -11,36 +11,36 @@ public class AverageValueOperationTests
     public void GivenSimplePopulationData_WhenGetStatistics_ReturnsAverageOverGivenValue()
     {
         // Arrange
-        var populationData = new PopulationData
-        {
-            Specimens =
+        List<Specimen> populationData =
+        [
+            new Specimen
             {
-                new Specimen
+                Identifier = "ABC123",
+                Observations =
                 {
-                    Identifier = "ABC123",
-                    Observations =
-                    {
-                        new Observation(["VALUE"], [2]),
-                    }
-                },
-                new Specimen
-                {
-                    Identifier = "DEF456",
-                    Observations =
-                    {
-                        new Observation(["VALUE"], [1]),
-                    }
-                },
-                new Specimen
-                {
-                    Identifier = "GHI789",
-                    Observations =
-                    {
-                        new Observation(["VALUE"], [6]),
-                    }
+                    new Observation(["VALUE"], [2]),
                 }
+            },
+
+            new Specimen
+            {
+                Identifier = "DEF456",
+                Observations =
+                {
+                    new Observation(["VALUE"], [1]),
+                }
+            },
+
+            new Specimen
+            {
+                Identifier = "GHI789",
+                Observations =
+                {
+                    new Observation(["VALUE"], [6]),
+                }
+
             }
-        };
+        ];
 
         var operation = new AverageValueOperation("VALUE", "AVERAGE_VALUE");
 
@@ -56,44 +56,44 @@ public class AverageValueOperationTests
     public void GivenNullsInValues_WhenGetStatistics_ReturnsAverageOverGivenValue()
     {
         // Arrange
-        var populationData = new PopulationData
-        {
-            Specimens =
+        List<Specimen> populationData =
+        [
+            new Specimen
             {
-                new Specimen
+                Identifier = "ABC123",
+                Observations =
                 {
-                    Identifier = "ABC123",
-                    Observations =
-                    {
-                        new Observation(["VALUE"], [2]),
-                    }
-                },
-                new Specimen
+                    new Observation(["VALUE"], [2]),
+                }
+            },
+
+            new Specimen
+            {
+                Identifier = "DEF456",
+                Observations =
                 {
-                    Identifier = "DEF456",
-                    Observations =
-                    {
-                        new Observation(["VALUE"], [1]),
-                    }
-                },
-                new Specimen
+                    new Observation(["VALUE"], [1]),
+                }
+            },
+
+            new Specimen
+            {
+                Identifier = "GHI789",
+                Observations =
                 {
-                    Identifier = "GHI789",
-                    Observations =
-                    {
-                        new Observation(["VALUE"], [6]),
-                    }
-                },
-                new Specimen
+                    new Observation(["VALUE"], [6]),
+                }
+            },
+
+            new Specimen
+            {
+                Identifier = "JKL012",
+                Observations =
                 {
-                    Identifier = "JKL012",
-                    Observations =
-                    {
-                        new Observation(["VALUE"], [null]),
-                    }
+                    new Observation(["VALUE"], [null]),
                 }
             }
-        };
+        ];
 
         var operation = new AverageValueOperation("VALUE", "AVERAGE_VALUE");
 

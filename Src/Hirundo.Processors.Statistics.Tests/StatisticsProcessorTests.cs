@@ -24,23 +24,23 @@ public class StatisticsProcessorTests
     {
         // Arrange
         operation1
-            .Setup(x => x.GetStatistics(It.IsAny<PopulationData>()))
-            .Returns(new StatisticalDataValue("OPERATION1", 1));
+            .Setup(x => x.GetStatistics(It.IsAny<IEnumerable<Specimen>>()))
+            .Returns(new StatisticalData("OPERATION1", 1));
 
         operation2
-            .Setup(x => x.GetStatistics(It.IsAny<PopulationData>()))
-            .Returns(new StatisticalDataValue("OPERATION2", 2));
+            .Setup(x => x.GetStatistics(It.IsAny<IEnumerable<Specimen>>()))
+            .Returns(new StatisticalData("OPERATION2", 2));
 
-        var populationData = new PopulationData();
+        var populationData = new List<Specimen>();
 
         // Act
-        var result = processor.GetStatistics(populationData);
+        var result = processor.GetStatistics(populationData).ToArray();
 
         // Assert
-        Assert.That(result.Values, Has.Length.EqualTo(2));
-        Assert.That(result.Values[0].Name, Is.EqualTo("OPERATION1"));
-        Assert.That(result.Values[0].Value, Is.EqualTo(1));
-        Assert.That(result.Values[1].Name, Is.EqualTo("OPERATION2"));
-        Assert.That(result.Values[1].Value, Is.EqualTo(2));
+        Assert.That(result, Has.Length.EqualTo(2));
+        Assert.That(result[0].Name, Is.EqualTo("OPERATION1"));
+        Assert.That(result[0].Value, Is.EqualTo(1));
+        Assert.That(result[1].Name, Is.EqualTo("OPERATION2"));
+        Assert.That(result[1].Value, Is.EqualTo(2));
     }
 }

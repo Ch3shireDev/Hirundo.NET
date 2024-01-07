@@ -9,9 +9,9 @@ namespace Hirundo.Processors.Statistics.Operations;
 /// <param name="statisticalValueName">Nazwa parametru wynikowego.</param>
 public class AverageValueOperation(string valueName, string statisticalValueName) : IStatisticalOperation
 {
-    public StatisticalDataValue GetStatistics(PopulationData populationData)
+    public StatisticalData GetStatistics(IEnumerable<Specimen> populationData)
     {
-        var values = populationData.Specimens
+        var values = populationData
             .Select(specimen => specimen.Observations.First())
             .Select(observation => observation.GetValue(valueName))
             .Where(value => value != null)
@@ -20,7 +20,7 @@ public class AverageValueOperation(string valueName, string statisticalValueName
 
         var averageValue = GetAverageValue(values);
 
-        return new StatisticalDataValue
+        return new StatisticalData
         {
             Name = statisticalValueName,
             Value = averageValue

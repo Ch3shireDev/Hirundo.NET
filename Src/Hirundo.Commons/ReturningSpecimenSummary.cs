@@ -15,10 +15,10 @@ public class ReturningSpecimenSummary
     /// <summary>
     ///     Dane populacji.
     /// </summary>
-    public PopulationData Population { get; set; } = null!;
+    public Specimen[] Population { get; set; } = [];
 
     /// <summary>
     ///     Dane statystyczne.
     /// </summary>
-    public StatisticalData Statistics { get; set; } = null!;
+    public StatisticalData[] Statistics { get; set; } = [];
 }

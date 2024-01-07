@@ -7,13 +7,8 @@ namespace Hirundo.Processors.Population;
 /// </summary>
 public class PopulationProcessor : IPopulationProcessor
 {
-    public PopulationData GetPopulation(Specimen returningSpecimen, IEnumerable<Specimen> totalSpecimens)
+    public IEnumerable<Specimen> GetPopulation(Specimen returningSpecimen, IEnumerable<Specimen> totalSpecimens)
     {
-        var specimensList = totalSpecimens.ToList();
-
-        return new PopulationData
-        {
-            Specimens = specimensList
-        };
+        return totalSpecimens;
     }
 }

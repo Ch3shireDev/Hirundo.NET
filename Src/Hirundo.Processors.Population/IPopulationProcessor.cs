@@ -13,5 +13,5 @@ public interface IPopulationProcessor
     /// <param name="returningSpecimen">Osobnik powracający.</param>
     /// <param name="totalSpecimens">Lista wszystkich osobników.</param>
     /// <returns></returns>
-    PopulationData GetPopulation(Specimen returningSpecimen, IEnumerable<Specimen> totalSpecimens);
+    IEnumerable<Specimen> GetPopulation(Specimen returningSpecimen, IEnumerable<Specimen> totalSpecimens);
 }

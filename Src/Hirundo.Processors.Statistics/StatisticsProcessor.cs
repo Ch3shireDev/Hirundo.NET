@@ -13,13 +13,8 @@ public class StatisticsProcessor(params IStatisticalOperation[] statisticalOpera
     /// </summary>
     /// <param name="populationsData">Dane populacji.</param>
     /// <returns></returns>
-    public StatisticalData GetStatistics(PopulationData populationsData)
+    public IEnumerable<StatisticalData> GetStatistics(IEnumerable<Specimen> populationsData)
     {
-        var values = statisticalOperations.Select(operation => operation.GetStatistics(populationsData)).ToArray();
-
-        return new StatisticalData
-        {
-            Values = values
-        };
+        return statisticalOperations.Select(operation => operation.GetStatistics(populationsData));
     }
 }

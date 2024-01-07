@@ -23,8 +23,8 @@ public class SummaryProcessor(
     /// <returns>Podsumowanie.</returns>
     public ReturningSpecimenSummary GetSummary(Specimen returningSpecimen)
     {
-        var population = populationProcessor.GetPopulation(returningSpecimen, totalSpecimens);
-        var statistics = statisticsProcessor.GetStatistics(population);
+        var population = populationProcessor.GetPopulation(returningSpecimen, totalSpecimens).ToArray();
+        var statistics = statisticsProcessor.GetStatistics(population).ToArray();
 
         return new ReturningSpecimenSummary
         {
