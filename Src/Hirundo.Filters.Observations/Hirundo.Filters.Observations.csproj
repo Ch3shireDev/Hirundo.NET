@@ -15,6 +15,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Moq" Version="4.20.70" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Hirundo.Commons\Hirundo.Commons.csproj" />
   </ItemGroup>
 

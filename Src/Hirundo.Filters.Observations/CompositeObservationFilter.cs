@@ -2,10 +2,10 @@
 
 namespace Hirundo.Filters.Observations;
 
-public class CompositeObservationFilter : IObservationFilter
+public class CompositeObservationFilter(params IObservationFilter[] filters) : IObservationFilter
 {
     public bool IsSelected(Observation observation)
     {
-        return true;
+        return filters.All(f => f.IsSelected(observation));
     }
 }
