@@ -65,9 +65,9 @@ internal class Program
             .Build();
 
         var observations = compositeDatabase.GetObservations().ToArray();
-        var selectedObservations = observations.Where(observationFilters.IsSelected);
+        var selectedObservations = observations.Where(observationFilters.IsAccepted);
         var specimens = specimensProcessor.GetSpecimens(selectedObservations).ToArray();
-        var returningSpecimens = specimens.Where(returningSpecimenFilters.IsReturningSpecimen);
+        var returningSpecimens = specimens.Where(returningSpecimenFilters.IsReturning);
 
         var summaryProcessor = summaryProcessorBuilder
             .WithPopulationProcessor(populationProcessor)
@@ -80,37 +80,6 @@ internal class Program
             .ToList();
 
         resultsWriter.WriteSummary(summary);
-    }
-
-    private static AccessDatabaseParameters GetNewAccessDatabaseParameters()
-    {
-        var newDatabaseParameters = new AccessDatabaseParameters
-        {
-            FilePath = @"D:\Ring_00_PODAB.mdb",
-            TableName = "AB 2017_18_19_20_21S",
-            ValuesColumns =
-            {
-                new DatabaseColumn("IDR_Podab", "ID", DataValueType.LongInt),
-                new DatabaseColumn("RING", "RING", DataValueType.String),
-                new DatabaseColumn("Species Code", "SPECIES", DataValueType.String),
-                new DatabaseColumn("Date2", "DATE", DataValueType.DateTime),
-                new DatabaseColumn("HOUR", "HOUR", DataValueType.ShortInt),
-                new DatabaseColumn("SEX", "SEX", DataValueType.String),
-                new DatabaseColumn("AGE", "AGE", DataValueType.String),
-                new DatabaseColumn("WEIGHT", "WEIGHT", DataValueType.Decimal),
-                new DatabaseColumn("WING", "WING", DataValueType.Decimal),
-                new DatabaseColumn("TAIL", "TAIL", DataValueType.Decimal),
-                new DatabaseColumn("FAT", "FAT", DataValueType.ShortInt),
-                new DatabaseColumn("D2", "D2", DataValueType.ShortInt),
-                new DatabaseColumn("D3", "D3", DataValueType.ShortInt),
-                new DatabaseColumn("D4", "D4", DataValueType.ShortInt),
-                new DatabaseColumn("D5", "D5", DataValueType.ShortInt),
-                new DatabaseColumn("D6", "D6", DataValueType.ShortInt),
-                new DatabaseColumn("D7", "D7", DataValueType.ShortInt),
-                new DatabaseColumn("D8", "D8", DataValueType.ShortInt)
-            }
-        };
-        return newDatabaseParameters;
     }
 
     private static AccessDatabaseParameters GetOldAccessDatabaseParameters()
@@ -142,5 +111,35 @@ internal class Program
             }
         };
         return oldDatabaseParameters;
+    }
+    private static AccessDatabaseParameters GetNewAccessDatabaseParameters()
+    {
+        var newDatabaseParameters = new AccessDatabaseParameters
+        {
+            FilePath = @"D:\Ring_00_PODAB.mdb",
+            TableName = "AB 2017_18_19_20_21S",
+            ValuesColumns =
+            {
+                new DatabaseColumn("IDR_Podab", "ID", DataValueType.LongInt),
+                new DatabaseColumn("RING", "RING", DataValueType.String),
+                new DatabaseColumn("Species Code", "SPECIES", DataValueType.String),
+                new DatabaseColumn("Date2", "DATE", DataValueType.DateTime),
+                new DatabaseColumn("HOUR", "HOUR", DataValueType.ShortInt),
+                new DatabaseColumn("SEX", "SEX", DataValueType.String),
+                new DatabaseColumn("AGE", "AGE", DataValueType.String),
+                new DatabaseColumn("WEIGHT", "WEIGHT", DataValueType.Decimal),
+                new DatabaseColumn("WING", "WING", DataValueType.Decimal),
+                new DatabaseColumn("TAIL", "TAIL", DataValueType.Decimal),
+                new DatabaseColumn("FAT", "FAT", DataValueType.ShortInt),
+                new DatabaseColumn("D2", "D2", DataValueType.ShortInt),
+                new DatabaseColumn("D3", "D3", DataValueType.ShortInt),
+                new DatabaseColumn("D4", "D4", DataValueType.ShortInt),
+                new DatabaseColumn("D5", "D5", DataValueType.ShortInt),
+                new DatabaseColumn("D6", "D6", DataValueType.ShortInt),
+                new DatabaseColumn("D7", "D7", DataValueType.ShortInt),
+                new DatabaseColumn("D8", "D8", DataValueType.ShortInt)
+            }
+        };
+        return newDatabaseParameters;
     }
 }

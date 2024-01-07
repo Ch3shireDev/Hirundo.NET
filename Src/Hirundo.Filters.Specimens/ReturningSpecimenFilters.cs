@@ -7,7 +7,7 @@ namespace Hirundo.Filters.Specimens;
 /// </summary>
 public class ReturningSpecimenFilters : IReturningSpecimenFilter
 {
-    public bool IsReturningSpecimen(Specimen specimen)
+    public bool IsReturning(Specimen specimen)
     {
         return true;
     }

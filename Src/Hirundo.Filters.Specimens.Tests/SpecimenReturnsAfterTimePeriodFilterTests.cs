@@ -1,0 +1,76 @@
+﻿using Hirundo.Commons;
+using NUnit.Framework;
+
+namespace Hirundo.Filters.Specimens.Tests;
+
+[TestFixture]
+public class SpecimenReturnsAfterTimePeriodFilterTests
+{
+    [Test]
+    public void GivenTwoObservationsWithDistantDates_WhenIsReturning_ReturnsTrue()
+    {
+        // Arrange
+        var filter = new SpecimenReturnsAfterTimePeriodFilter("DATE", 20);
+
+        var specimen = new Specimen
+        {
+            Identifier = "AB123",
+            Observations = [
+                new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
+                new Observation(["DATE"], [DateTime.Parse("2021-06-21")]),
+            ] 
+        };
+
+        // Act
+        var result = filter.IsReturning(specimen);
+
+        // Assert
+        Assert.That(result, Is.True);
+    }
+
+    [Test]
+    public void GivenMoreThanTwoObservationsWithDistantDates_WhenIsReturning_ReturnsTrue()
+    {
+        // Arrange
+        var filter = new SpecimenReturnsAfterTimePeriodFilter("DATE", 20);
+
+        var specimen = new Specimen
+        {
+            Identifier = "AB123",
+            Observations = [
+                new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
+                new Observation(["DATE"], [DateTime.Parse("2021-06-05")]),
+                new Observation(["DATE"], [DateTime.Parse("2021-06-27")]),
+            ] 
+        };
+
+        // Act
+        var result = filter.IsReturning(specimen);
+
+        // Assert
+        Assert.That(result, Is.True);
+    }
+
+    [Test]
+    public void GivenMoreThanTwoObservationsWithDistanceLessThanTimePeriod_WhenIsReturning_ReturnsFalse()
+    {
+        // Arrange
+        var filter = new SpecimenReturnsAfterTimePeriodFilter("DATE", 20);
+
+        var specimen = new Specimen
+        {
+            Identifier = "AB123",
+            Observations = [
+                new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
+                new Observation(["DATE"], [DateTime.Parse("2021-06-05")]),
+                new Observation(["DATE"], [DateTime.Parse("2021-06-22")]),
+            ] 
+        };
+
+        // Act
+        var result = filter.IsReturning(specimen);
+
+        // Assert
+        Assert.That(result, Is.False);
+    }
+}

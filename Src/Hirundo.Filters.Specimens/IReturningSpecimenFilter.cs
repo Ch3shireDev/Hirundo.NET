@@ -13,5 +13,5 @@ public interface IReturningSpecimenFilter
     /// </summary>
     /// <param name="specimen">Osobnik.</param>
     /// <returns>Czy osobnik jest powracający?</returns>
-    bool IsReturningSpecimen(Specimen specimen);
+    bool IsReturning(Specimen specimen);
 }

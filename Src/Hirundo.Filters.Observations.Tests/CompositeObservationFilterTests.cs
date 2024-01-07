@@ -21,30 +21,30 @@ public class CompositeObservationFilterTests
     private CompositeObservationFilter _compositeFilter = null!;
 
     [Test]
-    public void GivenTwoTrueFilters_WhenIsSelect_ReturnsTrue()
+    public void GivenTwoTrueFilters_WhenIsAccepted_ReturnsTrue()
     {
         // Arrange
-        _filter1.Setup(f => f.IsSelected(It.IsAny<Observation>())).Returns(true);
-        _filter2.Setup(f => f.IsSelected(It.IsAny<Observation>())).Returns(true);
+        _filter1.Setup(f => f.IsAccepted(It.IsAny<Observation>())).Returns(true);
+        _filter2.Setup(f => f.IsAccepted(It.IsAny<Observation>())).Returns(true);
         var observation = new Observation();
 
         // Act
-        var result = _compositeFilter.IsSelected(observation);
+        var result = _compositeFilter.IsAccepted(observation);
 
         // Assert
         Assert.That(result, Is.True);
     }
 
     [Test]
-    public void GivenOneFalseFilter_WhenIsSelect_ReturnsFalse()
+    public void GivenOneFalseFilter_WhenIsAccepted_ReturnsFalse()
     {
         // Arrange
-        _filter1.Setup(f => f.IsSelected(It.IsAny<Observation>())).Returns(true);
-        _filter2.Setup(f => f.IsSelected(It.IsAny<Observation>())).Returns(false);
+        _filter1.Setup(f => f.IsAccepted(It.IsAny<Observation>())).Returns(true);
+        _filter2.Setup(f => f.IsAccepted(It.IsAny<Observation>())).Returns(false);
         var observation = new Observation();
 
         // Act
-        var result = _compositeFilter.IsSelected(observation);
+        var result = _compositeFilter.IsAccepted(observation);
 
         // Assert
         Assert.That(result, Is.False);

@@ -4,7 +4,7 @@ namespace Hirundo.Filters.Observations;
 
 public class IsInSeasonFilter(string dateColumnName, Season season) : IObservationFilter
 {
-    public bool IsSelected(Observation observation)
+    public bool IsAccepted(Observation observation)
     {
         var dateTimeValue = observation.GetValue(dateColumnName);
 

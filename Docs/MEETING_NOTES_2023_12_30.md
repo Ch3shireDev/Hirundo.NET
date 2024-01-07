@@ -82,11 +82,11 @@ Dla każdej z tych wartości wskazujący operacje statystyczne do wykonania na c
 
 Druga rzecz dla wartości pomiarowych.
 
-Outliner / obserwacja odstająca
+Outlier / obserwacja odstająca
 
-Opcja wykluczania outlinerów z populacji.
+Opcja wykluczania outlierów z populacji.
 
-Metoda wykluczania outlinerów:
+Metoda wykluczania outlierów:
 
 1. Więcej niż x odchyleń standardowych od średniej
 2. Określony % skrajnych wartości

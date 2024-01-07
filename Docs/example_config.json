@@ -1,0 +1,94 @@
+{
+  "Databases": [
+    {
+      "Type": "Access",
+      "FileName": "D:\\Ring_00_PODAB.mdb",
+      "TableName": "TAB_RING_PODAB",
+      "Columns": [
+        {
+          "ColumnName": "IDR_Podab",
+          "ValueName": "ID",
+          "ValueType": "LongInt"
+        },
+        {
+          "ColumnName": "RING",
+          "ValueName": "RING",
+          "ValueType": "String"
+        },
+        {
+          "ColumnName": "SPEC",
+          "ValueName": "SPECIES",
+          "ValueType": "String"
+        },
+        {
+          "ColumnName": "DATE",
+          "ValueName": "DATE",
+          "ValueType": "DateTime"
+        }
+      ]
+    },
+    {
+      "Type": "Access",
+      "FileName": "D:\\Ring_00_PODAB.mdb",
+      "TableName": "AB 2017_18_19_20_21S",
+      "Columns": [
+        {
+          "ColumnName": "IDR_Podab",
+          "ValueName": "ID",
+          "ValueType": "LongInt"
+        },
+        {
+          "ColumnName": "RING",
+          "ValueName": "RING",
+          "ValueType": "String"
+        },
+        {
+          "ColumnName": "SpeciesCode",
+          "ValueName": "SPECIES",
+          "ValueType": "String"
+        },
+        {
+          "ColumnName": "DATE2",
+          "ValueName": "DATE",
+          "ValueType": "DateTime"
+        }
+      ]
+    }
+  ],
+  "ObservationConditions": [
+    {
+      "Type": "IsEqual",
+      "ValueName": "SPECIES",
+      "Value": "REG.REG"
+    },
+    {
+      "Type": "IsInTimeBlock",
+      "ValueName": "HOUR",
+      "TimeBlock": {
+        "StartHour": 4,
+        "EndHour": 10
+      }
+    }
+  ],
+  "Specimens": {
+    "SpecimenIdentifier": "RING",
+    "IncludeEmptyValues": false
+  },
+  "ReturningSpecimenConditions": [
+    {
+      "Type": "ReturnsAfterTimePeriod",
+      "Days": 20
+    },
+    {
+      "Type": "ReturnsNotEarlierThanGivenDateNextYear",
+      "Month": 6,
+      "Day": 15
+    }
+  ],
+  "PopulationConditions": [
+    {
+      "Type": "IsInSharedTimeWindow",
+      "MaxDaysDistance": 20
+    }
+  ]
+}

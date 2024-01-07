@@ -13,5 +13,5 @@ public interface IObservationFilter
     /// </summary>
     /// <param name="observation">Obserwacja.</param>
     /// <returns>Odpowiedź, czy obserwacja spełnia zadany warunek.</returns>
-    public bool IsSelected(Observation observation);
+    public bool IsAccepted(Observation observation);
 }

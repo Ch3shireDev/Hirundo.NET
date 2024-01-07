@@ -2,9 +2,9 @@
 
 namespace Hirundo.Filters.Observations;
 
-public class OnlyGivenValueFilter(string valueName, object value) : IObservationFilter
+public class IsEqualValueFilter(string valueName, object value) : IObservationFilter
 {
-    public bool IsSelected(Observation observation)
+    public bool IsAccepted(Observation observation)
     {
         return observation.GetValue(valueName) == value;
     }

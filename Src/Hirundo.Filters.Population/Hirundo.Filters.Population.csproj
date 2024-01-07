@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Hirundo.Commons\Hirundo.Commons.csproj" />
+  </ItemGroup>
+
 </Project>

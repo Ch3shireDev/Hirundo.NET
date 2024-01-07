@@ -6,7 +6,7 @@ public class IsInTimeBlockFilter(string columnName, TimeBlock block) : IObservat
 {
     private readonly bool isThroughMidnight = block.StartHour > block.EndHour;
 
-    public bool IsSelected(Observation observation)
+    public bool IsAccepted(Observation observation)
     {
         var dateTimeValue = observation.GetValue(columnName);
 

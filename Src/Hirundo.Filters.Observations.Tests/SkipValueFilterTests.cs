@@ -7,7 +7,7 @@ namespace Hirundo.Filters.Observations.Tests;
 public class SkipValueFilterTests
 {
     [Test]
-    public void GivenOtherValue_WhenIsSelect_ReturnsTrue()
+    public void GivenOtherValue_WhenIsAccepted_ReturnsTrue()
     {
         // Arrange
         var valueName = "SEX";
@@ -18,14 +18,14 @@ public class SkipValueFilterTests
         var observation = new Observation(["SEX"], ["M"]);
 
         // Act
-        var result = filter.IsSelected(observation);
+        var result = filter.IsAccepted(observation);
 
         // Assert
         Assert.That(result, Is.True);
     }
 
     [Test]
-    public void GivenValue_WhenIsSelect_ReturnsFalse()
+    public void GivenValue_WhenIsAccepted_ReturnsFalse()
     {
         // Arrange
         var valueName = "SPECIES";
@@ -36,7 +36,7 @@ public class SkipValueFilterTests
         var observation = new Observation(["SPECIES"], ["REG.REG"]);
 
         // Act
-        var result = filter.IsSelected(observation);
+        var result = filter.IsAccepted(observation);
 
         // Assert
         Assert.That(result, Is.False);

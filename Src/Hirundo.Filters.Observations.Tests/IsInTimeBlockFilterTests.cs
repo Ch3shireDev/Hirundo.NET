@@ -7,7 +7,7 @@ namespace Hirundo.Filters.Observations.Tests;
 public class IsInTimeBlockFilterTests
 {
     [Test]
-    public void GivenHourInTimeBlock_WhenIsSelect_ReturnsTrue()
+    public void GivenHourInTimeBlock_WhenIsAccepted_ReturnsTrue()
     {
         // Arrange
         var timeBlock = new TimeBlock(06, 08);
@@ -15,14 +15,14 @@ public class IsInTimeBlockFilterTests
         var observation = new Observation(["HOUR"], [7]);
 
         // Act
-        var result = filter.IsSelected(observation);
+        var result = filter.IsAccepted(observation);
 
         // Assert
         Assert.That(result, Is.True);
     }
 
     [Test]
-    public void GivenHourInTimeBlockThroughMidnight_WhenIsSelect_ReturnsTrue()
+    public void GivenHourInTimeBlockThroughMidnight_WhenIsAccepted_ReturnsTrue()
     {
         // Arrange
         var timeBlock = new TimeBlock(23, 2);
@@ -30,14 +30,14 @@ public class IsInTimeBlockFilterTests
         var observation = new Observation(["HOUR"], [1]);
 
         // Act
-        var result = filter.IsSelected(observation);
+        var result = filter.IsAccepted(observation);
 
         // Assert
         Assert.That(result, Is.True);
     }
 
     [Test]
-    public void GivenHourOutsideTimeBlock_WhenIsSelect_ReturnsFalse()
+    public void GivenHourOutsideTimeBlock_WhenIsAccepted_ReturnsFalse()
     {
         // Arrange
         var timeBlock = new TimeBlock(12, 14);
@@ -45,14 +45,14 @@ public class IsInTimeBlockFilterTests
         var observation = new Observation(["HOUR"], [15]);
 
         // Act
-        var result = filter.IsSelected(observation);
+        var result = filter.IsAccepted(observation);
 
         // Assert
         Assert.That(result, Is.False);
     }
 
     [Test]
-    public void GivenHourOutsideTimeBlockThroughMidnight_WhenIsSelect_ReturnsFalse()
+    public void GivenHourOutsideTimeBlockThroughMidnight_WhenIsAccepted_ReturnsFalse()
     {
         // Arrange
         var timeBlock = new TimeBlock(22, 5);
@@ -60,7 +60,7 @@ public class IsInTimeBlockFilterTests
         var observation = new Observation(["HOUR"], [6]);
 
         // Act
-        var result = filter.IsSelected(observation);
+        var result = filter.IsAccepted(observation);
 
         // Assert
         Assert.That(result, Is.False);
