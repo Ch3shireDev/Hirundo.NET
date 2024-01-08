@@ -2,8 +2,8 @@
   "Databases": [
     {
       "Type": "Access",
-      "FileName": "D:\\Ring_00_PODAB.mdb",
-      "TableName": "TAB_RING_PODAB",
+      "Path": "D:\\Ring_00_PODAB.mdb",
+      "Table": "TAB_RING_PODAB",
       "Columns": [
         {
           "ColumnName": "IDR_Podab",
@@ -24,6 +24,71 @@
           "ColumnName": "DATE",
           "ValueName": "DATE",
           "ValueType": "DateTime"
+        },
+        {
+          "ColumnName": "HOUR",
+          "ValueName": "HOUR",
+          "ValueType": "ShortInt"
+        },
+        {
+          "ColumnName": "SEX",
+          "ValueName": "SEX",
+          "ValueType": "String"
+        },
+        {
+          "ColumnName": "AGE",
+          "ValueName": "AGE",
+          "ValueType": "String"
+        },
+        {
+          "ColumnName": "MASS",
+          "ValueName": "WEIGHT",
+          "ValueType": "Decimal"
+        },
+        {
+          "ColumnName": "WING",
+          "ValueName": "WING",
+          "ValueType": "Decimal"
+        },
+        {
+          "ColumnName": "TAIL",
+          "ValueName": "TAIL",
+          "ValueType": "Decimal"
+        },
+        {
+          "ColumnName": "D2",
+          "ValueName": "D2",
+          "ValueType": "ShortInt"
+        },
+        {
+          "ColumnName": "D3",
+          "ValueName": "D3",
+          "ValueType": "ShortInt"
+        },
+        {
+          "ColumnName": "D4",
+          "ValueName": "D4",
+          "ValueType": "ShortInt"
+        },
+        {
+          "ColumnName": "D5",
+          "ValueName": "D5",
+          "ValueType": "ShortInt"
+        },
+        {
+          "ColumnName": "D6",
+          "ValueName": "D6",
+          "ValueType": "ShortInt"
+        },
+        {
+          "ColumnName": "D7",
+          "ValueName": "D7",
+          "ValueType": "ShortInt"
+        },
+        {
+          "ColumnName": "D8",
+          "ValueName": "D8",
+          "ValueType": "ShortInt"
         }
       ]
     },
@@ -43,7 +108,7 @@
           "ValueType": "String"
         },
         {
-          "ColumnName": "SpeciesCode",
+          "ColumnName": "Species Code",
           "ValueName": "SPECIES",
           "ValueType": "String"
         },
@@ -51,6 +116,71 @@
           "ColumnName": "DATE2",
           "ValueName": "DATE",
           "ValueType": "DateTime"
+        },
+        {
+          "ColumnName": "HOUR",
+          "ValueName": "HOUR",
+          "ValueType": "ShortInt"
+        },
+        {
+          "ColumnName": "SEX",
+          "ValueName": "SEX",
+          "ValueType": "String"
+        },
+        {
+          "ColumnName": "AGE",
+          "ValueName": "AGE",
+          "ValueType": "String"
+        },
+        {
+          "ColumnName": "WEIGHT",
+          "ValueName": "WEIGHT",
+          "ValueType": "Decimal"
+        },
+        {
+          "ColumnName": "WING",
+          "ValueName": "WING",
+          "ValueType": "Decimal"
+        },
+        {
+          "ColumnName": "TAIL",
+          "ValueName": "TAIL",
+          "ValueType": "Decimal"
+        },
+        {
+          "ColumnName": "D2",
+          "ValueName": "D2",
+          "ValueType": "ShortInt"
+        },
+        {
+          "ColumnName": "D3",
+          "ValueName": "D3",
+          "ValueType": "ShortInt"
+        },
+        {
+          "ColumnName": "D4",
+          "ValueName": "D4",
+          "ValueType": "ShortInt"
+        },
+        {
+          "ColumnName": "D5",
+          "ValueName": "D5",
+          "ValueType": "ShortInt"
+        },
+        {
+          "ColumnName": "D6",
+          "ValueName": "D6",
+          "ValueType": "ShortInt"
+        },
+        {
+          "ColumnName": "D7",
+          "ValueName": "D7",
+          "ValueType": "ShortInt"
+        },
+        {
+          "ColumnName": "D8",
+          "ValueName": "D8",
+          "ValueType": "ShortInt"
         }
       ]
     }

@@ -86,9 +86,9 @@ internal class Program
     {
         var oldDatabaseParameters = new AccessDatabaseParameters
         {
-            FilePath = @"D:\Ring_00_PODAB.mdb",
-            TableName = "TAB_RING_PODAB",
-            ValuesColumns =
+            Path = @"D:\Ring_00_PODAB.mdb",
+            Table = "TAB_RING_PODAB",
+            Columns =
             {
                 new DatabaseColumn("IDR_Podab", "ID", DataValueType.LongInt),
                 new DatabaseColumn("RING", "RING", DataValueType.String),
@@ -116,9 +116,9 @@ internal class Program
     {
         var newDatabaseParameters = new AccessDatabaseParameters
         {
-            FilePath = @"D:\Ring_00_PODAB.mdb",
-            TableName = "AB 2017_18_19_20_21S",
-            ValuesColumns =
+            Path = @"D:\Ring_00_PODAB.mdb",
+            Table = "AB 2017_18_19_20_21S",
+            Columns =
             {
                 new DatabaseColumn("IDR_Podab", "ID", DataValueType.LongInt),
                 new DatabaseColumn("RING", "RING", DataValueType.String),

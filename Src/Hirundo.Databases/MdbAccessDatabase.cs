@@ -24,7 +24,7 @@ public class MdbAccessDatabase(AccessDatabaseParameters parameters) : IDatabase
     /// <summary>
     ///     ConnectionString jest tworzony z użyciem Microsoft Access Driver dla połączenia ODBC.
     /// </summary>
-    private string ConnectionString => $"Driver={{Microsoft Access Driver (*.mdb, *.accdb)}};Dbq={parameters.FilePath};";
+    private string ConnectionString => $"Driver={{Microsoft Access Driver (*.mdb, *.accdb)}};Dbq={parameters.Path};";
 
     /// <summary>
     ///     Dane są zwracane na podstawie parametrów wejściowych podanych w konstruktorze klasy.
@@ -37,14 +37,14 @@ public class MdbAccessDatabase(AccessDatabaseParameters parameters) : IDatabase
         connection.Open();
 
         var query = _queryBuilder
-            .WithTable(parameters.TableName)
-            .WithColumns(parameters.ValuesColumns)
+            .WithTable(parameters.Table)
+            .WithColumns(parameters.Columns)
             .Build();
 
         using var command = new OdbcCommand(query, connection);
         using var reader = command.ExecuteReader();
 
-        var dataColumns = parameters.ValuesColumns.Select(x => x.DataValueName).ToArray();
+        var dataColumns = parameters.Columns.Select(x => x.DataValueName).ToArray();
 
         while (reader.Read())
         {

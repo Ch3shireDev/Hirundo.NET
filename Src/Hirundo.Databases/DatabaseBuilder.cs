@@ -7,10 +7,10 @@
 /// </summary>
 public class DatabaseBuilder
 {
-    private readonly IList<IDatabase> _databases = [];
+    private readonly List<IDatabase> _databases = [];
 
     /// <summary>
-    ///    Dodaje parametry bazy danych Access.
+    ///     Dodaje parametry bazy danych Access.
     /// </summary>
     /// <param name="databaseParameters"></param>
     /// <returns></returns>
@@ -21,11 +21,11 @@ public class DatabaseBuilder
     }
 
     /// <summary>
-    /// Tworzy obiekt typu <see cref="IDatabase" />.
+    ///     Tworzy obiekt typu <see cref="IDatabase" />.
     /// </summary>
     /// <returns></returns>
     public IDatabase Build()
     {
-        return new CompositeDatabase(_databases.ToArray());
+        return new CompositeDatabase([.._databases]);
     }
 }
