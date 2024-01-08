@@ -8,9 +8,12 @@ namespace Hirundo.Filters.Specimens;
 ///     dat jest większa lub równa podanej liczbie dni.
 /// </summary>
 /// <param name="dateValueName">Nazwa kolumny danych reprezentującej datę.</param>
-/// <param name="days">Minimalna liczba dni różnicy pomiędzy obserwacjami.</param>
-public class ReturnsAfterTimePeriodFilter(string dateValueName, int days) : IReturningSpecimenFilter
+/// <param name="timePeriodInDays">Minimalna liczba dni różnicy pomiędzy obserwacjami.</param>
+public class ReturnsAfterTimePeriodFilter(string dateValueName, int timePeriodInDays) : IReturningSpecimenFilter
 {
+    public string DateValueName { get; } = dateValueName;
+    public int TimePeriodInDays { get; } = timePeriodInDays;
+
     public bool IsReturning(Specimen specimen)
     {
         if (specimen.Observations.Count < 2)
@@ -19,7 +22,7 @@ public class ReturnsAfterTimePeriodFilter(string dateValueName, int days) : IRet
         }
 
         var datesAreInOrder = specimen.Observations
-            .Select(o => o.GetValue<DateTime>(dateValueName).Date)
+            .Select(o => o.GetValue<DateTime>(DateValueName).Date)
             .OrderBy(d => d)
             .ToArray();
 
@@ -27,6 +30,6 @@ public class ReturnsAfterTimePeriodFilter(string dateValueName, int days) : IRet
 
         var timePeriods = datesPairs.Select(pair => pair.Second - pair.First);
 
-        return timePeriods.Any(period => period.Days >= days);
+        return timePeriods.Any(period => period.Days >= TimePeriodInDays);
     }
 }

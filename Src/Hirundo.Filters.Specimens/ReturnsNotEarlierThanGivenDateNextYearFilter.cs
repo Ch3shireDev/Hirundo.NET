@@ -4,6 +4,10 @@ namespace Hirundo.Filters.Specimens;
 
 public class ReturnsNotEarlierThanGivenDateNextYearFilter(string dateValueName, int month, int day) : IReturningSpecimenFilter
 {
+    public string DateValueName { get; } = dateValueName;
+    public int Month { get; } = month;
+    public int Day { get; } = day;
+
     public bool IsReturning(Specimen specimen)
     {
         if (specimen.Observations.Count < 2)
@@ -12,7 +16,7 @@ public class ReturnsNotEarlierThanGivenDateNextYearFilter(string dateValueName, 
         }
 
         var dates = specimen.Observations
-            .Select(o => o.GetValue<DateTime>(dateValueName).Date)
+            .Select(o => o.GetValue<DateTime>(DateValueName).Date)
             .OrderBy(d => d)
             .ToList();
 
@@ -23,7 +27,7 @@ public class ReturnsNotEarlierThanGivenDateNextYearFilter(string dateValueName, 
 
     private bool IsConditionForDatesMet(DateTime firstDate, DateTime lastDate)
     {
-        var expectedReturnDate = new DateTime(firstDate.Year + 1, month, day);
+        var expectedReturnDate = new DateTime(firstDate.Year + 1, Month, Day);
 
         return lastDate >= expectedReturnDate;
     }

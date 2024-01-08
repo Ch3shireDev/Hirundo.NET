@@ -211,7 +211,7 @@
       {
         "Type": "ReturnsAfterTimePeriod",
         "DateValueName": "DATE",
-        "Days": 20
+        "TimePeriodInDays": 20
       },
       {
         "Type": "ReturnsNotEarlierThanGivenDateNextYear",
