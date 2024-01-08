@@ -1,12 +1,15 @@
-﻿namespace Hirundo.Writers.Summary;
+﻿using Hirundo.Commons;
+
+namespace Hirundo.Writers.Summary;
 
 /// <summary>
 ///     Parametry dla <see cref="CsvSummaryWriter" />.
 /// </summary>
-public class CsvSummaryWriterParameters
+[TypeDescription("Csv")]
+public class CsvSummaryWriterParameters : IWriterParameters
 {
     /// <summary>
     ///     Lokalizacja pliku wynikowego z danymi.
     /// </summary>
-    public string SummaryFilepath { get; set; } = null!;
+    public string Path { get; set; } = null!;
 }

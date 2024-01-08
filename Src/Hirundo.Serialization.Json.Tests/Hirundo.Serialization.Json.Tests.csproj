@@ -13,10 +13,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Hirundo.Configuration\Hirundo.Configuration.csproj" />
     <ProjectReference Include="..\Hirundo.Databases\Hirundo.Databases.csproj" />
     <ProjectReference Include="..\Hirundo.Filters.Observations\Hirundo.Filters.Observations.csproj" />
     <ProjectReference Include="..\Hirundo.Filters.Specimens\Hirundo.Filters.Specimens.csproj" />
+    <ProjectReference Include="..\Hirundo.Processors.Specimens\Hirundo.Processors.Specimens.csproj" />
     <ProjectReference Include="..\Hirundo.Serialization.Json\Hirundo.Serialization.Json.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
 
 </Project>

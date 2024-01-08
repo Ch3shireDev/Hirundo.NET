@@ -2,7 +2,7 @@
 
 namespace Hirundo.Filters.Observations;
 
-[Polymorphic("IsInSeason")]
+[TypeDescription("IsInSeason")]
 public class IsInSeasonFilter(string dateColumnName, Season season) : IObservationFilter
 {
     public bool IsAccepted(Observation observation)

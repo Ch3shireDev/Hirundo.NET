@@ -8,7 +8,7 @@ using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
 namespace Hirundo.Serialization.Json;
 
-public class PolymorphicJsonConverter<T> : JsonConverter where T : class
+internal class PolymorphicJsonConverter<T> : JsonConverter where T : class
 {
     private readonly JsonSerializerSettings _settings = new()
     {
@@ -34,7 +34,7 @@ public class PolymorphicJsonConverter<T> : JsonConverter where T : class
 
     public static string GetType(T filter)
     {
-        if (filter.GetType().GetCustomAttribute<PolymorphicAttribute>() is { } polymorphicAttribute)
+        if (filter.GetType().GetCustomAttribute<TypeDescriptionAttribute>() is { } polymorphicAttribute)
         {
             return polymorphicAttribute.Type;
         }
@@ -51,7 +51,7 @@ public class PolymorphicJsonConverter<T> : JsonConverter where T : class
         {
             if (!type.GetInterfaces().Contains(typeof(T))) continue;
 
-            if (type.GetCustomAttribute<PolymorphicAttribute>() is not { } polymorphicAttribute) continue;
+            if (type.GetCustomAttribute<TypeDescriptionAttribute>() is not { } polymorphicAttribute) continue;
 
             if (polymorphicAttribute.Type == typeName)
             {

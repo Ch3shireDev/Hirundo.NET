@@ -2,7 +2,7 @@
 
 namespace Hirundo.Filters.Observations;
 
-[Polymorphic("IsNotEqual")]
+[TypeDescription("IsNotEqual")]
 public class IsNotEqualFilter(string valueName, object value) : IObservationFilter
 {
     public bool IsAccepted(Observation observation)

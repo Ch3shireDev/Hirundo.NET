@@ -1,7 +1,11 @@
-﻿namespace Hirundo.Databases;
+﻿using Hirundo.Commons;
 
-public class SqlServerParameters : DatabaseParameters
+namespace Hirundo.Databases;
+
+[TypeDescription("SqlServer")]
+public class SqlServerParameters : IDatabaseParameters
 {
     public string ConnectionString { get; set; } = null!;
-    public ColumnMapping[] Columns { get; set; } = [];
+    public string Table { get; set; } = null!;
+    public IList<ColumnMapping> Columns { get; set; } = [];
 }

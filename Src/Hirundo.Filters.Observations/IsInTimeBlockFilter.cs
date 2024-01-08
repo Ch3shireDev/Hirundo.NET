@@ -2,7 +2,7 @@
 
 namespace Hirundo.Filters.Observations;
 
-[Polymorphic("IsInTimeBlock")]
+[TypeDescription("IsInTimeBlock")]
 public class IsInTimeBlockFilter(string valueName, TimeBlock timeBlock) : IObservationFilter
 {
     private readonly bool isThroughMidnight = timeBlock.StartHour > timeBlock.EndHour;

@@ -1,16 +1,8 @@
 ﻿using System.Data.Odbc;
 using Hirundo.Commons;
+using Serilog;
 
 namespace Hirundo.Databases;
-
-/// <summary>
-///     Interfejs dla klas reprezentujących połączenie z bazą danych. Wszystkie klasy implementujące ten interfejs muszą
-///     posiadać metodę GetData().
-/// </summary>
-public interface IDatabase
-{
-    public IEnumerable<Observation> GetObservations();
-}
 
 /// <summary>
 ///     Klasa reprezentująca połączenie z bazą danych Access. Poprzez parametry wejściowe definiowana jest nazwa pliku,
@@ -46,11 +38,17 @@ public class MdbAccessDatabase(AccessDatabaseParameters parameters) : IDatabase
 
         var dataColumns = parameters.Columns.Select(x => x.ValueName).ToArray();
 
+        Log.Information($"Odczytywanie danych z tabeli {parameters.Table}, z kolumn: {
+            string.Join(", ", parameters.Columns.Select(c => c.DatabaseColumn))
+        }");
+
         while (reader.Read())
         {
             var dataValues = GetValuesFromReader(reader);
             yield return new Observation(dataColumns, dataValues);
         }
+
+        Log.Information("Zakończono odczyt danych z bazy danych Access.");
     }
 
     /// <summary>

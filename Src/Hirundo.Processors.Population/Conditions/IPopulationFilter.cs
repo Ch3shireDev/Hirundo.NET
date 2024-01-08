@@ -1,6 +1,6 @@
 ﻿using Hirundo.Commons;
 
-namespace Hirundo.Filters.Population;
+namespace Hirundo.Processors.Population.Conditions;
 
 /// <summary>
 ///     Filtr populacji - na podstawie parametrów wejściowych podejmowana jest decyzja, czy obserwowany dany

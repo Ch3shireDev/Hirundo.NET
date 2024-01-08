@@ -17,7 +17,7 @@ public class ObservationFilterJsonConverterTests
         Formatting = Formatting.Indented,
         Converters = new List<JsonConverter>
         {
-            new PolymorphicJsonConverter<IObservationFilter>()
+            new HirundoJsonConverter()
         }
     };
 
@@ -25,7 +25,7 @@ public class ObservationFilterJsonConverterTests
     public void GivenIsEqualFilter_WhenSerialize_ReturnsJsonString()
     {
         // Arrange
-        var filter = new IsEqualValueFilter("ID", 1);
+        var filter = new IsEqualFilter("ID", 1);
 
         // Act
         var json = JsonConvert.SerializeObject(filter, _settings);
@@ -69,8 +69,8 @@ public class ObservationFilterJsonConverterTests
 
         // Assert
         Assert.That(filter, Is.Not.Null);
-        Assert.That(filter, Is.TypeOf<IsEqualValueFilter>());
-        var isEqualFilter = filter as IsEqualValueFilter;
+        Assert.That(filter, Is.TypeOf<IsEqualFilter>());
+        var isEqualFilter = filter as IsEqualFilter;
         Assert.That(isEqualFilter?.ValueName, Is.EqualTo("ID"));
         Assert.That(isEqualFilter?.Value, Is.EqualTo(1));
     }

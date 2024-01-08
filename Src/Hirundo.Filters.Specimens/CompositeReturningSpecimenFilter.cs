@@ -5,10 +5,10 @@ namespace Hirundo.Filters.Specimens;
 /// <summary>
 ///     Implementacja filtra zwracającego wszystkie okazy.
 /// </summary>
-public class CompositeReturningSpecimenFilter : IReturningSpecimenFilter
+public class CompositeReturningSpecimenFilter(params IReturningSpecimenFilter[] conditions) : IReturningSpecimenFilter
 {
     public bool IsReturning(Specimen specimen)
     {
-        return true;
+        return conditions.All(condition => condition.IsReturning(specimen));
     }
 }

@@ -1,11 +1,15 @@
-﻿using Hirundo.Databases;
+﻿using Hirundo.Configuration;
+using Hirundo.Databases;
 using Hirundo.Filters.Observations;
 using Hirundo.Filters.Specimens;
 using Hirundo.Processors.Population;
 using Hirundo.Processors.Specimens;
 using Hirundo.Processors.Statistics;
 using Hirundo.Processors.Summary;
+using Hirundo.Serialization.Json;
 using Hirundo.Writers.Summary;
+using Newtonsoft.Json;
+using Serilog;
 
 namespace Hirundo.App.CLI;
 
@@ -17,18 +21,11 @@ internal class Program
 {
     private static void Main()
     {
-        var oldDatabaseParameters = GetOldAccessDatabaseParameters();
-        var newDatabaseParameters = GetNewAccessDatabaseParameters();
+        Log.Logger = new LoggerConfiguration()
+            .WriteTo.Console()
+            .CreateLogger();
 
-        var specimensProcessorParameters = new SpecimensProcessorParameters
-        {
-            RingValueName = "RING"
-        };
-
-        var csvSummaryWriterParameters = new CsvSummaryWriterParameters
-        {
-            SummaryFilepath = @"summary.csv"
-        };
+        var appConfig = GetConfig();
 
         var databaseBuilder = new DatabaseBuilder();
         var specimensProcessorBuilder = new SpecimensProcessorBuilder();
@@ -40,28 +37,32 @@ internal class Program
         var summaryWriterBuilder = new SummaryWriterBuilder();
 
         var compositeDatabase = databaseBuilder
-            .AddMdbAccessDatabase(oldDatabaseParameters)
-            .AddMdbAccessDatabase(newDatabaseParameters)
+            .AddDatabaseParameters(appConfig.Databases)
             .Build();
 
         var observationFilters = observationFiltersBuilder
+            .WithConditions(appConfig.Observations.Conditions)
             .Build();
 
         var returningSpecimenFilters = returningSpecimenFiltersBuilder
+            .WithConditions(appConfig.ReturningSpecimens.Conditions)
             .Build();
 
         var populationProcessor = populationProcessorBuilder
+            .WithConditions(appConfig.Population.Conditions)
             .Build();
 
         var statisticsProcessor = statisticsProcessorBuilder
+            .WithOperations(appConfig.Statistics.Operations)
+            .WithOutliersConditions(appConfig.Statistics.Outliers.Conditions)
             .Build();
 
         var specimensProcessor = specimensProcessorBuilder
-            .WithSpecimensProcessorParameters(specimensProcessorParameters)
+            .WithSpecimensProcessorParameters(appConfig.Specimens)
             .Build();
 
         var resultsWriter = summaryWriterBuilder
-            .WithCsvSummaryWriterParameters(csvSummaryWriterParameters)
+            .WithWriterParameters(appConfig.Results.Writer)
             .Build();
 
         var observations = compositeDatabase.GetObservations().ToArray();
@@ -82,65 +83,11 @@ internal class Program
         resultsWriter.WriteSummary(summary);
     }
 
-    private static AccessDatabaseParameters GetOldAccessDatabaseParameters()
+    private static ApplicationConfig GetConfig()
     {
-        var oldDatabaseParameters = new AccessDatabaseParameters
-        {
-            Path = @"D:\Ring_00_PODAB.mdb",
-            Table = "TAB_RING_PODAB",
-            Columns =
-            {
-                new ColumnMapping("IDR_Podab", "ID", DataValueType.LongInt),
-                new ColumnMapping("RING", "RING", DataValueType.String),
-                new ColumnMapping("SPEC", "SPECIES", DataValueType.String),
-                new ColumnMapping("DATE", "DATE", DataValueType.DateTime),
-                new ColumnMapping("HOUR", "HOUR", DataValueType.ShortInt),
-                new ColumnMapping("SEX", "SEX", DataValueType.String),
-                new ColumnMapping("AGE", "AGE", DataValueType.String),
-                new ColumnMapping("MASS", "WEIGHT", DataValueType.Decimal),
-                new ColumnMapping("WING", "WING", DataValueType.Decimal),
-                new ColumnMapping("TAIL", "TAIL", DataValueType.Decimal),
-                new ColumnMapping("FAT", "FAT", DataValueType.ShortInt),
-                new ColumnMapping("D2", "D2", DataValueType.ShortInt),
-                new ColumnMapping("D3", "D3", DataValueType.ShortInt),
-                new ColumnMapping("D4", "D4", DataValueType.ShortInt),
-                new ColumnMapping("D5", "D5", DataValueType.ShortInt),
-                new ColumnMapping("D6", "D6", DataValueType.ShortInt),
-                new ColumnMapping("D7", "D7", DataValueType.ShortInt),
-                new ColumnMapping("D8", "D8", DataValueType.ShortInt)
-            }
-        };
-        return oldDatabaseParameters;
-    }
-
-    private static AccessDatabaseParameters GetNewAccessDatabaseParameters()
-    {
-        var newDatabaseParameters = new AccessDatabaseParameters
-        {
-            Path = @"D:\Ring_00_PODAB.mdb",
-            Table = "AB 2017_18_19_20_21S",
-            Columns =
-            {
-                new ColumnMapping("IDR_Podab", "ID", DataValueType.LongInt),
-                new ColumnMapping("RING", "RING", DataValueType.String),
-                new ColumnMapping("Species Code", "SPECIES", DataValueType.String),
-                new ColumnMapping("Date2", "DATE", DataValueType.DateTime),
-                new ColumnMapping("HOUR", "HOUR", DataValueType.ShortInt),
-                new ColumnMapping("SEX", "SEX", DataValueType.String),
-                new ColumnMapping("AGE", "AGE", DataValueType.String),
-                new ColumnMapping("WEIGHT", "WEIGHT", DataValueType.Decimal),
-                new ColumnMapping("WING", "WING", DataValueType.Decimal),
-                new ColumnMapping("TAIL", "TAIL", DataValueType.Decimal),
-                new ColumnMapping("FAT", "FAT", DataValueType.ShortInt),
-                new ColumnMapping("D2", "D2", DataValueType.ShortInt),
-                new ColumnMapping("D3", "D3", DataValueType.ShortInt),
-                new ColumnMapping("D4", "D4", DataValueType.ShortInt),
-                new ColumnMapping("D5", "D5", DataValueType.ShortInt),
-                new ColumnMapping("D6", "D6", DataValueType.ShortInt),
-                new ColumnMapping("D7", "D7", DataValueType.ShortInt),
-                new ColumnMapping("D8", "D8", DataValueType.ShortInt)
-            }
-        };
-        return newDatabaseParameters;
+        var converter = new HirundoJsonConverter();
+        var jsonConfig = File.ReadAllText("appsettings.json");
+        var appConfig = JsonConvert.DeserializeObject<ApplicationConfig>(jsonConfig, converter) ?? throw new Exception("Błąd parsowania konfiguracji.");
+        return appConfig;
     }
 }

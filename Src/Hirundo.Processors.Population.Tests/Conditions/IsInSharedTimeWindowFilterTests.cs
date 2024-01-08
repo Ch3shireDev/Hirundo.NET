@@ -1,7 +1,8 @@
 ﻿using Hirundo.Commons;
+using Hirundo.Processors.Population.Conditions;
 using NUnit.Framework;
 
-namespace Hirundo.Filters.Population.Tests;
+namespace Hirundo.Processors.Population.Tests.Conditions;
 
 [TestFixture]
 public class IsInSharedTimeWindowFilterTests
@@ -28,7 +29,8 @@ public class IsInSharedTimeWindowFilterTests
             Observations = [new Observation(["DATE"], [DateTime.Parse("2020-05-20")])]
         };
 
-        var filter = new IsInSharedTimeWindowFilter(returningSpecimen, dateValueName, days);
+        var filterBuilder = new IsInSharedTimeWindowFilterBuilder(dateValueName, days);
+        var filter = filterBuilder.GetPopulationFilter(returningSpecimen);
 
         // Act
         var result = filter.IsAccepted(specimen);
@@ -59,7 +61,8 @@ public class IsInSharedTimeWindowFilterTests
             Observations = [new Observation(["DATE"], [DateTime.Parse("2020-05-05")])]
         };
 
-        var filter = new IsInSharedTimeWindowFilter(returningSpecimen, dateValueName, days);
+        var filterBuilder = new IsInSharedTimeWindowFilterBuilder(dateValueName, days);
+        var filter = filterBuilder.GetPopulationFilter(returningSpecimen);
 
         // Act
         var result = filter.IsAccepted(specimen);

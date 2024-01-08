@@ -6,14 +6,18 @@ namespace Hirundo.Processors.Statistics.Operations;
 ///     Zwraca wartość średnią po danej wartości w populacji. W przypadku napotkania wartości null, pomija.
 /// </summary>
 /// <param name="valueName">Nazwa parametru po którym jest brana wartość średnia.</param>
-/// <param name="statisticalValueName">Nazwa parametru wynikowego.</param>
-public class AverageValueOperation(string valueName, string statisticalValueName) : IStatisticalOperation
+/// <param name="resultName">Nazwa parametru wynikowego.</param>
+[TypeDescription("Average")]
+public class AverageValueOperation(string valueName, string resultName) : IStatisticalOperation
 {
+    public string ValueName { get; } = valueName;
+    public string ResultName { get; } = resultName;
+
     public StatisticalData GetStatistics(IEnumerable<Specimen> populationData)
     {
         var values = populationData
             .Select(specimen => specimen.Observations.First())
-            .Select(observation => observation.GetValue(valueName))
+            .Select(observation => observation.GetValue(ValueName))
             .Where(value => value != null)
             .Select(value => value!)
             .ToArray();
@@ -22,7 +26,7 @@ public class AverageValueOperation(string valueName, string statisticalValueName
 
         return new StatisticalData
         {
-            Name = statisticalValueName,
+            Name = ResultName,
             Value = averageValue
         };
     }

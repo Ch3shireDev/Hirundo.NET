@@ -9,6 +9,23 @@ public class DatabaseBuilder
 {
     private readonly List<IDatabase> _databases = [];
 
+    public DatabaseBuilder AddDatabaseParameters(params IDatabaseParameters[] appConfigDatabases)
+    {
+        foreach (var databaseParameters in appConfigDatabases)
+        {
+            switch (databaseParameters)
+            {
+                case AccessDatabaseParameters accessDatabaseParameters:
+                    AddMdbAccessDatabase(accessDatabaseParameters);
+                    break;
+                default:
+                    throw new ArgumentException($"Unknown database type: {databaseParameters.GetType()}");
+            }
+        }
+
+        return this;
+    }
+
     /// <summary>
     ///     Dodaje parametry bazy danych Access.
     /// </summary>
@@ -28,4 +45,5 @@ public class DatabaseBuilder
     {
         return new CompositeDatabase([.._databases]);
     }
+
 }

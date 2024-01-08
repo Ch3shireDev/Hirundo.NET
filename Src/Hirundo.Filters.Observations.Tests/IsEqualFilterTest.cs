@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Hirundo.Filters.Observations.Tests;
 
 [TestFixture]
-public class IsEqualValueFilterTest
+public class IsEqualFilterTest
 {
     [Test]
     public void GivenComplementaryValue_WhenIsAccepteded_ReturnsTrue()
@@ -12,7 +12,7 @@ public class IsEqualValueFilterTest
         // Arrange
         var valueName = "SEX";
         var value = "F";
-        var filter = new IsEqualValueFilter(valueName, value);
+        var filter = new IsEqualFilter(valueName, value);
 
         var observation = new Observation(["SEX"], ["F"]);
 
@@ -29,7 +29,7 @@ public class IsEqualValueFilterTest
         // Arrange
         var valueName = "SPECIES";
         var value = "REG.REG";
-        var filter = new IsEqualValueFilter(valueName, value);
+        var filter = new IsEqualFilter(valueName, value);
 
         var observation = new Observation(["SPECIES"], ["REG.SCI"]);
 

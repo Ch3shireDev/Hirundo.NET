@@ -15,7 +15,7 @@ public class SpecimensProcessor(SpecimensProcessorParameters parameters)
     public IEnumerable<Specimen> GetSpecimens(IEnumerable<Observation> observations)
     {
         return observations
-            .GroupBy(x => x.GetValue<string>(parameters.RingValueName))
+            .GroupBy(x => x.GetValue<string>(parameters.SpecimenIdentifier))
             .Where(pair => !string.IsNullOrWhiteSpace(pair.Key))
             .Select(observationGroup => new Specimen
             {

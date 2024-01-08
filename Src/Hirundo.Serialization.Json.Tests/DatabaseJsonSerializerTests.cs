@@ -1,5 +1,5 @@
 ﻿using Hirundo.Databases;
-using Hirundo.Databases.Serialization;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
@@ -11,10 +11,19 @@ public class DatabaseJsonSerializerTests
     [SetUp]
     public void Setup()
     {
-        _serializer = new DatabaseJsonSerializer();
+        _settings = new JsonSerializerSettings
+        {
+            TypeNameHandling = TypeNameHandling.Auto,
+            NullValueHandling = NullValueHandling.Ignore,
+            Formatting = Formatting.Indented,
+            Converters = new List<JsonConverter>
+            {
+                new HirundoJsonConverter()
+            }
+        };
     }
 
-    private DatabaseJsonSerializer _serializer = null!;
+    private JsonSerializerSettings _settings = null!;
 
     [Test]
     public void GivenSqlServerParameters_WhenSerialize_ReturnsSqlServerParameters()
@@ -27,7 +36,7 @@ public class DatabaseJsonSerializerTests
         };
 
         // Act
-        var json = _serializer.Serialize(parameters);
+        var json = JsonConvert.SerializeObject(parameters, _settings);
 
         // Assert
         var jobject = JObject.Parse(json);
@@ -53,7 +62,7 @@ public class DatabaseJsonSerializerTests
         };
 
         // Act
-        var json = _serializer.Serialize(parameters);
+        var json = JsonConvert.SerializeObject(parameters, _settings);
 
         // Assert
         var jobject = JObject.Parse(json);
@@ -79,8 +88,8 @@ public class DatabaseJsonSerializerTests
         };
 
         // Act
-        var json = _serializer.Serialize(parameters);
-        var deserializedParameters = _serializer.Deserialize(json) as AccessDatabaseParameters;
+        var json = JsonConvert.SerializeObject(parameters, _settings);
+        var deserializedParameters = JsonConvert.DeserializeObject<IDatabaseParameters>(json, _settings)! as AccessDatabaseParameters;
 
         // Assert
         Assert.That(deserializedParameters, Is.Not.Null);

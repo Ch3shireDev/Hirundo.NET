@@ -1,5 +1,5 @@
 ﻿using Hirundo.Filters.Specimens;
-using Hirundo.Filters.Specimens.Serialization;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
@@ -11,10 +11,19 @@ public class ReturningSpecimenJsonSerializerTests
     [SetUp]
     public void Setup()
     {
-        _serializer = new ReturningSpecimenJsonSerializer();
+        _settings = new JsonSerializerSettings
+        {
+            TypeNameHandling = TypeNameHandling.Auto,
+            NullValueHandling = NullValueHandling.Ignore,
+            Formatting = Formatting.Indented,
+            Converters = new List<JsonConverter>
+            {
+                new HirundoJsonConverter()
+            }
+        };
     }
 
-    private ReturningSpecimenJsonSerializer _serializer = null!;
+    private JsonSerializerSettings _settings = null!;
 
     [Test]
     public void GivenReturningSpecimenConditions_WhenSerialize_ReturnsJsonWithConditions()
@@ -30,7 +39,7 @@ public class ReturningSpecimenJsonSerializerTests
         };
 
         // Act
-        var result = _serializer.Serialize(parameters);
+        var result = JsonConvert.SerializeObject(parameters, _settings);
 
         // Assert
         var jobject = JObject.Parse(result);
@@ -38,7 +47,6 @@ public class ReturningSpecimenJsonSerializerTests
         Assert.That(jobject["Conditions"]?[0]?["Type"]?.Value<string>(), Is.EqualTo("ReturnsAfterTimePeriod"));
         Assert.That(jobject["Conditions"]?[0]?["DateValueName"]?.Value<string>(), Is.EqualTo("DATE1"));
         Assert.That(jobject["Conditions"]?[0]?["TimePeriodInDays"]?.Value<int>(), Is.EqualTo(20));
-
 
         Assert.That(jobject["Conditions"]?[1]?["Type"]?.Value<string>(), Is.EqualTo("ReturnsNotEarlierThanGivenDateNextYear"));
         Assert.That(jobject["Conditions"]?[1]?["DateValueName"]?.Value<string>(), Is.EqualTo("DATE2"));
@@ -60,8 +68,8 @@ public class ReturningSpecimenJsonSerializerTests
         };
 
         // Act
-        var serialized = _serializer.Serialize(parameters);
-        var deserialized = _serializer.Deserialize(serialized);
+        var serialized = JsonConvert.SerializeObject(parameters, _settings);
+        var deserialized = JsonConvert.DeserializeObject<ReturningSpecimensParameters>(serialized, _settings)!;
 
         // Assert
         Assert.That(deserialized.Conditions.Count, Is.EqualTo(2));

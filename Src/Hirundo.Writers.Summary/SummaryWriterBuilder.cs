@@ -15,8 +15,17 @@ public class SummaryWriterBuilder
 
     public SummaryWriterBuilder WithCsvSummaryWriterParameters(CsvSummaryWriterParameters parameters)
     {
-        _filename = parameters.SummaryFilepath;
+        _filename = parameters.Path;
         return this;
+    }
+
+    public SummaryWriterBuilder WithWriterParameters(IWriterParameters resultsWriter)
+    {
+        return resultsWriter switch
+        {
+            CsvSummaryWriterParameters csvSummaryWriterParameters => WithCsvSummaryWriterParameters(csvSummaryWriterParameters),
+            _ => throw new ArgumentException($"Unknown writer type: {resultsWriter.GetType().Name}")
+        };
     }
 
     public ISummaryWriter Build()

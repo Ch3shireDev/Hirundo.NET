@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Hirundo.Databases\Hirundo.Databases.csproj" />
+		<ProjectReference Include="..\Hirundo.Filters.Observations\Hirundo.Filters.Observations.csproj" />
+		<ProjectReference Include="..\Hirundo.Filters.Specimens\Hirundo.Filters.Specimens.csproj" />
+		<ProjectReference Include="..\Hirundo.Processors.Population\Hirundo.Processors.Population.csproj" />
+		<ProjectReference Include="..\Hirundo.Processors.Specimens\Hirundo.Processors.Specimens.csproj" />
+		<ProjectReference Include="..\Hirundo.Processors.Statistics\Hirundo.Processors.Statistics.csproj" />
+		<ProjectReference Include="..\Hirundo.Writers.Summary\Hirundo.Writers.Summary.csproj" />
+	</ItemGroup>
+
+</Project>

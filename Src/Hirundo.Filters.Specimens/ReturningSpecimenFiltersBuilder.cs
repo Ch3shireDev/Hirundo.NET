@@ -11,6 +11,14 @@ public class ReturningSpecimenFiltersBuilder
     /// <returns></returns>
     public IReturningSpecimenFilter Build()
     {
-        return new CompositeReturningSpecimenFilter();
+        return new CompositeReturningSpecimenFilter([.._conditions]);
     }
+
+    public ReturningSpecimenFiltersBuilder WithConditions(List<IReturningSpecimenFilter> returningSpecimensConditions)
+    {
+        _conditions = returningSpecimensConditions;
+        return this;
+    }
+
+    private List<IReturningSpecimenFilter> _conditions = [];
 }

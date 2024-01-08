@@ -2,6 +2,7 @@
 
 namespace Hirundo.Filters.Specimens;
 
+[TypeDescription("ReturnsNotEarlierThanGivenDateNextYear")]
 public class ReturnsNotEarlierThanGivenDateNextYearFilter(string dateValueName, int month, int day) : IReturningSpecimenFilter
 {
     public string DateValueName { get; } = dateValueName;
