@@ -2,7 +2,8 @@
 
 namespace Hirundo.Filters.Observations;
 
-public class SkipValueFilter(string valueName, object value) : IObservationFilter
+[Polymorphic("IsNotEqual")]
+public class IsNotEqualFilter(string valueName, object value) : IObservationFilter
 {
     public bool IsAccepted(Observation observation)
     {

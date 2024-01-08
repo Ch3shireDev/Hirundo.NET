@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Hirundo.Filters.Observations.Tests;
 
 [TestFixture]
-public class SkipValueFilterTests
+public class IsNotEqualFilterTests
 {
     [Test]
     public void GivenOtherValue_WhenIsAccepted_ReturnsTrue()
@@ -13,7 +13,7 @@ public class SkipValueFilterTests
         var valueName = "SEX";
         var value = "F";
 
-        var filter = new SkipValueFilter(valueName, value);
+        var filter = new IsNotEqualFilter(valueName, value);
 
         var observation = new Observation(["SEX"], ["M"]);
 
@@ -31,7 +31,7 @@ public class SkipValueFilterTests
         var valueName = "SPECIES";
         var value = "REG.REG";
 
-        var filter = new SkipValueFilter(valueName, value);
+        var filter = new IsNotEqualFilter(valueName, value);
 
         var observation = new Observation(["SPECIES"], ["REG.REG"]);
 

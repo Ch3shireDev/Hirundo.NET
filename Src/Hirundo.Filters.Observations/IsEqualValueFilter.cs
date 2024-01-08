@@ -2,6 +2,7 @@
 
 namespace Hirundo.Filters.Observations;
 
+[Polymorphic("IsEqual")]
 public class IsEqualValueFilter(string valueName, object value) : IObservationFilter
 {
     public string ValueName { get; } = valueName;

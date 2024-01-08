@@ -1,8 +1,9 @@
-﻿using Hirundo.Filters.Specimens.Serialization;
+﻿using Hirundo.Filters.Specimens;
+using Hirundo.Filters.Specimens.Serialization;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
-namespace Hirundo.Filters.Specimens.Tests.Serialization;
+namespace Hirundo.Serialization.Json.Tests;
 
 [TestFixture]
 public class ReturningSpecimenJsonSerializerTests
