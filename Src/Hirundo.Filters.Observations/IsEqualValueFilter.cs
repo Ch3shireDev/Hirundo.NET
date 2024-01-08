@@ -6,6 +6,7 @@ public class IsEqualValueFilter(string valueName, object value) : IObservationFi
 {
     public string ValueName { get; } = valueName;
     public object Value { get; } = value;
+
     public bool IsAccepted(Observation observation)
     {
         return observation.GetValue(ValueName) == Value;

@@ -1,10 +1,10 @@
 ﻿namespace Hirundo.Commons;
 
 /// <summary>
-///     Klasa reprezentująca zaobserwowanego osobnika w danym miejscu i czasie. 
-///     Obserwacja charakteryzuje się zestawem wartości zapisanych w bazie danych. 
+///     Klasa reprezentująca zaobserwowanego osobnika w danym miejscu i czasie.
+///     Obserwacja charakteryzuje się zestawem wartości zapisanych w bazie danych.
 ///     Obserwacja zawsze jest związana z konkretnym osobnikiem. Obserwacja jest
-///     związana z zestawem kolumn w bazie danych, które reprezentują wartości kluczowe 
+///     związana z zestawem kolumn w bazie danych, które reprezentują wartości kluczowe
 ///     oraz wartości pomiarowe.
 /// </summary>
 public class Observation

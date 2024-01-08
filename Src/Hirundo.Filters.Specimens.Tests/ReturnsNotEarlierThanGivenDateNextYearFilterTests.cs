@@ -15,10 +15,11 @@ public class ReturnsNotEarlierThanGivenDateNextYearFilterTests
         var specimen = new Specimen
         {
             Identifier = "AB123",
-            Observations = [
+            Observations =
+            [
                 new Observation(["DATE"], [DateTime.Parse("2021-06-20")]),
-                new Observation(["DATE"], [DateTime.Parse("2022-06-01")]),
-            ] 
+                new Observation(["DATE"], [DateTime.Parse("2022-06-01")])
+            ]
         };
 
         // Act
@@ -37,10 +38,11 @@ public class ReturnsNotEarlierThanGivenDateNextYearFilterTests
         var specimen = new Specimen
         {
             Identifier = "AB123",
-            Observations = [
+            Observations =
+            [
                 new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
-                new Observation(["DATE"], [DateTime.Parse("2022-06-01")]),
-            ] 
+                new Observation(["DATE"], [DateTime.Parse("2022-06-01")])
+            ]
         };
 
         // Act
@@ -59,11 +61,12 @@ public class ReturnsNotEarlierThanGivenDateNextYearFilterTests
         var specimen = new Specimen
         {
             Identifier = "AB123",
-            Observations = [
+            Observations =
+            [
                 new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
                 new Observation(["DATE"], [DateTime.Parse("2022-06-05")]),
-                new Observation(["DATE"], [DateTime.Parse("2023-06-15")]),
-            ] 
+                new Observation(["DATE"], [DateTime.Parse("2023-06-15")])
+            ]
         };
 
         // Act
@@ -82,11 +85,12 @@ public class ReturnsNotEarlierThanGivenDateNextYearFilterTests
         var specimen = new Specimen
         {
             Identifier = "AB123",
-            Observations = [
+            Observations =
+            [
                 new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
                 new Observation(["DATE"], [DateTime.Parse("2022-06-05")]),
-                new Observation(["DATE"], [DateTime.Parse("2022-06-20")]),
-            ] 
+                new Observation(["DATE"], [DateTime.Parse("2022-06-20")])
+            ]
         };
 
         // Act

@@ -112,6 +112,7 @@ internal class Program
         };
         return oldDatabaseParameters;
     }
+
     private static AccessDatabaseParameters GetNewAccessDatabaseParameters()
     {
         var newDatabaseParameters = new AccessDatabaseParameters

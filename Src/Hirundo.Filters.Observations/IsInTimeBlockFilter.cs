@@ -4,10 +4,9 @@ namespace Hirundo.Filters.Observations;
 
 public class IsInTimeBlockFilter(string valueName, TimeBlock timeBlock) : IObservationFilter
 {
+    private readonly bool isThroughMidnight = timeBlock.StartHour > timeBlock.EndHour;
     public string ValueName { get; } = valueName;
     public TimeBlock TimeBlock { get; } = timeBlock;
-
-    private readonly bool isThroughMidnight = timeBlock.StartHour > timeBlock.EndHour;
 
     public bool IsAccepted(Observation observation)
     {

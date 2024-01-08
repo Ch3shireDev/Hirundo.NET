@@ -15,10 +15,11 @@ public class ReturnsAfterTimePeriodFilterTests
         var specimen = new Specimen
         {
             Identifier = "AB123",
-            Observations = [
+            Observations =
+            [
                 new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
-                new Observation(["DATE"], [DateTime.Parse("2021-06-21")]),
-            ] 
+                new Observation(["DATE"], [DateTime.Parse("2021-06-21")])
+            ]
         };
 
         // Act
@@ -37,11 +38,12 @@ public class ReturnsAfterTimePeriodFilterTests
         var specimen = new Specimen
         {
             Identifier = "AB123",
-            Observations = [
+            Observations =
+            [
                 new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
                 new Observation(["DATE"], [DateTime.Parse("2021-06-05")]),
-                new Observation(["DATE"], [DateTime.Parse("2021-06-27")]),
-            ] 
+                new Observation(["DATE"], [DateTime.Parse("2021-06-27")])
+            ]
         };
 
         // Act
@@ -60,11 +62,12 @@ public class ReturnsAfterTimePeriodFilterTests
         var specimen = new Specimen
         {
             Identifier = "AB123",
-            Observations = [
+            Observations =
+            [
                 new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
                 new Observation(["DATE"], [DateTime.Parse("2021-06-05")]),
-                new Observation(["DATE"], [DateTime.Parse("2021-06-22")]),
-            ] 
+                new Observation(["DATE"], [DateTime.Parse("2021-06-22")])
+            ]
         };
 
         // Act

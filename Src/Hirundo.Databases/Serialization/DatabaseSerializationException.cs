@@ -5,6 +5,7 @@ public class DatabaseSerializationException : Exception
     public DatabaseSerializationException()
     {
     }
+
     public DatabaseSerializationException(string message) : base(message)
     {
     }

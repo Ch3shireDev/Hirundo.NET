@@ -18,7 +18,7 @@ public class AverageValueOperationTests
                 Identifier = "ABC123",
                 Observations =
                 {
-                    new Observation(["VALUE"], [2]),
+                    new Observation(["VALUE"], [2])
                 }
             },
 
@@ -27,7 +27,7 @@ public class AverageValueOperationTests
                 Identifier = "DEF456",
                 Observations =
                 {
-                    new Observation(["VALUE"], [1]),
+                    new Observation(["VALUE"], [1])
                 }
             },
 
@@ -36,9 +36,8 @@ public class AverageValueOperationTests
                 Identifier = "GHI789",
                 Observations =
                 {
-                    new Observation(["VALUE"], [6]),
+                    new Observation(["VALUE"], [6])
                 }
-
             }
         ];
 
@@ -63,7 +62,7 @@ public class AverageValueOperationTests
                 Identifier = "ABC123",
                 Observations =
                 {
-                    new Observation(["VALUE"], [2]),
+                    new Observation(["VALUE"], [2])
                 }
             },
 
@@ -72,7 +71,7 @@ public class AverageValueOperationTests
                 Identifier = "DEF456",
                 Observations =
                 {
-                    new Observation(["VALUE"], [1]),
+                    new Observation(["VALUE"], [1])
                 }
             },
 
@@ -81,7 +80,7 @@ public class AverageValueOperationTests
                 Identifier = "GHI789",
                 Observations =
                 {
-                    new Observation(["VALUE"], [6]),
+                    new Observation(["VALUE"], [6])
                 }
             },
 
@@ -90,7 +89,7 @@ public class AverageValueOperationTests
                 Identifier = "JKL012",
                 Observations =
                 {
-                    new Observation(["VALUE"], [null]),
+                    new Observation(["VALUE"], [null])
                 }
             }
         ];
