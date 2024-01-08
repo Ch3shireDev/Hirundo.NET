@@ -1,7 +1,7 @@
 ﻿using Hirundo.Databases.Serialization;
 using Newtonsoft.Json.Linq;
 
-namespace Hirundo.Databases.Tests;
+namespace Hirundo.Databases.Tests.Serialization;
 
 [TestFixture]
 public class DatabaseJsonSerializerTests

@@ -2,29 +2,32 @@
 
 namespace Hirundo.Filters.Observations;
 
-public class IsInTimeBlockFilter(string columnName, TimeBlock block) : IObservationFilter
+public class IsInTimeBlockFilter(string valueName, TimeBlock timeBlock) : IObservationFilter
 {
-    private readonly bool isThroughMidnight = block.StartHour > block.EndHour;
+    public string ValueName { get; } = valueName;
+    public TimeBlock TimeBlock { get; } = timeBlock;
+
+    private readonly bool isThroughMidnight = timeBlock.StartHour > timeBlock.EndHour;
 
     public bool IsAccepted(Observation observation)
     {
-        var dateTimeValue = observation.GetValue(columnName);
+        var dateTimeValue = observation.GetValue(ValueName);
 
         if (dateTimeValue is int hour)
         {
             return IsInTimeRange(hour);
         }
 
-        throw new ArgumentException($"Value of column {columnName} is not a DateTime or string");
+        throw new ArgumentException($"Value of column {ValueName} is not a DateTime or string");
     }
 
     private bool IsInTimeRange(int hour)
     {
         if (isThroughMidnight)
         {
-            return hour >= block.StartHour || hour <= block.EndHour;
+            return hour >= TimeBlock.StartHour || hour <= TimeBlock.EndHour;
         }
 
-        return hour >= block.StartHour && hour <= block.EndHour;
+        return hour >= TimeBlock.StartHour && hour <= TimeBlock.EndHour;
     }
 }
