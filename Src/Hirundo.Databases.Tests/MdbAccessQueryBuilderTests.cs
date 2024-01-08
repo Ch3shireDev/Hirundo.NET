@@ -16,7 +16,7 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table");
-        _builder.WithColumn(new DatabaseColumn("IDR_Podab", "ID", DataValueType.LongInt));
+        _builder.WithColumn(new ColumnMapping("IDR_Podab", "ID", DataValueType.LongInt));
 
         // Act
         var query = _builder.Build();
@@ -30,8 +30,8 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table 2");
-        _builder.WithColumn(new DatabaseColumn("IDR_Podab", "ID", DataValueType.LongInt));
-        _builder.WithColumn(new DatabaseColumn("RING", "RING", DataValueType.String));
+        _builder.WithColumn(new ColumnMapping("IDR_Podab", "ID", DataValueType.LongInt));
+        _builder.WithColumn(new ColumnMapping("RING", "RING", DataValueType.String));
 
         // Act
         var query = _builder.Build();
@@ -45,7 +45,7 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table 3");
-        _builder.WithColumn(new DatabaseColumn("HOUR", "HOUR", DataValueType.ShortInt));
+        _builder.WithColumn(new ColumnMapping("HOUR", "HOUR", DataValueType.ShortInt));
 
         // Act
         var query = _builder.Build();
@@ -63,7 +63,7 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table 4");
-        _builder.WithColumn(new DatabaseColumn("WEIGHT", "WEIGHT", DataValueType.Decimal));
+        _builder.WithColumn(new ColumnMapping("WEIGHT", "WEIGHT", DataValueType.Decimal));
 
         // Act
         var query = _builder.Build();
@@ -77,7 +77,7 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table 5");
-        _builder.WithColumn(new DatabaseColumn("DATE", "DATE", DataValueType.DateTime));
+        _builder.WithColumn(new ColumnMapping("DATE", "DATE", DataValueType.DateTime));
 
         // Act
         var query = _builder.Build();

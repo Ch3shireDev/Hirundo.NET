@@ -6,89 +6,89 @@
       "Table": "TAB_RING_PODAB",
       "Columns": [
         {
-          "ColumnName": "IDR_Podab",
+          "DatabaseColumn": "IDR_Podab",
           "ValueName": "ID",
-          "ValueType": "LongInt"
+          "DataType": "LongInt"
         },
         {
-          "ColumnName": "RING",
+          "DatabaseColumn": "RING",
           "ValueName": "RING",
-          "ValueType": "String"
+          "DataType": "String"
         },
         {
-          "ColumnName": "SPEC",
+          "DatabaseColumn": "SPEC",
           "ValueName": "SPECIES",
-          "ValueType": "String"
+          "DataType": "String"
         },
         {
-          "ColumnName": "DATE",
+          "DatabaseColumn": "DATE",
           "ValueName": "DATE",
-          "ValueType": "DateTime"
+          "DataType": "DateTime"
         },
         {
-          "ColumnName": "HOUR",
+          "DatabaseColumn": "HOUR",
           "ValueName": "HOUR",
-          "ValueType": "ShortInt"
+          "DataType": "ShortInt"
         },
         {
-          "ColumnName": "SEX",
+          "DatabaseColumn": "SEX",
           "ValueName": "SEX",
-          "ValueType": "String"
+          "DataType": "String"
         },
         {
-          "ColumnName": "AGE",
+          "DatabaseColumn": "AGE",
           "ValueName": "AGE",
-          "ValueType": "String"
+          "DataType": "String"
         },
         {
-          "ColumnName": "MASS",
+          "DatabaseColumn": "MASS",
           "ValueName": "WEIGHT",
-          "ValueType": "Decimal"
+          "DataType": "Decimal"
         },
         {
-          "ColumnName": "WING",
+          "DatabaseColumn": "WING",
           "ValueName": "WING",
-          "ValueType": "Decimal"
+          "DataType": "Decimal"
         },
         {
-          "ColumnName": "TAIL",
+          "DatabaseColumn": "TAIL",
           "ValueName": "TAIL",
-          "ValueType": "Decimal"
+          "DataType": "Decimal"
         },
         {
-          "ColumnName": "D2",
+          "DatabaseColumn": "D2",
           "ValueName": "D2",
-          "ValueType": "ShortInt"
+          "DataType": "ShortInt"
         },
         {
-          "ColumnName": "D3",
+          "DatabaseColumn": "D3",
           "ValueName": "D3",
-          "ValueType": "ShortInt"
+          "DataType": "ShortInt"
         },
         {
-          "ColumnName": "D4",
+          "DatabaseColumn": "D4",
           "ValueName": "D4",
-          "ValueType": "ShortInt"
+          "DataType": "ShortInt"
         },
         {
-          "ColumnName": "D5",
+          "DatabaseColumn": "D5",
           "ValueName": "D5",
-          "ValueType": "ShortInt"
+          "DataType": "ShortInt"
         },
         {
-          "ColumnName": "D6",
+          "DatabaseColumn": "D6",
           "ValueName": "D6",
-          "ValueType": "ShortInt"
+          "DataType": "ShortInt"
         },
         {
-          "ColumnName": "D7",
+          "DatabaseColumn": "D7",
           "ValueName": "D7",
-          "ValueType": "ShortInt"
+          "DataType": "ShortInt"
         },
         {
-          "ColumnName": "D8",
+          "DatabaseColumn": "D8",
           "ValueName": "D8",
-          "ValueType": "ShortInt"
+          "DataType": "ShortInt"
         }
       ]
     },
@@ -98,89 +98,89 @@
       "TableName": "AB 2017_18_19_20_21S",
       "Columns": [
         {
-          "ColumnName": "IDR_Podab",
+          "DatabaseColumn": "IDR_Podab",
           "ValueName": "ID",
-          "ValueType": "LongInt"
+          "DataType": "LongInt"
         },
         {
-          "ColumnName": "RING",
+          "DatabaseColumn": "RING",
           "ValueName": "RING",
-          "ValueType": "String"
+          "DataType": "String"
         },
         {
-          "ColumnName": "Species Code",
+          "DatabaseColumn": "Species Code",
           "ValueName": "SPECIES",
-          "ValueType": "String"
+          "DataType": "String"
         },
         {
-          "ColumnName": "DATE2",
+          "DatabaseColumn": "DATE2",
           "ValueName": "DATE",
-          "ValueType": "DateTime"
+          "DataType": "DateTime"
         },
         {
-          "ColumnName": "HOUR",
+          "DatabaseColumn": "HOUR",
           "ValueName": "HOUR",
-          "ValueType": "ShortInt"
+          "DataType": "ShortInt"
         },
         {
-          "ColumnName": "SEX",
+          "DatabaseColumn": "SEX",
           "ValueName": "SEX",
-          "ValueType": "String"
+          "DataType": "String"
         },
         {
-          "ColumnName": "AGE",
+          "DatabaseColumn": "AGE",
           "ValueName": "AGE",
-          "ValueType": "String"
+          "DataType": "String"
         },
         {
-          "ColumnName": "WEIGHT",
+          "DatabaseColumn": "WEIGHT",
           "ValueName": "WEIGHT",
-          "ValueType": "Decimal"
+          "DataType": "Decimal"
         },
         {
-          "ColumnName": "WING",
+          "DatabaseColumn": "WING",
           "ValueName": "WING",
-          "ValueType": "Decimal"
+          "DataType": "Decimal"
         },
         {
-          "ColumnName": "TAIL",
+          "DatabaseColumn": "TAIL",
           "ValueName": "TAIL",
-          "ValueType": "Decimal"
+          "DataType": "Decimal"
         },
         {
-          "ColumnName": "D2",
+          "DatabaseColumn": "D2",
           "ValueName": "D2",
-          "ValueType": "ShortInt"
+          "DataType": "ShortInt"
         },
         {
-          "ColumnName": "D3",
+          "DatabaseColumn": "D3",
           "ValueName": "D3",
-          "ValueType": "ShortInt"
+          "DataType": "ShortInt"
         },
         {
-          "ColumnName": "D4",
+          "DatabaseColumn": "D4",
           "ValueName": "D4",
-          "ValueType": "ShortInt"
+          "DataType": "ShortInt"
         },
         {
-          "ColumnName": "D5",
+          "DatabaseColumn": "D5",
           "ValueName": "D5",
-          "ValueType": "ShortInt"
+          "DataType": "ShortInt"
         },
         {
-          "ColumnName": "D6",
+          "DatabaseColumn": "D6",
           "ValueName": "D6",
-          "ValueType": "ShortInt"
+          "DataType": "ShortInt"
         },
         {
-          "ColumnName": "D7",
+          "DatabaseColumn": "D7",
           "ValueName": "D7",
-          "ValueType": "ShortInt"
+          "DataType": "ShortInt"
         },
         {
-          "ColumnName": "D8",
+          "DatabaseColumn": "D8",
           "ValueName": "D8",
-          "ValueType": "ShortInt"
+          "DataType": "ShortInt"
         }
       ]
     }

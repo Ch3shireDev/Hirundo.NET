@@ -17,11 +17,11 @@ public class MdbAccessDatabaseTests
     {
         // Arrange
         _accessDatabaseParameters.Path = "./Assets/access_example_old_db.mdb";
-        _accessDatabaseParameters.Columns.Add(new DatabaseColumn("IDR_Podab", "ID", DataValueType.LongInt));
-        _accessDatabaseParameters.Columns.Add(new DatabaseColumn("RING", "RING", DataValueType.String));
-        _accessDatabaseParameters.Columns.Add(new DatabaseColumn("DATE", "DATE", DataValueType.DateTime));
-        _accessDatabaseParameters.Columns.Add(new DatabaseColumn("MASS", "WEIGHT", DataValueType.Decimal));
-        _accessDatabaseParameters.Columns.Add(new DatabaseColumn("FAT", "FAT", DataValueType.ShortInt));
+        _accessDatabaseParameters.Columns.Add(new ColumnMapping("IDR_Podab", "ID", DataValueType.LongInt));
+        _accessDatabaseParameters.Columns.Add(new ColumnMapping("RING", "RING", DataValueType.String));
+        _accessDatabaseParameters.Columns.Add(new ColumnMapping("DATE", "DATE", DataValueType.DateTime));
+        _accessDatabaseParameters.Columns.Add(new ColumnMapping("MASS", "WEIGHT", DataValueType.Decimal));
+        _accessDatabaseParameters.Columns.Add(new ColumnMapping("FAT", "FAT", DataValueType.ShortInt));
         _accessDatabaseParameters.Table = "TAB_RING_PODAB";
 
         // Act
@@ -44,10 +44,10 @@ public class MdbAccessDatabaseTests
     {
         // Arrange
         _accessDatabaseParameters.Path = "./Assets/access_example_new_db.mdb";
-        _accessDatabaseParameters.Columns.Add(new DatabaseColumn("IDR_Podab", "ID", DataValueType.LongInt));
-        _accessDatabaseParameters.Columns.Add(new DatabaseColumn("RING", "RING", DataValueType.String));
-        _accessDatabaseParameters.Columns.Add(new DatabaseColumn("Date2", "DATE", DataValueType.DateTime));
-        _accessDatabaseParameters.Columns.Add(new DatabaseColumn("Species Code", "SPECIES", DataValueType.String));
+        _accessDatabaseParameters.Columns.Add(new ColumnMapping("IDR_Podab", "ID", DataValueType.LongInt));
+        _accessDatabaseParameters.Columns.Add(new ColumnMapping("RING", "RING", DataValueType.String));
+        _accessDatabaseParameters.Columns.Add(new ColumnMapping("Date2", "DATE", DataValueType.DateTime));
+        _accessDatabaseParameters.Columns.Add(new ColumnMapping("Species Code", "SPECIES", DataValueType.String));
         _accessDatabaseParameters.Table = "example table";
 
         // Act

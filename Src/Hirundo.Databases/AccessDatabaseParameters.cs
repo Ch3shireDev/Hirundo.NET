@@ -3,7 +3,7 @@
 /// <summary>
 ///     Parametry bazy danych Access.
 /// </summary>
-public class AccessDatabaseParameters
+public class AccessDatabaseParameters : DatabaseParameters
 {
     /// <summary>
     ///     Nazwa pliku bazy danych. Obsługuje pliki .mdb.
@@ -18,5 +18,5 @@ public class AccessDatabaseParameters
     /// <summary>
     ///     Lista kolumn z danymi.
     /// </summary>
-    public IList<DatabaseColumn> Columns { get; set; } = new List<DatabaseColumn>();
+    public IList<ColumnMapping> Columns { get; set; } = new List<ColumnMapping>();
 }

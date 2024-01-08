@@ -44,7 +44,7 @@ public class MdbAccessDatabase(AccessDatabaseParameters parameters) : IDatabase
         using var command = new OdbcCommand(query, connection);
         using var reader = command.ExecuteReader();
 
-        var dataColumns = parameters.Columns.Select(x => x.DataValueName).ToArray();
+        var dataColumns = parameters.Columns.Select(x => x.ValueName).ToArray();
 
         while (reader.Read())
         {
