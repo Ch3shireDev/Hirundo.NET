@@ -16,13 +16,13 @@ public class MdbAccessDatabaseTests
     public void GivenOldExampleDatabase_WhenGetData_ReturnsRows()
     {
         // Arrange
-        _accessDatabaseParameters.FilePath = "./Assets/access_example_old_db.mdb";
-        _accessDatabaseParameters.ValuesColumns.Add(new DatabaseColumn("IDR_Podab", "ID", DataValueType.LongInt));
-        _accessDatabaseParameters.ValuesColumns.Add(new DatabaseColumn("RING", "RING", DataValueType.String));
-        _accessDatabaseParameters.ValuesColumns.Add(new DatabaseColumn("DATE", "DATE", DataValueType.DateTime));
-        _accessDatabaseParameters.ValuesColumns.Add(new DatabaseColumn("MASS", "WEIGHT", DataValueType.Decimal));
-        _accessDatabaseParameters.ValuesColumns.Add(new DatabaseColumn("FAT", "FAT", DataValueType.ShortInt));
-        _accessDatabaseParameters.TableName = "TAB_RING_PODAB";
+        _accessDatabaseParameters.Path = "./Assets/access_example_old_db.mdb";
+        _accessDatabaseParameters.Columns.Add(new DatabaseColumn("IDR_Podab", "ID", DataValueType.LongInt));
+        _accessDatabaseParameters.Columns.Add(new DatabaseColumn("RING", "RING", DataValueType.String));
+        _accessDatabaseParameters.Columns.Add(new DatabaseColumn("DATE", "DATE", DataValueType.DateTime));
+        _accessDatabaseParameters.Columns.Add(new DatabaseColumn("MASS", "WEIGHT", DataValueType.Decimal));
+        _accessDatabaseParameters.Columns.Add(new DatabaseColumn("FAT", "FAT", DataValueType.ShortInt));
+        _accessDatabaseParameters.Table = "TAB_RING_PODAB";
 
         // Act
         var data = _mdbAccessDatabase.GetObservations().ToList();
@@ -43,12 +43,12 @@ public class MdbAccessDatabaseTests
     public void GivenNewExampleDatabse_WhenGetData_ReturnsThreeRows()
     {
         // Arrange
-        _accessDatabaseParameters.FilePath = "./Assets/access_example_new_db.mdb";
-        _accessDatabaseParameters.ValuesColumns.Add(new DatabaseColumn("IDR_Podab", "ID", DataValueType.LongInt));
-        _accessDatabaseParameters.ValuesColumns.Add(new DatabaseColumn("RING", "RING", DataValueType.String));
-        _accessDatabaseParameters.ValuesColumns.Add(new DatabaseColumn("Date2", "DATE", DataValueType.DateTime));
-        _accessDatabaseParameters.ValuesColumns.Add(new DatabaseColumn("Species Code", "SPECIES", DataValueType.String));
-        _accessDatabaseParameters.TableName = "example table";
+        _accessDatabaseParameters.Path = "./Assets/access_example_new_db.mdb";
+        _accessDatabaseParameters.Columns.Add(new DatabaseColumn("IDR_Podab", "ID", DataValueType.LongInt));
+        _accessDatabaseParameters.Columns.Add(new DatabaseColumn("RING", "RING", DataValueType.String));
+        _accessDatabaseParameters.Columns.Add(new DatabaseColumn("Date2", "DATE", DataValueType.DateTime));
+        _accessDatabaseParameters.Columns.Add(new DatabaseColumn("Species Code", "SPECIES", DataValueType.String));
+        _accessDatabaseParameters.Table = "example table";
 
         // Act
         var data = _mdbAccessDatabase.GetObservations().ToList();
