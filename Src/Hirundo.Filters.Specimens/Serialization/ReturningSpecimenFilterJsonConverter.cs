@@ -16,7 +16,7 @@ public class ReturningSpecimenFilterJsonConverter : JsonConverter
         }
     }
 
-    private string GetType(IReturningSpecimenFilter filter)
+    private static string GetType(IReturningSpecimenFilter filter)
     {
         return filter switch
         {

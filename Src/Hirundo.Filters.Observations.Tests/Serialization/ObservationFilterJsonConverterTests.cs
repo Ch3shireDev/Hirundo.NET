@@ -1,20 +1,34 @@
 ﻿using Hirundo.Commons;
 using Hirundo.Filters.Observations.Serialization;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
 namespace Hirundo.Filters.Observations.Tests.Serialization;
 
 [TestFixture]
-public class ObservationFilterJsonSerializationTests
+public class ObservationFilterJsonConverterTests
 {
-    [SetUp]
-    public void Setup()
+    private readonly JsonSerializerSettings _settings = new()
     {
-        _serializer = new ObservationFilterJsonSerializer();
+        TypeNameHandling = TypeNameHandling.Auto,
+        NullValueHandling = NullValueHandling.Ignore,
+        Formatting = Formatting.Indented,
+        Converters = new List<JsonConverter>
+        {
+            new ObservationFilterJsonConverter()
+        }
+    };
+
+    private string Serialize(IObservationFilter filter)
+    {
+        return JsonConvert.SerializeObject(filter, _settings);
     }
 
-    private ObservationFilterJsonSerializer _serializer = null!;
+    private IObservationFilter? Deserialize(string json)
+    {
+        return JsonConvert.DeserializeObject<IObservationFilter>(json, _settings);
+    }
 
     [Test]
     public void GivenIsEqualFilter_WhenSerialize_ReturnsJsonString()
@@ -23,7 +37,7 @@ public class ObservationFilterJsonSerializationTests
         var filter = new IsEqualValueFilter("ID", 1);
 
         // Act
-        var json = _serializer.Serialize(filter);
+        var json = Serialize(filter);
 
         // Assert
         var jobject = JObject.Parse(json);
@@ -38,7 +52,7 @@ public class ObservationFilterJsonSerializationTests
         var filter = new IsInTimeBlockFilter("Time", new TimeBlock(6, 12));
 
         // Act
-        var json = _serializer.Serialize(filter);
+        var json = Serialize(filter);
 
         // Assert
         var jobject = JObject.Parse(json);
@@ -60,14 +74,14 @@ public class ObservationFilterJsonSerializationTests
         }";
 
         // Act
-        var filter = _serializer.Deserialize(json);
+        var filter = Deserialize(json);
 
         // Assert
         Assert.That(filter, Is.Not.Null);
         Assert.That(filter, Is.TypeOf<IsEqualValueFilter>());
-        var isEqualFilter = (IsEqualValueFilter)filter;
-        Assert.That(isEqualFilter.ValueName, Is.EqualTo("ID"));
-        Assert.That(isEqualFilter.Value, Is.EqualTo(1));
+        var isEqualFilter = filter as IsEqualValueFilter;
+        Assert.That(isEqualFilter?.ValueName, Is.EqualTo("ID"));
+        Assert.That(isEqualFilter?.Value, Is.EqualTo(1));
     }
 
     [Test]
@@ -84,7 +98,7 @@ public class ObservationFilterJsonSerializationTests
         }";
 
         // Act
-        var filter = _serializer.Deserialize(json) as IsInTimeBlockFilter;
+        var filter = Deserialize(json) as IsInTimeBlockFilter;
 
         // Assert
         Assert.That(filter, Is.Not.Null);
