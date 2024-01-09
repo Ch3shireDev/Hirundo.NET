@@ -10,6 +10,8 @@ using Hirundo.Serialization.Json;
 using Hirundo.Writers.Summary;
 using Newtonsoft.Json;
 using Serilog;
+using System.Globalization;
+using System.Runtime.Serialization;
 
 namespace Hirundo.App.CLI;
 
@@ -17,12 +19,12 @@ namespace Hirundo.App.CLI;
 ///     Przykładowa aplikacja konsolowa, która wykorzystuje bibliotekę Hirundo. 
 ///     Program pobiera dane z dwóch tabel w bazie danych Access, przetwarza je i zapisuje wyniki do pliku CSV.
 /// </summary>
-internal class Program
+internal sealed class Program
 {
     private static void Main()
     {
         Log.Logger = new LoggerConfiguration()
-            .WriteTo.Console()
+            .WriteTo.Console(formatProvider:CultureInfo.InvariantCulture)
             .CreateLogger();
 
         var appConfig = GetConfig();
@@ -100,7 +102,7 @@ internal class Program
     {
         var converter = new HirundoJsonConverter();
         var jsonConfig = File.ReadAllText("appsettings.json");
-        var appConfig = JsonConvert.DeserializeObject<ApplicationConfig>(jsonConfig, converter) ?? throw new Exception("Błąd parsowania konfiguracji.");
+        var appConfig = JsonConvert.DeserializeObject<ApplicationConfig>(jsonConfig, converter) ?? throw new SerializationException("Błąd parsowania konfiguracji.");
         return appConfig;
     }
 }

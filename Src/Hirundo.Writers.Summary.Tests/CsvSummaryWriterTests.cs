@@ -1,25 +1,16 @@
-﻿using System.Text;
-using Hirundo.Commons;
+﻿using Hirundo.Commons;
 using NUnit.Framework;
 
 namespace Hirundo.Writers.Summary.Tests;
 
 public class CsvSummaryWriterTests
 {
-    private StringWriter _stringWriter = null!;
-    private CsvSummaryWriter _writer = null!;
-
-    [SetUp]
-    public void Setup()
-    {
-        _stringWriter = new StringWriter();
-        _writer = new CsvSummaryWriter(_stringWriter);
-    }
-
     [Test]
     public void GivenEmptyRecords_WhenWriteSummary_ReturnsEmptyDocument()
     {
         // Arrange
+        var stringWriter = new StringWriter();
+        using var writer = new CsvSummaryWriter(stringWriter);
         var returningSpecimen = new Specimen("AB123", []);
         Specimen[] population = [];
         StatisticalData[] statistics = [];
@@ -27,10 +18,10 @@ public class CsvSummaryWriterTests
         List<ReturningSpecimenSummary> summary = [new ReturningSpecimenSummary(returningSpecimen, population, statistics)];
 
         // Act
-        _writer.Write(summary);
+        writer.Write(summary);
 
         // Assert
-        var result = _stringWriter.ToString();
+        var result = stringWriter.ToString();
         Assert.That(result, Is.Not.Null);
     }
 
@@ -38,6 +29,8 @@ public class CsvSummaryWriterTests
     public void GivenOneColumn_WhenWriteSummary_ReturnsThisColumn()
     {
         // Arrange
+        var stringWriter = new StringWriter();
+        using var writer = new CsvSummaryWriter(stringWriter);
         Observation[] observations = [new Observation(["ID"], [123])];
         var returningSpecimen = new Specimen(123, observations);
         Specimen[] population = [];
@@ -46,10 +39,10 @@ public class CsvSummaryWriterTests
         List<ReturningSpecimenSummary> summary = [new ReturningSpecimenSummary(returningSpecimen, population, statistics)];
 
         // Act
-        _writer.Write(summary);
+        writer.Write(summary);
 
         // Assert
-        var result = _stringWriter.ToString();
+        var result = stringWriter.ToString();
         Assert.That(result, Is.Not.Null);
         Assert.That(result, Is.EqualTo("ID\r\n123\r\n"));
     }
@@ -58,6 +51,8 @@ public class CsvSummaryWriterTests
     public void GivenOnePrimaryColumnAndOneStatisticalColumn_WhenWrite_ReturnsBothColumns()
     {
         // Arrange
+        var stringWriter = new StringWriter();
+        using var writer = new CsvSummaryWriter(stringWriter);
         Observation[] observations = [new Observation(["PID"], [123])];
         var returningSpecimen = new Specimen(123, observations);
         Specimen[] population = [];
@@ -66,10 +61,10 @@ public class CsvSummaryWriterTests
         List<ReturningSpecimenSummary> summary = [new ReturningSpecimenSummary(returningSpecimen, population, statistics)];
 
         // Act
-        _writer.Write(summary);
+        writer.Write(summary);
 
         // Assert
-        var result = _stringWriter.ToString();
+        var result = stringWriter.ToString();
         Assert.That(result, Is.Not.Null);
         Assert.That(result, Is.EqualTo("PID,MEAN_WEIGHT\r\n123,22.5\r\n"));
     }

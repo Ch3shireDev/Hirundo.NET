@@ -22,10 +22,10 @@ public class AccessDatabaseParameters : IDatabaseParameters
     /// <summary>
     ///     Lista kolumn z danymi.
     /// </summary>
-    public ColumnMapping[] Columns { get; set; } = [];
+    public IList<ColumnMapping> Columns { get; init; } = [];
 
     /// <summary>
-    /// Lista warunków do spełnienia przez kolumny danych (klauzula WHERE).
+    ///     Lista warunków do spełnienia przez kolumny danych (klauzula WHERE).
     /// </summary>
-    public DatabaseCondition[] Conditions { get; set; } = [];
+    public IList<DatabaseCondition> Conditions { get; init; } = [];
 }

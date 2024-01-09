@@ -35,7 +35,9 @@ public class MdbAccessDatabase(AccessDatabaseParameters parameters) : IDatabase
             .WithConditions(parameters.Conditions)
             .Build();
 
+#pragma warning disable CA2100
         using var command = new OdbcCommand(query, connection);
+#pragma warning restore CA2100
         using var reader = command.ExecuteReader();
 
         var dataColumns = parameters.Columns.Select(x => x.ValueName).ToArray();

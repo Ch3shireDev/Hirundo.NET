@@ -15,6 +15,8 @@ public class SummaryWriterBuilder
 
     public SummaryWriterBuilder WithCsvSummaryWriterParameters(CsvSummaryWriterParameters parameters)
     {
+        ArgumentNullException.ThrowIfNull(parameters);
+
         _filename = parameters.Path;
         return this;
     }

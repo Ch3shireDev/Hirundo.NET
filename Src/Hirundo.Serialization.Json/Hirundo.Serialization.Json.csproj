@@ -1,23 +1,35 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-  </ItemGroup>
+	<PropertyGroup>
+		<EnableNETAnalyzers>true</EnableNETAnalyzers>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Hirundo.Commons\Hirundo.Commons.csproj" />
-    <ProjectReference Include="..\Hirundo.Databases\Hirundo.Databases.csproj" />
-    <ProjectReference Include="..\Hirundo.Filters.Observations\Hirundo.Filters.Observations.csproj" />
-    <ProjectReference Include="..\Hirundo.Filters.Specimens\Hirundo.Filters.Specimens.csproj" />
-    <ProjectReference Include="..\Hirundo.Processors.Population\Hirundo.Processors.Population.csproj" />
-    <ProjectReference Include="..\Hirundo.Processors.Statistics\Hirundo.Processors.Statistics.csproj" />
-    <ProjectReference Include="..\Hirundo.Writers.Summary\Hirundo.Writers.Summary.csproj" />
-  </ItemGroup>
+	<PropertyGroup>
+		<AnalysisMode>All</AnalysisMode>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Hirundo.Commons\Hirundo.Commons.csproj" />
+		<ProjectReference Include="..\Hirundo.Databases\Hirundo.Databases.csproj" />
+		<ProjectReference Include="..\Hirundo.Filters.Observations\Hirundo.Filters.Observations.csproj" />
+		<ProjectReference Include="..\Hirundo.Filters.Specimens\Hirundo.Filters.Specimens.csproj" />
+		<ProjectReference Include="..\Hirundo.Processors.Population\Hirundo.Processors.Population.csproj" />
+		<ProjectReference Include="..\Hirundo.Processors.Statistics\Hirundo.Processors.Statistics.csproj" />
+		<ProjectReference Include="..\Hirundo.Writers.Summary\Hirundo.Writers.Summary.csproj" />
+	</ItemGroup>
 
 </Project>

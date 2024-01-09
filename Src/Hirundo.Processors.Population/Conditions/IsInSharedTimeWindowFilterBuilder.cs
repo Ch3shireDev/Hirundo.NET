@@ -3,7 +3,7 @@
 namespace Hirundo.Processors.Population.Conditions;
 
 [TypeDescription("IsInSharedTimeWindow")]
-public class IsInSharedTimeWindowFilterBuilder(
+public sealed class IsInSharedTimeWindowFilterBuilder(
     string dateValueName,
     int maxTimeDistanceInDays) : IPopulationFilterBuilder
 {
@@ -15,7 +15,7 @@ public class IsInSharedTimeWindowFilterBuilder(
         return new IsInSharedTimeWindowFilter(returningSpecimen, DateValueName, MaxTimeDistanceInDays);
     }
 
-    private class IsInSharedTimeWindowFilter(
+    private sealed class IsInSharedTimeWindowFilter(
         Specimen returningSpecimen,
         string dateValueName,
         int days) : IPopulationFilter

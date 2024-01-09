@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using System.Text;
-using Hirundo.Commons;
 using Hirundo.Databases.Conditions;
 
 namespace Hirundo.Databases;
@@ -67,7 +66,7 @@ public class MdbAccessQueryBuilder
     /// </summary>
     /// <param name="parametersConditions"></param>
     /// <returns></returns>
-    public MdbAccessQueryBuilder WithConditions(DatabaseCondition[] parametersConditions)
+    public MdbAccessQueryBuilder WithConditions(IEnumerable<DatabaseCondition> parametersConditions)
     {
         _conditions.AddRange(parametersConditions);
         return this;
@@ -79,10 +78,12 @@ public class MdbAccessQueryBuilder
     /// <returns></returns>
     public string Build()
     {
+        ArgumentNullException.ThrowIfNull(_tableName);
+
         var stringBuilder = new StringBuilder();
         stringBuilder.Append("SELECT ");
         stringBuilder.Append(string.Join(", ", _columns.Select(GetSqlColumnExpression)));
-        stringBuilder.Append($" FROM [{_tableName}]");
+        stringBuilder.Append(CultureInfo.InvariantCulture, $" FROM [{_tableName ?? ""}]");
         stringBuilder.Append(GetWhereClause());
         return stringBuilder.ToString();
     }
@@ -101,18 +102,19 @@ public class MdbAccessQueryBuilder
             if (!isFirst)
             {
                 var logicOperator = GetLogicOperator(condition.ConditionOperator);
-                stringBuilder2.Append($" {logicOperator} ");
+                stringBuilder2.Append(CultureInfo.InvariantCulture, $" {logicOperator} ");
             }
 
-            stringBuilder2.Append($"{GetColumnForWhereQuery(condition)} {TwoArgumentOperator(condition.Type)} {GetValueForSqlWhereStatement(condition.Value)}");
+            stringBuilder2.Append(CultureInfo.InvariantCulture, $"{GetColumnForWhereQuery(condition)} {TwoArgumentOperator(condition.Type)} {GetValueForSqlWhereStatement(condition.Value)}");
         }
 
         var result = stringBuilder2.ToString();
         return result;
     }
 
-    private string GetColumnForWhereQuery(DatabaseCondition condition)
+    private static string GetColumnForWhereQuery(DatabaseCondition condition)
     {
+        // TODO: Refactor date conversion
         if (condition.DatabaseColumn == "DATE2") return $"CDATE([{condition.DatabaseColumn}])";
         return $"[{condition.DatabaseColumn}]";
     }
@@ -145,15 +147,15 @@ public class MdbAccessQueryBuilder
         return value switch
         {
             string stringValue => DateTime.TryParse(stringValue, out var date) ? GetDateQuery(date) : $"'{stringValue}'",
-            int intValue => intValue.ToString(),
-            long longValue => longValue.ToString(),
+            int intValue => intValue.ToString(CultureInfo.InvariantCulture),
+            long longValue => longValue.ToString(CultureInfo.InvariantCulture),
             double doubleValue => doubleValue.ToString(CultureInfo.InvariantCulture),
             DateTime dateTimeValue => GetDateQuery(dateTimeValue),
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
         };
     }
 
-    static string GetDateQuery(DateTime date)
+    private static string GetDateQuery(DateTime date)
     {
         return $"DateSerial({date.Year}, {date.Month}, {date.Day})";
     }
@@ -170,10 +172,10 @@ public class MdbAccessQueryBuilder
         return columnMapping.DataType switch
         {
             DataValueType.Undefined => $"[{columnMapping.DatabaseColumn}]",
-            DataValueType.String => $"IIF(IsNull([{columnMapping.DatabaseColumn}]), Null, CSTR([{columnMapping.DatabaseColumn}]))",
+            DataValueType.Text => $"IIF(IsNull([{columnMapping.DatabaseColumn}]), Null, CSTR([{columnMapping.DatabaseColumn}]))",
             DataValueType.ShortInt => $"IIF(IsNull([{columnMapping.DatabaseColumn}]), Null, CINT([{columnMapping.DatabaseColumn}]))",
             DataValueType.LongInt => $"IIF(IsNull([{columnMapping.DatabaseColumn}]), Null, CLNG([{columnMapping.DatabaseColumn}]))",
-            DataValueType.Decimal => $"IIF(IsNull([{columnMapping.DatabaseColumn}]), Null, CDBL([{columnMapping.DatabaseColumn}]))",
+            DataValueType.Numeric => $"IIF(IsNull([{columnMapping.DatabaseColumn}]), Null, CDBL([{columnMapping.DatabaseColumn}]))",
             DataValueType.DateTime => $"IIF(IsNull([{columnMapping.DatabaseColumn}]), Null, CDATE([{columnMapping.DatabaseColumn}]))",
             _ => throw new ArgumentOutOfRangeException(nameof(columnMapping), columnMapping.DataType, null)
         };

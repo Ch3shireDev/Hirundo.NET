@@ -12,7 +12,7 @@ public class SpecimensProcessorParameters
     public string SpecimenIdentifier { get; set; } = null!;
 
     /// <summary>
-    ///     Czy należy uwzględniać przypadki gdy wartość identyfikatora osobnika jest pusta? Domyślnie <c>false</c>.
+    ///     Czy należy uwzględniać przypadki, gdy wartość identyfikatora osobnika jest pusta? Domyślnie <c>false</c>.
     /// </summary>
-    public bool IncludeEmptyValues { get; set; } = false;
+    public bool IncludeEmptyValues { get; set; }
 }

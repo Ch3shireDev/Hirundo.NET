@@ -7,6 +7,7 @@ using Hirundo.Processors.Statistics.Operations;
 using Hirundo.Writers.Summary;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using System.Runtime.Serialization;
 
 namespace Hirundo.Serialization.Json.Tests;
 
@@ -18,7 +19,7 @@ public class ApplicationConfigJsonConverterTests
     {
         _settings = new JsonSerializerSettings
         {
-            TypeNameHandling = TypeNameHandling.Auto,
+            TypeNameHandling = TypeNameHandling.None,
             NullValueHandling = NullValueHandling.Ignore,
             Formatting = Formatting.Indented,
             Converters = new List<JsonConverter>
@@ -49,7 +50,7 @@ public class ApplicationConfigJsonConverterTests
                 {
                   ""DatabaseColumn"": ""RING"",
                   ""ValueName"": ""RING"",
-                  ""DataType"": ""String""
+                  ""DataType"": ""Text""
                 },
                 {
                   ""DatabaseColumn"": ""DATE"",
@@ -71,7 +72,7 @@ public class ApplicationConfigJsonConverterTests
                 {
                   ""DatabaseColumn"": ""RING"",
                   ""ValueName"": ""RING"",
-                  ""DataType"": ""String""
+                  ""DataType"": ""Text""
                 },
                 {
                   ""DatabaseColumn"": ""DATE2"",
@@ -84,24 +85,24 @@ public class ApplicationConfigJsonConverterTests
         }";
 
         // Act
-        var config = JsonConvert.DeserializeObject<ApplicationConfig>(json, _settings) ?? throw new Exception();
+        var config = JsonConvert.DeserializeObject<ApplicationConfig>(json, _settings) ?? throw new SerializationException();
 
         // Assert
         Assert.That(config, Is.Not.Null);
-        Assert.That(config.Databases, Has.Length.EqualTo(2));
+        Assert.That(config.Databases, Has.Count.EqualTo(2));
         Assert.That(config.Databases[0], Is.TypeOf<AccessDatabaseParameters>());
         Assert.That(config.Databases[1], Is.TypeOf<SqlServerParameters>());
 
         var databaseParameters0 = (AccessDatabaseParameters)config.Databases[0];
         Assert.That(databaseParameters0.Path, Is.EqualTo(@"D:\Ring_00_PODAB.mdb"));
         Assert.That(databaseParameters0.Table, Is.EqualTo("TAB_RING_PODAB"));
-        Assert.That(databaseParameters0.Columns, Has.Length.EqualTo(3));
+        Assert.That(databaseParameters0.Columns, Has.Count.EqualTo(3));
         Assert.That(databaseParameters0.Columns[0].DatabaseColumn, Is.EqualTo("IDR_Podab"));
         Assert.That(databaseParameters0.Columns[0].ValueName, Is.EqualTo("ID"));
         Assert.That(databaseParameters0.Columns[0].DataType, Is.EqualTo(DataValueType.LongInt));
         Assert.That(databaseParameters0.Columns[1].DatabaseColumn, Is.EqualTo("RING"));
         Assert.That(databaseParameters0.Columns[1].ValueName, Is.EqualTo("RING"));
-        Assert.That(databaseParameters0.Columns[1].DataType, Is.EqualTo(DataValueType.String));
+        Assert.That(databaseParameters0.Columns[1].DataType, Is.EqualTo(DataValueType.Text));
         Assert.That(databaseParameters0.Columns[2].DatabaseColumn, Is.EqualTo("DATE"));
         Assert.That(databaseParameters0.Columns[2].ValueName, Is.EqualTo("DATE"));
         Assert.That(databaseParameters0.Columns[2].DataType, Is.EqualTo(DataValueType.DateTime));
@@ -109,13 +110,13 @@ public class ApplicationConfigJsonConverterTests
         var databaseParameters1 = (SqlServerParameters)config.Databases[1];
         Assert.That(databaseParameters1.ConnectionString, Is.EqualTo("Server=localhost;Database=DB"));
         Assert.That(databaseParameters1.Table, Is.EqualTo("AB 2017_18_19_20_21S"));
-        Assert.That(databaseParameters1.Columns, Has.Length.EqualTo(3));
+        Assert.That(databaseParameters1.Columns, Has.Count.EqualTo(3));
         Assert.That(databaseParameters1.Columns[0].DatabaseColumn, Is.EqualTo("IDR_Podab"));
         Assert.That(databaseParameters1.Columns[0].ValueName, Is.EqualTo("ID"));
         Assert.That(databaseParameters1.Columns[0].DataType, Is.EqualTo(DataValueType.LongInt));
         Assert.That(databaseParameters1.Columns[1].DatabaseColumn, Is.EqualTo("RING"));
         Assert.That(databaseParameters1.Columns[1].ValueName, Is.EqualTo("RING"));
-        Assert.That(databaseParameters1.Columns[1].DataType, Is.EqualTo(DataValueType.String));
+        Assert.That(databaseParameters1.Columns[1].DataType, Is.EqualTo(DataValueType.Text));
         Assert.That(databaseParameters1.Columns[2].DatabaseColumn, Is.EqualTo("DATE2"));
         Assert.That(databaseParameters1.Columns[2].ValueName, Is.EqualTo("DATE"));
         Assert.That(databaseParameters1.Columns[2].DataType, Is.EqualTo(DataValueType.DateTime));
@@ -146,12 +147,12 @@ public class ApplicationConfigJsonConverterTests
         }";
 
         // Act
-        var config = JsonConvert.DeserializeObject<ApplicationConfig>(json, _settings) ?? throw new Exception();
+        var config = JsonConvert.DeserializeObject<ApplicationConfig>(json, _settings) ?? throw new SerializationException();
 
         // Assert
         Assert.That(config, Is.Not.Null);
         Assert.That(config.Observations, Is.Not.Null);
-        Assert.That(config.Observations.Conditions, Has.Length.EqualTo(2));
+        Assert.That(config.Observations.Conditions, Has.Count.EqualTo(2));
         Assert.That(config.Observations.Conditions[0], Is.TypeOf<IsEqualFilter>());
         Assert.That(config.Observations.Conditions[1], Is.TypeOf<IsInTimeBlockFilter>());
 
@@ -177,7 +178,7 @@ public class ApplicationConfigJsonConverterTests
         }";
 
         // Act
-        var config = JsonConvert.DeserializeObject<ApplicationConfig>(json, _settings) ?? throw new Exception();
+        var config = JsonConvert.DeserializeObject<ApplicationConfig>(json, _settings) ?? throw new SerializationException();
 
         // Assert
         Assert.That(config, Is.Not.Null);
@@ -210,7 +211,7 @@ public class ApplicationConfigJsonConverterTests
         }";
 
         // Act
-        var config = JsonConvert.DeserializeObject<ApplicationConfig>(json, _settings) ?? throw new Exception();
+        var config = JsonConvert.DeserializeObject<ApplicationConfig>(json, _settings) ?? throw new SerializationException();
 
         // Assert
         Assert.That(config, Is.Not.Null);
@@ -247,13 +248,13 @@ public class ApplicationConfigJsonConverterTests
         }";
 
         // Act
-        var config = JsonConvert.DeserializeObject<ApplicationConfig>(json, _settings) ?? throw new Exception();
+        var config = JsonConvert.DeserializeObject<ApplicationConfig>(json, _settings) ?? throw new SerializationException();
 
         // Assert
         Assert.That(config, Is.Not.Null);
 
         Assert.That(config.Population, Is.Not.Null);
-        Assert.That(config.Population.Conditions, Has.Length.EqualTo(1));
+        Assert.That(config.Population.Conditions, Has.Count.EqualTo(1));
         Assert.That(config.Population.Conditions[0], Is.TypeOf<IsInSharedTimeWindowFilterBuilder>());
 
         var populationFilter0 = (IsInSharedTimeWindowFilterBuilder)config.Population.Conditions[0];
@@ -278,13 +279,13 @@ public class ApplicationConfigJsonConverterTests
         }";
 
         // Act
-        var config = JsonConvert.DeserializeObject<ApplicationConfig>(json, _settings) ?? throw new Exception();
+        var config = JsonConvert.DeserializeObject<ApplicationConfig>(json, _settings) ?? throw new SerializationException();
 
         // Assert
         Assert.That(config, Is.Not.Null);
 
         Assert.That(config.Statistics, Is.Not.Null);
-        Assert.That(config.Statistics.Operations, Has.Length.EqualTo(1));
+        Assert.That(config.Statistics.Operations, Has.Count.EqualTo(1));
         Assert.That(config.Statistics.Operations[0], Is.TypeOf<AverageValueOperation>());
 
         var operation0 = (AverageValueOperation)config.Statistics.Operations[0];
@@ -306,7 +307,7 @@ public class ApplicationConfigJsonConverterTests
         }";
 
         // Act
-        var config = JsonConvert.DeserializeObject<ApplicationConfig>(json, _settings) ?? throw new Exception();
+        var config = JsonConvert.DeserializeObject<ApplicationConfig>(json, _settings) ?? throw new SerializationException();
 
         // Assert
         Assert.That(config, Is.Not.Null);

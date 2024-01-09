@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace Hirundo.App;
 
-internal class MainViewModel : ViewModelBase
+internal sealed class MainViewModel : ViewModelBase
 {
     public string Title { get; set; } = null!;
     public string Description { get; set; } = null!;

@@ -6,8 +6,20 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<EnableNETAnalyzers>true</EnableNETAnalyzers>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<AnalysisMode>All</AnalysisMode>
+	</PropertyGroup>
+
 	<ItemGroup>
-	  <PackageReference Include="Serilog" Version="3.1.1" />
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Serilog" Version="3.1.1" />
 	</ItemGroup>
 
 	<ItemGroup>

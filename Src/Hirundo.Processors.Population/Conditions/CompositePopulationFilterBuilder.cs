@@ -2,7 +2,7 @@
 
 namespace Hirundo.Processors.Population.Conditions;
 
-public class CompositePopulationFilterBuilder(IEnumerable<IPopulationFilterBuilder> builders) : IPopulationFilterBuilder
+public sealed class CompositePopulationFilterBuilder(IEnumerable<IPopulationFilterBuilder> builders) : IPopulationFilterBuilder
 {
     public IPopulationFilter GetPopulationFilter(Specimen returningSpecimen)
     {
@@ -11,7 +11,7 @@ public class CompositePopulationFilterBuilder(IEnumerable<IPopulationFilterBuild
         return new CompositePopulationFilter(filters);
     }
 
-    private class CompositePopulationFilter(IEnumerable<IPopulationFilter> filters) : IPopulationFilter
+    private sealed class CompositePopulationFilter(IEnumerable<IPopulationFilter> filters) : IPopulationFilter
     {
         public bool IsAccepted(Specimen specimen)
         {

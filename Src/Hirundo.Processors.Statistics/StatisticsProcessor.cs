@@ -14,11 +14,12 @@ public class StatisticsProcessor(
     /// <summary>
     ///     Zwraca dane statystyczne wyznaczone na podstawie danych populacji.
     /// </summary>
-    /// <param name="populationsData">Dane populacji.</param>
+    /// <param name="populationData">Dane populacji.</param>
     /// <returns></returns>
-    public IEnumerable<StatisticalData> GetStatistics(IEnumerable<Specimen> populationsData)
+    public IEnumerable<StatisticalData> GetStatistics(IEnumerable<Specimen> populationData)
     {
+        ArgumentNullException.ThrowIfNull(populationData);
         if (outliersConditions.Any()) throw new NotImplementedException();
-        return statisticalOperations.Select(operation => operation.GetStatistics(populationsData));
+        return statisticalOperations.Select(operation => operation.GetStatistics(populationData));
     }
 }

@@ -8,11 +8,11 @@ using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
 namespace Hirundo.Serialization.Json;
 
-internal class PolymorphicJsonConverter<T> : JsonConverter where T : class
+internal sealed class PolymorphicJsonConverter<T> : JsonConverter where T : class
 {
     private readonly JsonSerializerSettings _settings = new()
     {
-        TypeNameHandling = TypeNameHandling.Auto,
+        TypeNameHandling = TypeNameHandling.None,
         NullValueHandling = NullValueHandling.Ignore,
         Formatting = Formatting.Indented,
         Converters = new List<JsonConverter>

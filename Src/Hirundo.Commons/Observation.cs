@@ -64,7 +64,7 @@ public class Observation
     {
         for (var i = 0; i < _names.Length; i++)
         {
-            if (string.Equals(_names[i], columnName, StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(_names[i], columnName, StringComparison.OrdinalIgnoreCase))
             {
                 return i;
             }

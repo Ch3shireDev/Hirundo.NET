@@ -1,4 +1,5 @@
-﻿using Hirundo.Commons;
+﻿using System.Globalization;
+using Hirundo.Commons;
 using NUnit.Framework;
 
 namespace Hirundo.Filters.Observations.Tests;
@@ -12,7 +13,7 @@ public class IsInSeasonFilterTests
         // Arrange
         var season = new Season(06, 01, 08, 31);
         var filter = new IsInSeasonFilter("DATE", season);
-        var observation = new Observation(["DATE"], [DateTime.Parse("2021-06-01")]);
+        var observation = new Observation(["DATE"], [DateTime.Parse("2021-06-01", CultureInfo.InvariantCulture)]);
 
         // Act
         var result = filter.IsAccepted(observation);
@@ -27,7 +28,7 @@ public class IsInSeasonFilterTests
         // Arrange
         var season = new Season(06, 15, 08, 15);
         var filter = new IsInSeasonFilter("DATE", season);
-        var observation = new Observation(["DATE"], [DateTime.Parse("2021-05-16")]);
+        var observation = new Observation(["DATE"], [DateTime.Parse("2021-05-16", CultureInfo.InvariantCulture)]);
 
         // Act
         var result = filter.IsAccepted(observation);

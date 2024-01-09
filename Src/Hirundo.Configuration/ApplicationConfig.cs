@@ -8,7 +8,7 @@ namespace Hirundo.Configuration;
 
 public class ApplicationConfig
 {
-    public IDatabaseParameters[] Databases { get; set; } = [];
+    public IList<IDatabaseParameters> Databases { get; init; } = [];
     public ObservationsParameters Observations { get; set; } = null!;
     public SpecimensProcessorParameters Specimens { get; set; } = null!;
     public ReturningSpecimensParameters ReturningSpecimens { get; set; } = null!;

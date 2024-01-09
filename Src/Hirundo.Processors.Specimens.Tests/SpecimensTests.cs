@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
 
-namespace Hirundo.Processors.Population.Tests;
+namespace Hirundo.Processors.Specimens.Tests;
 
-public class Tests
+public class SpecimensTests
 {
     [SetUp]
     public void Setup()

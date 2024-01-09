@@ -12,7 +12,7 @@ public class ObservationFilterJsonConverterTests
 {
     private readonly JsonSerializerSettings _settings = new()
     {
-        TypeNameHandling = TypeNameHandling.Auto,
+        TypeNameHandling = TypeNameHandling.None,
         NullValueHandling = NullValueHandling.Ignore,
         Formatting = Formatting.Indented,
         Converters = new List<JsonConverter>

@@ -13,7 +13,7 @@ public class ReturningSpecimenJsonSerializerTests
     {
         _settings = new JsonSerializerSettings
         {
-            TypeNameHandling = TypeNameHandling.Auto,
+            TypeNameHandling = TypeNameHandling.None,
             NullValueHandling = NullValueHandling.Ignore,
             Formatting = Formatting.Indented,
             Converters = new List<JsonConverter>
@@ -29,14 +29,12 @@ public class ReturningSpecimenJsonSerializerTests
     public void GivenReturningSpecimenConditions_WhenSerialize_ReturnsJsonWithConditions()
     {
         // Arrange
-        var parameters = new ReturningSpecimensParameters
-        {
-            Conditions =
+        var parameters = new ReturningSpecimensParameters(
             [
                 new ReturnsAfterTimePeriodFilter("DATE1", 20),
                 new ReturnsNotEarlierThanGivenDateNextYearFilter("DATE2", 07, 15)
             ]
-        };
+        );
 
         // Act
         var result = JsonConvert.SerializeObject(parameters, _settings);
@@ -58,14 +56,7 @@ public class ReturningSpecimenJsonSerializerTests
     public void GivenReturningSpecimenConditions_WhenSerializeAndDeserialize_ReturnsSameConditions()
     {
         // Arrange
-        var parameters = new ReturningSpecimensParameters
-        {
-            Conditions =
-            [
-                new ReturnsAfterTimePeriodFilter("DATE1", 20),
-                new ReturnsNotEarlierThanGivenDateNextYearFilter("DATE2", 06, 14)
-            ]
-        };
+        var parameters = new ReturningSpecimensParameters([new ReturnsAfterTimePeriodFilter("DATE1", 20), new ReturnsNotEarlierThanGivenDateNextYearFilter("DATE2", 06, 14)]);
 
         // Act
         var serialized = JsonConvert.SerializeObject(parameters, _settings);

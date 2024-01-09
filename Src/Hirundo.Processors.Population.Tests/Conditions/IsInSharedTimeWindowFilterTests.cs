@@ -1,4 +1,5 @@
-﻿using Hirundo.Commons;
+﻿using System.Globalization;
+using Hirundo.Commons;
 using Hirundo.Processors.Population.Conditions;
 using NUnit.Framework;
 
@@ -10,12 +11,12 @@ public class IsInSharedTimeWindowFilterTests
     [Test]
     public void GivenSpecimenFromTimeWindow_WhenIsAccepted_ReturnsTrue()
     {
-        var returningSpecimen = new Specimen("XXX", [new Observation(["DATE"], [DateTime.Parse("2020-06-01")])]);
+        var returningSpecimen = new Specimen("XXX", [new Observation(["DATE"], [DateTime.Parse("2020-06-01", CultureInfo.InvariantCulture)])]);
 
         var dateValueName = "DATE";
         var days = 20;
 
-        var specimen = new Specimen("ABC123", [new Observation(["DATE"], [DateTime.Parse("2020-05-20")])]);
+        var specimen = new Specimen("ABC123", [new Observation(["DATE"], [DateTime.Parse("2020-05-20", CultureInfo.InvariantCulture)])]);
 
         var filterBuilder = new IsInSharedTimeWindowFilterBuilder(dateValueName, days);
         var filter = filterBuilder.GetPopulationFilter(returningSpecimen);
@@ -32,15 +33,15 @@ public class IsInSharedTimeWindowFilterTests
     {
         // Arrange
         var returningSpecimen = new Specimen("XX123", [
-                new Observation(["DATE"], [DateTime.Parse("2020-06-01")]),
-                new Observation(["DATE"], [DateTime.Parse("2021-06-01")])
+                new Observation(["DATE"], [DateTime.Parse("2020-06-01", CultureInfo.InvariantCulture)]),
+                new Observation(["DATE"], [DateTime.Parse("2021-06-01", CultureInfo.InvariantCulture)])
             ]
         );
 
         var dateValueName = "DATE";
         var days = 20;
 
-        var specimen = new Specimen("ABC123", [new Observation(["DATE"], [DateTime.Parse("2020-05-05")])]);
+        var specimen = new Specimen("ABC123", [new Observation(["DATE"], [DateTime.Parse("2020-05-05", CultureInfo.InvariantCulture)])]);
 
         var filterBuilder = new IsInSharedTimeWindowFilterBuilder(dateValueName, days);
         var filter = filterBuilder.GetPopulationFilter(returningSpecimen);

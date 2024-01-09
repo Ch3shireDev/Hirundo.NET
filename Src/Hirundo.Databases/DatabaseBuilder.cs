@@ -11,6 +11,13 @@ public class DatabaseBuilder
 
     public DatabaseBuilder AddDatabaseParameters(params IDatabaseParameters[] appConfigDatabases)
     {
+        return AddDatabaseParameters(appConfigDatabases.ToList());
+    }
+
+    public DatabaseBuilder AddDatabaseParameters(IEnumerable<IDatabaseParameters> appConfigDatabases)
+    {
+        ArgumentNullException.ThrowIfNull(appConfigDatabases);
+
         foreach (var databaseParameters in appConfigDatabases)
         {
             switch (databaseParameters)

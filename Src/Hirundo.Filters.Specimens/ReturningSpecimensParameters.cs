@@ -1,6 +1,6 @@
 ﻿namespace Hirundo.Filters.Specimens;
 
-public class ReturningSpecimensParameters
+public class ReturningSpecimensParameters(IList<IReturningSpecimenFilter> conditions)
 {
-    public List<IReturningSpecimenFilter> Conditions { get; set; } = [];
+    public IList<IReturningSpecimenFilter> Conditions { get; } = conditions;
 }

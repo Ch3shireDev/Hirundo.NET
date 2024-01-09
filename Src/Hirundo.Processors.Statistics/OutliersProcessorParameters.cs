@@ -4,5 +4,5 @@ namespace Hirundo.Processors.Statistics;
 
 public class OutliersProcessorParameters
 {
-    public IOutliersCondition[] Conditions { get; set; } = [];
+    public IList<IOutliersCondition> Conditions { get; init; } = [];
 }

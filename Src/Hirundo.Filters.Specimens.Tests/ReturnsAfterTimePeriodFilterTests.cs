@@ -1,4 +1,5 @@
-﻿using Hirundo.Commons;
+﻿using System.Globalization;
+using Hirundo.Commons;
 using NUnit.Framework;
 
 namespace Hirundo.Filters.Specimens.Tests;
@@ -13,8 +14,8 @@ public class ReturnsAfterTimePeriodFilterTests
         var filter = new ReturnsAfterTimePeriodFilter("DATE", 20);
 
         var specimen = new Specimen("AB123", [
-            new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
-            new Observation(["DATE"], [DateTime.Parse("2021-06-21")])
+            new Observation(["DATE"], [DateTime.Parse("2021-06-01", CultureInfo.InvariantCulture)]),
+            new Observation(["DATE"], [DateTime.Parse("2021-06-21", CultureInfo.InvariantCulture)])
         ]);
 
         // Act
@@ -31,9 +32,9 @@ public class ReturnsAfterTimePeriodFilterTests
         var filter = new ReturnsAfterTimePeriodFilter("DATE", 20);
 
         var specimen = new Specimen("AB123", [
-            new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
-            new Observation(["DATE"], [DateTime.Parse("2021-06-05")]),
-            new Observation(["DATE"], [DateTime.Parse("2021-06-27")])
+            new Observation(["DATE"], [DateTime.Parse("2021-06-01", CultureInfo.InvariantCulture)]),
+            new Observation(["DATE"], [DateTime.Parse("2021-06-05", CultureInfo.InvariantCulture)]),
+            new Observation(["DATE"], [DateTime.Parse("2021-06-27", CultureInfo.InvariantCulture)])
         ]);
 
         // Act
@@ -51,9 +52,9 @@ public class ReturnsAfterTimePeriodFilterTests
 
         var specimen = new Specimen("AB123",
         [
-            new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
-            new Observation(["DATE"], [DateTime.Parse("2021-06-05")]),
-            new Observation(["DATE"], [DateTime.Parse("2021-06-22")])
+            new Observation(["DATE"], [DateTime.Parse("2021-06-01", CultureInfo.InvariantCulture)]),
+            new Observation(["DATE"], [DateTime.Parse("2021-06-05", CultureInfo.InvariantCulture)]),
+            new Observation(["DATE"], [DateTime.Parse("2021-06-22", CultureInfo.InvariantCulture)])
         ]);
 
         // Act

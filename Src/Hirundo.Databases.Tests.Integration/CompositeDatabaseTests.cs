@@ -14,10 +14,10 @@ public class CompositeDatabaseTests
             Columns =
             [
                 new ColumnMapping("IDR_Podab", "ID", DataValueType.LongInt),
-                new ColumnMapping("RING", "RING", DataValueType.String),
-                new ColumnMapping("SPEC", "SPECIES", DataValueType.String),
+                new ColumnMapping("RING", "RING", DataValueType.Text),
+                new ColumnMapping("SPEC", "SPECIES", DataValueType.Text),
                 new ColumnMapping("DATE", "DATE", DataValueType.DateTime),
-                new ColumnMapping("MASS", "WEIGHT", DataValueType.Decimal)
+                new ColumnMapping("MASS", "WEIGHT", DataValueType.Numeric)
             ]
         };
 
@@ -28,10 +28,10 @@ public class CompositeDatabaseTests
             Columns =
             [
                 new ColumnMapping("IDR_Podab", "ID", DataValueType.LongInt),
-                new ColumnMapping("RING", "RING", DataValueType.String),
-                new ColumnMapping("Species Code", "SPECIES", DataValueType.String),
+                new ColumnMapping("RING", "RING", DataValueType.Text),
+                new ColumnMapping("Species Code", "SPECIES", DataValueType.Text),
                 new ColumnMapping("DATE2", "DATE", DataValueType.DateTime),
-                new ColumnMapping("WEIGHT", "WEIGHT", DataValueType.Decimal)
+                new ColumnMapping("WEIGHT", "WEIGHT", DataValueType.Numeric)
             ]
         };
 

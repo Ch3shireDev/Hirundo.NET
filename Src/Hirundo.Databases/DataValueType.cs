@@ -11,12 +11,12 @@ public enum DataValueType
     Undefined,
 
     /// <summary>
-    ///     Short integer, reprezentuje liczbę całkowitą z zakresu od -32 768 do 32 767. Odpowiada wartości int16 w C#.
+    ///     Short integer reprezentuje liczbę całkowitą z zakresu od -32 768 do 32 767. Odpowiada wartości int16 w C#.
     /// </summary>
     ShortInt,
 
     /// <summary>
-    ///     Long integer, reprezentuje liczbę całkowitą z zakresu od -2 147 483 648 do 2 147 483 647. Odpowiada wartości int32
+    ///     Long integer reprezentuje liczbę całkowitą z zakresu od -2 147 483 648 do 2 147 483 647. Odpowiada wartości int32
     ///     w C#.
     /// </summary>
     LongInt,
@@ -24,7 +24,7 @@ public enum DataValueType
     /// <summary>
     ///     Łańcuch znaków.
     /// </summary>
-    String,
+    Text,
 
     /// <summary>
     ///     Data i czas.
@@ -34,5 +34,5 @@ public enum DataValueType
     /// <summary>
     ///     Liczba zmiennoprzecinkowa.
     /// </summary>
-    Decimal
+    Numeric
 }

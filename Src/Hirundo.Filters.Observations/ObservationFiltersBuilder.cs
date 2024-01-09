@@ -17,7 +17,7 @@ public class ObservationFiltersBuilder
         return new CompositeObservationFilter([.._observationFilters]);
     }
 
-    public ObservationFiltersBuilder WithConditions(IObservationFilter[] observationsConditions)
+    public ObservationFiltersBuilder WithConditions(IEnumerable<IObservationFilter> observationsConditions)
     {
         _observationFilters.AddRange(observationsConditions);
         return this;

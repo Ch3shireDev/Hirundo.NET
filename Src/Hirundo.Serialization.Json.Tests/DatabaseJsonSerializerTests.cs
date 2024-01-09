@@ -13,7 +13,7 @@ public class DatabaseJsonSerializerTests
     {
         _settings = new JsonSerializerSettings
         {
-            TypeNameHandling = TypeNameHandling.Auto,
+            TypeNameHandling = TypeNameHandling.None,
             NullValueHandling = NullValueHandling.Ignore,
             Formatting = Formatting.Indented,
             Converters = new List<JsonConverter>
@@ -84,7 +84,7 @@ public class DatabaseJsonSerializerTests
         {
             Path = "other_example.mdb",
             Table = "OTHER_EXAMPLE_TABLE",
-            Columns = [new ColumnMapping("OTHER_COLUMN", "OTHER_DATA", DataValueType.String)]
+            Columns = [new ColumnMapping("OTHER_COLUMN", "OTHER_DATA", DataValueType.Text)]
         };
 
         // Act
@@ -96,9 +96,9 @@ public class DatabaseJsonSerializerTests
         Assert.That(deserializedParameters, Is.InstanceOf<AccessDatabaseParameters>());
         Assert.That(deserializedParameters?.Path, Is.EqualTo("other_example.mdb"));
         Assert.That(deserializedParameters?.Table, Is.EqualTo("OTHER_EXAMPLE_TABLE"));
-        Assert.That(deserializedParameters?.Columns, Has.Length.EqualTo(1));
+        Assert.That(deserializedParameters?.Columns, Has.Count.EqualTo(1));
         Assert.That(deserializedParameters?.Columns[0].DatabaseColumn, Is.EqualTo("OTHER_COLUMN"));
         Assert.That(deserializedParameters?.Columns[0].ValueName, Is.EqualTo("OTHER_DATA"));
-        Assert.That(deserializedParameters?.Columns[0].DataType, Is.EqualTo(DataValueType.String));
+        Assert.That(deserializedParameters?.Columns[0].DataType, Is.EqualTo(DataValueType.Text));
     }
 }

@@ -5,7 +5,7 @@
 ///     zestawem cech, które są zapisane w bazie danych. Osobnik może być zaobserwowany wiele razy w różnych miejscach i
 ///     czasach.
 /// </summary>
-public class Specimen(object identifier, Observation[] observations)
+public class Specimen(object identifier, IList<Observation> observations)
 {
     /// <summary>
     ///     Unikalny identyfikator osobnika, np. numer obrączki.
@@ -15,7 +15,7 @@ public class Specimen(object identifier, Observation[] observations)
     /// <summary>
     ///     Lista obserwacji osobnika.
     /// </summary>
-    public Observation[] Observations { get; set; } = observations;
+    public IList<Observation> Observations { get; } = observations;
 
     public string[] GetHeaders()
     {

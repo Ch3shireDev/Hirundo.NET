@@ -1,5 +1,4 @@
-﻿using System.Formats.Asn1;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text;
 using CsvHelper;
 using CsvHelper.Configuration;
@@ -8,11 +7,11 @@ using Hirundo.Commons;
 
 namespace Hirundo.Writers.Summary;
 
-public class CsvSummaryWriter(TextWriter streamWriter) : ISummaryWriter, IDisposable, IAsyncDisposable
+public sealed class CsvSummaryWriter(TextWriter streamWriter) : ISummaryWriter, IDisposable, IAsyncDisposable
 {
     public async ValueTask DisposeAsync()
     {
-        await streamWriter.DisposeAsync();
+        await streamWriter.DisposeAsync().ConfigureAwait(false);
         GC.SuppressFinalize(this);
     }
 
@@ -26,7 +25,7 @@ public class CsvSummaryWriter(TextWriter streamWriter) : ISummaryWriter, IDispos
     {
         var records = summary.ToList();
 
-        if(records.Count == 0) throw new ArgumentException("No records to write.");
+        if (records.Count == 0) throw new ArgumentException("No records to write.");
 
         var firstRecord = records.First();
         var headers = firstRecord.GetHeaders();
@@ -35,12 +34,12 @@ public class CsvSummaryWriter(TextWriter streamWriter) : ISummaryWriter, IDispos
         {
             NewLine = "\r\n",
             Delimiter = ",",
-            Encoding = Encoding.UTF8,
+            Encoding = Encoding.UTF8
         };
 
         var options = new TypeConverterOptions { Formats = new[] { "yyyy-MM-dd" } };
 
-        using var csvWriter = new CsvWriter(streamWriter,configuration);
+        using var csvWriter = new CsvWriter(streamWriter, configuration);
         csvWriter.Context.TypeConverterOptionsCache.AddOptions<DateTime>(options);
         csvWriter.Context.TypeConverterOptionsCache.AddOptions<DateTime?>(options);
 
@@ -50,17 +49,25 @@ public class CsvSummaryWriter(TextWriter streamWriter) : ISummaryWriter, IDispos
             {
                 csvWriter.WriteField(header);
             }
+
             csvWriter.NextRecord();
 
             foreach (var record in records)
             {
                 var values = record.GetValues();
+
                 foreach (var value in values)
                 {
                     csvWriter.WriteField(value);
                 }
+
                 csvWriter.NextRecord();
             }
         }
+    }
+
+    ~CsvSummaryWriter()
+    {
+        Dispose();
     }
 }

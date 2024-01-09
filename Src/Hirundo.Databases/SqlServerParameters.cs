@@ -7,5 +7,5 @@ public class SqlServerParameters : IDatabaseParameters
 {
     public string ConnectionString { get; set; } = null!;
     public string Table { get; set; } = null!;
-    public ColumnMapping[] Columns { get; set; } = [];
+    public IList<ColumnMapping> Columns { get; init; } = [];
 }

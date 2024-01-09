@@ -33,6 +33,8 @@ public class HirundoJsonConverter : JsonConverter
 
     public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
     {
+        ArgumentNullException.ThrowIfNull(writer);
+
         if (value == null)
         {
             writer.WriteNull();

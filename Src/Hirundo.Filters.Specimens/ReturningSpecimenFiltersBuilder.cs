@@ -14,11 +14,11 @@ public class ReturningSpecimenFiltersBuilder
         return new CompositeReturningSpecimenFilter([.._conditions]);
     }
 
-    public ReturningSpecimenFiltersBuilder WithConditions(List<IReturningSpecimenFilter> returningSpecimensConditions)
+    public ReturningSpecimenFiltersBuilder WithConditions(IEnumerable<IReturningSpecimenFilter> returningSpecimensConditions)
     {
-        _conditions = returningSpecimensConditions;
+        _conditions.AddRange(returningSpecimensConditions);
         return this;
     }
 
-    private List<IReturningSpecimenFilter> _conditions = [];
+    private readonly List<IReturningSpecimenFilter> _conditions = [];
 }

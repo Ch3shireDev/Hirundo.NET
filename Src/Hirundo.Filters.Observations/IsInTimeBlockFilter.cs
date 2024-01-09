@@ -1,4 +1,5 @@
-﻿using Hirundo.Commons;
+﻿using System.Globalization;
+using Hirundo.Commons;
 using Serilog;
 
 namespace Hirundo.Filters.Observations;
@@ -13,6 +14,7 @@ public class IsInTimeBlockFilter(string valueName, TimeBlock timeBlock, bool rej
 
     public bool IsAccepted(Observation observation)
     {
+        ArgumentNullException.ThrowIfNull(observation);
         var hourValue = observation.GetValue(ValueName);
 
         if (hourValue == null)
@@ -22,7 +24,7 @@ public class IsInTimeBlockFilter(string valueName, TimeBlock timeBlock, bool rej
 
         if (IsNumeric(hourValue))
         {
-            var hour = Convert.ToInt32(hourValue);
+            var hour = Convert.ToInt32(hourValue, CultureInfo.InvariantCulture);
             return IsInTimeRange(hour);
         }
 

@@ -7,6 +7,7 @@ public class IsInSeasonFilter(string dateColumnName, Season season) : IObservati
 {
     public bool IsAccepted(Observation observation)
     {
+        ArgumentNullException.ThrowIfNull(observation);
         var dateTimeValue = observation.GetValue(dateColumnName);
 
         if (dateTimeValue is DateTime dateTime)

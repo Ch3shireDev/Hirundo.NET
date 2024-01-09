@@ -33,7 +33,7 @@ public class MdbAccessQueryBuilderTests
         // Arrange
         _builder.WithTable("example table 2");
         _builder.WithColumn(new ColumnMapping("IDR_Podab", "ID", DataValueType.LongInt));
-        _builder.WithColumn(new ColumnMapping("RING", "RING", DataValueType.String));
+        _builder.WithColumn(new ColumnMapping("RING", "RING", DataValueType.Text));
 
         // Act
         var query = _builder.Build();
@@ -65,7 +65,7 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table 4");
-        _builder.WithColumn(new ColumnMapping("WEIGHT", "WEIGHT", DataValueType.Decimal));
+        _builder.WithColumn(new ColumnMapping("WEIGHT", "WEIGHT", DataValueType.Numeric));
 
         // Act
         var query = _builder.Build();

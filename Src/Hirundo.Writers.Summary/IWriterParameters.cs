@@ -2,4 +2,5 @@
 
 public interface IWriterParameters
 {
+    string Path { get; }
 }

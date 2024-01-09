@@ -4,5 +4,5 @@ namespace Hirundo.Configuration;
 
 public class ObservationsParameters
 {
-    public IObservationFilter[] Conditions { get; set; } = [];
+    public IList<IObservationFilter> Conditions { get; init; } = [];
 }

@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
 
-namespace Hirundo.Processors.Specimens.Tests;
+namespace Hirundo.Processors.Summary.Tests;
 
-public class Tests
+public class SummaryTests
 {
     [SetUp]
     public void Setup()

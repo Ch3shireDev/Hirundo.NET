@@ -1,4 +1,5 @@
-﻿using Hirundo.Commons;
+﻿using System.Globalization;
+using Hirundo.Commons;
 using NUnit.Framework;
 
 namespace Hirundo.Filters.Specimens.Tests;
@@ -13,8 +14,8 @@ public class ReturnsNotEarlierThanGivenDateNextYearFilterTests
         var filter = new ReturnsNotEarlierThanGivenDateNextYearFilter("DATE", 06, 01);
 
         var specimen = new Specimen("AB123", [
-            new Observation(["DATE"], [DateTime.Parse("2021-06-20")]),
-            new Observation(["DATE"], [DateTime.Parse("2022-06-01")])
+            new Observation(["DATE"], [DateTime.Parse("2021-06-20", CultureInfo.InvariantCulture)]),
+            new Observation(["DATE"], [DateTime.Parse("2022-06-01", CultureInfo.InvariantCulture)])
         ]);
 
         // Act
@@ -31,8 +32,8 @@ public class ReturnsNotEarlierThanGivenDateNextYearFilterTests
         var filter = new ReturnsNotEarlierThanGivenDateNextYearFilter("DATE", 06, 15);
 
         var specimen = new Specimen("AB123", [
-            new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
-            new Observation(["DATE"], [DateTime.Parse("2022-06-01")])
+            new Observation(["DATE"], [DateTime.Parse("2021-06-01", CultureInfo.InvariantCulture)]),
+            new Observation(["DATE"], [DateTime.Parse("2022-06-01", CultureInfo.InvariantCulture)])
         ]);
 
         // Act
@@ -49,9 +50,9 @@ public class ReturnsNotEarlierThanGivenDateNextYearFilterTests
         var filter = new ReturnsNotEarlierThanGivenDateNextYearFilter("DATE", 06, 15);
 
         var specimen = new Specimen("AB123", [
-            new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
-            new Observation(["DATE"], [DateTime.Parse("2022-06-05")]),
-            new Observation(["DATE"], [DateTime.Parse("2023-06-15")])
+            new Observation(["DATE"], [DateTime.Parse("2021-06-01", CultureInfo.InvariantCulture)]),
+            new Observation(["DATE"], [DateTime.Parse("2022-06-05", CultureInfo.InvariantCulture)]),
+            new Observation(["DATE"], [DateTime.Parse("2023-06-15", CultureInfo.InvariantCulture)])
         ]);
 
         // Act
@@ -68,9 +69,9 @@ public class ReturnsNotEarlierThanGivenDateNextYearFilterTests
         var filter = new ReturnsNotEarlierThanGivenDateNextYearFilter("DATE", 06, 15);
 
         var specimen = new Specimen("AB123", [
-            new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
-            new Observation(["DATE"], [DateTime.Parse("2022-06-05")]),
-            new Observation(["DATE"], [DateTime.Parse("2022-06-20")])
+            new Observation(["DATE"], [DateTime.Parse("2021-06-01", CultureInfo.InvariantCulture)]),
+            new Observation(["DATE"], [DateTime.Parse("2022-06-05", CultureInfo.InvariantCulture)]),
+            new Observation(["DATE"], [DateTime.Parse("2022-06-20", CultureInfo.InvariantCulture)])
         ]);
 
         // Act
