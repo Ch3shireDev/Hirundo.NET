@@ -95,7 +95,7 @@ public class ApplicationConfigJsonConverterTests
         var databaseParameters0 = (AccessDatabaseParameters)config.Databases[0];
         Assert.That(databaseParameters0.Path, Is.EqualTo(@"D:\Ring_00_PODAB.mdb"));
         Assert.That(databaseParameters0.Table, Is.EqualTo("TAB_RING_PODAB"));
-        Assert.That(databaseParameters0.Columns, Has.Count.EqualTo(3));
+        Assert.That(databaseParameters0.Columns, Has.Length.EqualTo(3));
         Assert.That(databaseParameters0.Columns[0].DatabaseColumn, Is.EqualTo("IDR_Podab"));
         Assert.That(databaseParameters0.Columns[0].ValueName, Is.EqualTo("ID"));
         Assert.That(databaseParameters0.Columns[0].DataType, Is.EqualTo(DataValueType.LongInt));
@@ -109,7 +109,7 @@ public class ApplicationConfigJsonConverterTests
         var databaseParameters1 = (SqlServerParameters)config.Databases[1];
         Assert.That(databaseParameters1.ConnectionString, Is.EqualTo("Server=localhost;Database=DB"));
         Assert.That(databaseParameters1.Table, Is.EqualTo("AB 2017_18_19_20_21S"));
-        Assert.That(databaseParameters1.Columns, Has.Count.EqualTo(3));
+        Assert.That(databaseParameters1.Columns, Has.Length.EqualTo(3));
         Assert.That(databaseParameters1.Columns[0].DatabaseColumn, Is.EqualTo("IDR_Podab"));
         Assert.That(databaseParameters1.Columns[0].ValueName, Is.EqualTo("ID"));
         Assert.That(databaseParameters1.Columns[0].DataType, Is.EqualTo(DataValueType.LongInt));

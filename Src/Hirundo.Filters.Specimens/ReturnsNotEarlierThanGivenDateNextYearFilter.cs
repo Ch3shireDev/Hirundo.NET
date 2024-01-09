@@ -11,7 +11,7 @@ public class ReturnsNotEarlierThanGivenDateNextYearFilter(string dateValueName, 
 
     public bool IsReturning(Specimen specimen)
     {
-        if (specimen.Observations.Count < 2)
+        if (specimen.Observations.Length < 2)
         {
             return false;
         }

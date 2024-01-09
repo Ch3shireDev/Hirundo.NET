@@ -12,5 +12,5 @@ public interface ISummaryWriter
     ///     Zapisz podsumowania na temat powracających osobników.
     /// </summary>
     /// <param name="summary"></param>
-    void WriteSummary(IEnumerable<ReturningSpecimenSummary> summary);
+    void Write(IEnumerable<ReturningSpecimenSummary> summary);
 }

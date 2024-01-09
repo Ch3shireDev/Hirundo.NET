@@ -12,15 +12,10 @@ public class ReturnsAfterTimePeriodFilterTests
         // Arrange
         var filter = new ReturnsAfterTimePeriodFilter("DATE", 20);
 
-        var specimen = new Specimen
-        {
-            Identifier = "AB123",
-            Observations =
-            [
-                new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
-                new Observation(["DATE"], [DateTime.Parse("2021-06-21")])
-            ]
-        };
+        var specimen = new Specimen("AB123", [
+            new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
+            new Observation(["DATE"], [DateTime.Parse("2021-06-21")])
+        ]);
 
         // Act
         var result = filter.IsReturning(specimen);
@@ -35,16 +30,11 @@ public class ReturnsAfterTimePeriodFilterTests
         // Arrange
         var filter = new ReturnsAfterTimePeriodFilter("DATE", 20);
 
-        var specimen = new Specimen
-        {
-            Identifier = "AB123",
-            Observations =
-            [
-                new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
-                new Observation(["DATE"], [DateTime.Parse("2021-06-05")]),
-                new Observation(["DATE"], [DateTime.Parse("2021-06-27")])
-            ]
-        };
+        var specimen = new Specimen("AB123", [
+            new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
+            new Observation(["DATE"], [DateTime.Parse("2021-06-05")]),
+            new Observation(["DATE"], [DateTime.Parse("2021-06-27")])
+        ]);
 
         // Act
         var result = filter.IsReturning(specimen);
@@ -59,16 +49,12 @@ public class ReturnsAfterTimePeriodFilterTests
         // Arrange
         var filter = new ReturnsAfterTimePeriodFilter("DATE", 20);
 
-        var specimen = new Specimen
-        {
-            Identifier = "AB123",
-            Observations =
-            [
-                new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
-                new Observation(["DATE"], [DateTime.Parse("2021-06-05")]),
-                new Observation(["DATE"], [DateTime.Parse("2021-06-22")])
-            ]
-        };
+        var specimen = new Specimen("AB123",
+        [
+            new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
+            new Observation(["DATE"], [DateTime.Parse("2021-06-05")]),
+            new Observation(["DATE"], [DateTime.Parse("2021-06-22")])
+        ]);
 
         // Act
         var result = filter.IsReturning(specimen);

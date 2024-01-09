@@ -1,4 +1,5 @@
-﻿using Hirundo.Commons;
+﻿using System.Text;
+using Hirundo.Commons;
 using NUnit.Framework;
 
 namespace Hirundo.Filters.Observations.Tests;
@@ -38,5 +39,22 @@ public class IsEqualFilterTest
 
         // Assert
         Assert.That(result, Is.False);
+    }
+
+    [Test]
+    public void GivenValueWithDifferentReferenceButSameValue_WhenIsAccepted_ReturnsTrue()
+    {
+        // Arrange
+        var valueName = "SPECIES";
+        var stringBuilder = new StringBuilder("REG.REG");
+        var filter = new IsEqualFilter(valueName, stringBuilder.ToString());
+
+        var observation = new Observation(["SPECIES", "XYZ"], ["REG.REG", 123]);
+
+        // Act
+        var result = filter.IsAccepted(observation);
+
+        // Assert
+        Assert.That(result, Is.True);
     }
 }

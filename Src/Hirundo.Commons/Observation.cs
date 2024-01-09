@@ -77,7 +77,7 @@ public class Observation
     ///     Zwraca listę kolumn.
     /// </summary>
     /// <returns></returns>
-    public string[] GetColumns()
+    public string[] GetHeaders()
     {
         return [.. _names];
     }
@@ -89,5 +89,10 @@ public class Observation
     public Type?[] GetTypes()
     {
         return _values.Select(x => x?.GetType()).ToArray();
+    }
+
+    public object?[] GetValues()
+    {
+        return [.. _values];
     }
 }

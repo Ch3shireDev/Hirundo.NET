@@ -12,15 +12,10 @@ public class ReturnsNotEarlierThanGivenDateNextYearFilterTests
         // Arrange
         var filter = new ReturnsNotEarlierThanGivenDateNextYearFilter("DATE", 06, 01);
 
-        var specimen = new Specimen
-        {
-            Identifier = "AB123",
-            Observations =
-            [
-                new Observation(["DATE"], [DateTime.Parse("2021-06-20")]),
-                new Observation(["DATE"], [DateTime.Parse("2022-06-01")])
-            ]
-        };
+        var specimen = new Specimen("AB123", [
+            new Observation(["DATE"], [DateTime.Parse("2021-06-20")]),
+            new Observation(["DATE"], [DateTime.Parse("2022-06-01")])
+        ]);
 
         // Act
         var result = filter.IsReturning(specimen);
@@ -35,15 +30,10 @@ public class ReturnsNotEarlierThanGivenDateNextYearFilterTests
         // Arrange
         var filter = new ReturnsNotEarlierThanGivenDateNextYearFilter("DATE", 06, 15);
 
-        var specimen = new Specimen
-        {
-            Identifier = "AB123",
-            Observations =
-            [
-                new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
-                new Observation(["DATE"], [DateTime.Parse("2022-06-01")])
-            ]
-        };
+        var specimen = new Specimen("AB123", [
+            new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
+            new Observation(["DATE"], [DateTime.Parse("2022-06-01")])
+        ]);
 
         // Act
         var result = filter.IsReturning(specimen);
@@ -58,16 +48,11 @@ public class ReturnsNotEarlierThanGivenDateNextYearFilterTests
         // Arrange
         var filter = new ReturnsNotEarlierThanGivenDateNextYearFilter("DATE", 06, 15);
 
-        var specimen = new Specimen
-        {
-            Identifier = "AB123",
-            Observations =
-            [
-                new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
-                new Observation(["DATE"], [DateTime.Parse("2022-06-05")]),
-                new Observation(["DATE"], [DateTime.Parse("2023-06-15")])
-            ]
-        };
+        var specimen = new Specimen("AB123", [
+            new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
+            new Observation(["DATE"], [DateTime.Parse("2022-06-05")]),
+            new Observation(["DATE"], [DateTime.Parse("2023-06-15")])
+        ]);
 
         // Act
         var result = filter.IsReturning(specimen);
@@ -82,16 +67,11 @@ public class ReturnsNotEarlierThanGivenDateNextYearFilterTests
         // Arrange
         var filter = new ReturnsNotEarlierThanGivenDateNextYearFilter("DATE", 06, 15);
 
-        var specimen = new Specimen
-        {
-            Identifier = "AB123",
-            Observations =
-            [
-                new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
-                new Observation(["DATE"], [DateTime.Parse("2022-06-05")]),
-                new Observation(["DATE"], [DateTime.Parse("2022-06-20")])
-            ]
-        };
+        var specimen = new Specimen("AB123", [
+            new Observation(["DATE"], [DateTime.Parse("2021-06-01")]),
+            new Observation(["DATE"], [DateTime.Parse("2022-06-05")]),
+            new Observation(["DATE"], [DateTime.Parse("2022-06-20")])
+        ]);
 
         // Act
         var result = filter.IsReturning(specimen);

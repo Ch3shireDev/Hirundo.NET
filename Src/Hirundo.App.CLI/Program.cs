@@ -14,8 +14,8 @@ using Serilog;
 namespace Hirundo.App.CLI;
 
 /// <summary>
-///     Przykładowa aplikacja konsolowa, która wykorzystuje bibliotekę Hirundo. Program pobiera dane z dwóch tabel w bazie
-///     danych Access, przetwarza je i zapisuje wyniki do pliku CSV.
+///     Przykładowa aplikacja konsolowa, która wykorzystuje bibliotekę Hirundo. 
+///     Program pobiera dane z dwóch tabel w bazie danych Access, przetwarza je i zapisuje wyniki do pliku CSV.
 /// </summary>
 internal class Program
 {
@@ -36,7 +36,7 @@ internal class Program
         var summaryProcessorBuilder = new SummaryProcessorBuilder();
         var summaryWriterBuilder = new SummaryWriterBuilder();
 
-        var compositeDatabase = databaseBuilder
+        var database = databaseBuilder
             .AddDatabaseParameters(appConfig.Databases)
             .Build();
 
@@ -65,10 +65,21 @@ internal class Program
             .WithWriterParameters(appConfig.Results.Writer)
             .Build();
 
-        var observations = compositeDatabase.GetObservations().ToArray();
-        var selectedObservations = observations.Where(observationFilters.IsAccepted);
+        var observations = database.GetObservations().ToArray();
+
+        Log.Information($"Odczytano {observations.Length} obserwacji.");
+
+        var selectedObservations = observations.Where(observationFilters.IsAccepted).ToArray();
+
+        Log.Information($"Wybrano {selectedObservations.Length} obserwacji.");
+
         var specimens = specimensProcessor.GetSpecimens(selectedObservations).ToArray();
-        var returningSpecimens = specimens.Where(returningSpecimenFilters.IsReturning);
+
+        Log.Information($"Wybrano {specimens.Length} osobników.");
+
+        var returningSpecimens = specimens.Where(returningSpecimenFilters.IsReturning).ToArray();
+
+        Log.Information($"Wybrano {returningSpecimens.Length} powracających osobników.");
 
         var summaryProcessor = summaryProcessorBuilder
             .WithPopulationProcessor(populationProcessor)
@@ -80,7 +91,9 @@ internal class Program
             .Select(summaryProcessor.GetSummary)
             .ToList();
 
-        resultsWriter.WriteSummary(summary);
+        Log.Information($"Przygotowano {summary.Count} wierszy danych wynikowych.");
+
+        resultsWriter.Write(summary);
     }
 
     private static ApplicationConfig GetConfig()

@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using System.Globalization;
+using System.Text;
+using Hirundo.Commons;
+using Hirundo.Databases.Conditions;
 
 namespace Hirundo.Databases;
 
@@ -9,23 +12,64 @@ namespace Hirundo.Databases;
 public class MdbAccessQueryBuilder
 {
     private readonly List<ColumnMapping> _columns = [];
+    private readonly List<DatabaseCondition> _conditions = [];
     private string? _tableName;
 
+    /// <summary>
+    ///     Ustalana jest nazwa tabeli, do której odwołuje się zapytanie SELECT.
+    ///     Nazwa tabeli nie powinna zawierać nawiasów kwadratowych.
+    /// </summary>
+    /// <param name="tableName"></param>
+    /// <returns></returns>
     public MdbAccessQueryBuilder WithTable(string tableName)
     {
         _tableName = tableName;
         return this;
     }
 
+    /// <summary>
+    ///     Dodawana jest lista kolumn (bądź wyrażeń) do zapytania SELECT. Zależnie od podanego typu danych,
+    ///     wartości są konwertowane na poziomie zapytania SQL.
+    /// </summary>
+    /// <param name="columns"></param>
+    /// <returns></returns>
     public MdbAccessQueryBuilder WithColumns(IEnumerable<ColumnMapping> columns)
     {
         _columns.AddRange(columns);
         return this;
     }
 
+    /// <summary>
+    ///     Dodawana jest pojedyncza kolumna (bądź wyrażenie) do zapytania SELECT. Zależnie od podanego typu danych,
+    ///     wartość jest konwertowana na poziomie zapytania SQL.
+    /// </summary>
+    /// <param name="columnMapping"></param>
+    /// <returns></returns>
     public MdbAccessQueryBuilder WithColumn(ColumnMapping columnMapping)
     {
         _columns.Add(columnMapping);
+        return this;
+    }
+
+    /// <summary>
+    ///     Dodawany jest warunek do zapytania SELECT (klauzula WHERE).
+    /// </summary>
+    /// <param name="databaseCondition"></param>
+    /// <returns></returns>
+    public MdbAccessQueryBuilder WithCondition(DatabaseCondition databaseCondition)
+    {
+        _conditions.Add(databaseCondition);
+        return this;
+    }
+
+    /// <summary>
+    ///     Dodawane są warunki do zapytania SELECT (klauzula WHERE).
+    /// </summary>
+    /// <param name="parametersConditions"></param>
+    /// <returns></returns>
+    public MdbAccessQueryBuilder WithConditions(DatabaseCondition[] parametersConditions)
+    {
+        _conditions.AddRange(parametersConditions);
         return this;
     }
 
@@ -35,11 +79,83 @@ public class MdbAccessQueryBuilder
     /// <returns></returns>
     public string Build()
     {
-        var stringBuider = new StringBuilder();
-        stringBuider.Append("SELECT ");
-        stringBuider.Append(string.Join(", ", _columns.Select(GetSqlColumnExpression)));
-        stringBuider.Append($" FROM [{_tableName}]");
-        return stringBuider.ToString();
+        var stringBuilder = new StringBuilder();
+        stringBuilder.Append("SELECT ");
+        stringBuilder.Append(string.Join(", ", _columns.Select(GetSqlColumnExpression)));
+        stringBuilder.Append($" FROM [{_tableName}]");
+        stringBuilder.Append(GetWhereClause());
+        return stringBuilder.ToString();
+    }
+
+    private string GetWhereClause()
+    {
+        if (_conditions.Count == 0) return string.Empty;
+
+        var stringBuilder2 = new StringBuilder();
+        stringBuilder2.Append(" WHERE ");
+
+        foreach (var condition in _conditions)
+        {
+            var isFirst = condition == _conditions.First();
+
+            if (!isFirst)
+            {
+                var logicOperator = GetLogicOperator(condition.ConditionOperator);
+                stringBuilder2.Append($" {logicOperator} ");
+            }
+
+            stringBuilder2.Append($"{GetColumnForWhereQuery(condition)} {TwoArgumentOperator(condition.Type)} {GetValueForSqlWhereStatement(condition.Value)}");
+        }
+
+        var result = stringBuilder2.ToString();
+        return result;
+    }
+
+    private string GetColumnForWhereQuery(DatabaseCondition condition)
+    {
+        if (condition.DatabaseColumn == "DATE2") return $"CDATE([{condition.DatabaseColumn}])";
+        return $"[{condition.DatabaseColumn}]";
+    }
+
+    private static string TwoArgumentOperator(DatabaseConditionType conditionType)
+    {
+        return conditionType switch
+        {
+            DatabaseConditionType.IsEqual => "=",
+            DatabaseConditionType.IsGreaterThan => ">",
+            DatabaseConditionType.IsGreaterOrEqual => ">=",
+            DatabaseConditionType.IsLowerThan => "<",
+            DatabaseConditionType.IsLowerOrEqual => "<=",
+            _ => throw new ArgumentOutOfRangeException(nameof(conditionType), conditionType, null)
+        };
+    }
+
+    private static string GetLogicOperator(DatabaseConditionOperator conditionOperator)
+    {
+        return conditionOperator switch
+        {
+            DatabaseConditionOperator.And => "AND",
+            DatabaseConditionOperator.Or => "OR",
+            _ => throw new ArgumentOutOfRangeException(nameof(conditionOperator), conditionOperator, null)
+        };
+    }
+
+    private static string GetValueForSqlWhereStatement(object value)
+    {
+        return value switch
+        {
+            string stringValue => DateTime.TryParse(stringValue, out var date) ? GetDateQuery(date) : $"'{stringValue}'",
+            int intValue => intValue.ToString(),
+            long longValue => longValue.ToString(),
+            double doubleValue => doubleValue.ToString(CultureInfo.InvariantCulture),
+            DateTime dateTimeValue => GetDateQuery(dateTimeValue),
+            _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+        };
+    }
+
+    static string GetDateQuery(DateTime date)
+    {
+        return $"DateSerial({date.Year}, {date.Month}, {date.Day})";
     }
 
     /// <summary>
@@ -49,7 +165,7 @@ public class MdbAccessQueryBuilder
     /// <param name="columnMapping"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
-    private string GetSqlColumnExpression(ColumnMapping columnMapping)
+    private static string GetSqlColumnExpression(ColumnMapping columnMapping)
     {
         return columnMapping.DataType switch
         {

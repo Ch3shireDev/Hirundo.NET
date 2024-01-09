@@ -5,15 +5,25 @@
 ///     zestawem cech, które są zapisane w bazie danych. Osobnik może być zaobserwowany wiele razy w różnych miejscach i
 ///     czasach.
 /// </summary>
-public class Specimen
+public class Specimen(object identifier, Observation[] observations)
 {
     /// <summary>
     ///     Unikalny identyfikator osobnika, np. numer obrączki.
     /// </summary>
-    public object Identifier { get; set; } = null!;
+    public object Identifier { get; set; } = identifier;
 
     /// <summary>
     ///     Lista obserwacji osobnika.
     /// </summary>
-    public List<Observation> Observations { get; set; } = [];
+    public Observation[] Observations { get; set; } = observations;
+
+    public string[] GetHeaders()
+    {
+        return Observations.FirstOrDefault()?.GetHeaders() ?? [];
+    }
+
+    public object?[] GetValues()
+    {
+        return Observations.FirstOrDefault()?.GetValues() ?? [];
+    }
 }

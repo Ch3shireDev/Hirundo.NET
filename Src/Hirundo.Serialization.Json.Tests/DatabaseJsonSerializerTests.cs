@@ -89,14 +89,14 @@ public class DatabaseJsonSerializerTests
 
         // Act
         var json = JsonConvert.SerializeObject(parameters, _settings);
-        var deserializedParameters = JsonConvert.DeserializeObject<IDatabaseParameters>(json, _settings)! as AccessDatabaseParameters;
+        var deserializedParameters = JsonConvert.DeserializeObject<IDatabaseParameters>(json, _settings) as AccessDatabaseParameters;
 
         // Assert
         Assert.That(deserializedParameters, Is.Not.Null);
         Assert.That(deserializedParameters, Is.InstanceOf<AccessDatabaseParameters>());
         Assert.That(deserializedParameters?.Path, Is.EqualTo("other_example.mdb"));
         Assert.That(deserializedParameters?.Table, Is.EqualTo("OTHER_EXAMPLE_TABLE"));
-        Assert.That(deserializedParameters?.Columns.Count, Is.EqualTo(1));
+        Assert.That(deserializedParameters?.Columns, Has.Length.EqualTo(1));
         Assert.That(deserializedParameters?.Columns[0].DatabaseColumn, Is.EqualTo("OTHER_COLUMN"));
         Assert.That(deserializedParameters?.Columns[0].ValueName, Is.EqualTo("OTHER_DATA"));
         Assert.That(deserializedParameters?.Columns[0].DataType, Is.EqualTo(DataValueType.String));

@@ -17,7 +17,7 @@ public class ReturnsAfterTimePeriodFilter(string dateValueName, int timePeriodIn
 
     public bool IsReturning(Specimen specimen)
     {
-        if (specimen.Observations.Count < 2)
+        if (specimen.Observations.Length < 2)
         {
             return false;
         }

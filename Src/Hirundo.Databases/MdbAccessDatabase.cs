@@ -24,6 +24,7 @@ public class MdbAccessDatabase(AccessDatabaseParameters parameters) : IDatabase
     /// <returns></returns>
     public IEnumerable<Observation> GetObservations()
     {
+        Log.Information("Nawiązywanie połączenia z bazą danych Access.");
         using var connection = new OdbcConnection(ConnectionString);
 
         connection.Open();
@@ -31,6 +32,7 @@ public class MdbAccessDatabase(AccessDatabaseParameters parameters) : IDatabase
         var query = _queryBuilder
             .WithTable(parameters.Table)
             .WithColumns(parameters.Columns)
+            .WithConditions(parameters.Conditions)
             .Build();
 
         using var command = new OdbcCommand(query, connection);
@@ -38,9 +40,7 @@ public class MdbAccessDatabase(AccessDatabaseParameters parameters) : IDatabase
 
         var dataColumns = parameters.Columns.Select(x => x.ValueName).ToArray();
 
-        Log.Information($"Odczytywanie danych z tabeli {parameters.Table}, z kolumn: {
-            string.Join(", ", parameters.Columns.Select(c => c.DatabaseColumn))
-        }");
+        Log.Information($"Odczytywanie danych z tabeli {parameters.Table}.");
 
         while (reader.Read())
         {
@@ -56,11 +56,23 @@ public class MdbAccessDatabase(AccessDatabaseParameters parameters) : IDatabase
     /// </summary>
     /// <param name="reader"></param>
     /// <returns></returns>
-    private static object[] GetValuesFromReader(OdbcDataReader reader)
+    private static object?[] GetValuesFromReader(OdbcDataReader reader)
     {
         var columnCount = reader.FieldCount;
-        var array = new object[columnCount];
+        object?[] array = new object[columnCount];
         reader.GetValues(array);
+        NullifyElements(array, columnCount);
         return array;
+    }
+
+    private static void NullifyElements(object?[] array, int columnCount)
+    {
+        for (var i = 0; i < columnCount; i++)
+        {
+            if (array[i] is DBNull)
+            {
+                array[i] = null;
+            }
+        }
     }
 }

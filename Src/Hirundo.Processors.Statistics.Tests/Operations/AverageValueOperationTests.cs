@@ -13,32 +13,9 @@ public class AverageValueOperationTests
         // Arrange
         List<Specimen> populationData =
         [
-            new Specimen
-            {
-                Identifier = "ABC123",
-                Observations =
-                {
-                    new Observation(["VALUE"], [2])
-                }
-            },
-
-            new Specimen
-            {
-                Identifier = "DEF456",
-                Observations =
-                {
-                    new Observation(["VALUE"], [1])
-                }
-            },
-
-            new Specimen
-            {
-                Identifier = "GHI789",
-                Observations =
-                {
-                    new Observation(["VALUE"], [6])
-                }
-            }
+            new Specimen("ABC123", [new Observation(["VALUE"], [2])]),
+            new Specimen("DEF456", [new Observation(["VALUE"], [1])]),
+            new Specimen("GHI789", [new Observation(["VALUE"], [6])])
         ];
 
         var operation = new AverageValueOperation("VALUE", "AVERAGE_VALUE");
@@ -57,41 +34,10 @@ public class AverageValueOperationTests
         // Arrange
         List<Specimen> populationData =
         [
-            new Specimen
-            {
-                Identifier = "ABC123",
-                Observations =
-                {
-                    new Observation(["VALUE"], [2])
-                }
-            },
-
-            new Specimen
-            {
-                Identifier = "DEF456",
-                Observations =
-                {
-                    new Observation(["VALUE"], [1])
-                }
-            },
-
-            new Specimen
-            {
-                Identifier = "GHI789",
-                Observations =
-                {
-                    new Observation(["VALUE"], [6])
-                }
-            },
-
-            new Specimen
-            {
-                Identifier = "JKL012",
-                Observations =
-                {
-                    new Observation(["VALUE"], [null])
-                }
-            }
+            new Specimen("ABC123", [new Observation(["VALUE"], [2])]),
+            new Specimen("DEF456", [new Observation(["VALUE"], [1])]),
+            new Specimen("GHI789", [new Observation(["VALUE"], [6])]),
+            new Specimen("JKL012", [new Observation(["VALUE"], [null])])
         ];
 
         var operation = new AverageValueOperation("VALUE", "AVERAGE_VALUE");

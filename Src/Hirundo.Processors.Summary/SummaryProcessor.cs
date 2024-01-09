@@ -12,7 +12,7 @@ namespace Hirundo.Processors.Summary;
 /// <param name="populationProcessor"></param>
 /// <param name="statisticsProcessor"></param>
 public class SummaryProcessor(
-    Specimen[] totalSpecimens,
+    IEnumerable<Specimen> totalSpecimens,
     IPopulationProcessor populationProcessor,
     IStatisticsProcessor statisticsProcessor) : ISummaryProcessor
 {
@@ -26,11 +26,6 @@ public class SummaryProcessor(
         var population = populationProcessor.GetPopulation(returningSpecimen, totalSpecimens).ToArray();
         var statistics = statisticsProcessor.GetStatistics(population).ToArray();
 
-        return new ReturningSpecimenSummary
-        {
-            ReturningSpecimen = returningSpecimen,
-            Population = population,
-            Statistics = statistics
-        };
+        return new ReturningSpecimenSummary(returningSpecimen, population, statistics);
     }
 }

@@ -1,24 +1,39 @@
 ﻿using Hirundo.Commons;
+using Serilog;
 
 namespace Hirundo.Filters.Observations;
 
 [TypeDescription("IsInTimeBlock")]
-public class IsInTimeBlockFilter(string valueName, TimeBlock timeBlock) : IObservationFilter
+public class IsInTimeBlockFilter(string valueName, TimeBlock timeBlock, bool rejectNullValues = false) : IObservationFilter
 {
     private readonly bool isThroughMidnight = timeBlock.StartHour > timeBlock.EndHour;
     public string ValueName { get; } = valueName;
     public TimeBlock TimeBlock { get; } = timeBlock;
+    public bool RejectNullValues { get; } = rejectNullValues;
 
     public bool IsAccepted(Observation observation)
     {
-        var dateTimeValue = observation.GetValue(ValueName);
+        var hourValue = observation.GetValue(ValueName);
 
-        if (dateTimeValue is int hour)
+        if (hourValue == null)
         {
+            return !RejectNullValues;
+        }
+
+        if (IsNumeric(hourValue))
+        {
+            var hour = Convert.ToInt32(hourValue);
             return IsInTimeRange(hour);
         }
 
-        throw new ArgumentException($"Value of column {ValueName} is not a DateTime or string");
+        throw new ArgumentException($"Wartość kolumny {ValueName} nie jest typem numerycznym.");
+    }
+
+    private static bool IsNumeric(object hourValue)
+    {
+        var type = hourValue.GetType();
+        var isNumeric = type.IsPrimitive || type == typeof(decimal);
+        return isNumeric;
     }
 
     private bool IsInTimeRange(int hour)

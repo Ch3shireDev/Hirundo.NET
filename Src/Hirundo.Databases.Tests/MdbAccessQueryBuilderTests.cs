@@ -1,4 +1,6 @@
-﻿namespace Hirundo.Databases.Tests;
+﻿using Hirundo.Databases.Conditions;
+
+namespace Hirundo.Databases.Tests;
 
 [TestFixture]
 public class MdbAccessQueryBuilderTests
@@ -55,8 +57,8 @@ public class MdbAccessQueryBuilderTests
     }
 
     /// <summary>
-    ///     Ze względu na błąd w starych bazach danych Access, nie mamy możliwości używania funkcji CDEC, która konwertuje
-    ///     element na liczbę zmiennoprzecinkową.
+    ///     Ze względu na błąd w starych bazach danych Access, nie mamy możliwości używania funkcji CDEC,
+    ///     która konwertuje element na liczbę zmiennoprzecinkową.
     /// </summary>
     [Test]
     public void GivenDecimalColumn_WhenBuild_ReturnsQueryWithDoubleColumn()
@@ -84,5 +86,85 @@ public class MdbAccessQueryBuilderTests
 
         // Assert
         Assert.That(query, Is.EqualTo("SELECT IIF(IsNull([DATE]), Null, CDATE([DATE])) FROM [example table 5]"));
+    }
+
+    [Test]
+    public void GivenDatabaseCondition_WhenBuild_TranslatesToWhereClause()
+    {
+        // Arrange
+        _builder.WithTable("example table 6");
+        _builder.WithColumn(new ColumnMapping("IDR_Podab", "ID", DataValueType.LongInt));
+        _builder.WithCondition(new DatabaseCondition("SPECIES", "REG.REG", DatabaseConditionType.IsEqual));
+
+        // Act
+        var query = _builder.Build();
+
+        // Assert
+        Assert.That(query, Is.EqualTo("SELECT IIF(IsNull([IDR_Podab]), Null, CLNG([IDR_Podab])) FROM [example table 6] WHERE [SPECIES] = 'REG.REG'"));
+    }
+
+    [Test]
+    public void GivenTwoDatabaseConditions_WhenBuild_TranslatesToWhereClause()
+    {
+        // Arrange
+        _builder.WithTable("example table 7");
+        _builder.WithColumn(new ColumnMapping("IDR_Podab", "ID", DataValueType.LongInt));
+        _builder.WithCondition(new DatabaseCondition("SPECIES", "REG.REG", DatabaseConditionType.IsEqual));
+        _builder.WithCondition(new DatabaseCondition("RING", "J634038", DatabaseConditionType.IsEqual));
+
+        // Act
+        var query = _builder.Build();
+
+        // Assert
+        Assert.That(query, Is.EqualTo("SELECT IIF(IsNull([IDR_Podab]), Null, CLNG([IDR_Podab])) FROM [example table 7] WHERE [SPECIES] = 'REG.REG' AND [RING] = 'J634038'"));
+    }
+
+    [Test]
+    public void GivenTwoDatabaseConditions_WhenBuild_TranslatesToWhereClauseWithOr()
+    {
+        // Arrange
+        _builder.WithTable("example table 8");
+        _builder.WithColumn(new ColumnMapping("IDR_Podab", "ID", DataValueType.LongInt));
+        _builder.WithCondition(new DatabaseCondition("SPECIES", "REG.REG", DatabaseConditionType.IsEqual));
+        _builder.WithCondition(new DatabaseCondition("RING", "J634038", DatabaseConditionType.IsEqual, DatabaseConditionOperator.Or));
+
+        // Act
+        var query = _builder.Build();
+
+        // Assert
+        Assert.That(query, Is.EqualTo("SELECT IIF(IsNull([IDR_Podab]), Null, CLNG([IDR_Podab])) FROM [example table 8] WHERE [SPECIES] = 'REG.REG' OR [RING] = 'J634038'"));
+    }
+
+    [Test]
+    public void GivenThreeDatabaseConditions_WhenBuild_TranslatesToWhereClauseWithAndOr()
+    {
+        // Arrange
+        _builder.WithTable("example table 9");
+        _builder.WithColumn(new ColumnMapping("IDR_Podab", "ID", DataValueType.LongInt));
+        _builder.WithCondition(new DatabaseCondition("SPECIES", "REG.REG", DatabaseConditionType.IsEqual));
+        _builder.WithCondition(new DatabaseCondition("RING", "J634038", DatabaseConditionType.IsEqual, DatabaseConditionOperator.Or));
+        _builder.WithCondition(new DatabaseCondition("RING", "J664040", DatabaseConditionType.IsEqual));
+
+        // Act
+        var query = _builder.Build();
+
+        // Assert
+        Assert.That(query, Is.EqualTo("SELECT IIF(IsNull([IDR_Podab]), Null, CLNG([IDR_Podab])) FROM [example table 9] WHERE [SPECIES] = 'REG.REG' OR [RING] = 'J634038' AND [RING] = 'J664040'"));
+    }
+
+    [Test]
+    public void GivenConditionsWithDates_WhenBuild_TranslatesToTwoDateConditions()
+    {
+        // Arrange
+        _builder.WithTable("example table 10");
+        _builder.WithColumn(new ColumnMapping("IDR_Podab", "ID", DataValueType.LongInt));
+        _builder.WithCondition(new DatabaseCondition("DATE", new DateTime(1967, 08, 16), DatabaseConditionType.IsGreaterThan));
+        _builder.WithCondition(new DatabaseCondition("DATE", new DateTime(1967, 08, 17), DatabaseConditionType.IsLowerThan));
+
+        // Act
+        var query = _builder.Build();
+
+        // Assert
+        Assert.That(query, Is.EqualTo("SELECT IIF(IsNull([IDR_Podab]), Null, CLNG([IDR_Podab])) FROM [example table 10] WHERE [DATE] > DateSerial(1967, 8, 16) AND [DATE] < DateSerial(1967, 8, 17)"));
     }
 }

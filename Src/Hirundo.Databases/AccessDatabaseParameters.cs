@@ -1,4 +1,5 @@
 ﻿using Hirundo.Commons;
+using Hirundo.Databases.Conditions;
 
 namespace Hirundo.Databases;
 
@@ -21,5 +22,10 @@ public class AccessDatabaseParameters : IDatabaseParameters
     /// <summary>
     ///     Lista kolumn z danymi.
     /// </summary>
-    public IList<ColumnMapping> Columns { get; set; } = new List<ColumnMapping>();
+    public ColumnMapping[] Columns { get; set; } = [];
+
+    /// <summary>
+    /// Lista warunków do spełnienia przez kolumny danych (klauzula WHERE).
+    /// </summary>
+    public DatabaseCondition[] Conditions { get; set; } = [];
 }

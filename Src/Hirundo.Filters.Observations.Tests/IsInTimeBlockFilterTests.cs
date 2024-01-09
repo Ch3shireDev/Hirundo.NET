@@ -65,4 +65,19 @@ public class IsInTimeBlockFilterTests
         // Assert
         Assert.That(result, Is.False);
     }
+
+    [Test]
+    public void WhenHourValueIsShortInt_WhenIsAccepted_Works()
+    {
+        // Arrange
+        var timeBlock = new TimeBlock(06, 08);
+        var filter = new IsInTimeBlockFilter("HOUR", timeBlock, false);
+        var observation = new Observation(["HOUR"], [(short)7]);
+
+        // Act
+        var result = filter.IsAccepted(observation);
+
+        // Assert
+        Assert.That(result, Is.True);
+    }
 }

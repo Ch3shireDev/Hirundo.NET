@@ -10,6 +10,7 @@ public class IsEqualFilter(string valueName, object value) : IObservationFilter
 
     public bool IsAccepted(Observation observation)
     {
-        return observation.GetValue(ValueName) == Value;
+        var observationValue = observation.GetValue(ValueName);
+        return Equals(Value, observationValue);
     }
 }
