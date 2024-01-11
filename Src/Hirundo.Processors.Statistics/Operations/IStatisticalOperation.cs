@@ -4,5 +4,5 @@ namespace Hirundo.Processors.Statistics.Operations;
 
 public interface IStatisticalOperation
 {
-    public StatisticalData GetStatistics(IEnumerable<Specimen> populationData);
+    public StatisticalOperationResult GetStatistics(IEnumerable<Specimen> populationData);
 }

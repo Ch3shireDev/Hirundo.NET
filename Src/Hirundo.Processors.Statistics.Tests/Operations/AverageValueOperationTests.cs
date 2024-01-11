@@ -24,8 +24,9 @@ public class AverageValueOperationTests
         var result = operation.GetStatistics(populationData);
 
         // Assert
-        Assert.That(result.Name, Is.EqualTo("AVERAGE_VALUE"));
-        Assert.That(result.Value, Is.EqualTo(3));
+        Assert.That(result.Names, Is.EquivalentTo(new List<string> { "AVERAGE_VALUE" }));
+        Assert.That(result.Values, Is.EqualTo(new object[] { 3 }));
+        Assert.That(result.PopulationIds, Is.EquivalentTo(new List<string> { "ABC123", "DEF456", "GHI789" }));
     }
 
     [Test]
@@ -46,7 +47,9 @@ public class AverageValueOperationTests
         var result = operation.GetStatistics(populationData);
 
         // Assert
-        Assert.That(result.Name, Is.EqualTo("AVERAGE_VALUE"));
-        Assert.That(result.Value, Is.EqualTo(3));
+        Assert.That(result.Names, Is.EqualTo(new List<string> { "AVERAGE_VALUE" }));
+        Assert.That(result.Values, Is.EqualTo(new object[] { 3 }));
+        Assert.That(result.PopulationIds, Is.EquivalentTo(new List<string> { "ABC123", "DEF456", "GHI789" }));
+        Assert.That(result.EmptyValuesIds, Is.EquivalentTo(new List<string> { "JKL012" }));
     }
 }

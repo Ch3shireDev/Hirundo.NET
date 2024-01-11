@@ -3,9 +3,9 @@
 namespace Hirundo.Processors.Statistics.Operations;
 
 /// <summary>
-///     Zwraca wartość średnią po danej wartości w populacji. W przypadku napotkania wartości null, pomija.
+///     Zwraca wartość średnią po danej wartości w populacji. W przypadku napotkania wartości null pomija.
 /// </summary>
-/// <param name="valueName">Nazwa parametru po którym jest brana wartość średnia.</param>
+/// <param name="valueName">Nazwa parametru, po którym jest brana wartość średnia.</param>
 /// <param name="resultName">Nazwa parametru wynikowego.</param>
 [TypeDescription("Average")]
 public class AverageValueOperation(string valueName, string resultName) : IStatisticalOperation
@@ -13,9 +13,11 @@ public class AverageValueOperation(string valueName, string resultName) : IStati
     public string ValueName { get; } = valueName;
     public string ResultName { get; } = resultName;
 
-    public StatisticalData GetStatistics(IEnumerable<Specimen> populationData)
+    public StatisticalOperationResult GetStatistics(IEnumerable<Specimen> populationData)
     {
-        var values = populationData
+        var population = populationData.ToArray();
+
+        var values = population
             .Select(specimen => specimen.Observations.First())
             .Select(observation => observation.GetValue(ValueName))
             .Where(value => value != null)
@@ -24,11 +26,17 @@ public class AverageValueOperation(string valueName, string resultName) : IStati
 
         var averageValue = GetAverageValue(values);
 
-        return new StatisticalData
-        {
-            Name = ResultName,
-            Value = averageValue
-        };
+        var populationIds = population
+            .Where(specimen => specimen.Observations.First().GetValue(ValueName) != null)
+            .Select(pd => pd.Identifier)
+            .ToArray();
+
+        var emptyValuesIds = population
+            .Where(specimen => specimen.Observations.First().GetValue(ValueName) == null)
+            .Select(specimen => specimen.Identifier)
+            .ToArray();
+
+        return new StatisticalOperationResult(ResultName, averageValue, populationIds, emptyValuesIds);
     }
 
     private static object GetAverageValue(object[] values)

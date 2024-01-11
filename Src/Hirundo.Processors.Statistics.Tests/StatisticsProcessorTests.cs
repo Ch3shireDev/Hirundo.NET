@@ -28,16 +28,20 @@ public class StatisticsProcessorTests
         // Arrange
         operation1
             .Setup(x => x.GetStatistics(It.IsAny<IEnumerable<Specimen>>()))
-            .Returns(new StatisticalData("OPERATION1", 1));
+            .Returns(new StatisticalOperationResult("OPERATION1", 1));
 
         operation2
             .Setup(x => x.GetStatistics(It.IsAny<IEnumerable<Specimen>>()))
-            .Returns(new StatisticalData("OPERATION2", 2));
+            .Returns(new StatisticalOperationResult("OPERATION2", 2));
 
-        var populationData = new List<Specimen>();
+        var population = new[]
+        {
+            new Specimen(1, [new Observation(["Value"], [1])]),
+            new Specimen(2, [new Observation(["OPERATION2"], [2])])
+        };
 
         // Act
-        var result = processor.GetStatistics(populationData).ToArray();
+        var result = processor.GetStatistics(population).ToArray();
 
         // Assert
         Assert.That(result, Has.Length.EqualTo(2));

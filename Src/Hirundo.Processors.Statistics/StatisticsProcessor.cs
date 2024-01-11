@@ -20,6 +20,8 @@ public class StatisticsProcessor(
     {
         ArgumentNullException.ThrowIfNull(populationData);
         if (outliersConditions.Any()) throw new NotImplementedException();
-        return statisticalOperations.Select(operation => operation.GetStatistics(populationData));
+        var results =  statisticalOperations.Select(operation => operation.GetStatistics(populationData));
+    
+        return results.SelectMany(result => result.Names.Zip(result.Values, (name, value) => new StatisticalData(name, value)));
     }
 }
