@@ -3,6 +3,7 @@ using Hirundo.Filters.Observations;
 using Hirundo.Filters.Specimens;
 using Hirundo.Processors.Population.Conditions;
 using Hirundo.Processors.Statistics.Operations;
+using Hirundo.Processors.Statistics.Operations.Outliers;
 using Hirundo.Writers.Summary;
 using Newtonsoft.Json;
 
@@ -12,12 +13,12 @@ public class HirundoJsonConverter : JsonConverter
 {
     private static readonly IList<JsonConverter> _converters = new List<JsonConverter>
     {
-        new PolymorphicJsonConverter<IDatabaseParameters>(),
-        new PolymorphicJsonConverter<IObservationFilter>(),
-        new PolymorphicJsonConverter<IPopulationFilterBuilder>(),
-        new PolymorphicJsonConverter<IStatisticalOperation>(),
-        new PolymorphicJsonConverter<IReturningSpecimenFilter>(),
-        new PolymorphicJsonConverter<IWriterParameters>()
+        new DynamicPolymorphicJsonConverter(typeof(IDatabaseParameters)),
+        new DynamicPolymorphicJsonConverter(typeof(IObservationFilter)),
+        new DynamicPolymorphicJsonConverter(typeof(IPopulationFilterBuilder)),
+        new DynamicPolymorphicJsonConverter(typeof(IStatisticalOperation), new DynamicPolymorphicJsonConverter(typeof(IOutliersCondition))),
+        new DynamicPolymorphicJsonConverter(typeof(IReturningSpecimenFilter)),
+        new DynamicPolymorphicJsonConverter(typeof(IWriterParameters))
     };
 
     public override bool CanConvert(Type objectType)

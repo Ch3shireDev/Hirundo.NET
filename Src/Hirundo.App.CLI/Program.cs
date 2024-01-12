@@ -56,7 +56,6 @@ internal sealed class Program
 
         var statisticsProcessor = statisticsProcessorBuilder
             .WithOperations(appConfig.Statistics.Operations)
-            .WithOutliersConditions(appConfig.Statistics.Outliers.Conditions)
             .Build();
 
         var specimensProcessor = specimensProcessorBuilder

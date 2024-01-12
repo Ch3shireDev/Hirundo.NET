@@ -1,4 +1,4 @@
-﻿using Hirundo.Processors.Statistics.Outliers;
+﻿using Hirundo.Processors.Statistics.Operations.Outliers;
 
 namespace Hirundo.Processors.Statistics;
 

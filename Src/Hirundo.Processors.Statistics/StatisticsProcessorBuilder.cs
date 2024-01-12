@@ -1,5 +1,5 @@
 ﻿using Hirundo.Processors.Statistics.Operations;
-using Hirundo.Processors.Statistics.Outliers;
+using Hirundo.Processors.Statistics.Operations.Outliers;
 
 namespace Hirundo.Processors.Statistics;
 
@@ -24,12 +24,6 @@ public class StatisticsProcessorBuilder
     public StatisticsProcessorBuilder WithOperations(IEnumerable<IStatisticalOperation> statisticsOperations)
     {
         _statisticalOperations.AddRange(statisticsOperations);
-        return this;
-    }
-
-    public StatisticsProcessorBuilder WithOutliersConditions(IEnumerable<IOutliersCondition> outliersConditions)
-    {
-        _outliersConditions.AddRange(outliersConditions);
         return this;
     }
 }

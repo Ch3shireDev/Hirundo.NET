@@ -4,6 +4,7 @@ using Hirundo.Filters.Observations;
 using Hirundo.Filters.Specimens;
 using Hirundo.Processors.Population.Conditions;
 using Hirundo.Processors.Statistics.Operations;
+using Hirundo.Processors.Statistics.Operations.Outliers;
 using Hirundo.Writers.Summary;
 using Newtonsoft.Json;
 using NUnit.Framework;
@@ -270,9 +271,17 @@ public class ApplicationConfigJsonConverterTests
           ""Statistics"": {
             ""Operations"": [
               {
-                ""Type"": ""Average"",
+                ""Type"": ""AverageAndDeviation"",
                 ""ValueName"": ""WEIGHT"",
-                ""ResultName"": ""AVERAGE_WEIGHT""
+                ""ResultNameAverage"": ""WEIGHT_AVERAGE"",
+                ""ResultNameStandardDeviation"": ""WEIGHT_SD"",
+                ""Outliers"": {
+                  ""Type"": ""StandardDeviation"",
+                  ""RejectOutliers"": true,
+                  ""Threshold"": 3,
+                  ""UpperBound"": ""WEIGHT_AVERAGE + (WEIGHT_SD * Threshold)"",
+                  ""LowerBound"": ""WEIGHT_AVERAGE - (WEIGHT_SD * Threshold)""
+                }
               }
             ]
           }
@@ -286,11 +295,54 @@ public class ApplicationConfigJsonConverterTests
 
         Assert.That(config.Statistics, Is.Not.Null);
         Assert.That(config.Statistics.Operations, Has.Count.EqualTo(1));
-        Assert.That(config.Statistics.Operations[0], Is.TypeOf<AverageValueOperation>());
+        Assert.That(config.Statistics.Operations[0], Is.TypeOf<AverageAndDeviationOperation>());
 
-        var operation0 = (AverageValueOperation)config.Statistics.Operations[0];
+        var operation0 = (AverageAndDeviationOperation)config.Statistics.Operations[0];
         Assert.That(operation0.ValueName, Is.EqualTo("WEIGHT"));
-        Assert.That(operation0.ResultName, Is.EqualTo("AVERAGE_WEIGHT"));
+        Assert.That(operation0.ResultNameAverage, Is.EqualTo("WEIGHT_AVERAGE"));
+        Assert.That(operation0.ResultNameStandardDeviation, Is.EqualTo("WEIGHT_SD"));
+        Assert.That(operation0.Outliers, Is.Not.Null);
+        Assert.That(operation0.Outliers.RejectOutliers, Is.True);
+        Assert.That(operation0.Outliers, Is.InstanceOf<StandardDeviationOutliersCondition>());
+        var outlierDetection0 = (StandardDeviationOutliersCondition)operation0.Outliers;
+        Assert.That(outlierDetection0.Threshold, Is.EqualTo(3));
+        Assert.That(outlierDetection0.UpperBound, Is.EqualTo("WEIGHT_AVERAGE + (WEIGHT_SD * Threshold)"));
+        Assert.That(outlierDetection0.LowerBound, Is.EqualTo("WEIGHT_AVERAGE - (WEIGHT_SD * Threshold)"));
+    }
+    [Test]
+    public void GivenStatisticsConfigurationJsonWithEmptyOutliers_WhenDeserialized_ThenHasDefaultOutliers()
+    {
+        // Arrange
+        var json = @"{
+          ""Statistics"": {
+            ""Operations"": [
+              {
+                ""Type"": ""AverageAndDeviation"",
+                ""ValueName"": ""WEIGHT"",
+                ""ResultNameAverage"": ""WEIGHT_AVERAGE"",
+                ""ResultNameStandardDeviation"": ""WEIGHT_SD""
+              }
+            ]
+          }
+        }";
+
+        // Act
+        var config = JsonConvert.DeserializeObject<ApplicationConfig>(json, _settings) ?? throw new SerializationException();
+
+        // Assert
+        Assert.That(config, Is.Not.Null);
+
+        Assert.That(config.Statistics, Is.Not.Null);
+        Assert.That(config.Statistics.Operations, Has.Count.EqualTo(1));
+        Assert.That(config.Statistics.Operations[0], Is.TypeOf<AverageAndDeviationOperation>());
+
+        var operation0 = (AverageAndDeviationOperation)config.Statistics.Operations[0];
+        Assert.That(operation0.ValueName, Is.EqualTo("WEIGHT"));
+        Assert.That(operation0.ResultNameAverage, Is.EqualTo("WEIGHT_AVERAGE"));
+        Assert.That(operation0.ResultNameStandardDeviation, Is.EqualTo("WEIGHT_SD"));
+        Assert.That(operation0.Outliers, Is.Not.Null);
+        Assert.That(operation0.Outliers.RejectOutliers, Is.False);
+        Assert.That(operation0.Outliers, Is.InstanceOf<NoneOutliersCondition>());
     }
 
     [Test]

@@ -3,43 +3,38 @@ using Hirundo.Commons;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using Formatting = Newtonsoft.Json.Formatting;
-using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
 namespace Hirundo.Serialization.Json;
 
-internal sealed class PolymorphicJsonConverter<T> : JsonConverter where T : class
+internal sealed class DynamicPolymorphicJsonConverter(Type type, params JsonConverter[] converters) : JsonConverter
 {
     private readonly JsonSerializerSettings _settings = new()
     {
         TypeNameHandling = TypeNameHandling.None,
         NullValueHandling = NullValueHandling.Ignore,
         Formatting = Formatting.Indented,
-        Converters = new List<JsonConverter>
-        {
-            new StringEnumConverter()
-        }
+        Converters = [new StringEnumConverter(), ..converters]
     };
 
     public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
     {
-        if (value is T filter)
+        if (type.IsInstanceOfType(value))
         {
-            var json = JsonConvert.SerializeObject(filter, _settings);
+            var json = JsonConvert.SerializeObject(value, _settings);
             var jobject = JObject.Parse(json);
-            jobject.AddFirst(new JProperty("Type", GetType(filter)));
+            jobject.AddFirst(new JProperty("Type", GetType(value)));
             jobject.WriteTo(writer);
         }
     }
 
-    public static string GetType(T filter)
+    public static string GetType(object filter)
     {
         if (filter.GetType().GetCustomAttribute<TypeDescriptionAttribute>() is { } polymorphicAttribute)
         {
             return polymorphicAttribute.Type;
         }
 
-        throw new ArgumentException($"Unknown filter type: {filter.GetType().Name}");
+        throw new ArgumentException($"Unknown object type: {filter.GetType().Name}");
     }
 
     public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
@@ -47,15 +42,15 @@ internal sealed class PolymorphicJsonConverter<T> : JsonConverter where T : clas
         var jobject = JObject.Load(reader);
         var typeName = jobject["Type"]?.Value<string>();
 
-        foreach (var type in Assembly.GetAssembly(typeof(T))?.GetTypes() ?? [])
+        foreach (var type2 in Assembly.GetAssembly(type)?.GetTypes() ?? [])
         {
-            if (!type.GetInterfaces().Contains(typeof(T))) continue;
+            if (!type2.GetInterfaces().Contains(type)) continue;
 
-            if (type.GetCustomAttribute<TypeDescriptionAttribute>() is not { } polymorphicAttribute) continue;
+            if (type2.GetCustomAttribute<TypeDescriptionAttribute>() is not { } polymorphicAttribute) continue;
 
             if (polymorphicAttribute.Type == typeName)
             {
-                return JsonConvert.DeserializeObject(jobject.ToString(), type);
+                return JsonConvert.DeserializeObject(jobject.ToString(), type2, _settings);
             }
         }
 
@@ -64,6 +59,6 @@ internal sealed class PolymorphicJsonConverter<T> : JsonConverter where T : clas
 
     public override bool CanConvert(Type objectType)
     {
-        return typeof(T).IsAssignableFrom(objectType);
+        return type.IsAssignableFrom(objectType);
     }
 }
