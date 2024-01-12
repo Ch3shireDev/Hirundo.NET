@@ -1,4 +1,5 @@
-﻿using Hirundo.Commons;
+﻿using System.Collections;
+using Hirundo.Commons;
 using Hirundo.Processors.Statistics.Operations;
 using Hirundo.Processors.Statistics.Operations.Outliers;
 using NUnit.Framework;
@@ -25,9 +26,9 @@ public class AverageAndDeviationOperationTests
         var result = operation.GetStatistics(populationData);
 
         // Assert
-        Assert.That(result.Names, Is.EquivalentTo(new List<string> { "AVERAGE_VALUE", "VALUE_SD" }));
-        Assert.That(result.Values, Is.EqualTo(new object[] { 5, 4 }));
-        Assert.That(result.PopulationIds, Is.EquivalentTo(new List<string> { "ABC123", "DEF456", "GHI789" }));
+        Assert.That(result.Names, Is.EquivalentTo(new ArrayList { "AVERAGE_VALUE", "VALUE_SD" }));
+        Assert.That(result.Values, Is.EqualTo(new ArrayList { 5, 4 }));
+        Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList { "ABC123", "DEF456", "GHI789" }));
     }
 
     [Test]
@@ -46,15 +47,46 @@ public class AverageAndDeviationOperationTests
         {
             RejectOutliers = false
         };
+
         var operation = new AverageAndDeviationOperation("VALUE", "VALUE_AVG", "VALUE_SD", outlierDetection);
 
         // Act
         var result = operation.GetStatistics(populationData);
 
         // Assert
-        Assert.That(result.Names, Is.EqualTo(new List<string> { "VALUE_AVG", "VALUE_SD" }));
-        Assert.That(result.Values, Is.EqualTo(new object[] { 3, 2 }));
-        Assert.That(result.PopulationIds, Is.EquivalentTo(new List<string> { "ABC123", "DEF456", "GHI789" }));
-        Assert.That(result.EmptyValuesIds, Is.EquivalentTo(new List<string> { "JKL012" }));
+        Assert.That(result.Names, Is.EquivalentTo(new ArrayList { "VALUE_AVG", "VALUE_SD" }));
+        Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 3, 2 }));
+        Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList { "ABC123", "DEF456", "GHI789" }));
+        Assert.That(result.EmptyValueIds, Is.EquivalentTo(new ArrayList { "JKL012" }));
+    }
+
+    [Test]
+    public void GivenOutlierInValues_WhenGetStatistics_ExcludesOutlier()
+    {
+        // Arrange
+        List<Specimen> populationData =
+        [
+            new Specimen("AAA111", [new Observation(["VALUE"], [10])]),
+            new Specimen("BBB222", [new Observation(["VALUE"], [14])]),
+            new Specimen("CCC333", [new Observation(["VALUE"], [18])]),
+            new Specimen("DDD444", [new Observation(["VALUE"], [9999])])
+        ];
+
+        var outlierDetection = new StandardDeviationOutliersCondition
+        {
+            RejectOutliers = true,
+            Threshold = 1
+        };
+
+        var operation = new AverageAndDeviationOperation("VALUE", "VALUE_AVG", "VALUE_SD", outlierDetection);
+
+        // Act
+        var result = operation.GetStatistics(populationData);
+
+        // Assert
+        Assert.That(result.Names, Is.EquivalentTo(new ArrayList { "VALUE_AVG", "VALUE_SD" }));
+        Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 14, 4 }));
+        Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList { "AAA111", "BBB222", "CCC333" }));
+        Assert.That(result.OutlierIds, Is.EquivalentTo(new ArrayList { "DDD444" }));
     }
 }

@@ -23,7 +23,7 @@ public class AverageAndDeviationOperation : IStatisticalOperation
     public AverageAndDeviationOperation(string valueName,
         string resultNameAverage,
         string resultNameStandardDeviation,
-        IOutliersCondition outliers)
+        StandardDeviationOutliersCondition outliers)
     {
         ValueName = valueName;
         ResultNameAverage = resultNameAverage;
@@ -42,32 +42,49 @@ public class AverageAndDeviationOperation : IStatisticalOperation
     public string ValueName { get; init; } = null!;
     public string ResultNameAverage { get; init; } = null!;
     public string ResultNameStandardDeviation { get; init; } = null!;
-    public IOutliersCondition Outliers { get; init; } = new NoneOutliersCondition();
+    public StandardDeviationOutliersCondition Outliers { get; init; } = new() { RejectOutliers = false };
 
     public StatisticalOperationResult GetStatistics(IEnumerable<Specimen> populationData)
     {
         var population = populationData.ToArray();
-
-        var values = population
-            .Select(specimen => specimen.Observations.First())
-            .Select(observation => observation.GetValue(ValueName))
-            .Where(value => value != null)
-            .Select(value => value!)
-            .ToArray();
-
-        var (averageValue, standardDeviationValue) = GetValues(values);
-
-        var populationIds = population
-            .Where(specimen => specimen.Observations.First().GetValue(ValueName) != null)
-            .Select(pd => pd.Identifier)
-            .ToArray();
 
         var emptyValuesIds = population
             .Where(specimen => specimen.Observations.First().GetValue(ValueName) == null)
             .Select(specimen => specimen.Identifier)
             .ToArray();
 
-        return new StatisticalOperationResult([ResultNameAverage, ResultNameStandardDeviation], [averageValue, standardDeviationValue], populationIds, emptyValuesIds);
+        object[] outliersIds = [];
+        object[] oldOutliersIds;
+
+        object averageValue;
+        object standardDeviationValue;
+
+        object[] populationIds; 
+
+        do
+        {
+            populationIds = population
+                .Select(specimen => specimen.Identifier)
+                .Where(id => !emptyValuesIds.Contains(id))
+                .Where(id => !outliersIds.Contains(id))
+                .ToArray();
+
+            var values = population
+                .Where(specimen => populationIds.Contains(specimen.Identifier))
+                .Select(specimen => specimen.Observations.First())
+                .Select(observation => observation.GetValue(ValueName))
+                .Select(value => value!)
+                .ToArray();
+
+            (averageValue, standardDeviationValue) = GetValues(values);
+
+            oldOutliersIds = outliersIds;
+            outliersIds = Outliers.GetOutliersIds(population, ValueName, averageValue, standardDeviationValue);
+        }
+        while (oldOutliersIds.Length != outliersIds.Length);
+
+
+        return new StatisticalOperationResult([ResultNameAverage, ResultNameStandardDeviation], [averageValue, standardDeviationValue], populationIds, emptyValuesIds, outliersIds);
     }
 
     private static (object average, object standardDeviation) GetValues(object[] values)

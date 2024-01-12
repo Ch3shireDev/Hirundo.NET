@@ -304,7 +304,7 @@ public class ApplicationConfigJsonConverterTests
         Assert.That(operation0.Outliers, Is.Not.Null);
         Assert.That(operation0.Outliers.RejectOutliers, Is.True);
         Assert.That(operation0.Outliers, Is.InstanceOf<StandardDeviationOutliersCondition>());
-        var outlierDetection0 = (StandardDeviationOutliersCondition)operation0.Outliers;
+        var outlierDetection0 = operation0.Outliers;
         Assert.That(outlierDetection0.Threshold, Is.EqualTo(3));
         Assert.That(outlierDetection0.UpperBound, Is.EqualTo("WEIGHT_AVERAGE + (WEIGHT_SD * Threshold)"));
         Assert.That(outlierDetection0.LowerBound, Is.EqualTo("WEIGHT_AVERAGE - (WEIGHT_SD * Threshold)"));
@@ -343,7 +343,9 @@ public class ApplicationConfigJsonConverterTests
         Assert.That(operation0.ResultNameStandardDeviation, Is.EqualTo("WEIGHT_SD"));
         Assert.That(operation0.Outliers, Is.Not.Null);
         Assert.That(operation0.Outliers.RejectOutliers, Is.False);
-        Assert.That(operation0.Outliers, Is.InstanceOf<NoneOutliersCondition>());
+        Assert.That(operation0.Outliers, Is.InstanceOf<StandardDeviationOutliersCondition>());
+        var outlierDetection0 = operation0.Outliers;
+        Assert.That(outlierDetection0.RejectOutliers, Is.False);
     }
 
     [Test]

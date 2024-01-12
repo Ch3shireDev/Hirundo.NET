@@ -18,12 +18,12 @@ public class StatisticalOperationResult
         PopulationIds = populationIds;
     }
 
-    public StatisticalOperationResult(string name, object value, IList<object> populationIds, IList<object> emptyValuesIds)
+    public StatisticalOperationResult(string name, object value, IList<object> populationIds, IList<object> emptyValueIds)
     {
         Names = [name];
         Values = [value];
         PopulationIds = populationIds;
-        EmptyValuesIds = emptyValuesIds;
+        EmptyValueIds = emptyValueIds;
     }
 
     public StatisticalOperationResult(IList<string> names, IList<object> values)
@@ -39,12 +39,21 @@ public class StatisticalOperationResult
         PopulationIds = populationIds;
     }
 
-    public StatisticalOperationResult(IList<string> names, IList<object> values, IList<object> populationIds, IList<object> emptyValuesIds)
+    public StatisticalOperationResult(IList<string> names, IList<object> values, IList<object> populationIds, IList<object> emptyValueIds)
     {
         Names = names;
         Values = values;
         PopulationIds = populationIds;
-        EmptyValuesIds = emptyValuesIds;
+        EmptyValueIds = emptyValueIds;
+    }
+
+    public StatisticalOperationResult(IList<string> names, IList<object> values, IList<object> populationIds, IList<object> emptyValueIds, IList<object> outlierIds)
+    {
+        Names = names;
+        Values = values;
+        PopulationIds = populationIds;
+        EmptyValueIds = emptyValueIds;
+        OutlierIds = outlierIds;
     }
 
     /// <summary>
@@ -65,5 +74,10 @@ public class StatisticalOperationResult
     /// <summary>
     ///     Identyfikatory populacji, dla których wartość statystyczna jest pusta.
     /// </summary>
-    public IList<object> EmptyValuesIds { get; init; } = [];
+    public IList<object> EmptyValueIds { get; init; } = [];
+
+    /// <summary>
+    ///     Identyfikatory populacji, dla których wartość statystyczna jest odstająca.
+    /// </summary>
+    public IList<object> OutlierIds { get; init; } = [];
 }
