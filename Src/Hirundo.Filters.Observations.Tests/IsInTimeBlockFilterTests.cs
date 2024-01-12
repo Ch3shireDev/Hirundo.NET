@@ -71,7 +71,7 @@ public class IsInTimeBlockFilterTests
     {
         // Arrange
         var timeBlock = new TimeBlock(06, 08);
-        var filter = new IsInTimeBlockFilter("HOUR", timeBlock, false);
+        var filter = new IsInTimeBlockFilter("HOUR", timeBlock);
         var observation = new Observation(["HOUR"], [(short)7]);
 
         // Act

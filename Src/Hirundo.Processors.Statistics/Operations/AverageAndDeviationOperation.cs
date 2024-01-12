@@ -78,7 +78,7 @@ public class AverageAndDeviationOperation : IStatisticalOperation
         {
             var valuesInt = values.Cast<int>().ToArray();
             var average = valuesInt.Average();
-            var sd2 = valuesInt.Select(x => (x - average)).Select(x => x * x / (valuesInt.Length - 1)).Sum();
+            var sd2 = valuesInt.Select(x => x - average).Select(x => x * x / (valuesInt.Length - 1)).Sum();
             var sd = Math.Sqrt(sd2);
             return (average, sd);
         }
@@ -87,7 +87,7 @@ public class AverageAndDeviationOperation : IStatisticalOperation
         {
             var valuesDouble = values.Cast<double>().ToArray();
             var average = valuesDouble.Average();
-            var sd2 = valuesDouble.Select(x => (x - average)).Select(x => x * x / (valuesDouble.Length - 1)).Sum();
+            var sd2 = valuesDouble.Select(x => x - average).Select(x => x * x / (valuesDouble.Length - 1)).Sum();
             var sd = Math.Sqrt(sd2);
             return (average, sd);
         }
@@ -96,7 +96,7 @@ public class AverageAndDeviationOperation : IStatisticalOperation
         {
             var valuesFloat = values.Cast<float>().ToArray();
             var average = valuesFloat.Average();
-            var sd2 = valuesFloat.Select(x => (x - average)).Select(x => x * x / (valuesFloat.Length - 1)).Sum();
+            var sd2 = valuesFloat.Select(x => x - average).Select(x => x * x / (valuesFloat.Length - 1)).Sum();
             var sd = Math.Sqrt(sd2);
             return (average, sd);
         }
@@ -105,7 +105,7 @@ public class AverageAndDeviationOperation : IStatisticalOperation
         {
             var valuesDecimal = values.Cast<decimal>().ToArray();
             var average = valuesDecimal.Average();
-            var sd2 = valuesDecimal.Select(x => (x - average)).Select(x => x * x / (valuesDecimal.Length - 1)).Sum();
+            var sd2 = valuesDecimal.Select(x => x - average).Select(x => x * x / (valuesDecimal.Length - 1)).Sum();
             var sd = Convert.ToDecimal(Math.Sqrt((double)sd2));
             return (average, sd);
         }

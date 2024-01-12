@@ -1,4 +1,5 @@
-﻿using Hirundo.Configuration;
+﻿using System.Runtime.Serialization;
+using Hirundo.Configuration;
 using Hirundo.Databases;
 using Hirundo.Filters.Observations;
 using Hirundo.Filters.Specimens;
@@ -8,7 +9,6 @@ using Hirundo.Processors.Statistics.Operations.Outliers;
 using Hirundo.Writers.Summary;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using System.Runtime.Serialization;
 
 namespace Hirundo.Serialization.Json.Tests;
 
@@ -309,6 +309,7 @@ public class ApplicationConfigJsonConverterTests
         Assert.That(outlierDetection0.UpperBound, Is.EqualTo("WEIGHT_AVERAGE + (WEIGHT_SD * Threshold)"));
         Assert.That(outlierDetection0.LowerBound, Is.EqualTo("WEIGHT_AVERAGE - (WEIGHT_SD * Threshold)"));
     }
+
     [Test]
     public void GivenStatisticsConfigurationJsonWithEmptyOutliers_WhenDeserialized_ThenHasDefaultOutliers()
     {

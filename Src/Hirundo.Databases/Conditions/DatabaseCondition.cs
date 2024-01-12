@@ -1,11 +1,11 @@
 ﻿namespace Hirundo.Databases.Conditions;
 
 public class DatabaseCondition(
-    string databaseColumn, 
-    object value, 
+    string databaseColumn,
+    object value,
     DatabaseConditionType type,
     DatabaseConditionOperator conditionOperator = DatabaseConditionOperator.And
-    )
+)
 {
     public string DatabaseColumn { get; set; } = databaseColumn;
     public DatabaseConditionType Type { get; set; } = type;

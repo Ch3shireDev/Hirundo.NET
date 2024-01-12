@@ -5,6 +5,8 @@
 /// </summary>
 public class ReturningSpecimenFiltersBuilder
 {
+    private readonly List<IReturningSpecimenFilter> _conditions = [];
+
     /// <summary>
     ///     Buduje filtr powracających osobników.
     /// </summary>
@@ -19,6 +21,4 @@ public class ReturningSpecimenFiltersBuilder
         _conditions.AddRange(returningSpecimensConditions);
         return this;
     }
-
-    private readonly List<IReturningSpecimenFilter> _conditions = [];
 }

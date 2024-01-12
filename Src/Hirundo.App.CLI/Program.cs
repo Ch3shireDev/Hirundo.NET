@@ -1,4 +1,6 @@
-﻿using Hirundo.Configuration;
+﻿using System.Globalization;
+using System.Runtime.Serialization;
+using Hirundo.Configuration;
 using Hirundo.Databases;
 using Hirundo.Filters.Observations;
 using Hirundo.Filters.Specimens;
@@ -10,13 +12,11 @@ using Hirundo.Serialization.Json;
 using Hirundo.Writers.Summary;
 using Newtonsoft.Json;
 using Serilog;
-using System.Globalization;
-using System.Runtime.Serialization;
 
 namespace Hirundo.App.CLI;
 
 /// <summary>
-///     Przykładowa aplikacja konsolowa, która wykorzystuje bibliotekę Hirundo. 
+///     Przykładowa aplikacja konsolowa, która wykorzystuje bibliotekę Hirundo.
 ///     Program pobiera dane z dwóch tabel w bazie danych Access, przetwarza je i zapisuje wyniki do pliku CSV.
 /// </summary>
 internal sealed class Program
@@ -24,7 +24,7 @@ internal sealed class Program
     private static void Main()
     {
         Log.Logger = new LoggerConfiguration()
-            .WriteTo.Console(formatProvider:CultureInfo.InvariantCulture)
+            .WriteTo.Console(formatProvider: CultureInfo.InvariantCulture)
             .CreateLogger();
 
         var appConfig = GetConfig();

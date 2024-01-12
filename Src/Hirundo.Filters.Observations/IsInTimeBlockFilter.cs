@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using Hirundo.Commons;
-using Serilog;
 
 namespace Hirundo.Filters.Observations;
 

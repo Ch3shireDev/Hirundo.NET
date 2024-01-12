@@ -35,25 +35,25 @@
             </Grid.ColumnDefinitions>
             <TabControl TabStripPlacement="Left" Grid.Column="0">
                 <TabItem Header="Źródło danych">
-                    <views:DataSourceView/>
+                    <views:DataSourceView />
                 </TabItem>
                 <TabItem Header="Obserwacje">
-                    <views:ObservationsView/>
+                    <views:ObservationsView />
                 </TabItem>
                 <TabItem Header="Wszystkie osobniki">
-                    <views:SpecimensView/>
+                    <views:SpecimensView />
                 </TabItem>
                 <TabItem Header="Osobniki powracające">
-                    <views:ReturningSpecimensView/>
+                    <views:ReturningSpecimensView />
                 </TabItem>
                 <TabItem Header="Populacja">
-                    <views:PopulationView/>
+                    <views:PopulationView />
                 </TabItem>
                 <TabItem Header="Statystyki">
-                    <views:StatisticsView/>
+                    <views:StatisticsView />
                 </TabItem>
                 <TabItem Header="Zapis wyników">
-                    <views:WriteResultsView/>
+                    <views:WriteResultsView />
                 </TabItem>
             </TabControl>
             <ListBox Grid.Column="1" ItemsSource="{Binding Items}" Margin="5,0">

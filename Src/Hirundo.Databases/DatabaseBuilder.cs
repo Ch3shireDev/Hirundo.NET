@@ -52,5 +52,4 @@ public class DatabaseBuilder
     {
         return new CompositeDatabase([.._databases]);
     }
-
 }

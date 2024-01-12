@@ -63,7 +63,7 @@ public class StatisticalOperationResult
     public IList<object> PopulationIds { get; init; } = [];
 
     /// <summary>
-    /// Identyfikatory populacji, dla których wartość statystyczna jest pusta.
+    ///     Identyfikatory populacji, dla których wartość statystyczna jest pusta.
     /// </summary>
     public IList<object> EmptyValuesIds { get; init; } = [];
 }
