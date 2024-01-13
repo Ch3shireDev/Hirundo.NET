@@ -4,7 +4,7 @@ public class SpecimensProcessorBuilder
 {
     private SpecimensProcessorParameters _parameters = null!;
 
-    public SpecimensProcessorBuilder WithSpecimensProcessorParameters(SpecimensProcessorParameters parameters)
+    public SpecimensProcessorBuilder WithSpecimensParameters(SpecimensProcessorParameters parameters)
     {
         _parameters = parameters;
         return this;

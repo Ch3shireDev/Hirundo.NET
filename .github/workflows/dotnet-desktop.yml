@@ -86,5 +86,5 @@ jobs:
       with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./Src/hirundo-net-${{ env.VERSION }}.zip
-          asset_name: hirundo-net-${{ env.VERSION }}
+          asset_name: hirundo-net-${{ env.VERSION }}.zip
           asset_content_type: application/zip

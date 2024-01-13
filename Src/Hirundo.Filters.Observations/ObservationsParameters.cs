@@ -1,6 +1,4 @@
-﻿using Hirundo.Filters.Observations;
-
-namespace Hirundo.Configuration;
+﻿namespace Hirundo.Filters.Observations;
 
 public class ObservationsParameters
 {

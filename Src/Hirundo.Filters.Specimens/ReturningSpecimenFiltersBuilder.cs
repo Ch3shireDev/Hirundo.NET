@@ -16,7 +16,7 @@ public class ReturningSpecimenFiltersBuilder
         return new CompositeReturningSpecimenFilter([.._conditions]);
     }
 
-    public ReturningSpecimenFiltersBuilder WithConditions(IEnumerable<IReturningSpecimenFilter> returningSpecimensConditions)
+    public ReturningSpecimenFiltersBuilder WithReturningSpecimensConditions(IEnumerable<IReturningSpecimenFilter> returningSpecimensConditions)
     {
         _conditions.AddRange(returningSpecimensConditions);
         return this;

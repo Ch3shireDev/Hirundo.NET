@@ -59,7 +59,7 @@ public class AverageAndDeviationOperation : IStatisticalOperation
         object averageValue;
         object standardDeviationValue;
 
-        object[] populationIds; 
+        object[] populationIds;
 
         do
         {
@@ -80,8 +80,7 @@ public class AverageAndDeviationOperation : IStatisticalOperation
 
             oldOutliersIds = outliersIds;
             outliersIds = Outliers.GetOutliersIds(population, ValueName, averageValue, standardDeviationValue);
-        }
-        while (oldOutliersIds.Length != outliersIds.Length);
+        } while (oldOutliersIds.Length != outliersIds.Length);
 
 
         return new StatisticalOperationResult([ResultNameAverage, ResultNameStandardDeviation], [averageValue, standardDeviationValue], populationIds, emptyValuesIds, outliersIds);

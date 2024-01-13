@@ -1,6 +1,6 @@
 ﻿using Hirundo.Processors.Population.Conditions;
 
-namespace Hirundo.Configuration;
+namespace Hirundo.Processors.Population;
 
 public class PopulationProcessorParameters
 {
