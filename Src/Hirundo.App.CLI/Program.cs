@@ -1,15 +1,7 @@
 ﻿using System.Globalization;
 using System.Runtime.Serialization;
 using Hirundo.Configuration;
-using Hirundo.Databases;
-using Hirundo.Filters.Observations;
-using Hirundo.Filters.Specimens;
-using Hirundo.Processors.Population;
-using Hirundo.Processors.Specimens;
-using Hirundo.Processors.Statistics;
-using Hirundo.Processors.Summary;
 using Hirundo.Serialization.Json;
-using Hirundo.Writers.Summary;
 using Newtonsoft.Json;
 using Serilog;
 
@@ -21,6 +13,8 @@ namespace Hirundo.App.CLI;
 /// </summary>
 internal sealed class Program
 {
+    private static readonly HirundoApp app = new();
+
     private static void Main()
     {
         Log.Logger = new LoggerConfiguration()
@@ -29,72 +23,7 @@ internal sealed class Program
 
         var appConfig = GetConfig();
 
-        var databaseBuilder = new DatabaseBuilder();
-        var specimensProcessorBuilder = new SpecimensProcessorBuilder();
-        var observationFiltersBuilder = new ObservationFiltersBuilder();
-        var returningSpecimenFiltersBuilder = new ReturningSpecimenFiltersBuilder();
-        var populationProcessorBuilder = new PopulationProcessorBuilder();
-        var statisticsProcessorBuilder = new StatisticsProcessorBuilder();
-        var summaryProcessorBuilder = new SummaryProcessorBuilder();
-        var summaryWriterBuilder = new SummaryWriterBuilder();
-
-        var database = databaseBuilder
-            .AddDatabaseParameters(appConfig.Databases)
-            .Build();
-
-        var observationFilters = observationFiltersBuilder
-            .WithConditions(appConfig.Observations.Conditions)
-            .Build();
-
-        var returningSpecimenFilters = returningSpecimenFiltersBuilder
-            .WithConditions(appConfig.ReturningSpecimens.Conditions)
-            .Build();
-
-        var populationProcessor = populationProcessorBuilder
-            .WithConditions(appConfig.Population.Conditions)
-            .Build();
-
-        var statisticsProcessor = statisticsProcessorBuilder
-            .WithOperations(appConfig.Statistics.Operations)
-            .Build();
-
-        var specimensProcessor = specimensProcessorBuilder
-            .WithSpecimensProcessorParameters(appConfig.Specimens)
-            .Build();
-
-        var resultsWriter = summaryWriterBuilder
-            .WithWriterParameters(appConfig.Results.Writer)
-            .Build();
-
-        var observations = database.GetObservations().ToArray();
-
-        Log.Information($"Odczytano {observations.Length} obserwacji.");
-
-        var selectedObservations = observations.Where(observationFilters.IsAccepted).ToArray();
-
-        Log.Information($"Wybrano {selectedObservations.Length} obserwacji.");
-
-        var specimens = specimensProcessor.GetSpecimens(selectedObservations).ToArray();
-
-        Log.Information($"Wybrano {specimens.Length} osobników.");
-
-        var returningSpecimens = specimens.Where(returningSpecimenFilters.IsReturning).ToArray();
-
-        Log.Information($"Wybrano {returningSpecimens.Length} powracających osobników.");
-
-        var summaryProcessor = summaryProcessorBuilder
-            .WithPopulationProcessor(populationProcessor)
-            .WithStatisticsProcessor(statisticsProcessor)
-            .WithTotalPopulation(specimens)
-            .Build();
-
-        var summary = returningSpecimens
-            .Select(summaryProcessor.GetSummary)
-            .ToList();
-
-        Log.Information($"Przygotowano {summary.Count} wierszy danych wynikowych.");
-
-        resultsWriter.Write(summary);
+        app.Run(appConfig);
     }
 
     private static ApplicationConfig GetConfig()

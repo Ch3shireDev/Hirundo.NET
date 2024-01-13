@@ -3,70 +3,76 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:Hirundo.App"
              xmlns:views="clr-namespace:Hirundo.App.Views"
+             xmlns:viewModels="clr-namespace:Hirundo.App.ViewModels"
+             xmlns:helpers="clr-namespace:Hirundo.App.Helpers"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="1000" Background="#FFF7FFF7"
-             d:DataContext="{d:DesignInstance local:MainViewModel}">
+             d:DataContext="{d:DesignInstance viewModels:MainViewModel}">
     <UserControl.Resources>
-        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-            <Setter Property="Margin" Value="5,5" />
-            <Setter Property="Padding" Value="15,5" />
-            <Setter Property="MinWidth" Value="120" />
-        </Style>
         <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
             <Setter Property="Padding" Value="15,5" />
         </Style>
+        <helpers:LogEventMessageConverter x:Key="LogEventConverter" />
+        <helpers:LogEventToColorConverter x:Key="LogEventToColorConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Margin="10,5">
-            <Label FontWeight="Bold">Źródło danych</Label>
-            <Label>Panel wyboru źródła danych.</Label>
-        </StackPanel>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="200" />
             </Grid.ColumnDefinitions>
             <TabControl TabStripPlacement="Left" Grid.Column="0">
                 <TabItem Header="Źródło danych">
-                    <views:DataSourceView />
+                    <views:DataSourceView DataContext="{Binding DataSourceViewModel}" />
                 </TabItem>
                 <TabItem Header="Obserwacje">
-                    <views:ObservationsView />
+                    <views:ObservationsView DataContext="{Binding ObservationsViewModel}" />
                 </TabItem>
                 <TabItem Header="Wszystkie osobniki">
-                    <views:SpecimensView />
+                    <views:SpecimensView DataContext="{Binding SpecimensViewModel}" />
                 </TabItem>
                 <TabItem Header="Osobniki powracające">
-                    <views:ReturningSpecimensView />
+                    <views:ReturningSpecimensView DataContext="{Binding PopulationViewModel}" />
                 </TabItem>
                 <TabItem Header="Populacja">
-                    <views:PopulationView />
+                    <views:PopulationView DataContext="{Binding PopulationViewModel}" />
                 </TabItem>
                 <TabItem Header="Statystyki">
-                    <views:StatisticsView />
+                    <views:StatisticsView DataContext="{Binding StatisticsViewModel}" />
                 </TabItem>
                 <TabItem Header="Zapis wyników">
-                    <views:WriteResultsView />
+                    <views:WriterView DataContext="{Binding WriterViewModel}" />
                 </TabItem>
             </TabControl>
-            <ListBox Grid.Column="1" ItemsSource="{Binding Items}" Margin="5,0">
+            <ListBox Grid.Column="1" SelectionMode="Single" ItemsSource="{Binding Items}">
+                <ListBox.Resources>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Padding" Value="0" />
+                        <Setter Property="Margin" Value="0" />
+                    </Style>
+                </ListBox.Resources>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Padding" Value="2,0" />
+                        <Setter Property="Margin" Value="2,0" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding}" Padding="0" Margin="0" />
+                        <TextBlock TextWrapping="Wrap" Text="{Binding Converter={StaticResource LogEventConverter}}"
+                                   FontFamily="Consolas" Padding="0" Margin="0"
+                                   Foreground="{Binding Converter={StaticResource LogEventToColorConverter}}" />
                     </DataTemplate>
                 </ListBox.ItemTemplate>
-                <d:ListBoxItem Content="First line" />
-                <d:ListBoxItem Content="Second line" />
             </ListBox>
+
         </Grid>
-        <DockPanel Grid.Row="2">
+        <DockPanel Grid.Row="1">
             <Button HorizontalAlignment="Left" Command="{Binding CancelCommand}">Porzuć</Button>
             <WrapPanel HorizontalAlignment="Right">
                 <Button HorizontalAlignment="Right" Command="{Binding PreviousCommand}">Poprzedni</Button>

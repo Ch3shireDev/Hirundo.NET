@@ -1,5 +1,14 @@
-﻿using System.Reflection;
+﻿using System.IO;
+using System.Reflection;
+using System.Runtime.Serialization;
 using System.Windows;
+using Hirundo.App.Helpers;
+using Hirundo.App.Models;
+using Hirundo.App.ViewModels;
+using Hirundo.Configuration;
+using Hirundo.Serialization.Json;
+using Newtonsoft.Json;
+using Serilog;
 
 namespace Hirundo.App;
 
@@ -10,10 +19,17 @@ public partial class App : Application
 {
     protected override void OnStartup(StartupEventArgs e)
     {
-        var viewModel = new MainViewModel();
+        var config = GetConfig();
 
-        viewModel.Items.Add("Hello");
-        viewModel.Items.Add("World");
+        var app = new HirundoApp();
+        var model = new MainModel(app);
+        model.LoadConfig(config);
+
+        var viewModel = new MainViewModel(model);
+
+        Log.Logger = new LoggerConfiguration()
+            .WriteTo.Sink(new LogEventSink(viewModel.Items))
+            .CreateLogger();
 
         var view = new MainWindow
         {
@@ -23,5 +39,15 @@ public partial class App : Application
         };
 
         view.Show();
+
+        Log.Information("Uruchomiono aplikację Hirundo.");
+    }
+
+    private static ApplicationConfig GetConfig()
+    {
+        var converter = new HirundoJsonConverter();
+        var jsonConfig = File.ReadAllText("appsettings.json");
+        var appConfig = JsonConvert.DeserializeObject<ApplicationConfig>(jsonConfig, converter) ?? throw new SerializationException("Błąd parsowania konfiguracji.");
+        return appConfig;
     }
 }

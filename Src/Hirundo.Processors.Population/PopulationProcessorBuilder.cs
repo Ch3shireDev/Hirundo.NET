@@ -19,7 +19,7 @@ public class PopulationProcessorBuilder
         return new PopulationProcessor(conditionBuilder);
     }
 
-    public PopulationProcessorBuilder WithConditions(IEnumerable<IPopulationFilterBuilder> populationConditions)
+    public PopulationProcessorBuilder WithPopulationConditions(IEnumerable<IPopulationFilterBuilder> populationConditions)
     {
         _conditionBuilders.AddRange(populationConditions);
         return this;

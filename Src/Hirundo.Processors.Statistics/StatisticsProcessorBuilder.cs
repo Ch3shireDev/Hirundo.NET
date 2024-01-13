@@ -21,7 +21,7 @@ public class StatisticsProcessorBuilder
         return new StatisticsProcessor(_statisticalOperations, _outliersConditions);
     }
 
-    public StatisticsProcessorBuilder WithOperations(IEnumerable<IStatisticalOperation> statisticsOperations)
+    public StatisticsProcessorBuilder WithStatisticsOperations(IEnumerable<IStatisticalOperation> statisticsOperations)
     {
         _statisticalOperations.AddRange(statisticsOperations);
         return this;

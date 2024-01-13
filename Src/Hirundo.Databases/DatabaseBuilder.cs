@@ -9,12 +9,12 @@ public class DatabaseBuilder
 {
     private readonly List<IDatabase> _databases = [];
 
-    public DatabaseBuilder AddDatabaseParameters(params IDatabaseParameters[] appConfigDatabases)
+    public DatabaseBuilder WithDatabaseParameters(params IDatabaseParameters[] appConfigDatabases)
     {
-        return AddDatabaseParameters(appConfigDatabases.ToList());
+        return WithDatabaseParameters(appConfigDatabases.ToList());
     }
 
-    public DatabaseBuilder AddDatabaseParameters(IEnumerable<IDatabaseParameters> appConfigDatabases)
+    public DatabaseBuilder WithDatabaseParameters(IEnumerable<IDatabaseParameters> appConfigDatabases)
     {
         ArgumentNullException.ThrowIfNull(appConfigDatabases);
 
