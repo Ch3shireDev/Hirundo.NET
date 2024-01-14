@@ -11,9 +11,6 @@ public class LogEventSink(ICollection<LogEvent> items) : ILogEventSink
     {
         ArgumentNullException.ThrowIfNull(logEvent, nameof(logEvent));
         var message = logEvent.RenderMessage(CultureInfo.InvariantCulture);
-        Application.Current.Dispatcher.Invoke(() =>
-        {
-            items.Add(logEvent);
-        });
+        Application.Current.Dispatcher.Invoke(() => { items.Add(logEvent); });
     }
 }

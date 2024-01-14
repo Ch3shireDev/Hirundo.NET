@@ -19,8 +19,8 @@
                 <Setter Property="MinWidth" Value="120" />
                 <Setter Property="FontSize" Value="12" />
             </Style>
-            <Style TargetType="ListView" BasedOn="{StaticResource MaterialDesignToolVerticalToggleListBox}"/>
-            <Style TargetType="ListViewItem" BasedOn="{StaticResource MaterialDesignToolVerticalToggleListBox}"/>
+            <Style TargetType="ListView" BasedOn="{StaticResource MaterialDesignToolVerticalToggleListBox}" />
+            <Style TargetType="ListViewItem" BasedOn="{StaticResource MaterialDesignToolVerticalToggleListBox}" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

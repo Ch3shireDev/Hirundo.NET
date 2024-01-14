@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="Hirundo.App.Components.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:helpers="clr-namespace:Hirundo.App.Helpers"
+             xmlns:dataSource="clr-namespace:Hirundo.App.Components.DataSource"
+             xmlns:observations="clr-namespace:Hirundo.App.Components.Observations"
+             xmlns:specimens="clr-namespace:Hirundo.App.Components.Specimens"
+             xmlns:returningSpecimens="clr-namespace:Hirundo.App.Components.ReturningSpecimens"
+             xmlns:population="clr-namespace:Hirundo.App.Components.Population"
+             xmlns:statistics="clr-namespace:Hirundo.App.Components.Statistics"
+             xmlns:writer="clr-namespace:Hirundo.App.Components.Writer"
+             xmlns:components="clr-namespace:Hirundo.App.Components"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="1000" Background="#FFF7FFF7"
+             d:DataContext="{d:DesignInstance components:MainViewModel}">
+    <UserControl.Resources>
+        <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
+            <Setter Property="Padding" Value="15,5" />
+        </Style>
+        <helpers:LogEventMessageConverter x:Key="LogEventConverter" />
+        <helpers:LogEventToColorConverter x:Key="LogEventToColorConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="200" />
+            </Grid.ColumnDefinitions>
+            <TabControl TabStripPlacement="Left" Grid.Column="0">
+                <TabItem Header="Źródło danych">
+                    <dataSource:DataSourceView DataContext="{Binding DataSourceViewModel}" />
+                </TabItem>
+                <TabItem Header="Obserwacje">
+                    <observations:ObservationsView DataContext="{Binding ObservationsViewModel}" />
+                </TabItem>
+                <TabItem Header="Wszystkie osobniki">
+                    <specimens:SpecimensView DataContext="{Binding SpecimensViewModel}" />
+                </TabItem>
+                <TabItem Header="Osobniki powracające">
+                    <returningSpecimens:ReturningSpecimensView DataContext="{Binding PopulationViewModel}" />
+                </TabItem>
+                <TabItem Header="Populacja">
+                    <population:PopulationView DataContext="{Binding PopulationViewModel}" />
+                </TabItem>
+                <TabItem Header="Statystyki">
+                    <statistics:StatisticsView DataContext="{Binding StatisticsViewModel}" />
+                </TabItem>
+                <TabItem Header="Zapis wyników">
+                    <writer:WriterView DataContext="{Binding WriterViewModel}" />
+                </TabItem>
+            </TabControl>
+            <ListBox Grid.Column="1" SelectionMode="Single" ItemsSource="{Binding Items}">
+                <ListBox.Resources>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Padding" Value="0" />
+                        <Setter Property="Margin" Value="0" />
+                    </Style>
+                </ListBox.Resources>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Padding" Value="2,0" />
+                        <Setter Property="Margin" Value="2,0" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding Converter={StaticResource LogEventConverter}}"
+                                   FontFamily="Consolas" Padding="0" Margin="0"
+                                   Foreground="{Binding Converter={StaticResource LogEventToColorConverter}}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+        </Grid>
+        <DockPanel Grid.Row="1">
+            <Button HorizontalAlignment="Left" Command="{Binding CancelCommand}">Porzuć</Button>
+            <WrapPanel HorizontalAlignment="Right">
+                <Button HorizontalAlignment="Right" Command="{Binding PreviousCommand}">Poprzedni</Button>
+                <Button HorizontalAlignment="Right" Command="{Binding NextCommand}">Następny</Button>
+            </WrapPanel>
+        </DockPanel>
+    </Grid>
+</UserControl>
