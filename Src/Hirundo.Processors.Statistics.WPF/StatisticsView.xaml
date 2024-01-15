@@ -4,9 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:wpf="clr-namespace:Hirundo.Processors.Statistics.WPF"
+             xmlns:afterTimePeriod="clr-namespace:Hirundo.Processors.Statistics.WPF.Average"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800" d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance wpf:StatisticsViewModel}">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type afterTimePeriod:AverageViewModel}">
+            <afterTimePeriod:AverageView />
+        </DataTemplate>
+    </UserControl.Resources>
     <StackPanel Margin="10">
         <WrapPanel Margin="10">
             <TextBlock TextWrapping="WrapWithOverflow">W tym panelu wybierasz dane statystyczne, które mają być obliczone dla populacji dla każdego osobnika powracającego.</TextBlock>
@@ -19,5 +25,17 @@
                 <ComboBoxItem>CCCC</ComboBoxItem>
             </ComboBox>
         </WrapPanel>
+
+        <ItemsControl ItemsSource="{Binding OperationsViewModels}" HorizontalAlignment="Left">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="10" Background="LightGray" MaxWidth="500" CornerRadius="5">
+                        <WrapPanel Margin="10">
+                            <ContentControl Content="{Binding}" DataContext="{Binding}" />
+                        </WrapPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </StackPanel>
 </UserControl>

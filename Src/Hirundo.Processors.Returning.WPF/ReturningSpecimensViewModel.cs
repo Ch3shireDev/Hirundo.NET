@@ -2,12 +2,7 @@
 
 namespace Hirundo.Processors.Returning.WPF;
 
-public class ReturningSpecimensViewModel : ViewModelBase
+public class ReturningSpecimensViewModel(ReturningSpecimensModel model) : ViewModelBase
 {
-    public ReturningSpecimensViewModel(ReturningSpecimensModel model)
-    {
-        ConditionsViewModels = model.Conditions.Select(ReturningSpecimensConditionFactory.Create).ToList();
-    }
-
-    public IList<ReturningSpecimensConditionViewModel> ConditionsViewModels { get; } = [];
+    public IList<ReturningSpecimensConditionViewModel> ConditionsViewModels { get; } = model.Conditions.Select(ReturningSpecimensConditionFactory.Create).ToList();
 }
