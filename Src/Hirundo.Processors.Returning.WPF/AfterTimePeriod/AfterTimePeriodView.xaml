@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="Hirundo.Processors.Returning.WPF.AfterTimePeriod.AfterTimePeriodView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:afterTimePeriod="clr-namespace:Hirundo.Processors.Returning.WPF.AfterTimePeriod"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             d:Background="AliceBlue"
+             d:DataContext="{d:DesignInstance afterTimePeriod:AfterTimePeriodViewModel}">
+    <StackPanel>
+        <Label FontWeight="Bold">Wraca po co najmniej ustalonej liczbie dni.</Label>
+        <WrapPanel>
+            <Label>Nazwa pola danych daty</Label>
+            <TextBox Text="{Binding DateValueName, Mode=TwoWay}" MinWidth="100" />
+        </WrapPanel>
+        <WrapPanel>
+            <Label>Liczba dni</Label>
+            <TextBox Text="{Binding TimePeriodInDays, Mode=TwoWay}" MinWidth="100" />
+        </WrapPanel>
+    </StackPanel>
+</UserControl>

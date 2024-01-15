@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Windows;
 using Hirundo.App.Components;
-using Hirundo.App.Helpers;
+using Hirundo.Commons.WPF.Helpers;
 using Hirundo.Configuration;
 using Hirundo.Serialization.Json;
 using Newtonsoft.Json;

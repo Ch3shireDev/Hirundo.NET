@@ -1,0 +1,14 @@
+﻿using Hirundo.Commons.WPF;
+using Hirundo.Databases.WPF.Access;
+
+namespace Hirundo.Databases.WPF;
+
+public class DataSourceViewModel : ViewModelBase
+{
+    public DataSourceViewModel(DataSourceModel model)
+    {
+        DatabaseViewModels = model.DatabaseParameters.Select(x => new AccessDataSourceViewModel(x as AccessDatabaseParameters)).ToList();
+    }
+
+    public IList<AccessDataSourceViewModel> DatabaseViewModels { get; set; } = [];
+}

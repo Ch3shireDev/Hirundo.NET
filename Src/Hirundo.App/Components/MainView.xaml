@@ -3,17 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:helpers="clr-namespace:Hirundo.App.Helpers"
-             xmlns:dataSource="clr-namespace:Hirundo.App.Components.DataSource"
-             xmlns:observations="clr-namespace:Hirundo.App.Components.Observations"
-             xmlns:specimens="clr-namespace:Hirundo.App.Components.Specimens"
-             xmlns:returningSpecimens="clr-namespace:Hirundo.App.Components.ReturningSpecimens"
-             xmlns:population="clr-namespace:Hirundo.App.Components.Population"
-             xmlns:statistics="clr-namespace:Hirundo.App.Components.Statistics"
-             xmlns:writer="clr-namespace:Hirundo.App.Components.Writer"
              xmlns:components="clr-namespace:Hirundo.App.Components"
+             xmlns:wpf="clr-namespace:Hirundo.Databases.WPF;assembly=Hirundo.Databases.WPF"
+             xmlns:wpf1="clr-namespace:Hirundo.Processors.Observations.WPF;assembly=Hirundo.Processors.Observations.WPF"
+             xmlns:wpf2="clr-namespace:Hirundo.Processors.Population.WPF;assembly=Hirundo.Processors.Population.WPF"
+             xmlns:wpf3="clr-namespace:Hirundo.Processors.Returning.WPF;assembly=Hirundo.Processors.Returning.WPF"
+             xmlns:wpf4="clr-namespace:Hirundo.Processors.Specimens.WPF;assembly=Hirundo.Processors.Specimens.WPF"
+             xmlns:wpf5="clr-namespace:Hirundo.Processors.Statistics.WPF;assembly=Hirundo.Processors.Statistics.WPF"
+             xmlns:helpers="clr-namespace:Hirundo.Commons.WPF.Helpers;assembly=Hirundo.Commons.WPF"
+             xmlns:wpf6="clr-namespace:Hirundo.Writers.WPF;assembly=Hirundo.Writers.WPF"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="1000" Background="#FFF7FFF7"
+             d:DesignHeight="600" d:DesignWidth="1000" d:Background="#FFF7FFF7"
              d:DataContext="{d:DesignInstance components:MainViewModel}">
     <UserControl.Resources>
         <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
@@ -34,25 +34,25 @@
             </Grid.ColumnDefinitions>
             <TabControl TabStripPlacement="Left" Grid.Column="0">
                 <TabItem Header="Źródło danych">
-                    <dataSource:DataSourceView DataContext="{Binding DataSourceViewModel}" />
+                    <wpf:DataSourceView DataContext="{Binding DataSourceViewModel}" />
                 </TabItem>
                 <TabItem Header="Obserwacje">
-                    <observations:ObservationsView DataContext="{Binding ObservationsViewModel}" />
+                    <wpf1:ObservationsView DataContext="{Binding ObservationsViewModel}" />
                 </TabItem>
                 <TabItem Header="Wszystkie osobniki">
-                    <specimens:SpecimensView DataContext="{Binding SpecimensViewModel}" />
+                    <wpf4:SpecimensView DataContext="{Binding SpecimensViewModel}" />
                 </TabItem>
                 <TabItem Header="Osobniki powracające">
-                    <returningSpecimens:ReturningSpecimensView DataContext="{Binding ReturningSpecimensViewModel}" />
+                    <wpf3:ReturningSpecimensView DataContext="{Binding ReturningSpecimensViewModel}" />
                 </TabItem>
                 <TabItem Header="Populacja">
-                    <population:PopulationView DataContext="{Binding PopulationViewModel}" />
+                    <wpf2:PopulationView DataContext="{Binding PopulationViewModel}" />
                 </TabItem>
                 <TabItem Header="Statystyki">
-                    <statistics:StatisticsView DataContext="{Binding StatisticsViewModel}" />
+                    <wpf5:StatisticsView DataContext="{Binding StatisticsViewModel}" />
                 </TabItem>
                 <TabItem Header="Zapis wyników">
-                    <writer:WriterView DataContext="{Binding WriterViewModel}" />
+                    <wpf6:WriterView DataContext="{Binding WriterViewModel}" />
                 </TabItem>
             </TabControl>
             <ListBox Grid.Column="1" SelectionMode="Single" ItemsSource="{Binding Items}">

@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hirundo.Commons.WPF\Hirundo.Commons.WPF.csproj" />
+    <ProjectReference Include="..\Hirundo.Processors.Returning\Hirundo.Processors.Returning.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="AfterTimePeriod\AfterTimePeriodView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="NotEarlierThanGivenDateNextYear\NotEarlierThanGivenDateNextYearView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ReturningSpecimensView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+</Project>

@@ -1,12 +1,13 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Hirundo.App.Components.DataSource;
-using Hirundo.App.Components.Observations;
-using Hirundo.App.Components.Population;
-using Hirundo.App.Components.ReturningSpecimens;
-using Hirundo.App.Components.Specimens;
-using Hirundo.App.Components.Statistics;
-using Hirundo.App.Components.Writer;
+using Hirundo.Commons.WPF;
+using Hirundo.Databases.WPF;
+using Hirundo.Processors.Observations.WPF;
+using Hirundo.Processors.Population.WPF;
+using Hirundo.Processors.Returning.WPF;
+using Hirundo.Processors.Specimens.WPF;
+using Hirundo.Processors.Statistics.WPF;
+using Hirundo.Writers.WPF;
 using Serilog.Events;
 
 namespace Hirundo.App.Components;

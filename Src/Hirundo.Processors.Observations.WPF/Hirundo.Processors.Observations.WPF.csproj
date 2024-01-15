@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hirundo.Commons.WPF\Hirundo.Commons.WPF.csproj" />
+    <ProjectReference Include="..\Hirundo.Processors.Observations\Hirundo.Processors.Observations.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="IsEqual\IsEqualView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="IsInTimeBlock\IsInTimeBlockView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ObservationsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+</Project>
