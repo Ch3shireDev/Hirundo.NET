@@ -1,10 +1,10 @@
 ﻿using Hirundo.Commons;
 
-namespace Hirundo.Filters.Specimens;
+namespace Hirundo.Processors.Returning.Conditions;
 
 /// <summary>
 ///     Filtr zwracający osobniki, które powróciły po określonym czasie, liczonym w dniach. Aby osobnik został
-///     uznany za powracający, musi istnieć co najmniej para pomiędzy sąsiednimi obserwacjami, której różnica
+///     uznany za powracający, muszą istnieć co najmniej dwie sąsiednie obserwacje, których różnica
 ///     dat jest większa lub równa podanej liczbie dni.
 /// </summary>
 /// <param name="dateValueName">Nazwa kolumny danych reprezentującej datę.</param>

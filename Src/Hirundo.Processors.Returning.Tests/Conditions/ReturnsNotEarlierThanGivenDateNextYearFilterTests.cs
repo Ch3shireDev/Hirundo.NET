@@ -1,8 +1,9 @@
 ﻿using System.Globalization;
 using Hirundo.Commons;
+using Hirundo.Processors.Returning.Conditions;
 using NUnit.Framework;
 
-namespace Hirundo.Filters.Specimens.Tests;
+namespace Hirundo.Processors.Returning.Tests.Conditions;
 
 [TestFixture]
 public class ReturnsNotEarlierThanGivenDateNextYearFilterTests

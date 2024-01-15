@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 using Hirundo.Commons;
-using Hirundo.Filters.Observations;
+using Hirundo.Processors.Observations.Conditions;
 
 namespace Hirundo.App.Components.Observations.IsEqual;
 

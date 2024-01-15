@@ -1,7 +1,8 @@
 ﻿using Hirundo.Commons;
+using Hirundo.Processors.Observations.Conditions;
 using NUnit.Framework;
 
-namespace Hirundo.Filters.Observations.Tests;
+namespace Hirundo.Processors.Observations.Tests.Conditions;
 
 [TestFixture]
 public class IsNotEqualFilterTests

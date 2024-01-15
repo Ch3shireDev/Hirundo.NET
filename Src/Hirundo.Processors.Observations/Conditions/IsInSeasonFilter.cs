@@ -1,6 +1,6 @@
 ﻿using Hirundo.Commons;
 
-namespace Hirundo.Filters.Observations;
+namespace Hirundo.Processors.Observations.Conditions;
 
 [TypeDescription("IsInSeason")]
 public class IsInSeasonFilter(string dateColumnName, Season season) : IObservationFilter

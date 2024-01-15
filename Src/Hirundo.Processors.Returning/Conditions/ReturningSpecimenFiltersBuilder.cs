@@ -1,4 +1,4 @@
-﻿namespace Hirundo.Filters.Specimens;
+﻿namespace Hirundo.Processors.Returning.Conditions;
 
 /// <summary>
 ///     Budowniczy filtrów powracających osobników.

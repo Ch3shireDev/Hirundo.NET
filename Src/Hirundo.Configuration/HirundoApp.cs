@@ -1,7 +1,7 @@
 ﻿using Hirundo.Databases;
-using Hirundo.Filters.Observations;
-using Hirundo.Filters.Specimens;
+using Hirundo.Processors.Observations.Conditions;
 using Hirundo.Processors.Population;
+using Hirundo.Processors.Returning.Conditions;
 using Hirundo.Processors.Specimens;
 using Hirundo.Processors.Statistics;
 using Hirundo.Processors.Summary;

@@ -1,4 +1,4 @@
-﻿namespace Hirundo.Filters.Observations;
+﻿namespace Hirundo.Processors.Observations.Conditions;
 
 /// <summary>
 ///     Budowniczy filtrów obserwacji. Filtry mogą być budowane na podstawie danych wprowadzonych przez użytkownika,

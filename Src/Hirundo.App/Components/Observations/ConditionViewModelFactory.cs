@@ -1,6 +1,6 @@
 ﻿using Hirundo.App.Components.Observations.IsEqual;
 using Hirundo.App.Components.Observations.IsInTimeBlock;
-using Hirundo.Filters.Observations;
+using Hirundo.Processors.Observations.Conditions;
 
 namespace Hirundo.App.Components.Observations;
 

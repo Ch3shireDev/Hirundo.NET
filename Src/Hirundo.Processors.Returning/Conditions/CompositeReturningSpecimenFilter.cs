@@ -1,6 +1,6 @@
 ﻿using Hirundo.Commons;
 
-namespace Hirundo.Filters.Specimens;
+namespace Hirundo.Processors.Returning.Conditions;
 
 /// <summary>
 ///     Implementacja filtra zwracającego wszystkie okazy.

@@ -1,6 +1,6 @@
 ﻿using Hirundo.Commons;
 
-namespace Hirundo.Filters.Specimens;
+namespace Hirundo.Processors.Returning.Conditions;
 
 [TypeDescription("ReturnsNotEarlierThanGivenDateNextYear")]
 public class ReturnsNotEarlierThanGivenDateNextYearFilter(string dateValueName, int month, int day) : IReturningSpecimenFilter

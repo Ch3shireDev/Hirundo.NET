@@ -32,8 +32,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Hirundo.Configuration\Hirundo.Configuration.csproj" />
 		<ProjectReference Include="..\Hirundo.Databases\Hirundo.Databases.csproj" />
-		<ProjectReference Include="..\Hirundo.Filters.Observations\Hirundo.Filters.Observations.csproj" />
-		<ProjectReference Include="..\Hirundo.Filters.Specimens\Hirundo.Filters.Specimens.csproj" />
 		<ProjectReference Include="..\Hirundo.Processors.Population\Hirundo.Processors.Population.csproj" />
 		<ProjectReference Include="..\Hirundo.Processors.Specimens\Hirundo.Processors.Specimens.csproj" />
 		<ProjectReference Include="..\Hirundo.Processors.Statistics\Hirundo.Processors.Statistics.csproj" />

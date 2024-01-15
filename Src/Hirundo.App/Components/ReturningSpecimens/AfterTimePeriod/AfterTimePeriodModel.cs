@@ -1,4 +1,4 @@
-﻿using Hirundo.Filters.Specimens;
+﻿using Hirundo.Processors.Returning.Conditions;
 
 namespace Hirundo.App.Components.ReturningSpecimens.AfterTimePeriod;
 

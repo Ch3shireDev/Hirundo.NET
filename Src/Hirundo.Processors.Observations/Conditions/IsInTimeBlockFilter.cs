@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using Hirundo.Commons;
 
-namespace Hirundo.Filters.Observations;
+namespace Hirundo.Processors.Observations.Conditions;
 
 [TypeDescription("IsInTimeBlock")]
 public class IsInTimeBlockFilter(string valueName, TimeBlock timeBlock, bool rejectNullValues = false) : IObservationFilter

@@ -1,6 +1,6 @@
 ﻿using Hirundo.Commons;
 
-namespace Hirundo.Filters.Observations;
+namespace Hirundo.Processors.Observations.Conditions;
 
 /// <summary>
 ///     Filtr obserwacji. Podczas przetwarzania danych z bazy danych, obserwacje są filtrowane warunkami zadanymi przez

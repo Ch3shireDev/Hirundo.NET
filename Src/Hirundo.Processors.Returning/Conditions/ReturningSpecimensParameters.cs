@@ -1,4 +1,4 @@
-﻿namespace Hirundo.Filters.Specimens;
+﻿namespace Hirundo.Processors.Returning.Conditions;
 
 public class ReturningSpecimensParameters(IList<IReturningSpecimenFilter> conditions)
 {

@@ -1,6 +1,6 @@
 ﻿using Hirundo.Commons;
 
-namespace Hirundo.Filters.Observations;
+namespace Hirundo.Processors.Observations.Conditions;
 
 /// <summary>
 ///     Klasa reprezentująca złożenie wielu warunków na obserwację. Warunki są łączone operatorem logicznym AND,

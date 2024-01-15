@@ -1,8 +1,9 @@
 ﻿using Hirundo.Commons;
+using Hirundo.Processors.Observations.Conditions;
 using Moq;
 using NUnit.Framework;
 
-namespace Hirundo.Filters.Observations.Tests;
+namespace Hirundo.Processors.Observations.Tests.Conditions;
 
 [TestFixture]
 public class CompositeObservationFilterTests

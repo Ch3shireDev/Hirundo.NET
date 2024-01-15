@@ -1,4 +1,4 @@
-﻿namespace Hirundo.Filters.Observations;
+﻿namespace Hirundo.Processors.Observations.Conditions;
 
 public class ObservationsParameters
 {

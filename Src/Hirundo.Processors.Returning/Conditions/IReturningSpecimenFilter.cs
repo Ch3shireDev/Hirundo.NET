@@ -1,6 +1,6 @@
 ﻿using Hirundo.Commons;
 
-namespace Hirundo.Filters.Specimens;
+namespace Hirundo.Processors.Returning.Conditions;
 
 /// <summary>
 ///     Interfejs dla filtrów powracających osobników. Na podstawie osobnika i jego listy obserwacji określa, czy dany

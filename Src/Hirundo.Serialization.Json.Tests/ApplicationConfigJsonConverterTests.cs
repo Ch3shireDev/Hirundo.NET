@@ -1,9 +1,9 @@
 ﻿using System.Runtime.Serialization;
 using Hirundo.Configuration;
 using Hirundo.Databases;
-using Hirundo.Filters.Observations;
-using Hirundo.Filters.Specimens;
+using Hirundo.Processors.Observations.Conditions;
 using Hirundo.Processors.Population.Conditions;
+using Hirundo.Processors.Returning.Conditions;
 using Hirundo.Processors.Statistics.Operations;
 using Hirundo.Processors.Statistics.Operations.Outliers;
 using Hirundo.Writers.Summary;
