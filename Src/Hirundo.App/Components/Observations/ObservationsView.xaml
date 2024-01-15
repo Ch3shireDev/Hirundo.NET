@@ -23,8 +23,7 @@
             <TextBlock TextWrapping="WrapWithOverflow">W tym panelu ustalasz warunki, jakie mają spełniać wybierane obserwacje do obliczeń.</TextBlock>
         </WrapPanel>
         <WrapPanel Margin="10">
-            <Label>Warunki</Label>
-            <Label Content="{Binding Count}" />
+            <Label FontWeight="Bold">Warunki filtrowania obserwacji</Label>
         </WrapPanel>
         <ItemsControl ItemsSource="{Binding ConditionViewModels}" HorizontalAlignment="Left">
             <ItemsControl.ItemTemplate>

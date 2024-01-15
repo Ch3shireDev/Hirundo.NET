@@ -4,9 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:population="clr-namespace:Hirundo.App.Components.Population"
+             xmlns:afterTimePeriod="clr-namespace:Hirundo.App.Components.ReturningSpecimens.AfterTimePeriod"
+             xmlns:isInSharedTimeWindow="clr-namespace:Hirundo.App.Components.Population.IsInSharedTimeWindow"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800" d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance population:PopulationViewModel}">
+    <UserControl.Resources>
+
+        <DataTemplate DataType="{x:Type isInSharedTimeWindow:IsInSharedTimeWindowViewModel}">
+            <isInSharedTimeWindow:IsInSharedTimeWindowView />
+        </DataTemplate>
+
+
+    </UserControl.Resources>
     <StackPanel Margin="10">
         <WrapPanel Margin="10">
             <TextBlock TextWrapping="WrapWithOverflow">W tym panelu określasz warunki określające populację dla danego osobnika powracającego.</TextBlock>
@@ -14,6 +24,18 @@
         <StackPanel Margin="10">
             <Label FontWeight="Bold">Warunki populacji</Label>
         </StackPanel>
+
+        <ItemsControl ItemsSource="{Binding ConditionsViewModels}" HorizontalAlignment="Left">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="10" Background="LightGray" MaxWidth="500" CornerRadius="5">
+                        <WrapPanel Margin="10">
+                            <ContentControl Content="{Binding}" DataContext="{Binding}" />
+                        </WrapPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
         <StackPanel Margin="10">
             <WrapPanel>
                 <Button>Dodaj nowy warunek</Button>

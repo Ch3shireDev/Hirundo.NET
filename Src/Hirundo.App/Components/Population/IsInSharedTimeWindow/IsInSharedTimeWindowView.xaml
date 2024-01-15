@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="Hirundo.App.Components.Population.IsInSharedTimeWindow.IsInSharedTimeWindowView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Hirundo.App.Components.Population.IsInSharedTimeWindow"
+             mc:Ignorable="d"
+             d:Background="AliceBlue"
+             d:DataContext="{d:DesignInstance local:IsInSharedTimeWindowViewModel}">
+    <StackPanel>
+        <Label FontWeight="Bold">Czy jest we współdzielonym oknie czasowym?</Label>
+        <WrapPanel>
+            <Label>Nazwa pola danych daty</Label>
+            <TextBox MinWidth="100" Text="{Binding DateValueName, Mode=TwoWay}" />
+        </WrapPanel>
+        <WrapPanel>
+            <Label>Maksymalny dystans czasowy w dniach</Label>
+            <TextBox MinWidth="100" Text="{Binding MaxTimeDistanceInDays, Mode=TwoWay}" />
+        </WrapPanel>
+    </StackPanel>
+</UserControl>

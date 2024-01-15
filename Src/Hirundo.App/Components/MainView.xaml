@@ -43,7 +43,7 @@
                     <specimens:SpecimensView DataContext="{Binding SpecimensViewModel}" />
                 </TabItem>
                 <TabItem Header="Osobniki powracające">
-                    <returningSpecimens:ReturningSpecimensView DataContext="{Binding PopulationViewModel}" />
+                    <returningSpecimens:ReturningSpecimensView DataContext="{Binding ReturningSpecimensViewModel}" />
                 </TabItem>
                 <TabItem Header="Populacja">
                     <population:PopulationView DataContext="{Binding PopulationViewModel}" />

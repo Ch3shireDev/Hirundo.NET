@@ -16,14 +16,10 @@
         </WrapPanel>
         <WrapPanel Margin="10">
             <Label>Identyfikator osobnika</Label>
-            <ComboBox MinWidth="100">
-                <ComboBoxItem>aaa</ComboBoxItem>
-                <ComboBoxItem>bbb</ComboBoxItem>
-                <ComboBoxItem>ccc</ComboBoxItem>
-            </ComboBox>
+            <TextBox Text="{Binding SpecimenIdentifier}" MinWidth="100"></TextBox>
         </WrapPanel>
         <WrapPanel Margin="10">
-            <CheckBox>Czy dodawać obserwacje o pustych identyfikatorach?</CheckBox>
+            <CheckBox IsChecked="{Binding IncludeEmptyValues}">Czy dodawać obserwacje o pustych identyfikatorach?</CheckBox>
         </WrapPanel>
     </StackPanel>
 </UserControl>
