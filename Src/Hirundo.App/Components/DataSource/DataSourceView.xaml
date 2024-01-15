@@ -4,8 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:access="clr-namespace:Hirundo.App.Components.DataSource.Access"
+             xmlns:dataSource="clr-namespace:Hirundo.App.Components.DataSource"
              mc:Ignorable="d" d:Background="AliceBlue"
-             d:DataContext="{d:DesignInstance viewModels:DataSourceViewModel}">
+             d:DataContext="{d:DesignInstance dataSource:DataSourceViewModel}">
     <UserControl.Resources>
         <Style TargetType="ListBox" BasedOn="{StaticResource {x:Type ListBox}}" />
         <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}" />

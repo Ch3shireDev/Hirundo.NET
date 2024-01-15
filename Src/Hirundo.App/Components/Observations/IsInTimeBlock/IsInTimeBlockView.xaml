@@ -3,10 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:isInTimeBlock="clr-namespace:Hirundo.App.Components.Observations.IsInTimeBlock"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800"
-             d:Background="AliceBlue">
-    <Grid>
-        <Label>IsInTimeBlock</Label>
-    </Grid>
+             d:Background="AliceBlue"
+             d:DataContext="{d:DesignInstance isInTimeBlock:IsInTimeBlockViewModel}">
+    <StackPanel>
+        <Label FontWeight="Bold">Czy wartość jest w przedziale czasowym?</Label>
+        <WrapPanel>
+            <Label>Nazwa wartości</Label>
+            <TextBox Text="{Binding ValueName}" MinWidth="100" />
+        </WrapPanel>
+        <WrapPanel>
+            <Label>Godzina początkowa</Label>
+            <TextBox Text="{Binding StartHour}" MinWidth="100" />
+        </WrapPanel>
+        <WrapPanel>
+            <Label>Godzina końcowa</Label>
+            <TextBox Text="{Binding EndHour}" MinWidth="100" />
+        </WrapPanel>
+    </StackPanel>
 </UserControl>
