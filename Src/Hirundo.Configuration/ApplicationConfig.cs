@@ -11,10 +11,10 @@ namespace Hirundo.Configuration;
 public class ApplicationConfig
 {
     public IList<IDatabaseParameters> Databases { get; init; } = [];
-    public ObservationsParameters Observations { get; set; } = null!;
-    public SpecimensProcessorParameters Specimens { get; set; } = null!;
-    public ReturningSpecimensParameters ReturningSpecimens { get; set; } = null!;
-    public PopulationProcessorParameters Population { get; set; } = null!;
-    public StatisticsProcessorParameters Statistics { get; set; } = null!;
-    public SummaryParameters Results { get; set; } = null!;
+    public ObservationsParameters Observations { get; set; } = new();
+    public SpecimensProcessorParameters Specimens { get; set; } = new();
+    public ReturningSpecimensParameters ReturningSpecimens { get; set; } = new();
+    public PopulationProcessorParameters Population { get; set; } = new();
+    public StatisticsProcessorParameters Statistics { get; set; } = new();
+    public SummaryParameters Results { get; set; } = new();
 }

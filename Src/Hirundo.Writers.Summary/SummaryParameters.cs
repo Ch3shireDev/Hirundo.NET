@@ -2,5 +2,5 @@
 
 public class SummaryParameters
 {
-    public IWriterParameters Writer { get; set; } = null!;
+    public IWriterParameters Writer { get; set; } = new CsvSummaryWriterParameters();
 }

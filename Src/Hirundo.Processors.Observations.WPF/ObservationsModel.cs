@@ -4,5 +4,5 @@ namespace Hirundo.Processors.Observations.WPF;
 
 public class ObservationsModel
 {
-    public ObservationsParameters ObservationsParameters { get; set; } = null!;
+    public ObservationsParameters ObservationsParameters { get; set; } = new();
 }

@@ -39,6 +39,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Hirundo.Databases.Tests.Integration\Hirundo.Databases.Tests.Integration.csproj" />
 		<ProjectReference Include="..\Hirundo.Databases\Hirundo.Databases.csproj" />
 	</ItemGroup>
 

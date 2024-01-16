@@ -4,5 +4,5 @@ namespace Hirundo.Writers.WPF;
 
 public class WriterModel
 {
-    public SummaryParameters SummaryParameters { get; set; } = null!;
+    public SummaryParameters SummaryParameters { get; set; } = new();
 }

@@ -19,7 +19,7 @@ public class MainModel(HirundoApp app)
     public StatisticsModel StatisticsModel { get; set; } = new();
     public WriterModel WriterModel { get; set; } = new();
 
-    public void LoadConfig(ApplicationConfig config)
+    public void SetConfig(ApplicationConfig config)
     {
         ArgumentNullException.ThrowIfNull(config);
 
@@ -38,7 +38,7 @@ public class MainModel(HirundoApp app)
         WriterModel.SummaryParameters = config.Results;
     }
 
-    private ApplicationConfig GetConfig()
+    public ApplicationConfig GetConfig()
     {
         return new ApplicationConfig
         {

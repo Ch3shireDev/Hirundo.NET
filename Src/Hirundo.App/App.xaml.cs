@@ -22,15 +22,15 @@ public partial class App : Application
 
         var app = new HirundoApp();
         var model = new MainModel(app);
-        model.LoadConfig(config);
+        model.SetConfig(config);
 
-        var viewModel = new MainViewModel(model);
+        var viewModel = new Components.MainViewModel(model);
 
         Log.Logger = new LoggerConfiguration()
             .WriteTo.Sink(new LogEventSink(viewModel.Items))
             .CreateLogger();
 
-        var view = new MainWindow
+        var view = new MainViewModel
         {
             DataContext = viewModel,
             Title = $"Hirundo ver. {Assembly.GetExecutingAssembly().GetName().Version}",

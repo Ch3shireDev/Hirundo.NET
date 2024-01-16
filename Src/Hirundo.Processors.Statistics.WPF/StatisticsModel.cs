@@ -2,5 +2,5 @@
 
 public class StatisticsModel
 {
-    public StatisticsProcessorParameters StatisticsProcessorParameters { get; set; } = null!;
+    public StatisticsProcessorParameters StatisticsProcessorParameters { get; set; } = new();
 }

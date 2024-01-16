@@ -7,17 +7,29 @@ using Hirundo.Commons;
 
 namespace Hirundo.Writers.Summary;
 
-public sealed class CsvSummaryWriter(TextWriter streamWriter) : ISummaryWriter, IDisposable, IAsyncDisposable
+public sealed class CsvSummaryWriter : ISummaryWriter, IDisposable, IAsyncDisposable
 {
+    private readonly TextWriter _streamWriter;
+
+    public CsvSummaryWriter()
+    {
+        _streamWriter = new StreamWriter("summary.csv", false, Encoding.UTF8);
+    }
+
+    public CsvSummaryWriter(TextWriter streamWriter)
+    {
+        _streamWriter = streamWriter;
+    }
+
     public async ValueTask DisposeAsync()
     {
-        await streamWriter.DisposeAsync().ConfigureAwait(false);
+        await _streamWriter.DisposeAsync().ConfigureAwait(false);
         GC.SuppressFinalize(this);
     }
 
     public void Dispose()
     {
-        streamWriter.Dispose();
+        _streamWriter.Dispose();
         GC.SuppressFinalize(this);
     }
 
@@ -39,7 +51,7 @@ public sealed class CsvSummaryWriter(TextWriter streamWriter) : ISummaryWriter, 
 
         var options = new TypeConverterOptions { Formats = new[] { "yyyy-MM-dd" } };
 
-        using var csvWriter = new CsvWriter(streamWriter, configuration);
+        using var csvWriter = new CsvWriter(_streamWriter, configuration);
         csvWriter.Context.TypeConverterOptionsCache.AddOptions<DateTime>(options);
         csvWriter.Context.TypeConverterOptionsCache.AddOptions<DateTime?>(options);
 
