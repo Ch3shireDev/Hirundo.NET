@@ -14,6 +14,13 @@ public class MdbAccessQueryBuilder
     private readonly List<DatabaseCondition> _conditions = [];
     private string? _tableName;
 
+    public MdbAccessQueryBuilder(string rowSeparator = " ")
+    {
+        RowSeparator = rowSeparator;
+    }
+
+    public string RowSeparator { get; }
+
     /// <summary>
     ///     Ustalana jest nazwa tabeli, do której odwołuje się zapytanie SELECT.
     ///     Nazwa tabeli nie powinna zawierać nawiasów kwadratowych.
@@ -81,9 +88,11 @@ public class MdbAccessQueryBuilder
         ArgumentNullException.ThrowIfNull(_tableName);
 
         var stringBuilder = new StringBuilder();
-        stringBuilder.Append("SELECT ");
-        stringBuilder.Append(string.Join(", ", _columns.Select(GetSqlColumnExpression)));
-        stringBuilder.Append(CultureInfo.InvariantCulture, $" FROM [{_tableName ?? ""}]");
+        stringBuilder.Append("SELECT");
+        stringBuilder.Append(RowSeparator);
+        stringBuilder.Append(string.Join($",{RowSeparator}", _columns.Select(GetSqlColumnExpression)));
+        stringBuilder.Append(RowSeparator);
+        stringBuilder.Append(CultureInfo.InvariantCulture, $"FROM [{_tableName ?? ""}]");
         stringBuilder.Append(GetWhereClause());
         return stringBuilder.ToString();
     }
@@ -93,7 +102,9 @@ public class MdbAccessQueryBuilder
         if (_conditions.Count == 0) return string.Empty;
 
         var stringBuilder2 = new StringBuilder();
-        stringBuilder2.Append(" WHERE ");
+        stringBuilder2.Append(RowSeparator);
+        stringBuilder2.Append("WHERE");
+        stringBuilder2.Append(RowSeparator);
 
         foreach (var condition in _conditions)
         {
@@ -102,7 +113,9 @@ public class MdbAccessQueryBuilder
             if (!isFirst)
             {
                 var logicOperator = GetLogicOperator(condition.ConditionOperator);
-                stringBuilder2.Append(CultureInfo.InvariantCulture, $" {logicOperator} ");
+                stringBuilder2.Append(RowSeparator);
+                stringBuilder2.Append(CultureInfo.InvariantCulture, $"{logicOperator}");
+                stringBuilder2.Append(RowSeparator);
             }
 
             stringBuilder2.Append(CultureInfo.InvariantCulture, $"{GetColumnForWhereQuery(condition)} {TwoArgumentOperator(condition.Type)} {GetValueForSqlWhereStatement(condition.Value)}");

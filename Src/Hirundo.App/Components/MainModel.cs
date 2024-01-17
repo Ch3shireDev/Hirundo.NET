@@ -1,16 +1,27 @@
-﻿using Hirundo.Configuration;
+﻿using System.IO;
+using Hirundo.Configuration;
 using Hirundo.Databases.WPF;
 using Hirundo.Processors.Observations.WPF;
 using Hirundo.Processors.Population.WPF;
 using Hirundo.Processors.Returning.WPF;
 using Hirundo.Processors.Specimens.WPF;
 using Hirundo.Processors.Statistics.WPF;
+using Hirundo.Serialization.Json;
 using Hirundo.Writers.WPF;
+using Newtonsoft.Json;
+using Serilog;
 
 namespace Hirundo.App.Components;
 
-public class MainModel(HirundoApp app)
+public class MainModel
 {
+    private readonly HirundoApp _app;
+
+    public MainModel(HirundoApp app)
+    {
+        _app = app;
+    }
+
     public DataSourceModel DataSourceModel { get; set; } = new();
     public ObservationsModel ObservationsModel { get; set; } = new();
     public PopulationModel PopulationModel { get; set; } = new();
@@ -52,10 +63,38 @@ public class MainModel(HirundoApp app)
         };
     }
 
-    public Task Run()
+    public async Task Run()
     {
-        var config = GetConfig();
-        app.Run(config);
-        return Task.CompletedTask;
+        try
+        {
+            var config = GetConfig();
+
+            var settings = new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                DefaultValueHandling = DefaultValueHandling.Ignore,
+                Formatting = Formatting.Indented,
+                Converters = { new HirundoJsonConverter() }
+            };
+
+            await File.WriteAllTextAsync($"{DateTime.Now.Ticks}.json", JsonConvert.SerializeObject(config, Formatting.Indented, settings));
+
+            _app.Run(config);
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Błąd działania aplikacji: {e.Message}", e);
+            throw;
+        }
+    }
+
+    public async Task<bool> CanRun()
+    {
+        if (_app == null)
+        {
+            return false;
+        }
+
+        return true;
     }
 }

@@ -7,9 +7,9 @@ namespace Hirundo.Processors.Statistics.Operations;
 ///     Zwraca wartość średnią po danej wartości w populacji. W przypadku napotkania wartości null pomija.
 /// </summary>
 [TypeDescription("AverageAndDeviation")]
-public class AverageAndDeviationOperation : IStatisticalOperation
+public class AverageOperation : IStatisticalOperation
 {
-    public AverageAndDeviationOperation()
+    public AverageOperation()
     {
     }
 
@@ -20,7 +20,7 @@ public class AverageAndDeviationOperation : IStatisticalOperation
     /// <param name="resultNameAverage">Nazwa parametru wynikowego.</param>
     /// <param name="resultNameStandardDeviation"></param>
     /// <param name="outliers"></param>
-    public AverageAndDeviationOperation(string valueName,
+    public AverageOperation(string valueName,
         string resultNameAverage,
         string resultNameStandardDeviation,
         StandardDeviationOutliersCondition outliers)
@@ -32,7 +32,7 @@ public class AverageAndDeviationOperation : IStatisticalOperation
     }
 
 
-    public AverageAndDeviationOperation(string valueName, string resultNameAverage, string resultNameStandardDeviation)
+    public AverageOperation(string valueName, string resultNameAverage, string resultNameStandardDeviation)
     {
         ValueName = valueName;
         ResultNameAverage = resultNameAverage;

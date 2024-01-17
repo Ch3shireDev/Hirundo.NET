@@ -11,7 +11,7 @@ public static class OperationViewModelFactory
 
         return statisticalOperation switch
         {
-            AverageAndDeviationOperation operation => new AverageViewModel(new AverageModel(operation)),
+            AverageOperation operation => new AverageViewModel(new AverageModel(operation)),
             _ => throw new ArgumentException($"Unknown operation model type: {statisticalOperation.GetType()}")
         };
     }

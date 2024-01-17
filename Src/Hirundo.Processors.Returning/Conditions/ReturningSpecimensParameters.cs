@@ -11,5 +11,5 @@ public class ReturningSpecimensParameters
         Conditions = conditions;
     }
 
-    public IList<IReturningSpecimenFilter> Conditions { get; } = [];
+    public IList<IReturningSpecimenFilter> Conditions { get; init; } = [];
 }

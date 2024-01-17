@@ -5,25 +5,28 @@ namespace Hirundo.Processors.Observations.Conditions;
 [TypeDescription("IsInSeason")]
 public class IsInSeasonFilter(string dateColumnName, Season season) : IObservationFilter
 {
+    public string DateColumnName { get; } = dateColumnName;
+    public Season Season { get; } = season;
+
     public bool IsAccepted(Observation observation)
     {
         ArgumentNullException.ThrowIfNull(observation);
-        var dateTimeValue = observation.GetValue(dateColumnName);
+        var dateTimeValue = observation.GetValue(DateColumnName);
 
         if (dateTimeValue is DateTime dateTime)
         {
             return IsInDateRange(dateTime);
         }
 
-        throw new ArgumentException($"Value of column {dateColumnName} is not a DateTime or string");
+        throw new ArgumentException($"Value of column {DateColumnName} is not a DateTime or string");
     }
 
     private bool IsInDateRange(DateTime date)
     {
         var year = date.Year;
 
-        var seasonStart = new DateTime(year, season.StartMonth, season.StartDay);
-        var seasonEnd = new DateTime(year, season.EndMonth, season.EndDay);
+        var seasonStart = new DateTime(year, Season.StartMonth, Season.StartDay);
+        var seasonEnd = new DateTime(year, Season.EndMonth, Season.EndDay);
 
         return date >= seasonStart && date <= seasonEnd;
     }

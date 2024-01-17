@@ -24,13 +24,15 @@ public partial class App : Application
         var model = new MainModel(app);
         model.SetConfig(config);
 
-        var viewModel = new Components.MainViewModel(model);
+        var viewModel = new MainViewModel(model);
 
         Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
             .WriteTo.Sink(new LogEventSink(viewModel.Items))
             .CreateLogger();
 
-        var view = new MainViewModel
+
+        var view = new MainWindow
         {
             DataContext = viewModel,
             Title = $"Hirundo ver. {Assembly.GetExecutingAssembly().GetName().Version}",
@@ -40,6 +42,7 @@ public partial class App : Application
         view.Show();
 
         Log.Information("Uruchomiono aplikację Hirundo.");
+        Log.Debug("Wersja aplikacji: {Version}", Assembly.GetExecutingAssembly().GetName().Version);
     }
 
     private static ApplicationConfig GetConfig()

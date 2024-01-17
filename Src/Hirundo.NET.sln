@@ -73,6 +73,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Writers.WPF", "Hiru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.App.Tests.Integration", "Hirundo.App.Tests.Integration\Hirundo.App.Tests.Integration.csproj", "{F969AD4C-F03D-4A83-B633-FFB58B01E4EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.App.Tests", "Hirundo.App.Tests\Hirundo.App.Tests.csproj", "{31ACB4A1-2D81-4F72-97BF-AFB1CDE062A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -207,6 +209,10 @@ Global
 		{F969AD4C-F03D-4A83-B633-FFB58B01E4EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F969AD4C-F03D-4A83-B633-FFB58B01E4EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F969AD4C-F03D-4A83-B633-FFB58B01E4EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31ACB4A1-2D81-4F72-97BF-AFB1CDE062A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31ACB4A1-2D81-4F72-97BF-AFB1CDE062A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31ACB4A1-2D81-4F72-97BF-AFB1CDE062A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31ACB4A1-2D81-4F72-97BF-AFB1CDE062A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -244,6 +250,7 @@ Global
 		{F88A8D4B-5EAA-4A35-8A98-2EA16C977F96} = {095ED9C4-38CC-415A-92E4-1E5EADBDD439}
 		{5F0C378E-4BB7-438A-A24F-DCB3C405C933} = {095ED9C4-38CC-415A-92E4-1E5EADBDD439}
 		{F969AD4C-F03D-4A83-B633-FFB58B01E4EB} = {66952413-DE19-442D-BD7E-05B457715E11}
+		{31ACB4A1-2D81-4F72-97BF-AFB1CDE062A2} = {66952413-DE19-442D-BD7E-05B457715E11}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7BB2E5CA-3E12-4544-8827-61B4CF679997}

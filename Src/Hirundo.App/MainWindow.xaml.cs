@@ -5,9 +5,9 @@ namespace Hirundo.App;
 /// <summary>
 ///     Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainViewModel : Window
+public partial class MainWindow : Window
 {
-    public MainViewModel()
+    public MainWindow()
     {
         InitializeComponent();
     }

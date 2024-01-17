@@ -7,15 +7,15 @@ public class AverageModel
 {
     public AverageModel()
     {
-        Operation = new AverageAndDeviationOperation();
+        Operation = new AverageOperation();
     }
 
-    public AverageModel(AverageAndDeviationOperation operation)
+    public AverageModel(AverageOperation operation)
     {
         Operation = operation;
     }
 
-    public AverageAndDeviationOperation Operation
+    public AverageOperation Operation
     {
         get =>
             new(ValueName, ResultNameAverage, ResultNameStandardDeviation, new StandardDeviationOutliersCondition

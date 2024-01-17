@@ -12,6 +12,7 @@
              xmlns:wpf5="clr-namespace:Hirundo.Processors.Statistics.WPF;assembly=Hirundo.Processors.Statistics.WPF"
              xmlns:helpers="clr-namespace:Hirundo.Commons.WPF.Helpers;assembly=Hirundo.Commons.WPF"
              xmlns:wpf6="clr-namespace:Hirundo.Writers.WPF;assembly=Hirundo.Writers.WPF"
+             xmlns:helpers1="clr-namespace:Hirundo.App.Helpers"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="1000" d:Background="#FFF7FFF7"
              d:DataContext="{d:DesignInstance components:MainViewModel}">
@@ -19,41 +20,87 @@
         <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
             <Setter Property="Padding" Value="15,5" />
         </Style>
+
+        <Style TargetType="{x:Type Menu}" BasedOn="{StaticResource {x:Type Menu}}">
+            <Setter Property="Background" Value="LightGray" />
+            <Setter Property="Padding" Value="10,0" />
+        </Style>
+
+        <Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0" />
+        </Style>
+
+        <DataTemplate DataType="{x:Type wpf:DataSourceViewModel}">
+            <wpf:DataSourceView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type wpf1:ObservationsViewModel}">
+            <wpf1:ObservationsView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type wpf2:PopulationViewModel}">
+            <wpf2:PopulationView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type wpf3:ReturningSpecimensViewModel}">
+            <wpf3:ReturningSpecimensView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type wpf4:SpecimensViewModel}">
+            <wpf4:SpecimensView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type wpf5:StatisticsViewModel}">
+            <wpf5:StatisticsView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type wpf6:WriterViewModel}">
+            <wpf6:WriterView />
+        </DataTemplate>
+
+        <helpers1:ViewModelToTabItemHeaderConverter x:Key="ViewModelToTabItemHeaderConverter" />
+
         <helpers:LogEventMessageConverter x:Key="LogEventConverter" />
         <helpers:LogEventToColorConverter x:Key="LogEventToColorConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Menu>
+            <MenuItem Header="Plik">
+                <MenuItem Header="Zapisz bieżącą konfigurację" Command="{Binding SaveCurrentConfigCommand}" />
+                <MenuItem Header="Wczytaj nową konfiguracją" Command="{Binding LoadNewConfigCommand}" />
+                <!-- Inne opcje -->
+            </MenuItem>
+            <!-- Możesz dodać więcej pozycji menu tutaj -->
+        </Menu>
+
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="400" />
             </Grid.ColumnDefinitions>
-            <TabControl TabStripPlacement="Left" Grid.Column="0">
-                <TabItem Header="Źródło danych">
-                    <wpf:DataSourceView DataContext="{Binding DataSourceViewModel}" />
-                </TabItem>
-                <TabItem Header="Obserwacje">
-                    <wpf1:ObservationsView DataContext="{Binding ObservationsViewModel}" />
-                </TabItem>
-                <TabItem Header="Wszystkie osobniki">
-                    <wpf4:SpecimensView DataContext="{Binding SpecimensViewModel}" />
-                </TabItem>
-                <TabItem Header="Osobniki powracające">
-                    <wpf3:ReturningSpecimensView DataContext="{Binding ReturningSpecimensViewModel}" />
-                </TabItem>
-                <TabItem Header="Populacja">
-                    <wpf2:PopulationView DataContext="{Binding PopulationViewModel}" />
-                </TabItem>
-                <TabItem Header="Statystyki">
-                    <wpf5:StatisticsView DataContext="{Binding StatisticsViewModel}" />
-                </TabItem>
-                <TabItem Header="Zapis wyników">
-                    <wpf6:WriterView DataContext="{Binding WriterViewModel}" />
-                </TabItem>
+            <TabControl TabStripPlacement="Left"
+                        Grid.Column="0"
+                        ItemsSource="{Binding ViewModels}"
+                        SelectedValue="{Binding SelectedViewModel}">
+                <TabControl.ItemContainerStyle>
+                    <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
+                        <Setter Property="Header"
+                                Value="{Binding Converter={StaticResource ViewModelToTabItemHeaderConverter}}" />
+                    </Style>
+
+
+                </TabControl.ItemContainerStyle>
+                <TabControl.ItemTemplate>
+                    <DataTemplate>
+                        <ContentControl Content="{Binding}" />
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
             </TabControl>
             <ListBox Grid.Column="1" SelectionMode="Single" ItemsSource="{Binding Items}">
                 <ListBox.Resources>
@@ -78,11 +125,11 @@
             </ListBox>
 
         </Grid>
-        <DockPanel Grid.Row="1">
-            <Button HorizontalAlignment="Left" Command="{Binding CancelCommand}">Porzuć</Button>
+        <DockPanel Grid.Row="2">
             <WrapPanel HorizontalAlignment="Right">
                 <Button HorizontalAlignment="Right" Command="{Binding PreviousCommand}">Poprzedni</Button>
                 <Button HorizontalAlignment="Right" Command="{Binding NextCommand}">Następny</Button>
+                <Button HorizontalAlignment="Right" Command="{Binding ProcessAndSaveCommand}">Zapisz dane</Button>
             </WrapPanel>
         </DockPanel>
     </Grid>

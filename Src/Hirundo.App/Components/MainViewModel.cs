@@ -1,6 +1,10 @@
 ﻿using System.Collections.ObjectModel;
+using System.IO;
+using System.Windows;
 using System.Windows.Input;
+using Hirundo.App.Helpers;
 using Hirundo.Commons.WPF;
+using Hirundo.Commons.WPF.Helpers;
 using Hirundo.Configuration;
 using Hirundo.Databases.WPF;
 using Hirundo.Processors.Observations.WPF;
@@ -9,30 +13,237 @@ using Hirundo.Processors.Returning.WPF;
 using Hirundo.Processors.Specimens.WPF;
 using Hirundo.Processors.Statistics.WPF;
 using Hirundo.Writers.WPF;
+using Microsoft.Win32;
+using Serilog;
 using Serilog.Events;
 
 namespace Hirundo.App.Components;
 
-public sealed class MainViewModel(MainModel model) : ViewModelBase
+public sealed class MainViewModel : ViewModelBase
 {
-    public DataSourceViewModel DataSourceViewModel { get; } = new(model.DataSourceModel);
-    public ObservationsViewModel ObservationsViewModel { get; } = new(model.ObservationsModel);
-    public ReturningSpecimensViewModel ReturningSpecimensViewModel { get; } = new(model.ReturningSpecimensModel);
-    public PopulationViewModel PopulationViewModel { get; } = new(model.PopulationModel);
-    public SpecimensViewModel SpecimensViewModel { get; } = new(model.SpecimensModel);
-    public StatisticsViewModel StatisticsViewModel { get; } = new(model.StatisticsModel);
-    public WriterViewModel WriterViewModel { get; } = new(model.WriterModel, model.Run);
+    private readonly MainModel _model;
+    private ViewModelBase _selectedViewModel = null!;
+
+    private bool isProcessing;
+
+    public MainViewModel(MainModel model)
+    {
+        ArgumentNullException.ThrowIfNull(model);
+
+        _model = model;
+        DataSourceViewModel = new(model.DataSourceModel);
+        ObservationsViewModel = new(model.ObservationsModel);
+        ReturningSpecimensViewModel = new(model.ReturningSpecimensModel);
+        PopulationViewModel = new(model.PopulationModel);
+        SpecimensViewModel = new(model.SpecimensModel);
+        StatisticsViewModel = new(model.StatisticsModel);
+        WriterViewModel = new(model.WriterModel, model.Run);
+
+        ViewModels = new List<ViewModelBase>
+        {
+            DataSourceViewModel,
+            ObservationsViewModel,
+            ReturningSpecimensViewModel,
+            PopulationViewModel,
+            SpecimensViewModel,
+            StatisticsViewModel,
+            WriterViewModel
+        };
+
+        SelectedViewModel = DataSourceViewModel;
+    }
+
+    public DataSourceViewModel DataSourceViewModel { get; }
+    public ObservationsViewModel ObservationsViewModel { get; }
+    public ReturningSpecimensViewModel ReturningSpecimensViewModel { get; }
+    public PopulationViewModel PopulationViewModel { get; }
+    public SpecimensViewModel SpecimensViewModel { get; }
+    public StatisticsViewModel StatisticsViewModel { get; }
+    public WriterViewModel WriterViewModel { get; }
     public ObservableCollection<LogEvent> Items { get; } = [];
-    public ICommand CancelCommand { get; } = null!;
-    public ICommand PreviousCommand { get; } = null!;
-    public ICommand NextCommand { get; } = null!;
+    public ICommand PreviousCommand => new RelayCommand(Previous, CanGoPrevious);
+    public ICommand NextCommand => new RelayCommand(Next, CanGoNext);
+    public ICommand ProcessAndSaveCommand => new AsyncRelayCommand(ProcessAndSave, CanProcessAndSave);
+    public ICommand SaveCurrentConfigCommand => new RelayCommand(SaveCurrentConfig);
+    public ICommand LoadNewConfigCommand => new RelayCommand(LoadNewConfig);
+
+    public IList<ViewModelBase> ViewModels { get; }
+
+    public ViewModelBase SelectedViewModel
+    {
+        get => _selectedViewModel;
+        set
+        {
+            _selectedViewModel = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(PreviousCommand));
+            OnPropertyChanged(nameof(NextCommand));
+            OnPropertyChanged(nameof(ProcessAndSaveCommand));
+        }
+    }
+
+    private bool IsProcessing
+    {
+        get => isProcessing;
+        set
+        {
+            isProcessing = value;
+
+            if (isProcessing)
+            {
+                SetMouseCursor(Cursors.Wait);
+            }
+            else
+            {
+                SetMouseCursor();
+            }
+
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(ProcessAndSaveCommand));
+        }
+    }
+
+    private Task<bool> CanProcessAndSave()
+    {
+        if (IsProcessing) return Task.FromResult(false);
+        if (SelectedViewModel != ViewModels.Last()) return Task.FromResult(false);
+        return _model.CanRun();
+    }
+
+    private static void SetMouseCursor(Cursor? cursor = null)
+    {
+        try
+        {
+            Application.Current.Dispatcher.Invoke(() => { Mouse.OverrideCursor = cursor; });
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Błąd ustawiania kursora. Informacja o błędzie: {e.Message}", e);
+        }
+    }
+
+    private async Task ProcessAndSave()
+    {
+        if (IsProcessing) return;
+
+        try
+        {
+            IsProcessing = true;
+            await Task.Run(_model.Run);
+            IsProcessing = false;
+        }
+        catch (Exception e)
+        {
+            IsProcessing = false;
+            MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        finally
+        {
+            IsProcessing = false;
+        }
+    }
+
     public void SetConfig(ApplicationConfig config)
     {
-        model.SetConfig(config);
+        _model.SetConfig(config);
     }
 
     public ApplicationConfig GetConfig()
     {
-        return model.GetConfig();
+        return _model.GetConfig();
+    }
+
+    public void Previous()
+    {
+        if (!CanGoPrevious())
+        {
+            return;
+        }
+
+        var index = ViewModels.IndexOf(SelectedViewModel);
+        SelectedViewModel = ViewModels[index - 1];
+    }
+
+    public bool CanGoPrevious()
+    {
+        return SelectedViewModel != ViewModels.First();
+    }
+
+    public void Next()
+    {
+        if (!CanGoNext())
+        {
+            return;
+        }
+
+        var index = ViewModels.IndexOf(SelectedViewModel);
+        SelectedViewModel = ViewModels[index + 1];
+    }
+
+    public bool CanGoNext()
+    {
+        return SelectedViewModel != ViewModels.Last();
+    }
+
+    public void SaveCurrentConfig()
+    {
+        try
+        {
+            var config = GetConfig();
+            var json = JsonTools.Serialize(config);
+            var saveFileDialog = new SaveFileDialog
+            {
+                Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*",
+                FilterIndex = 1,
+                RestoreDirectory = true,
+                FileName = "config.json"
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                File.WriteAllText(saveFileDialog.FileName, json);
+            }
+
+            var message = $"Konfiguracja została zapisana w {saveFileDialog.FileName}.";
+
+            Log.Information(message);
+        }
+        catch (Exception e)
+        {
+            var message = $"Błąd zapisu konfiguracji: {e.Message}";
+            Log.Error(message, e);
+            MessageBox.Show(message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            throw;
+        }
+    }
+
+    public void LoadNewConfig()
+    {
+        try
+        {
+            var loadFileDialog = new OpenFileDialog
+            {
+                Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*",
+                FilterIndex = 1,
+                RestoreDirectory = true
+            };
+
+            if (loadFileDialog.ShowDialog() == true)
+            {
+                var json = File.ReadAllText(loadFileDialog.FileName);
+                var config = JsonTools.Deserialize(json);
+                SetConfig(config);
+            }
+
+            var message = $"Konfiguracja została wczytana z {loadFileDialog.FileName}.";
+            Log.Information(message);
+        }
+        catch (Exception e)
+        {
+            var message = $"Błąd odczytu konfiguracji: {e.Message}";
+            Log.Error(message, e);
+            MessageBox.Show(message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            throw;
+        }
     }
 }

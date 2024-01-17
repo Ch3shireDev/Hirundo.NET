@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Hirundo.Processors.Statistics.Tests.Operations;
 
 [TestFixture]
-public class AverageAndDeviationOperationTests
+public class AverageOperationTests
 {
     [Test]
     public void GivenSimplePopulationData_WhenGetStatistics_ReturnsAverageOverGivenValue()
@@ -20,7 +20,7 @@ public class AverageAndDeviationOperationTests
             new Specimen("GHI789", [new Observation(["VALUE"], [9])])
         ];
 
-        var operation = new AverageAndDeviationOperation("VALUE", "AVERAGE_VALUE", "VALUE_SD");
+        var operation = new AverageOperation("VALUE", "AVERAGE_VALUE", "VALUE_SD");
 
         // Act
         var result = operation.GetStatistics(populationData);
@@ -48,7 +48,7 @@ public class AverageAndDeviationOperationTests
             RejectOutliers = false
         };
 
-        var operation = new AverageAndDeviationOperation("VALUE", "VALUE_AVG", "VALUE_SD", outlierDetection);
+        var operation = new AverageOperation("VALUE", "VALUE_AVG", "VALUE_SD", outlierDetection);
 
         // Act
         var result = operation.GetStatistics(populationData);
@@ -78,7 +78,7 @@ public class AverageAndDeviationOperationTests
             Threshold = 1
         };
 
-        var operation = new AverageAndDeviationOperation("VALUE", "VALUE_AVG", "VALUE_SD", outlierDetection);
+        var operation = new AverageOperation("VALUE", "VALUE_AVG", "VALUE_SD", outlierDetection);
 
         // Act
         var result = operation.GetStatistics(populationData);

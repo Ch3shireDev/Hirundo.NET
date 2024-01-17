@@ -295,9 +295,9 @@ public class ApplicationConfigJsonConverterTests
 
         Assert.That(config.Statistics, Is.Not.Null);
         Assert.That(config.Statistics.Operations, Has.Count.EqualTo(1));
-        Assert.That(config.Statistics.Operations[0], Is.TypeOf<AverageAndDeviationOperation>());
+        Assert.That(config.Statistics.Operations[0], Is.TypeOf<AverageOperation>());
 
-        var operation0 = (AverageAndDeviationOperation)config.Statistics.Operations[0];
+        var operation0 = (AverageOperation)config.Statistics.Operations[0];
         Assert.That(operation0.ValueName, Is.EqualTo("WEIGHT"));
         Assert.That(operation0.ResultNameAverage, Is.EqualTo("WEIGHT_AVERAGE"));
         Assert.That(operation0.ResultNameStandardDeviation, Is.EqualTo("WEIGHT_SD"));
@@ -335,9 +335,9 @@ public class ApplicationConfigJsonConverterTests
 
         Assert.That(config.Statistics, Is.Not.Null);
         Assert.That(config.Statistics.Operations, Has.Count.EqualTo(1));
-        Assert.That(config.Statistics.Operations[0], Is.TypeOf<AverageAndDeviationOperation>());
+        Assert.That(config.Statistics.Operations[0], Is.TypeOf<AverageOperation>());
 
-        var operation0 = (AverageAndDeviationOperation)config.Statistics.Operations[0];
+        var operation0 = (AverageOperation)config.Statistics.Operations[0];
         Assert.That(operation0.ValueName, Is.EqualTo("WEIGHT"));
         Assert.That(operation0.ResultNameAverage, Is.EqualTo("WEIGHT_AVERAGE"));
         Assert.That(operation0.ResultNameStandardDeviation, Is.EqualTo("WEIGHT_SD"));

@@ -11,8 +11,6 @@ namespace Hirundo.Databases;
 /// <param name="parameters"></param>
 public class MdbAccessDatabase(AccessDatabaseParameters parameters) : IDatabase
 {
-    private readonly MdbAccessQueryBuilder _queryBuilder = new();
-
     /// <summary>
     ///     ConnectionString jest tworzony z użyciem Microsoft Access Driver dla połączenia ODBC.
     /// </summary>
@@ -29,11 +27,13 @@ public class MdbAccessDatabase(AccessDatabaseParameters parameters) : IDatabase
 
         connection.Open();
 
-        var query = _queryBuilder
+        var query = new MdbAccessQueryBuilder("\n")
             .WithTable(parameters.Table)
             .WithColumns(parameters.Columns)
             .WithConditions(parameters.Conditions)
             .Build();
+
+        Log.Debug($"Access query: {query}");
 
 #pragma warning disable CA2100
         using var command = new OdbcCommand(query, connection);

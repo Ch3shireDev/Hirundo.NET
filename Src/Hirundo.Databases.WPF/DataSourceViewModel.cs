@@ -10,5 +10,6 @@ public class DataSourceViewModel : ViewModelBase
         DatabaseViewModels = model.DatabaseParameters.Select(x => new AccessDataSourceViewModel(x as AccessDatabaseParameters)).ToList();
     }
 
+    public string Header { get; set; } = "twoja stara";
     public IList<AccessDataSourceViewModel> DatabaseViewModels { get; set; } = [];
 }
