@@ -6,6 +6,7 @@
              xmlns:afterTimePeriod="clr-namespace:Hirundo.Processors.Returning.WPF.AfterTimePeriod"
              xmlns:notEarlierThanGivenDateNextYear="clr-namespace:Hirundo.Processors.Returning.WPF.NotEarlierThanGivenDateNextYear"
              xmlns:wpf="clr-namespace:Hirundo.Processors.Returning.WPF"
+             xmlns:helpers="clr-namespace:Hirundo.Processors.Returning.WPF.Helpers"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800" d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance wpf:ReturningSpecimensViewModel}">
@@ -19,27 +20,42 @@
             <notEarlierThanGivenDateNextYear:NotEarlierThanGivenDateNextYearView />
         </DataTemplate>
 
-
+        <helpers:ReturningFilterToStringConverter x:Key="ReturningFilterToStringConverter" />
     </UserControl.Resources>
 
-    <StackPanel Margin="10">
-        <TextBlock Margin="10" TextWrapping="WrapWithOverflow">W tym panelu ustalasz warunki wyróżniające osobniki powracające spośród wszystkich osobników.</TextBlock>
-        <WrapPanel Margin="10">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Margin="10" TextWrapping="WrapWithOverflow">W tym panelu ustalasz warunki wyróżniające osobniki powracające spośród wszystkich osobników.</TextBlock>
+        <WrapPanel Grid.Row="1" Margin="10">
             <Label FontWeight="Bold">Warunki powracających osobników</Label>
         </WrapPanel>
-        <ItemsControl ItemsSource="{Binding ConditionsViewModels}" HorizontalAlignment="Left">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border Margin="10" Background="LightGray" MaxWidth="500" CornerRadius="5">
-                        <WrapPanel Margin="10">
-                            <ContentControl Content="{Binding}" DataContext="{Binding}" />
-                        </WrapPanel>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-        <WrapPanel Margin="10">
-            <Button>Dodaj nowy warunek</Button>
+        <WrapPanel Grid.Row="2" Margin="10">
+            <Button Command="{Binding AddConditionCommand}">Dodaj nowy warunek</Button>
+            <ComboBox ItemsSource="{Binding ReturningTypes}" SelectedValue="{Binding SelectedReturningType}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Converter={StaticResource ReturningFilterToStringConverter}}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </WrapPanel>
-    </StackPanel>
+        <ScrollViewer Grid.Row="3">
+            <ItemsControl ItemsSource="{Binding ConditionsViewModels}" HorizontalAlignment="Left">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="10" Background="LightGray" MaxWidth="500" CornerRadius="5">
+                            <WrapPanel Margin="10">
+                                <ContentControl Content="{Binding}" DataContext="{Binding}" />
+                            </WrapPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
 </UserControl>

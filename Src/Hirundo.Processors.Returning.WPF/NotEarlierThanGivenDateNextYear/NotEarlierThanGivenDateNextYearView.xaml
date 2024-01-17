@@ -22,5 +22,14 @@
             <Label>Dzień</Label>
             <TextBox MinWidth="100" Text="{Binding Day}" />
         </WrapPanel>
+        <WrapPanel>
+            <Button
+                Command="{Binding RemoveCommand}"
+                Background="DarkRed"
+                Foreground="White"
+                BorderBrush="DarkRed">
+                Usuń źródło danych
+            </Button>
+        </WrapPanel>
     </StackPanel>
 </UserControl>

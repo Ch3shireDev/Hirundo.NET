@@ -28,7 +28,7 @@ public partial class App : Application
 
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
-            .WriteTo.Sink(new LogEventSink(viewModel.Items))
+            .WriteTo.Sink(new LogEventSink(viewModel.LogEventsItems))
             .CreateLogger();
 
 
@@ -39,10 +39,12 @@ public partial class App : Application
             WindowStartupLocation = WindowStartupLocation.CenterScreen
         };
 
+        viewModel.RefreshWindow = view.InvalidateVisual;
+
         view.Show();
 
         Log.Information("Uruchomiono aplikację Hirundo.");
-        Log.Debug("Wersja aplikacji: {Version}", Assembly.GetExecutingAssembly().GetName().Version);
+        Log.Debug($"Wersja aplikacji {Assembly.GetExecutingAssembly().GetName().Version}");
     }
 
     private static ApplicationConfig GetConfig()

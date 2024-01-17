@@ -1,8 +1,12 @@
-﻿using Hirundo.Commons;
+﻿using System.Windows.Input;
+using Hirundo.Commons;
+using Hirundo.Commons.WPF;
+using Hirundo.Commons.WPF.Helpers;
+using Hirundo.Processors.Observations.Conditions;
 
 namespace Hirundo.Processors.Observations.WPF.IsEqual;
 
-internal class IsEqualViewModel(IsEqualModel model) : ConditionViewModel
+internal class IsEqualViewModel(IsEqualModel model) : ConditionViewModel, IRemovable<IObservationFilter>
 {
     public string ValueName
     {
@@ -32,5 +36,18 @@ internal class IsEqualViewModel(IsEqualModel model) : ConditionViewModel
             model.ValueType = value;
             OnPropertyChanged();
         }
+    }
+
+    public ICommand RemoveCommand => new RelayCommand(Remove);
+    public event EventHandler<IObservationFilter>? Removed;
+
+    public void Remove()
+    {
+        Removed?.Invoke(this, model.OriginalCondition);
+    }
+
+    public override string ToString()
+    {
+        return "Czy jest równy?";
     }
 }

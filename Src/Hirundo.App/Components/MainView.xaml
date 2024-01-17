@@ -15,7 +15,8 @@
              xmlns:helpers1="clr-namespace:Hirundo.App.Helpers"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="1000" d:Background="#FFF7FFF7"
-             d:DataContext="{d:DesignInstance components:MainViewModel}">
+             d:DataContext="{d:DesignInstance components:MainViewModel}"
+             >
     <UserControl.Resources>
         <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
             <Setter Property="Padding" Value="15,5" />
@@ -72,11 +73,10 @@
         </Grid.RowDefinitions>
         <Menu>
             <MenuItem Header="Plik">
+                <MenuItem Header="Stwórz nową konfigurację" Command="{Binding CreateNewConfigCommand}" />
                 <MenuItem Header="Zapisz bieżącą konfigurację" Command="{Binding SaveCurrentConfigCommand}" />
                 <MenuItem Header="Wczytaj nową konfiguracją" Command="{Binding LoadNewConfigCommand}" />
-                <!-- Inne opcje -->
             </MenuItem>
-            <!-- Możesz dodać więcej pozycji menu tutaj -->
         </Menu>
 
         <Grid Grid.Row="1">
@@ -87,14 +87,13 @@
             <TabControl TabStripPlacement="Left"
                         Grid.Column="0"
                         ItemsSource="{Binding ViewModels}"
-                        SelectedValue="{Binding SelectedViewModel}">
+                        SelectedValue="{Binding SelectedViewModel}"
+                        >
                 <TabControl.ItemContainerStyle>
                     <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                         <Setter Property="Header"
                                 Value="{Binding Converter={StaticResource ViewModelToTabItemHeaderConverter}}" />
                     </Style>
-
-
                 </TabControl.ItemContainerStyle>
                 <TabControl.ItemTemplate>
                     <DataTemplate>
@@ -102,7 +101,7 @@
                     </DataTemplate>
                 </TabControl.ItemTemplate>
             </TabControl>
-            <ListBox Grid.Column="1" SelectionMode="Single" ItemsSource="{Binding Items}">
+            <ListBox Grid.Column="1" SelectionMode="Single" ItemsSource="{Binding LogEventsItems}">
                 <ListBox.Resources>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="Padding" Value="0" />
@@ -126,6 +125,7 @@
 
         </Grid>
         <DockPanel Grid.Row="2">
+            <Button HorizontalAlignment="Left" Command="{Binding CreateNewConfigCommand}">Stwórz nową konfigurację</Button>
             <WrapPanel HorizontalAlignment="Right">
                 <Button HorizontalAlignment="Right" Command="{Binding PreviousCommand}">Poprzedni</Button>
                 <Button HorizontalAlignment="Right" Command="{Binding NextCommand}">Następny</Button>

@@ -1,6 +1,11 @@
-﻿namespace Hirundo.Processors.Observations.WPF.IsInTimeBlock;
+﻿using System.Windows.Input;
+using Hirundo.Commons.WPF;
+using Hirundo.Commons.WPF.Helpers;
+using Hirundo.Processors.Observations.Conditions;
 
-internal class IsInTimeBlockViewModel(IsInTimeBlockModel model) : ConditionViewModel
+namespace Hirundo.Processors.Observations.WPF.IsInTimeBlock;
+
+internal class IsInTimeBlockViewModel(IsInTimeBlockModel model) : ConditionViewModel, IRemovable<IObservationFilter>
 {
     public string ValueName
     {
@@ -30,5 +35,18 @@ internal class IsInTimeBlockViewModel(IsInTimeBlockModel model) : ConditionViewM
             model.EndHour = value;
             OnPropertyChanged();
         }
+    }
+
+    public ICommand RemoveCommand => new RelayCommand(Remove);
+    public event EventHandler<IObservationFilter>? Removed;
+
+    public void Remove()
+    {
+        Removed?.Invoke(this, model.Filter);
+    }
+
+    public override string ToString()
+    {
+        return "Czy jest w przedziale czasowym?";
     }
 }

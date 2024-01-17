@@ -2,25 +2,19 @@
 
 namespace Hirundo.Processors.Population.WPF.IsInSharedTimeWindow;
 
-public class IsInSharedTimeWindowModel
+public class IsInSharedTimeWindowModel(IsInSharedTimeWindowFilterBuilder condition)
 {
-    public IsInSharedTimeWindowModel(IsInSharedTimeWindowFilterBuilder condition)
+    public string DateValueName
     {
-        Condition = condition;
+        get => Condition.DateValueName;
+        set => Condition.DateValueName = value;
     }
 
-    public IsInSharedTimeWindowFilterBuilder Condition
+    public int MaxTimeDistanceInDays
     {
-        get => new(DateValueName, MaxTimeDistanceInDays);
-
-        set
-        {
-            ArgumentNullException.ThrowIfNull(value);
-            DateValueName = value.DateValueName;
-            MaxTimeDistanceInDays = value.MaxTimeDistanceInDays;
-        }
+        get => Condition.MaxTimeDistanceInDays;
+        set => Condition.MaxTimeDistanceInDays = value;
     }
 
-    public string DateValueName { get; set; } = null!;
-    public int MaxTimeDistanceInDays { get; set; }
+    public IsInSharedTimeWindowFilterBuilder Condition { get; set; } = condition;
 }

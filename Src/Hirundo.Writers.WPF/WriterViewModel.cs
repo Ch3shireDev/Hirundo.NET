@@ -6,7 +6,7 @@ namespace Hirundo.Writers.WPF;
 
 public class WriterViewModel(WriterModel model, Func<Task> runTask) : ViewModelBase
 {
-    public DataWriterViewModel DataWriterViewModel { get; } = DataWriterViewModelFactory.Create(model.SummaryParameters.Writer);
+    public DataWriterViewModel DataWriterViewModel => DataWriterViewModelFactory.Create(model.SummaryParameters.Writer);
 
     public ICommand SaveDataCommand => new AsyncRelayCommand(SaveData);
 

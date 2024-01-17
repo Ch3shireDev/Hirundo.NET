@@ -4,12 +4,25 @@ using Hirundo.Commons;
 namespace Hirundo.Processors.Observations.Conditions;
 
 [TypeDescription("IsInTimeBlock")]
-public class IsInTimeBlockFilter(string valueName, TimeBlock timeBlock, bool rejectNullValues = false) : IObservationFilter
+public class IsInTimeBlockFilter : IObservationFilter
 {
-    private readonly bool isThroughMidnight = timeBlock.StartHour > timeBlock.EndHour;
-    public string ValueName { get; } = valueName;
-    public TimeBlock TimeBlock { get; } = timeBlock;
-    public bool RejectNullValues { get; } = rejectNullValues;
+    private readonly bool isThroughMidnight;
+
+    public IsInTimeBlockFilter()
+    {
+    }
+
+    public IsInTimeBlockFilter(string valueName, TimeBlock timeBlock, bool rejectNullValues = false)
+    {
+        isThroughMidnight = timeBlock.StartHour > timeBlock.EndHour;
+        ValueName = valueName;
+        TimeBlock = timeBlock;
+        RejectNullValues = rejectNullValues;
+    }
+
+    public string ValueName { get; set; } = null!;
+    public TimeBlock TimeBlock { get; set; } = new TimeBlock(6, 12);
+    public bool RejectNullValues { get; set; }
 
     public bool IsAccepted(Observation observation)
     {

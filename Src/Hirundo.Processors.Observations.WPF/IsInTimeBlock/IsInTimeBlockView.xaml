@@ -21,5 +21,14 @@
             <Label>Godzina końcowa</Label>
             <TextBox Text="{Binding EndHour}" MinWidth="100" />
         </WrapPanel>
+        <WrapPanel>
+            <Button
+                Command="{Binding RemoveCommand}"
+                Background="DarkRed"
+                Foreground="White"
+                BorderBrush="DarkRed">
+                Usuń źródło danych
+            </Button>
+        </WrapPanel>
     </StackPanel>
 </UserControl>

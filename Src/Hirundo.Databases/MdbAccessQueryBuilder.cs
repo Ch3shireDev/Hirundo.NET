@@ -8,18 +8,13 @@ namespace Hirundo.Databases;
 ///     Budowniczy zapytań dla bazy danych Access 2003 (pliki .mdb). Zapytanie jest tworzone na podstawie nazwy tabeli oraz
 ///     <see cref="ColumnMapping" />.
 /// </summary>
-public class MdbAccessQueryBuilder
+public class MdbAccessQueryBuilder(string rowSeparator = " ")
 {
     private readonly List<ColumnMapping> _columns = [];
     private readonly List<DatabaseCondition> _conditions = [];
     private string? _tableName;
 
-    public MdbAccessQueryBuilder(string rowSeparator = " ")
-    {
-        RowSeparator = rowSeparator;
-    }
-
-    public string RowSeparator { get; }
+    public string RowSeparator { get; } = rowSeparator;
 
     /// <summary>
     ///     Ustalana jest nazwa tabeli, do której odwołuje się zapytanie SELECT.

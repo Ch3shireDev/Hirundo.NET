@@ -22,7 +22,7 @@ namespace Hirundo.App.Components;
 public sealed class MainViewModel : ViewModelBase
 {
     private readonly MainModel _model;
-    private ViewModelBase _selectedViewModel = null!;
+    private ViewModelBase? _selectedViewModel;
 
     private bool isProcessing;
 
@@ -53,6 +53,7 @@ public sealed class MainViewModel : ViewModelBase
         SelectedViewModel = DataSourceViewModel;
     }
 
+    public Action RefreshWindow { get; set; } = () => { };
     public DataSourceViewModel DataSourceViewModel { get; }
     public ObservationsViewModel ObservationsViewModel { get; }
     public ReturningSpecimensViewModel ReturningSpecimensViewModel { get; }
@@ -60,7 +61,7 @@ public sealed class MainViewModel : ViewModelBase
     public SpecimensViewModel SpecimensViewModel { get; }
     public StatisticsViewModel StatisticsViewModel { get; }
     public WriterViewModel WriterViewModel { get; }
-    public ObservableCollection<LogEvent> Items { get; } = [];
+    public ObservableCollection<LogEvent> LogEventsItems { get; } = [];
     public ICommand PreviousCommand => new RelayCommand(Previous, CanGoPrevious);
     public ICommand NextCommand => new RelayCommand(Next, CanGoNext);
     public ICommand ProcessAndSaveCommand => new AsyncRelayCommand(ProcessAndSave, CanProcessAndSave);
@@ -69,7 +70,7 @@ public sealed class MainViewModel : ViewModelBase
 
     public IList<ViewModelBase> ViewModels { get; }
 
-    public ViewModelBase SelectedViewModel
+    public ViewModelBase? SelectedViewModel
     {
         get => _selectedViewModel;
         set
@@ -103,10 +104,23 @@ public sealed class MainViewModel : ViewModelBase
         }
     }
 
+    public ICommand CreateNewConfigCommand => new AsyncRelayCommand(CreateNewConfig);
+
+    private async Task CreateNewConfig()
+    {
+        var dialog = MessageBox.Show("Czy na pewno chcesz utworzyć nową konfigurację? Niezapisane zmiany w bieżącej konfiguracji zostaną utracone.", "Uwaga", MessageBoxButton.YesNo,
+            MessageBoxImage.Warning);
+        if (dialog != MessageBoxResult.Yes) return;
+        SetConfig(new ApplicationConfig());
+
+        SelectedViewModel = null;
+        RefreshWindow();
+        SelectedViewModel = DataSourceViewModel;
+    }
+
     private Task<bool> CanProcessAndSave()
     {
         if (IsProcessing) return Task.FromResult(false);
-        if (SelectedViewModel != ViewModels.Last()) return Task.FromResult(false);
         return _model.CanRun();
     }
 
@@ -119,6 +133,7 @@ public sealed class MainViewModel : ViewModelBase
         catch (Exception e)
         {
             Log.Error($"Błąd ustawiania kursora. Informacja o błędzie: {e.Message}", e);
+            throw;
         }
     }
 
@@ -146,6 +161,14 @@ public sealed class MainViewModel : ViewModelBase
     public void SetConfig(ApplicationConfig config)
     {
         _model.SetConfig(config);
+        OnPropertyChanged(nameof(DataSourceViewModel));
+        OnPropertyChanged(nameof(ObservationsViewModel));
+        OnPropertyChanged(nameof(ReturningSpecimensViewModel));
+        OnPropertyChanged(nameof(PopulationViewModel));
+        OnPropertyChanged(nameof(SpecimensViewModel));
+        OnPropertyChanged(nameof(StatisticsViewModel));
+        OnPropertyChanged(nameof(WriterViewModel));
+        SelectedViewModel = DataSourceViewModel;
     }
 
     public ApplicationConfig GetConfig()
@@ -160,7 +183,9 @@ public sealed class MainViewModel : ViewModelBase
             return;
         }
 
+        if (SelectedViewModel == null) return;
         var index = ViewModels.IndexOf(SelectedViewModel);
+        if (index == -1) return;
         SelectedViewModel = ViewModels[index - 1];
     }
 
@@ -176,7 +201,9 @@ public sealed class MainViewModel : ViewModelBase
             return;
         }
 
+        if (SelectedViewModel == null) return;
         var index = ViewModels.IndexOf(SelectedViewModel);
+        if (index == -1) return;
         SelectedViewModel = ViewModels[index + 1];
     }
 

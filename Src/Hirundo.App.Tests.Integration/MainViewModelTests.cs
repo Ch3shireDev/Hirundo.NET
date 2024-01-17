@@ -3,6 +3,7 @@ using Hirundo.Commons;
 using Hirundo.Configuration;
 using Hirundo.Databases;
 using Hirundo.Databases.Conditions;
+using Hirundo.Databases.WPF;
 using Hirundo.Processors.Observations.Conditions;
 using Hirundo.Processors.Population;
 using Hirundo.Processors.Population.Conditions;
@@ -109,6 +110,11 @@ public class MainViewModelTests
         Assert.That(accessDatabaseParameters.Columns[0].DatabaseColumn, Is.EqualTo("AAA"));
         Assert.That(accessDatabaseParameters.Columns[0].ValueName, Is.EqualTo("XXX"));
         Assert.That(accessDatabaseParameters.Columns[0].DataType, Is.EqualTo(DataValueType.LongInt));
+
+        var dataSourceViewModel = _viewModel.ViewModels.OfType<DataSourceViewModel>().First();
+        Assert.That(dataSourceViewModel, Is.Not.Null);
+        Assert.That(dataSourceViewModel.DatabaseViewModels, Is.Not.Null);
+        Assert.That(dataSourceViewModel.DatabaseViewModels.Count, Is.EqualTo(1));
     }
 
     [Test]

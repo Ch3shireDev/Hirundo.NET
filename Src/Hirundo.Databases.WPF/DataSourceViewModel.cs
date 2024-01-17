@@ -1,15 +1,61 @@
-﻿using Hirundo.Commons.WPF;
-using Hirundo.Databases.WPF.Access;
+﻿using System.Windows;
+using System.Windows.Input;
+using Hirundo.Commons.WPF;
+using Hirundo.Commons.WPF.Helpers;
 
 namespace Hirundo.Databases.WPF;
 
-public class DataSourceViewModel : ViewModelBase
+public class DataSourceViewModel(DataSourceModel model) : ViewModelBase
 {
-    public DataSourceViewModel(DataSourceModel model)
+    private Type? selectedDataSourceType = typeof(AccessDatabaseParameters);
+    public IList<ViewModelBase> DatabaseViewModels => [.. model.DatabaseParameters.Select(CreateViewModel)];
+
+    public IList<Type> DataSourceTypes { get; } =
+    [
+        typeof(AccessDatabaseParameters)
+    ];
+
+    public Type? SelectedDataSourceType
     {
-        DatabaseViewModels = model.DatabaseParameters.Select(x => new AccessDataSourceViewModel(x as AccessDatabaseParameters)).ToList();
+        get => selectedDataSourceType;
+        set
+        {
+            selectedDataSourceType = value;
+            OnPropertyChanged();
+        }
     }
 
-    public string Header { get; set; } = "twoja stara";
-    public IList<AccessDataSourceViewModel> DatabaseViewModels { get; set; } = [];
+    public ICommand AddNewSourceCommand => new RelayCommand(AddNewSource);
+
+    public void AddNewSource()
+    {
+        if (SelectedDataSourceType is null)
+        {
+            return;
+        }
+
+        model.AddDataSource(SelectedDataSourceType);
+
+        OnPropertyChanged(nameof(DatabaseViewModels));
+    }
+
+    public ViewModelBase CreateViewModel(IDatabaseParameters parameters)
+    {
+        var viewModel = DataSourceViewModelFactory.Create(parameters);
+
+        if (viewModel is IRemovable<IDatabaseParameters> removable)
+        {
+            removable.Removed += (_, p) => { Remove(p); };
+        }
+
+        return viewModel;
+    }
+
+    private void Remove(IDatabaseParameters p)
+    {
+        var result = MessageBox.Show("Czy na pewno chcesz skasować bieżące źródło danych?", "Uwaga", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+        if (result != MessageBoxResult.Yes) return;
+        model.DatabaseParameters.Remove(p);
+        OnPropertyChanged(nameof(DatabaseViewModels));
+    }
 }

@@ -26,12 +26,12 @@ public class TimeBlock
     }
 
     /// <summary>
-    ///     Godzina od której obowiązuje przedział czasowy, liczona od 0 do 23.
+    ///     Godzina, od której obowiązuje przedział czasowy, liczona od 0 do 23.
     /// </summary>
     public int StartHour { get; set; }
 
     /// <summary>
-    ///     Godzina do której obowiązuje przedział czasowy, liczona od 0 do 23.
+    ///     Godzina, do której obowiązuje przedział czasowy, liczona od 0 do 23.
     /// </summary>
     public int EndHour { get; set; }
 }

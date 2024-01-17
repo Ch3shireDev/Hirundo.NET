@@ -15,10 +15,10 @@ public class StandardDeviationOutliersCondition : IOutliersCondition
         Threshold = threshold;
     }
 
-    public double Threshold { get; init; } = 3;
-    public string UpperBound { get; init; } = "WEIGHT_AVERAGE + (WEIGHT_SD * Threshold)";
-    public string LowerBound { get; init; } = "WEIGHT_AVERAGE - (WEIGHT_SD * Threshold)";
-    public bool RejectOutliers { get; init; } = true;
+    public double Threshold { get; set; } = 3;
+    public string UpperBound { get; set; } = "WEIGHT_AVERAGE + (WEIGHT_SD * Threshold)";
+    public string LowerBound { get; set; } = "WEIGHT_AVERAGE - (WEIGHT_SD * Threshold)";
+    public bool RejectOutliers { get; set; } = true;
 
     public object[] GetOutliersIds(Specimen[] population, string valueName, object averageValue, object standardDeviationValue)
     {

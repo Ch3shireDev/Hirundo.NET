@@ -6,14 +6,13 @@ namespace Hirundo.Processors.Observations.WPF.IsEqual;
 
 internal class IsEqualModel
 {
-    public IsEqualModel()
-    {
-    }
-
     public IsEqualModel(IsEqualFilter filter)
     {
+        OriginalCondition = filter;
         IsEqualFilter = filter;
     }
+
+    public IsEqualFilter OriginalCondition { get; init; }
 
     public string ValueName { get; set; } = null!;
     public string ValueStr { get; set; } = null!;
@@ -39,7 +38,7 @@ internal class IsEqualModel
     private void SetIsEqualFilter(IsEqualFilter value)
     {
         ValueName = value.ValueName;
-        ValueStr = value.Value.ToString()!;
+        ValueStr = value.Value?.ToString() ?? "";
 
         ValueType = value.Value switch
         {
@@ -48,7 +47,7 @@ internal class IsEqualModel
             double => DataType.Numeric,
             bool => DataType.Boolean,
             DateTime => DataType.Date,
-            _ => throw new ArgumentOutOfRangeException(nameof(value))
+            _ => DataType.Text
         };
     }
 

@@ -1,9 +1,11 @@
-﻿using Hirundo.Commons.WPF;
+﻿using System.Windows.Input;
+using Hirundo.Commons.WPF;
+using Hirundo.Commons.WPF.Helpers;
 using Hirundo.Databases.Conditions;
 
 namespace Hirundo.Databases.WPF.Access;
 
-public class AccessDataSourceViewModel(AccessDatabaseParameters parameters) : ViewModelBase
+public class AccessDataSourceViewModel(AccessDatabaseParameters parameters) : ViewModelBase, IRemovable<IDatabaseParameters>
 {
     public string Path
     {
@@ -27,4 +29,12 @@ public class AccessDataSourceViewModel(AccessDatabaseParameters parameters) : Vi
 
     public IList<DatabaseCondition> Conditions => parameters.Conditions;
     public IList<ColumnMapping> Columns => parameters.Columns;
+    public ICommand RemoveCommand => new RelayCommand(RemoveDataSource);
+
+    public event EventHandler<IDatabaseParameters> Removed;
+
+    public void RemoveDataSource()
+    {
+        Removed.Invoke(this, parameters);
+    }
 }

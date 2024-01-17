@@ -39,10 +39,10 @@ public class AverageOperation : IStatisticalOperation
         ResultNameStandardDeviation = resultNameStandardDeviation;
     }
 
-    public string ValueName { get; init; } = null!;
-    public string ResultNameAverage { get; init; } = null!;
-    public string ResultNameStandardDeviation { get; init; } = null!;
-    public StandardDeviationOutliersCondition Outliers { get; init; } = new() { RejectOutliers = false };
+    public string ValueName { get; set; } = null!;
+    public string ResultNameAverage { get; set; } = null!;
+    public string ResultNameStandardDeviation { get; set; } = null!;
+    public StandardDeviationOutliersCondition Outliers { get; set; } = new() { RejectOutliers = false };
 
     public StatisticalOperationResult GetStatistics(IEnumerable<Specimen> populationData)
     {

@@ -17,5 +17,14 @@
             <Label>Maksymalny dystans czasowy w dniach</Label>
             <TextBox MinWidth="100" Text="{Binding MaxTimeDistanceInDays, Mode=TwoWay}" />
         </WrapPanel>
+        <WrapPanel>
+            <Button
+                Command="{Binding RemoveCommand}"
+                Background="DarkRed"
+                Foreground="White"
+                BorderBrush="DarkRed">
+                Usuń źródło danych
+            </Button>
+        </WrapPanel>
     </StackPanel>
 </UserControl>

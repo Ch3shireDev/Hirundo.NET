@@ -1,6 +1,11 @@
-﻿namespace Hirundo.Processors.Population.WPF.IsInSharedTimeWindow;
+﻿using System.Windows.Input;
+using Hirundo.Commons.WPF;
+using Hirundo.Commons.WPF.Helpers;
+using Hirundo.Processors.Population.Conditions;
 
-public class IsInSharedTimeWindowViewModel(IsInSharedTimeWindowModel model) : PopulationConditionViewModel
+namespace Hirundo.Processors.Population.WPF.IsInSharedTimeWindow;
+
+public class IsInSharedTimeWindowViewModel(IsInSharedTimeWindowModel model) : PopulationConditionViewModel, IRemovable<IPopulationFilterBuilder>
 {
     public string DateValueName
     {
@@ -20,5 +25,14 @@ public class IsInSharedTimeWindowViewModel(IsInSharedTimeWindowModel model) : Po
             model.MaxTimeDistanceInDays = value;
             OnPropertyChanged();
         }
+    }
+
+    public ICommand RemoveCommand => new RelayCommand(Remove);
+
+    public event EventHandler<IPopulationFilterBuilder>? Removed;
+
+    public void Remove()
+    {
+        Removed?.Invoke(this, model.Condition);
     }
 }

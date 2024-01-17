@@ -2,28 +2,19 @@
 
 namespace Hirundo.Processors.Returning.WPF.AfterTimePeriod;
 
-internal class AfterTimePeriodModel
+internal class AfterTimePeriodModel(ReturnsAfterTimePeriodFilter condition)
 {
-    public AfterTimePeriodModel()
+    public string DateValueName
     {
+        get => Condition.DateValueName;
+        set => Condition.DateValueName = value;
     }
 
-    public AfterTimePeriodModel(ReturnsAfterTimePeriodFilter condition)
+    public int TimePeriodInDays
     {
-        Condition = condition;
+        get => Condition.TimePeriodInDays;
+        set => Condition.TimePeriodInDays = value;
     }
 
-    public ReturnsAfterTimePeriodFilter Condition
-    {
-        get => new(DateValueName, TimePeriodInDays);
-        set
-        {
-            ArgumentNullException.ThrowIfNull(value, nameof(value));
-            DateValueName = value.DateValueName;
-            TimePeriodInDays = value.TimePeriodInDays;
-        }
-    }
-
-    public string DateValueName { get; set; } = null!;
-    public int TimePeriodInDays { get; set; } = 365;
+    public ReturnsAfterTimePeriodFilter Condition { get; } = condition;
 }

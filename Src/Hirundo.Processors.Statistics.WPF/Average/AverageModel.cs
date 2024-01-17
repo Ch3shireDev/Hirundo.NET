@@ -1,48 +1,50 @@
 ﻿using Hirundo.Processors.Statistics.Operations;
-using Hirundo.Processors.Statistics.Operations.Outliers;
 
 namespace Hirundo.Processors.Statistics.WPF.Average;
 
-public class AverageModel
+public class AverageModel(AverageOperation operation)
 {
-    public AverageModel()
+    public AverageOperation Operation { get; set; } = operation;
+
+    public string ValueName
     {
-        Operation = new AverageOperation();
+        get => Operation.ValueName;
+        set => Operation.ValueName = value;
     }
 
-    public AverageModel(AverageOperation operation)
+    public string ResultNameAverage
     {
-        Operation = operation;
+        get => Operation.ResultNameAverage;
+        set => Operation.ResultNameAverage = value;
     }
 
-    public AverageOperation Operation
+    public string ResultNameStandardDeviation
     {
-        get =>
-            new(ValueName, ResultNameAverage, ResultNameStandardDeviation, new StandardDeviationOutliersCondition
-            {
-                Threshold = Threshold,
-                UpperBound = UpperBound,
-                LowerBound = LowerBound,
-                RejectOutliers = RejectOutliers
-            });
-        set
-        {
-            ArgumentNullException.ThrowIfNull(value, nameof(value));
-            ValueName = value.ValueName;
-            ResultNameAverage = value.ResultNameAverage;
-            ResultNameStandardDeviation = value.ResultNameStandardDeviation;
-            Threshold = value.Outliers.Threshold;
-            UpperBound = value.Outliers.UpperBound;
-            LowerBound = value.Outliers.LowerBound;
-            RejectOutliers = value.Outliers.RejectOutliers;
-        }
+        get => Operation.ResultNameStandardDeviation;
+        set => Operation.ResultNameStandardDeviation = value;
     }
 
-    public string ValueName { get; set; } = null!;
-    public string ResultNameAverage { get; set; } = null!;
-    public string ResultNameStandardDeviation { get; set; } = null!;
-    public double Threshold { get; set; } = 1;
-    public string UpperBound { get; set; } = null!;
-    public string LowerBound { get; set; } = null!;
-    public bool RejectOutliers { get; set; } = true;
+    public double Threshold
+    {
+        get => Operation.Outliers.Threshold;
+        set => Operation.Outliers.Threshold = value;
+    }
+
+    public string UpperBound
+    {
+        get => Operation.Outliers.UpperBound;
+        set => Operation.Outliers.UpperBound = value;
+    }
+
+    public string LowerBound
+    {
+        get => Operation.Outliers.LowerBound;
+        set => Operation.Outliers.LowerBound = value;
+    }
+
+    public bool RejectOutliers
+    {
+        get => Operation.Outliers.RejectOutliers;
+        set => Operation.Outliers.RejectOutliers = value;
+    }
 }

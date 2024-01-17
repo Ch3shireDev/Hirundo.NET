@@ -1,6 +1,11 @@
-﻿namespace Hirundo.Processors.Returning.WPF.AfterTimePeriod;
+﻿using System.Windows.Input;
+using Hirundo.Commons.WPF;
+using Hirundo.Commons.WPF.Helpers;
+using Hirundo.Processors.Returning.Conditions;
 
-internal class AfterTimePeriodViewModel(AfterTimePeriodModel model) : ReturningSpecimensConditionViewModel
+namespace Hirundo.Processors.Returning.WPF.AfterTimePeriod;
+
+internal class AfterTimePeriodViewModel(AfterTimePeriodModel model) : ReturningSpecimensConditionViewModel, IRemovable<IReturningSpecimenFilter>
 {
     public string DateValueName
     {
@@ -20,5 +25,13 @@ internal class AfterTimePeriodViewModel(AfterTimePeriodModel model) : ReturningS
             model.TimePeriodInDays = value;
             OnPropertyChanged();
         }
+    }
+
+    public ICommand RemoveCommand => new RelayCommand(Remove);
+    public event EventHandler<IReturningSpecimenFilter>? Removed;
+
+    public void Remove()
+    {
+        Removed?.Invoke(this, model.Condition);
     }
 }

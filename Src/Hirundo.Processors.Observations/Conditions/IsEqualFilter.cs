@@ -3,10 +3,22 @@
 namespace Hirundo.Processors.Observations.Conditions;
 
 [TypeDescription("IsEqual")]
-public class IsEqualFilter(string valueName, object value) : IObservationFilter
+public class IsEqualFilter : IObservationFilter
 {
-    public string ValueName { get; } = valueName;
-    public object Value { get; } = value;
+    public IsEqualFilter()
+    {
+        ValueName = null!;
+        Value = null!;
+    }
+
+    public IsEqualFilter(string valueName, object value)
+    {
+        ValueName = valueName;
+        Value = value;
+    }
+
+    public string ValueName { get; set; }
+    public object Value { get; set; }
 
     public bool IsAccepted(Observation observation)
     {

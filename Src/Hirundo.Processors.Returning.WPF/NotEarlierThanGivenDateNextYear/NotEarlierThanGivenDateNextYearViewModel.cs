@@ -1,6 +1,11 @@
-﻿namespace Hirundo.Processors.Returning.WPF.NotEarlierThanGivenDateNextYear;
+﻿using System.Windows.Input;
+using Hirundo.Commons.WPF;
+using Hirundo.Commons.WPF.Helpers;
+using Hirundo.Processors.Returning.Conditions;
 
-internal class NotEarlierThanGivenDateNextYearViewModel(NotEarlierThanGivenDateNextYearModel model) : ReturningSpecimensConditionViewModel
+namespace Hirundo.Processors.Returning.WPF.NotEarlierThanGivenDateNextYear;
+
+internal class NotEarlierThanGivenDateNextYearViewModel(NotEarlierThanGivenDateNextYearModel model) : ReturningSpecimensConditionViewModel, IRemovable<IReturningSpecimenFilter>
 {
     public string DateValueName
     {
@@ -30,5 +35,13 @@ internal class NotEarlierThanGivenDateNextYearViewModel(NotEarlierThanGivenDateN
             model.Day = value;
             OnPropertyChanged();
         }
+    }
+
+    public ICommand RemoveCommand => new RelayCommand(Remove);
+    public event EventHandler<IReturningSpecimenFilter>? Removed;
+
+    public void Remove()
+    {
+        Removed?.Invoke(this, model.Condition);
     }
 }

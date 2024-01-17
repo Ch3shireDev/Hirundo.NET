@@ -3,11 +3,22 @@
 namespace Hirundo.Processors.Returning.Conditions;
 
 [TypeDescription("ReturnsNotEarlierThanGivenDateNextYear")]
-public class ReturnsNotEarlierThanGivenDateNextYearFilter(string dateValueName, int month, int day) : IReturningSpecimenFilter
+public class ReturnsNotEarlierThanGivenDateNextYearFilter : IReturningSpecimenFilter
 {
-    public string DateValueName { get; } = dateValueName;
-    public int Month { get; } = month;
-    public int Day { get; } = day;
+    public ReturnsNotEarlierThanGivenDateNextYearFilter()
+    {
+    }
+
+    public ReturnsNotEarlierThanGivenDateNextYearFilter(string dateValueName, int month, int day)
+    {
+        DateValueName = dateValueName;
+        Month = month;
+        Day = day;
+    }
+
+    public string DateValueName { get; set; } = "DATE";
+    public int Month { get; set; } = 06;
+    public int Day { get; set; } = 01;
 
     public bool IsReturning(Specimen specimen)
     {
