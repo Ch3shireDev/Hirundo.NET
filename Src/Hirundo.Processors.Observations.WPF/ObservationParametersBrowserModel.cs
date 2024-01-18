@@ -9,6 +9,7 @@ public class ObservationParametersBrowserModel : IParametersBrowserModel
 {
     public ObservationsParameters ObservationsParameters { get; set; } = new();
     public string Description { get; set; } = "W tym panelu ustalasz warunki, jakie mają spełniać wybierane obserwacje do obliczeń.";
+    public string AddParametersCommandText { get; } = "Dodaj nowy warunek";
     public string Title { get; set; } = "Warunki filtrowania obserwacji";
     public IList<ParametersData> ParametersDataList { get; } =
     [

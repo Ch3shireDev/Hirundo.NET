@@ -31,10 +31,10 @@ public class AccessDataSourceViewModel(AccessDatabaseParameters parameters) : Pa
     public IList<ColumnMapping> Columns => parameters.Columns;
     public ICommand RemoveCommand => new RelayCommand(RemoveDataSource);
 
-    public event EventHandler<ConditionEventArgs>? Removed;
+    public event EventHandler<ParametersEventArgs>? Removed;
 
     public void RemoveDataSource()
     {
-        Removed?.Invoke(this, new ConditionEventArgs(parameters));
+        Removed?.Invoke(this, new ParametersEventArgs(parameters));
     }
 }

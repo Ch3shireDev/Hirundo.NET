@@ -8,8 +8,9 @@ public class DataSourceModel : IParametersBrowserModel
 {
     public IList<IDatabaseParameters> DatabaseParameters { get; } = new List<IDatabaseParameters>();
 
-    public string Description { get; } = "W tym panelu wybierasz źródło danych.";
-    public string Title { get; } = "Źródła danych";
+    public string Description => "W tym panelu wybierasz źródło danych.";
+    public string AddParametersCommandText => "Dodaj nowe źródło danych";
+    public string Title => "Źródła danych";
 
     public IList<ParametersData> ParametersDataList { get; } =
     [

@@ -5,7 +5,7 @@ namespace Hirundo.Commons.WPF;
 public interface IRemovable
 {
     ICommand RemoveCommand { get; }
-    public event EventHandler<ConditionEventArgs>? Removed;
+    public event EventHandler<ParametersEventArgs>? Removed;
 }
 
 public interface IRemovable<T>

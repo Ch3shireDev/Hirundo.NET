@@ -1,11 +1,10 @@
 ﻿using System.Windows.Input;
 using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
-using Hirundo.Processors.Population.Conditions;
 
 namespace Hirundo.Processors.Population.WPF.IsInSharedTimeWindow;
 
-public class IsInSharedTimeWindowViewModel(IsInSharedTimeWindowModel model) : PopulationConditionViewModel, IRemovable<IPopulationFilterBuilder>
+public class IsInSharedTimeWindowViewModel(IsInSharedTimeWindowModel model) : PopulationConditionViewModel, IRemovable
 {
     public string DateValueName
     {
@@ -29,10 +28,10 @@ public class IsInSharedTimeWindowViewModel(IsInSharedTimeWindowModel model) : Po
 
     public ICommand RemoveCommand => new RelayCommand(Remove);
 
-    public event EventHandler<IPopulationFilterBuilder>? Removed;
+    public event EventHandler<ParametersEventArgs>? Removed;
 
     public void Remove()
     {
-        Removed?.Invoke(this, model.Condition);
+        Removed?.Invoke(this, new ParametersEventArgs(model.Condition));
     }
 }

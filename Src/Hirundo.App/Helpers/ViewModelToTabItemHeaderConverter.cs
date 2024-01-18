@@ -1,9 +1,6 @@
 ﻿using System.Globalization;
 using System.Windows.Data;
 using Hirundo.Commons.WPF;
-using Hirundo.Databases.WPF;
-using Hirundo.Processors.Observations.WPF;
-using Hirundo.Processors.Population.WPF;
 using Hirundo.Processors.Returning.WPF;
 using Hirundo.Processors.Specimens.WPF;
 using Hirundo.Processors.Statistics.WPF;
@@ -19,7 +16,6 @@ public class ViewModelToTabItemHeaderConverter : IValueConverter
         {
             ParametersBrowserViewModel viewModel => viewModel.Title,
             ReturningSpecimensViewModel => "Osobniki powracające",
-            PopulationViewModel => "Populacja",
             SpecimensViewModel => "Wszystkie osobniki",
             StatisticsViewModel => "Statystyki",
             WriterViewModel => "Zapis wyników",

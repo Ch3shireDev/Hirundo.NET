@@ -38,10 +38,10 @@ public class IsEqualViewModel(IsEqualModel model) : ParametersViewModel, IRemova
     }
 
     public ICommand RemoveCommand => new RelayCommand(Remove);
-    public event EventHandler<ConditionEventArgs>? Removed;
+    public event EventHandler<ParametersEventArgs>? Removed;
 
     public void Remove()
     {
-        Removed?.Invoke(this, new ConditionEventArgs(model.OriginalCondition));
+        Removed?.Invoke(this, new ParametersEventArgs(model.OriginalCondition));
     }
 }

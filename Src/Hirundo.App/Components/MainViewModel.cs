@@ -56,8 +56,8 @@ public sealed class MainViewModel : ViewModelBase
     public Action RefreshWindow { get; set; } = () => { };
     public ParametersBrowserViewModel DataSourceViewModel { get; }
     public ParametersBrowserViewModel ParametersBrowserViewModel { get; }
+    public ParametersBrowserViewModel PopulationViewModel { get; }
     public ReturningSpecimensViewModel ReturningSpecimensViewModel { get; }
-    public PopulationViewModel PopulationViewModel { get; }
     public SpecimensViewModel SpecimensViewModel { get; }
     public StatisticsViewModel StatisticsViewModel { get; }
     public WriterViewModel WriterViewModel { get; }

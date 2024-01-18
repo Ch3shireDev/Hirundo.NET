@@ -8,6 +8,7 @@ public class ParametersBrowserViewModel(IParametersBrowserModel parametersBrowse
     public ICommand AddParametersCommand => new RelayCommand(AddParameters);
     public string Description => parametersBrowserModel.Description;
     public string Title => parametersBrowserModel.Title;
+    public string AddParametersCommandText => parametersBrowserModel.AddParametersCommandText;
     public IList<ParametersData> Options => parametersBrowserModel.ParametersDataList;
     public ParametersData? SelectedParameter { get; set; } = parametersBrowserModel.ParametersDataList.FirstOrDefault();
     public IList<ParametersViewModel> ParametersViewModels => [.. parametersBrowserModel.GetParametersViewModels().Select(SetRefreshOnUpdate)];

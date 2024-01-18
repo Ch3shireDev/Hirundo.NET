@@ -2,6 +2,6 @@
 
 namespace Hirundo.Processors.Population.WPF;
 
-public class PopulationConditionViewModel : ViewModelBase
+public class PopulationConditionViewModel : ParametersViewModel
 {
 }

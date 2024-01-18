@@ -22,10 +22,9 @@
             <Label FontWeight="Bold" Content="{Binding Title}" />
         </WrapPanel>
         <WrapPanel Margin="10" Grid.Row="2">
-            <Button Command="{Binding AddParametersCommand}">Dodaj warunek</Button>
+            <Button Command="{Binding AddParametersCommand}" Content="{Binding AddParametersCommandText}"/>
             <ComboBox ItemsSource="{Binding Options}" SelectedValue="{Binding SelectedParameter}"
                       DisplayMemberPath="Title" MinWidth="200" />
-
         </WrapPanel>
         <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="3">
             <ItemsControl ItemsSource="{Binding ParametersViewModels}" HorizontalAlignment="Left">

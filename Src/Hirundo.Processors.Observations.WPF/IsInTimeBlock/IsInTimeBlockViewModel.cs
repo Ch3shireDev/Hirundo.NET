@@ -37,10 +37,10 @@ public class IsInTimeBlockViewModel(IsInTimeBlockModel model) : ParametersViewMo
     }
 
     public ICommand RemoveCommand => new RelayCommand(Remove);
-    public event EventHandler<ConditionEventArgs>? Removed;
+    public event EventHandler<ParametersEventArgs>? Removed;
 
     public void Remove()
     {
-        Removed?.Invoke(this, new ConditionEventArgs(model.Filter));
+        Removed?.Invoke(this, new ParametersEventArgs(model.Filter));
     }
 }
