@@ -4,7 +4,7 @@ using Hirundo.Commons.WPF.Helpers;
 
 namespace Hirundo.Processors.Statistics.WPF.Average;
 
-public class AverageViewModel(AverageModel model) : OperationViewModel, IRemovable
+public class AverageViewModel(AverageModel model) : ParametersViewModel, IRemovable
 {
     public string ValueName
     {

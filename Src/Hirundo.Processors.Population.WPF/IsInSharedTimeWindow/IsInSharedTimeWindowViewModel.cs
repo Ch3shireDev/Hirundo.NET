@@ -4,7 +4,7 @@ using Hirundo.Commons.WPF.Helpers;
 
 namespace Hirundo.Processors.Population.WPF.IsInSharedTimeWindow;
 
-public class IsInSharedTimeWindowViewModel(IsInSharedTimeWindowModel model) : PopulationConditionViewModel, IRemovable
+public class IsInSharedTimeWindowViewModel(IsInSharedTimeWindowModel model) : ParametersViewModel, IRemovable
 {
     public string DateValueName
     {

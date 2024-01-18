@@ -168,7 +168,7 @@ public sealed class MainViewModel : ViewModelBase
 
     public ApplicationConfig GetConfig()
     {
-        return _model.GetConfig();
+        return _model.CreateConfig();
     }
 
     public void Previous()

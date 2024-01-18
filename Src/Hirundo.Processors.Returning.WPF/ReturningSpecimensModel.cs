@@ -34,7 +34,7 @@ public class ReturningSpecimensModel : IParametersBrowserModel
         }
         else
         {
-            throw new ArgumentException($"Unknown type: {parametersData.Type}", nameof(parametersData.Type));
+            throw new ArgumentException($"Unknown type: {parametersData.Type}", nameof(ParametersData.Type));
         }
     }
 

@@ -4,7 +4,7 @@ using Hirundo.Commons.WPF.Helpers;
 
 namespace Hirundo.Processors.Returning.WPF.NotEarlierThanGivenDateNextYear;
 
-public class NotEarlierThanGivenDateNextYearViewModel(NotEarlierThanGivenDateNextYearModel model) : ReturningSpecimensConditionViewModel, IRemovable
+public class NotEarlierThanGivenDateNextYearViewModel(NotEarlierThanGivenDateNextYearModel model) : ParametersViewModel, IRemovable
 {
     public string DateValueName
     {

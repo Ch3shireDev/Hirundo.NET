@@ -41,7 +41,7 @@ public class MainModel(HirundoApp app)
         WriterModel.SummaryParameters = config.Results;
     }
 
-    public ApplicationConfig GetConfig()
+    public ApplicationConfig CreateConfig()
     {
         return new ApplicationConfig
         {
@@ -59,7 +59,7 @@ public class MainModel(HirundoApp app)
     {
         try
         {
-            var config = GetConfig();
+            var config = CreateConfig();
 
             app.Run(config);
         }

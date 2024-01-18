@@ -4,7 +4,7 @@ using Hirundo.Commons.WPF.Helpers;
 
 namespace Hirundo.Processors.Returning.WPF.AfterTimePeriod;
 
-public class AfterTimePeriodViewModel(AfterTimePeriodModel model) : ReturningSpecimensConditionViewModel, IRemovable
+public class AfterTimePeriodViewModel(AfterTimePeriodModel model) : ParametersViewModel, IRemovable
 {
     public string DateValueName
     {

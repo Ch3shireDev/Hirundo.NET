@@ -53,7 +53,7 @@ public class PopulationModel : IParametersBrowserModel
         return viewModel;
     }
 
-    public static PopulationConditionViewModel Create(IPopulationFilterBuilder condition)
+    public static ParametersViewModel Create(IPopulationFilterBuilder condition)
     {
         return condition switch
         {
