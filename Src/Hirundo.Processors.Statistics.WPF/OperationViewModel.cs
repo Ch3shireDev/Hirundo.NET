@@ -2,6 +2,6 @@
 
 namespace Hirundo.Processors.Statistics.WPF;
 
-public class OperationViewModel : ViewModelBase
+public class OperationViewModel : ParametersViewModel
 {
 }

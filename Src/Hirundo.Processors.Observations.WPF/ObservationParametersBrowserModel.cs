@@ -55,7 +55,7 @@ public class ObservationParametersBrowserModel : IParametersBrowserModel
         {
             removable.Removed += (_, args) =>
             {
-                if (args.Condition is IObservationFilter conditionToRemove)
+                if (args.Parameters is IObservationFilter conditionToRemove)
                 {
                     ObservationsParameters.Conditions.Remove(conditionToRemove);
                 }

@@ -6,12 +6,7 @@ using Hirundo.App.Helpers;
 using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
 using Hirundo.Configuration;
-using Hirundo.Databases.WPF;
-using Hirundo.Processors.Observations.WPF;
-using Hirundo.Processors.Population.WPF;
-using Hirundo.Processors.Returning.WPF;
 using Hirundo.Processors.Specimens.WPF;
-using Hirundo.Processors.Statistics.WPF;
 using Hirundo.Writers.WPF;
 using Microsoft.Win32;
 using Serilog;
@@ -58,8 +53,8 @@ public sealed class MainViewModel : ViewModelBase
     public ParametersBrowserViewModel ParametersBrowserViewModel { get; }
     public ParametersBrowserViewModel PopulationViewModel { get; }
     public ParametersBrowserViewModel ReturningSpecimensViewModel { get; }
+    public ParametersBrowserViewModel StatisticsViewModel { get; }
     public SpecimensViewModel SpecimensViewModel { get; }
-    public StatisticsViewModel StatisticsViewModel { get; }
     public WriterViewModel WriterViewModel { get; }
     public ObservableCollection<LogEvent> LogEventsItems { get; } = [];
     public ICommand PreviousCommand => new RelayCommand(Previous, CanGoPrevious);

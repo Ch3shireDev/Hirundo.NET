@@ -12,10 +12,4 @@
     <ProjectReference Include="..\Hirundo.Processors.Statistics\Hirundo.Processors.Statistics.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="StatisticsView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-
 </Project>

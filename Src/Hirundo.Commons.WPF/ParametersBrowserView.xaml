@@ -6,8 +6,7 @@
              xmlns:wpf1="clr-namespace:Hirundo.Commons.WPF"
              mc:Ignorable="d"
              d:Background="AliceBlue"
-             d:DataContext="{d:DesignInstance wpf1:ParametersBrowserViewModel}"
-             >
+             d:DataContext="{d:DesignInstance wpf1:ParametersBrowserViewModel}">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -22,7 +21,7 @@
             <Label FontWeight="Bold" Content="{Binding Title}" />
         </WrapPanel>
         <WrapPanel Margin="10" Grid.Row="2">
-            <Button Command="{Binding AddParametersCommand}" Content="{Binding AddParametersCommandText}"/>
+            <Button Command="{Binding AddParametersCommand}" Content="{Binding AddParametersCommandText}" />
             <ComboBox ItemsSource="{Binding Options}" SelectedValue="{Binding SelectedParameter}"
                       DisplayMemberPath="Title" MinWidth="200" />
         </WrapPanel>

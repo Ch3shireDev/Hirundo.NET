@@ -48,7 +48,7 @@ public class DataSourceModel : IParametersBrowserModel
         {
             removable.Removed += (_, p) =>
             {
-                if (p.Condition is IDatabaseParameters parametersToRemove)
+                if (p.Parameters is IDatabaseParameters parametersToRemove)
                 {
                     Remove(parametersToRemove);
                 }

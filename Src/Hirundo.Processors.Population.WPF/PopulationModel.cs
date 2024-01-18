@@ -43,7 +43,7 @@ public class PopulationModel : IParametersBrowserModel
         {
             removable.Removed += (_, args) =>
             {
-                if (args.Condition is IPopulationFilterBuilder populationCondition)
+                if (args.Parameters is IPopulationFilterBuilder populationCondition)
                 {
                     Conditions.Remove(populationCondition);
                 }

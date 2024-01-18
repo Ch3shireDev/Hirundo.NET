@@ -1,6 +1,6 @@
 ﻿namespace Hirundo.Commons.WPF;
 
-public class ParametersEventArgs(object condition) : EventArgs
+public class ParametersEventArgs(object parameters) : EventArgs
 {
-    public object Condition { get; } = condition;
+    public object Parameters { get; } = parameters;
 }

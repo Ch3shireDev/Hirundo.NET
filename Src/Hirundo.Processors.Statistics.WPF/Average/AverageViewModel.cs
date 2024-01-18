@@ -1,11 +1,10 @@
 ﻿using System.Windows.Input;
 using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
-using Hirundo.Processors.Statistics.Operations;
 
 namespace Hirundo.Processors.Statistics.WPF.Average;
 
-public class AverageViewModel(AverageModel model) : OperationViewModel, IRemovable<IStatisticalOperation>
+public class AverageViewModel(AverageModel model) : OperationViewModel, IRemovable
 {
     public string ValueName
     {
@@ -79,10 +78,10 @@ public class AverageViewModel(AverageModel model) : OperationViewModel, IRemovab
     }
 
     public ICommand RemoveCommand => new RelayCommand(Remove);
-    public event EventHandler<IStatisticalOperation>? Removed;
+    public event EventHandler<ParametersEventArgs>? Removed;
 
     public void Remove()
     {
-        Removed?.Invoke(this, model.Operation);
+        Removed?.Invoke(this, new ParametersEventArgs(model.Operation));
     }
 }

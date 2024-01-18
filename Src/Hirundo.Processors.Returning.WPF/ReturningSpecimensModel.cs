@@ -56,7 +56,7 @@ public class ReturningSpecimensModel : IParametersBrowserModel
         {
             removable.Removed += (_, args) =>
             {
-                if (args.Condition is IReturningSpecimenFilter filter)
+                if (args.Parameters is IReturningSpecimenFilter filter)
                 {
                     Conditions.Remove(filter);
                 }
