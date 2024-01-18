@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Windows.Data;
+using Hirundo.Commons.WPF;
 using Hirundo.Databases.WPF;
 using Hirundo.Processors.Observations.WPF;
 using Hirundo.Processors.Population.WPF;
@@ -17,7 +18,7 @@ public class ViewModelToTabItemHeaderConverter : IValueConverter
         return value switch
         {
             DataSourceViewModel => "Źródło danych",
-            ObservationsViewModel => "Obserwacje",
+            ConditionsBrowserViewModel => "Obserwacje",
             ReturningSpecimensViewModel => "Osobniki powracające",
             PopulationViewModel => "Populacja",
             SpecimensViewModel => "Wszystkie osobniki",

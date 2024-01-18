@@ -19,9 +19,6 @@
     <Compile Update="IsInTimeBlock\IsInTimeBlockView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="ObservationsView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
 
 </Project>

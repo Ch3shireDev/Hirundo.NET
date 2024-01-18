@@ -2,7 +2,7 @@
 
 namespace Hirundo.Processors.Observations.WPF.IsInTimeBlock;
 
-internal class IsInTimeBlockModel(IsInTimeBlockFilter filter)
+public class IsInTimeBlockModel(IsInTimeBlockFilter filter)
 {
     public IsInTimeBlockFilter Filter { get; set; } = filter;
 

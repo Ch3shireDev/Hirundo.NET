@@ -11,4 +11,10 @@
     <PackageReference Include="Serilog" Version="3.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="ConditionsBrowserView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

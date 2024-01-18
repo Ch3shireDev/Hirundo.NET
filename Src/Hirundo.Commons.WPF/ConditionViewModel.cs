@@ -1,6 +1,4 @@
-﻿using Hirundo.Commons.WPF;
-
-namespace Hirundo.Processors.Observations.WPF;
+﻿namespace Hirundo.Commons.WPF;
 
 public class ConditionViewModel : ViewModelBase
 {

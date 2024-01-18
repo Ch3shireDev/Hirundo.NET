@@ -4,7 +4,7 @@ using Hirundo.Processors.Observations.Conditions;
 
 namespace Hirundo.Processors.Observations.WPF.IsEqual;
 
-internal class IsEqualModel
+public class IsEqualModel
 {
     public IsEqualModel(IsEqualFilter filter)
     {

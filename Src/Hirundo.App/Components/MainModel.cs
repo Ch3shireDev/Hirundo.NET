@@ -1,5 +1,6 @@
 ﻿using Hirundo.Configuration;
 using Hirundo.Databases.WPF;
+using Hirundo.Processors.Observations.Conditions;
 using Hirundo.Processors.Observations.WPF;
 using Hirundo.Processors.Population.WPF;
 using Hirundo.Processors.Returning.WPF;
@@ -13,7 +14,8 @@ namespace Hirundo.App.Components;
 public class MainModel(HirundoApp app)
 {
     public DataSourceModel DataSourceModel { get; set; } = new();
-    public ObservationsModel ObservationsModel { get; set; } = new();
+    public ObservationConditionsBrowserModel ObservationConditionsBrowserModel { get; set; } = new();
+    public ObservationsParameters ObservationsParameters { get; set; } = new();
     public PopulationModel PopulationModel { get; set; } = new();
     public ReturningSpecimensModel ReturningSpecimensModel { get; set; } = new();
     public SpecimensModel SpecimensModel { get; set; } = new();
@@ -31,7 +33,7 @@ public class MainModel(HirundoApp app)
             DataSourceModel.DatabaseParameters.Add(database);
         }
 
-        ObservationsModel.ObservationsParameters = config.Observations;
+        ObservationConditionsBrowserModel.ObservationsParameters = config.Observations;
         PopulationModel.ConfigPopulation = config.Population;
         ReturningSpecimensModel.ReturningSpecimensParameters = config.ReturningSpecimens;
         SpecimensModel.SpecimensProcessorParameters = config.Specimens;
@@ -44,7 +46,7 @@ public class MainModel(HirundoApp app)
         return new ApplicationConfig
         {
             Databases = DataSourceModel.DatabaseParameters,
-            Observations = ObservationsModel.ObservationsParameters,
+            Observations = ObservationConditionsBrowserModel.ObservationsParameters,
             Population = PopulationModel.ConfigPopulation,
             ReturningSpecimens = ReturningSpecimensModel.ReturningSpecimensParameters!,
             Specimens = SpecimensModel.SpecimensProcessorParameters ?? throw new InvalidOperationException("Config not loaded"),
