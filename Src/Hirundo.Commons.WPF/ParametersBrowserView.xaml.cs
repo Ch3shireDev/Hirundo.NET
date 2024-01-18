@@ -5,9 +5,9 @@ namespace Hirundo.Commons.WPF
     /// <summary>
     /// Interaction logic for ConditionsView.xaml
     /// </summary>
-    public partial class ConditionsBrowserView : UserControl
+    public partial class ParametersBrowserView : UserControl
     {
-        public ConditionsBrowserView()
+        public ParametersBrowserView()
         {
             InitializeComponent();
         }

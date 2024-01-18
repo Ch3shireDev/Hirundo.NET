@@ -32,7 +32,7 @@ public sealed class MainViewModel : ViewModelBase
 
         _model = model;
         DataSourceViewModel = new(model.DataSourceModel);
-        ConditionsBrowserViewModel = new(model.ObservationBrowserModel);
+        ParametersBrowserViewModel = new(model.ObservationParametersBrowserModel);
         ReturningSpecimensViewModel = new(model.ReturningSpecimensModel);
         PopulationViewModel = new(model.PopulationModel);
         SpecimensViewModel = new(model.SpecimensModel);
@@ -42,7 +42,7 @@ public sealed class MainViewModel : ViewModelBase
         ViewModels = new List<ViewModelBase>
         {
             DataSourceViewModel,
-            ConditionsBrowserViewModel,
+            ParametersBrowserViewModel,
             ReturningSpecimensViewModel,
             PopulationViewModel,
             SpecimensViewModel,
@@ -54,8 +54,8 @@ public sealed class MainViewModel : ViewModelBase
     }
 
     public Action RefreshWindow { get; set; } = () => { };
-    public ConditionsBrowserViewModel DataSourceViewModel { get; }
-    public ConditionsBrowserViewModel ConditionsBrowserViewModel { get; }
+    public ParametersBrowserViewModel DataSourceViewModel { get; }
+    public ParametersBrowserViewModel ParametersBrowserViewModel { get; }
     public ReturningSpecimensViewModel ReturningSpecimensViewModel { get; }
     public PopulationViewModel PopulationViewModel { get; }
     public SpecimensViewModel SpecimensViewModel { get; }
@@ -162,7 +162,7 @@ public sealed class MainViewModel : ViewModelBase
     {
         _model.SetConfig(config);
         OnPropertyChanged(nameof(DataSourceViewModel));
-        OnPropertyChanged(nameof(ConditionsBrowserViewModel));
+        OnPropertyChanged(nameof(ParametersBrowserViewModel));
         OnPropertyChanged(nameof(ReturningSpecimensViewModel));
         OnPropertyChanged(nameof(PopulationViewModel));
         OnPropertyChanged(nameof(SpecimensViewModel));

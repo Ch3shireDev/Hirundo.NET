@@ -5,7 +5,7 @@ using Hirundo.Commons.WPF.Helpers;
 
 namespace Hirundo.Processors.Observations.WPF.IsEqual;
 
-public class IsEqualViewModel(IsEqualModel model) : ConditionViewModel, IRemovable
+public class IsEqualViewModel(IsEqualModel model) : ParametersViewModel, IRemovable
 {
     public string ValueName
     {

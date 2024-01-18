@@ -14,7 +14,7 @@ namespace Hirundo.App.Components;
 public class MainModel(HirundoApp app)
 {
     public DataSourceModel DataSourceModel { get; set; } = new();
-    public ObservationBrowserModel ObservationBrowserModel { get; set; } = new();
+    public ObservationParametersBrowserModel ObservationParametersBrowserModel { get; set; } = new();
     public ObservationsParameters ObservationsParameters { get; set; } = new();
     public PopulationModel PopulationModel { get; set; } = new();
     public ReturningSpecimensModel ReturningSpecimensModel { get; set; } = new();
@@ -33,7 +33,7 @@ public class MainModel(HirundoApp app)
             DataSourceModel.DatabaseParameters.Add(database);
         }
 
-        ObservationBrowserModel.ObservationsParameters = config.Observations;
+        ObservationParametersBrowserModel.ObservationsParameters = config.Observations;
         PopulationModel.ConfigPopulation = config.Population;
         ReturningSpecimensModel.ReturningSpecimensParameters = config.ReturningSpecimens;
         SpecimensModel.SpecimensProcessorParameters = config.Specimens;
@@ -46,7 +46,7 @@ public class MainModel(HirundoApp app)
         return new ApplicationConfig
         {
             Databases = DataSourceModel.DatabaseParameters,
-            Observations = ObservationBrowserModel.ObservationsParameters,
+            Observations = ObservationParametersBrowserModel.ObservationsParameters,
             Population = PopulationModel.ConfigPopulation,
             ReturningSpecimens = ReturningSpecimensModel.ReturningSpecimensParameters!,
             Specimens = SpecimensModel.SpecimensProcessorParameters ?? throw new InvalidOperationException("Config not loaded"),

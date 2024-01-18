@@ -5,7 +5,7 @@ using Hirundo.Databases.Conditions;
 
 namespace Hirundo.Databases.WPF.Access;
 
-public class AccessDataSourceViewModel(AccessDatabaseParameters parameters) : ConditionViewModel, IRemovable
+public class AccessDataSourceViewModel(AccessDatabaseParameters parameters) : ParametersViewModel, IRemovable
 {
     public string Path
     {

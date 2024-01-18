@@ -28,8 +28,8 @@ public class MainViewModelTests
         var selected = _viewModel.SelectedViewModel;
 
         // Assert
-        Assert.That(selected, Is.InstanceOf<ConditionsBrowserViewModel>());
-        var browserViewModel = selected as ConditionsBrowserViewModel;
+        Assert.That(selected, Is.InstanceOf<ParametersBrowserViewModel>());
+        var browserViewModel = selected as ParametersBrowserViewModel;
         Assert.That(browserViewModel?.Title, Is.EqualTo(new DataSourceModel().Title));
     }
 

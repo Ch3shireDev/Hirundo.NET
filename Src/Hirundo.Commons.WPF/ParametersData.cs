@@ -1,12 +1,12 @@
 ﻿namespace Hirundo.Commons.WPF;
 
-public class SettingsData
+public class ParametersData
 {
-    public SettingsData()
+    public ParametersData()
     {
     }
 
-    public SettingsData(Type type, string title = "", string description = "")
+    public ParametersData(Type type, string title = "", string description = "")
     {
         Type = type;
         Title = title;

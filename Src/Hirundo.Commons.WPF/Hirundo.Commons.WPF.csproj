@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="ConditionsBrowserView.xaml.cs">
+    <Compile Update="ParametersBrowserView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

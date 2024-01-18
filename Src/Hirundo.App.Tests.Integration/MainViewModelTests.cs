@@ -112,10 +112,10 @@ public class MainViewModelTests
         Assert.That(accessDatabaseParameters.Columns[0].ValueName, Is.EqualTo("XXX"));
         Assert.That(accessDatabaseParameters.Columns[0].DataType, Is.EqualTo(DataValueType.LongInt));
 
-        var dataSourceViewModel = _viewModel.ViewModels.OfType<ConditionsBrowserViewModel>().First();
+        var dataSourceViewModel = _viewModel.ViewModels.OfType<ParametersBrowserViewModel>().First();
         Assert.That(dataSourceViewModel, Is.Not.Null);
-        Assert.That(dataSourceViewModel.ConditionViewModels, Is.Not.Null);
-        Assert.That(dataSourceViewModel.ConditionViewModels.Count, Is.EqualTo(1));
+        Assert.That(dataSourceViewModel.ParametersViewModels, Is.Not.Null);
+        Assert.That(dataSourceViewModel.ParametersViewModels.Count, Is.EqualTo(1));
     }
 
     [Test]

@@ -34,8 +34,8 @@
             <Setter Property="Margin" Value="0" />
         </Style>
 
-        <DataTemplate DataType="{x:Type wpf11:ConditionsBrowserViewModel}">
-            <wpf11:ConditionsBrowserView />
+        <DataTemplate DataType="{x:Type wpf11:ParametersBrowserViewModel}">
+            <wpf11:ParametersBrowserView />
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type access:AccessDataSourceViewModel}">

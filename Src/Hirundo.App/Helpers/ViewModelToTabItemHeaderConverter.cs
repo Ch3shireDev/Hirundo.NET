@@ -17,7 +17,7 @@ public class ViewModelToTabItemHeaderConverter : IValueConverter
     {
         return value switch
         {
-            ConditionsBrowserViewModel viewModel => viewModel.Title,
+            ParametersBrowserViewModel viewModel => viewModel.Title,
             ReturningSpecimensViewModel => "Osobniki powracające",
             PopulationViewModel => "Populacja",
             SpecimensViewModel => "Wszystkie osobniki",

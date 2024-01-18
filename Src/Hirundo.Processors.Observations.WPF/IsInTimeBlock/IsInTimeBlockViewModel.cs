@@ -4,7 +4,7 @@ using Hirundo.Commons.WPF.Helpers;
 
 namespace Hirundo.Processors.Observations.WPF.IsInTimeBlock;
 
-public class IsInTimeBlockViewModel(IsInTimeBlockModel model) : ConditionViewModel, IRemovable
+public class IsInTimeBlockViewModel(IsInTimeBlockModel model) : ParametersViewModel, IRemovable
 {
     public string ValueName
     {

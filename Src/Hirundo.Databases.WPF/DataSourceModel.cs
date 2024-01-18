@@ -4,24 +4,24 @@ using Hirundo.Databases.WPF.Access;
 
 namespace Hirundo.Databases.WPF;
 
-public class DataSourceModel : IBrowserModel
+public class DataSourceModel : IParametersBrowserModel
 {
     public IList<IDatabaseParameters> DatabaseParameters { get; } = new List<IDatabaseParameters>();
 
     public string Description { get; } = "W tym panelu wybierasz źródło danych.";
     public string Title { get; } = "Źródła danych";
 
-    public IList<SettingsData> Options { get; } =
+    public IList<ParametersData> ParametersDataList { get; } =
     [
-        new SettingsData(typeof(AccessDatabaseParameters), "Baza danych Access (*.mdb)", "Źródło danych wyszczególniające tabelę bazy danych Access")
+        new ParametersData(typeof(AccessDatabaseParameters), "Baza danych Access (*.mdb)", "Źródło danych wyszczególniające tabelę bazy danych Access")
     ];
 
-    public void AddCondition(SettingsData settingsData)
+    public void AddParameters(ParametersData parametersData)
     {
-        AddCondition(settingsData.Type);
+        AddCondition(parametersData.Type);
     }
 
-    public IEnumerable<ConditionViewModel> GetConditions()
+    public IEnumerable<ParametersViewModel> GetParametersViewModels()
     {
         return DatabaseParameters.Select(CreateViewModel);
     }
@@ -38,7 +38,7 @@ public class DataSourceModel : IBrowserModel
         }
     }
 
-    private ConditionViewModel CreateViewModel(IDatabaseParameters parameters)
+    private ParametersViewModel CreateViewModel(IDatabaseParameters parameters)
     {
         var viewModel = Create(parameters);
 
@@ -63,7 +63,7 @@ public class DataSourceModel : IBrowserModel
         DatabaseParameters.Remove(p);
     }
 
-    public static ConditionViewModel Create(IDatabaseParameters parameters)
+    public static ParametersViewModel Create(IDatabaseParameters parameters)
     {
         return parameters switch
         {

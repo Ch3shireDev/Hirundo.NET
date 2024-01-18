@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Hirundo.Commons.WPF.ConditionsBrowserView"
+﻿<UserControl x:Class="Hirundo.Commons.WPF.ParametersBrowserView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -6,7 +6,7 @@
              xmlns:wpf1="clr-namespace:Hirundo.Commons.WPF"
              mc:Ignorable="d"
              d:Background="AliceBlue"
-             d:DataContext="{d:DesignInstance wpf1:ConditionsBrowserViewModel}"
+             d:DataContext="{d:DesignInstance wpf1:ParametersBrowserViewModel}"
              >
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -22,13 +22,13 @@
             <Label FontWeight="Bold" Content="{Binding Title}" />
         </WrapPanel>
         <WrapPanel Margin="10" Grid.Row="2">
-            <Button Command="{Binding AddConditionCommand}">Dodaj warunek</Button>
-            <ComboBox ItemsSource="{Binding Options}" SelectedValue="{Binding SelectedOption}"
+            <Button Command="{Binding AddParametersCommand}">Dodaj warunek</Button>
+            <ComboBox ItemsSource="{Binding Options}" SelectedValue="{Binding SelectedParameter}"
                       DisplayMemberPath="Title" MinWidth="200" />
 
         </WrapPanel>
         <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="3">
-            <ItemsControl ItemsSource="{Binding ConditionViewModels}" HorizontalAlignment="Left">
+            <ItemsControl ItemsSource="{Binding ParametersViewModels}" HorizontalAlignment="Left">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Orientation="Horizontal" />
