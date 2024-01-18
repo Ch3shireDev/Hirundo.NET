@@ -10,6 +10,7 @@ public class DataSourceModel : IParametersBrowserModel
 
     public string Description => "W tym panelu wybierasz źródło danych.";
     public string AddParametersCommandText => "Dodaj nowe źródło danych";
+    public string Header => "Źródła danych";
     public string Title => "Źródła danych";
 
     public IList<ParametersData> ParametersDataList { get; } =

@@ -8,9 +8,10 @@ public class PopulationModel : IParametersBrowserModel
 {
     public PopulationProcessorParameters ConfigPopulation { get; set; } = new();
     public IList<IPopulationFilterBuilder> Conditions => ConfigPopulation.Conditions;
-    public string Title { get; } = "Warunki populacji";
-    public string Description { get; } = "W tym panelu określasz warunki określające populację dla danego osobnika powracającego.";
-    public string AddParametersCommandText { get; } = "Dodaj nowy warunek";
+    public string Header => "Populacja";
+    public string Title => "Warunki populacji";
+    public string Description => "W tym panelu określasz warunki określające populację dla danego osobnika powracającego.";
+    public string AddParametersCommandText => "Dodaj nowy warunek";
 
     public IList<ParametersData> ParametersDataList { get; } =
     [

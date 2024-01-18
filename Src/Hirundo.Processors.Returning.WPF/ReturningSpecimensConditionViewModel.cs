@@ -2,6 +2,6 @@
 
 namespace Hirundo.Processors.Returning.WPF;
 
-public class ReturningSpecimensConditionViewModel : ViewModelBase
+public class ReturningSpecimensConditionViewModel : ParametersViewModel
 {
 }

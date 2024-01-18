@@ -2,7 +2,7 @@
 
 namespace Hirundo.Processors.Returning.WPF.NotEarlierThanGivenDateNextYear;
 
-internal class NotEarlierThanGivenDateNextYearModel(ReturnsNotEarlierThanGivenDateNextYearFilter condition)
+public class NotEarlierThanGivenDateNextYearModel(ReturnsNotEarlierThanGivenDateNextYearFilter condition)
 {
     public ReturnsNotEarlierThanGivenDateNextYearFilter Condition { get; set; } = condition;
 

@@ -19,9 +19,6 @@
     <Compile Update="NotEarlierThanGivenDateNextYear\NotEarlierThanGivenDateNextYearView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="ReturningSpecimensView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
 
 </Project>

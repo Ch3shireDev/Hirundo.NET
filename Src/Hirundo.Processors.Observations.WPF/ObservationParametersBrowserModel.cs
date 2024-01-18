@@ -8,9 +8,11 @@ namespace Hirundo.Processors.Observations.WPF;
 public class ObservationParametersBrowserModel : IParametersBrowserModel
 {
     public ObservationsParameters ObservationsParameters { get; set; } = new();
-    public string Description { get; set; } = "W tym panelu ustalasz warunki, jakie mają spełniać wybierane obserwacje do obliczeń.";
-    public string AddParametersCommandText { get; } = "Dodaj nowy warunek";
-    public string Title { get; set; } = "Warunki filtrowania obserwacji";
+    public string Description => "W tym panelu ustalasz warunki, jakie mają spełniać wybierane obserwacje do obliczeń.";
+    public string AddParametersCommandText => "Dodaj nowy warunek";
+    public string Header => "Obserwacje";
+    public string Title => "Warunki filtrowania obserwacji";
+
     public IList<ParametersData> ParametersDataList { get; } =
     [
         new ParametersData(typeof(IsEqualFilter), "Czy wartość jest równa?", "Warunek porównujący wartość w polu danych z wybraną wartością."),

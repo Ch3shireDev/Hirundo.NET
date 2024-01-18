@@ -15,6 +15,8 @@
              xmlns:wpf11="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
              xmlns:access="clr-namespace:Hirundo.Databases.WPF.Access;assembly=Hirundo.Databases.WPF"
              xmlns:isInSharedTimeWindow="clr-namespace:Hirundo.Processors.Population.WPF.IsInSharedTimeWindow;assembly=Hirundo.Processors.Population.WPF"
+             xmlns:afterTimePeriod="clr-namespace:Hirundo.Processors.Returning.WPF.AfterTimePeriod;assembly=Hirundo.Processors.Returning.WPF"
+             xmlns:notEarlierThanGivenDateNextYear="clr-namespace:Hirundo.Processors.Returning.WPF.NotEarlierThanGivenDateNextYear;assembly=Hirundo.Processors.Returning.WPF"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="1000" d:Background="#FFF7FFF7"
              d:DataContext="{d:DesignInstance components:MainViewModel}">
@@ -41,10 +43,6 @@
             <access:AccessDataSourceView />
         </DataTemplate>
 
-        <DataTemplate DataType="{x:Type wpf3:ReturningSpecimensViewModel}">
-            <wpf3:ReturningSpecimensView />
-        </DataTemplate>
-
         <DataTemplate DataType="{x:Type wpf4:SpecimensViewModel}">
             <wpf4:SpecimensView />
         </DataTemplate>
@@ -67,6 +65,14 @@
 
         <DataTemplate DataType="{x:Type isInSharedTimeWindow:IsInSharedTimeWindowViewModel}">
             <isInSharedTimeWindow:IsInSharedTimeWindowView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type afterTimePeriod:AfterTimePeriodViewModel}">
+            <afterTimePeriod:AfterTimePeriodView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type notEarlierThanGivenDateNextYear:NotEarlierThanGivenDateNextYearViewModel}">
+            <notEarlierThanGivenDateNextYear:NotEarlierThanGivenDateNextYearView/>
         </DataTemplate>
 
         <helpers1:ViewModelToTabItemHeaderConverter x:Key="ViewModelToTabItemHeaderConverter" />

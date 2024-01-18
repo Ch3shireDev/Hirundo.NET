@@ -2,7 +2,7 @@
 
 namespace Hirundo.Processors.Returning.WPF.AfterTimePeriod;
 
-internal class AfterTimePeriodModel(ReturnsAfterTimePeriodFilter condition)
+public class AfterTimePeriodModel(ReturnsAfterTimePeriodFilter condition)
 {
     public string DateValueName
     {

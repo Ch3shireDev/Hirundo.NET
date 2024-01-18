@@ -1,11 +1,10 @@
 ﻿using System.Windows.Input;
 using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
-using Hirundo.Processors.Returning.Conditions;
 
 namespace Hirundo.Processors.Returning.WPF.NotEarlierThanGivenDateNextYear;
 
-internal class NotEarlierThanGivenDateNextYearViewModel(NotEarlierThanGivenDateNextYearModel model) : ReturningSpecimensConditionViewModel, IRemovable<IReturningSpecimenFilter>
+public class NotEarlierThanGivenDateNextYearViewModel(NotEarlierThanGivenDateNextYearModel model) : ReturningSpecimensConditionViewModel, IRemovable
 {
     public string DateValueName
     {
@@ -38,10 +37,10 @@ internal class NotEarlierThanGivenDateNextYearViewModel(NotEarlierThanGivenDateN
     }
 
     public ICommand RemoveCommand => new RelayCommand(Remove);
-    public event EventHandler<IReturningSpecimenFilter>? Removed;
+    public event EventHandler<ParametersEventArgs>? Removed;
 
     public void Remove()
     {
-        Removed?.Invoke(this, model.Condition);
+        Removed?.Invoke(this, new ParametersEventArgs(model.Condition));
     }
 }
