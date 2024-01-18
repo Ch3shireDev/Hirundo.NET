@@ -1,6 +1,6 @@
 ﻿namespace Hirundo.Commons.WPF;
 
-public interface IConditionsBrowserModel
+public interface IBrowserModel
 {
     string Description { get; }
     string Title { get; }

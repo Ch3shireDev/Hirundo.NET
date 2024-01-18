@@ -1,4 +1,5 @@
 ﻿using Hirundo.App.Components;
+using Hirundo.Commons.WPF;
 using Hirundo.Configuration;
 using Hirundo.Databases.WPF;
 using NUnit.Framework;
@@ -27,7 +28,9 @@ public class MainViewModelTests
         var selected = _viewModel.SelectedViewModel;
 
         // Assert
-        Assert.That(selected, Is.InstanceOf<DataSourceViewModel>());
+        Assert.That(selected, Is.InstanceOf<ConditionsBrowserViewModel>());
+        var browserViewModel = selected as ConditionsBrowserViewModel;
+        Assert.That(browserViewModel?.Title, Is.EqualTo(new DataSourceModel().Title));
     }
 
     [Test]

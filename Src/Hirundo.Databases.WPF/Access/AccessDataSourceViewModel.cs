@@ -5,7 +5,7 @@ using Hirundo.Databases.Conditions;
 
 namespace Hirundo.Databases.WPF.Access;
 
-public class AccessDataSourceViewModel(AccessDatabaseParameters parameters) : ViewModelBase, IRemovable<IDatabaseParameters>
+public class AccessDataSourceViewModel(AccessDatabaseParameters parameters) : ConditionViewModel, IRemovable
 {
     public string Path
     {
@@ -31,10 +31,10 @@ public class AccessDataSourceViewModel(AccessDatabaseParameters parameters) : Vi
     public IList<ColumnMapping> Columns => parameters.Columns;
     public ICommand RemoveCommand => new RelayCommand(RemoveDataSource);
 
-    public event EventHandler<IDatabaseParameters> Removed;
+    public event EventHandler<ConditionEventArgs>? Removed;
 
     public void RemoveDataSource()
     {
-        Removed.Invoke(this, parameters);
+        Removed?.Invoke(this, new ConditionEventArgs(parameters));
     }
 }

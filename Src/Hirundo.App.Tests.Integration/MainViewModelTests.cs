@@ -1,5 +1,6 @@
 ﻿using Hirundo.App.Components;
 using Hirundo.Commons;
+using Hirundo.Commons.WPF;
 using Hirundo.Configuration;
 using Hirundo.Databases;
 using Hirundo.Databases.Conditions;
@@ -111,10 +112,10 @@ public class MainViewModelTests
         Assert.That(accessDatabaseParameters.Columns[0].ValueName, Is.EqualTo("XXX"));
         Assert.That(accessDatabaseParameters.Columns[0].DataType, Is.EqualTo(DataValueType.LongInt));
 
-        var dataSourceViewModel = _viewModel.ViewModels.OfType<DataSourceViewModel>().First();
+        var dataSourceViewModel = _viewModel.ViewModels.OfType<ConditionsBrowserViewModel>().First();
         Assert.That(dataSourceViewModel, Is.Not.Null);
-        Assert.That(dataSourceViewModel.DatabaseViewModels, Is.Not.Null);
-        Assert.That(dataSourceViewModel.DatabaseViewModels.Count, Is.EqualTo(1));
+        Assert.That(dataSourceViewModel.ConditionViewModels, Is.Not.Null);
+        Assert.That(dataSourceViewModel.ConditionViewModels.Count, Is.EqualTo(1));
     }
 
     [Test]

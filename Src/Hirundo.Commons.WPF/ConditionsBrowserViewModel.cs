@@ -3,7 +3,7 @@ using Hirundo.Commons.WPF.Helpers;
 
 namespace Hirundo.Commons.WPF;
 
-public class ConditionsBrowserViewModel(IConditionsBrowserModel browserModel) : ViewModelBase
+public class ConditionsBrowserViewModel(IBrowserModel browserModel) : ViewModelBase
 {
     public ICommand AddConditionCommand => new RelayCommand(AddCondition);
     public string Description => browserModel.Description;

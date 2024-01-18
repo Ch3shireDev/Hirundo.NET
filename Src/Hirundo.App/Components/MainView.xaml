@@ -15,6 +15,7 @@
              xmlns:isEqual="clr-namespace:Hirundo.Processors.Observations.WPF.IsEqual;assembly=Hirundo.Processors.Observations.WPF"
              xmlns:isInTimeBlock="clr-namespace:Hirundo.Processors.Observations.WPF.IsInTimeBlock;assembly=Hirundo.Processors.Observations.WPF"
              xmlns:wpf11="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
+             xmlns:access="clr-namespace:Hirundo.Databases.WPF.Access;assembly=Hirundo.Databases.WPF"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="1000" d:Background="#FFF7FFF7"
              d:DataContext="{d:DesignInstance components:MainViewModel}">
@@ -33,14 +34,14 @@
             <Setter Property="Margin" Value="0" />
         </Style>
 
-        <DataTemplate DataType="{x:Type wpf:DataSourceViewModel}">
-            <wpf:DataSourceView />
-        </DataTemplate>
-
         <DataTemplate DataType="{x:Type wpf11:ConditionsBrowserViewModel}">
             <wpf11:ConditionsBrowserView />
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type access:AccessDataSourceViewModel}">
+            <access:AccessDataSourceView />
+        </DataTemplate>
+        
         <DataTemplate DataType="{x:Type wpf2:PopulationViewModel}">
             <wpf2:PopulationView />
         </DataTemplate>

@@ -32,7 +32,7 @@ public sealed class MainViewModel : ViewModelBase
 
         _model = model;
         DataSourceViewModel = new(model.DataSourceModel);
-        ConditionsBrowserViewModel = new(model.ObservationConditionsBrowserModel);
+        ConditionsBrowserViewModel = new(model.ObservationBrowserModel);
         ReturningSpecimensViewModel = new(model.ReturningSpecimensModel);
         PopulationViewModel = new(model.PopulationModel);
         SpecimensViewModel = new(model.SpecimensModel);
@@ -54,7 +54,7 @@ public sealed class MainViewModel : ViewModelBase
     }
 
     public Action RefreshWindow { get; set; } = () => { };
-    public DataSourceViewModel DataSourceViewModel { get; }
+    public ConditionsBrowserViewModel DataSourceViewModel { get; }
     public ConditionsBrowserViewModel ConditionsBrowserViewModel { get; }
     public ReturningSpecimensViewModel ReturningSpecimensViewModel { get; }
     public PopulationViewModel PopulationViewModel { get; }

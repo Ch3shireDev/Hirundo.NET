@@ -1,9 +1,11 @@
 ﻿using Hirundo.Commons.WPF;
 using Hirundo.Processors.Observations.Conditions;
+using Hirundo.Processors.Observations.WPF.IsEqual;
+using Hirundo.Processors.Observations.WPF.IsInTimeBlock;
 
 namespace Hirundo.Processors.Observations.WPF;
 
-public class ObservationConditionsBrowserModel : IConditionsBrowserModel
+public class ObservationBrowserModel : IBrowserModel
 {
     public ObservationsParameters ObservationsParameters { get; set; } = new();
     public string Description { get; set; } = "W tym panelu ustalasz warunki, jakie mają spełniać wybierane obserwacje do obliczeń.";
@@ -39,7 +41,12 @@ public class ObservationConditionsBrowserModel : IConditionsBrowserModel
 
     private ConditionViewModel Create(IObservationFilter condition)
     {
-        var viewModel = ConditionViewModelFactory.Create(condition);
+        var viewModel = (ConditionViewModel)(condition switch
+        {
+            IsEqualFilter filter => new IsEqualViewModel(new IsEqualModel(filter)),
+            IsInTimeBlockFilter filter => new IsInTimeBlockViewModel(new IsInTimeBlockModel(filter)),
+            _ => throw new NotImplementedException()
+        });
 
         if (viewModel is IRemovable removable)
         {
