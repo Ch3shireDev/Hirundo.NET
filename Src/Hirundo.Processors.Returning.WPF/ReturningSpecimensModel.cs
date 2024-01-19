@@ -24,23 +24,28 @@ public class ReturningSpecimensModel : IParametersBrowserModel
 
     public void AddParameters(ParametersData parametersData)
     {
-        if (parametersData.Type == typeof(ReturnsAfterTimePeriodFilter))
-        {
-            Conditions.Add(new ReturnsAfterTimePeriodFilter());
-        }
-        else if (parametersData.Type == typeof(ReturnsNotEarlierThanGivenDateNextYearFilter))
-        {
-            Conditions.Add(new ReturnsNotEarlierThanGivenDateNextYearFilter());
-        }
-        else
-        {
-            throw new ArgumentException($"Unknown type: {parametersData.Type}", nameof(ParametersData.Type));
-        }
+        AddParameters(parametersData.Type);
     }
 
     public IEnumerable<ParametersViewModel> GetParametersViewModels()
     {
         return Conditions.Select(Create);
+    }
+
+    private void AddParameters(Type parametersDataType)
+    {
+        if (parametersDataType == typeof(ReturnsAfterTimePeriodFilter))
+        {
+            Conditions.Add(new ReturnsAfterTimePeriodFilter());
+        }
+        else if (parametersDataType == typeof(ReturnsNotEarlierThanGivenDateNextYearFilter))
+        {
+            Conditions.Add(new ReturnsNotEarlierThanGivenDateNextYearFilter());
+        }
+        else
+        {
+            throw new ArgumentException($"Unknown type: {parametersDataType}", nameof(parametersDataType));
+        }
     }
 
     private ParametersViewModel Create(IReturningSpecimenFilter condition)

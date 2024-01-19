@@ -13,6 +13,7 @@ namespace Hirundo.App.Components;
 
 public class MainModel(HirundoApp app)
 {
+    private bool _isProcessing;
     public DataSourceModel DataSourceModel { get; set; } = new();
     public ObservationParametersBrowserModel ObservationParametersBrowserModel { get; set; } = new();
     public ObservationsParameters ObservationsParameters { get; set; } = new();
@@ -57,26 +58,37 @@ public class MainModel(HirundoApp app)
 
     public async Task Run()
     {
+        if (_isProcessing)
+        {
+            return;
+        }
+
         try
         {
+            _isProcessing = true;
             var config = CreateConfig();
-
-            app.Run(config);
+            var task = new Task(() => app.Run(config));
+            await task.ConfigureAwait(false);
         }
         catch (Exception e)
         {
             Log.Error($"Błąd działania aplikacji: {e.Message}", e);
             throw;
         }
+        finally
+        {
+            _isProcessing = false;
+        }
     }
 
     public async Task<bool> CanRun()
     {
-        if (app == null)
+        if (_isProcessing)
         {
             return false;
         }
 
+        await Task.Delay(1).ConfigureAwait(false);
         return true;
     }
 }

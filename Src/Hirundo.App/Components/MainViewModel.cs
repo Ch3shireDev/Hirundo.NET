@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using Hirundo.App.Helpers;
+using Hirundo.Commons;
 using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
 using Hirundo.Configuration;
@@ -109,6 +110,7 @@ public sealed class MainViewModel : ViewModelBase
         SetConfig(new ApplicationConfig());
 
         SelectedViewModel = null;
+        await Task.Delay(100).ConfigureAwait(false);
         RefreshWindow();
         SelectedViewModel = DataSourceViewModel;
     }
@@ -139,13 +141,19 @@ public sealed class MainViewModel : ViewModelBase
         try
         {
             IsProcessing = true;
-            await Task.Run(_model.Run);
+            await _model.Run().ConfigureAwait(false);
             IsProcessing = false;
+        }
+        catch (HirundoException e)
+        {
+            IsProcessing = false;
+            MessageBox.Show($"Wystąpił błąd algorytmu: {e.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         catch (Exception e)
         {
             IsProcessing = false;
             MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            throw;
         }
         finally
         {

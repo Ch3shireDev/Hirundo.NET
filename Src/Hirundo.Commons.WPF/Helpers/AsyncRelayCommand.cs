@@ -22,6 +22,7 @@ public sealed class AsyncRelayCommand(Func<Task> execute, Func<Task<bool>>? canE
     public void Execute(object? parameter)
     {
         Task.Run(execute);
+        CanExecuteChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public event EventHandler? CanExecuteChanged;
