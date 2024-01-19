@@ -14,10 +14,10 @@ public class HirundoJsonConverter : JsonConverter
     private static readonly IList<JsonConverter> _converters = new List<JsonConverter>
     {
         new DynamicPolymorphicJsonConverter(typeof(IDatabaseParameters)),
-        new DynamicPolymorphicJsonConverter(typeof(IObservationFilter)),
-        new DynamicPolymorphicJsonConverter(typeof(IPopulationFilterBuilder)),
+        new DynamicPolymorphicJsonConverter(typeof(IObservationCondition)),
+        new DynamicPolymorphicJsonConverter(typeof(IPopulationConditionBuilder)),
         new DynamicPolymorphicJsonConverter(typeof(IStatisticalOperation), new DynamicPolymorphicJsonConverter(typeof(IOutliersCondition))),
-        new DynamicPolymorphicJsonConverter(typeof(IReturningSpecimenFilter)),
+        new DynamicPolymorphicJsonConverter(typeof(IReturningSpecimenCondition)),
         new DynamicPolymorphicJsonConverter(typeof(IWriterParameters))
     };
 

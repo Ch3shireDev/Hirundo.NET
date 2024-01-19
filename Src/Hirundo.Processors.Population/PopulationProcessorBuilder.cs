@@ -7,7 +7,7 @@ namespace Hirundo.Processors.Population;
 /// </summary>
 public class PopulationProcessorBuilder
 {
-    private readonly List<IPopulationFilterBuilder> _conditionBuilders = [];
+    private readonly List<IPopulationConditionBuilder> _conditionBuilders = [];
 
     /// <summary>
     ///     Tworzy obiekt typu <see cref="IPopulationProcessor" />.
@@ -15,11 +15,11 @@ public class PopulationProcessorBuilder
     /// <returns></returns>
     public IPopulationProcessor Build()
     {
-        var conditionBuilder = new CompositePopulationFilterBuilder([.._conditionBuilders]);
+        var conditionBuilder = new CompositePopulationConditionBuilder([.._conditionBuilders]);
         return new PopulationProcessor(conditionBuilder);
     }
 
-    public PopulationProcessorBuilder WithPopulationConditions(IEnumerable<IPopulationFilterBuilder> populationConditions)
+    public PopulationProcessorBuilder WithPopulationConditions(IEnumerable<IPopulationConditionBuilder> populationConditions)
     {
         _conditionBuilders.AddRange(populationConditions);
         return this;

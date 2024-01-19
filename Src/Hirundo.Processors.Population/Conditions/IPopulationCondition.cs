@@ -3,10 +3,10 @@
 namespace Hirundo.Processors.Population.Conditions;
 
 /// <summary>
-///     Filtr populacji - na podstawie parametrów wejściowych podejmowana jest decyzja, czy obserwowany dany
+///     Warunki populacji — na podstawie parametrów wejściowych podejmowana jest decyzja, czy obserwowany dany
 ///     osobnik należy do populacji.
 /// </summary>
-public interface IPopulationFilter
+public interface IPopulationCondition
 {
     /// <summary>
     ///     Informacja, czy dany osobnik należy do populacji.

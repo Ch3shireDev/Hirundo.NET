@@ -7,7 +7,7 @@ namespace Hirundo.Processors.Observations.Conditions;
 ///     tj. obserwacja jest wybierana, tylko jeśli spełnia wszystkie warunki.
 /// </summary>
 /// <param name="filters"></param>
-public class CompositeObservationFilter(params IObservationFilter[] filters) : IObservationFilter
+public class CompositeObservationCondition(params IObservationCondition[] filters) : IObservationCondition
 {
     public bool IsAccepted(Observation observation)
     {

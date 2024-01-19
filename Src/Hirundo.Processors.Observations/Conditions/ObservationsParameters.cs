@@ -2,5 +2,5 @@
 
 public class ObservationsParameters
 {
-    public IList<IObservationFilter> Conditions { get; init; } = [];
+    public IList<IObservationCondition> Conditions { get; init; } = [];
 }

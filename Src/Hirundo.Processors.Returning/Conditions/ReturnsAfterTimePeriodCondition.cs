@@ -8,7 +8,7 @@ namespace Hirundo.Processors.Returning.Conditions;
 ///     dat jest większa lub równa podanej liczbie dni.
 /// </summary>
 [TypeDescription("ReturnsAfterTimePeriod")]
-public class ReturnsAfterTimePeriodFilter : IReturningSpecimenFilter
+public class ReturnsAfterTimePeriodCondition : IReturningSpecimenCondition
 {
     /// <summary>
     ///     Filtr zwracający osobniki, które powróciły po określonym czasie, liczonym w dniach. Aby osobnik został
@@ -17,13 +17,13 @@ public class ReturnsAfterTimePeriodFilter : IReturningSpecimenFilter
     /// </summary>
     /// <param name="dateValueName">Nazwa kolumny danych reprezentującej datę.</param>
     /// <param name="timePeriodInDays">Minimalna liczba dni różnicy pomiędzy obserwacjami.</param>
-    public ReturnsAfterTimePeriodFilter(string dateValueName, int timePeriodInDays)
+    public ReturnsAfterTimePeriodCondition(string dateValueName, int timePeriodInDays)
     {
         DateValueName = dateValueName;
         TimePeriodInDays = timePeriodInDays;
     }
 
-    public ReturnsAfterTimePeriodFilter()
+    public ReturnsAfterTimePeriodCondition()
     {
     }
 

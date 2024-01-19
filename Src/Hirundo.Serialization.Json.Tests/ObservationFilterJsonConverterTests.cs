@@ -25,7 +25,7 @@ public class ObservationFilterJsonConverterTests
     public void GivenIsEqualFilter_WhenSerialize_ReturnsJsonString()
     {
         // Arrange
-        var filter = new IsEqualFilter("ID", 1);
+        var filter = new IsEqualCondition("ID", 1);
 
         // Act
         var json = JsonConvert.SerializeObject(filter, _settings);
@@ -40,7 +40,7 @@ public class ObservationFilterJsonConverterTests
     public void GivenIsInTimeBlockFilter_WhenSerialize_ReturnsJsonString()
     {
         // Arrange
-        var filter = new IsInTimeBlockFilter("Time", new TimeBlock(6, 12));
+        var filter = new IsInTimeBlockCondition("Time", new TimeBlock(6, 12));
 
         // Act
         var json = JsonConvert.SerializeObject(filter, _settings);
@@ -65,12 +65,12 @@ public class ObservationFilterJsonConverterTests
         }";
 
         // Act
-        var filter = JsonConvert.DeserializeObject<IObservationFilter>(json, _settings);
+        var filter = JsonConvert.DeserializeObject<IObservationCondition>(json, _settings);
 
         // Assert
         Assert.That(filter, Is.Not.Null);
-        Assert.That(filter, Is.TypeOf<IsEqualFilter>());
-        var isEqualFilter = filter as IsEqualFilter;
+        Assert.That(filter, Is.TypeOf<IsEqualCondition>());
+        var isEqualFilter = filter as IsEqualCondition;
         Assert.That(isEqualFilter?.ValueName, Is.EqualTo("ID"));
         Assert.That(isEqualFilter?.Value, Is.EqualTo(1));
     }
@@ -89,11 +89,11 @@ public class ObservationFilterJsonConverterTests
         }";
 
         // Act
-        var filter = JsonConvert.DeserializeObject<IObservationFilter>(json, _settings) as IsInTimeBlockFilter;
+        var filter = JsonConvert.DeserializeObject<IObservationCondition>(json, _settings) as IsInTimeBlockCondition;
 
         // Assert
         Assert.That(filter, Is.Not.Null);
-        Assert.That(filter, Is.TypeOf<IsInTimeBlockFilter>());
+        Assert.That(filter, Is.TypeOf<IsInTimeBlockCondition>());
         Assert.That(filter?.ValueName, Is.EqualTo("HOUR"));
         Assert.That(filter?.TimeBlock.StartHour, Is.EqualTo(4));
         Assert.That(filter?.TimeBlock.EndHour, Is.EqualTo(10));

@@ -2,7 +2,7 @@
 
 namespace Hirundo.Processors.Population.WPF.IsInSharedTimeWindow;
 
-public class IsInSharedTimeWindowModel(IsInSharedTimeWindowFilterBuilder condition)
+public class IsInSharedTimeWindowModel(IsInSharedTimeWindowConditionBuilder condition)
 {
     public string DateValueName
     {
@@ -16,5 +16,5 @@ public class IsInSharedTimeWindowModel(IsInSharedTimeWindowFilterBuilder conditi
         set => Condition.MaxTimeDistanceInDays = value;
     }
 
-    public IsInSharedTimeWindowFilterBuilder Condition { get; set; } = condition;
+    public IsInSharedTimeWindowConditionBuilder Condition { get; set; } = condition;
 }

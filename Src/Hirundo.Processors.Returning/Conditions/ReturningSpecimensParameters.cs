@@ -6,10 +6,10 @@ public class ReturningSpecimensParameters
     {
     }
 
-    public ReturningSpecimensParameters(IList<IReturningSpecimenFilter> conditions)
+    public ReturningSpecimensParameters(IList<IReturningSpecimenCondition> conditions)
     {
         Conditions = conditions;
     }
 
-    public IList<IReturningSpecimenFilter> Conditions { get; init; } = [];
+    public IList<IReturningSpecimenCondition> Conditions { get; init; } = [];
 }

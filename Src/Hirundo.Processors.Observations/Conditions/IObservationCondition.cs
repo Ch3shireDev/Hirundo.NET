@@ -3,10 +3,10 @@
 namespace Hirundo.Processors.Observations.Conditions;
 
 /// <summary>
-///     Filtr obserwacji. Podczas przetwarzania danych z bazy danych, obserwacje są filtrowane warunkami zadanymi przez
+///     Warunek obserwacji. Podczas przetwarzania danych z bazy danych, obserwacje są filtrowane warunkami zadanymi przez
 ///     użytkownika. Te warunki są reprezentowane przez obiekty implementujące ten interfejs.
 /// </summary>
-public interface IObservationFilter
+public interface IObservationCondition
 {
     /// <summary>
     ///     Sprawdza, czy obserwacja spełnia warunki filtru.

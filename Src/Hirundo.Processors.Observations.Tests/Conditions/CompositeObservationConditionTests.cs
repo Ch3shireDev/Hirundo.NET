@@ -6,20 +6,20 @@ using NUnit.Framework;
 namespace Hirundo.Processors.Observations.Tests.Conditions;
 
 [TestFixture]
-public class CompositeObservationFilterTests
+public class CompositeObservationConditionTests
 {
     [SetUp]
     public void SetUp()
     {
-        _filter1 = new Mock<IObservationFilter>();
-        _filter2 = new Mock<IObservationFilter>();
+        _filter1 = new Mock<IObservationCondition>();
+        _filter2 = new Mock<IObservationCondition>();
 
-        _compositeFilter = new CompositeObservationFilter(_filter1.Object, _filter2.Object);
+        _compositeCondition = new CompositeObservationCondition(_filter1.Object, _filter2.Object);
     }
 
-    private Mock<IObservationFilter> _filter1 = null!;
-    private Mock<IObservationFilter> _filter2 = null!;
-    private CompositeObservationFilter _compositeFilter = null!;
+    private Mock<IObservationCondition> _filter1 = null!;
+    private Mock<IObservationCondition> _filter2 = null!;
+    private CompositeObservationCondition _compositeCondition = null!;
 
     [Test]
     public void GivenTwoTrueFilters_WhenIsAccepted_ReturnsTrue()
@@ -30,7 +30,7 @@ public class CompositeObservationFilterTests
         var observation = new Observation();
 
         // Act
-        var result = _compositeFilter.IsAccepted(observation);
+        var result = _compositeCondition.IsAccepted(observation);
 
         // Assert
         Assert.That(result, Is.True);
@@ -45,7 +45,7 @@ public class CompositeObservationFilterTests
         var observation = new Observation();
 
         // Act
-        var result = _compositeFilter.IsAccepted(observation);
+        var result = _compositeCondition.IsAccepted(observation);
 
         // Assert
         Assert.That(result, Is.False);

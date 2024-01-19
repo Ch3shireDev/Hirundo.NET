@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Hirundo.Processors.Observations.Tests.Conditions;
 
 [TestFixture]
-public class IsNotEqualFilterTests
+public class IsNotEqualConditionTests
 {
     [Test]
     public void GivenOtherValue_WhenIsAccepted_ReturnsTrue()
@@ -14,7 +14,7 @@ public class IsNotEqualFilterTests
         var valueName = "SEX";
         var value = "F";
 
-        var filter = new IsNotEqualFilter(valueName, value);
+        var filter = new IsNotEqualCondition(valueName, value);
 
         var observation = new Observation(["SEX"], ["M"]);
 
@@ -32,7 +32,7 @@ public class IsNotEqualFilterTests
         var valueName = "SPECIES";
         var value = "REG.REG";
 
-        var filter = new IsNotEqualFilter(valueName, value);
+        var filter = new IsNotEqualCondition(valueName, value);
 
         var observation = new Observation(["SPECIES"], ["REG.REG"]);
 

@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Hirundo.Processors.Population.Tests.Conditions;
 
 [TestFixture]
-public class IsInSharedTimeWindowFilterTests
+public class IsInSharedTimeWindowConditionTests
 {
     [Test]
     public void GivenSpecimenFromTimeWindow_WhenIsAccepted_ReturnsTrue()
@@ -18,7 +18,7 @@ public class IsInSharedTimeWindowFilterTests
 
         var specimen = new Specimen("ABC123", [new Observation(["DATE"], [DateTime.Parse("2020-05-20", CultureInfo.InvariantCulture)])]);
 
-        var filterBuilder = new IsInSharedTimeWindowFilterBuilder(dateValueName, days);
+        var filterBuilder = new IsInSharedTimeWindowConditionBuilder(dateValueName, days);
         var filter = filterBuilder.GetPopulationFilter(returningSpecimen);
 
         // Act
@@ -43,7 +43,7 @@ public class IsInSharedTimeWindowFilterTests
 
         var specimen = new Specimen("ABC123", [new Observation(["DATE"], [DateTime.Parse("2020-05-05", CultureInfo.InvariantCulture)])]);
 
-        var filterBuilder = new IsInSharedTimeWindowFilterBuilder(dateValueName, days);
+        var filterBuilder = new IsInSharedTimeWindowConditionBuilder(dateValueName, days);
         var filter = filterBuilder.GetPopulationFilter(returningSpecimen);
 
         // Act

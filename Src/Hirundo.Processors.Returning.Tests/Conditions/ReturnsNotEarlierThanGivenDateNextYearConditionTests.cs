@@ -6,13 +6,13 @@ using NUnit.Framework;
 namespace Hirundo.Processors.Returning.Tests.Conditions;
 
 [TestFixture]
-public class ReturnsNotEarlierThanGivenDateNextYearFilterTests
+public class ReturnsNotEarlierThanGivenDateNextYearConditionTests
 {
     [Test]
     public void GivenTwoObservationsWithDistantDates_WhenIsReturning_ReturnsTrue()
     {
         // Arrange
-        var filter = new ReturnsNotEarlierThanGivenDateNextYearFilter("DATE", 06, 01);
+        var filter = new ReturnsNotEarlierThanGivenDateNextYearCondition("DATE", 06, 01);
 
         var specimen = new Specimen("AB123", [
             new Observation(["DATE"], [DateTime.Parse("2021-06-20", CultureInfo.InvariantCulture)]),
@@ -30,7 +30,7 @@ public class ReturnsNotEarlierThanGivenDateNextYearFilterTests
     public void GivenTwoObservationsBeforeDateNextYear_WhenIsReturning_ReturnsFalse()
     {
         // Arrange
-        var filter = new ReturnsNotEarlierThanGivenDateNextYearFilter("DATE", 06, 15);
+        var filter = new ReturnsNotEarlierThanGivenDateNextYearCondition("DATE", 06, 15);
 
         var specimen = new Specimen("AB123", [
             new Observation(["DATE"], [DateTime.Parse("2021-06-01", CultureInfo.InvariantCulture)]),
@@ -48,7 +48,7 @@ public class ReturnsNotEarlierThanGivenDateNextYearFilterTests
     public void GivenMoreThanTwoObservations_WhenIsReturning_ReturnsTrueIfDistanceIsGreaterThanTimePeriod()
     {
         // Arrange
-        var filter = new ReturnsNotEarlierThanGivenDateNextYearFilter("DATE", 06, 15);
+        var filter = new ReturnsNotEarlierThanGivenDateNextYearCondition("DATE", 06, 15);
 
         var specimen = new Specimen("AB123", [
             new Observation(["DATE"], [DateTime.Parse("2021-06-01", CultureInfo.InvariantCulture)]),
@@ -67,7 +67,7 @@ public class ReturnsNotEarlierThanGivenDateNextYearFilterTests
     public void GivenMoreThanTwoObservations_WhenIsReturning_ReturnsFalseIfNoPairGivesDistance()
     {
         // Arrange
-        var filter = new ReturnsNotEarlierThanGivenDateNextYearFilter("DATE", 06, 15);
+        var filter = new ReturnsNotEarlierThanGivenDateNextYearCondition("DATE", 06, 15);
 
         var specimen = new Specimen("AB123", [
             new Observation(["DATE"], [DateTime.Parse("2021-06-01", CultureInfo.InvariantCulture)]),

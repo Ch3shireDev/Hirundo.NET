@@ -6,19 +6,19 @@ namespace Hirundo.Processors.Observations.WPF.IsEqual;
 
 public class IsEqualModel
 {
-    public IsEqualModel(IsEqualFilter filter)
+    public IsEqualModel(IsEqualCondition condition)
     {
-        OriginalCondition = filter;
-        IsEqualFilter = filter;
+        OriginalCondition = condition;
+        IsEqualCondition = condition;
     }
 
-    public IsEqualFilter OriginalCondition { get; init; }
+    public IsEqualCondition OriginalCondition { get; init; }
 
     public string ValueName { get; set; } = null!;
     public string ValueStr { get; set; } = null!;
     public DataType ValueType { get; set; }
 
-    public IsEqualFilter IsEqualFilter
+    public IsEqualCondition IsEqualCondition
     {
         get => GetIsEqualFilter();
         set => SetIsEqualFilter(value);
@@ -30,12 +30,12 @@ public class IsEqualModel
         set => SetValue(value);
     }
 
-    private IsEqualFilter GetIsEqualFilter()
+    private IsEqualCondition GetIsEqualFilter()
     {
         return new(ValueName, Value);
     }
 
-    private void SetIsEqualFilter(IsEqualFilter value)
+    private void SetIsEqualFilter(IsEqualCondition value)
     {
         ValueName = value.ValueName;
         ValueStr = value.Value?.ToString() ?? "";

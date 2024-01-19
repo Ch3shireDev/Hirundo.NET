@@ -7,7 +7,7 @@ namespace Hirundo.Processors.Population.WPF;
 public class PopulationModel : IParametersBrowserModel
 {
     public PopulationProcessorParameters ConfigPopulation { get; set; } = new();
-    public IList<IPopulationFilterBuilder> Conditions => ConfigPopulation.Conditions;
+    public IList<IPopulationConditionBuilder> Conditions => ConfigPopulation.Conditions;
     public string Header => "Populacja";
     public string Title => "Warunki populacji";
     public string Description => "W tym panelu określasz warunki określające populację dla danego osobnika powracającego.";
@@ -15,7 +15,7 @@ public class PopulationModel : IParametersBrowserModel
 
     public IList<ParametersData> ParametersDataList { get; } =
     [
-        new ParametersData(typeof(IsInSharedTimeWindowFilterBuilder), "Czy jest we współdzielonym oknie czasowym?", "Czy jest we współdzielonym oknie czasowym?")
+        new ParametersData(typeof(IsInSharedTimeWindowConditionBuilder), "Czy jest we współdzielonym oknie czasowym?", "Czy jest we współdzielonym oknie czasowym?")
     ];
 
     public IEnumerable<ParametersViewModel> GetParametersViewModels()
@@ -27,15 +27,15 @@ public class PopulationModel : IParametersBrowserModel
     {
         switch (parametersData.Type)
         {
-            case not null when parametersData.Type == typeof(IsInSharedTimeWindowFilterBuilder):
-                Conditions.Add(new IsInSharedTimeWindowFilterBuilder());
+            case not null when parametersData.Type == typeof(IsInSharedTimeWindowConditionBuilder):
+                Conditions.Add(new IsInSharedTimeWindowConditionBuilder());
                 break;
             default:
                 throw new NotImplementedException();
         }
     }
 
-    public ParametersViewModel CreateViewModel(IPopulationFilterBuilder condition)
+    public ParametersViewModel CreateViewModel(IPopulationConditionBuilder condition)
     {
         var viewModel = Create(condition);
 
@@ -43,7 +43,7 @@ public class PopulationModel : IParametersBrowserModel
         {
             removable.Removed += (_, args) =>
             {
-                if (args.Parameters is IPopulationFilterBuilder populationCondition)
+                if (args.Parameters is IPopulationConditionBuilder populationCondition)
                 {
                     Conditions.Remove(populationCondition);
                 }
@@ -53,11 +53,11 @@ public class PopulationModel : IParametersBrowserModel
         return viewModel;
     }
 
-    public static ParametersViewModel Create(IPopulationFilterBuilder condition)
+    public static ParametersViewModel Create(IPopulationConditionBuilder condition)
     {
         return condition switch
         {
-            IsInSharedTimeWindowFilterBuilder m => new IsInSharedTimeWindowViewModel(new IsInSharedTimeWindowModel(m)),
+            IsInSharedTimeWindowConditionBuilder m => new IsInSharedTimeWindowViewModel(new IsInSharedTimeWindowModel(m)),
             _ => throw new NotSupportedException($"Condition of type {condition.GetType()} is not supported.")
         };
     }

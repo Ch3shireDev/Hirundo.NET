@@ -154,14 +154,14 @@ public class ApplicationConfigJsonConverterTests
         Assert.That(config, Is.Not.Null);
         Assert.That(config.Observations, Is.Not.Null);
         Assert.That(config.Observations.Conditions, Has.Count.EqualTo(2));
-        Assert.That(config.Observations.Conditions[0], Is.TypeOf<IsEqualFilter>());
-        Assert.That(config.Observations.Conditions[1], Is.TypeOf<IsInTimeBlockFilter>());
+        Assert.That(config.Observations.Conditions[0], Is.TypeOf<IsEqualCondition>());
+        Assert.That(config.Observations.Conditions[1], Is.TypeOf<IsInTimeBlockCondition>());
 
-        var observationFilter0 = (IsEqualFilter)config.Observations.Conditions[0];
+        var observationFilter0 = (IsEqualCondition)config.Observations.Conditions[0];
         Assert.That(observationFilter0.ValueName, Is.EqualTo("SPECIES"));
         Assert.That(observationFilter0.Value, Is.EqualTo("REG.REG"));
 
-        var observationFilter1 = (IsInTimeBlockFilter)config.Observations.Conditions[1];
+        var observationFilter1 = (IsInTimeBlockCondition)config.Observations.Conditions[1];
         Assert.That(observationFilter1.ValueName, Is.EqualTo("HOUR"));
         Assert.That(observationFilter1.TimeBlock.StartHour, Is.EqualTo(4));
         Assert.That(observationFilter1.TimeBlock.EndHour, Is.EqualTo(10));
@@ -219,14 +219,14 @@ public class ApplicationConfigJsonConverterTests
 
         Assert.That(config.ReturningSpecimens, Is.Not.Null);
         Assert.That(config.ReturningSpecimens.Conditions, Has.Count.EqualTo(2));
-        Assert.That(config.ReturningSpecimens.Conditions[0], Is.TypeOf<ReturnsAfterTimePeriodFilter>());
-        Assert.That(config.ReturningSpecimens.Conditions[1], Is.TypeOf<ReturnsNotEarlierThanGivenDateNextYearFilter>());
+        Assert.That(config.ReturningSpecimens.Conditions[0], Is.TypeOf<ReturnsAfterTimePeriodCondition>());
+        Assert.That(config.ReturningSpecimens.Conditions[1], Is.TypeOf<ReturnsNotEarlierThanGivenDateNextYearCondition>());
 
-        var returningSpecimenFilter0 = (ReturnsAfterTimePeriodFilter)config.ReturningSpecimens.Conditions[0];
+        var returningSpecimenFilter0 = (ReturnsAfterTimePeriodCondition)config.ReturningSpecimens.Conditions[0];
         Assert.That(returningSpecimenFilter0.DateValueName, Is.EqualTo("DATE"));
         Assert.That(returningSpecimenFilter0.TimePeriodInDays, Is.EqualTo(20));
 
-        var returningSpecimenFilter1 = (ReturnsNotEarlierThanGivenDateNextYearFilter)config.ReturningSpecimens.Conditions[1];
+        var returningSpecimenFilter1 = (ReturnsNotEarlierThanGivenDateNextYearCondition)config.ReturningSpecimens.Conditions[1];
         Assert.That(returningSpecimenFilter1.DateValueName, Is.EqualTo("DATE"));
         Assert.That(returningSpecimenFilter1.Month, Is.EqualTo(6));
         Assert.That(returningSpecimenFilter1.Day, Is.EqualTo(15));
@@ -256,9 +256,9 @@ public class ApplicationConfigJsonConverterTests
 
         Assert.That(config.Population, Is.Not.Null);
         Assert.That(config.Population.Conditions, Has.Count.EqualTo(1));
-        Assert.That(config.Population.Conditions[0], Is.TypeOf<IsInSharedTimeWindowFilterBuilder>());
+        Assert.That(config.Population.Conditions[0], Is.TypeOf<IsInSharedTimeWindowConditionBuilder>());
 
-        var populationFilter0 = (IsInSharedTimeWindowFilterBuilder)config.Population.Conditions[0];
+        var populationFilter0 = (IsInSharedTimeWindowConditionBuilder)config.Population.Conditions[0];
         Assert.That(populationFilter0.DateValueName, Is.EqualTo("DATE"));
         Assert.That(populationFilter0.MaxTimeDistanceInDays, Is.EqualTo(20));
     }

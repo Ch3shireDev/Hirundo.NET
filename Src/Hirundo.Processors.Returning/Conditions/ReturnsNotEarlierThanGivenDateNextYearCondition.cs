@@ -3,13 +3,13 @@
 namespace Hirundo.Processors.Returning.Conditions;
 
 [TypeDescription("ReturnsNotEarlierThanGivenDateNextYear")]
-public class ReturnsNotEarlierThanGivenDateNextYearFilter : IReturningSpecimenFilter
+public class ReturnsNotEarlierThanGivenDateNextYearCondition : IReturningSpecimenCondition
 {
-    public ReturnsNotEarlierThanGivenDateNextYearFilter()
+    public ReturnsNotEarlierThanGivenDateNextYearCondition()
     {
     }
 
-    public ReturnsNotEarlierThanGivenDateNextYearFilter(string dateValueName, int month, int day)
+    public ReturnsNotEarlierThanGivenDateNextYearCondition(string dateValueName, int month, int day)
     {
         DateValueName = dateValueName;
         Month = month;

@@ -5,7 +5,7 @@ namespace Hirundo.Processors.Returning.Conditions;
 /// <summary>
 ///     Implementacja filtra zwracającego wszystkie okazy.
 /// </summary>
-public class CompositeReturningSpecimenFilter(params IReturningSpecimenFilter[] conditions) : IReturningSpecimenFilter
+public class CompositeReturningSpecimenCondition(params IReturningSpecimenCondition[] conditions) : IReturningSpecimenCondition
 {
     public bool IsReturning(Specimen specimen)
     {

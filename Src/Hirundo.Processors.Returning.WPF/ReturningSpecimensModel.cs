@@ -8,7 +8,7 @@ namespace Hirundo.Processors.Returning.WPF;
 public class ReturningSpecimensModel : IParametersBrowserModel
 {
     public ReturningSpecimensParameters? ReturningSpecimensParameters { get; set; } = new();
-    public IList<IReturningSpecimenFilter> Conditions => ReturningSpecimensParameters!.Conditions;
+    public IList<IReturningSpecimenCondition> Conditions => ReturningSpecimensParameters!.Conditions;
 
     public string Header => "Powroty";
     public string Title => "Warunki powracających osobników";
@@ -18,8 +18,8 @@ public class ReturningSpecimensModel : IParametersBrowserModel
     public IList<ParametersData> ParametersDataList { get; } =
     [
         new ParametersData(
-            typeof(ReturnsAfterTimePeriodFilter), "Powrót po określonym czasie", "Osobnik wraca nie wcześniej niż po określonej liczbie dni"),
-        new ParametersData(typeof(ReturnsNotEarlierThanGivenDateNextYearFilter), "Powrót po określonej dacie w przyszłym roku", "Osobnik wraca nie wcześniej niż w określonej dacie w przyszłym roku")
+            typeof(ReturnsAfterTimePeriodCondition), "Powrót po określonym czasie", "Osobnik wraca nie wcześniej niż po określonej liczbie dni"),
+        new ParametersData(typeof(ReturnsNotEarlierThanGivenDateNextYearCondition), "Powrót po określonej dacie w przyszłym roku", "Osobnik wraca nie wcześniej niż w określonej dacie w przyszłym roku")
     ];
 
     public void AddParameters(ParametersData parametersData)
@@ -34,13 +34,13 @@ public class ReturningSpecimensModel : IParametersBrowserModel
 
     private void AddParameters(Type parametersDataType)
     {
-        if (parametersDataType == typeof(ReturnsAfterTimePeriodFilter))
+        if (parametersDataType == typeof(ReturnsAfterTimePeriodCondition))
         {
-            Conditions.Add(new ReturnsAfterTimePeriodFilter());
+            Conditions.Add(new ReturnsAfterTimePeriodCondition());
         }
-        else if (parametersDataType == typeof(ReturnsNotEarlierThanGivenDateNextYearFilter))
+        else if (parametersDataType == typeof(ReturnsNotEarlierThanGivenDateNextYearCondition))
         {
-            Conditions.Add(new ReturnsNotEarlierThanGivenDateNextYearFilter());
+            Conditions.Add(new ReturnsNotEarlierThanGivenDateNextYearCondition());
         }
         else
         {
@@ -48,12 +48,12 @@ public class ReturningSpecimensModel : IParametersBrowserModel
         }
     }
 
-    private ParametersViewModel Create(IReturningSpecimenFilter condition)
+    private ParametersViewModel Create(IReturningSpecimenCondition condition)
     {
         var viewModel = (ParametersViewModel)(condition switch
         {
-            ReturnsNotEarlierThanGivenDateNextYearFilter m => new NotEarlierThanGivenDateNextYearViewModel(new NotEarlierThanGivenDateNextYearModel(m)),
-            ReturnsAfterTimePeriodFilter m => new AfterTimePeriodViewModel(new AfterTimePeriodModel(m)),
+            ReturnsNotEarlierThanGivenDateNextYearCondition m => new NotEarlierThanGivenDateNextYearViewModel(new NotEarlierThanGivenDateNextYearModel(m)),
+            ReturnsAfterTimePeriodCondition m => new AfterTimePeriodViewModel(new AfterTimePeriodModel(m)),
             _ => throw new NotImplementedException()
         });
 
@@ -61,7 +61,7 @@ public class ReturningSpecimensModel : IParametersBrowserModel
         {
             removable.Removed += (_, args) =>
             {
-                if (args.Parameters is IReturningSpecimenFilter filter)
+                if (args.Parameters is IReturningSpecimenCondition filter)
                 {
                     Conditions.Remove(filter);
                 }

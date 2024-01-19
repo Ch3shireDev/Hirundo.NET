@@ -2,25 +2,25 @@
 
 namespace Hirundo.Processors.Observations.WPF.IsInTimeBlock;
 
-public class IsInTimeBlockModel(IsInTimeBlockFilter filter)
+public class IsInTimeBlockModel(IsInTimeBlockCondition condition)
 {
-    public IsInTimeBlockFilter Filter { get; set; } = filter;
+    public IsInTimeBlockCondition Condition { get; set; } = condition;
 
     public string ValueName
     {
-        get => Filter.ValueName;
-        set => Filter.ValueName = value;
+        get => Condition.ValueName;
+        set => Condition.ValueName = value;
     }
 
     public int StartHour
     {
-        get => Filter.TimeBlock.StartHour;
-        set => Filter.TimeBlock.StartHour = value;
+        get => Condition.TimeBlock.StartHour;
+        set => Condition.TimeBlock.StartHour = value;
     }
 
     public int EndHour
     {
-        get => Filter.TimeBlock.EndHour;
-        set => Filter.TimeBlock.EndHour = value;
+        get => Condition.TimeBlock.EndHour;
+        set => Condition.TimeBlock.EndHour = value;
     }
 }

@@ -31,8 +31,8 @@ public class ReturningSpecimenJsonSerializerTests
         // Arrange
         var parameters = new ReturningSpecimensParameters(
             [
-                new ReturnsAfterTimePeriodFilter("DATE1", 20),
-                new ReturnsNotEarlierThanGivenDateNextYearFilter("DATE2", 07, 15)
+                new ReturnsAfterTimePeriodCondition("DATE1", 20),
+                new ReturnsNotEarlierThanGivenDateNextYearCondition("DATE2", 07, 15)
             ]
         );
 
@@ -56,7 +56,7 @@ public class ReturningSpecimenJsonSerializerTests
     public void GivenReturningSpecimenConditions_WhenSerializeAndDeserialize_ReturnsSameConditions()
     {
         // Arrange
-        var parameters = new ReturningSpecimensParameters([new ReturnsAfterTimePeriodFilter("DATE1", 20), new ReturnsNotEarlierThanGivenDateNextYearFilter("DATE2", 06, 14)]);
+        var parameters = new ReturningSpecimensParameters([new ReturnsAfterTimePeriodCondition("DATE1", 20), new ReturnsNotEarlierThanGivenDateNextYearCondition("DATE2", 06, 14)]);
 
         // Act
         var serialized = JsonConvert.SerializeObject(parameters, _settings);
@@ -65,14 +65,14 @@ public class ReturningSpecimenJsonSerializerTests
         // Assert
         Assert.That(deserialized.Conditions.Count, Is.EqualTo(2));
 
-        Assert.That(deserialized.Conditions[0], Is.TypeOf<ReturnsAfterTimePeriodFilter>());
-        Assert.That(deserialized.Conditions[1], Is.TypeOf<ReturnsNotEarlierThanGivenDateNextYearFilter>());
+        Assert.That(deserialized.Conditions[0], Is.TypeOf<ReturnsAfterTimePeriodCondition>());
+        Assert.That(deserialized.Conditions[1], Is.TypeOf<ReturnsNotEarlierThanGivenDateNextYearCondition>());
 
-        Assert.That(((ReturnsAfterTimePeriodFilter)deserialized.Conditions[0]).DateValueName, Is.EqualTo("DATE1"));
-        Assert.That(((ReturnsAfterTimePeriodFilter)deserialized.Conditions[0]).TimePeriodInDays, Is.EqualTo(20));
+        Assert.That(((ReturnsAfterTimePeriodCondition)deserialized.Conditions[0]).DateValueName, Is.EqualTo("DATE1"));
+        Assert.That(((ReturnsAfterTimePeriodCondition)deserialized.Conditions[0]).TimePeriodInDays, Is.EqualTo(20));
 
-        Assert.That(((ReturnsNotEarlierThanGivenDateNextYearFilter)deserialized.Conditions[1]).DateValueName, Is.EqualTo("DATE2"));
-        Assert.That(((ReturnsNotEarlierThanGivenDateNextYearFilter)deserialized.Conditions[1]).Month, Is.EqualTo(06));
-        Assert.That(((ReturnsNotEarlierThanGivenDateNextYearFilter)deserialized.Conditions[1]).Day, Is.EqualTo(14));
+        Assert.That(((ReturnsNotEarlierThanGivenDateNextYearCondition)deserialized.Conditions[1]).DateValueName, Is.EqualTo("DATE2"));
+        Assert.That(((ReturnsNotEarlierThanGivenDateNextYearCondition)deserialized.Conditions[1]).Month, Is.EqualTo(06));
+        Assert.That(((ReturnsNotEarlierThanGivenDateNextYearCondition)deserialized.Conditions[1]).Day, Is.EqualTo(14));
     }
 }

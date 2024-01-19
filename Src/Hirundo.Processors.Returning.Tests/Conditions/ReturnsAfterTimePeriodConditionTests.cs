@@ -6,13 +6,13 @@ using NUnit.Framework;
 namespace Hirundo.Processors.Returning.Tests.Conditions;
 
 [TestFixture]
-public class ReturnsAfterTimePeriodFilterTests
+public class ReturnsAfterTimePeriodConditionTests
 {
     [Test]
     public void GivenTwoObservationsWithDistantDates_WhenIsReturning_ReturnsTrue()
     {
         // Arrange
-        var filter = new ReturnsAfterTimePeriodFilter("DATE", 20);
+        var filter = new ReturnsAfterTimePeriodCondition("DATE", 20);
 
         var specimen = new Specimen("AB123", [
             new Observation(["DATE"], [DateTime.Parse("2021-06-01", CultureInfo.InvariantCulture)]),
@@ -30,7 +30,7 @@ public class ReturnsAfterTimePeriodFilterTests
     public void GivenMoreThanTwoObservationsWithDistantDates_WhenIsReturning_ReturnsTrue()
     {
         // Arrange
-        var filter = new ReturnsAfterTimePeriodFilter("DATE", 20);
+        var filter = new ReturnsAfterTimePeriodCondition("DATE", 20);
 
         var specimen = new Specimen("AB123", [
             new Observation(["DATE"], [DateTime.Parse("2021-06-01", CultureInfo.InvariantCulture)]),
@@ -49,7 +49,7 @@ public class ReturnsAfterTimePeriodFilterTests
     public void GivenMoreThanTwoObservationsWithDistanceLessThanTimePeriod_WhenIsReturning_ReturnsFalse()
     {
         // Arrange
-        var filter = new ReturnsAfterTimePeriodFilter("DATE", 20);
+        var filter = new ReturnsAfterTimePeriodCondition("DATE", 20);
 
         var specimen = new Specimen("AB123",
         [

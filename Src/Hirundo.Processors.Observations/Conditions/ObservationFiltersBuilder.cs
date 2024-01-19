@@ -6,18 +6,18 @@
 /// </summary>
 public class ObservationFiltersBuilder
 {
-    private readonly List<IObservationFilter> _observationFilters = [];
+    private readonly List<IObservationCondition> _observationFilters = [];
 
     /// <summary>
     ///     Tworzy nowy filtr obserwacji.
     /// </summary>
     /// <returns></returns>
-    public IObservationFilter Build()
+    public IObservationCondition Build()
     {
-        return new CompositeObservationFilter([.._observationFilters]);
+        return new CompositeObservationCondition([.._observationFilters]);
     }
 
-    public ObservationFiltersBuilder WithObservationConditions(IEnumerable<IObservationFilter> observationsConditions)
+    public ObservationFiltersBuilder WithObservationConditions(IEnumerable<IObservationCondition> observationsConditions)
     {
         _observationFilters.AddRange(observationsConditions);
         return this;

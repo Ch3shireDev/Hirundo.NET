@@ -15,19 +15,19 @@ public class ObservationParametersBrowserModel : IParametersBrowserModel
 
     public IList<ParametersData> ParametersDataList { get; } =
     [
-        new ParametersData(typeof(IsEqualFilter), "Czy wartość jest równa?", "Warunek porównujący wartość w polu danych z wybraną wartością."),
-        new ParametersData(typeof(IsInTimeBlockFilter), "Czy wartość jest w przedziale czasowym?", "Warunek sprawdzający godziny złapania osobnika.")
+        new ParametersData(typeof(IsEqualCondition), "Czy wartość jest równa?", "Warunek porównujący wartość w polu danych z wybraną wartością."),
+        new ParametersData(typeof(IsInTimeBlockCondition), "Czy wartość jest w przedziale czasowym?", "Warunek sprawdzający godziny złapania osobnika.")
     ];
 
     public void AddParameters(ParametersData parametersData)
     {
         switch (parametersData.Type.Name)
         {
-            case nameof(IsEqualFilter):
-                ObservationsParameters.Conditions.Add(new IsEqualFilter());
+            case nameof(IsEqualCondition):
+                ObservationsParameters.Conditions.Add(new IsEqualCondition());
                 break;
-            case nameof(IsInTimeBlockFilter):
-                ObservationsParameters.Conditions.Add(new IsInTimeBlockFilter());
+            case nameof(IsInTimeBlockCondition):
+                ObservationsParameters.Conditions.Add(new IsInTimeBlockCondition());
                 break;
             default:
                 throw new NotImplementedException();
@@ -42,12 +42,12 @@ public class ObservationParametersBrowserModel : IParametersBrowserModel
                 .Select(Create);
     }
 
-    private ParametersViewModel Create(IObservationFilter condition)
+    private ParametersViewModel Create(IObservationCondition condition)
     {
         var viewModel = (ParametersViewModel)(condition switch
         {
-            IsEqualFilter filter => new IsEqualViewModel(new IsEqualModel(filter)),
-            IsInTimeBlockFilter filter => new IsInTimeBlockViewModel(new IsInTimeBlockModel(filter)),
+            IsEqualCondition filter => new IsEqualViewModel(new IsEqualModel(filter)),
+            IsInTimeBlockCondition filter => new IsInTimeBlockViewModel(new IsInTimeBlockModel(filter)),
             _ => throw new NotImplementedException()
         });
 
@@ -55,7 +55,7 @@ public class ObservationParametersBrowserModel : IParametersBrowserModel
         {
             removable.Removed += (_, args) =>
             {
-                if (args.Parameters is IObservationFilter conditionToRemove)
+                if (args.Parameters is IObservationCondition conditionToRemove)
                 {
                     ObservationsParameters.Conditions.Remove(conditionToRemove);
                 }

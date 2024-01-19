@@ -5,18 +5,18 @@
 /// </summary>
 public class ReturningSpecimenFiltersBuilder
 {
-    private readonly List<IReturningSpecimenFilter> _conditions = [];
+    private readonly List<IReturningSpecimenCondition> _conditions = [];
 
     /// <summary>
     ///     Buduje filtr powracających osobników.
     /// </summary>
     /// <returns></returns>
-    public IReturningSpecimenFilter Build()
+    public IReturningSpecimenCondition Build()
     {
-        return new CompositeReturningSpecimenFilter([.._conditions]);
+        return new CompositeReturningSpecimenCondition([.._conditions]);
     }
 
-    public ReturningSpecimenFiltersBuilder WithReturningSpecimensConditions(IEnumerable<IReturningSpecimenFilter> returningSpecimensConditions)
+    public ReturningSpecimenFiltersBuilder WithReturningSpecimensConditions(IEnumerable<IReturningSpecimenCondition> returningSpecimensConditions)
     {
         _conditions.AddRange(returningSpecimensConditions);
         return this;

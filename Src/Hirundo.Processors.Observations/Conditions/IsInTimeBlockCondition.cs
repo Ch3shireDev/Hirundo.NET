@@ -4,15 +4,15 @@ using Hirundo.Commons;
 namespace Hirundo.Processors.Observations.Conditions;
 
 [TypeDescription("IsInTimeBlock")]
-public class IsInTimeBlockFilter : IObservationFilter
+public class IsInTimeBlockCondition : IObservationCondition
 {
     private readonly bool isThroughMidnight;
 
-    public IsInTimeBlockFilter()
+    public IsInTimeBlockCondition()
     {
     }
 
-    public IsInTimeBlockFilter(string valueName, TimeBlock timeBlock, bool rejectNullValues = false)
+    public IsInTimeBlockCondition(string valueName, TimeBlock timeBlock, bool rejectNullValues = false)
     {
         isThroughMidnight = timeBlock.StartHour > timeBlock.EndHour;
         ValueName = valueName;

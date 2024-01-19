@@ -3,7 +3,7 @@
 namespace Hirundo.Processors.Observations.Conditions;
 
 [TypeDescription("IsInSeason")]
-public class IsInSeasonFilter(string dateColumnName, Season season) : IObservationFilter
+public class IsInSeasonCondition(string dateColumnName, Season season) : IObservationCondition
 {
     public string DateColumnName { get; } = dateColumnName;
     public Season Season { get; } = season;

@@ -128,8 +128,8 @@ public class MainViewModelTests
             {
                 Conditions =
                 [
-                    new IsEqualFilter("AAA", "XXX"),
-                    new IsInSeasonFilter("BBB", new Season(06, 01, 08, 15))
+                    new IsEqualCondition("AAA", "XXX"),
+                    new IsInSeasonCondition("BBB", new Season(06, 01, 08, 15))
                 ]
             }
         };
@@ -143,12 +143,12 @@ public class MainViewModelTests
         Assert.That(result.Observations, Is.Not.Null);
         Assert.That(result.Observations.Conditions, Is.Not.Null);
         Assert.That(result.Observations.Conditions.Count, Is.EqualTo(2));
-        Assert.That(result.Observations.Conditions[0], Is.InstanceOf<IsEqualFilter>());
-        Assert.That(result.Observations.Conditions[1], Is.InstanceOf<IsInSeasonFilter>());
-        var isEqualFilter = (IsEqualFilter)result.Observations.Conditions[0];
+        Assert.That(result.Observations.Conditions[0], Is.InstanceOf<IsEqualCondition>());
+        Assert.That(result.Observations.Conditions[1], Is.InstanceOf<IsInSeasonCondition>());
+        var isEqualFilter = (IsEqualCondition)result.Observations.Conditions[0];
         Assert.That(isEqualFilter.ValueName, Is.EqualTo("AAA"));
         Assert.That(isEqualFilter.Value, Is.EqualTo("XXX"));
-        var isInSeasonFilter = (IsInSeasonFilter)result.Observations.Conditions[1];
+        var isInSeasonFilter = (IsInSeasonCondition)result.Observations.Conditions[1];
         Assert.That(isInSeasonFilter.DateColumnName, Is.EqualTo("BBB"));
         Assert.That(isInSeasonFilter.Season, Is.Not.Null);
         Assert.That(isInSeasonFilter.Season.StartMonth, Is.EqualTo(06));
@@ -191,8 +191,8 @@ public class MainViewModelTests
             {
                 Conditions =
                 [
-                    new ReturnsAfterTimePeriodFilter("DATE", 400),
-                    new ReturnsNotEarlierThanGivenDateNextYearFilter("DATE", 06, 01)
+                    new ReturnsAfterTimePeriodCondition("DATE", 400),
+                    new ReturnsNotEarlierThanGivenDateNextYearCondition("DATE", 06, 01)
                 ]
             }
         };
@@ -206,12 +206,12 @@ public class MainViewModelTests
         Assert.That(result.ReturningSpecimens, Is.Not.Null);
         Assert.That(result.ReturningSpecimens.Conditions, Is.Not.Null);
         Assert.That(result.ReturningSpecimens.Conditions.Count, Is.EqualTo(2));
-        Assert.That(result.ReturningSpecimens.Conditions[0], Is.InstanceOf<ReturnsAfterTimePeriodFilter>());
-        Assert.That(result.ReturningSpecimens.Conditions[1], Is.InstanceOf<ReturnsNotEarlierThanGivenDateNextYearFilter>());
-        var returnsAfterTimePeriodFilter = (ReturnsAfterTimePeriodFilter)result.ReturningSpecimens.Conditions[0];
+        Assert.That(result.ReturningSpecimens.Conditions[0], Is.InstanceOf<ReturnsAfterTimePeriodCondition>());
+        Assert.That(result.ReturningSpecimens.Conditions[1], Is.InstanceOf<ReturnsNotEarlierThanGivenDateNextYearCondition>());
+        var returnsAfterTimePeriodFilter = (ReturnsAfterTimePeriodCondition)result.ReturningSpecimens.Conditions[0];
         Assert.That(returnsAfterTimePeriodFilter.DateValueName, Is.EqualTo("DATE"));
         Assert.That(returnsAfterTimePeriodFilter.TimePeriodInDays, Is.EqualTo(400));
-        var returnsNotEarlierThanGivenDateNextYearFilter = (ReturnsNotEarlierThanGivenDateNextYearFilter)result.ReturningSpecimens.Conditions[1];
+        var returnsNotEarlierThanGivenDateNextYearFilter = (ReturnsNotEarlierThanGivenDateNextYearCondition)result.ReturningSpecimens.Conditions[1];
         Assert.That(returnsNotEarlierThanGivenDateNextYearFilter.DateValueName, Is.EqualTo("DATE"));
         Assert.That(returnsNotEarlierThanGivenDateNextYearFilter.Month, Is.EqualTo(06));
         Assert.That(returnsNotEarlierThanGivenDateNextYearFilter.Day, Is.EqualTo(01));
@@ -227,7 +227,7 @@ public class MainViewModelTests
             {
                 Conditions =
                 [
-                    new IsInSharedTimeWindowFilterBuilder("DATE", 100)
+                    new IsInSharedTimeWindowConditionBuilder("DATE", 100)
                 ]
             }
         };
@@ -241,8 +241,8 @@ public class MainViewModelTests
         Assert.That(result.Population, Is.Not.Null);
         Assert.That(result.Population.Conditions, Is.Not.Null);
         Assert.That(result.Population.Conditions.Count, Is.EqualTo(1));
-        Assert.That(result.Population.Conditions[0], Is.InstanceOf<IsInSharedTimeWindowFilterBuilder>());
-        var isInSharedTimeWindowFilterBuilder = (IsInSharedTimeWindowFilterBuilder)result.Population.Conditions[0];
+        Assert.That(result.Population.Conditions[0], Is.InstanceOf<IsInSharedTimeWindowConditionBuilder>());
+        var isInSharedTimeWindowFilterBuilder = (IsInSharedTimeWindowConditionBuilder)result.Population.Conditions[0];
         Assert.That(isInSharedTimeWindowFilterBuilder.DateValueName, Is.EqualTo("DATE"));
         Assert.That(isInSharedTimeWindowFilterBuilder.MaxTimeDistanceInDays, Is.EqualTo(100));
     }

@@ -4,5 +4,5 @@ namespace Hirundo.Processors.Population;
 
 public class PopulationProcessorParameters
 {
-    public IList<IPopulationFilterBuilder> Conditions { get; init; } = [];
+    public IList<IPopulationConditionBuilder> Conditions { get; init; } = [];
 }

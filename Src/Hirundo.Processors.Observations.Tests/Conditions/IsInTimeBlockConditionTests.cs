@@ -5,14 +5,14 @@ using NUnit.Framework;
 namespace Hirundo.Processors.Observations.Tests.Conditions;
 
 [TestFixture]
-public class IsInTimeBlockFilterTests
+public class IsInTimeBlockConditionTests
 {
     [Test]
     public void GivenHourInTimeBlock_WhenIsAccepted_ReturnsTrue()
     {
         // Arrange
         var timeBlock = new TimeBlock(06, 08);
-        var filter = new IsInTimeBlockFilter("HOUR", timeBlock);
+        var filter = new IsInTimeBlockCondition("HOUR", timeBlock);
         var observation = new Observation(["HOUR"], [7]);
 
         // Act
@@ -27,7 +27,7 @@ public class IsInTimeBlockFilterTests
     {
         // Arrange
         var timeBlock = new TimeBlock(23, 2);
-        var filter = new IsInTimeBlockFilter("HOUR", timeBlock);
+        var filter = new IsInTimeBlockCondition("HOUR", timeBlock);
         var observation = new Observation(["HOUR"], [1]);
 
         // Act
@@ -42,7 +42,7 @@ public class IsInTimeBlockFilterTests
     {
         // Arrange
         var timeBlock = new TimeBlock(12, 14);
-        var filter = new IsInTimeBlockFilter("HOUR", timeBlock);
+        var filter = new IsInTimeBlockCondition("HOUR", timeBlock);
         var observation = new Observation(["HOUR"], [15]);
 
         // Act
@@ -57,7 +57,7 @@ public class IsInTimeBlockFilterTests
     {
         // Arrange
         var timeBlock = new TimeBlock(22, 5);
-        var filter = new IsInTimeBlockFilter("HOUR", timeBlock);
+        var filter = new IsInTimeBlockCondition("HOUR", timeBlock);
         var observation = new Observation(["HOUR"], [6]);
 
         // Act
@@ -72,7 +72,7 @@ public class IsInTimeBlockFilterTests
     {
         // Arrange
         var timeBlock = new TimeBlock(06, 08);
-        var filter = new IsInTimeBlockFilter("HOUR", timeBlock);
+        var filter = new IsInTimeBlockCondition("HOUR", timeBlock);
         var observation = new Observation(["HOUR"], [(short)7]);
 
         // Act

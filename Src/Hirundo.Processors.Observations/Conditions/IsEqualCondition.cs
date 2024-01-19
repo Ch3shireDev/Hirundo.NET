@@ -3,15 +3,15 @@
 namespace Hirundo.Processors.Observations.Conditions;
 
 [TypeDescription("IsEqual")]
-public class IsEqualFilter : IObservationFilter
+public class IsEqualCondition : IObservationCondition
 {
-    public IsEqualFilter()
+    public IsEqualCondition()
     {
         ValueName = null!;
         Value = null!;
     }
 
-    public IsEqualFilter(string valueName, object value)
+    public IsEqualCondition(string valueName, object value)
     {
         ValueName = valueName;
         Value = value;

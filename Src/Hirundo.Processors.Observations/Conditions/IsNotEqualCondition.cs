@@ -3,7 +3,7 @@
 namespace Hirundo.Processors.Observations.Conditions;
 
 [TypeDescription("IsNotEqual")]
-public class IsNotEqualFilter(string valueName, object value) : IObservationFilter
+public class IsNotEqualCondition(string valueName, object value) : IObservationCondition
 {
     public bool IsAccepted(Observation observation)
     {

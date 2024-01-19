@@ -41,6 +41,6 @@ public class IsInTimeBlockViewModel(IsInTimeBlockModel model) : ParametersViewMo
 
     public void Remove()
     {
-        Removed?.Invoke(this, new ParametersEventArgs(model.Filter));
+        Removed?.Invoke(this, new ParametersEventArgs(model.Condition));
     }
 }

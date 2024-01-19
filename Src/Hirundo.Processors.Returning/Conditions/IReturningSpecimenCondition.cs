@@ -3,10 +3,10 @@
 namespace Hirundo.Processors.Returning.Conditions;
 
 /// <summary>
-///     Interfejs dla filtrów powracających osobników. Na podstawie osobnika i jego listy obserwacji określa, czy dany
+///     Interfejs warunków powracających osobników. Na podstawie osobnika i jego listy obserwacji określa, czy dany
 ///     osobnik jest interesującym nas osobnikiem powracającym.
 /// </summary>
-public interface IReturningSpecimenFilter
+public interface IReturningSpecimenCondition
 {
     /// <summary>
     ///     Sprawdza, czy dany osobnik jest interesującym nas osobnikiem powracającym.
