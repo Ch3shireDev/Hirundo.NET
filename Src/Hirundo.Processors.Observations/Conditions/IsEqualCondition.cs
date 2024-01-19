@@ -3,22 +3,14 @@
 namespace Hirundo.Processors.Observations.Conditions;
 
 [TypeDescription("IsEqual")]
-public class IsEqualCondition : IObservationCondition
+public class IsEqualCondition(string valueName, object value) : IObservationCondition
 {
-    public IsEqualCondition()
+    public IsEqualCondition() : this(null!, null!)
     {
-        ValueName = null!;
-        Value = null!;
     }
 
-    public IsEqualCondition(string valueName, object value)
-    {
-        ValueName = valueName;
-        Value = value;
-    }
-
-    public string ValueName { get; set; }
-    public object Value { get; set; }
+    public string ValueName { get; set; } = valueName;
+    public object Value { get; set; } = value;
 
     public bool IsAccepted(Observation observation)
     {

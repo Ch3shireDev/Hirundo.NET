@@ -32,6 +32,6 @@ public class IsInSharedTimeWindowViewModel(IsInSharedTimeWindowModel model) : Pa
 
     public void Remove()
     {
-        Removed?.Invoke(this, new ParametersEventArgs(model.Condition));
+        Removed?.Invoke(this, new ParametersEventArgs(model.ConditionBuilder));
     }
 }

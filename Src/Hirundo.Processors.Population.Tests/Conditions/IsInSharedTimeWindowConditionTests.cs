@@ -18,11 +18,11 @@ public class IsInSharedTimeWindowConditionTests
 
         var specimen = new Specimen("ABC123", [new Observation(["DATE"], [DateTime.Parse("2020-05-20", CultureInfo.InvariantCulture)])]);
 
-        var filterBuilder = new IsInSharedTimeWindowConditionBuilder(dateValueName, days);
-        var filter = filterBuilder.GetPopulationFilter(returningSpecimen);
+        var condition = new IsInSharedTimeWindowConditionBuilder(dateValueName, days);
+        var @internal = condition.GetPopulationCondition(returningSpecimen);
 
         // Act
-        var result = filter.IsAccepted(specimen);
+        var result = @internal.IsAccepted(specimen);
 
         // Assert
         Assert.That(result, Is.True);
@@ -44,7 +44,7 @@ public class IsInSharedTimeWindowConditionTests
         var specimen = new Specimen("ABC123", [new Observation(["DATE"], [DateTime.Parse("2020-05-05", CultureInfo.InvariantCulture)])]);
 
         var filterBuilder = new IsInSharedTimeWindowConditionBuilder(dateValueName, days);
-        var filter = filterBuilder.GetPopulationFilter(returningSpecimen);
+        var filter = filterBuilder.GetPopulationCondition(returningSpecimen);
 
         // Act
         var result = filter.IsAccepted(specimen);

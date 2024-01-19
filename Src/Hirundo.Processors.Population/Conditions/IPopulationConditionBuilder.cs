@@ -4,5 +4,5 @@ namespace Hirundo.Processors.Population.Conditions;
 
 public interface IPopulationConditionBuilder
 {
-    public IPopulationCondition GetPopulationFilter(Specimen returningSpecimen);
+    public IPopulationCondition GetPopulationCondition(Specimen returningSpecimen);
 }

@@ -4,9 +4,9 @@ namespace Hirundo.Processors.Population.Conditions;
 
 public sealed class CompositePopulationConditionBuilder(IEnumerable<IPopulationConditionBuilder> builders) : IPopulationConditionBuilder
 {
-    public IPopulationCondition GetPopulationFilter(Specimen returningSpecimen)
+    public IPopulationCondition GetPopulationCondition(Specimen returningSpecimen)
     {
-        var filters = builders.Select(builder => builder.GetPopulationFilter(returningSpecimen)).ToArray();
+        var filters = builders.Select(builder => builder.GetPopulationCondition(returningSpecimen)).ToArray();
 
         return new CompositePopulationCondition(filters);
     }

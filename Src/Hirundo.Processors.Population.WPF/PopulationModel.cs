@@ -35,9 +35,9 @@ public class PopulationModel : IParametersBrowserModel
         }
     }
 
-    public ParametersViewModel CreateViewModel(IPopulationConditionBuilder condition)
+    public ParametersViewModel CreateViewModel(IPopulationConditionBuilder conditionBuilder)
     {
-        var viewModel = Create(condition);
+        var viewModel = Create(conditionBuilder);
 
         if (viewModel is IRemovable removable)
         {
@@ -53,12 +53,12 @@ public class PopulationModel : IParametersBrowserModel
         return viewModel;
     }
 
-    public static ParametersViewModel Create(IPopulationConditionBuilder condition)
+    public static ParametersViewModel Create(IPopulationConditionBuilder conditionBuilder)
     {
-        return condition switch
+        return conditionBuilder switch
         {
             IsInSharedTimeWindowConditionBuilder m => new IsInSharedTimeWindowViewModel(new IsInSharedTimeWindowModel(m)),
-            _ => throw new NotSupportedException($"Condition of type {condition.GetType()} is not supported.")
+            _ => throw new NotSupportedException($"Condition of type {conditionBuilder.GetType()} is not supported.")
         };
     }
 }

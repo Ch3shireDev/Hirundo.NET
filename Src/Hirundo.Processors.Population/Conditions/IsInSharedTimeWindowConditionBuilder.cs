@@ -19,7 +19,7 @@ public sealed class IsInSharedTimeWindowConditionBuilder : IPopulationConditionB
     public string DateValueName { get; set; } = "";
     public int MaxTimeDistanceInDays { get; set; } = 300;
 
-    public IPopulationCondition GetPopulationFilter(Specimen returningSpecimen)
+    public IPopulationCondition GetPopulationCondition(Specimen returningSpecimen)
     {
         return new IsInSharedTimeWindowCondition(returningSpecimen, DateValueName, MaxTimeDistanceInDays);
     }

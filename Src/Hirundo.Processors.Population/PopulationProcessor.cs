@@ -10,7 +10,7 @@ public class PopulationProcessor(IPopulationConditionBuilder conditionBuilder) :
 {
     public IEnumerable<Specimen> GetPopulation(Specimen returningSpecimen, IEnumerable<Specimen> totalSpecimens)
     {
-        var condition = conditionBuilder.GetPopulationFilter(returningSpecimen);
-        return totalSpecimens.Where(condition.IsAccepted).ToList();
+        var @internal = conditionBuilder.GetPopulationCondition(returningSpecimen);
+        return totalSpecimens.Where(@internal.IsAccepted).ToList();
     }
 }

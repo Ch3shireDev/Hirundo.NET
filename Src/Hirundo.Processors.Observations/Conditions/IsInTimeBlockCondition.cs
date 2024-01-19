@@ -21,7 +21,7 @@ public class IsInTimeBlockCondition : IObservationCondition
     }
 
     public string ValueName { get; set; } = null!;
-    public TimeBlock TimeBlock { get; set; } = new TimeBlock(6, 12);
+    public TimeBlock TimeBlock { get; set; } = new(6, 12);
     public bool RejectNullValues { get; set; }
 
     public bool IsAccepted(Observation observation)
