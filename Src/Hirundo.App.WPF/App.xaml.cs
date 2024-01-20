@@ -39,7 +39,7 @@ public partial class App : Application
 
         builder.RegisterType<MainModel>().AsSelf().SingleInstance();
         builder.RegisterType<MainViewModel>().AsSelf().SingleInstance();
-        builder.RegisterType<DataLabelsRepository>().As<IDataLabelsRepository>().SingleInstance();
+        builder.RegisterType<DataLabelRepository>().As<IDataLabelRepository>().SingleInstance();
 
         var container = builder.Build();
 

@@ -1,10 +1,11 @@
 ﻿using System.Windows;
 using Hirundo.Commons.WPF;
 using Hirundo.Databases.WPF.Access;
+using Hirundo.Repositories.DataLabels;
 
 namespace Hirundo.Databases.WPF;
 
-public class DataSourceModel : IParametersBrowserModel
+public class DataSourceModel(IDataLabelRepository dataLabelRepository) : IParametersBrowserModel
 {
     public IList<IDatabaseParameters> DatabaseParameters { get; } = new List<IDatabaseParameters>();
 
@@ -20,7 +21,7 @@ public class DataSourceModel : IParametersBrowserModel
 
     public void AddParameters(ParametersData parametersData)
     {
-        AddCondition(parametersData.Type);
+        AddDatasource(parametersData.Type);
     }
 
     public IEnumerable<ParametersViewModel> GetParametersViewModels()
@@ -28,7 +29,7 @@ public class DataSourceModel : IParametersBrowserModel
         return DatabaseParameters.Select(CreateViewModel);
     }
 
-    public void AddCondition(Type selectedDataSourceType)
+    public void AddDatasource(Type selectedDataSourceType)
     {
         switch (selectedDataSourceType)
         {
@@ -65,11 +66,11 @@ public class DataSourceModel : IParametersBrowserModel
         DatabaseParameters.Remove(p);
     }
 
-    public static ParametersViewModel Create(IDatabaseParameters parameters)
+    public ParametersViewModel Create(IDatabaseParameters parameters)
     {
         return parameters switch
         {
-            AccessDatabaseParameters accessDatabaseParameters => new AccessDataSourceViewModel(accessDatabaseParameters),
+            AccessDatabaseParameters accessDatabaseParameters => new AccessDataSourceViewModel(accessDatabaseParameters, dataLabelRepository),
             _ => throw new NotImplementedException()
         };
     }

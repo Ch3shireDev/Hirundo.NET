@@ -1,4 +1,5 @@
-﻿using Hirundo.App.WPF.Components;
+﻿using Autofac;
+using Hirundo.App.WPF.Components;
 using Hirundo.Commons;
 using Hirundo.Commons.WPF;
 using Hirundo.Databases;
@@ -23,8 +24,9 @@ public class MainViewModelTests
     [SetUp]
     public void Setup()
     {
-        var model = new MainModel();
-        _viewModel = new MainViewModel(model);
+        var builder = new ContainerBuilder();
+        builder.AddViewModel();
+        _viewModel = builder.Build().Resolve<MainViewModel>();
     }
 
     [Test]

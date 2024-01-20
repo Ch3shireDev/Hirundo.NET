@@ -3,9 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:wpf3="clr-namespace:Hirundo.Processors.Returning.WPF;assembly=Hirundo.Processors.Returning.WPF"
              xmlns:wpf4="clr-namespace:Hirundo.Processors.Specimens.WPF;assembly=Hirundo.Processors.Specimens.WPF"
-             xmlns:wpf5="clr-namespace:Hirundo.Processors.Statistics.WPF;assembly=Hirundo.Processors.Statistics.WPF"
              xmlns:helpers="clr-namespace:Hirundo.Commons.WPF.Helpers;assembly=Hirundo.Commons.WPF"
              xmlns:wpf6="clr-namespace:Hirundo.Writers.WPF;assembly=Hirundo.Writers.WPF"
              xmlns:isEqual="clr-namespace:Hirundo.Processors.Observations.WPF.IsEqual;assembly=Hirundo.Processors.Observations.WPF"
@@ -69,11 +67,11 @@
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type notEarlierThanGivenDateNextYear:NotEarlierThanGivenDateNextYearViewModel}">
-            <notEarlierThanGivenDateNextYear:NotEarlierThanGivenDateNextYearView/>
+            <notEarlierThanGivenDateNextYear:NotEarlierThanGivenDateNextYearView />
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type average:AverageViewModel}">
-            <average:AverageView/>
+            <average:AverageView />
         </DataTemplate>
 
         <helpers2:ViewModelToTabItemHeaderConverter x:Key="ViewModelToTabItemHeaderConverter" />

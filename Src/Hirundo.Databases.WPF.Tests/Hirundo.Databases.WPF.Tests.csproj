@@ -5,15 +5,6 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ImplicitUsings>enable</ImplicitUsings>
-    <PlatformTarget>x64</PlatformTarget>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <NoWarn>1701;1702;NETSDK1</NoWarn>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <NoWarn>1701;1702;NETSDK1</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,8 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Hirundo.App.WPF\Hirundo.App.WPF.csproj" />
-    <ProjectReference Include="..\Hirundo.App\Hirundo.App.csproj" />
+    <ProjectReference Include="..\Hirundo.Databases.WPF\Hirundo.Databases.WPF.csproj" />
   </ItemGroup>
 
 </Project>

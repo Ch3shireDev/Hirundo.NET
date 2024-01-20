@@ -1,6 +1,6 @@
 ﻿namespace Hirundo.Repositories.DataLabels;
 
-public class DataLabelsRepository : IDataLabelsRepository
+public class DataLabelRepository : IDataLabelRepository
 {
     private readonly List<DataLabel> _labels = [];
 
@@ -23,6 +23,13 @@ public class DataLabelsRepository : IDataLabelsRepository
 
     public void AddLabels(IEnumerable<DataLabel> labels)
     {
+        _labels.AddRange(labels);
+        LabelsChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void UpdateLabels(IEnumerable<DataLabel> labels)
+    {
+        _labels.Clear();
         _labels.AddRange(labels);
         LabelsChanged?.Invoke(this, EventArgs.Empty);
     }

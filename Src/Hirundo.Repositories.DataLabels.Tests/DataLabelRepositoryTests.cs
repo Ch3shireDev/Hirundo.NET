@@ -3,15 +3,15 @@
 namespace Hirundo.Repositories.DataLabels.Tests;
 
 [TestFixture]
-public class DataLabelsRepositoryTests
+public class DataLabelRepositoryTests
 {
     [SetUp]
     public void Setup()
     {
-        _repository = new DataLabelsRepository();
+        _repository = new DataLabelRepository();
     }
 
-    private DataLabelsRepository _repository = null!;
+    private DataLabelRepository _repository = null!;
 
     [Test]
     public void GivenEmptyRepository_WhenGetLabels_ReturnsEmpty()
@@ -117,5 +117,24 @@ public class DataLabelsRepositoryTests
 
         // Assert
         Assert.That(eventRaised, Is.True);
+    }
+
+    [Test]
+    public void GivenExistingLabels_WhenUpdateLabels_SetsNewLabels()
+    {
+        // Arrange
+        _repository.Clear();
+        _repository.AddLabel(new DataLabel("label1", Commons.DataType.Numeric));
+        _repository.AddLabel(new DataLabel("label2", Commons.DataType.Number));
+
+        // Act
+        _repository.UpdateLabels([new DataLabel("label3"), new DataLabel("label4")]);
+
+        // Assert
+        var labels = _repository.GetLabels().ToArray();
+        Assert.That(labels, Is.Not.Empty);
+        Assert.That(labels, Has.Length.EqualTo(2));
+        Assert.That(labels.First().Name, Is.EqualTo("label3"));
+        Assert.That(labels.Last().Name, Is.EqualTo("label4"));
     }
 }

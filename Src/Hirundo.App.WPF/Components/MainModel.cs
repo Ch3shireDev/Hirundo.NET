@@ -20,10 +20,6 @@ public class MainModel(
     WriterModel writerModel
 )
 {
-    public MainModel():this(new HirundoApp(), new DataSourceModel(), new ObservationParametersBrowserModel(), new PopulationModel(), new ReturningSpecimensModel(), new SpecimensModel(), new StatisticsModel(), new WriterModel())
-    {
-    }
-
     private bool _isProcessing;
     public DataSourceModel DataSourceModel { get; set; } = dataSourceModel;
     public ObservationParametersBrowserModel ObservationParametersBrowserModel { get; set; } = observationParametersBrowserModel;

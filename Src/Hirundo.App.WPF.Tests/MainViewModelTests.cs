@@ -1,6 +1,6 @@
-﻿using Hirundo.App.WPF.Components;
+﻿using Autofac;
+using Hirundo.App.WPF.Components;
 using Hirundo.Commons.WPF;
-using Hirundo.Databases.WPF;
 using NUnit.Framework;
 
 namespace Hirundo.App.WPF.Tests;
@@ -11,8 +11,9 @@ public class MainViewModelTests
     [SetUp]
     public void Setup()
     {
-        var model = new MainModel();
-        _viewModel = new MainViewModel(model);
+        var builder = new ContainerBuilder();
+        builder.AddViewModel();
+        _viewModel = builder.Build().Resolve<MainViewModel>();
     }
 
     private MainViewModel _viewModel = null!;
@@ -28,7 +29,7 @@ public class MainViewModelTests
         // Assert
         Assert.That(selected, Is.InstanceOf<ParametersBrowserViewModel>());
         var browserViewModel = selected as ParametersBrowserViewModel;
-        Assert.That(browserViewModel?.Title, Is.EqualTo(new DataSourceModel().Title));
+        Assert.That(browserViewModel?.Title, Is.EqualTo("Źródła danych"));
     }
 
     [Test]
