@@ -5,8 +5,15 @@ using System.Windows;
 using Autofac;
 using Hirundo.App.WPF.Components;
 using Hirundo.Commons.WPF.Helpers;
+using Hirundo.Databases.WPF;
+using Hirundo.Processors.Observations.WPF;
+using Hirundo.Processors.Population.WPF;
+using Hirundo.Processors.Returning.WPF;
+using Hirundo.Processors.Specimens.WPF;
+using Hirundo.Processors.Statistics.WPF;
 using Hirundo.Repositories.DataLabels;
 using Hirundo.Serialization.Json;
+using Hirundo.Writers.WPF;
 using Newtonsoft.Json;
 using Serilog;
 
@@ -21,8 +28,17 @@ public partial class App : Application
     {
         var builder = new ContainerBuilder();
         builder.RegisterType<HirundoApp>().As<IHirundoApp>();
-        builder.RegisterType<MainModel>().AsSelf();
-        builder.RegisterType<MainViewModel>().AsSelf();
+
+        builder.RegisterType<DataSourceModel>().AsSelf().SingleInstance();
+        builder.RegisterType<ObservationParametersBrowserModel>().AsSelf().SingleInstance();
+        builder.RegisterType<PopulationModel>().AsSelf().SingleInstance();
+        builder.RegisterType<ReturningSpecimensModel>().AsSelf().SingleInstance();
+        builder.RegisterType<SpecimensModel>().AsSelf().SingleInstance();
+        builder.RegisterType<StatisticsModel>().AsSelf().SingleInstance();
+        builder.RegisterType<WriterModel>().AsSelf().SingleInstance();
+
+        builder.RegisterType<MainModel>().AsSelf().SingleInstance();
+        builder.RegisterType<MainViewModel>().AsSelf().SingleInstance();
         builder.RegisterType<DataLabelsRepository>().As<IDataLabelsRepository>().SingleInstance();
 
         var container = builder.Build();

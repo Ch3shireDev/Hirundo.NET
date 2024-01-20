@@ -9,16 +9,29 @@ using Serilog;
 
 namespace Hirundo.App.WPF.Components;
 
-public class MainModel(IHirundoApp app)
+public class MainModel(
+    IHirundoApp app,
+    DataSourceModel dataSourceModel,
+    ObservationParametersBrowserModel observationParametersBrowserModel,
+    PopulationModel populationModel,
+    ReturningSpecimensModel returningSpecimensModel,
+    SpecimensModel specimensModel,
+    StatisticsModel statisticsModel,
+    WriterModel writerModel
+)
 {
+    public MainModel():this(new HirundoApp(), new DataSourceModel(), new ObservationParametersBrowserModel(), new PopulationModel(), new ReturningSpecimensModel(), new SpecimensModel(), new StatisticsModel(), new WriterModel())
+    {
+    }
+
     private bool _isProcessing;
-    public DataSourceModel DataSourceModel { get; set; } = new();
-    public ObservationParametersBrowserModel ObservationParametersBrowserModel { get; set; } = new();
-    public PopulationModel PopulationModel { get; set; } = new();
-    public ReturningSpecimensModel ReturningSpecimensModel { get; set; } = new();
-    public SpecimensModel SpecimensModel { get; set; } = new();
-    public StatisticsModel StatisticsModel { get; set; } = new();
-    public WriterModel WriterModel { get; set; } = new();
+    public DataSourceModel DataSourceModel { get; set; } = dataSourceModel;
+    public ObservationParametersBrowserModel ObservationParametersBrowserModel { get; set; } = observationParametersBrowserModel;
+    public PopulationModel PopulationModel { get; set; } = populationModel;
+    public ReturningSpecimensModel ReturningSpecimensModel { get; set; } = returningSpecimensModel;
+    public SpecimensModel SpecimensModel { get; set; } = specimensModel;
+    public StatisticsModel StatisticsModel { get; set; } = statisticsModel;
+    public WriterModel WriterModel { get; set; } = writerModel;
 
     public void SetConfig(ApplicationConfig config)
     {

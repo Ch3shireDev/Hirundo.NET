@@ -23,8 +23,7 @@ public class MainViewModelTests
     [SetUp]
     public void Setup()
     {
-        var app = new HirundoApp();
-        var model = new MainModel(app);
+        var model = new MainModel();
         _viewModel = new MainViewModel(model);
     }
 
