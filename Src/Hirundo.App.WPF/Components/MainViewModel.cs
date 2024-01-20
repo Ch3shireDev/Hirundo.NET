@@ -6,7 +6,6 @@ using Hirundo.App.WPF.Helpers;
 using Hirundo.Commons;
 using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
-using Hirundo.Configuration;
 using Hirundo.Processors.Specimens.WPF;
 using Hirundo.Writers.WPF;
 using Microsoft.Win32;
@@ -107,7 +106,7 @@ public sealed class MainViewModel : ViewModelBase
         var dialog = MessageBox.Show("Czy na pewno chcesz utworzyć nową konfigurację? Niezapisane zmiany w bieżącej konfiguracji zostaną utracone.", "Uwaga", MessageBoxButton.YesNo,
             MessageBoxImage.Warning);
         if (dialog != MessageBoxResult.Yes) return;
-        SetConfig(new ApplicationConfig());
+        UpdateConfig(new ApplicationConfig());
 
         SelectedViewModel = null;
         await Task.Delay(100).ConfigureAwait(false);
@@ -161,7 +160,7 @@ public sealed class MainViewModel : ViewModelBase
         }
     }
 
-    public void SetConfig(ApplicationConfig config)
+    public void UpdateConfig(ApplicationConfig config)
     {
         _model.SetConfig(config);
         OnPropertyChanged(nameof(DataSourceViewModel));
@@ -262,7 +261,7 @@ public sealed class MainViewModel : ViewModelBase
             {
                 var json = File.ReadAllText(loadFileDialog.FileName);
                 var config = JsonTools.Deserialize(json);
-                SetConfig(config);
+                UpdateConfig(config);
             }
 
             var message = $"Konfiguracja została wczytana z {loadFileDialog.FileName}.";

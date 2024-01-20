@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Hirundo.App.WPF\Hirundo.App.WPF.csproj" />
-    <ProjectReference Include="..\Hirundo.Configuration\Hirundo.Configuration.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,4 @@
 ﻿using System.Runtime.Serialization;
-using Hirundo.Configuration;
 using Hirundo.Serialization.Json;
 using Newtonsoft.Json;
 

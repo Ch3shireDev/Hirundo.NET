@@ -30,7 +30,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Hirundo.Configuration\Hirundo.Configuration.csproj" />
+		<ProjectReference Include="..\Hirundo.App\Hirundo.App.csproj" />
 		<ProjectReference Include="..\Hirundo.Databases\Hirundo.Databases.csproj" />
 		<ProjectReference Include="..\Hirundo.Processors.Population\Hirundo.Processors.Population.csproj" />
 		<ProjectReference Include="..\Hirundo.Processors.Specimens\Hirundo.Processors.Specimens.csproj" />

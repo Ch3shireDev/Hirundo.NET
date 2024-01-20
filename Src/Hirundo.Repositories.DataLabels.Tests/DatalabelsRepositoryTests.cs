@@ -76,4 +76,46 @@ public class DataLabelsRepositoryTests
         Assert.That(labels.First().Name, Is.EqualTo("label3"));
         Assert.That(labels.Last().Name, Is.EqualTo("label4"));
     }
+
+    [Test]
+    public void GivenSubscribedEvent_WhenAddLabels_EventListenersAreNotified()
+    {
+        // Arrange
+        var eventRaised = false;
+        _repository.LabelsChanged += (sender, args) => eventRaised = true;
+
+        // Act
+        _repository.AddLabels([new DataLabel("label3"), new DataLabel("label4")]);
+
+        // Assert
+        Assert.That(eventRaised, Is.True);
+    }
+
+    [Test]
+    public void GivenSubscribedEvent_WhenClear_EventListenersAreNotified()
+    {
+        // Arrange
+        var eventRaised = false;
+        _repository.LabelsChanged += (sender, args) => eventRaised = true;
+
+        // Act
+        _repository.Clear();
+
+        // Assert
+        Assert.That(eventRaised, Is.True);
+    }
+
+    [Test]
+    public void GivenSubscribedEvent_WhenAddLabel_EventListenersAreNotified()
+    {
+        // Arrange
+        var eventRaised = false;
+        _repository.LabelsChanged += (sender, args) => eventRaised = true;
+
+        // Act
+        _repository.AddLabel(new DataLabel("label3"));
+
+        // Assert
+        Assert.That(eventRaised, Is.True);
+    }
 }

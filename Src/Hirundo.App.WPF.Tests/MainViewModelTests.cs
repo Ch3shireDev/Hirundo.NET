@@ -1,6 +1,5 @@
 ﻿using Hirundo.App.WPF.Components;
 using Hirundo.Commons.WPF;
-using Hirundo.Configuration;
 using Hirundo.Databases.WPF;
 using NUnit.Framework;
 

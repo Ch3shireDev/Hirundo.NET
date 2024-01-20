@@ -1,7 +1,6 @@
 ﻿using Hirundo.App.WPF.Components;
 using Hirundo.Commons;
 using Hirundo.Commons.WPF;
-using Hirundo.Configuration;
 using Hirundo.Databases;
 using Hirundo.Databases.Conditions;
 using Hirundo.Processors.Observations.Conditions;
@@ -88,7 +87,7 @@ public class MainViewModelTests
         };
 
         // Act
-        _viewModel.SetConfig(config);
+        _viewModel.UpdateConfig(config);
         var result = _viewModel.GetConfig();
 
         // Assert
@@ -134,7 +133,7 @@ public class MainViewModelTests
         };
 
         // Act
-        _viewModel.SetConfig(config);
+        _viewModel.UpdateConfig(config);
         var result = _viewModel.GetConfig();
 
         // Assert
@@ -170,7 +169,7 @@ public class MainViewModelTests
         };
 
         // Act
-        _viewModel.SetConfig(config);
+        _viewModel.UpdateConfig(config);
         var result = _viewModel.GetConfig();
 
         // Assert
@@ -197,7 +196,7 @@ public class MainViewModelTests
         };
 
         // Act
-        _viewModel.SetConfig(config);
+        _viewModel.UpdateConfig(config);
         var result = _viewModel.GetConfig();
 
         // Assert
@@ -232,7 +231,7 @@ public class MainViewModelTests
         };
 
         // Act
-        _viewModel.SetConfig(config);
+        _viewModel.UpdateConfig(config);
         var result = _viewModel.GetConfig();
 
         // Assert
@@ -262,7 +261,7 @@ public class MainViewModelTests
         };
 
         // Act
-        _viewModel.SetConfig(config);
+        _viewModel.UpdateConfig(config);
         var result = _viewModel.GetConfig();
 
         // Assert
@@ -296,7 +295,7 @@ public class MainViewModelTests
         };
 
         // Act
-        _viewModel.SetConfig(config);
+        _viewModel.UpdateConfig(config);
         var result = _viewModel.GetConfig();
 
         // Assert

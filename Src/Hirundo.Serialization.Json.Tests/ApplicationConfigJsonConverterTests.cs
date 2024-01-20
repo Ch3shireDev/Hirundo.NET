@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using Hirundo.Configuration;
+using Hirundo.App;
 using Hirundo.Databases;
 using Hirundo.Processors.Observations.Conditions;
 using Hirundo.Processors.Population.Conditions;

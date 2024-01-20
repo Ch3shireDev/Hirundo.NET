@@ -19,8 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Hirundo.App\Hirundo.App.csproj" />
     <ProjectReference Include="..\Hirundo.Commons.WPF\Hirundo.Commons.WPF.csproj" />
-    <ProjectReference Include="..\Hirundo.Configuration\Hirundo.Configuration.csproj" />
     <ProjectReference Include="..\Hirundo.Databases.WPF\Hirundo.Databases.WPF.csproj" />
     <ProjectReference Include="..\Hirundo.Processors.Observations.WPF\Hirundo.Processors.Observations.WPF.csproj" />
     <ProjectReference Include="..\Hirundo.Processors.Population.WPF\Hirundo.Processors.Population.WPF.csproj" />

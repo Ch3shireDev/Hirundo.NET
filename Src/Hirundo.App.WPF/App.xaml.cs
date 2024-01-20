@@ -5,7 +5,6 @@ using System.Windows;
 using Autofac;
 using Hirundo.App.WPF.Components;
 using Hirundo.Commons.WPF.Helpers;
-using Hirundo.Configuration;
 using Hirundo.Repositories.DataLabels;
 using Hirundo.Serialization.Json;
 using Newtonsoft.Json;
@@ -31,7 +30,7 @@ public partial class App : Application
         var viewModel = container.Resolve<MainViewModel>();
 
         var config = GetConfig();
-        viewModel.SetConfig(config);
+        viewModel.UpdateConfig(config);
 
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()

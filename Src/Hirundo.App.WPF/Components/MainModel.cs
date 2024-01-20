@@ -1,5 +1,4 @@
-﻿using Hirundo.Configuration;
-using Hirundo.Databases.WPF;
+﻿using Hirundo.Databases.WPF;
 using Hirundo.Processors.Observations.WPF;
 using Hirundo.Processors.Population.WPF;
 using Hirundo.Processors.Returning.WPF;

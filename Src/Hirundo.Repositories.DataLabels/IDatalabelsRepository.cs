@@ -6,4 +6,5 @@ public interface IDataLabelsRepository
     IEnumerable<DataLabel> GetLabels();
     void AddLabel(DataLabel label);
     void AddLabels(IEnumerable<DataLabel> labels);
+    event EventHandler? LabelsChanged;
 }
