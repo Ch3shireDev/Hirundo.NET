@@ -1,10 +1,10 @@
-﻿using Hirundo.App.Components;
+﻿using Hirundo.App.WPF;
+using Hirundo.App.WPF.Components;
 using Hirundo.Commons;
 using Hirundo.Commons.WPF;
 using Hirundo.Configuration;
 using Hirundo.Databases;
 using Hirundo.Databases.Conditions;
-using Hirundo.Databases.WPF;
 using Hirundo.Processors.Observations.Conditions;
 using Hirundo.Processors.Population;
 using Hirundo.Processors.Population.Conditions;

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Hirundo.App.Components;
+namespace Hirundo.App.WPF.Components;
 
 /// <summary>
 ///     Interaction logic for MainView.xaml

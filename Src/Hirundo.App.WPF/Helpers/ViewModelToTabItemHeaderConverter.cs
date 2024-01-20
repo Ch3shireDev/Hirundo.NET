@@ -4,7 +4,7 @@ using Hirundo.Commons.WPF;
 using Hirundo.Processors.Specimens.WPF;
 using Hirundo.Writers.WPF;
 
-namespace Hirundo.App.Helpers;
+namespace Hirundo.App.WPF.Helpers;
 
 public class ViewModelToTabItemHeaderConverter : IValueConverter
 {

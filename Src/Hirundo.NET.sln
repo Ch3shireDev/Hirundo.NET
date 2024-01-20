@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.App", "Hirundo.App\Hirundo.App.csproj", "{14071E3F-E4EC-40A6-9792-10FAC1283407}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Databases", "Hirundo.Databases\Hirundo.Databases.csproj", "{58E8EC4A-0F4C-4115-8DC3-7339F76F7D26}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Databases.Tests", "Hirundo.Databases.Tests\Hirundo.Databases.Tests.csproj", "{08194132-B25D-46B8-A12D-F734DC214FB6}"
@@ -79,16 +77,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Repositories.DataLa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Repositories.DataLabels.Tests", "Hirundo.Repositories.DataLabels.Tests\Hirundo.Repositories.DataLabels.Tests.csproj", "{34DFB71C-1FB9-4B71-A0C0-868185CF445C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.App.WPF", "Hirundo.App.WPF\Hirundo.App.WPF.csproj", "{37F217EF-5F1F-4BB8-84EB-5690C2B7AC97}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{14071E3F-E4EC-40A6-9792-10FAC1283407}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{14071E3F-E4EC-40A6-9792-10FAC1283407}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{14071E3F-E4EC-40A6-9792-10FAC1283407}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{14071E3F-E4EC-40A6-9792-10FAC1283407}.Release|Any CPU.Build.0 = Release|Any CPU
 		{58E8EC4A-0F4C-4115-8DC3-7339F76F7D26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{58E8EC4A-0F4C-4115-8DC3-7339F76F7D26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58E8EC4A-0F4C-4115-8DC3-7339F76F7D26}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -225,12 +221,15 @@ Global
 		{34DFB71C-1FB9-4B71-A0C0-868185CF445C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34DFB71C-1FB9-4B71-A0C0-868185CF445C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34DFB71C-1FB9-4B71-A0C0-868185CF445C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37F217EF-5F1F-4BB8-84EB-5690C2B7AC97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37F217EF-5F1F-4BB8-84EB-5690C2B7AC97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37F217EF-5F1F-4BB8-84EB-5690C2B7AC97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37F217EF-5F1F-4BB8-84EB-5690C2B7AC97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{14071E3F-E4EC-40A6-9792-10FAC1283407} = {08F44D1D-B8D6-4172-B8D0-B0383A77C5AE}
 		{58E8EC4A-0F4C-4115-8DC3-7339F76F7D26} = {095ED9C4-38CC-415A-92E4-1E5EADBDD439}
 		{08194132-B25D-46B8-A12D-F734DC214FB6} = {66952413-DE19-442D-BD7E-05B457715E11}
 		{3F2FC052-29B9-4089-B659-C6DD59C89719} = {66952413-DE19-442D-BD7E-05B457715E11}
@@ -265,6 +264,7 @@ Global
 		{31ACB4A1-2D81-4F72-97BF-AFB1CDE062A2} = {66952413-DE19-442D-BD7E-05B457715E11}
 		{1F92CB9C-0DDE-4993-B3BE-B2C5FA92C155} = {095ED9C4-38CC-415A-92E4-1E5EADBDD439}
 		{34DFB71C-1FB9-4B71-A0C0-868185CF445C} = {66952413-DE19-442D-BD7E-05B457715E11}
+		{37F217EF-5F1F-4BB8-84EB-5690C2B7AC97} = {08F44D1D-B8D6-4172-B8D0-B0383A77C5AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7BB2E5CA-3E12-4544-8827-61B4CF679997}

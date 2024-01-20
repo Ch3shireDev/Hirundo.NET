@@ -3,7 +3,7 @@ using Hirundo.Configuration;
 using Hirundo.Serialization.Json;
 using Newtonsoft.Json;
 
-namespace Hirundo.App.Helpers;
+namespace Hirundo.App.WPF.Helpers;
 
 public static class JsonTools
 {

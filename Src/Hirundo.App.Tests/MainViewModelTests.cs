@@ -1,4 +1,4 @@
-﻿using Hirundo.App.Components;
+﻿using Hirundo.App.WPF.Components;
 using Hirundo.Commons.WPF;
 using Hirundo.Configuration;
 using Hirundo.Databases.WPF;

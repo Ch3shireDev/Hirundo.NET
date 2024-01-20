@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Windows;
 using Autofac;
-using Hirundo.App.Components;
+using Hirundo.App.WPF.Components;
 using Hirundo.Commons.WPF.Helpers;
 using Hirundo.Configuration;
 using Hirundo.Repositories.DataLabels;
@@ -11,7 +11,7 @@ using Hirundo.Serialization.Json;
 using Newtonsoft.Json;
 using Serilog;
 
-namespace Hirundo.App;
+namespace Hirundo.App.WPF;
 
 /// <summary>
 ///     Interaction logic for App.xaml

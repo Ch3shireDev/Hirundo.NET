@@ -47,7 +47,7 @@ jobs:
       if: env.RELEASE_TRIGGERED == 'true'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: dotnet publish Hirundo.App --self-contained --configuration Release -o ./publish
+      run: dotnet publish Hirundo.App.WPF --self-contained --configuration Release -o ./publish
 
     - name: Get Version
       id: get_version
@@ -55,7 +55,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        $exePath = "./publish/Hirundo.App.exe"
+        $exePath = "./publish/Hirundo.App.WPF.exe"
         $versionInfo = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($exePath)
         $version = $versionInfo.FileVersion
         "VERSION=$version" | Out-File -FilePath $env:GITHUB_ENV -Append

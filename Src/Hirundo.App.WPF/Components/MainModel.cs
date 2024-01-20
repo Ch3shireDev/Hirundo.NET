@@ -1,6 +1,5 @@
 ﻿using Hirundo.Configuration;
 using Hirundo.Databases.WPF;
-using Hirundo.Processors.Observations.Conditions;
 using Hirundo.Processors.Observations.WPF;
 using Hirundo.Processors.Population.WPF;
 using Hirundo.Processors.Returning.WPF;
@@ -9,7 +8,7 @@ using Hirundo.Processors.Statistics.WPF;
 using Hirundo.Writers.WPF;
 using Serilog;
 
-namespace Hirundo.App.Components;
+namespace Hirundo.App.WPF.Components;
 
 public class MainModel(IHirundoApp app)
 {

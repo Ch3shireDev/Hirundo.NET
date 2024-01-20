@@ -2,7 +2,7 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
-using Hirundo.App.Helpers;
+using Hirundo.App.WPF.Helpers;
 using Hirundo.Commons;
 using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
@@ -13,7 +13,7 @@ using Microsoft.Win32;
 using Serilog;
 using Serilog.Events;
 
-namespace Hirundo.App.Components;
+namespace Hirundo.App.WPF.Components;
 
 public sealed class MainViewModel : ViewModelBase
 {
