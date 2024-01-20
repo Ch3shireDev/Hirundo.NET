@@ -4,7 +4,7 @@ using Hirundo.Configuration;
 using Hirundo.Databases.WPF;
 using NUnit.Framework;
 
-namespace Hirundo.App.Tests;
+namespace Hirundo.App.WPF.Tests;
 
 [TestFixture]
 public class MainViewModelTests

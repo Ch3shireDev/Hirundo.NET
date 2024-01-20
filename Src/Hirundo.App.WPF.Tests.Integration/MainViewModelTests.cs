@@ -1,5 +1,4 @@
-﻿using Hirundo.App.WPF;
-using Hirundo.App.WPF.Components;
+﻿using Hirundo.App.WPF.Components;
 using Hirundo.Commons;
 using Hirundo.Commons.WPF;
 using Hirundo.Configuration;
@@ -16,7 +15,7 @@ using Hirundo.Processors.Statistics.Operations.Outliers;
 using Hirundo.Writers.Summary;
 using NUnit.Framework;
 
-namespace Hirundo.App.Tests.Integration;
+namespace Hirundo.App.WPF.Tests.Integration;
 
 public class MainViewModelTests
 {
