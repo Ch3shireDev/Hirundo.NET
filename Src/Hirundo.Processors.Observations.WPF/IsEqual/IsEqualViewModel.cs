@@ -2,21 +2,12 @@
 using Hirundo.Commons;
 using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
+using Hirundo.Repositories.DataLabels;
 
 namespace Hirundo.Processors.Observations.WPF.IsEqual;
 
 public class IsEqualViewModel(IsEqualModel model) : ParametersViewModel, IRemovable
 {
-    public string ValueName
-    {
-        get => model.ValueName;
-        set
-        {
-            model.ValueName = value;
-            OnPropertyChanged();
-        }
-    }
-
     public string Value
     {
         get => model.ValueStr;
@@ -37,7 +28,20 @@ public class IsEqualViewModel(IsEqualModel model) : ParametersViewModel, IRemova
         }
     }
 
+    public IList<DataLabel> Labels => model.Labels;
+
+    public DataLabel? SelectedLabel
+    {
+        get => model.SelectedLabel;
+        set
+        {
+            model.SelectedLabel = value;
+            OnPropertyChanged();
+        }
+    }
+
     public ICommand RemoveCommand => new RelayCommand(Remove);
+
     public event EventHandler<ParametersEventArgs>? Removed;
 
     public void Remove()

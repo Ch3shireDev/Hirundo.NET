@@ -18,6 +18,7 @@ internal static class ContainerExtensions
     {
         var repository = new Mock<IDataLabelRepository>();
 
+        builder.RegisterInstance(repository).As<Mock<IDataLabelRepository>>();
         builder.RegisterInstance(repository.Object).As<IDataLabelRepository>().SingleInstance();
 
         var hirundoApp = new Mock<IHirundoApp>();

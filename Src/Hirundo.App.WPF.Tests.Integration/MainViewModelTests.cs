@@ -12,13 +12,16 @@ using Hirundo.Processors.Specimens;
 using Hirundo.Processors.Statistics;
 using Hirundo.Processors.Statistics.Operations;
 using Hirundo.Processors.Statistics.Operations.Outliers;
+using Hirundo.Repositories.DataLabels;
 using Hirundo.Writers.Summary;
+using Moq;
 using NUnit.Framework;
 
 namespace Hirundo.App.WPF.Tests.Integration;
 
 public class MainViewModelTests
 {
+    private Mock<IDataLabelRepository> _repository = null!;
     private MainViewModel _viewModel = null!;
 
     [SetUp]
@@ -26,7 +29,9 @@ public class MainViewModelTests
     {
         var builder = new ContainerBuilder();
         builder.AddViewModel();
-        _viewModel = builder.Build().Resolve<MainViewModel>();
+        var container = builder.Build();
+        _repository = container.Resolve<Mock<IDataLabelRepository>>();
+        _viewModel = container.Resolve<MainViewModel>();
     }
 
     [Test]
@@ -115,6 +120,50 @@ public class MainViewModelTests
         Assert.That(dataSourceViewModel, Is.Not.Null);
         Assert.That(dataSourceViewModel.ParametersViewModels, Is.Not.Null);
         Assert.That(dataSourceViewModel.ParametersViewModels.Count, Is.EqualTo(1));
+    }
+
+    [Test]
+    public void GivenDataSourceConfig_WhenSaveConfig_ShouldUpdateRepository()
+    {
+        // Arrange
+        var config = new ApplicationConfig
+        {
+            Databases =
+            [
+                new AccessDatabaseParameters
+                {
+                    Path = "abc.mdb",
+                    Table = "table",
+                    Conditions =
+                    [
+                        new DatabaseCondition
+                        {
+                            DatabaseColumn = "AAA",
+                            Type = DatabaseConditionType.IsEqual,
+                            Value = "XXX",
+                            ConditionOperator = DatabaseConditionOperator.And
+                        }
+                    ],
+                    Columns =
+                    [
+                        new ColumnMapping
+                        {
+                            DatabaseColumn = "AAA",
+                            ValueName = "XXX",
+                            DataType = DataValueType.LongInt
+                        }
+                    ]
+                }
+            ]
+        };
+
+        // Act
+        _viewModel.UpdateConfig(config);
+
+        // Assert
+        _repository.Verify(r => r.UpdateLabels(It.IsAny<IEnumerable<DataLabel>>()), Times.Once);
+        _repository.Verify(r => r.UpdateLabels(It.Is<IEnumerable<DataLabel>>(l => l.Count() == 1)), Times.Once);
+        _repository.Verify(r => r.UpdateLabels(It.Is<IEnumerable<DataLabel>>(l => l.First().Name == "XXX")), Times.Once);
     }
 
     [Test]

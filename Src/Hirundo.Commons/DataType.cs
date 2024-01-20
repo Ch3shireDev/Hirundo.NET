@@ -2,9 +2,10 @@
 
 public enum DataType
 {
+    Undefined,
     Text,
     Number,
     Numeric,
     Date,
-    Boolean
+    Boolean,
 }

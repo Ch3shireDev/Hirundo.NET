@@ -22,7 +22,11 @@
         <Label FontWeight="Bold">Czy wartość jest równa?</Label>
         <WrapPanel>
             <Label>Nazwa wartości</Label>
-            <TextBox Text="{Binding ValueName}" MinWidth="100" />
+            <ComboBox 
+                ItemsSource="{Binding Labels}" 
+                SelectedValue="{Binding SelectedLabel}"
+                DisplayMemberPath="Name"
+                MinWidth="100" />
         </WrapPanel>
         <WrapPanel>
             <Label>Wartość</Label>

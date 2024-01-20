@@ -26,7 +26,11 @@ public class DataSourceModel(IDataLabelRepository dataLabelRepository) : IParame
 
     public IEnumerable<ParametersViewModel> GetParametersViewModels()
     {
-        return DatabaseParameters.Select(CreateViewModel);
+        return DatabaseParameters
+                .Select(AsParametersViewModel)
+                .Select(AddUpdaterListener)
+                .Select(AddRemovedListener)
+            ;
     }
 
     public void AddDatasource(Type selectedDataSourceType)
@@ -41,10 +45,18 @@ public class DataSourceModel(IDataLabelRepository dataLabelRepository) : IParame
         }
     }
 
-    private ParametersViewModel CreateViewModel(IDatabaseParameters parameters)
+    private ParametersViewModel AddUpdaterListener(ParametersViewModel viewModel)
     {
-        var viewModel = Create(parameters);
+        if (viewModel is ILabelsUpdater labelsUpdater)
+        {
+            labelsUpdater.LabelsUpdated += (_, _) => { UpdateRepository(); };
+        }
 
+        return viewModel;
+    }
+
+    private ParametersViewModel AddRemovedListener(ParametersViewModel viewModel)
+    {
         if (viewModel is IRemovable removable)
         {
             removable.Removed += (_, p) =>
@@ -66,12 +78,30 @@ public class DataSourceModel(IDataLabelRepository dataLabelRepository) : IParame
         DatabaseParameters.Remove(p);
     }
 
-    public ParametersViewModel Create(IDatabaseParameters parameters)
+    private static ParametersViewModel AsParametersViewModel(IDatabaseParameters parameters)
     {
         return parameters switch
         {
-            AccessDatabaseParameters accessDatabaseParameters => new AccessDataSourceViewModel(accessDatabaseParameters, dataLabelRepository),
+            AccessDatabaseParameters accessDatabaseParameters => new AccessDataSourceViewModel(accessDatabaseParameters),
             _ => throw new NotImplementedException()
         };
+    }
+
+    public void UpdateRepository()
+    {
+        // TODO: Ten fragment nie jest do końca dobry, pobiera tylko różne wartości pól i unika konfliktów.
+        // Należy dodać walidację zgodności dla wielu źródeł.
+
+        var labels = new List<DataLabel>();
+
+        foreach (var databaseParameters in DatabaseParameters)
+        {
+            var dbLabels = databaseParameters.Columns.Select(c => new DataLabel(c.ValueName)).ToList();
+            labels.AddRange(dbLabels);
+        }
+
+        var groups = labels.GroupBy(l => l.Name).Select(x => x.First()).ToArray();
+
+        dataLabelRepository.UpdateLabels(groups);
     }
 }

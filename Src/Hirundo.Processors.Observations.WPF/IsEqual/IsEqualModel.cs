@@ -1,27 +1,39 @@
 ﻿using System.Globalization;
 using Hirundo.Commons;
 using Hirundo.Processors.Observations.Conditions;
+using Hirundo.Repositories.DataLabels;
 
 namespace Hirundo.Processors.Observations.WPF.IsEqual;
 
 public class IsEqualModel
 {
-    public IsEqualModel(IsEqualCondition condition)
+    private readonly IDataLabelRepository _repository;
+
+
+    private DataLabel? _selectedLabel;
+
+    public IsEqualModel(IsEqualCondition condition, IDataLabelRepository repository)
     {
         OriginalCondition = condition;
         IsEqualCondition = condition;
+        _repository = repository;
     }
 
     public IsEqualCondition OriginalCondition { get; init; }
 
-    public string ValueName { get; set; } = null!;
+    public string ValueName
+    {
+        get => OriginalCondition.ValueName;
+        set => OriginalCondition.ValueName = value;
+    }
+
     public string ValueStr { get; set; } = null!;
     public DataType ValueType { get; set; }
 
     public IsEqualCondition IsEqualCondition
     {
-        get => GetIsEqualFilter();
-        set => SetIsEqualFilter(value);
+        get => GetIsEqualCondition();
+        set => SetIsEqualCondition(value);
     }
 
     private object Value
@@ -30,12 +42,26 @@ public class IsEqualModel
         set => SetValue(value);
     }
 
-    private IsEqualCondition GetIsEqualFilter()
+
+    public IList<DataLabel> Labels => [.._repository.GetLabels()];
+
+    public DataLabel? SelectedLabel
     {
-        return new(ValueName, Value);
+        get => _selectedLabel;
+        set
+        {
+            _selectedLabel = value;
+            ValueName = value?.Name ?? "";
+        }
     }
 
-    private void SetIsEqualFilter(IsEqualCondition value)
+    private IsEqualCondition GetIsEqualCondition()
+    {
+        var name = SelectedLabel?.Name ?? ValueName;
+        return new(name, Value);
+    }
+
+    private void SetIsEqualCondition(IsEqualCondition value)
     {
         ValueName = value.ValueName;
         ValueStr = value.Value?.ToString() ?? "";

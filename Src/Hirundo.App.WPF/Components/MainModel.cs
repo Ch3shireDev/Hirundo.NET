@@ -40,6 +40,8 @@ public class MainModel(
             DataSourceModel.DatabaseParameters.Add(database);
         }
 
+        DataSourceModel.UpdateRepository();
+
         ObservationParametersBrowserModel.ObservationsParameters = config.Observations;
         PopulationModel.ConfigPopulation = config.Population;
         ReturningSpecimensModel.ReturningSpecimensParameters = config.ReturningSpecimens;

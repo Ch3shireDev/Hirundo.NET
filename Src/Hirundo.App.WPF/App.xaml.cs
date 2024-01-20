@@ -53,6 +53,14 @@ public partial class App : Application
             .WriteTo.Sink(new LogEventSink(viewModel.LogEventsItems))
             .CreateLogger();
 
+        var repository = container.Resolve<IDataLabelRepository>();
+
+        repository.LabelsChanged += (_, _) =>
+        {
+            var labels = repository.GetLabels();
+            Log.Debug($"Zaktualizowano etykiety. Bieżąca lista: {string.Join(", ", labels.Select(l=>l.Name))}");
+        };
+
         var view = new MainWindow
         {
             DataContext = viewModel,
