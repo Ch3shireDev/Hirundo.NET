@@ -11,12 +11,11 @@ using Serilog;
 
 namespace Hirundo.App.Components;
 
-public class MainModel(HirundoApp app)
+public class MainModel(IHirundoApp app)
 {
     private bool _isProcessing;
     public DataSourceModel DataSourceModel { get; set; } = new();
     public ObservationParametersBrowserModel ObservationParametersBrowserModel { get; set; } = new();
-    public ObservationsParameters ObservationsParameters { get; set; } = new();
     public PopulationModel PopulationModel { get; set; } = new();
     public ReturningSpecimensModel ReturningSpecimensModel { get; set; } = new();
     public SpecimensModel SpecimensModel { get; set; } = new();

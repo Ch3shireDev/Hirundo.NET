@@ -36,6 +36,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Autofac" Version="8.0.0" />
 		<PackageReference Include="MaterialDesignColors" Version="2.1.4" />
 		<PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
 		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0">
@@ -55,6 +56,7 @@
 	  <ProjectReference Include="..\Hirundo.Processors.Returning.WPF\Hirundo.Processors.Returning.WPF.csproj" />
 	  <ProjectReference Include="..\Hirundo.Processors.Specimens.WPF\Hirundo.Processors.Specimens.WPF.csproj" />
 	  <ProjectReference Include="..\Hirundo.Processors.Statistics.WPF\Hirundo.Processors.Statistics.WPF.csproj" />
+	  <ProjectReference Include="..\Hirundo.Repositories.DataLabels\Hirundo.Repositories.DataLabels.csproj" />
 	  <ProjectReference Include="..\Hirundo.Serialization.Json\Hirundo.Serialization.Json.csproj" />
 	  <ProjectReference Include="..\Hirundo.Writers.WPF\Hirundo.Writers.WPF.csproj" />
 	</ItemGroup>

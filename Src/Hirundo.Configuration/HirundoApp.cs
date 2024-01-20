@@ -10,7 +10,7 @@ using Serilog;
 
 namespace Hirundo.Configuration;
 
-public class HirundoApp
+public class HirundoApp : IHirundoApp
 {
     private readonly DatabaseBuilder databaseBuilder = new();
     private readonly ObservationFiltersBuilder observationFiltersBuilder = new();
@@ -21,36 +21,36 @@ public class HirundoApp
     private readonly SummaryProcessorBuilder summaryProcessorBuilder = new();
     private readonly SummaryWriterBuilder summaryWriterBuilder = new();
 
-    public void Run(ApplicationConfig appConfig)
+    public void Run(ApplicationConfig applicationConfig)
     {
-        ArgumentNullException.ThrowIfNull(appConfig);
+        ArgumentNullException.ThrowIfNull(applicationConfig);
 
         var database = databaseBuilder
-            .WithDatabaseParameters(appConfig.Databases)
+            .WithDatabaseParameters(applicationConfig.Databases)
             .Build();
 
         var observationFilters = observationFiltersBuilder
-            .WithObservationConditions(appConfig.Observations.Conditions)
+            .WithObservationConditions(applicationConfig.Observations.Conditions)
             .Build();
 
         var returningSpecimenFilters = returningSpecimenFiltersBuilder
-            .WithReturningSpecimensConditions(appConfig.ReturningSpecimens.Conditions)
+            .WithReturningSpecimensConditions(applicationConfig.ReturningSpecimens.Conditions)
             .Build();
 
         var populationProcessor = populationProcessorBuilder
-            .WithPopulationConditions(appConfig.Population.Conditions)
+            .WithPopulationConditions(applicationConfig.Population.Conditions)
             .Build();
 
         var statisticsProcessor = statisticsProcessorBuilder
-            .WithStatisticsOperations(appConfig.Statistics.Operations)
+            .WithStatisticsOperations(applicationConfig.Statistics.Operations)
             .Build();
 
         var specimensProcessor = specimensProcessorBuilder
-            .WithSpecimensParameters(appConfig.Specimens)
+            .WithSpecimensParameters(applicationConfig.Specimens)
             .Build();
 
         var resultsWriter = summaryWriterBuilder
-            .WithWriterParameters(appConfig.Results.Writer)
+            .WithWriterParameters(applicationConfig.Results.Writer)
             .Build();
 
         var observations = database.GetObservations().ToArray();
@@ -83,6 +83,6 @@ public class HirundoApp
 
         resultsWriter.Write(summary);
 
-        Log.Information($"Zapisano dane wynikowe do pliku {appConfig.Results.Writer.Path}.");
+        Log.Information($"Zapisano dane wynikowe do pliku {applicationConfig.Results.Writer.Path}.");
     }
 }
