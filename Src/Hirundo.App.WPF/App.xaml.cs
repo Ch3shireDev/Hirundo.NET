@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 using System.Windows;
 using Autofac;
 using Hirundo.App.WPF.Components;
+using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF.Helpers;
 using Hirundo.Databases.WPF;
 using Hirundo.Processors.Observations.WPF;
@@ -11,7 +12,7 @@ using Hirundo.Processors.Population.WPF;
 using Hirundo.Processors.Returning.WPF;
 using Hirundo.Processors.Specimens.WPF;
 using Hirundo.Processors.Statistics.WPF;
-using Hirundo.Repositories.DataLabels;
+
 using Hirundo.Serialization.Json;
 using Hirundo.Writers.WPF;
 using Newtonsoft.Json;

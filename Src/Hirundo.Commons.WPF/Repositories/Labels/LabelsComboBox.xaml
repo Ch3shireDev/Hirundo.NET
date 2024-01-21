@@ -1,0 +1,10 @@
+﻿<UserControl x:Class="Hirundo.Commons.WPF.Repositories.Labels.LabelsComboBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Hirundo.Commons.WPF.Repositories.Labels"
+             mc:Ignorable="d"
+             d:Background="AliceBlue">
+    <ComboBox x:Name="ComboBox" MinWidth="100" SelectedValue="{Binding SelectedLabel, RelativeSource={RelativeSource AncestorType={x:Type local:LabelsComboBox}}, Mode=TwoWay}"/>
+</UserControl>

@@ -1,10 +1,12 @@
 ﻿using Autofac;
 using Hirundo.App.WPF.Components;
 using Hirundo.Commons;
+using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
 using Hirundo.Databases;
 using Hirundo.Databases.Conditions;
 using Hirundo.Processors.Observations.Conditions;
+using Hirundo.Processors.Observations.WPF.IsEqual;
 using Hirundo.Processors.Population;
 using Hirundo.Processors.Population.Conditions;
 using Hirundo.Processors.Returning.Conditions;
@@ -12,7 +14,7 @@ using Hirundo.Processors.Specimens;
 using Hirundo.Processors.Statistics;
 using Hirundo.Processors.Statistics.Operations;
 using Hirundo.Processors.Statistics.Operations.Outliers;
-using Hirundo.Repositories.DataLabels;
+
 using Hirundo.Writers.Summary;
 using Moq;
 using NUnit.Framework;
@@ -354,5 +356,37 @@ public class MainViewModelTests
         Assert.That(result.Results.Writer, Is.InstanceOf<CsvSummaryWriterParameters>());
         var csvSummaryWriterParameters = (CsvSummaryWriterParameters)result.Results.Writer;
         Assert.That(csvSummaryWriterParameters.Path, Is.EqualTo("abc.csv"));
+    }
+
+    [Test]
+    public void GivenIsEqualObservation_WhenChangeParameters_ReturnsChangedConfig()
+    {
+        // Arrange
+        var config = new ApplicationConfig
+        {
+            Observations = new ObservationsParameters
+            {
+                Conditions = [new IsEqualCondition("AAA", "XXX")]
+            }
+        };
+
+        _viewModel.UpdateConfig(config);
+
+        // Act
+        var observationsViewModel = _viewModel.ViewModels.OfType<ParametersBrowserViewModel>().First(vm => vm.Header == "Obserwacje");
+        var optionsIsEqual = observationsViewModel.ParametersViewModels.OfType<IsEqualViewModel>().First();
+        optionsIsEqual.ValueName = "BBB";
+        optionsIsEqual.Value = "YYY";
+
+        // Assert
+        var result = _viewModel.GetConfig();
+        Assert.That(result, Is.Not.Null);
+        Assert.That(result.Observations, Is.Not.Null);
+        Assert.That(result.Observations.Conditions, Is.Not.Null);
+        Assert.That(result.Observations.Conditions.Count, Is.EqualTo(1));
+        Assert.That(result.Observations.Conditions[0], Is.InstanceOf<IsEqualCondition>());
+        var isEqualFilter = (IsEqualCondition)result.Observations.Conditions[0];
+        Assert.That(isEqualFilter.ValueName, Is.EqualTo("BBB"));
+        Assert.That(isEqualFilter.Value, Is.EqualTo("YYY"));
     }
 }

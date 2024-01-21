@@ -9,8 +9,8 @@
 	  <PublishSingleFile>true</PublishSingleFile>
 	  <EnableWindowsTargeting>true</EnableWindowsTargeting>
 	  <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-	  <AssemblyVersion>0.4.2</AssemblyVersion>
-	  <FileVersion>0.4.2</FileVersion>
+	  <AssemblyVersion>0.5</AssemblyVersion>
+	  <FileVersion>0.5</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -38,7 +38,6 @@
     <ProjectReference Include="..\Hirundo.Processors.Returning.WPF\Hirundo.Processors.Returning.WPF.csproj" />
     <ProjectReference Include="..\Hirundo.Processors.Specimens.WPF\Hirundo.Processors.Specimens.WPF.csproj" />
     <ProjectReference Include="..\Hirundo.Processors.Statistics.WPF\Hirundo.Processors.Statistics.WPF.csproj" />
-    <ProjectReference Include="..\Hirundo.Repositories.DataLabels\Hirundo.Repositories.DataLabels.csproj" />
     <ProjectReference Include="..\Hirundo.Serialization.Json\Hirundo.Serialization.Json.csproj" />
     <ProjectReference Include="..\Hirundo.Writers.WPF\Hirundo.Writers.WPF.csproj" />
   </ItemGroup>

@@ -1,6 +1,6 @@
-using Hirundo.Commons;
+using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Databases.WPF.Access;
-using Hirundo.Repositories.DataLabels;
+
 using Moq;
 using NUnit.Framework;
 

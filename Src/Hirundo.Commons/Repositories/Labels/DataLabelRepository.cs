@@ -1,6 +1,6 @@
-﻿using Hirundo.Commons;
+﻿using Serilog;
 
-namespace Hirundo.Repositories.DataLabels;
+namespace Hirundo.Commons.Repositories.Labels;
 
 public class DataLabelRepository : IDataLabelRepository
 {
@@ -9,7 +9,7 @@ public class DataLabelRepository : IDataLabelRepository
     public void Clear()
     {
         _labels.Clear();
-        LabelsChanged?.Invoke(this, EventArgs.Empty);
+        NotifyLabelsChanged();
     }
 
     public IEnumerable<DataLabel> GetLabels()
@@ -20,19 +20,25 @@ public class DataLabelRepository : IDataLabelRepository
     public void AddLabel(DataLabel label)
     {
         _labels.Add(label);
-        LabelsChanged?.Invoke(this, EventArgs.Empty);
+        NotifyLabelsChanged();
     }
 
     public void AddLabels(IEnumerable<DataLabel> labels)
     {
         _labels.AddRange(labels);
-        LabelsChanged?.Invoke(this, EventArgs.Empty);
+        NotifyLabelsChanged();
     }
 
     public void UpdateLabels(IEnumerable<DataLabel> labels)
     {
         _labels.Clear();
         _labels.AddRange(labels);
+        NotifyLabelsChanged();
+    }
+
+    void NotifyLabelsChanged()
+    {
+        Log.Debug("Labels changed");
         LabelsChanged?.Invoke(this, EventArgs.Empty);
     }
 

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:isInTimeBlock="clr-namespace:Hirundo.Processors.Observations.WPF.IsInTimeBlock"
+             xmlns:labels="clr-namespace:Hirundo.Commons.WPF.Repositories.Labels;assembly=Hirundo.Commons.WPF"
              mc:Ignorable="d"
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance isInTimeBlock:IsInTimeBlockViewModel}">
@@ -11,7 +12,7 @@
         <Label FontWeight="Bold">Czy wartość jest w przedziale czasowym?</Label>
         <WrapPanel>
             <Label>Nazwa wartości</Label>
-            <ComboBox ItemsSource="{Binding Labels}" SelectedValue="{Binding SelectedLabel}" DisplayMemberPath="Name"/>
+            <labels:LabelsComboBox ValueName="{Binding ValueName, Mode=TwoWay}" Repository="{Binding Repository}"/>
         </WrapPanel>
         <WrapPanel>
             <Label>Godzina początkowa</Label>

@@ -67,21 +67,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Processors.Statisti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Writers.WPF", "Hirundo.Writers.WPF\Hirundo.Writers.WPF.csproj", "{5F0C378E-4BB7-438A-A24F-DCB3C405C933}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Repositories.DataLabels", "Hirundo.Repositories.DataLabels\Hirundo.Repositories.DataLabels.csproj", "{1F92CB9C-0DDE-4993-B3BE-B2C5FA92C155}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Repositories.DataLabels.Tests", "Hirundo.Repositories.DataLabels.Tests\Hirundo.Repositories.DataLabels.Tests.csproj", "{34DFB71C-1FB9-4B71-A0C0-868185CF445C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Repositories.DataLabels.Tests", "Hirundo.Repositories.DataLabels.Tests\Hirundo.Repositories.DataLabels.Tests.csproj", "{34DFB71C-1FB9-4B71-A0C0-868185CF445C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.App.WPF", "Hirundo.App.WPF\Hirundo.App.WPF.csproj", "{37F217EF-5F1F-4BB8-84EB-5690C2B7AC97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.App.WPF", "Hirundo.App.WPF\Hirundo.App.WPF.csproj", "{37F217EF-5F1F-4BB8-84EB-5690C2B7AC97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.App.WPF.Tests", "Hirundo.App.WPF.Tests\Hirundo.App.WPF.Tests.csproj", "{FD9F9D79-9B16-46E1-B50A-CF4419372FF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.App.WPF.Tests", "Hirundo.App.WPF.Tests\Hirundo.App.WPF.Tests.csproj", "{FD9F9D79-9B16-46E1-B50A-CF4419372FF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.App.WPF.Tests.Integration", "Hirundo.App.WPF.Tests.Integration\Hirundo.App.WPF.Tests.Integration.csproj", "{610FB91C-08BE-46EB-B6F0-BD179F426392}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.App.WPF.Tests.Integration", "Hirundo.App.WPF.Tests.Integration\Hirundo.App.WPF.Tests.Integration.csproj", "{610FB91C-08BE-46EB-B6F0-BD179F426392}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.App", "Hirundo.App\Hirundo.App.csproj", "{35B4EB75-1F57-4545-8325-D25524AEBCF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.App", "Hirundo.App\Hirundo.App.csproj", "{35B4EB75-1F57-4545-8325-D25524AEBCF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Databases.WPF.Tests", "Hirundo.Databases.WPF.Tests\Hirundo.Databases.WPF.Tests.csproj", "{2F003FAB-5501-4091-820F-5B2A5717B4D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Databases.WPF.Tests", "Hirundo.Databases.WPF.Tests\Hirundo.Databases.WPF.Tests.csproj", "{2F003FAB-5501-4091-820F-5B2A5717B4D8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Processors.Observations.WPF.Tests", "Hirundo.Processors.Observations.WPF.Tests\Hirundo.Processors.Observations.WPF.Tests.csproj", "{11FCD219-121C-48D5-B7A7-640AD25BB31B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Processors.Observations.WPF.Tests", "Hirundo.Processors.Observations.WPF.Tests\Hirundo.Processors.Observations.WPF.Tests.csproj", "{11FCD219-121C-48D5-B7A7-640AD25BB31B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -205,10 +203,6 @@ Global
 		{5F0C378E-4BB7-438A-A24F-DCB3C405C933}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F0C378E-4BB7-438A-A24F-DCB3C405C933}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F0C378E-4BB7-438A-A24F-DCB3C405C933}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1F92CB9C-0DDE-4993-B3BE-B2C5FA92C155}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1F92CB9C-0DDE-4993-B3BE-B2C5FA92C155}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1F92CB9C-0DDE-4993-B3BE-B2C5FA92C155}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1F92CB9C-0DDE-4993-B3BE-B2C5FA92C155}.Release|Any CPU.Build.0 = Release|Any CPU
 		{34DFB71C-1FB9-4B71-A0C0-868185CF445C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{34DFB71C-1FB9-4B71-A0C0-868185CF445C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34DFB71C-1FB9-4B71-A0C0-868185CF445C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -271,7 +265,6 @@ Global
 		{2B1E14CE-0218-4F06-9DF5-E5AE1C07D178} = {095ED9C4-38CC-415A-92E4-1E5EADBDD439}
 		{F88A8D4B-5EAA-4A35-8A98-2EA16C977F96} = {095ED9C4-38CC-415A-92E4-1E5EADBDD439}
 		{5F0C378E-4BB7-438A-A24F-DCB3C405C933} = {095ED9C4-38CC-415A-92E4-1E5EADBDD439}
-		{1F92CB9C-0DDE-4993-B3BE-B2C5FA92C155} = {095ED9C4-38CC-415A-92E4-1E5EADBDD439}
 		{34DFB71C-1FB9-4B71-A0C0-868185CF445C} = {66952413-DE19-442D-BD7E-05B457715E11}
 		{37F217EF-5F1F-4BB8-84EB-5690C2B7AC97} = {08F44D1D-B8D6-4172-B8D0-B0383A77C5AE}
 		{FD9F9D79-9B16-46E1-B50A-CF4419372FF3} = {66952413-DE19-442D-BD7E-05B457715E11}

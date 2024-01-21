@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using Hirundo.Commons;
+using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
 using Hirundo.Databases.WPF.Access;
-using Hirundo.Repositories.DataLabels;
 
 namespace Hirundo.Databases.WPF;
 
@@ -97,12 +97,28 @@ public class DataSourceModel(IDataLabelRepository dataLabelRepository) : IParame
 
         foreach (var databaseParameters in DatabaseParameters)
         {
-            var dbLabels = databaseParameters.Columns.Select(c => new DataLabel(c.ValueName)).ToList();
+            var dbLabels = databaseParameters.Columns.Select(GetDataLabel).ToList();
             labels.AddRange(dbLabels);
         }
 
         var groups = labels.GroupBy(l => l.Name).Select(x => x.First()).ToArray();
 
         dataLabelRepository.UpdateLabels(groups);
+    }
+
+    private DataLabel GetDataLabel(ColumnMapping columnMapping)
+    {
+        var dataType = columnMapping.DataType switch
+        {
+            DataValueType.ShortInt => DataType.Integer,
+            DataValueType.Numeric => DataType.Numeric,
+            DataValueType.Undefined => DataType.Undefined,
+            DataValueType.LongInt => DataType.Integer,
+            DataValueType.Text => DataType.Text,
+            DataValueType.DateTime => DataType.Date,
+            _ => DataType.Undefined
+        };
+
+        return new DataLabel(columnMapping.ValueName, dataType);
     }
 }

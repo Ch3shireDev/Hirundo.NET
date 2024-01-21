@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Hirundo.Processors.Observations.WPF\Hirundo.Processors.Observations.WPF.csproj" />
-    <ProjectReference Include="..\Hirundo.Repositories.DataLabels\Hirundo.Repositories.DataLabels.csproj" />
   </ItemGroup>
 
 </Project>

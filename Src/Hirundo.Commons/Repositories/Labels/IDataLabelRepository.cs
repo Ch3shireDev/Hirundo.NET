@@ -1,6 +1,4 @@
-﻿using Hirundo.Commons;
-
-namespace Hirundo.Repositories.DataLabels;
+﻿namespace Hirundo.Commons.Repositories.Labels;
 
 public interface IDataLabelRepository
 {

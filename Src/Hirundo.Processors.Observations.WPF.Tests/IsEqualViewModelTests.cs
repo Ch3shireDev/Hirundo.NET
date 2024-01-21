@@ -1,7 +1,7 @@
 using Hirundo.Commons;
+using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Processors.Observations.Conditions;
 using Hirundo.Processors.Observations.WPF.IsEqual;
-using Hirundo.Repositories.DataLabels;
 using Moq;
 using NUnit.Framework;
 
@@ -27,45 +27,81 @@ public class IsEqualViewModelTests
     private IsEqualViewModel _viewModel = null!;
 
     [Test]
-    public void GivenDataLabelsInRepository_WhenGetLabels_ViewModelShouldShowDataLabels()
+    public void GivenTextDataType_AfterSetValueInViewModel_ConditionHasSetValue()
     {
         // Arrange
-        var dataLabels = new List<DataLabel>
-        {
-            new("label1"),
-            new("label2"),
-            new("label3")
-        };
-        _repository.Setup(r => r.GetLabels()).Returns(dataLabels);
+        _model.DataType = DataType.Text;
 
         // Act
-        var labels = _viewModel.Labels;
+        _viewModel.Value = "test";
 
         // Assert
-        Assert.That(labels, Is.Not.Null);
-        Assert.That(labels.Count, Is.EqualTo(3));
-        Assert.That(labels[0].Name, Is.EqualTo("label1"));
-        Assert.That(labels[1].Name, Is.EqualTo("label2"));
-        Assert.That(labels[2].Name, Is.EqualTo("label3"));
+        Assert.That(_condition.Value, Is.EqualTo("test"));
     }
 
     [Test]
-    public void GivenSelectedDataLabel_WhenGetSelectedLabel_ViewModelShouldShowSelectedDataLabel()
+    public void GivenNumberDataType_AfterSetValueInViewModel_ConditionHasSetValue()
     {
         // Arrange
-        var dataLabels = new List<DataLabel>
-        {
-            new("label1"),
-            new("label2"),
-            new("label3")
-        };
-        _repository.Setup(r => r.GetLabels()).Returns(dataLabels);
+        _model.DataType = DataType.Integer;
 
         // Act
-        _viewModel.SelectedLabel = dataLabels[1];
+        _viewModel.Value = "1";
 
         // Assert
-        Assert.That(_model.SelectedLabel, Is.EqualTo(dataLabels[1]));
-        Assert.That(_condition.ValueName, Is.EqualTo("label2"));
+        Assert.That(_condition.Value, Is.EqualTo(1));
+    }
+
+    [Test]
+    public void GivenNumberDataType_AfterIncorrectValue_ConditionHasStringValue()
+    {
+        // Arrange
+        _model.DataType = DataType.Integer;
+
+        // Act
+        _viewModel.Value = "abc";
+
+        // Assert
+        Assert.That(_condition.Value, Is.EqualTo("abc"));
+    }
+
+    [Test]
+    public void GivenNumericDataType_AfterSetValueInViewModel_ConditionHasSetValue()
+    {
+        // Arrange
+        _model.DataType = DataType.Numeric;
+
+        // Act
+        _viewModel.Value = "1.23";
+
+        // Assert
+        Assert.That(_condition.Value, Is.EqualTo(1.23));
+    }
+
+    [Test]
+    public void GivenNumericDataType_AfterIncorrectValue_ConditionHasStringValue()
+    {
+        // Arrange
+        _model.DataType = DataType.Numeric;
+
+        // Act
+        _viewModel.Value = "abc";
+
+        // Assert
+        Assert.That(_condition.Value, Is.EqualTo("abc"));
+    }
+
+    [Test]
+    public void GivenDateTimeDataType_AfterSetValueInViewModel_ConditionHasCorrectDataType()
+    {
+        // Arrange
+        _model.DataType = DataType.Date;
+
+        // Act
+        _viewModel.Value = "2021-01-01";
+
+        // Assert
+        Assert.That(_condition.Value, Is.TypeOf<DateTime>());
+        Assert.That(_condition.Value, Is.EqualTo(new DateTime(2021, 1, 1)));
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Hirundo.Commons;
+using Hirundo.Commons.Repositories.Labels;
 using NUnit.Framework;
 
 namespace Hirundo.Repositories.DataLabels.Tests;
@@ -125,8 +126,8 @@ public class DataLabelRepositoryTests
     {
         // Arrange
         _repository.Clear();
-        _repository.AddLabel(new DataLabel("label1", Commons.DataType.Numeric));
-        _repository.AddLabel(new DataLabel("label2", Commons.DataType.Number));
+        _repository.AddLabel(new DataLabel("label1", DataType.Numeric));
+        _repository.AddLabel(new DataLabel("label2", DataType.Integer));
 
         // Act
         _repository.UpdateLabels([new DataLabel("label3"), new DataLabel("label4")]);

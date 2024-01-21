@@ -29,7 +29,7 @@ public class MainModel(
     public StatisticsModel StatisticsModel { get; set; } = statisticsModel;
     public WriterModel WriterModel { get; set; } = writerModel;
 
-    public void SetConfig(ApplicationConfig config)
+    public void UpdateConfig(ApplicationConfig config)
     {
         ArgumentNullException.ThrowIfNull(config);
 

@@ -1,5 +1,5 @@
 ﻿using System.Windows.Input;
-using Hirundo.Commons;
+using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
 
@@ -7,6 +7,7 @@ namespace Hirundo.Processors.Observations.WPF.IsInTimeBlock;
 
 public class IsInTimeBlockViewModel(IsInTimeBlockModel model) : ParametersViewModel, IRemovable
 {
+    public IDataLabelRepository Repository => model.Repository;
     public string ValueName
     {
         get => model.ValueName;
@@ -33,18 +34,6 @@ public class IsInTimeBlockViewModel(IsInTimeBlockModel model) : ParametersViewMo
         set
         {
             model.EndHour = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public IList<DataLabel> Labels => [..model.GetLabels()];
-
-    public DataLabel? SelectedLabel
-    {
-        get => Labels.FirstOrDefault(l => l.Name == model.ValueName);
-        set
-        {
-            model.ValueName = value?.Name ?? string.Empty;
             OnPropertyChanged();
         }
     }

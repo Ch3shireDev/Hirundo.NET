@@ -162,7 +162,7 @@ public sealed class MainViewModel : ViewModelBase
 
     public void UpdateConfig(ApplicationConfig config)
     {
-        _model.SetConfig(config);
+        _model.UpdateConfig(config);
         OnPropertyChanged(nameof(DataSourceViewModel));
         OnPropertyChanged(nameof(ParametersBrowserViewModel));
         OnPropertyChanged(nameof(ReturningSpecimensViewModel));

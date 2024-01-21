@@ -4,7 +4,7 @@ public enum DataType
 {
     Undefined,
     Text,
-    Number,
+    Integer,
     Numeric,
     Date,
     Boolean,

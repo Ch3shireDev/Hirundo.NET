@@ -1,106 +1,68 @@
 ﻿using System.Globalization;
 using Hirundo.Commons;
+using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Processors.Observations.Conditions;
-using Hirundo.Repositories.DataLabels;
 
 namespace Hirundo.Processors.Observations.WPF.IsEqual;
 
-public class IsEqualModel
+public class IsEqualModel(IsEqualCondition condition, IDataLabelRepository repository)
 {
-    private readonly IDataLabelRepository _repository;
-
-
-    private DataLabel? _selectedLabel;
-
-    public IsEqualModel(IsEqualCondition condition, IDataLabelRepository repository)
-    {
-        OriginalCondition = condition;
-        IsEqualCondition = condition;
-        _repository = repository;
-    }
-
-    public IsEqualCondition OriginalCondition { get; init; }
+    public IsEqualCondition Condition { get; init; } = condition;
 
     public string ValueName
     {
-        get => OriginalCondition.ValueName;
-        set => OriginalCondition.ValueName = value;
+        get => Condition.ValueName;
+        set => Condition.ValueName = value;
     }
 
-    public string ValueStr { get; set; } = null!;
-    public DataType ValueType { get; set; }
-
-    public IsEqualCondition IsEqualCondition
-    {
-        get => GetIsEqualCondition();
-        set => SetIsEqualCondition(value);
-    }
-
-    private object Value
+    public string ValueStr
     {
         get => GetValue();
-        set => SetValue(value);
+        set => SetValueFromString(value);
     }
 
+    public DataType ValueType { get; set; }
 
-    public IList<DataLabel> Labels => [.._repository.GetLabels()];
+    public IDataLabelRepository Repository { get; } = repository;
+    public DataType DataType { get; set; }
 
-    public DataLabel? SelectedLabel
+    private string GetValue()
     {
-        get => _selectedLabel;
-        set
+        switch (ValueType)
         {
-            _selectedLabel = value;
-            ValueName = value?.Name ?? "";
+            case DataType.Text:
+                return Condition.Value as string ?? string.Empty;
+            case DataType.Integer:
+                return Condition.Value is int intValue ? intValue.ToString(CultureInfo.InvariantCulture) : string.Empty;
+            case DataType.Numeric:
+                return Condition.Value is double doubleValue ? doubleValue.ToString(CultureInfo.InvariantCulture) : string.Empty;
+            case DataType.Date:
+                return Condition.Value is DateTime dateValue ? dateValue.ToString(CultureInfo.InvariantCulture) : string.Empty;
+            case DataType.Boolean:
+                return Condition.Value is bool boolValue ? boolValue.ToString(CultureInfo.InvariantCulture) : string.Empty;
+            case DataType.Undefined:
+                return Condition.Value as string ?? string.Empty;
+            default:
+                return string.Empty;
         }
     }
 
-    private IsEqualCondition GetIsEqualCondition()
-    {
-        var name = SelectedLabel?.Name ?? ValueName;
-        return new(name, Value);
-    }
 
-    private void SetIsEqualCondition(IsEqualCondition value)
+    private void SetValueFromString(string value)
     {
-        ValueName = value.ValueName;
-        ValueStr = value.Value?.ToString() ?? "";
-
-        ValueType = value.Value switch
+        Condition.Value = DataType switch
         {
-            string => DataType.Text,
-            int => DataType.Number,
-            double => DataType.Numeric,
-            bool => DataType.Boolean,
-            DateTime => DataType.Date,
-            _ => DataType.Text
-        };
-    }
-
-    private object GetValue()
-    {
-        return ValueType switch
-        {
-            DataType.Text => ValueStr,
-            DataType.Number => int.Parse(ValueStr, CultureInfo.InvariantCulture),
-            DataType.Numeric => double.Parse(ValueStr, CultureInfo.InvariantCulture),
-            DataType.Boolean => bool.Parse(ValueStr),
-            DataType.Date => DateTime.Parse(ValueStr, CultureInfo.InvariantCulture),
-            _ => throw new ArgumentOutOfRangeException(nameof(ValueType))
-        };
-    }
-
-    private void SetValue(object value)
-    {
-        ValueStr = value.ToString()!;
-        ValueType = value switch
-        {
-            string => DataType.Text,
-            int => DataType.Number,
-            double => DataType.Numeric,
-            bool => DataType.Boolean,
-            DateTime => DataType.Date,
-            _ => throw new ArgumentOutOfRangeException(nameof(value))
+            DataType.Text => value,
+            DataType.Integer when int.TryParse(value, out var intValue) => intValue,
+            DataType.Integer => value,
+            DataType.Numeric when double.TryParse(value, out var doubleValue) => doubleValue,
+            DataType.Numeric => value,
+            DataType.Date when DateTime.TryParse(value, out var dateValue) => dateValue,
+            DataType.Date => value,
+            DataType.Boolean when bool.TryParse(value, out var boolValue) => boolValue,
+            DataType.Boolean => value,
+            DataType.Undefined => value,
+            _ => Condition.Value
         };
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Hirundo.Commons;
+﻿namespace Hirundo.Commons.Repositories.Labels;
 
 public class DataLabel(string name, DataType dataType = DataType.Text)
 {

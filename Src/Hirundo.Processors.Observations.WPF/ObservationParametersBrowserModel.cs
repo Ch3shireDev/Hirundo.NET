@@ -1,8 +1,9 @@
-﻿using Hirundo.Commons.WPF;
+﻿using Hirundo.Commons.Repositories.Labels;
+using Hirundo.Commons.WPF;
 using Hirundo.Processors.Observations.Conditions;
 using Hirundo.Processors.Observations.WPF.IsEqual;
 using Hirundo.Processors.Observations.WPF.IsInTimeBlock;
-using Hirundo.Repositories.DataLabels;
+
 
 namespace Hirundo.Processors.Observations.WPF;
 
