@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using Hirundo.Commons;
 using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
 
@@ -36,7 +37,20 @@ public class IsInTimeBlockViewModel(IsInTimeBlockModel model) : ParametersViewMo
         }
     }
 
+    public IList<DataLabel> Labels => [..model.GetLabels()];
+
+    public DataLabel? SelectedLabel
+    {
+        get => Labels.FirstOrDefault(l => l.Name == model.ValueName);
+        set
+        {
+            model.ValueName = value?.Name ?? string.Empty;
+            OnPropertyChanged();
+        }
+    }
+
     public ICommand RemoveCommand => new RelayCommand(Remove);
+
     public event EventHandler<ParametersEventArgs>? Removed;
 
     public void Remove()

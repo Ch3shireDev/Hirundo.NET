@@ -48,7 +48,7 @@ public class ObservationParametersBrowserModel(IDataLabelRepository repository) 
         var viewModel = (ParametersViewModel)(condition switch
         {
             IsEqualCondition filter => new IsEqualViewModel(new IsEqualModel(filter, repository)),
-            IsInTimeBlockCondition filter => new IsInTimeBlockViewModel(new IsInTimeBlockModel(filter)),
+            IsInTimeBlockCondition filter => new IsInTimeBlockViewModel(new IsInTimeBlockModel(filter, repository)),
             _ => throw new NotImplementedException()
         });
 

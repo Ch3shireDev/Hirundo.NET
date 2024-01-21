@@ -11,7 +11,7 @@
         <Label FontWeight="Bold">Czy wartość jest w przedziale czasowym?</Label>
         <WrapPanel>
             <Label>Nazwa wartości</Label>
-            <TextBox Text="{Binding ValueName}" MinWidth="100" />
+            <ComboBox ItemsSource="{Binding Labels}" SelectedValue="{Binding SelectedLabel}" DisplayMemberPath="Name"/>
         </WrapPanel>
         <WrapPanel>
             <Label>Godzina początkowa</Label>

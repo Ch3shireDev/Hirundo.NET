@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Hirundo.Commons\Hirundo.Commons.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="ParametersBrowserView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

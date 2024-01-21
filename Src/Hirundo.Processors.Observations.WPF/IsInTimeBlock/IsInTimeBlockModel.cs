@@ -1,8 +1,10 @@
-﻿using Hirundo.Processors.Observations.Conditions;
+﻿using Hirundo.Commons;
+using Hirundo.Processors.Observations.Conditions;
+using Hirundo.Repositories.DataLabels;
 
 namespace Hirundo.Processors.Observations.WPF.IsInTimeBlock;
 
-public class IsInTimeBlockModel(IsInTimeBlockCondition condition)
+public class IsInTimeBlockModel(IsInTimeBlockCondition condition, IDataLabelRepository repository)
 {
     public IsInTimeBlockCondition Condition { get; set; } = condition;
 
@@ -22,5 +24,10 @@ public class IsInTimeBlockModel(IsInTimeBlockCondition condition)
     {
         get => Condition.TimeBlock.EndHour;
         set => Condition.TimeBlock.EndHour = value;
+    }
+
+    public IEnumerable<DataLabel> GetLabels()
+    {
+        return repository.GetLabels();
     }
 }

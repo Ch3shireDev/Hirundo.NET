@@ -1,3 +1,4 @@
+using Hirundo.Commons;
 using Hirundo.Processors.Observations.Conditions;
 using Hirundo.Processors.Observations.WPF.IsEqual;
 using Hirundo.Repositories.DataLabels;

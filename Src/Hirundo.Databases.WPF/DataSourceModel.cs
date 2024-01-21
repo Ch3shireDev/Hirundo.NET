@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Hirundo.Commons;
 using Hirundo.Commons.WPF;
 using Hirundo.Databases.WPF.Access;
 using Hirundo.Repositories.DataLabels;

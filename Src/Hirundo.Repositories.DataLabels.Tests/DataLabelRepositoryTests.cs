@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Hirundo.Commons;
+using NUnit.Framework;
 
 namespace Hirundo.Repositories.DataLabels.Tests;
 
