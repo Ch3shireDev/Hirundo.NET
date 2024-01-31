@@ -3,7 +3,7 @@ using Hirundo.Commons.WPF.Helpers;
 
 namespace Hirundo.Commons.WPF;
 
-public class ParametersBrowserViewModel(IParametersBrowserModel parametersBrowserModel) : ViewModelBase
+public class ParametersBrowserViewModel(ParametersBrowserModel parametersBrowserModel) : ViewModelBase
 {
     public ICommand AddParametersCommand => new RelayCommand(AddParameters);
     public string Description => parametersBrowserModel.Description;

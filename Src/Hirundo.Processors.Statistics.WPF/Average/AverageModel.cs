@@ -1,8 +1,10 @@
-﻿using Hirundo.Processors.Statistics.Operations;
+﻿using Hirundo.Commons;
+using Hirundo.Commons.Repositories.Labels;
+using Hirundo.Processors.Statistics.Operations;
 
 namespace Hirundo.Processors.Statistics.WPF.Average;
 
-public class AverageModel(AverageOperation operation)
+public class AverageModel(AverageOperation operation, IDataLabelRepository repository)
 {
     public AverageOperation Operation { get; set; } = operation;
 
@@ -47,4 +49,7 @@ public class AverageModel(AverageOperation operation)
         get => Operation.Outliers.RejectOutliers;
         set => Operation.Outliers.RejectOutliers = value;
     }
+
+    public IDataLabelRepository Repository => repository;
+    public DataType ValueType { get; set; }
 }

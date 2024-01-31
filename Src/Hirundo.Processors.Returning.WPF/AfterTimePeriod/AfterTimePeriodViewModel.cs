@@ -1,4 +1,6 @@
 ﻿using System.Windows.Input;
+using Hirundo.Commons;
+using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
 
@@ -16,6 +18,17 @@ public class AfterTimePeriodViewModel(AfterTimePeriodModel model) : ParametersVi
         }
     }
 
+    public IDataLabelRepository Repository => model.Repository;
+
+    public DataType DataType
+    {
+        get => model.ValueType;
+        set
+        {
+            model.ValueType = value;
+            OnPropertyChanged();
+        }
+    }
     public int TimePeriodInDays
     {
         get => model.TimePeriodInDays;

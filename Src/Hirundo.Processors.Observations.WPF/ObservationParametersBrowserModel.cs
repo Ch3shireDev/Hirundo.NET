@@ -7,21 +7,21 @@ using Hirundo.Processors.Observations.WPF.IsInTimeBlock;
 
 namespace Hirundo.Processors.Observations.WPF;
 
-public class ObservationParametersBrowserModel(IDataLabelRepository repository) : IParametersBrowserModel
+public class ObservationParametersBrowserModel(IDataLabelRepository repository) : ParametersBrowserModel
 {
     public ObservationsParameters ObservationsParameters { get; set; } = new();
-    public string Description => "W tym panelu ustalasz warunki, jakie mają spełniać wybierane obserwacje do obliczeń.";
-    public string AddParametersCommandText => "Dodaj nowy warunek";
-    public string Header => "Obserwacje";
-    public string Title => "Warunki filtrowania obserwacji";
+    public override string Description => "W tym panelu ustalasz warunki, jakie mają spełniać wybierane obserwacje do obliczeń.";
+    public override string AddParametersCommandText => "Dodaj nowy warunek";
+    public override string Header => "Obserwacje";
+    public override string Title => "Warunki filtrowania obserwacji";
 
-    public IList<ParametersData> ParametersDataList { get; } =
+    public override IList<ParametersData> ParametersDataList { get; } =
     [
         new ParametersData(typeof(IsEqualCondition), "Czy wartość jest równa?", "Warunek porównujący wartość w polu danych z wybraną wartością."),
         new ParametersData(typeof(IsInTimeBlockCondition), "Czy wartość jest w przedziale czasowym?", "Warunek sprawdzający godziny złapania osobnika.")
     ];
 
-    public void AddParameters(ParametersData parametersData)
+    public override void AddParameters(ParametersData parametersData)
     {
         switch (parametersData.Type.Name)
         {
@@ -36,7 +36,7 @@ public class ObservationParametersBrowserModel(IDataLabelRepository repository) 
         }
     }
 
-    public IEnumerable<ParametersViewModel> GetParametersViewModels()
+    public override IEnumerable<ParametersViewModel> GetParametersViewModels()
     {
         return
             ObservationsParameters

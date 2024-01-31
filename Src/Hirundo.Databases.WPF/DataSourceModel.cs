@@ -6,26 +6,26 @@ using Hirundo.Databases.WPF.Access;
 
 namespace Hirundo.Databases.WPF;
 
-public class DataSourceModel(IDataLabelRepository dataLabelRepository) : IParametersBrowserModel
+public class DataSourceModel(IDataLabelRepository dataLabelRepository) : ParametersBrowserModel
 {
     public IList<IDatabaseParameters> DatabaseParameters { get; } = new List<IDatabaseParameters>();
 
-    public string Description => "W tym panelu wybierasz źródło danych.";
-    public string AddParametersCommandText => "Dodaj nowe źródło danych";
-    public string Header => "Źródła danych";
-    public string Title => "Źródła danych";
+    public override string Description => "W tym panelu wybierasz źródło danych.";
+    public override string AddParametersCommandText => "Dodaj nowe źródło danych";
+    public override string Header => "Źródła danych";
+    public override string Title => "Źródła danych";
 
-    public IList<ParametersData> ParametersDataList { get; } =
+    public override IList<ParametersData> ParametersDataList { get; } =
     [
         new ParametersData(typeof(AccessDatabaseParameters), "Baza danych Access (*.mdb)", "Źródło danych wyszczególniające tabelę bazy danych Access")
     ];
 
-    public void AddParameters(ParametersData parametersData)
+    public override void AddParameters(ParametersData parametersData)
     {
         AddDatasource(parametersData.Type);
     }
 
-    public IEnumerable<ParametersViewModel> GetParametersViewModels()
+    public override IEnumerable<ParametersViewModel> GetParametersViewModels()
     {
         return DatabaseParameters
                 .Select(AsParametersViewModel)

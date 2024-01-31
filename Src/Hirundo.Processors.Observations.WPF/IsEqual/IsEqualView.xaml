@@ -3,8 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
-             xmlns:commons="clr-namespace:Hirundo.Commons;assembly=Hirundo.Commons"
              xmlns:isEqual="clr-namespace:Hirundo.Processors.Observations.WPF.IsEqual"
              xmlns:labels="clr-namespace:Hirundo.Commons.WPF.Repositories.Labels;assembly=Hirundo.Commons.WPF"
              mc:Ignorable="d"
@@ -14,10 +12,10 @@
         <Label FontWeight="Bold">Czy wartość jest równa?</Label>
         <WrapPanel>
             <Label>Nazwa wartości</Label>
-            <labels:LabelsComboBox 
+            <labels:LabelsComboBox
                 ValueName="{Binding ValueName}"
                 DataType="{Binding DataType}"
-                Repository="{Binding Repository}"/>
+                Repository="{Binding Repository}" />
         </WrapPanel>
         <WrapPanel>
             <Label>Wartość do porównania</Label>

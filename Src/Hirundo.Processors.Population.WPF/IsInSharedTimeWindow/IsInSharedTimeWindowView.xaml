@@ -4,14 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:isInSharedTimeWindow="clr-namespace:Hirundo.Processors.Population.WPF.IsInSharedTimeWindow"
+             xmlns:labels="clr-namespace:Hirundo.Commons.WPF.Repositories.Labels;assembly=Hirundo.Commons.WPF"
              mc:Ignorable="d"
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance isInSharedTimeWindow:IsInSharedTimeWindowViewModel}">
     <StackPanel>
         <Label FontWeight="Bold">Czy jest we współdzielonym oknie czasowym?</Label>
         <WrapPanel>
-            <Label>Nazwa pola danych daty</Label>
-            <TextBox MinWidth="100" Text="{Binding DateValueName, Mode=TwoWay}" />
+            <Label>Nazwa pola daty</Label>
+            <labels:LabelsComboBox 
+                ValueName="{Binding DateValueName}"
+                DataType="{Binding DataType}"
+                Repository="{Binding Repository}"/>
         </WrapPanel>
         <WrapPanel>
             <Label>Maksymalny czas w dniach</Label>

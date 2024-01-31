@@ -1,8 +1,10 @@
-﻿using Hirundo.Processors.Returning.Conditions;
+﻿using Hirundo.Commons;
+using Hirundo.Commons.Repositories.Labels;
+using Hirundo.Processors.Returning.Conditions;
 
 namespace Hirundo.Processors.Returning.WPF.NotEarlierThanGivenDateNextYear;
 
-public class NotEarlierThanGivenDateNextYearModel(ReturnsNotEarlierThanGivenDateNextYearCondition condition)
+public class NotEarlierThanGivenDateNextYearModel(ReturnsNotEarlierThanGivenDateNextYearCondition condition, IDataLabelRepository repository)
 {
     public ReturnsNotEarlierThanGivenDateNextYearCondition Condition { get; set; } = condition;
 
@@ -23,4 +25,7 @@ public class NotEarlierThanGivenDateNextYearModel(ReturnsNotEarlierThanGivenDate
         get => Condition.Day;
         set => Condition.Day = value;
     }
+
+    public DataType ValueType { get; set; }
+    public IDataLabelRepository Repository => repository;
 }

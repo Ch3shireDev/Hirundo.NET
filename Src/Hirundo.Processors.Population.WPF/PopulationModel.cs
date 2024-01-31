@@ -1,29 +1,30 @@
-﻿using Hirundo.Commons.WPF;
+﻿using Hirundo.Commons.Repositories.Labels;
+using Hirundo.Commons.WPF;
 using Hirundo.Processors.Population.Conditions;
 using Hirundo.Processors.Population.WPF.IsInSharedTimeWindow;
 
 namespace Hirundo.Processors.Population.WPF;
 
-public class PopulationModel : IParametersBrowserModel
+public class PopulationModel(IDataLabelRepository repository) : ParametersBrowserModel
 {
     public PopulationProcessorParameters ConfigPopulation { get; set; } = new();
     public IList<IPopulationConditionBuilder> Conditions => ConfigPopulation.Conditions;
-    public string Header => "Populacja";
-    public string Title => "Warunki populacji";
-    public string Description => "W tym panelu określasz warunki określające populację dla danego osobnika powracającego.";
-    public string AddParametersCommandText => "Dodaj nowy warunek";
+    public override string Header => "Populacja";
+    public override string Title => "Warunki populacji";
+    public override string Description => "W tym panelu określasz warunki określające populację dla danego osobnika powracającego.";
+    public override string AddParametersCommandText => "Dodaj nowy warunek";
 
-    public IList<ParametersData> ParametersDataList { get; } =
+    public override IList<ParametersData> ParametersDataList { get; } =
     [
         new ParametersData(typeof(IsInSharedTimeWindowConditionBuilder), "Czy jest we współdzielonym oknie czasowym?", "Czy jest we współdzielonym oknie czasowym?")
     ];
 
-    public IEnumerable<ParametersViewModel> GetParametersViewModels()
+    public override IEnumerable<ParametersViewModel> GetParametersViewModels()
     {
         return Conditions.Select(CreateViewModel);
     }
 
-    public void AddParameters(ParametersData parametersData)
+    public override void AddParameters(ParametersData parametersData)
     {
         switch (parametersData.Type)
         {
@@ -53,11 +54,11 @@ public class PopulationModel : IParametersBrowserModel
         return viewModel;
     }
 
-    public static ParametersViewModel Create(IPopulationConditionBuilder conditionBuilder)
+    public ParametersViewModel Create(IPopulationConditionBuilder conditionBuilder)
     {
         return conditionBuilder switch
         {
-            IsInSharedTimeWindowConditionBuilder m => new IsInSharedTimeWindowViewModel(new IsInSharedTimeWindowModel(m)),
+            IsInSharedTimeWindowConditionBuilder m => new IsInSharedTimeWindowViewModel(new IsInSharedTimeWindowModel(m, repository)),
             _ => throw new NotSupportedException($"Condition of type {conditionBuilder.GetType()} is not supported.")
         };
     }

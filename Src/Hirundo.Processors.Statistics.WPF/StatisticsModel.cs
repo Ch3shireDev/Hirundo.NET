@@ -1,28 +1,29 @@
-﻿using Hirundo.Commons.WPF;
+﻿using Hirundo.Commons.Repositories.Labels;
+using Hirundo.Commons.WPF;
 using Hirundo.Processors.Statistics.Operations;
 using Hirundo.Processors.Statistics.WPF.Average;
 
 namespace Hirundo.Processors.Statistics.WPF;
 
-public class StatisticsModel : IParametersBrowserModel
+public class StatisticsModel(IDataLabelRepository repository) : ParametersBrowserModel
 {
     public StatisticsProcessorParameters StatisticsProcessorParameters { get; set; } = new();
-    public string Header => "Statystyki";
-    public string Title => "Operacje statystyczne";
-    public string Description => "W tym panelu wybierasz dane statystyczne, które mają być obliczone dla populacji dla każdego osobnika powracającego.";
-    public string AddParametersCommandText => "Dodaj operację";
+    public override string Header => "Statystyki";
+    public override string Title => "Operacje statystyczne";
+    public override string Description => "W tym panelu wybierasz dane statystyczne, które mają być obliczone dla populacji dla każdego osobnika powracającego.";
+    public override string AddParametersCommandText => "Dodaj operację";
 
-    public IList<ParametersData> ParametersDataList { get; } =
+    public override IList<ParametersData> ParametersDataList { get; } =
     [
         new ParametersData(typeof(AverageOperation), "Średnia", "Średnia wartość ze wszystkich pomiarów")
     ];
 
-    public void AddParameters(ParametersData parametersData)
+    public override void AddParameters(ParametersData parametersData)
     {
         AddOperation(parametersData.Type);
     }
 
-    public IEnumerable<ParametersViewModel> GetParametersViewModels()
+    public override IEnumerable<ParametersViewModel> GetParametersViewModels()
     {
         return StatisticsProcessorParameters.Operations.Select(Create);
     }
@@ -44,7 +45,7 @@ public class StatisticsModel : IParametersBrowserModel
         ArgumentNullException.ThrowIfNull(operation, nameof(operation));
         var viewModel = (ParametersViewModel)(operation switch
         {
-            AverageOperation operation1 => new AverageViewModel(new AverageModel(operation1)),
+            AverageOperation operation1 => new AverageViewModel(new AverageModel(operation1, repository)),
             _ => throw new ArgumentException($"Unknown operation model type: {operation.GetType()}")
         });
 

@@ -1,4 +1,6 @@
 ﻿using System.Windows.Input;
+using Hirundo.Commons;
+using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
 
@@ -12,6 +14,18 @@ public class AverageViewModel(AverageModel model) : ParametersViewModel, IRemova
         set
         {
             model.ValueName = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public IDataLabelRepository Repository => model.Repository;
+
+    public DataType DataType
+    {
+        get => model.ValueType;
+        set
+        {
+            model.ValueType = value;
             OnPropertyChanged();
         }
     }

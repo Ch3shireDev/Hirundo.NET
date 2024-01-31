@@ -1,4 +1,6 @@
 ﻿using System.Windows.Input;
+using Hirundo.Commons;
+using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
 
@@ -37,6 +39,18 @@ public class NotEarlierThanGivenDateNextYearViewModel(NotEarlierThanGivenDateNex
     }
 
     public ICommand RemoveCommand => new RelayCommand(Remove);
+    public IDataLabelRepository Repository => model.Repository;
+
+    public DataType DataType
+    {
+        get => model.ValueType;
+        set
+        {
+            model.ValueType = value;
+            OnPropertyChanged();
+        }
+    }
+
     public event EventHandler<ParametersEventArgs>? Removed;
 
     public void Remove()

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:average="clr-namespace:Hirundo.Processors.Statistics.WPF.Average"
+             xmlns:labels="clr-namespace:Hirundo.Commons.WPF.Repositories.Labels;assembly=Hirundo.Commons.WPF"
              mc:Ignorable="d"
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance average:AverageViewModel}">
@@ -11,7 +12,10 @@
         <Label FontWeight="Bold">Wartość średnia i odchylenie standardowe</Label>
         <WrapPanel>
             <Label>Nazwa wartości wejściowej</Label>
-            <TextBox Text="{Binding ValueName, Mode=TwoWay}" Width="100" />
+            <labels:LabelsComboBox 
+                ValueName="{Binding ValueName}"
+                DataType="{Binding DataType}"
+                Repository="{Binding Repository}"/>
         </WrapPanel>
         <WrapPanel>
             <Label>Nazwa wartości wynikowej — średniej</Label>

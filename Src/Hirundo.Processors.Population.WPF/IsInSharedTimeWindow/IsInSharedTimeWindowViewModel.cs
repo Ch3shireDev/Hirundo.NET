@@ -1,4 +1,6 @@
 ﻿using System.Windows.Input;
+using Hirundo.Commons;
+using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
 
@@ -16,6 +18,16 @@ public class IsInSharedTimeWindowViewModel(IsInSharedTimeWindowModel model) : Pa
         }
     }
 
+    public DataType DataType
+    {
+        get => model.ValueType;
+        set
+        {
+            model.ValueType = value;
+            OnPropertyChanged();
+        }
+    }
+
     public int MaxTimeDistanceInDays
     {
         get => model.MaxTimeDistanceInDays;
@@ -25,6 +37,7 @@ public class IsInSharedTimeWindowViewModel(IsInSharedTimeWindowModel model) : Pa
             OnPropertyChanged();
         }
     }
+    public IDataLabelRepository Repository => model.Repository;
 
     public ICommand RemoveCommand => new RelayCommand(Remove);
 
