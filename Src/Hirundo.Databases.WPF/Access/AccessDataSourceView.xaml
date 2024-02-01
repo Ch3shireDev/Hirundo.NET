@@ -8,6 +8,7 @@
              xmlns:conditions="clr-namespace:Hirundo.Databases.Conditions;assembly=Hirundo.Databases"
              xmlns:access="clr-namespace:Hirundo.Databases.WPF.Access"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:wpf="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
              mc:Ignorable="d"
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance access:AccessDataSourceViewModel}">
@@ -45,7 +46,7 @@
     <StackPanel Margin="10">
         <WrapPanel>
             <Label>Ścieżka</Label>
-            <TextBox Text="{Binding Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <wpf:FileSourceControl Path="{Binding Path}" />
         </WrapPanel>
         <WrapPanel>
             <Label>Nazwa tabeli</Label>
@@ -72,14 +73,20 @@
             <Label>Warunki</Label>
             <DataGrid ItemsSource="{Binding Conditions}" AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Kolumna" Binding="{Binding DatabaseColumn}" />
-                    <DataGridComboBoxColumn Header="Typ"
-                                            SelectedValueBinding="{Binding Type}"
-                                            ItemsSource="{Binding Source={StaticResource DatabaseConditionTypeListProvider}}" />
-                    <DataGridTextColumn Header="Wartość" Binding="{Binding Value}" />
-                    <DataGridComboBoxColumn Header="Operator"
-                                            SelectedValueBinding="{Binding ConditionOperator}"
-                                            ItemsSource="{Binding Source={StaticResource DatabaseConditionOperatorTypeListProvider}}" />
+                    <DataGridComboBoxColumn
+                        Header="Operator"
+                        SelectedValueBinding="{Binding ConditionOperator}"
+                        ItemsSource="{Binding Source={StaticResource DatabaseConditionOperatorTypeListProvider}}" />
+                    <DataGridTextColumn
+                        Header="Kolumna"
+                        Binding="{Binding DatabaseColumn}" />
+                    <DataGridComboBoxColumn
+                        Header="Typ"
+                        SelectedValueBinding="{Binding Type}"
+                        ItemsSource="{Binding Source={StaticResource DatabaseConditionTypeListProvider}}" />
+                    <DataGridTextColumn
+                        Header="Wartość"
+                        Binding="{Binding Value}" />
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

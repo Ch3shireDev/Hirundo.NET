@@ -64,7 +64,7 @@ public class MainModel(
         };
     }
 
-    public async Task Run()
+    public async Task RunAsync()
     {
         if (_isProcessing)
         {
@@ -75,8 +75,7 @@ public class MainModel(
         {
             _isProcessing = true;
             var config = CreateConfig();
-            var task = new Task(() => app.Run(config));
-            await task.ConfigureAwait(false);
+            await Task.Run(() => app.Run(config));
         }
         catch (Exception e)
         {
@@ -89,7 +88,31 @@ public class MainModel(
         }
     }
 
-    public async Task<bool> CanRun()
+    public void Run()
+    {
+        if (_isProcessing)
+        {
+            return;
+        }
+
+        try
+        {
+            _isProcessing = true;
+            var config = CreateConfig();
+            app.Run(config);
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Błąd działania aplikacji: {e.Message}", e);
+            throw;
+        }
+        finally
+        {
+            _isProcessing = false;
+        }
+    }
+
+    public async Task<bool> CanRunAsync()
     {
         if (_isProcessing)
         {
@@ -97,6 +120,16 @@ public class MainModel(
         }
 
         await Task.Delay(1).ConfigureAwait(false);
+        return true;
+    }
+
+    public bool CanRun()
+    {
+        if (_isProcessing)
+        {
+            return false;
+        }
+
         return true;
     }
 }

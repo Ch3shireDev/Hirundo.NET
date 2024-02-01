@@ -2,7 +2,7 @@
 
 namespace Hirundo.Commons.WPF.Helpers;
 
-public sealed class AsyncRelayCommand(Func<Task> execute, Func<Task<bool>>? canExecute = null) : ICommand
+public sealed class AsyncRelayCommand(Func<Task> execute, Func<bool>? canExecute = null) : ICommand
 {
     public bool CanExecute(object? parameter)
     {
@@ -11,12 +11,7 @@ public sealed class AsyncRelayCommand(Func<Task> execute, Func<Task<bool>>? canE
             return true;
         }
 
-        if (canExecute().Result)
-        {
-            return true;
-        }
-
-        return false;
+        return canExecute();
     }
 
     public void Execute(object? parameter)

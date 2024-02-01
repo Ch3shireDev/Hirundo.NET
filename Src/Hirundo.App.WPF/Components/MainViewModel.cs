@@ -32,7 +32,7 @@ public sealed class MainViewModel : ViewModelBase
         PopulationViewModel = new(model.PopulationModel);
         SpecimensViewModel = new(model.SpecimensModel);
         StatisticsViewModel = new(model.StatisticsModel);
-        WriterViewModel = new(model.WriterModel, model.Run);
+        WriterViewModel = new(model.WriterModel, ProcessAndSaveAsync);
 
         ViewModels = new List<ViewModelBase>
         {
@@ -59,7 +59,7 @@ public sealed class MainViewModel : ViewModelBase
     public ObservableCollection<LogEvent> LogEventsItems { get; } = [];
     public ICommand PreviousCommand => new RelayCommand(Previous, CanGoPrevious);
     public ICommand NextCommand => new RelayCommand(Next, CanGoNext);
-    public ICommand ProcessAndSaveCommand => new AsyncRelayCommand(ProcessAndSave, CanProcessAndSave);
+    public ICommand ProcessAndSaveCommand => new AsyncRelayCommand(ProcessAndSaveAsync, CanProcessAndSave);
     public ICommand SaveCurrentConfigCommand => new RelayCommand(SaveCurrentConfig);
     public ICommand LoadNewConfigCommand => new RelayCommand(LoadNewConfig);
 
@@ -78,10 +78,10 @@ public sealed class MainViewModel : ViewModelBase
         }
     }
 
-    private bool IsProcessing
+    public bool IsProcessing
     {
         get => isProcessing;
-        set
+        private set
         {
             isProcessing = value;
 
@@ -114,9 +114,9 @@ public sealed class MainViewModel : ViewModelBase
         SelectedViewModel = DataSourceViewModel;
     }
 
-    private Task<bool> CanProcessAndSave()
+    private bool CanProcessAndSave()
     {
-        if (IsProcessing) return Task.FromResult(false);
+        if (IsProcessing) return false;
         return _model.CanRun();
     }
 
@@ -124,7 +124,7 @@ public sealed class MainViewModel : ViewModelBase
     {
         try
         {
-            Application.Current.Dispatcher.Invoke(() => { Mouse.OverrideCursor = cursor; });
+            Application.Current?.Dispatcher?.Invoke(() => { Mouse.OverrideCursor = cursor; });
         }
         catch (Exception e)
         {
@@ -133,14 +133,19 @@ public sealed class MainViewModel : ViewModelBase
         }
     }
 
-    private async Task ProcessAndSave()
+    public void ProcessAndSave()
+    {
+        ProcessAndSaveAsync().RunSynchronously();
+    }
+
+    public async Task ProcessAndSaveAsync()
     {
         if (IsProcessing) return;
 
         try
         {
             IsProcessing = true;
-            await _model.Run().ConfigureAwait(false);
+            await _model.RunAsync().ConfigureAwait(false);
             IsProcessing = false;
         }
         catch (HirundoException e)

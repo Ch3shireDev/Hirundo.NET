@@ -24,6 +24,7 @@ internal static class ContainerExtensions
 
         var hirundoApp = new Mock<IHirundoApp>();
 
+        builder.RegisterInstance(hirundoApp).As<Mock<IHirundoApp>>().SingleInstance();
         builder.RegisterInstance(hirundoApp.Object).As<IHirundoApp>().SingleInstance();
 
         builder.RegisterType<DataSourceModel>().AsSelf().SingleInstance();

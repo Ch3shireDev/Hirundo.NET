@@ -14,7 +14,6 @@ using Hirundo.Processors.Specimens;
 using Hirundo.Processors.Statistics;
 using Hirundo.Processors.Statistics.Operations;
 using Hirundo.Processors.Statistics.Operations.Outliers;
-
 using Hirundo.Writers.Summary;
 using Moq;
 using NUnit.Framework;
@@ -23,6 +22,7 @@ namespace Hirundo.App.WPF.Tests.Integration;
 
 public class MainViewModelTests
 {
+    private Mock<IHirundoApp> _hirundoApp = null!;
     private Mock<IDataLabelRepository> _repository = null!;
     private MainViewModel _viewModel = null!;
 
@@ -33,6 +33,7 @@ public class MainViewModelTests
         builder.AddViewModel();
         var container = builder.Build();
         _repository = container.Resolve<Mock<IDataLabelRepository>>();
+        _hirundoApp = container.Resolve<Mock<IHirundoApp>>();
         _viewModel = container.Resolve<MainViewModel>();
     }
 
@@ -388,5 +389,18 @@ public class MainViewModelTests
         var isEqualFilter = (IsEqualCondition)result.Observations.Conditions[0];
         Assert.That(isEqualFilter.ValueName, Is.EqualTo("BBB"));
         Assert.That(isEqualFilter.Value, Is.EqualTo("YYY"));
+    }
+
+    [Test]
+    public async Task GivenReadyConfig_WhenProcessAndSave_RunsTaskToTheEnd()
+    {
+        // Arrange
+        _viewModel.UpdateConfig(new ApplicationConfig());
+
+        // Act
+        await _viewModel.ProcessAndSaveAsync();
+
+        // Assert
+        _hirundoApp.Verify(a => a.Run(It.IsAny<ApplicationConfig>()), Times.Once);
     }
 }

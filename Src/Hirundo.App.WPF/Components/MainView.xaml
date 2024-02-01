@@ -16,6 +16,7 @@
              xmlns:average="clr-namespace:Hirundo.Processors.Statistics.WPF.Average;assembly=Hirundo.Processors.Statistics.WPF"
              xmlns:helpers2="clr-namespace:Hirundo.App.WPF.Helpers"
              xmlns:components="clr-namespace:Hirundo.App.WPF.Components"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="1000" d:Background="#FFF7FFF7"
              d:DataContext="{d:DesignInstance components:MainViewModel}">
@@ -121,6 +122,9 @@
                         <Setter Property="Margin" Value="0" />
                     </Style>
                 </ListBox.Resources>
+                <b:Interaction.Behaviors>
+                    <wpf11:AutoScrollBehavior />
+                </b:Interaction.Behaviors>
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="Padding" Value="2,0" />
@@ -142,7 +146,7 @@
             <WrapPanel HorizontalAlignment="Right">
                 <Button HorizontalAlignment="Right" Command="{Binding PreviousCommand}">Poprzedni</Button>
                 <Button HorizontalAlignment="Right" Command="{Binding NextCommand}">Następny</Button>
-                <Button HorizontalAlignment="Right" Command="{Binding ProcessAndSaveCommand}">Zapisz dane</Button>
+                <Button HorizontalAlignment="Right" Command="{Binding ProcessAndSaveCommand}">Przetwarzaj dane</Button>
             </WrapPanel>
         </DockPanel>
     </Grid>

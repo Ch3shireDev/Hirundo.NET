@@ -4,7 +4,7 @@ using Hirundo.Commons.WPF.Helpers;
 
 namespace Hirundo.Writers.WPF;
 
-public class WriterViewModel(WriterModel model, Func<Task> runTask) : ViewModelBase
+public class WriterViewModel(WriterModel model, Func<Task>? runTask=null) : ViewModelBase
 {
     public DataWriterViewModel DataWriterViewModel => DataWriterViewModelFactory.Create(model.SummaryParameters.Writer);
 
@@ -12,6 +12,7 @@ public class WriterViewModel(WriterModel model, Func<Task> runTask) : ViewModelB
 
     private async Task SaveData()
     {
+        if (runTask == null) return;
         await runTask();
     }
 }
