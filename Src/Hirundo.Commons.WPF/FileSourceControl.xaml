@@ -6,9 +6,17 @@
              xmlns:local="clr-namespace:Hirundo.Commons.WPF"
              mc:Ignorable="d"
              d:Background="AliceBlue"
-             d:Width="200"
+             d:Width="400"
              >
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+        </Style>
+    </UserControl.Resources>
     <WrapPanel>
-        <TextBox x:Name="TextBox" MinWidth="200" Text="{Binding Path, RelativeSource={RelativeSource AncestorType={x:Type local:FileSourceControl}}, Mode=TwoWay}" />
+        <TextBlock x:Name="TextBox" Text="{Binding Filename, RelativeSource={RelativeSource AncestorType={x:Type local:FileSourceControl}}, NotifyOnTargetUpdated=True}" MaxWidth="200" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+        <Button Command="{Binding SelectFileCommand, RelativeSource={RelativeSource AncestorType={x:Type local:FileSourceControl}}}">Wybierz plik</Button>
     </WrapPanel>
 </UserControl>

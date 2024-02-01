@@ -6,6 +6,7 @@ using Autofac;
 using Hirundo.App.WPF.Components;
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF.Helpers;
+using Hirundo.Databases;
 using Hirundo.Databases.WPF;
 using Hirundo.Processors.Observations.WPF;
 using Hirundo.Processors.Population.WPF;
@@ -29,6 +30,7 @@ public partial class App : Application
     {
         var builder = new ContainerBuilder();
         builder.RegisterType<HirundoApp>().As<IHirundoApp>();
+        builder.RegisterType<AccessMetadataService>().As<IAccessMetadataService>();
 
         builder.RegisterType<DataSourceModel>().AsSelf().SingleInstance();
         builder.RegisterType<ObservationParametersBrowserModel>().AsSelf().SingleInstance();
@@ -71,9 +73,10 @@ public partial class App : Application
 
         viewModel.RefreshWindow = view.InvalidateVisual;
 
+        Log.Information("Uruchomiono aplikację Hirundo.");
+
         view.Show();
 
-        Log.Information("Uruchomiono aplikację Hirundo.");
         Log.Debug($"Wersja aplikacji {Assembly.GetExecutingAssembly().GetName().Version}");
     }
 

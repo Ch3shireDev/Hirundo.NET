@@ -6,7 +6,7 @@ using Hirundo.Databases.WPF.Access;
 
 namespace Hirundo.Databases.WPF;
 
-public class DataSourceModel(IDataLabelRepository dataLabelRepository) : ParametersBrowserModel
+public class DataSourceModel(IDataLabelRepository dataLabelRepository, IAccessMetadataService accessMetadataService) : ParametersBrowserModel
 {
     public IList<IDatabaseParameters> DatabaseParameters { get; } = new List<IDatabaseParameters>();
 
@@ -79,11 +79,11 @@ public class DataSourceModel(IDataLabelRepository dataLabelRepository) : Paramet
         DatabaseParameters.Remove(p);
     }
 
-    private static ParametersViewModel AsParametersViewModel(IDatabaseParameters parameters)
+    private ParametersViewModel AsParametersViewModel(IDatabaseParameters parameters)
     {
         return parameters switch
         {
-            AccessDatabaseParameters accessDatabaseParameters => new AccessDataSourceViewModel(accessDatabaseParameters),
+            AccessDatabaseParameters accessDatabaseParameters => new AccessDataSourceViewModel(accessDatabaseParameters, accessMetadataService),
             _ => throw new NotImplementedException()
         };
     }

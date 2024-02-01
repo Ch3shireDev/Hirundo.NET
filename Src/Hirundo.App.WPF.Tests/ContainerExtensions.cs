@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Hirundo.App.WPF.Components;
 using Hirundo.Commons.Repositories.Labels;
+using Hirundo.Databases;
 using Hirundo.Databases.WPF;
 using Hirundo.Processors.Observations.WPF;
 using Hirundo.Processors.Population.WPF;
@@ -24,6 +25,10 @@ internal static class ContainerExtensions
         var hirundoApp = new Mock<IHirundoApp>();
 
         builder.RegisterInstance(hirundoApp.Object).As<IHirundoApp>().SingleInstance();
+
+        var accessMetadataService = new Mock<IAccessMetadataService>();
+
+        builder.RegisterInstance(accessMetadataService.Object).As<IAccessMetadataService>().SingleInstance();
 
         builder.RegisterType<DataSourceModel>().AsSelf().SingleInstance();
         builder.RegisterType<ObservationParametersBrowserModel>().AsSelf().SingleInstance();

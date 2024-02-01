@@ -2,17 +2,18 @@ using Hirundo.Databases.Conditions;
 
 namespace Hirundo.Databases.Tests.Integration;
 
+[TestFixture]
 public class MdbAccessDatabaseTests
 {
-    private AccessDatabaseParameters _accessDatabaseParameters = null!;
-    private MdbAccessDatabase _mdbAccessDatabase = null!;
-
     [SetUp]
     public void Setup()
     {
         _accessDatabaseParameters = new AccessDatabaseParameters();
         _mdbAccessDatabase = new MdbAccessDatabase(_accessDatabaseParameters);
     }
+
+    private AccessDatabaseParameters _accessDatabaseParameters = null!;
+    private MdbAccessDatabase _mdbAccessDatabase = null!;
 
     [Test]
     public void GivenOldExampleDatabase_WhenGetData_ReturnsRows()

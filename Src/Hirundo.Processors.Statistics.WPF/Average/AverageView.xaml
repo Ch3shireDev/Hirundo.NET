@@ -12,10 +12,10 @@
         <Label FontWeight="Bold">Wartość średnia i odchylenie standardowe</Label>
         <WrapPanel>
             <Label>Nazwa wartości wejściowej</Label>
-            <labels:LabelsComboBox 
+            <labels:LabelsComboBox
                 ValueName="{Binding ValueName}"
                 DataType="{Binding DataType}"
-                Repository="{Binding Repository}"/>
+                Repository="{Binding Repository}" />
         </WrapPanel>
         <WrapPanel>
             <Label>Nazwa wartości wynikowej — średniej</Label>
@@ -28,18 +28,20 @@
         <WrapPanel Margin="10">
             <CheckBox IsChecked="{Binding RejectOutliers, Mode=TwoWay}">Czy odrzucać wartości skrajne?</CheckBox>
         </WrapPanel>
-        <WrapPanel>
-            <Label>Wartości odstające — próg odrzucania</Label>
-            <TextBox Text="{Binding Threshold, Mode=TwoWay}" Width="100" />
-        </WrapPanel>
-        <WrapPanel>
-            <Label>Wzór górnego progu</Label>
-            <TextBox Text="{Binding UpperBound, Mode=TwoWay}" MinWidth="100" />
-        </WrapPanel>
-        <WrapPanel>
-            <Label>Wzór dolnego progu</Label>
-            <TextBox Text="{Binding LowerBound, Mode=TwoWay}" MinWidth="100" />
-        </WrapPanel>
+        <StackPanel IsEnabled="{Binding RejectOutliers}">
+            <WrapPanel>
+                <Label>Wartości odstające — próg odrzucania</Label>
+                <TextBox Text="{Binding Threshold, Mode=TwoWay}" Width="100" />
+            </WrapPanel>
+            <WrapPanel>
+                <Label>Wzór górnego progu</Label>
+                <TextBox Text="{Binding UpperBound, Mode=TwoWay}" MinWidth="100" />
+            </WrapPanel>
+            <WrapPanel>
+                <Label>Wzór dolnego progu</Label>
+                <TextBox Text="{Binding LowerBound, Mode=TwoWay}" MinWidth="100" />
+            </WrapPanel>
+        </StackPanel>
         <WrapPanel>
             <Button
                 Command="{Binding RemoveCommand}"
