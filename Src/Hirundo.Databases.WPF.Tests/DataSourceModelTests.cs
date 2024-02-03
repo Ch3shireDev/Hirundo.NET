@@ -5,6 +5,7 @@ using NUnit.Framework;
 
 namespace Hirundo.Databases.WPF.Tests;
 
+[TestFixture]
 public class DataSourceModelTests
 {
     private Mock<IAccessMetadataService> _metadataService = null!;
