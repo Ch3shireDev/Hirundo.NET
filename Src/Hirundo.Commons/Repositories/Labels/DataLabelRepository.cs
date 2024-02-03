@@ -38,7 +38,6 @@ public class DataLabelRepository : IDataLabelRepository
 
     void NotifyLabelsChanged()
     {
-        Log.Debug("Labels changed");
         LabelsChanged?.Invoke(this, EventArgs.Empty);
     }
 

@@ -1,8 +1,10 @@
-﻿using Hirundo.Commons.WPF;
+﻿using Hirundo.Commons;
+using Hirundo.Commons.Repositories.Labels;
+using Hirundo.Commons.WPF;
 
 namespace Hirundo.Processors.Specimens.WPF;
 
-public class SpecimensViewModel(SpecimensModel model) : ViewModelBase
+public class SpecimensViewModel(SpecimensModel model, IDataLabelRepository repository) : ViewModelBase
 {
     public string SpecimenIdentifier
     {
@@ -23,4 +25,7 @@ public class SpecimensViewModel(SpecimensModel model) : ViewModelBase
             OnPropertyChanged();
         }
     }
+
+    public DataType DataType { get; set; }
+    public IDataLabelRepository Repository { get; } = repository;
 }

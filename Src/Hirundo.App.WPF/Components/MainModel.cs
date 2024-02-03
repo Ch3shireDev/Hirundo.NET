@@ -1,4 +1,5 @@
-﻿using Hirundo.Databases.WPF;
+﻿using Hirundo.Commons.Repositories.Labels;
+using Hirundo.Databases.WPF;
 using Hirundo.Processors.Observations.WPF;
 using Hirundo.Processors.Population.WPF;
 using Hirundo.Processors.Returning.WPF;
@@ -17,7 +18,8 @@ public class MainModel(
     ReturningSpecimensModel returningSpecimensModel,
     SpecimensModel specimensModel,
     StatisticsModel statisticsModel,
-    WriterModel writerModel
+    WriterModel writerModel,
+    IDataLabelRepository repository
 )
 {
     private bool _isProcessing;
@@ -28,6 +30,7 @@ public class MainModel(
     public SpecimensModel SpecimensModel { get; set; } = specimensModel;
     public StatisticsModel StatisticsModel { get; set; } = statisticsModel;
     public WriterModel WriterModel { get; set; } = writerModel;
+    public IDataLabelRepository Repository { get; set; } = repository;
 
     public void UpdateConfig(ApplicationConfig config)
     {
@@ -50,7 +53,7 @@ public class MainModel(
         WriterModel.SummaryParameters = config.Results;
     }
 
-    public ApplicationConfig CreateConfig()
+    public ApplicationConfig GetConfigFromViewModels()
     {
         return new ApplicationConfig
         {
@@ -74,7 +77,7 @@ public class MainModel(
         try
         {
             _isProcessing = true;
-            var config = CreateConfig();
+            var config = GetConfigFromViewModels();
             await Task.Run(() => app.Run(config));
         }
         catch (Exception e)
@@ -98,7 +101,7 @@ public class MainModel(
         try
         {
             _isProcessing = true;
-            var config = CreateConfig();
+            var config = GetConfigFromViewModels();
             app.Run(config);
         }
         catch (Exception e)

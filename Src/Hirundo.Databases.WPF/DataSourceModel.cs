@@ -91,7 +91,7 @@ public class DataSourceModel(IDataLabelRepository dataLabelRepository, IAccessMe
     public void UpdateRepository()
     {
         // TODO: Ten fragment nie jest do końca dobry, pobiera tylko różne wartości pól i unika konfliktów.
-        // Należy dodać walidację zgodności dla wielu źródeł.
+        // TODO: Należy dodać walidację zgodności dla wielu źródeł.
 
         var labels = new List<DataLabel>();
 

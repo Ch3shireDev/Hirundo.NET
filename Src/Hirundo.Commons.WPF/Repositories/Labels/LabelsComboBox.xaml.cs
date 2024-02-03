@@ -1,10 +1,13 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Controls;
 using Hirundo.Commons.Repositories.Labels;
+using Serilog;
 
 namespace Hirundo.Commons.WPF.Repositories.Labels;
 
-public partial class LabelsComboBox : UserControl
+public partial class LabelsComboBox : UserControl, INotifyPropertyChanged
 {
     public static readonly DependencyProperty RepositoryProperty =
         DependencyProperty.Register(nameof(Repository), typeof(IDataLabelRepository), typeof(LabelsComboBox), new PropertyMetadata(OnDataLabelRepositoryChanged));
@@ -64,6 +67,7 @@ public partial class LabelsComboBox : UserControl
         {
             ValueName = value?.Name ?? string.Empty;
             DataType = value?.DataType ?? DataType.Undefined;
+            OnPropertyChanged();
         }
     }
 
@@ -98,8 +102,31 @@ public partial class LabelsComboBox : UserControl
     private void OnLabelsChanged()
     {
         if (Repository is null) return;
+        Log.Information("Odświeżono labels.");
+        Log.Information("Wartość początkowa: {ValueName}", ValueName);
+        var valueName = ValueName;
         Labels = [..Repository.GetLabels()];
+        Log.Information("Załadowano {Count} labels.", Labels.Count);
+        SelectedLabel = Labels.FirstOrDefault(l => l.Name == valueName);
+        Log.Information("Wartość końcowa SelectedLabel: {SelectedLabel}", SelectedLabel?.Name);
         ComboBox.ItemsSource = Labels;
         ComboBox.SelectedValue = SelectedLabel;
+        ValueName = valueName;
+        Log.Information("Wartość końcowa: {ValueName}", ValueName);
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+    {
+        if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+        field = value;
+        OnPropertyChanged(propertyName);
+        return true;
     }
 }

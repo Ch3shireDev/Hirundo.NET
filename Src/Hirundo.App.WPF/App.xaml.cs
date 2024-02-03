@@ -29,6 +29,7 @@ public partial class App : Application
     protected override void OnStartup(StartupEventArgs e)
     {
         var builder = new ContainerBuilder();
+
         builder.RegisterType<HirundoApp>().As<IHirundoApp>();
         builder.RegisterType<AccessMetadataService>().As<IAccessMetadataService>();
 

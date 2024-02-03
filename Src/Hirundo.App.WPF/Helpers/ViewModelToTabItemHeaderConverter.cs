@@ -13,7 +13,7 @@ public class ViewModelToTabItemHeaderConverter : IValueConverter
         return value switch
         {
             ParametersBrowserViewModel viewModel => viewModel.Header,
-            SpecimensViewModel => "Wszystkie osobniki",
+            SpecimensViewModel => "Osobniki",
             WriterViewModel => "Zapis wyników",
             _ => throw new ArgumentOutOfRangeException(nameof(value))
         };

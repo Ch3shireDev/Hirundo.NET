@@ -1,6 +1,5 @@
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Databases.WPF.Access;
-
 using Moq;
 using NUnit.Framework;
 
@@ -8,9 +7,9 @@ namespace Hirundo.Databases.WPF.Tests;
 
 public class DataSourceModelTests
 {
+    private Mock<IAccessMetadataService> _metadataService = null!;
     private DataSourceModel _model = null!;
     private Mock<IDataLabelRepository> _repository = null!;
-    private Mock<IAccessMetadataService> _metadataService = null!;
 
     [SetUp]
     public void Setup()

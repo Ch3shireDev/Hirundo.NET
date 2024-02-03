@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Input;
 using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
@@ -32,36 +31,25 @@ public class AccessDataSourceViewModel(AccessDatabaseParameters parameters, IAcc
     }
 
     public ObservableCollection<string> DataColumns { get; } = new();
-    public ICommand AfterFileCommand => new RelayCommand(LoadMetadata);
-    public ICommand UpdateLabelsCommand => new RelayCommand(UpdateLabels);
-    public IList<DatabaseCondition> Conditions => parameters.Conditions;
-    public IList<ColumnMapping> Columns => parameters.Columns;
-    public ICommand LoadedCommand => new RelayCommand(LoadMetadata);
-
     public ObservableCollection<AccessTableMetadata> MetadatataTables { get; } = new();
     public ObservableCollection<string> Tables { get; } = new();
-    public ICommand RemoveValuesCommand => new RelayCommand(RemoveValues);
 
     public event EventHandler<EventArgs>? LabelsUpdated;
-    public ICommand RemoveCommand => new RelayCommand(RemoveDataSource);
 
     public event EventHandler<ParametersEventArgs>? Removed;
 
 
     private void RemoveValues()
     {
-        var dialog = MessageBox.Show(
-            "Ta operacja skasuje wybór kolumn. Baza danych pozostanie niezmieniona.",
-            "Usuwanie wybranych kolumn",
-            MessageBoxButton.YesNo,
-            MessageBoxImage.Warning
-        );
+        parameters.Columns.Clear();
+        parameters.Conditions.Clear();
 
-        if (dialog == MessageBoxResult.Yes)
-        {
-            parameters.Columns.Clear();
-            parameters.Conditions.Clear();
-        }
+        Columns.Clear();
+        Conditions.Clear();
+
+        UpdateLabels();
+        OnPropertyChanged(nameof(Columns));
+        OnPropertyChanged(nameof(Conditions));
     }
 
     private void SetDataColumns(string tableName)
@@ -123,4 +111,63 @@ public class AccessDataSourceViewModel(AccessDatabaseParameters parameters, IAcc
     {
         Removed?.Invoke(this, new ParametersEventArgs(parameters));
     }
+
+    public void TableSelectionChanged()
+    {
+        RemoveValues();
+    }
+
+    public void AddColumn()
+    {
+        var newColumnMapping = new ColumnMapping();
+        parameters.Columns.Add(newColumnMapping);
+        Columns.Add(newColumnMapping);
+    }
+
+    public void RemoveColumn()
+    {
+        if (Columns.Count <= 0) return;
+        var column = Columns.Last();
+        parameters.Columns.Remove(column);
+        Columns.Remove(column);
+        UpdateLabels();
+    }
+
+    private void AddCondition()
+    {
+        var newCondition = new DatabaseCondition();
+        parameters.Conditions.Add(newCondition);
+        Conditions.Add(newCondition);
+    }
+
+
+    private void RemoveCondition()
+    {
+        if (Conditions.Count <= 0) return;
+        var condition = Conditions.Last();
+        parameters.Conditions.Remove(condition);
+        Conditions.Remove(condition);
+    }
+
+    #region commands
+
+    public ICommand LoadedCommand => new RelayCommand(LoadMetadata);
+    public ICommand AfterFileCommand => new RelayCommand(LoadMetadata);
+    public ICommand UpdateLabelsCommand => new RelayCommand(UpdateLabels);
+    public ICommand RemoveCommand => new RelayCommand(RemoveDataSource);
+    public ICommand RemoveValuesCommand => new RelayCommand(RemoveValues);
+    public ICommand TableSelectionChangedCommand => new RelayCommand(TableSelectionChanged);
+    public ICommand AddColumnCommand => new RelayCommand(AddColumn);
+    public ICommand RemoveColumnCommand => new RelayCommand(RemoveColumn);
+    public ICommand AddConditionCommand => new RelayCommand(AddCondition);
+    public ICommand RemoveConditionCommand => new RelayCommand(RemoveCondition);
+
+    #endregion
+
+    #region collections
+
+    public IList<ColumnMapping> Columns { get; } = new ObservableCollection<ColumnMapping>(parameters.Columns);
+    public IList<DatabaseCondition> Conditions { get; } = new ObservableCollection<DatabaseCondition>(parameters.Conditions);
+
+    #endregion
 }

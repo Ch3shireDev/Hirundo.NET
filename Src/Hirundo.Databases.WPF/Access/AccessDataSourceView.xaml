@@ -59,21 +59,32 @@
                 MinWidth="100"
                 ItemsSource="{Binding Tables}"
                 SelectedValue="{Binding Table, Mode=TwoWay}"
-                IsEditable="True" />
+                IsEditable="True">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="SelectionChanged">
+                        <b:InvokeCommandAction Command="{Binding TableSelectionChangedCommand}" />
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </ComboBox>
         </WrapPanel>
         <WrapPanel>
             <Button
                 Command="{Binding RemoveValuesCommand}"
                 Background="DarkRed"
                 Foreground="White"
-                BorderBrush="DarkRed"
-                >Kasuj wartości</Button>
+                BorderBrush="DarkRed">
+                Resetuj konfigurację
+            </Button>
         </WrapPanel>
         <StackPanel Margin="0 10">
             <Label>Kolumny</Label>
-            <DataGrid ItemsSource="{Binding Columns}" AutoGenerateColumns="False" CanUserDeleteRows="True">
+            <DataGrid ItemsSource="{Binding Columns}" 
+                      AutoGenerateColumns="False" 
+                      CanUserDeleteRows="False"
+                      CanUserAddRows="False" 
+                      CanUserSortColumns="False">
                 <b:Interaction.Triggers>
-                    <b:EventTrigger EventName="SelectionChanged">
+                    <b:EventTrigger EventName="LostFocus">
                         <b:InvokeCommandAction Command="{Binding UpdateLabelsCommand}" />
                     </b:EventTrigger>
                 </b:Interaction.Triggers>
@@ -82,22 +93,54 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <ComboBox
+                                    Margin="2,0"
                                     ItemsSource="{Binding DataContext.DataColumns, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                    SelectedValue="{Binding DatabaseColumn, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedValue="{Binding DatabaseColumn}"
+                                    Style="{DynamicResource MaterialDesignDataGridComboBox}"
+                                    
                                     />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+
                     <DataGridTextColumn Header="Nazwa" Binding="{Binding ValueName}" />
-                    <DataGridComboBoxColumn Header="Typ"
-                                            SelectedValueBinding="{Binding DataType}"
-                                            ItemsSource="{Binding Source={StaticResource DataValueTypeListProvider}}" />
+                    <DataGridTemplateColumn Header="Typ">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox
+                                    Margin="2,0"
+                                    ItemsSource="{Binding Source={StaticResource DataValueTypeListProvider}}"
+                                    SelectedValue="{Binding DataType}"
+                                    Style="{DynamicResource MaterialDesignDataGridComboBox}"
+                                    
+                                    />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
+            <WrapPanel>
+                <Button Command="{Binding AddColumnCommand}">
+                    Dodaj kolumnę
+                </Button>
+                <Button
+                    Background="DarkRed"
+                    Foreground="White"
+                    BorderBrush="DarkRed"
+                    Command="{Binding RemoveColumnCommand}">
+                    Usuń kolumnę
+                </Button>
+            </WrapPanel>
         </StackPanel>
         <StackPanel Margin="0 10">
             <Label>Warunki</Label>
-            <DataGrid ItemsSource="{Binding Conditions}" AutoGenerateColumns="False">
+            <DataGrid 
+                ItemsSource="{Binding Conditions}" 
+                AutoGenerateColumns="False"
+                      CanUserDeleteRows="False"
+                      CanUserAddRows="False" 
+                      CanUserSortColumns="False"
+                      >
                 <DataGrid.Columns>
                     <DataGridComboBoxColumn
                         Header="Operator"
@@ -108,7 +151,7 @@
                             <DataTemplate>
                                 <ComboBox
                                     ItemsSource="{Binding DataContext.DataColumns, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                    SelectedValue="{Binding DatabaseColumn, UpdateSourceTrigger=PropertyChanged}" />
+                                    SelectedValue="{Binding DatabaseColumn}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -121,6 +164,17 @@
                         Binding="{Binding Value}" />
                 </DataGrid.Columns>
             </DataGrid>
+            <WrapPanel>
+                <Button
+                    Command="{Binding AddConditionCommand}"
+                    >Dodaj warunek</Button>
+                <Button
+                    Background="DarkRed"
+                    Foreground="White"
+                    BorderBrush="DarkRed"
+                    Command="{Binding RemoveConditionCommand}"
+                    >Usuń warunek</Button>
+            </WrapPanel>
         </StackPanel>
         <WrapPanel>
             <Button

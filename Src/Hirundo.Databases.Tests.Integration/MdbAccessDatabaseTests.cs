@@ -190,7 +190,7 @@ public class MdbAccessDatabaseTests
     }
 
     [Test]
-    public void GivenDateCaluseThatIsNotPossible_WhenGetData_ReturnsNoValue()
+    public void GivenDateClauseThatIsNotPossible_WhenGetData_ReturnsNoValue()
     {
         // Arrange
         _accessDatabaseParameters.Path = "./Assets/access_example_new_db.mdb";

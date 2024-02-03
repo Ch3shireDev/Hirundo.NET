@@ -30,17 +30,17 @@ public sealed class MainViewModel : ViewModelBase
         ParametersBrowserViewModel = new(model.ObservationParametersBrowserModel);
         ReturningSpecimensViewModel = new(model.ReturningSpecimensModel);
         PopulationViewModel = new(model.PopulationModel);
-        SpecimensViewModel = new(model.SpecimensModel);
+        SpecimensViewModel = new(model.SpecimensModel, model.Repository);
         StatisticsViewModel = new(model.StatisticsModel);
         WriterViewModel = new(model.WriterModel, ProcessAndSaveAsync);
 
         ViewModels = new List<ViewModelBase>
         {
             DataSourceViewModel,
+            SpecimensViewModel,
             ParametersBrowserViewModel,
             ReturningSpecimensViewModel,
             PopulationViewModel,
-            SpecimensViewModel,
             StatisticsViewModel,
             WriterViewModel
         };
@@ -180,7 +180,7 @@ public sealed class MainViewModel : ViewModelBase
 
     public ApplicationConfig GetConfig()
     {
-        return _model.CreateConfig();
+        return _model.GetConfigFromViewModels();
     }
 
     public void Previous()
