@@ -3,7 +3,6 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using Hirundo.Commons.Repositories.Labels;
-using Serilog;
 
 namespace Hirundo.Commons.WPF.Repositories.Labels;
 
@@ -73,6 +72,8 @@ public partial class LabelsComboBox : UserControl, INotifyPropertyChanged
 
     private IList<DataLabel> Labels { get; set; } = new List<DataLabel>();
 
+    public event PropertyChangedEventHandler? PropertyChanged;
+
     private static void OnDataLabelRepositoryChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not LabelsComboBox comboBox) return;
@@ -102,20 +103,13 @@ public partial class LabelsComboBox : UserControl, INotifyPropertyChanged
     private void OnLabelsChanged()
     {
         if (Repository is null) return;
-        Log.Information("Odświeżono labels.");
-        Log.Information("Wartość początkowa: {ValueName}", ValueName);
         var valueName = ValueName;
         Labels = [..Repository.GetLabels()];
-        Log.Information("Załadowano {Count} labels.", Labels.Count);
         SelectedLabel = Labels.FirstOrDefault(l => l.Name == valueName);
-        Log.Information("Wartość końcowa SelectedLabel: {SelectedLabel}", SelectedLabel?.Name);
         ComboBox.ItemsSource = Labels;
         ComboBox.SelectedValue = SelectedLabel;
         ValueName = valueName;
-        Log.Information("Wartość końcowa: {ValueName}", ValueName);
     }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
 
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {

@@ -5,8 +5,18 @@ namespace Hirundo.Databases;
 
 public class AccessMetadataService : IAccessMetadataService
 {
+    readonly Dictionary<string, AccessTableMetadata[]> _accessMetadata = [];
+
     public IEnumerable<AccessTableMetadata> GetTables(string path)
     {
+        if(_accessMetadata.TryGetValue(path, out var metadata))
+        {
+            if(metadata.Length > 0)
+            {
+                return metadata;
+            }
+        }
+
         // Replace with your actual database file path and connection string details
         var connectionString = $"Driver={{Microsoft Access Driver (*.mdb, *.accdb)}};Dbq={path};";
 
@@ -18,6 +28,15 @@ public class AccessMetadataService : IAccessMetadataService
         // Get the list of table names from the schema
         var tables = connection.GetSchema("Tables");
 
+        var result = GetAccessTableMetadatas(tables, connection).ToArray();
+
+        _accessMetadata[path] = result;
+
+        return result;
+    }
+
+    private static IEnumerable<AccessTableMetadata> GetAccessTableMetadatas(DataTable tables, OdbcConnection connection)
+    {
         foreach (DataRow row in tables.Rows)
         {
             var tableName = row["TABLE_NAME"].ToString();

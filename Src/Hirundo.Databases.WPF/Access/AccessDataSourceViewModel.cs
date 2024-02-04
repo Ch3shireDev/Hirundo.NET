@@ -73,11 +73,12 @@ public class AccessDataSourceViewModel(AccessDatabaseParameters parameters, IAcc
         LabelsUpdated?.Invoke(this, EventArgs.Empty);
     }
 
-    private void LoadMetadata()
+    private void LoadMetadata(bool force = false)
     {
         try
         {
             if (string.IsNullOrWhiteSpace(Path)) return;
+            if (!force && Tables.Any()) return;
             var metadata = accessMetadataService.GetTables(Path).ToArray();
             Log.Information($"Załadowano metadane: {metadata.Length} tabel.");
 
@@ -151,8 +152,8 @@ public class AccessDataSourceViewModel(AccessDatabaseParameters parameters, IAcc
 
     #region commands
 
-    public ICommand LoadedCommand => new RelayCommand(LoadMetadata);
-    public ICommand AfterFileCommand => new RelayCommand(LoadMetadata);
+    public ICommand LoadedCommand => new RelayCommand(()=>LoadMetadata(false));
+    public ICommand AfterFileCommand => new RelayCommand(()=>LoadMetadata(true));
     public ICommand UpdateLabelsCommand => new RelayCommand(UpdateLabels);
     public ICommand RemoveCommand => new RelayCommand(RemoveDataSource);
     public ICommand RemoveValuesCommand => new RelayCommand(RemoveValues);
