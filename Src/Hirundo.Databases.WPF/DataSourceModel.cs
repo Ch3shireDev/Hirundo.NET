@@ -110,10 +110,10 @@ public class DataSourceModel(IDataLabelRepository dataLabelRepository, IAccessMe
     {
         var dataType = columnMapping.DataType switch
         {
-            DataValueType.ShortInt => DataType.Integer,
+            DataValueType.ShortInt => DataType.Number,
             DataValueType.Numeric => DataType.Numeric,
             DataValueType.Undefined => DataType.Undefined,
-            DataValueType.LongInt => DataType.Integer,
+            DataValueType.LongInt => DataType.Number,
             DataValueType.Text => DataType.Text,
             DataValueType.DateTime => DataType.Date,
             _ => DataType.Undefined

@@ -127,7 +127,7 @@ public class DataLabelRepositoryTests
         // Arrange
         _repository.Clear();
         _repository.AddLabel(new DataLabel("label1", DataType.Numeric));
-        _repository.AddLabel(new DataLabel("label2", DataType.Integer));
+        _repository.AddLabel(new DataLabel("label2", DataType.Number));
 
         // Act
         _repository.UpdateLabels([new DataLabel("label3"), new DataLabel("label4")]);

@@ -70,7 +70,7 @@ public class Observation
             }
         }
 
-        throw new KeyNotFoundException($"Key '{columnName}' not found.");
+        throw new KeyNotFoundException($"Kolumna '{columnName}' nie występuje w danych.");
     }
 
     /// <summary>

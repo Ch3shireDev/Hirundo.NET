@@ -2,6 +2,7 @@
 using Hirundo.Commons.WPF;
 using Hirundo.Processors.Observations.Conditions;
 using Hirundo.Processors.Observations.WPF.IsEqual;
+using Hirundo.Processors.Observations.WPF.IsInSet;
 using Hirundo.Processors.Observations.WPF.IsInTimeBlock;
 
 
@@ -18,7 +19,8 @@ public class ObservationParametersBrowserModel(IDataLabelRepository repository) 
     public override IList<ParametersData> ParametersDataList { get; } =
     [
         new ParametersData(typeof(IsEqualCondition), "Czy wartość jest równa?", "Warunek porównujący wartość w polu danych z wybraną wartością."),
-        new ParametersData(typeof(IsInTimeBlockCondition), "Czy wartość jest w przedziale czasowym?", "Warunek sprawdzający godziny złapania osobnika.")
+        new ParametersData(typeof(IsInTimeBlockCondition), "Czy wartość jest w przedziale czasowym?", "Warunek sprawdzający godziny złapania osobnika."),
+        new ParametersData(typeof(IsInSetCondition), "Czy wartość jest w zbiorze?", "Warunek sprawdzający, czy wartość obserwacji z zadanego pola znajduje się w zbiorze wartości.")
     ];
 
     public override void AddParameters(ParametersData parametersData)
@@ -30,6 +32,9 @@ public class ObservationParametersBrowserModel(IDataLabelRepository repository) 
                 break;
             case nameof(IsInTimeBlockCondition):
                 ObservationsParameters.Conditions.Add(new IsInTimeBlockCondition());
+                break;
+            case nameof(IsInSetCondition):
+                ObservationsParameters.Conditions.Add(new IsInSetCondition());
                 break;
             default:
                 throw new NotImplementedException();
@@ -50,6 +55,7 @@ public class ObservationParametersBrowserModel(IDataLabelRepository repository) 
         {
             IsEqualCondition filter => new IsEqualViewModel(new IsEqualModel(filter, repository)),
             IsInTimeBlockCondition filter => new IsInTimeBlockViewModel(new IsInTimeBlockModel(filter, repository)),
+            IsInSetCondition filter => new IsInSetViewModel(new IsInSetModel(filter, repository)),
             _ => throw new NotImplementedException()
         });
 

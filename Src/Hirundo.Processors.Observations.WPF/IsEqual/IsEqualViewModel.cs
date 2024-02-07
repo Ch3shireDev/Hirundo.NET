@@ -9,7 +9,6 @@ namespace Hirundo.Processors.Observations.WPF.IsEqual;
 
 public class IsEqualViewModel(IsEqualModel model) : ParametersViewModel, IRemovable
 {
-
     public IsEqualModel Model => model;
 
     public string Value
@@ -52,4 +51,5 @@ public class IsEqualViewModel(IsEqualModel model) : ParametersViewModel, IRemova
     {
         Removed?.Invoke(this, new ParametersEventArgs(model.Condition));
     }
+
 }

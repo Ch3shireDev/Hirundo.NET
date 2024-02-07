@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Hirundo.Processors.Observations.Tests.Conditions;
 
 [TestFixture]
-public class IsEqualConditionTest
+public class IsEqualConditionTests
 {
     [Test]
     public void GivenComplementaryValue_WhenIsAccepteded_ReturnsTrue()

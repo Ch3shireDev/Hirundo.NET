@@ -27,7 +27,7 @@
                 Background="DarkRed"
                 Foreground="White"
                 BorderBrush="DarkRed">
-                Usuń źródło danych
+                Usuń warunek
             </Button>
         </WrapPanel>
     </StackPanel>

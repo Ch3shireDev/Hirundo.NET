@@ -28,23 +28,16 @@ public class IsEqualModel(IsEqualCondition condition, IDataLabelRepository repos
 
     private string GetValue()
     {
-        switch (ValueType)
+        return ValueType switch
         {
-            case DataType.Text:
-                return Condition.Value as string ?? string.Empty;
-            case DataType.Integer:
-                return Condition.Value is int intValue ? intValue.ToString(CultureInfo.InvariantCulture) : string.Empty;
-            case DataType.Numeric:
-                return Condition.Value is double doubleValue ? doubleValue.ToString(CultureInfo.InvariantCulture) : string.Empty;
-            case DataType.Date:
-                return Condition.Value is DateTime dateValue ? dateValue.ToString(CultureInfo.InvariantCulture) : string.Empty;
-            case DataType.Boolean:
-                return Condition.Value is bool boolValue ? boolValue.ToString(CultureInfo.InvariantCulture) : string.Empty;
-            case DataType.Undefined:
-                return Condition.Value as string ?? string.Empty;
-            default:
-                return string.Empty;
-        }
+            DataType.Text => Condition.Value as string ?? string.Empty,
+            DataType.Number => Condition.Value is int intValue ? intValue.ToString(CultureInfo.InvariantCulture) : string.Empty,
+            DataType.Numeric => Condition.Value is double doubleValue ? doubleValue.ToString(CultureInfo.InvariantCulture) : string.Empty,
+            DataType.Date => Condition.Value is DateTime dateValue ? dateValue.ToString(CultureInfo.InvariantCulture) : string.Empty,
+            DataType.Boolean => Condition.Value is bool boolValue ? boolValue.ToString(CultureInfo.InvariantCulture) : string.Empty,
+            DataType.Undefined => Condition.Value as string ?? string.Empty,
+            _ => string.Empty
+        };
     }
 
 
@@ -53,8 +46,8 @@ public class IsEqualModel(IsEqualCondition condition, IDataLabelRepository repos
         Condition.Value = DataType switch
         {
             DataType.Text => value,
-            DataType.Integer when int.TryParse(value, out var intValue) => intValue,
-            DataType.Integer => value,
+            DataType.Number when int.TryParse(value, out var intValue) => intValue,
+            DataType.Number => value,
             DataType.Numeric when double.TryParse(value, out var doubleValue) => doubleValue,
             DataType.Numeric => value,
             DataType.Date when DateTime.TryParse(value, out var dateValue) => dateValue,

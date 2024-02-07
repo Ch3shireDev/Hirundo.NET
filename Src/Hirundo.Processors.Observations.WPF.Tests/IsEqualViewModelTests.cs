@@ -43,7 +43,7 @@ public class IsEqualViewModelTests
     public void GivenNumberDataType_AfterSetValueInViewModel_ConditionHasSetValue()
     {
         // Arrange
-        _model.DataType = DataType.Integer;
+        _model.DataType = DataType.Number;
 
         // Act
         _viewModel.Value = "1";
@@ -56,7 +56,7 @@ public class IsEqualViewModelTests
     public void GivenNumberDataType_AfterIncorrectValue_ConditionHasStringValue()
     {
         // Arrange
-        _model.DataType = DataType.Integer;
+        _model.DataType = DataType.Number;
 
         // Act
         _viewModel.Value = "abc";
