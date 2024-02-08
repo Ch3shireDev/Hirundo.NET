@@ -5,30 +5,24 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:isInSharedTimeWindow="clr-namespace:Hirundo.Processors.Population.WPF.IsInSharedTimeWindow"
              xmlns:labels="clr-namespace:Hirundo.Commons.WPF.Repositories.Labels;assembly=Hirundo.Commons.WPF"
+             xmlns:wpf="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
              mc:Ignorable="d"
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance isInSharedTimeWindow:IsInSharedTimeWindowViewModel}">
-    <StackPanel>
-        <Label FontWeight="Bold">Czy jest we współdzielonym oknie czasowym?</Label>
-        <WrapPanel>
-            <Label>Nazwa pola daty</Label>
-            <labels:LabelsComboBox 
-                ValueName="{Binding DateValueName}"
-                DataType="{Binding DataType}"
-                Repository="{Binding Repository}"/>
-        </WrapPanel>
-        <WrapPanel>
-            <Label>Maksymalny czas w dniach</Label>
-            <TextBox MinWidth="100" Text="{Binding MaxTimeDistanceInDays, Mode=TwoWay}" />
-        </WrapPanel>
-        <WrapPanel>
-            <Button
-                Command="{Binding RemoveCommand}"
-                Background="DarkRed"
-                Foreground="White"
-                BorderBrush="DarkRed">
-                Usuń źródło danych
-            </Button>
-        </WrapPanel>
-    </StackPanel>
+    <wpf:RemovableControl RemoveCommand="{Binding RemoveCommand}">
+        <StackPanel>
+            <Label FontWeight="Bold">Czy jest we współdzielonym oknie czasowym?</Label>
+            <WrapPanel>
+                <Label>Nazwa pola daty</Label>
+                <labels:LabelsComboBox
+                    ValueName="{Binding DateValueName}"
+                    DataType="{Binding DataType}"
+                    Repository="{Binding Repository}" />
+            </WrapPanel>
+            <WrapPanel>
+                <Label>Maksymalny czas w dniach</Label>
+                <TextBox MinWidth="100" Text="{Binding MaxTimeDistanceInDays, Mode=TwoWay}" />
+            </WrapPanel>
+        </StackPanel>
+    </wpf:RemovableControl>
 </UserControl>

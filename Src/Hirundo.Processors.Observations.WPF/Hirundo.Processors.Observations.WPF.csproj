@@ -16,6 +16,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="IsEqual\IsEqualView.xaml~RF75528eec.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Hirundo.Commons.WPF\Hirundo.Commons.WPF.csproj" />
     <ProjectReference Include="..\Hirundo.Processors.Observations\Hirundo.Processors.Observations.csproj" />
   </ItemGroup>

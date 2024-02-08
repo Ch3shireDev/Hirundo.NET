@@ -5,30 +5,24 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:isEqual="clr-namespace:Hirundo.Processors.Observations.WPF.IsEqual"
              xmlns:labels="clr-namespace:Hirundo.Commons.WPF.Repositories.Labels;assembly=Hirundo.Commons.WPF"
+             xmlns:wpf="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
              mc:Ignorable="d"
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance isEqual:IsEqualViewModel}">
-    <StackPanel>
-        <Label FontWeight="Bold">Czy wartość jest równa?</Label>
-        <WrapPanel>
-            <Label>Nazwa wartości</Label>
-            <labels:LabelsComboBox
-                ValueName="{Binding ValueName}"
-                DataType="{Binding DataType}"
-                Repository="{Binding Repository}" />
-        </WrapPanel>
-        <WrapPanel>
-            <Label>Wartość do porównania</Label>
-            <TextBox Text="{Binding Value, Mode=TwoWay}" MinWidth="100" />
-        </WrapPanel>
-        <WrapPanel>
-            <Button
-                Command="{Binding RemoveCommand}"
-                Background="DarkRed"
-                Foreground="White"
-                BorderBrush="DarkRed">
-                Usuń warunek
-            </Button>
-        </WrapPanel>
-    </StackPanel>
+    <wpf:RemovableControl RemoveCommand="{Binding RemoveCommand}">
+        <StackPanel>
+            <Label FontWeight="Bold">Czy wartość jest równa?</Label>
+            <WrapPanel>
+                <Label>Nazwa wartości</Label>
+                <labels:LabelsComboBox
+                    ValueName="{Binding ValueName}"
+                    DataType="{Binding DataType}"
+                    Repository="{Binding Repository}" />
+            </WrapPanel>
+            <WrapPanel>
+                <Label>Wartość do porównania</Label>
+                <TextBox Text="{Binding Value, Mode=TwoWay}" MinWidth="100" />
+            </WrapPanel>
+        </StackPanel>
+    </wpf:RemovableControl>
 </UserControl>

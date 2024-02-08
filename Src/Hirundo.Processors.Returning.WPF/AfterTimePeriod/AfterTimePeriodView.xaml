@@ -5,30 +5,24 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:afterTimePeriod="clr-namespace:Hirundo.Processors.Returning.WPF.AfterTimePeriod"
              xmlns:labels="clr-namespace:Hirundo.Commons.WPF.Repositories.Labels;assembly=Hirundo.Commons.WPF"
+             xmlns:wpf="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
              mc:Ignorable="d"
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance afterTimePeriod:AfterTimePeriodViewModel}">
-    <StackPanel>
-        <Label FontWeight="Bold">Wraca po co najmniej ustalonej liczbie dni.</Label>
-        <WrapPanel>
-            <Label>Nazwa pola daty</Label>
-            <labels:LabelsComboBox 
-                ValueName="{Binding DateValueName}"
-                DataType="{Binding DataType}"
-                Repository="{Binding Repository}"/>
-        </WrapPanel>
-        <WrapPanel>
-            <Label>Liczba dni</Label>
-            <TextBox Text="{Binding TimePeriodInDays, Mode=TwoWay}" MinWidth="100" />
-        </WrapPanel>
-        <WrapPanel>
-            <Button
-                Command="{Binding RemoveCommand}"
-                Background="DarkRed"
-                Foreground="White"
-                BorderBrush="DarkRed">
-                Usuń źródło danych
-            </Button>
-        </WrapPanel>
-    </StackPanel>
+    <wpf:RemovableControl RemoveCommand="{Binding RemoveCommand}">
+        <StackPanel>
+            <Label FontWeight="Bold">Wraca po co najmniej ustalonej liczbie dni.</Label>
+            <WrapPanel>
+                <Label>Nazwa pola daty</Label>
+                <labels:LabelsComboBox
+                    ValueName="{Binding DateValueName}"
+                    DataType="{Binding DataType}"
+                    Repository="{Binding Repository}" />
+            </WrapPanel>
+            <WrapPanel>
+                <Label>Liczba dni</Label>
+                <TextBox Text="{Binding TimePeriodInDays, Mode=TwoWay}" MinWidth="100" />
+            </WrapPanel>
+        </StackPanel>
+    </wpf:RemovableControl>
 </UserControl>
