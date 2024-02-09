@@ -11,12 +11,12 @@ public class ObservationParametersBrowserModelTests
     [SetUp]
     public void Initialize()
     {
-        _factory = new Mock<IObservationParametersViewModelsFactory>();
+        _factory = new Mock<IObservationParametersFactory>();
         _model = new ObservationParametersBrowserModel(_factory.Object);
     }
 
     private ObservationParametersBrowserModel _model = null!;
-    private Mock<IObservationParametersViewModelsFactory> _factory = null!;
+    private Mock<IObservationParametersFactory> _factory = null!;
 
     [Test]
     public void GivenEmptyModel_WhenGetParametersDataList_ReturnsInfoAboutAvailableConditions()

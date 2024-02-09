@@ -1,7 +1,7 @@
 ﻿using Hirundo.Databases;
 using Hirundo.Processors.Observations.Conditions;
 using Hirundo.Processors.Population;
-using Hirundo.Processors.Returning.Conditions;
+using Hirundo.Processors.Returning;
 using Hirundo.Processors.Specimens;
 using Hirundo.Processors.Statistics;
 using Hirundo.Processors.Summary;
@@ -15,7 +15,7 @@ public class HirundoApp : IHirundoApp
     private readonly DatabaseBuilder databaseBuilder = new();
     private readonly ObservationFiltersBuilder observationFiltersBuilder = new();
     private readonly PopulationProcessorBuilder populationProcessorBuilder = new();
-    private readonly ReturningSpecimenFiltersBuilder returningSpecimenFiltersBuilder = new();
+    private readonly ReturningSpecimenConditionsBuilder _returningSpecimenConditionsBuilder = new();
     private readonly SpecimensProcessorBuilder specimensProcessorBuilder = new();
     private readonly StatisticsProcessorBuilder statisticsProcessorBuilder = new();
     private readonly SummaryProcessorBuilder summaryProcessorBuilder = new();
@@ -33,7 +33,7 @@ public class HirundoApp : IHirundoApp
             .WithObservationConditions(applicationConfig.Observations.Conditions)
             .Build();
 
-        var returningSpecimenFilters = returningSpecimenFiltersBuilder
+        var returningSpecimenFilters = _returningSpecimenConditionsBuilder
             .WithReturningSpecimensConditions(applicationConfig.ReturningSpecimens.Conditions)
             .Build();
 

@@ -9,6 +9,7 @@ using Hirundo.Processors.Observations.Conditions;
 using Hirundo.Processors.Observations.WPF.IsEqual;
 using Hirundo.Processors.Population;
 using Hirundo.Processors.Population.Conditions;
+using Hirundo.Processors.Returning;
 using Hirundo.Processors.Returning.Conditions;
 using Hirundo.Processors.Specimens;
 using Hirundo.Processors.Statistics;
@@ -179,7 +180,7 @@ public class MainViewModelTests
             {
                 Conditions =
                 [
-                    new IsEqualCondition("AAA", "XXX"),
+                    new IsEqualObservationCondition("AAA", "XXX"),
                     new IsInSeasonCondition("BBB", new Season(06, 01, 08, 15))
                 ]
             }
@@ -194,9 +195,9 @@ public class MainViewModelTests
         Assert.That(result.Observations, Is.Not.Null);
         Assert.That(result.Observations.Conditions, Is.Not.Null);
         Assert.That(result.Observations.Conditions.Count, Is.EqualTo(2));
-        Assert.That(result.Observations.Conditions[0], Is.InstanceOf<IsEqualCondition>());
+        Assert.That(result.Observations.Conditions[0], Is.InstanceOf<IsEqualObservationCondition>());
         Assert.That(result.Observations.Conditions[1], Is.InstanceOf<IsInSeasonCondition>());
-        var isEqualFilter = (IsEqualCondition)result.Observations.Conditions[0];
+        var isEqualFilter = (IsEqualObservationCondition)result.Observations.Conditions[0];
         Assert.That(isEqualFilter.ValueName, Is.EqualTo("AAA"));
         Assert.That(isEqualFilter.Value, Is.EqualTo("XXX"));
         var isInSeasonFilter = (IsInSeasonCondition)result.Observations.Conditions[1];
@@ -367,7 +368,7 @@ public class MainViewModelTests
         {
             Observations = new ObservationsParameters
             {
-                Conditions = [new IsEqualCondition("AAA", "XXX")]
+                Conditions = [new IsEqualObservationCondition("AAA", "XXX")]
             }
         };
 
@@ -385,8 +386,8 @@ public class MainViewModelTests
         Assert.That(result.Observations, Is.Not.Null);
         Assert.That(result.Observations.Conditions, Is.Not.Null);
         Assert.That(result.Observations.Conditions.Count, Is.EqualTo(1));
-        Assert.That(result.Observations.Conditions[0], Is.InstanceOf<IsEqualCondition>());
-        var isEqualFilter = (IsEqualCondition)result.Observations.Conditions[0];
+        Assert.That(result.Observations.Conditions[0], Is.InstanceOf<IsEqualObservationCondition>());
+        var isEqualFilter = (IsEqualObservationCondition)result.Observations.Conditions[0];
         Assert.That(isEqualFilter.ValueName, Is.EqualTo("BBB"));
         Assert.That(isEqualFilter.Value, Is.EqualTo("YYY"));
     }

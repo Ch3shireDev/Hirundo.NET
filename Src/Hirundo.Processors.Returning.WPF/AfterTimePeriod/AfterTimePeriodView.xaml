@@ -9,7 +9,8 @@
              mc:Ignorable="d"
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance afterTimePeriod:AfterTimePeriodViewModel}">
-    <wpf:ConditionControl RemoveCommand="{Binding RemoveCommand}">
+    <wpf:ConditionControl RemoveCommand="{Binding RemoveCommand}" ConditionName="{Binding Name}"
+                          Description="{Binding Description}">
         <StackPanel>
             <Label FontWeight="Bold">Wraca po co najmniej ustalonej liczbie dni.</Label>
             <WrapPanel>

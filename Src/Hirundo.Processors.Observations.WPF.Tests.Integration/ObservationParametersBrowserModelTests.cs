@@ -13,7 +13,7 @@ public class ObservationParametersBrowserModelTests
     public void Initialize()
     {
         var repository = new Mock<IDataLabelRepository>();
-        var factory = new ObservationParametersViewModelsFactory(repository.Object);
+        var factory = new ObservationParametersFactory(repository.Object);
         _model = new ObservationParametersBrowserModel(factory);
     }
 
@@ -21,7 +21,7 @@ public class ObservationParametersBrowserModelTests
 
     [Test]
     [TestCase(typeof(IsNotEmptyCondition))]
-    [TestCase(typeof(IsEqualCondition))]
+    [TestCase(typeof(IsEqualObservationCondition))]
     [TestCase(typeof(IsInTimeBlockCondition))]
     [TestCase(typeof(IsInSetCondition))]
     //[TestCase(typeof(IsInSeasonCondition))]
@@ -43,7 +43,7 @@ public class ObservationParametersBrowserModelTests
 
     [Test]
     [TestCase(typeof(IsNotEmptyCondition))]
-    [TestCase(typeof(IsEqualCondition))]
+    [TestCase(typeof(IsEqualObservationCondition))]
     [TestCase(typeof(IsInTimeBlockCondition))]
     [TestCase(typeof(IsInSetCondition))]
     public void GivenModelWithIsEqual_WhenRemoveIsEqualViewModel_RemovesIsEqualViewModel(Type conditionType)

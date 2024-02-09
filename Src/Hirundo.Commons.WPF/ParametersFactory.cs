@@ -1,17 +1,15 @@
 ﻿using System.Reflection;
 using Hirundo.Commons.Repositories.Labels;
-using Hirundo.Commons.WPF;
-using Hirundo.Processors.Observations.Conditions;
 
-namespace Hirundo.Processors.Observations.WPF;
+namespace Hirundo.Commons.WPF;
 
-public class ObservationParametersViewModelsFactory(IDataLabelRepository repository) : IObservationParametersViewModelsFactory
+public class ParametersFactory<TCondition, TBrowserModel>(IDataLabelRepository repository) : IParametersFactory<TCondition>
 {
-    public IObservationCondition CreateCondition(ParametersData parametersData)
+    public TCondition CreateCondition(ParametersData parametersData)
     {
         var type = parametersData.ConditionType;
         var instance = type.GetConstructor(Type.EmptyTypes)?.Invoke(null);
-        if (instance is not IObservationCondition condition) throw new InvalidOperationException($"Typ {type.Name} musi mieć bezparametrowy konstruktor do poprawnego działania.");
+        if (instance is not TCondition condition) throw new InvalidOperationException($"Typ {type.Name} musi mieć bezparametrowy konstruktor do poprawnego działania.");
         return condition;
     }
 
@@ -20,7 +18,7 @@ public class ObservationParametersViewModelsFactory(IDataLabelRepository reposit
         return GetAssemblyAttributes().Select(attribute => new ParametersData(attribute.ConditionType, attribute.Name, attribute.Description));
     }
 
-    public ParametersViewModel CreateViewModel(IObservationCondition condition)
+    public ParametersViewModel CreateViewModel(TCondition condition)
     {
         var attribute = GetConditionAttribute(condition);
         var viewModel = GetViewModelFromCondition(condition);
@@ -29,7 +27,7 @@ public class ObservationParametersViewModelsFactory(IDataLabelRepository reposit
         return viewModel;
     }
 
-    private ParametersViewModel GetViewModelFromCondition(IObservationCondition condition)
+    private ParametersViewModel GetViewModelFromCondition(TCondition condition)
     {
         var attribute = GetConditionAttribute(condition);
         var model = GetModelFromCondition(attribute, condition);
@@ -39,7 +37,7 @@ public class ObservationParametersViewModelsFactory(IDataLabelRepository reposit
         return viewModel ?? throw new InvalidOperationException($"Błąd tworzenia modelu dla warunku {condition.GetType().Name}");
     }
 
-    private object GetModelFromCondition(ParametersDataAttribute attribute, IObservationCondition condition)
+    private object GetModelFromCondition(ParametersDataAttribute attribute, TCondition condition)
     {
         var modelType = attribute.ModelType;
         var modelConstructor = modelType.GetConstructor([condition.GetType(), typeof(IDataLabelRepository)]);
@@ -47,7 +45,7 @@ public class ObservationParametersViewModelsFactory(IDataLabelRepository reposit
         return model ?? throw new InvalidOperationException($"Nie znaleziono modelu dla warunku {condition.GetType().Name}");
     }
 
-    private ParametersDataAttribute GetConditionAttribute(IObservationCondition condition)
+    private ParametersDataAttribute GetConditionAttribute(TCondition condition)
     {
         var attributes = GetAssemblyAttributes().ToArray();
         var attribute = attributes.FirstOrDefault(a => a.ConditionType == condition.GetType());
@@ -56,7 +54,7 @@ public class ObservationParametersViewModelsFactory(IDataLabelRepository reposit
 
     private IEnumerable<Type> GetViewModelsTypes()
     {
-        var assembly = Assembly.GetAssembly(typeof(ObservationParametersBrowserModel));
+        var assembly = Assembly.GetAssembly(typeof(TBrowserModel));
 
         var viewModelsTypes = assembly?
             .GetTypes()

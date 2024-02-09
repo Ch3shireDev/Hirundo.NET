@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Hirundo.Processors.Observations.Tests.Conditions;
 
 [TestFixture]
-public class IsEqualConditionTests
+public class IsEqualObservationConditionTests
 {
     [Test]
     public void GivenComplementaryValue_WhenIsAccepteded_ReturnsTrue()
@@ -14,7 +14,7 @@ public class IsEqualConditionTests
         // Arrange
         var valueName = "SEX";
         var value = "F";
-        var filter = new IsEqualCondition(valueName, value);
+        var filter = new IsEqualObservationCondition(valueName, value);
 
         var observation = new Observation(["SEX"], ["F"]);
 
@@ -31,7 +31,7 @@ public class IsEqualConditionTests
         // Arrange
         var valueName = "SPECIES";
         var value = "REG.REG";
-        var filter = new IsEqualCondition(valueName, value);
+        var filter = new IsEqualObservationCondition(valueName, value);
 
         var observation = new Observation(["SPECIES"], ["REG.SCI"]);
 
@@ -48,7 +48,7 @@ public class IsEqualConditionTests
         // Arrange
         var valueName = "SPECIES";
         var stringBuilder = new StringBuilder("REG.REG");
-        var filter = new IsEqualCondition(valueName, stringBuilder.ToString());
+        var filter = new IsEqualObservationCondition(valueName, stringBuilder.ToString());
 
         var observation = new Observation(["SPECIES", "XYZ"], ["REG.REG", 123]);
 

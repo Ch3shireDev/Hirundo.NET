@@ -12,11 +12,8 @@
     d:DataContext="{d:DesignInstance notEarlierThanGivenDateNextYear:NotEarlierThanGivenDateNextYearViewModel}"
     Width="300"
     >
-    <wpf:ConditionControl RemoveCommand="{Binding RemoveCommand}">
+    <wpf:ConditionControl RemoveCommand="{Binding RemoveCommand}" ConditionName="{Binding Name}" Description="{Binding Description}">
         <StackPanel>
-            <TextBlock FontWeight="Bold"
-                       TextWrapping="Wrap"
-                       >Osobnik powraca nie wcześniej niż na daną datę (MM-DD) następnego roku.</TextBlock>
             <WrapPanel>
                 <Label>Nazwa pola daty</Label>
                 <labels:LabelsComboBox

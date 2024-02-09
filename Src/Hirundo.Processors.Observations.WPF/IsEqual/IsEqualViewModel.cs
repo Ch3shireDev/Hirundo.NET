@@ -8,7 +8,7 @@ using Hirundo.Processors.Observations.Conditions;
 namespace Hirundo.Processors.Observations.WPF.IsEqual;
 
 [ParametersData(
-    typeof(IsEqualCondition),
+    typeof(IsEqualObservationCondition),
     typeof(IsEqualModel),
     typeof(IsEqualView),
     "Czy wartość jest równa?",
@@ -42,10 +42,10 @@ public class IsEqualViewModel(IsEqualModel model) : ParametersViewModel, IRemova
 
     public DataType DataType
     {
-        get => model.ValueType;
+        get => model.DataType;
         set
         {
-            model.ValueType = value;
+            model.DataType = value;
             OnPropertyChanged();
         }
     }
@@ -56,6 +56,6 @@ public class IsEqualViewModel(IsEqualModel model) : ParametersViewModel, IRemova
 
     public void Remove()
     {
-        Removed?.Invoke(this, new ParametersEventArgs(model.Condition));
+        Removed?.Invoke(this, new ParametersEventArgs(model.ObservationCondition));
     }
 }

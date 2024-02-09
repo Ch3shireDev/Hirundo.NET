@@ -1,4 +1,6 @@
-﻿namespace Hirundo.Processors.Returning.Conditions;
+﻿using Hirundo.Processors.Returning.Conditions;
+
+namespace Hirundo.Processors.Returning;
 
 public class ReturningSpecimensParameters
 {

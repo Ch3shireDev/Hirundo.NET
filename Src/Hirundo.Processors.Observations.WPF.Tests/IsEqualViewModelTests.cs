@@ -15,14 +15,14 @@ public class IsEqualViewModelTests
     {
         _repository = new Mock<IDataLabelRepository>();
 
-        _condition = new IsEqualCondition();
-        _model = new IsEqualModel(_condition, _repository.Object);
+        _observationCondition = new IsEqualObservationCondition();
+        _model = new IsEqualModel(_observationCondition, _repository.Object);
         _viewModel = new IsEqualViewModel(_model);
     }
 
     private Mock<IDataLabelRepository> _repository = null!;
 
-    private IsEqualCondition _condition = null!;
+    private IsEqualObservationCondition _observationCondition = null!;
     private IsEqualModel _model = null!;
     private IsEqualViewModel _viewModel = null!;
 
@@ -36,7 +36,7 @@ public class IsEqualViewModelTests
         _viewModel.Value = "test";
 
         // Assert
-        Assert.That(_condition.Value, Is.EqualTo("test"));
+        Assert.That(_observationCondition.Value, Is.EqualTo("test"));
     }
 
     [Test]
@@ -49,7 +49,7 @@ public class IsEqualViewModelTests
         _viewModel.Value = "1";
 
         // Assert
-        Assert.That(_condition.Value, Is.EqualTo(1));
+        Assert.That(_observationCondition.Value, Is.EqualTo(1));
     }
 
     [Test]
@@ -62,7 +62,7 @@ public class IsEqualViewModelTests
         _viewModel.Value = "abc";
 
         // Assert
-        Assert.That(_condition.Value, Is.EqualTo("abc"));
+        Assert.That(_observationCondition.Value, Is.EqualTo("abc"));
     }
 
     [Test]
@@ -75,7 +75,7 @@ public class IsEqualViewModelTests
         _viewModel.Value = "1.23";
 
         // Assert
-        Assert.That(_condition.Value, Is.EqualTo(1.23));
+        Assert.That(_observationCondition.Value, Is.EqualTo(1.23));
     }
 
     [Test]
@@ -88,7 +88,7 @@ public class IsEqualViewModelTests
         _viewModel.Value = "abc";
 
         // Assert
-        Assert.That(_condition.Value, Is.EqualTo("abc"));
+        Assert.That(_observationCondition.Value, Is.EqualTo("abc"));
     }
 
     [Test]
@@ -101,7 +101,7 @@ public class IsEqualViewModelTests
         _viewModel.Value = "2021-01-01";
 
         // Assert
-        Assert.That(_condition.Value, Is.TypeOf<DateTime>());
-        Assert.That(_condition.Value, Is.EqualTo(new DateTime(2021, 1, 1)));
+        Assert.That(_observationCondition.Value, Is.TypeOf<DateTime>());
+        Assert.That(_observationCondition.Value, Is.EqualTo(new DateTime(2021, 1, 1)));
     }
 }

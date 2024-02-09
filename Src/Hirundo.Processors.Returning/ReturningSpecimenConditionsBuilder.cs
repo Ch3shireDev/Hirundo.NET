@@ -1,9 +1,11 @@
-﻿namespace Hirundo.Processors.Returning.Conditions;
+﻿using Hirundo.Processors.Returning.Conditions;
+
+namespace Hirundo.Processors.Returning;
 
 /// <summary>
 ///     Budowniczy filtrów powracających osobników.
 /// </summary>
-public class ReturningSpecimenFiltersBuilder
+public class ReturningSpecimenConditionsBuilder
 {
     private readonly List<IReturningSpecimenCondition> _conditions = [];
 
@@ -13,10 +15,10 @@ public class ReturningSpecimenFiltersBuilder
     /// <returns></returns>
     public IReturningSpecimenCondition Build()
     {
-        return new CompositeReturningSpecimenCondition([.._conditions]);
+        return new CompositeReturningSpecimenCondition([.. _conditions]);
     }
 
-    public ReturningSpecimenFiltersBuilder WithReturningSpecimensConditions(IEnumerable<IReturningSpecimenCondition> returningSpecimensConditions)
+    public ReturningSpecimenConditionsBuilder WithReturningSpecimensConditions(IEnumerable<IReturningSpecimenCondition> returningSpecimensConditions)
     {
         _conditions.AddRange(returningSpecimensConditions);
         return this;

@@ -9,6 +9,7 @@ using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
 using Hirundo.Databases;
 using Hirundo.Databases.WPF;
+using Hirundo.Processors.Observations.Conditions;
 using Hirundo.Processors.Observations.WPF;
 using Hirundo.Processors.Population.WPF;
 using Hirundo.Processors.Returning.WPF;
@@ -45,7 +46,8 @@ public partial class App : Application
         builder.RegisterType<MainViewModel>().AsSelf().SingleInstance();
         builder.RegisterType<DataLabelRepository>().As<IDataLabelRepository>().SingleInstance();
 
-        builder.RegisterType<ObservationParametersViewModelsFactory>().As<IObservationParametersViewModelsFactory>().SingleInstance();
+        builder.RegisterType<ObservationParametersFactory>().As<IObservationParametersFactory>().SingleInstance();
+        builder.RegisterType<ReturningParametersFactory>().As<IReturningParametersFactory>().SingleInstance();
 
         var container = builder.Build();
 

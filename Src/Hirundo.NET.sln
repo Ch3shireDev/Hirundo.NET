@@ -83,6 +83,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Processors.Observat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Processors.Observations.WPF.Tests.Integration", "Hirundo.Processors.Observations.WPF.Tests.Integration\Hirundo.Processors.Observations.WPF.Tests.Integration.csproj", "{02E3E7E2-3278-4015-A0C2-C00902F2D178}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Processors.Returning.WPF.Tests", "Hirundo.Processors.Returning.WPF.Tests\Hirundo.Processors.Returning.WPF.Tests.csproj", "{B356E048-8B56-4CA0-9061-8E6804206941}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -237,6 +239,10 @@ Global
 		{02E3E7E2-3278-4015-A0C2-C00902F2D178}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02E3E7E2-3278-4015-A0C2-C00902F2D178}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02E3E7E2-3278-4015-A0C2-C00902F2D178}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B356E048-8B56-4CA0-9061-8E6804206941}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B356E048-8B56-4CA0-9061-8E6804206941}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B356E048-8B56-4CA0-9061-8E6804206941}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B356E048-8B56-4CA0-9061-8E6804206941}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -279,6 +285,7 @@ Global
 		{2F003FAB-5501-4091-820F-5B2A5717B4D8} = {66952413-DE19-442D-BD7E-05B457715E11}
 		{11FCD219-121C-48D5-B7A7-640AD25BB31B} = {66952413-DE19-442D-BD7E-05B457715E11}
 		{02E3E7E2-3278-4015-A0C2-C00902F2D178} = {66952413-DE19-442D-BD7E-05B457715E11}
+		{B356E048-8B56-4CA0-9061-8E6804206941} = {66952413-DE19-442D-BD7E-05B457715E11}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7BB2E5CA-3E12-4544-8827-61B4CF679997}

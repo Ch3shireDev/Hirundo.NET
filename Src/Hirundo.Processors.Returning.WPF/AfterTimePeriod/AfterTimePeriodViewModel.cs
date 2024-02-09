@@ -3,9 +3,17 @@ using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
+using Hirundo.Processors.Returning.Conditions;
 
 namespace Hirundo.Processors.Returning.WPF.AfterTimePeriod;
 
+[ParametersData(
+    typeof(ReturnsAfterTimePeriodCondition),
+    typeof(AfterTimePeriodModel),
+    typeof(AfterTimePeriodView),
+    "Czy powrót nastąpił po określonym czasie?",
+    "Osobnik wraca nie wcześniej niż po określonej liczbie dni"
+)]
 public class AfterTimePeriodViewModel(AfterTimePeriodModel model) : ParametersViewModel, IRemovable
 {
     public string DateValueName
@@ -29,6 +37,7 @@ public class AfterTimePeriodViewModel(AfterTimePeriodModel model) : ParametersVi
             OnPropertyChanged();
         }
     }
+
     public int TimePeriodInDays
     {
         get => model.TimePeriodInDays;

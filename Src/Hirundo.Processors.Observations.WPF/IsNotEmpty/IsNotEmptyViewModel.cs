@@ -26,7 +26,6 @@ public class IsNotEmptyViewModel(IsNotEmptyModel model) : ParametersViewModel, I
     }
 
     public IDataLabelRepository Repository => model.Repository;
-    public ICommand RemoveCommand => new RelayCommand(() => Removed?.Invoke(this, new ParametersEventArgs(model.Condition)));
-
     public event EventHandler<ParametersEventArgs>? Removed;
+    public ICommand RemoveCommand => new RelayCommand(() => Removed?.Invoke(this, new ParametersEventArgs(model.Condition)));
 }

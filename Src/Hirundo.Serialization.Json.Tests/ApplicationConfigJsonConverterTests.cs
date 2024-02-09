@@ -154,10 +154,10 @@ public class ApplicationConfigJsonConverterTests
         Assert.That(config, Is.Not.Null);
         Assert.That(config.Observations, Is.Not.Null);
         Assert.That(config.Observations.Conditions, Has.Count.EqualTo(2));
-        Assert.That(config.Observations.Conditions[0], Is.TypeOf<IsEqualCondition>());
+        Assert.That(config.Observations.Conditions[0], Is.TypeOf<IsEqualObservationCondition>());
         Assert.That(config.Observations.Conditions[1], Is.TypeOf<IsInTimeBlockCondition>());
 
-        var observationFilter0 = (IsEqualCondition)config.Observations.Conditions[0];
+        var observationFilter0 = (IsEqualObservationCondition)config.Observations.Conditions[0];
         Assert.That(observationFilter0.ValueName, Is.EqualTo("SPECIES"));
         Assert.That(observationFilter0.Value, Is.EqualTo("REG.REG"));
 

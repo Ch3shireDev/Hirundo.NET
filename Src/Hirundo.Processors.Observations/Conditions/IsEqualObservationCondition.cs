@@ -6,12 +6,12 @@ namespace Hirundo.Processors.Observations.Conditions;
 ///     Warunek sprawdzający, czy wartość obserwacji jest równa podanej wartości.
 /// </summary>
 [TypeDescription("IsEqual")]
-public class IsEqualCondition : IObservationCondition
+public class IsEqualObservationCondition : IObservationCondition
 {
     /// <summary>
     ///     Domyślny konstruktor. Ustawia wartości domyślne jako pusty string.
     /// </summary>
-    public IsEqualCondition()
+    public IsEqualObservationCondition()
     {
         ValueName = string.Empty;
         Value = string.Empty;
@@ -22,7 +22,7 @@ public class IsEqualCondition : IObservationCondition
     /// </summary>
     /// <param name="valueName">Nazwa sprawdzanej wartości obserwacji.</param>
     /// <param name="value">Wartość, do której jest przyrównywana wartość obserwacji.</param>
-    public IsEqualCondition(string valueName, object value)
+    public IsEqualObservationCondition(string valueName, object value)
     {
         ValueName = valueName;
         Value = value;

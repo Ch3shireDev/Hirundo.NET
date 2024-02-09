@@ -9,8 +9,6 @@
              xmlns:wpf11="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
              xmlns:access="clr-namespace:Hirundo.Databases.WPF.Access;assembly=Hirundo.Databases.WPF"
              xmlns:isInSharedTimeWindow="clr-namespace:Hirundo.Processors.Population.WPF.IsInSharedTimeWindow;assembly=Hirundo.Processors.Population.WPF"
-             xmlns:afterTimePeriod="clr-namespace:Hirundo.Processors.Returning.WPF.AfterTimePeriod;assembly=Hirundo.Processors.Returning.WPF"
-             xmlns:notEarlierThanGivenDateNextYear="clr-namespace:Hirundo.Processors.Returning.WPF.NotEarlierThanGivenDateNextYear;assembly=Hirundo.Processors.Returning.WPF"
              xmlns:average="clr-namespace:Hirundo.Processors.Statistics.WPF.Average;assembly=Hirundo.Processors.Statistics.WPF"
              xmlns:helpers2="clr-namespace:Hirundo.App.WPF.Helpers"
              xmlns:components="clr-namespace:Hirundo.App.WPF.Components"
@@ -51,14 +49,6 @@
 
         <DataTemplate DataType="{x:Type isInSharedTimeWindow:IsInSharedTimeWindowViewModel}">
             <isInSharedTimeWindow:IsInSharedTimeWindowView />
-        </DataTemplate>
-
-        <DataTemplate DataType="{x:Type afterTimePeriod:AfterTimePeriodViewModel}">
-            <afterTimePeriod:AfterTimePeriodView />
-        </DataTemplate>
-
-        <DataTemplate DataType="{x:Type notEarlierThanGivenDateNextYear:NotEarlierThanGivenDateNextYearViewModel}">
-            <notEarlierThanGivenDateNextYear:NotEarlierThanGivenDateNextYearView />
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type average:AverageViewModel}">

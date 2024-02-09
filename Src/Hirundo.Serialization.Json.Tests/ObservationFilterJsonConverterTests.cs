@@ -25,7 +25,7 @@ public class ObservationFilterJsonConverterTests
     public void GivenIsEqualFilter_WhenSerialize_ReturnsJsonString()
     {
         // Arrange
-        var filter = new IsEqualCondition("ID", 1);
+        var filter = new IsEqualObservationCondition("ID", 1);
 
         // Act
         var json = JsonConvert.SerializeObject(filter, _settings);
@@ -69,8 +69,8 @@ public class ObservationFilterJsonConverterTests
 
         // Assert
         Assert.That(filter, Is.Not.Null);
-        Assert.That(filter, Is.TypeOf<IsEqualCondition>());
-        var isEqualFilter = filter as IsEqualCondition;
+        Assert.That(filter, Is.TypeOf<IsEqualObservationCondition>());
+        var isEqualFilter = filter as IsEqualObservationCondition;
         Assert.That(isEqualFilter?.ValueName, Is.EqualTo("ID"));
         Assert.That(isEqualFilter?.Value, Is.EqualTo(1));
     }
