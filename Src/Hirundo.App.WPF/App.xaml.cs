@@ -5,6 +5,7 @@ using System.Windows;
 using Autofac;
 using Hirundo.App.WPF.Components;
 using Hirundo.Commons.Repositories.Labels;
+using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
 using Hirundo.Databases;
 using Hirundo.Databases.WPF;
@@ -13,7 +14,6 @@ using Hirundo.Processors.Population.WPF;
 using Hirundo.Processors.Returning.WPF;
 using Hirundo.Processors.Specimens.WPF;
 using Hirundo.Processors.Statistics.WPF;
-
 using Hirundo.Serialization.Json;
 using Hirundo.Writers.WPF;
 using Newtonsoft.Json;
@@ -45,6 +45,8 @@ public partial class App : Application
         builder.RegisterType<MainViewModel>().AsSelf().SingleInstance();
         builder.RegisterType<DataLabelRepository>().As<IDataLabelRepository>().SingleInstance();
 
+        builder.RegisterType<ObservationParametersViewModelsFactory>().As<IObservationParametersViewModelsFactory>().SingleInstance();
+
         var container = builder.Build();
 
         var viewModel = container.Resolve<MainViewModel>();
@@ -62,7 +64,7 @@ public partial class App : Application
         repository.LabelsChanged += (_, _) =>
         {
             var labels = repository.GetLabels();
-            Log.Debug($"Zaktualizowano etykiety. Bieżąca lista: {string.Join(", ", labels.Select(l=>l.Name))}");
+            Log.Debug($"Zaktualizowano etykiety. Bieżąca lista: {string.Join(", ", labels.Select(l => l.Name))}");
         };
 
         var view = new MainWindow
@@ -73,6 +75,20 @@ public partial class App : Application
         };
 
         viewModel.RefreshWindow = view.InvalidateVisual;
+
+        var viewModelTypes = AppDomain.CurrentDomain.GetAssemblies()
+            .SelectMany(a => a.GetTypes())
+            .Where(t => t.IsSubclassOf(typeof(ParametersViewModel)))
+            .Where(t => t is { IsClass: true, IsAbstract: false })
+            .Where(t => t.GetCustomAttribute<ParametersDataAttribute>() != null)
+            .ToArray();
+
+        foreach (var viewModelType in viewModelTypes)
+        {
+            var attribute = viewModelType.GetCustomAttribute<ParametersDataAttribute>();
+            if (attribute == null) continue;
+            AddViewModelBinding(viewModelType, attribute.ViewType);
+        }
 
         Log.Information("Uruchomiono aplikację Hirundo.");
 
@@ -87,5 +103,16 @@ public partial class App : Application
         var jsonConfig = File.ReadAllText("appsettings.json");
         var appConfig = JsonConvert.DeserializeObject<ApplicationConfig>(jsonConfig, converter) ?? throw new SerializationException("Błąd parsowania konfiguracji.");
         return appConfig;
+    }
+
+    private static void AddViewModelBinding(Type viewModelType, Type viewType)
+    {
+        var dataTemplate = new DataTemplate
+        {
+            DataType = viewModelType,
+            VisualTree = new FrameworkElementFactory(viewType)
+        };
+
+        Current.Resources.Add(new DataTemplateKey(viewModelType), dataTemplate);
     }
 }

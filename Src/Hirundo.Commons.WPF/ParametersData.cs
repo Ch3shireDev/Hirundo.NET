@@ -6,14 +6,14 @@ public class ParametersData
     {
     }
 
-    public ParametersData(Type type, string title = "", string description = "")
+    public ParametersData(Type conditionType, string title = "", string description = "")
     {
-        Type = type;
+        ConditionType = conditionType;
         Title = title;
         Description = description;
     }
 
-    public Type Type { get; set; } = null!;
+    public Type ConditionType { get; set; } = null!;
     public string Title { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
 }

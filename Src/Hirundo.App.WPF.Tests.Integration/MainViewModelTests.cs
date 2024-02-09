@@ -378,9 +378,9 @@ public class MainViewModelTests
         var optionsIsEqual = observationsViewModel.ParametersViewModels.OfType<IsEqualViewModel>().First();
         optionsIsEqual.ValueName = "BBB";
         optionsIsEqual.Value = "YYY";
+        var result = _viewModel.GetConfig();
 
         // Assert
-        var result = _viewModel.GetConfig();
         Assert.That(result, Is.Not.Null);
         Assert.That(result.Observations, Is.Not.Null);
         Assert.That(result.Observations.Conditions, Is.Not.Null);

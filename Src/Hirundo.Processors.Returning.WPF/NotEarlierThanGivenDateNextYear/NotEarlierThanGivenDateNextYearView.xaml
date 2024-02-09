@@ -12,7 +12,7 @@
     d:DataContext="{d:DesignInstance notEarlierThanGivenDateNextYear:NotEarlierThanGivenDateNextYearViewModel}"
     Width="300"
     >
-    <wpf:RemovableControl RemoveCommand="{Binding RemoveCommand}">
+    <wpf:ConditionControl RemoveCommand="{Binding RemoveCommand}">
         <StackPanel>
             <TextBlock FontWeight="Bold"
                        TextWrapping="Wrap"
@@ -33,5 +33,5 @@
                 <TextBox MinWidth="100" Text="{Binding Day}" />
             </WrapPanel>
         </StackPanel>
-    </wpf:RemovableControl>
+    </wpf:ConditionControl>
 </UserControl>

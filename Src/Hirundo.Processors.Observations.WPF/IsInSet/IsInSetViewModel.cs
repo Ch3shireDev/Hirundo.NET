@@ -4,10 +4,18 @@ using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
+using Hirundo.Processors.Observations.Conditions;
 using Serilog;
 
 namespace Hirundo.Processors.Observations.WPF.IsInSet;
 
+[ParametersData(
+    typeof(IsInSetCondition),
+    typeof(IsInSetModel),
+    typeof(IsInSetView),
+    "Czy dane są w zbiorze?",
+    "Warunek sprawdzający, czy pole danych znajduje się w zbiorze wartości."
+)]
 public class IsInSetViewModel : ParametersViewModel, IRemovable
 {
     private readonly IsInSetModel _model;
@@ -22,24 +30,6 @@ public class IsInSetViewModel : ParametersViewModel, IRemovable
         }
 
         Values.CollectionChanged += (_, _) => { model.SetValues(Values.Select(v => v.Value)); };
-    }
-
-    void AddValue(object? value)
-    {
-        var valueStr = value?.ToString() ?? string.Empty;
-
-        var containerValue = new ValueContainer(valueStr);
-
-        containerValue.PropertyChanged += (_, _) => { 
-        
-            var index = Values.IndexOf(containerValue);
-            if (index == -1) return;
-            _model.SetValue(containerValue.Value, index);
-
-            Log.Information($"Property update: {containerValue.Value}");
-        };
-
-        Values.Add(containerValue);
     }
 
     public IDataLabelRepository Repository => _model.Repository;
@@ -69,6 +59,24 @@ public class IsInSetViewModel : ParametersViewModel, IRemovable
     public ICommand RemoveValueCommand => new RelayCommand(RemoveValue);
     public ICommand RemoveCommand => new RelayCommand(Remove);
     public event EventHandler<ParametersEventArgs>? Removed;
+
+    private void AddValue(object? value)
+    {
+        var valueStr = value?.ToString() ?? string.Empty;
+
+        var containerValue = new ValueContainer(valueStr);
+
+        containerValue.PropertyChanged += (_, _) =>
+        {
+            var index = Values.IndexOf(containerValue);
+            if (index == -1) return;
+            _model.SetValue(containerValue.Value, index);
+
+            Log.Information($"Property update: {containerValue.Value}");
+        };
+
+        Values.Add(containerValue);
+    }
 
     public void AddValue()
     {

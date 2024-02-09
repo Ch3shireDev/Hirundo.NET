@@ -1,7 +1,7 @@
 # Zadania / pomysły do dodania
 
 1. [x] Dodać filtr obserwacji "czy wartość należy do zbioru".
-2. [ ] Dodać filtr obserwacji "czy wartość nie jest pusta".
+2. [x] Dodać filtr obserwacji "czy wartość nie jest pusta".
 3. [ ] Dodać pole statystyczne "pointedness".
 4. [ ] Dodać pole statystyczne "symmetry".
 5. [ ] Dodać pole statystyczne "histogram" (dla fatness).

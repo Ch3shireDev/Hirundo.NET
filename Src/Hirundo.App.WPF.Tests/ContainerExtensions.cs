@@ -30,6 +30,10 @@ internal static class ContainerExtensions
 
         builder.RegisterInstance(accessMetadataService.Object).As<IAccessMetadataService>().SingleInstance();
 
+        var observationParametersViewModelsFactory = new Mock<IObservationParametersViewModelsFactory>();
+
+        builder.RegisterInstance(observationParametersViewModelsFactory.Object).As<IObservationParametersViewModelsFactory>().SingleInstance();
+
         builder.RegisterType<DataSourceModel>().AsSelf().SingleInstance();
         builder.RegisterType<ObservationParametersBrowserModel>().AsSelf().SingleInstance();
         builder.RegisterType<PopulationModel>().AsSelf().SingleInstance();

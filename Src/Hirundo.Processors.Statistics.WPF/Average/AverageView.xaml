@@ -9,7 +9,7 @@
              mc:Ignorable="d"
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance average:AverageViewModel}">
-    <wpf:RemovableControl RemoveCommand="{Binding RemoveCommand}">
+    <wpf:ConditionControl RemoveCommand="{Binding RemoveCommand}">
         <StackPanel>
             <Label FontWeight="Bold">Wartość średnia i odchylenie standardowe</Label>
             <WrapPanel>
@@ -45,5 +45,5 @@
                 </WrapPanel>-->
             </StackPanel>
         </StackPanel>
-    </wpf:RemovableControl>
+    </wpf:ConditionControl>
 </UserControl>

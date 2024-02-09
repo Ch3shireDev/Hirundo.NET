@@ -22,7 +22,7 @@ public class DataSourceModel(IDataLabelRepository dataLabelRepository, IAccessMe
 
     public override void AddParameters(ParametersData parametersData)
     {
-        AddDatasource(parametersData.Type);
+        AddDatasource(parametersData.ConditionType);
     }
 
     public override IEnumerable<ParametersViewModel> GetParametersViewModels()

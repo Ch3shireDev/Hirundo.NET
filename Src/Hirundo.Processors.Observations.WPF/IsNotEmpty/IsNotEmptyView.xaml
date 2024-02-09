@@ -1,27 +1,19 @@
-﻿<UserControl x:Class="Hirundo.Processors.Observations.WPF.IsInTimeBlock.IsInTimeBlockView"
+﻿<UserControl x:Class="Hirundo.Processors.Observations.WPF.IsNotEmpty.IsNotEmptyView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:isInTimeBlock="clr-namespace:Hirundo.Processors.Observations.WPF.IsInTimeBlock"
-             xmlns:labels="clr-namespace:Hirundo.Commons.WPF.Repositories.Labels;assembly=Hirundo.Commons.WPF"
+             xmlns:local="clr-namespace:Hirundo.Processors.Observations.WPF.IsNotEmpty"
              xmlns:wpf="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
+             xmlns:labels="clr-namespace:Hirundo.Commons.WPF.Repositories.Labels;assembly=Hirundo.Commons.WPF"
              mc:Ignorable="d"
-             d:Background="AliceBlue"
-             d:DataContext="{d:DesignInstance isInTimeBlock:IsInTimeBlockViewModel}">
+             d:DataContext="{d:DesignInstance local:IsNotEmptyViewModel}"
+             d:Background="AliceBlue">
     <wpf:ConditionControl RemoveCommand="{Binding RemoveCommand}" ConditionName="{Binding Name}" Description="{Binding Description}">
         <StackPanel>
             <WrapPanel>
                 <Label>Nazwa wartości</Label>
                 <labels:LabelsComboBox ValueName="{Binding ValueName, Mode=TwoWay}" Repository="{Binding Repository}" />
-            </WrapPanel>
-            <WrapPanel>
-                <Label>Godzina początkowa</Label>
-                <TextBox Text="{Binding StartHour}" MinWidth="100" />
-            </WrapPanel>
-            <WrapPanel>
-                <Label>Godzina końcowa</Label>
-                <TextBox Text="{Binding EndHour}" MinWidth="100" />
             </WrapPanel>
         </StackPanel>
     </wpf:ConditionControl>

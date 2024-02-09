@@ -20,7 +20,7 @@ public class StatisticsModel(IDataLabelRepository repository) : ParametersBrowse
 
     public override void AddParameters(ParametersData parametersData)
     {
-        AddOperation(parametersData.Type);
+        AddOperation(parametersData.ConditionType);
     }
 
     public override IEnumerable<ParametersViewModel> GetParametersViewModels()

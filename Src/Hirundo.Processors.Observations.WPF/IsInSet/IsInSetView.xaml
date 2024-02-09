@@ -10,9 +10,8 @@
              mc:Ignorable="d"
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance local:IsInSetViewModel}">
-    <wpf:RemovableControl RemoveCommand="{Binding RemoveCommand}">
+    <wpf:ConditionControl RemoveCommand="{Binding RemoveCommand}" ConditionName="{Binding Name}" Description="{Binding Description}">
         <StackPanel>
-            <Label FontWeight="Bold">Czy wartość zawiera się w zbiorze?</Label>
             <WrapPanel>
                 <Label>Nazwa wartości</Label>
                 <labels:LabelsComboBox
@@ -51,5 +50,5 @@
                 </WrapPanel>
             </StackPanel>
         </StackPanel>
-    </wpf:RemovableControl>
+    </wpf:ConditionControl>
 </UserControl>

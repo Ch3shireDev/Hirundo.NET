@@ -51,7 +51,7 @@
             <b:InvokeCommandAction Command="{Binding LoadedCommand}" />
         </b:EventTrigger>
     </b:Interaction.Triggers>
-    <wpf:RemovableControl RemoveCommand="{Binding RemoveCommand}" RemoveText="Usuń źródło danych">
+    <wpf:ConditionControl RemoveCommand="{Binding RemoveCommand}" RemoveText="Usuń źródło danych">
         <StackPanel Margin="10">
             <WrapPanel>
                 <Label VerticalContentAlignment="Center">Ścieżka</Label>
@@ -208,5 +208,5 @@
                 </WrapPanel>
             </StackPanel>
         </StackPanel>
-    </wpf:RemovableControl>
+    </wpf:ConditionControl>
 </UserControl>

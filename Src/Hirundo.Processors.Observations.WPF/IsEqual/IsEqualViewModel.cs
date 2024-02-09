@@ -3,10 +3,17 @@ using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
-
+using Hirundo.Processors.Observations.Conditions;
 
 namespace Hirundo.Processors.Observations.WPF.IsEqual;
 
+[ParametersData(
+    typeof(IsEqualCondition),
+    typeof(IsEqualModel),
+    typeof(IsEqualView),
+    "Czy wartość jest równa?",
+    "Warunek porównujący pole danych z podaną wartością."
+)]
 public class IsEqualViewModel(IsEqualModel model) : ParametersViewModel, IRemovable
 {
     public IsEqualModel Model => model;
@@ -51,5 +58,4 @@ public class IsEqualViewModel(IsEqualModel model) : ParametersViewModel, IRemova
     {
         Removed?.Invoke(this, new ParametersEventArgs(model.Condition));
     }
-
 }

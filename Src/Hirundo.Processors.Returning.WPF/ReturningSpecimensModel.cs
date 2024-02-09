@@ -25,7 +25,7 @@ public class ReturningSpecimensModel(IDataLabelRepository repository) : Paramete
 
     public override void AddParameters(ParametersData parametersData)
     {
-        AddParameters(parametersData.Type);
+        AddParameters(parametersData.ConditionType);
     }
 
     public override IEnumerable<ParametersViewModel> GetParametersViewModels()

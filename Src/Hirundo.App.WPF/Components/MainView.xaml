@@ -6,8 +6,6 @@
              xmlns:wpf4="clr-namespace:Hirundo.Processors.Specimens.WPF;assembly=Hirundo.Processors.Specimens.WPF"
              xmlns:helpers="clr-namespace:Hirundo.Commons.WPF.Helpers;assembly=Hirundo.Commons.WPF"
              xmlns:wpf6="clr-namespace:Hirundo.Writers.WPF;assembly=Hirundo.Writers.WPF"
-             xmlns:isEqual="clr-namespace:Hirundo.Processors.Observations.WPF.IsEqual;assembly=Hirundo.Processors.Observations.WPF"
-             xmlns:isInTimeBlock="clr-namespace:Hirundo.Processors.Observations.WPF.IsInTimeBlock;assembly=Hirundo.Processors.Observations.WPF"
              xmlns:wpf11="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
              xmlns:access="clr-namespace:Hirundo.Databases.WPF.Access;assembly=Hirundo.Databases.WPF"
              xmlns:isInSharedTimeWindow="clr-namespace:Hirundo.Processors.Population.WPF.IsInSharedTimeWindow;assembly=Hirundo.Processors.Population.WPF"
@@ -17,7 +15,6 @@
              xmlns:helpers2="clr-namespace:Hirundo.App.WPF.Helpers"
              xmlns:components="clr-namespace:Hirundo.App.WPF.Components"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:isInSet="clr-namespace:Hirundo.Processors.Observations.WPF.IsInSet;assembly=Hirundo.Processors.Observations.WPF"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="1000" d:Background="#FFF7FFF7"
              d:DataContext="{d:DesignInstance components:MainViewModel}">
@@ -52,20 +49,8 @@
             <wpf6:WriterView />
         </DataTemplate>
 
-        <DataTemplate DataType="{x:Type isEqual:IsEqualViewModel}">
-            <isEqual:IsEqualView />
-        </DataTemplate>
-
-        <DataTemplate DataType="{x:Type isInTimeBlock:IsInTimeBlockViewModel}">
-            <isInTimeBlock:IsInTimeBlockView />
-        </DataTemplate>
-
         <DataTemplate DataType="{x:Type isInSharedTimeWindow:IsInSharedTimeWindowViewModel}">
             <isInSharedTimeWindow:IsInSharedTimeWindowView />
-        </DataTemplate>
-
-        <DataTemplate DataType="{x:Type isInSet:IsInSetViewModel}">
-            <isInSet:IsInSetView />
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type afterTimePeriod:AfterTimePeriodViewModel}">

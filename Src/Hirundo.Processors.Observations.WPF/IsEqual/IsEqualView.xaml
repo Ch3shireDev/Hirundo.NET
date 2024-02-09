@@ -9,9 +9,8 @@
              mc:Ignorable="d"
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance isEqual:IsEqualViewModel}">
-    <wpf:RemovableControl RemoveCommand="{Binding RemoveCommand}">
+    <wpf:ConditionControl RemoveCommand="{Binding RemoveCommand}" ConditionName="{Binding Name}" Description="{Binding Description}">
         <StackPanel>
-            <Label FontWeight="Bold">Czy wartość jest równa?</Label>
             <WrapPanel>
                 <Label>Nazwa wartości</Label>
                 <labels:LabelsComboBox
@@ -24,5 +23,5 @@
                 <TextBox Text="{Binding Value, Mode=TwoWay}" MinWidth="100" />
             </WrapPanel>
         </StackPanel>
-    </wpf:RemovableControl>
+    </wpf:ConditionControl>
 </UserControl>

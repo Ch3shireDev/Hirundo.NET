@@ -2,12 +2,21 @@
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
+using Hirundo.Processors.Observations.Conditions;
 
 namespace Hirundo.Processors.Observations.WPF.IsInTimeBlock;
 
+[ParametersData(
+    typeof(IsInTimeBlockCondition),
+    typeof(IsInTimeBlockModel),
+    typeof(IsInTimeBlockView),
+    "Czy pole danych jest w przedziale czasowym?",
+    "Warunek sprawdzający godziny złapania osobnika."
+)]
 public class IsInTimeBlockViewModel(IsInTimeBlockModel model) : ParametersViewModel, IRemovable
 {
     public IDataLabelRepository Repository => model.Repository;
+
     public string ValueName
     {
         get => model.ValueName;

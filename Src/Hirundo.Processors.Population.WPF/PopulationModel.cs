@@ -26,9 +26,9 @@ public class PopulationModel(IDataLabelRepository repository) : ParametersBrowse
 
     public override void AddParameters(ParametersData parametersData)
     {
-        switch (parametersData.Type)
+        switch (parametersData.ConditionType)
         {
-            case not null when parametersData.Type == typeof(IsInSharedTimeWindowConditionBuilder):
+            case not null when parametersData.ConditionType == typeof(IsInSharedTimeWindowConditionBuilder):
                 Conditions.Add(new IsInSharedTimeWindowConditionBuilder());
                 break;
             default:
