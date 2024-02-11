@@ -3,19 +3,28 @@ using Hirundo.Processors.Observations.Conditions;
 
 namespace Hirundo.Processors.Observations.WPF;
 
-public class ObservationParametersBrowserModel(IObservationParametersFactory factory) : ParametersBrowserModel
+public class ObservationParametersBrowserModel : ParametersBrowserModel
 {
+    private readonly IObservationParametersFactory _factory;
+
+    public ObservationParametersBrowserModel(IObservationParametersFactory factory)
+    {
+        _factory = factory;
+        ParametersDataList = _factory.GetParametersData().ToArray();
+    }
+
     public ObservationsParameters ObservationsParameters { get; set; } = new();
     public override string Description => "W tym panelu ustalasz warunki, jakie mają spełniać wybierane obserwacje do obliczeń.";
     public override string AddParametersCommandText => "Dodaj nowy warunek";
     public override string Header => "Obserwacje";
     public override string Title => "Warunki obserwacji";
 
-    public override IList<ParametersData> ParametersDataList => factory.GetParametersData().ToArray();
+    public override IList<ParametersData> ParametersDataList { get; }
+
 
     public override void AddParameters(ParametersData parametersData)
     {
-        var condition = factory.CreateCondition(parametersData);
+        var condition = _factory.CreateCondition(parametersData);
         ObservationsParameters.Conditions.Add(condition);
     }
 
@@ -24,7 +33,7 @@ public class ObservationParametersBrowserModel(IObservationParametersFactory fac
         return
             ObservationsParameters
                 .Conditions
-                .Select(factory.CreateViewModel)
+                .Select(_factory.CreateViewModel)
                 .Select(AddEventListener)
             ;
     }

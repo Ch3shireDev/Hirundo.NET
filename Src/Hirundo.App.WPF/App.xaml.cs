@@ -47,6 +47,7 @@ public partial class App : Application
 
         builder.RegisterType<ObservationParametersFactory>().As<IObservationParametersFactory>().SingleInstance();
         builder.RegisterType<ReturningParametersFactory>().As<IReturningParametersFactory>().SingleInstance();
+        builder.RegisterType<StatisticsParametersFactory>().As<IStatisticsParametersFactory>().SingleInstance();
 
         var container = builder.Build();
 

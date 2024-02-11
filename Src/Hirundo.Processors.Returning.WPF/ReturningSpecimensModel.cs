@@ -3,8 +3,16 @@ using Hirundo.Processors.Returning.Conditions;
 
 namespace Hirundo.Processors.Returning.WPF;
 
-public class ReturningSpecimensModel(IReturningParametersFactory factory) : ParametersBrowserModel
+public class ReturningSpecimensModel : ParametersBrowserModel
 {
+    private readonly IReturningParametersFactory _factory;
+
+    public ReturningSpecimensModel(IReturningParametersFactory factory)
+    {
+        _factory = factory;
+        ParametersDataList = _factory.GetParametersData().ToList();
+    }
+
     public ReturningSpecimensParameters? ReturningSpecimensParameters { get; set; } = new();
     public IList<IReturningSpecimenCondition> Conditions => ReturningSpecimensParameters!.Conditions;
 
@@ -13,17 +21,18 @@ public class ReturningSpecimensModel(IReturningParametersFactory factory) : Para
     public override string Description => "W tym panelu ustalasz warunki wyróżniające osobniki powracające spośród wszystkich osobników.";
     public override string AddParametersCommandText => "Dodaj warunek";
 
-    public override IList<ParametersData> ParametersDataList => factory.GetParametersData().ToList();
+    public override IList<ParametersData> ParametersDataList { get; }
+
 
     public override void AddParameters(ParametersData parametersData)
     {
-        var condition = factory.CreateCondition(parametersData);
+        var condition = _factory.CreateCondition(parametersData);
         Conditions.Add(condition);
     }
 
     public override IEnumerable<ParametersViewModel> GetParametersViewModels()
     {
-        return Conditions.Select(factory.CreateViewModel).Select(AddEventListener);
+        return Conditions.Select(_factory.CreateViewModel).Select(AddEventListener);
     }
 
     private ParametersViewModel AddEventListener(ParametersViewModel viewModel)

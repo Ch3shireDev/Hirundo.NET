@@ -38,6 +38,9 @@ internal static class ContainerExtensions
         var returningParametersViewModelsFactory = new ReturningParametersFactory(repository.Object);
         builder.RegisterInstance(returningParametersViewModelsFactory).As<IReturningParametersFactory>().SingleInstance();
 
+        var statisticsParametersViewModelsFactory = new StatisticsParametersFactory(repository.Object);
+        builder.RegisterInstance(statisticsParametersViewModelsFactory).As<IStatisticsParametersFactory>().SingleInstance();
+
         builder.RegisterType<DataSourceModel>().AsSelf().SingleInstance();
         builder.RegisterType<ObservationParametersBrowserModel>().AsSelf().SingleInstance();
         builder.RegisterType<PopulationModel>().AsSelf().SingleInstance();

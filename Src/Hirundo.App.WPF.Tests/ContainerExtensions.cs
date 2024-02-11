@@ -36,6 +36,9 @@ internal static class ContainerExtensions
         var returningParametersViewModelsFactory = new Mock<IReturningParametersFactory>();
         builder.RegisterInstance(returningParametersViewModelsFactory.Object).As<IReturningParametersFactory>().SingleInstance();
 
+        var statisticsParametersViewModelsFactory = new Mock<IStatisticsParametersFactory>();
+        builder.RegisterInstance(statisticsParametersViewModelsFactory.Object).As<IStatisticsParametersFactory>().SingleInstance();
+
         builder.RegisterType<DataSourceModel>().AsSelf().SingleInstance();
         builder.RegisterType<ObservationParametersBrowserModel>().AsSelf().SingleInstance();
         builder.RegisterType<PopulationModel>().AsSelf().SingleInstance();

@@ -3,14 +3,19 @@ using CommunityToolkit.Mvvm.Input;
 using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
+using Hirundo.Processors.Statistics.Operations;
 
 namespace Hirundo.Processors.Statistics.WPF.Average;
 
-public class AverageViewModel(AverageModel model) : ParametersViewModel, IRemovable
+[ParametersData(
+    typeof(AverageOperation),
+    typeof(AverageModel),
+    typeof(AverageView),
+    "Wartość średnia i odchylenie standardowe",
+    "Oblicza wartość średnią i odchylenie standardowe dla wybranej wartości."
+)]
+public class AverageViewModel(AverageModel model) : ParametersViewModel
 {
-    public override string Name => "Wartość średnia i odchylenie standardowe";
-    public override string Description => "Oblicza wartość średnią i odchylenie standardowe dla wybranej wartości.";
-
     public string ValueName
     {
         get => model.ValueName;
