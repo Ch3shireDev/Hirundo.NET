@@ -2,6 +2,7 @@
 
 namespace Hirundo.Processors.Returning.Conditions;
 
+[TypeDescription("IsEqual")]
 public class IsEqualReturningCondition : IReturningSpecimenCondition
 {
     public IsEqualReturningCondition()

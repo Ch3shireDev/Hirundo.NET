@@ -1,13 +1,13 @@
 ﻿using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
-using Hirundo.Processors.Observations.Conditions;
+using Hirundo.Processors.Returning.Conditions;
 
-namespace Hirundo.Processors.Observations.WPF.IsInSet;
+namespace Hirundo.Processors.Returning.WPF.IsInSet;
 
-public class IsInSetModel(IsInSetCondition condition, IDataLabelRepository repository)
+public class IsInSetReturningModel(IsInSetReturningCondition condition, IDataLabelRepository repository)
 {
     public IDataLabelRepository Repository { get; } = repository;
-    public IsInSetCondition Condition { get; init; } = condition;
+    public IsInSetReturningCondition Condition { get; init; } = condition;
 
     public string ValueName
     {

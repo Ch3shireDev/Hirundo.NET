@@ -3,7 +3,7 @@
 1. [x] Dodać filtr obserwacji "czy wartość należy do zbioru".
 2. [x] Dodać filtr obserwacji "czy wartość nie jest pusta".
 3. [x] Dodać filtr powrotów "Wartość jest równa".
-4. [ ] Dodać filtr powrotów "Wartość należy do zbioru".
+4. [x] Dodać filtr powrotów "Wartość należy do zbioru".
 5. [ ] Dodać pole statystyczne "pointedness".
 6. [ ] Dodać pole statystyczne "symmetry".
 7. [ ] Dodać pole statystyczne "histogram" (dla fatness).

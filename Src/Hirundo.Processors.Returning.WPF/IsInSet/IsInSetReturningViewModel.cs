@@ -1,26 +1,26 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
-using Hirundo.Commons;
+﻿using CommunityToolkit.Mvvm.Input;
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
-using Hirundo.Processors.Observations.Conditions;
+using Hirundo.Processors.Returning.Conditions;
 using Serilog;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
+using Hirundo.Commons;
 
-namespace Hirundo.Processors.Observations.WPF.IsInSet;
+namespace Hirundo.Processors.Returning.WPF.IsInSet;
 
 [ParametersData(
-    typeof(IsInSetCondition),
-    typeof(IsInSetModel),
-    typeof(IsInSetView),
-    "Czy dane są w zbiorze?",
-    "Warunek sprawdzający, czy pole danych znajduje się w zbiorze wartości."
+    typeof(IsInSetReturningCondition),
+    typeof(IsInSetReturningModel),
+    typeof(IsInSetReturningView),
+    "Czy dane powracającego osobnika są w zbiorze?",
+    "Warunek sprawdzający, czy pole danych dla osobnika powracającego znajduje się w zbiorze wartości."
 )]
-public class IsInSetViewModel : ParametersViewModel
+public class IsInSetReturningViewModel: ParametersViewModel
 {
-    private readonly IsInSetModel _model;
+    private readonly IsInSetReturningModel _model;
 
-    public IsInSetViewModel(IsInSetModel model)
+    public IsInSetReturningViewModel(IsInSetReturningModel model)
     {
         _model = model;
 
