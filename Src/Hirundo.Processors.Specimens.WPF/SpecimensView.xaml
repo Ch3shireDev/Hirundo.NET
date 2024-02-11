@@ -20,10 +20,10 @@
         </WrapPanel>
         <WrapPanel Margin="10">
             <Label>Identyfikator osobnika</Label>
-            <labels:LabelsComboBox 
+            <labels:LabelsComboBox
                 ValueName="{Binding SpecimenIdentifier}"
                 DataType="{Binding DataType}"
-                Repository="{Binding Repository}"/>
+                Repository="{Binding Repository}" />
         </WrapPanel>
         <WrapPanel Margin="10">
             <CheckBox IsChecked="{Binding IncludeEmptyValues}">Czy dodawać obserwacje o pustych identyfikatorach?</CheckBox>

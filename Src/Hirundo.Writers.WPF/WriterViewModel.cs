@@ -1,10 +1,10 @@
 ﻿using System.Windows.Input;
-using Hirundo.Commons.WPF;
-using Hirundo.Commons.WPF.Helpers;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Hirundo.Writers.WPF;
 
-public class WriterViewModel(WriterModel model, Func<Task>? runTask=null) : ViewModelBase
+public class WriterViewModel(WriterModel model, Func<Task>? runTask = null) : ObservableObject
 {
     public DataWriterViewModel DataWriterViewModel => DataWriterViewModelFactory.Create(model.SummaryParameters.Writer);
 

@@ -1,13 +1,16 @@
 ﻿using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
-using Hirundo.Commons.WPF.Helpers;
 
 namespace Hirundo.Processors.Population.WPF.IsInSharedTimeWindow;
 
 public class IsInSharedTimeWindowViewModel(IsInSharedTimeWindowModel model) : ParametersViewModel, IRemovable
 {
+    public override string Name => "Czy jest we współdzielonym oknie czasowym?";
+    public override string Description => "Warunek sprawdzający, czy osobnik z populacji jest w tym samym przedziale czasowym co osobnik powracający.";
+
     public string DateValueName
     {
         get => model.DateValueName;
@@ -37,14 +40,8 @@ public class IsInSharedTimeWindowViewModel(IsInSharedTimeWindowModel model) : Pa
             OnPropertyChanged();
         }
     }
+
     public IDataLabelRepository Repository => model.Repository;
 
-    public ICommand RemoveCommand => new RelayCommand(Remove);
-
-    public event EventHandler<ParametersEventArgs>? Removed;
-
-    public void Remove()
-    {
-        Removed?.Invoke(this, new ParametersEventArgs(model.ConditionBuilder));
-    }
+    public override ICommand RemoveCommand => new RelayCommand(() => Remove(model.ConditionBuilder));
 }

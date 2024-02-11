@@ -1,8 +1,8 @@
 ﻿using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
-using Hirundo.Commons.WPF.Helpers;
 using Hirundo.Processors.Returning.Conditions;
 
 namespace Hirundo.Processors.Returning.WPF.IsEqual;
@@ -48,11 +48,5 @@ public class IsEqualReturningViewModel(IsEqualReturningModel model) : Parameters
 
     public IDataLabelRepository Repository => model.Repository;
 
-    public ICommand RemoveCommand => new RelayCommand(Remove);
-    public event EventHandler<ParametersEventArgs>? Removed;
-
-    public void Remove()
-    {
-        Removed?.Invoke(this, new ParametersEventArgs(model.Condition));
-    }
+    public override ICommand RemoveCommand => new RelayCommand(() => Remove(model.Condition));
 }

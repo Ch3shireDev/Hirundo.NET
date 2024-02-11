@@ -74,8 +74,15 @@ public class DataSourceModel(IDataLabelRepository dataLabelRepository, IAccessMe
 
     private void Remove(IDatabaseParameters p)
     {
-        var result = MessageBox.Show("Czy na pewno chcesz skasować bieżące źródło danych?", "Uwaga", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-        if (result != MessageBoxResult.Yes) return;
+        var mainWindow = Application.Current.MainWindow;
+
+        if (mainWindow != null)
+        {
+            var result = MessageBox.Show(mainWindow, "Czy na pewno chcesz skasować bieżące źródło danych?", "Uwaga", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            if (result != MessageBoxResult.Yes) return;
+        }
+
         DatabaseParameters.Remove(p);
     }
 

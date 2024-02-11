@@ -6,49 +6,46 @@
              xmlns:local="clr-namespace:Hirundo.Processors.Observations.WPF.IsInSet"
              xmlns:labels="clr-namespace:Hirundo.Commons.WPF.Repositories.Labels;assembly=Hirundo.Commons.WPF"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:wpf="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
              mc:Ignorable="d"
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance local:IsInSetViewModel}">
-    <wpf:ConditionControl RemoveCommand="{Binding RemoveCommand}" ConditionName="{Binding Name}" Description="{Binding Description}">
-        <StackPanel>
+    <StackPanel>
+        <WrapPanel>
+            <Label>Nazwa wartości</Label>
+            <labels:LabelsComboBox
+                ValueName="{Binding ValueName}"
+                DataType="{Binding ValueType}"
+                Repository="{Binding Repository}" />
+        </WrapPanel>
+        <StackPanel Margin="10">
+            <DataGrid
+                ItemsSource="{Binding Values}"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                AutoGenerateColumns="False">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="CellEditEnding" />
+                </b:Interaction.Triggers>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Lista wartości"
+                                        Binding="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+
+                </DataGrid.Columns>
+            </DataGrid>
             <WrapPanel>
-                <Label>Nazwa wartości</Label>
-                <labels:LabelsComboBox
-                    ValueName="{Binding ValueName}"
-                    DataType="{Binding ValueType}"
-                    Repository="{Binding Repository}" />
+                <Button
+                    Command="{Binding AddValueCommand}">
+                    Dodaj wartość
+                </Button>
+                <Button
+                    Background="DarkRed"
+                    Foreground="White"
+                    BorderBrush="DarkRed"
+                    Command="{Binding RemoveValueCommand}">
+                    Usuń wartość
+                </Button>
             </WrapPanel>
-            <StackPanel Margin="10">
-                <DataGrid
-                    ItemsSource="{Binding Values}"
-                    CanUserAddRows="False"
-                    CanUserDeleteRows="False"
-                    AutoGenerateColumns="False">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="CellEditEnding" />
-                    </b:Interaction.Triggers>
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Lista wartości"
-                                            Binding="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-
-                    </DataGrid.Columns>
-                </DataGrid>
-                <WrapPanel>
-                    <Button
-                        Command="{Binding AddValueCommand}">
-                        Dodaj wartość
-                    </Button>
-                    <Button
-                        Background="DarkRed"
-                        Foreground="White"
-                        BorderBrush="DarkRed"
-                        Command="{Binding RemoveValueCommand}">
-                        Usuń wartość
-                    </Button>
-                </WrapPanel>
-            </StackPanel>
         </StackPanel>
-    </wpf:ConditionControl>
+    </StackPanel>
 </UserControl>

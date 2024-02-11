@@ -8,6 +8,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\Hirundo.Commons.WPF\Hirundo.Commons.WPF.csproj" />
 		<ProjectReference Include="..\Hirundo.Writers.Summary\Hirundo.Writers.Summary.csproj" />
 	</ItemGroup>

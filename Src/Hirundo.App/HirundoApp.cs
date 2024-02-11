@@ -12,10 +12,10 @@ namespace Hirundo.App;
 
 public class HirundoApp : IHirundoApp
 {
+    private readonly ReturningSpecimenConditionsBuilder _returningSpecimenConditionsBuilder = new();
     private readonly DatabaseBuilder databaseBuilder = new();
     private readonly ObservationFiltersBuilder observationFiltersBuilder = new();
     private readonly PopulationProcessorBuilder populationProcessorBuilder = new();
-    private readonly ReturningSpecimenConditionsBuilder _returningSpecimenConditionsBuilder = new();
     private readonly SpecimensProcessorBuilder specimensProcessorBuilder = new();
     private readonly StatisticsProcessorBuilder statisticsProcessorBuilder = new();
     private readonly SummaryProcessorBuilder summaryProcessorBuilder = new();

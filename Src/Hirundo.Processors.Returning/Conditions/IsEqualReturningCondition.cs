@@ -19,6 +19,6 @@ public class IsEqualReturningCondition : IReturningSpecimenCondition
 
     public bool IsReturning(Specimen specimen)
     {
-        return specimen.Observations.Any(o => o.GetValue(ValueName)?.Equals(Value) ?? (Value == null));
+        return specimen.Observations.Any(o => o.GetValue(ValueName)?.Equals(Value) ?? Value == null);
     }
 }

@@ -18,19 +18,19 @@ public static class DataTypeHelpers
         };
     }
 
-    static string ConvertToString(object? value)
+    private static string ConvertToString(object? value)
     {
-        if(value is DateTime dateValue)
+        if (value is DateTime dateValue)
         {
             return dateValue.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
         }
-        if(value is decimal decimalValue)
+
+        if (value is decimal decimalValue)
         {
             return decimalValue.ToString(CultureInfo.InvariantCulture);
         }
 
         return value?.ToString() ?? string.Empty;
-
     }
 
     public static object GetValueSetValueFromString(string value, DataType dataType)

@@ -1,9 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
-using Hirundo.Commons.WPF.Helpers;
 using Hirundo.Processors.Observations.Conditions;
 using Serilog;
 
@@ -57,8 +57,8 @@ public class IsInSetViewModel : ParametersViewModel, IRemovable
     public ObservableCollection<ValueContainer> Values { get; set; } = [];
     public ICommand AddValueCommand => new RelayCommand(AddValue);
     public ICommand RemoveValueCommand => new RelayCommand(RemoveValue);
-    public ICommand RemoveCommand => new RelayCommand(Remove);
-    public event EventHandler<ParametersEventArgs>? Removed;
+    public override ICommand RemoveCommand => new RelayCommand(() => Remove(_model.Condition));
+
 
     private void AddValue(object? value)
     {
@@ -87,10 +87,5 @@ public class IsInSetViewModel : ParametersViewModel, IRemovable
     {
         if (!Values.Any()) return;
         Values.Remove(Values.Last());
-    }
-
-    public void Remove()
-    {
-        Removed?.Invoke(this, new ParametersEventArgs(_model.Condition));
     }
 }

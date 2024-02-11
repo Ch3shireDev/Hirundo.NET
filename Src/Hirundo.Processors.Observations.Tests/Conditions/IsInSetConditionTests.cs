@@ -43,7 +43,10 @@ public class IsInSetConditionTests
         var observation = new Observation(["ID"], new object[] { 1 });
 
         // Act
-        bool act() => condition.IsAccepted(observation);
+        bool act()
+        {
+            return condition.IsAccepted(observation);
+        }
 
         // Assert
         Assert.That(act, Throws.Exception);

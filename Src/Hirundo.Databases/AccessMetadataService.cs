@@ -5,13 +5,13 @@ namespace Hirundo.Databases;
 
 public class AccessMetadataService : IAccessMetadataService
 {
-    readonly Dictionary<string, AccessTableMetadata[]> _accessMetadata = [];
+    private readonly Dictionary<string, AccessTableMetadata[]> _accessMetadata = [];
 
     public IEnumerable<AccessTableMetadata> GetTables(string path)
     {
-        if(_accessMetadata.TryGetValue(path, out var metadata))
+        if (_accessMetadata.TryGetValue(path, out var metadata))
         {
-            if(metadata.Length > 0)
+            if (metadata.Length > 0)
             {
                 return metadata;
             }

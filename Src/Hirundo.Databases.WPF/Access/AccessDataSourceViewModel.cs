@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Hirundo.Commons.WPF;
-using Hirundo.Commons.WPF.Helpers;
 using Hirundo.Databases.Conditions;
 using Serilog;
 
@@ -9,6 +9,10 @@ namespace Hirundo.Databases.WPF.Access;
 
 public class AccessDataSourceViewModel(AccessDatabaseParameters parameters, IAccessMetadataService accessMetadataService) : ParametersViewModel, IRemovable, ILabelsUpdater
 {
+    public override string Name => "Źródło danych Access";
+    public override string Description => "Źródło danych z pliku Access.";
+    public override string RemoveText => "Usuń źródło danych";
+
     public string Path
     {
         get => parameters.Path;
@@ -30,13 +34,11 @@ public class AccessDataSourceViewModel(AccessDatabaseParameters parameters, IAcc
         }
     }
 
-    public ObservableCollection<string> DataColumns { get; } = new();
-    public ObservableCollection<AccessTableMetadata> MetadatataTables { get; } = new();
-    public ObservableCollection<string> Tables { get; } = new();
+    public ObservableCollection<string> DataColumns { get; } = [];
+    public ObservableCollection<AccessTableMetadata> MetadatataTables { get; } = [];
+    public ObservableCollection<string> Tables { get; } = [];
 
     public event EventHandler<EventArgs>? LabelsUpdated;
-
-    public event EventHandler<ParametersEventArgs>? Removed;
 
 
     private void RemoveValues()
@@ -108,10 +110,6 @@ public class AccessDataSourceViewModel(AccessDatabaseParameters parameters, IAcc
         }
     }
 
-    public void RemoveDataSource()
-    {
-        Removed?.Invoke(this, new ParametersEventArgs(parameters));
-    }
 
     public void TableSelectionChanged()
     {
@@ -152,10 +150,10 @@ public class AccessDataSourceViewModel(AccessDatabaseParameters parameters, IAcc
 
     #region commands
 
-    public ICommand LoadedCommand => new RelayCommand(()=>LoadMetadata(false));
-    public ICommand AfterFileCommand => new RelayCommand(()=>LoadMetadata(true));
+    public ICommand LoadedCommand => new RelayCommand(() => LoadMetadata());
+    public ICommand AfterFileCommand => new RelayCommand(() => LoadMetadata(true));
     public ICommand UpdateLabelsCommand => new RelayCommand(UpdateLabels);
-    public ICommand RemoveCommand => new RelayCommand(RemoveDataSource);
+    public override ICommand RemoveCommand => new RelayCommand(() => Remove(parameters));
     public ICommand RemoveValuesCommand => new RelayCommand(RemoveValues);
     public ICommand TableSelectionChangedCommand => new RelayCommand(TableSelectionChanged);
     public ICommand AddColumnCommand => new RelayCommand(AddColumn);

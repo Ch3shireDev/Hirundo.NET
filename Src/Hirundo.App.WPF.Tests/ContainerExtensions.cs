@@ -8,7 +8,6 @@ using Hirundo.Processors.Population.WPF;
 using Hirundo.Processors.Returning.WPF;
 using Hirundo.Processors.Specimens.WPF;
 using Hirundo.Processors.Statistics.WPF;
-
 using Hirundo.Writers.WPF;
 using Moq;
 

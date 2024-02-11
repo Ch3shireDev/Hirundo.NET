@@ -60,6 +60,10 @@ jobs:
         $version = $versionInfo.FileVersion
         "VERSION=$version" | Out-File -FilePath $env:GITHUB_ENV -Append
 
+    - name: Remove .pdb files
+      if: env.RELEASE_TRIGGERED == 'true'
+      run: Remove-Item -Path ./publish/*.pdb
+        
     - name: Zip Release
       if: env.RELEASE_TRIGGERED == 'true'
       env:

@@ -1,8 +1,8 @@
 ﻿using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
-using Hirundo.Commons.WPF.Helpers;
 using Hirundo.Processors.Returning.Conditions;
 
 namespace Hirundo.Processors.Returning.WPF.NotEarlierThanGivenDateNextYear;
@@ -12,7 +12,7 @@ namespace Hirundo.Processors.Returning.WPF.NotEarlierThanGivenDateNextYear;
     typeof(NotEarlierThanGivenDateNextYearModel),
     typeof(NotEarlierThanGivenDateNextYearView),
     "Czy powrót nastąpił po określonej dacie kolejnego roku?",
-    "Osobnik wraca nie wcześniej niż w określonej dacie w przyszłym roku"
+    "Osobnik wraca nie wcześniej niż w określonej dacie w przyszłym roku."
 )]
 public class NotEarlierThanGivenDateNextYearViewModel(NotEarlierThanGivenDateNextYearModel model) : ParametersViewModel, IRemovable
 {
@@ -58,12 +58,5 @@ public class NotEarlierThanGivenDateNextYearViewModel(NotEarlierThanGivenDateNex
         }
     }
 
-    public ICommand RemoveCommand => new RelayCommand(Remove);
-
-    public event EventHandler<ParametersEventArgs>? Removed;
-
-    public void Remove()
-    {
-        Removed?.Invoke(this, new ParametersEventArgs(model.Condition));
-    }
+    public override ICommand RemoveCommand => new RelayCommand(() => Remove(model.Condition));
 }

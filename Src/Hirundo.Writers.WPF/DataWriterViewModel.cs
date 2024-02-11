@@ -1,7 +1,7 @@
-﻿using Hirundo.Commons.WPF;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Hirundo.Writers.WPF;
 
-public class DataWriterViewModel : ViewModelBase
+public class DataWriterViewModel : ObservableObject
 {
 }

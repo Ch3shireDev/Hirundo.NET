@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
-using Hirundo.Commons.WPF.Helpers;
 using Hirundo.Processors.Observations.Conditions;
 
 namespace Hirundo.Processors.Observations.WPF.IsInTimeBlock;
@@ -47,12 +47,5 @@ public class IsInTimeBlockViewModel(IsInTimeBlockModel model) : ParametersViewMo
         }
     }
 
-    public ICommand RemoveCommand => new RelayCommand(Remove);
-
-    public event EventHandler<ParametersEventArgs>? Removed;
-
-    public void Remove()
-    {
-        Removed?.Invoke(this, new ParametersEventArgs(model.Condition));
-    }
+    public override ICommand RemoveCommand => new RelayCommand(() => Remove(model.Condition));
 }
