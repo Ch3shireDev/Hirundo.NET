@@ -1,9 +1,10 @@
 ﻿using System.Windows.Input;
-using Hirundo.Commons.WPF.Helpers;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Hirundo.Commons.WPF;
 
-public class ParametersBrowserViewModel(ParametersBrowserModel parametersBrowserModel) : ViewModelBase
+public class ParametersBrowserViewModel(ParametersBrowserModel parametersBrowserModel) : ObservableObject
 {
     public ICommand AddParametersCommand => new RelayCommand(AddParameters);
     public string Description => parametersBrowserModel.Description;

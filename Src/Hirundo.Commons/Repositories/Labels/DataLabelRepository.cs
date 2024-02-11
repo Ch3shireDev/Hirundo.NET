@@ -1,6 +1,4 @@
-﻿using Serilog;
-
-namespace Hirundo.Commons.Repositories.Labels;
+﻿namespace Hirundo.Commons.Repositories.Labels;
 
 public class DataLabelRepository : IDataLabelRepository
 {
@@ -36,10 +34,10 @@ public class DataLabelRepository : IDataLabelRepository
         NotifyLabelsChanged();
     }
 
-    void NotifyLabelsChanged()
+    public event EventHandler? LabelsChanged;
+
+    private void NotifyLabelsChanged()
     {
         LabelsChanged?.Invoke(this, EventArgs.Empty);
     }
-
-    public event EventHandler? LabelsChanged;
 }

@@ -1,8 +1,9 @@
 ﻿using System.Globalization;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Hirundo.Commons.WPF;
 
-public class ValueContainer : ViewModelBase
+public class ValueContainer : ObservableObject
 {
     private string value = string.Empty;
 

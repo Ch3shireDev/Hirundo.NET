@@ -7,5 +7,5 @@ public enum DataType
     Number,
     Numeric,
     Date,
-    Boolean,
+    Boolean
 }

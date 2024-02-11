@@ -8,10 +8,6 @@ namespace Hirundo.Databases.WPF.Tests;
 [TestFixture]
 public class DataSourceModelTests
 {
-    private Mock<IAccessMetadataService> _metadataService = null!;
-    private DataSourceModel _model = null!;
-    private Mock<IDataLabelRepository> _repository = null!;
-
     [SetUp]
     public void Setup()
     {
@@ -19,6 +15,10 @@ public class DataSourceModelTests
         _metadataService = new Mock<IAccessMetadataService>();
         _model = new DataSourceModel(_repository.Object, _metadataService.Object);
     }
+
+    private Mock<IAccessMetadataService> _metadataService = null!;
+    private DataSourceModel _model = null!;
+    private Mock<IDataLabelRepository> _repository = null!;
 
     [Test]
     public void GivenAccessDataSource_WhenColumnUpdate_UpdatesRepository()

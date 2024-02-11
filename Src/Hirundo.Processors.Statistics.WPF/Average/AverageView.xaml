@@ -5,37 +5,34 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:average="clr-namespace:Hirundo.Processors.Statistics.WPF.Average"
              xmlns:labels="clr-namespace:Hirundo.Commons.WPF.Repositories.Labels;assembly=Hirundo.Commons.WPF"
-             xmlns:wpf="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
              mc:Ignorable="d"
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance average:AverageViewModel}">
-    <wpf:ConditionControl RemoveCommand="{Binding RemoveCommand}">
-        <StackPanel>
-            <Label FontWeight="Bold">Wartość średnia i odchylenie standardowe</Label>
+    <StackPanel>
+        <WrapPanel>
+            <Label>Nazwa wartości wejściowej</Label>
+            <labels:LabelsComboBox
+                ValueName="{Binding ValueName}"
+                DataType="{Binding DataType}"
+                Repository="{Binding Repository}" />
+        </WrapPanel>
+        <WrapPanel>
+            <Label>Średnia</Label>
+            <TextBox Text="{Binding ResultNameAverage, Mode=TwoWay}" Width="100" />
+        </WrapPanel>
+        <WrapPanel>
+            <Label Content="Odchylenie standardowe" />
+            <TextBox Text="{Binding ResultNameStandardDeviation, Mode=TwoWay}" Width="100" />
+        </WrapPanel>
+        <WrapPanel Margin="10">
+            <CheckBox IsChecked="{Binding RejectOutliers, Mode=TwoWay}">Czy odrzucać wartości skrajne?</CheckBox>
+        </WrapPanel>
+        <StackPanel IsEnabled="{Binding RejectOutliers}">
             <WrapPanel>
-                <Label>Nazwa wartości wejściowej</Label>
-                <labels:LabelsComboBox
-                    ValueName="{Binding ValueName}"
-                    DataType="{Binding DataType}"
-                    Repository="{Binding Repository}" />
+                <Label>Próg odrzucania</Label>
+                <TextBox Text="{Binding Threshold, Mode=TwoWay}" Width="100" />
             </WrapPanel>
-            <WrapPanel>
-                <Label>Średnia</Label>
-                <TextBox Text="{Binding ResultNameAverage, Mode=TwoWay}" Width="100" />
-            </WrapPanel>
-            <WrapPanel>
-                <Label Content="Odchylenie standardowe" />
-                <TextBox Text="{Binding ResultNameStandardDeviation, Mode=TwoWay}" Width="100" />
-            </WrapPanel>
-            <WrapPanel Margin="10">
-                <CheckBox IsChecked="{Binding RejectOutliers, Mode=TwoWay}">Czy odrzucać wartości skrajne?</CheckBox>
-            </WrapPanel>
-            <StackPanel IsEnabled="{Binding RejectOutliers}">
-                <WrapPanel>
-                    <Label>Próg odrzucania</Label>
-                    <TextBox Text="{Binding Threshold, Mode=TwoWay}" Width="100" />
-                </WrapPanel>
-                <!--<WrapPanel>
+            <!--<WrapPanel>
                     <Label>Wzór górnego progu</Label>
                     <TextBox Text="{Binding UpperBound, Mode=TwoWay}" MinWidth="100" />
                 </WrapPanel>
@@ -43,7 +40,6 @@
                     <Label>Wzór dolnego progu</Label>
                     <TextBox Text="{Binding LowerBound, Mode=TwoWay}" MinWidth="100" />
                 </WrapPanel>-->
-            </StackPanel>
         </StackPanel>
-    </wpf:ConditionControl>
+    </StackPanel>
 </UserControl>

@@ -1,13 +1,16 @@
 ﻿using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
-using Hirundo.Commons.WPF.Helpers;
 
 namespace Hirundo.Processors.Statistics.WPF.Average;
 
 public class AverageViewModel(AverageModel model) : ParametersViewModel, IRemovable
 {
+    public override string Name => "Wartość średnia i odchylenie standardowe";
+    public override string Description => "Oblicza wartość średnią i odchylenie standardowe dla wybranej wartości.";
+
     public string ValueName
     {
         get => model.ValueName;
@@ -91,11 +94,5 @@ public class AverageViewModel(AverageModel model) : ParametersViewModel, IRemova
         }
     }
 
-    public ICommand RemoveCommand => new RelayCommand(Remove);
-    public event EventHandler<ParametersEventArgs>? Removed;
-
-    public void Remove()
-    {
-        Removed?.Invoke(this, new ParametersEventArgs(model.Operation));
-    }
+    public override ICommand RemoveCommand => new RelayCommand(() => Remove(model.Operation));
 }

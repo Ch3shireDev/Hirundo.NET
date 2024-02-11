@@ -9,7 +9,6 @@ using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
 using Hirundo.Databases;
 using Hirundo.Databases.WPF;
-using Hirundo.Processors.Observations.Conditions;
 using Hirundo.Processors.Observations.WPF;
 using Hirundo.Processors.Population.WPF;
 using Hirundo.Processors.Returning.WPF;

@@ -1,10 +1,10 @@
-﻿using Hirundo.Commons;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
-using Hirundo.Commons.WPF;
 
 namespace Hirundo.Processors.Specimens.WPF;
 
-public class SpecimensViewModel(SpecimensModel model, IDataLabelRepository repository) : ViewModelBase
+public class SpecimensViewModel(SpecimensModel model, IDataLabelRepository repository) : ObservableObject
 {
     public string SpecimenIdentifier
     {

@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Hirundo.Commons.WPF.Helpers;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
 
 namespace Hirundo.Commons.WPF;

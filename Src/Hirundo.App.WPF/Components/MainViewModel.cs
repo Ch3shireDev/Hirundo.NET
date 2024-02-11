@@ -2,10 +2,11 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Hirundo.App.WPF.Helpers;
 using Hirundo.Commons;
 using Hirundo.Commons.WPF;
-using Hirundo.Commons.WPF.Helpers;
 using Hirundo.Processors.Specimens.WPF;
 using Hirundo.Writers.WPF;
 using Microsoft.Win32;
@@ -14,10 +15,10 @@ using Serilog.Events;
 
 namespace Hirundo.App.WPF.Components;
 
-public sealed class MainViewModel : ViewModelBase
+public sealed class MainViewModel : ObservableObject
 {
     private readonly MainModel _model;
-    private ViewModelBase? _selectedViewModel;
+    private ObservableObject? _selectedViewModel;
 
     private bool isProcessing;
 
@@ -26,15 +27,15 @@ public sealed class MainViewModel : ViewModelBase
         ArgumentNullException.ThrowIfNull(model);
 
         _model = model;
-        DataSourceViewModel = new(model.DataSourceModel);
-        ParametersBrowserViewModel = new(model.ObservationParametersBrowserModel);
-        ReturningSpecimensViewModel = new(model.ReturningSpecimensModel);
-        PopulationViewModel = new(model.PopulationModel);
-        SpecimensViewModel = new(model.SpecimensModel, model.Repository);
-        StatisticsViewModel = new(model.StatisticsModel);
-        WriterViewModel = new(model.WriterModel, ProcessAndSaveAsync);
+        DataSourceViewModel = new ParametersBrowserViewModel(model.DataSourceModel);
+        ParametersBrowserViewModel = new ParametersBrowserViewModel(model.ObservationParametersBrowserModel);
+        ReturningSpecimensViewModel = new ParametersBrowserViewModel(model.ReturningSpecimensModel);
+        PopulationViewModel = new ParametersBrowserViewModel(model.PopulationModel);
+        SpecimensViewModel = new SpecimensViewModel(model.SpecimensModel, model.Repository);
+        StatisticsViewModel = new ParametersBrowserViewModel(model.StatisticsModel);
+        WriterViewModel = new WriterViewModel(model.WriterModel, ProcessAndSaveAsync);
 
-        ViewModels = new List<ViewModelBase>
+        ViewModels = new List<ObservableObject>
         {
             DataSourceViewModel,
             SpecimensViewModel,
@@ -63,9 +64,9 @@ public sealed class MainViewModel : ViewModelBase
     public ICommand SaveCurrentConfigCommand => new RelayCommand(SaveCurrentConfig);
     public ICommand LoadNewConfigCommand => new RelayCommand(LoadNewConfig);
 
-    public IList<ViewModelBase> ViewModels { get; }
+    public IList<ObservableObject> ViewModels { get; }
 
-    public ViewModelBase? SelectedViewModel
+    public ObservableObject? SelectedViewModel
     {
         get => _selectedViewModel;
         set

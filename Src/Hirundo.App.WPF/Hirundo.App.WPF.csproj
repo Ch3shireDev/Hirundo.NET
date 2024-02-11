@@ -1,63 +1,78 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	  <OutputType>WinExe</OutputType>
-	  <TargetFramework>net8.0-windows</TargetFramework>
-	  <Nullable>enable</Nullable>
-	  <ImplicitUsings>enable</ImplicitUsings>
-	  <UseWPF>true</UseWPF>
-	  <PublishSingleFile>true</PublishSingleFile>
-	  <EnableWindowsTargeting>true</EnableWindowsTargeting>
-	  <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-	  <AssemblyVersion>0.7.1</AssemblyVersion>
-	  <FileVersion>0.7.1</FileVersion>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UseWPF>true</UseWPF>
+		<PublishSingleFile>true</PublishSingleFile>
+		<EnableWindowsTargeting>true</EnableWindowsTargeting>
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+		<AssemblyVersion>0.7.2</AssemblyVersion>
+		<FileVersion>0.7.2</FileVersion>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <NoWarn>1701;1702;NETSDK1187</NoWarn>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<NoWarn>1701;1702;NETSDK1187</NoWarn>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <NoWarn>1701;1702;NETSDK1187</NoWarn>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<NoWarn>1701;1702;NETSDK1187</NoWarn>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Autofac" Version="8.0.0" />
-    <PackageReference Include="MaterialDesignColors" Version="2.1.4" />
-    <PackageReference Include="MaterialDesignExtensions" Version="3.3.0" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-  </ItemGroup>
+	<PropertyGroup Condition="'$(Configuration)' == 'Publish'">
+		<PostBuildEvent>
+			del *.pdb
+			del *.xml
+		</PostBuildEvent>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Hirundo.App\Hirundo.App.csproj" />
-    <ProjectReference Include="..\Hirundo.Commons.WPF\Hirundo.Commons.WPF.csproj" />
-    <ProjectReference Include="..\Hirundo.Databases.WPF\Hirundo.Databases.WPF.csproj" />
-    <ProjectReference Include="..\Hirundo.Processors.Observations.WPF\Hirundo.Processors.Observations.WPF.csproj" />
-    <ProjectReference Include="..\Hirundo.Processors.Population.WPF\Hirundo.Processors.Population.WPF.csproj" />
-    <ProjectReference Include="..\Hirundo.Processors.Returning.WPF\Hirundo.Processors.Returning.WPF.csproj" />
-    <ProjectReference Include="..\Hirundo.Processors.Specimens.WPF\Hirundo.Processors.Specimens.WPF.csproj" />
-    <ProjectReference Include="..\Hirundo.Processors.Statistics.WPF\Hirundo.Processors.Statistics.WPF.csproj" />
-    <ProjectReference Include="..\Hirundo.Serialization.Json\Hirundo.Serialization.Json.csproj" />
-    <ProjectReference Include="..\Hirundo.Writers.WPF\Hirundo.Writers.WPF.csproj" />
-  </ItemGroup>
+	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
+		<PostBuildEvent>
+			del *.pdb
+			del *.xml
+		</PostBuildEvent>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Update="Components\MainView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Autofac" Version="8.0.0" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+		<PackageReference Include="MaterialDesignColors" Version="2.1.4" />
+		<PackageReference Include="MaterialDesignExtensions" Version="3.3.0" />
+		<PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Hirundo.App\Hirundo.App.csproj" />
+		<ProjectReference Include="..\Hirundo.Commons.WPF\Hirundo.Commons.WPF.csproj" />
+		<ProjectReference Include="..\Hirundo.Databases.WPF\Hirundo.Databases.WPF.csproj" />
+		<ProjectReference Include="..\Hirundo.Processors.Observations.WPF\Hirundo.Processors.Observations.WPF.csproj" />
+		<ProjectReference Include="..\Hirundo.Processors.Population.WPF\Hirundo.Processors.Population.WPF.csproj" />
+		<ProjectReference Include="..\Hirundo.Processors.Returning.WPF\Hirundo.Processors.Returning.WPF.csproj" />
+		<ProjectReference Include="..\Hirundo.Processors.Specimens.WPF\Hirundo.Processors.Specimens.WPF.csproj" />
+		<ProjectReference Include="..\Hirundo.Processors.Statistics.WPF\Hirundo.Processors.Statistics.WPF.csproj" />
+		<ProjectReference Include="..\Hirundo.Serialization.Json\Hirundo.Serialization.Json.csproj" />
+		<ProjectReference Include="..\Hirundo.Writers.WPF\Hirundo.Writers.WPF.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Page Update="MainWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Update="Components\MainView.xaml.cs">
+			<SubType>Code</SubType>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="appsettings.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Page Update="MainWindow.xaml">
+			<SubType>Designer</SubType>
+		</Page>
+	</ItemGroup>
 
 </Project>

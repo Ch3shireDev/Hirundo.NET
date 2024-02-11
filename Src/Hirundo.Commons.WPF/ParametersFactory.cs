@@ -3,7 +3,7 @@ using Hirundo.Commons.Repositories.Labels;
 
 namespace Hirundo.Commons.WPF;
 
-public class ParametersFactory<TCondition, TBrowserModel>(IDataLabelRepository repository) : IParametersFactory<TCondition>
+public class ParametersFactory<TCondition, TBrowserModel>(IDataLabelRepository repository) : IParametersFactory<TCondition> where TCondition : class
 {
     public TCondition CreateCondition(ParametersData parametersData)
     {

@@ -1,8 +1,8 @@
 ﻿using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
-using Hirundo.Commons.WPF.Helpers;
 using Hirundo.Processors.Observations.Conditions;
 
 namespace Hirundo.Processors.Observations.WPF.IsEqual;
@@ -50,12 +50,5 @@ public class IsEqualViewModel(IsEqualModel model) : ParametersViewModel, IRemova
         }
     }
 
-    public ICommand RemoveCommand => new RelayCommand(Remove);
-
-    public event EventHandler<ParametersEventArgs>? Removed;
-
-    public void Remove()
-    {
-        Removed?.Invoke(this, new ParametersEventArgs(model.ObservationCondition));
-    }
+    public override ICommand RemoveCommand => new RelayCommand(() => Remove(model.ObservationCondition));
 }

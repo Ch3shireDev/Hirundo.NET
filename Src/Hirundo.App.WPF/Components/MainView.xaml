@@ -17,6 +17,7 @@
              d:DesignHeight="600" d:DesignWidth="1000" d:Background="#FFF7FFF7"
              d:DataContext="{d:DesignInstance components:MainViewModel}">
     <UserControl.Resources>
+
         <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
             <Setter Property="Padding" Value="15,5" />
         </Style>
