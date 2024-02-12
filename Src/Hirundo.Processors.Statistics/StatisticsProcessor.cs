@@ -1,6 +1,5 @@
 ﻿using Hirundo.Commons;
 using Hirundo.Processors.Statistics.Operations;
-using Hirundo.Processors.Statistics.Operations.Outliers;
 
 namespace Hirundo.Processors.Statistics;
 
@@ -8,8 +7,7 @@ namespace Hirundo.Processors.Statistics;
 ///     Prosta implementacja procesora statystyk.
 /// </summary>
 public class StatisticsProcessor(
-    IEnumerable<IStatisticalOperation> statisticalOperations,
-    IEnumerable<IOutliersCondition> outliersConditions) : IStatisticsProcessor
+    IEnumerable<IStatisticalOperation> statisticalOperations) : IStatisticsProcessor
 {
     /// <summary>
     ///     Zwraca dane statystyczne wyznaczone na podstawie danych populacji.
@@ -19,7 +17,6 @@ public class StatisticsProcessor(
     public IEnumerable<StatisticalData> GetStatistics(IEnumerable<Specimen> populationData)
     {
         ArgumentNullException.ThrowIfNull(populationData);
-        if (outliersConditions.Any()) throw new NotImplementedException();
         var results = statisticalOperations.Select(operation => operation.GetStatistics(populationData));
 
         return results.SelectMany(result => result.Names.Zip(result.Values, (name, value) => new StatisticalData(name, value)));

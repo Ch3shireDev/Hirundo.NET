@@ -4,7 +4,7 @@
 ///     Budowniczy filtrów obserwacji. Filtry mogą być budowane na podstawie danych wprowadzonych przez użytkownika,
 ///     tworząc filtry składające się z kilku warunków z operatorem logicznym AND.
 /// </summary>
-public class ObservationFiltersBuilder
+public class ObservationConditionsBuilder : IObservationConditionsBuilder
 {
     private readonly List<IObservationCondition> _observationFilters = [];
 
@@ -17,7 +17,7 @@ public class ObservationFiltersBuilder
         return new CompositeObservationCondition([.._observationFilters]);
     }
 
-    public ObservationFiltersBuilder WithObservationConditions(IEnumerable<IObservationCondition> observationsConditions)
+    public IObservationConditionsBuilder WithObservationConditions(IEnumerable<IObservationCondition> observationsConditions)
     {
         _observationFilters.AddRange(observationsConditions);
         return this;

@@ -1,4 +1,5 @@
 ﻿using Hirundo.Databases;
+using Hirundo.Processors.Computed;
 using Hirundo.Processors.Observations.Conditions;
 using Hirundo.Processors.Population;
 using Hirundo.Processors.Returning;
@@ -12,6 +13,7 @@ public class ApplicationConfig
 {
     public IList<IDatabaseParameters> Databases { get; init; } = [];
     public ObservationsParameters Observations { get; set; } = new();
+    public ComputedValuesParameters ComputedValues { get; set; } = new();
     public SpecimensProcessorParameters Specimens { get; set; } = new();
     public ReturningSpecimensParameters ReturningSpecimens { get; set; } = new();
     public PopulationProcessorParameters Population { get; set; } = new();

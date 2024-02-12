@@ -9,7 +9,7 @@ namespace Hirundo.Processors.Summary;
 ///     <see cref="IStatisticsProcessor" /> oraz dostarczonych danych o wszystkich osobnikach tworzy obiekt
 ///     <see cref="ISummaryProcessor" />.
 /// </summary>
-public class SummaryProcessorBuilder
+public class SummaryProcessorBuilder : ISummaryProcessorBuilder
 {
     private IPopulationProcessor _populationProcessor = null!;
     private IStatisticsProcessor _statisticsProcessor = null!;

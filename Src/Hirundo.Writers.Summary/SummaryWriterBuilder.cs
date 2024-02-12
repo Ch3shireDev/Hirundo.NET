@@ -3,17 +3,11 @@
 /// <summary>
 ///     Budowniczy dla <see cref="ISummaryWriter" />.
 /// </summary>
-public class SummaryWriterBuilder
+public class SummaryWriterBuilder : ISummaryWriterBuilder
 {
     private string _filename = null!;
 
-    public SummaryWriterBuilder WithFilename(string filename)
-    {
-        _filename = filename;
-        return this;
-    }
-
-    public SummaryWriterBuilder WithCsvSummaryWriterParameters(CsvSummaryWriterParameters parameters)
+    public ISummaryWriterBuilder WithCsvSummaryWriterParameters(CsvSummaryWriterParameters parameters)
     {
         ArgumentNullException.ThrowIfNull(parameters);
 
@@ -21,7 +15,7 @@ public class SummaryWriterBuilder
         return this;
     }
 
-    public SummaryWriterBuilder WithWriterParameters(IWriterParameters resultsWriter)
+    public ISummaryWriterBuilder WithWriterParameters(IWriterParameters resultsWriter)
     {
         return resultsWriter switch
         {

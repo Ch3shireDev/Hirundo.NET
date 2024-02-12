@@ -61,7 +61,7 @@ public class HistogramOperation : IStatisticalOperation
             valueLabels.Add($"{ResultName}-{valueStr}");
         }
 
-        var values = new List<object>();
+        var values = new List<object?>();
 
         for (var x = MinValue; x <= MaxValue; x += Interval)
         {

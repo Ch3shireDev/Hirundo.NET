@@ -5,16 +5,16 @@
 ///     na szczególną formę bieżącej bazy danych, budowniczy tworzy kompozyt, w celu umożliwienia pobierania danych z dwóch
 ///     tabel.
 /// </summary>
-public class DatabaseBuilder
+public class DatabaseBuilder : IDatabaseBuilder
 {
     private readonly List<IDatabase> _databases = [];
 
-    public DatabaseBuilder WithDatabaseParameters(params IDatabaseParameters[] appConfigDatabases)
+    public IDatabaseBuilder WithDatabaseParameters(params IDatabaseParameters[] appConfigDatabases)
     {
         return WithDatabaseParameters(appConfigDatabases.ToList());
     }
 
-    public DatabaseBuilder WithDatabaseParameters(IEnumerable<IDatabaseParameters> appConfigDatabases)
+    public IDatabaseBuilder WithDatabaseParameters(IEnumerable<IDatabaseParameters> appConfigDatabases)
     {
         ArgumentNullException.ThrowIfNull(appConfigDatabases);
 
@@ -38,7 +38,7 @@ public class DatabaseBuilder
     /// </summary>
     /// <param name="databaseParameters"></param>
     /// <returns></returns>
-    public DatabaseBuilder AddMdbAccessDatabase(AccessDatabaseParameters databaseParameters)
+    public IDatabaseBuilder AddMdbAccessDatabase(AccessDatabaseParameters databaseParameters)
     {
         _databases.Add(new MdbAccessDatabase(databaseParameters));
         return this;

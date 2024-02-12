@@ -9,7 +9,7 @@ public class StatisticalData
     {
     }
 
-    public StatisticalData(string name, object value)
+    public StatisticalData(string name, object? value)
     {
         Name = name;
         Value = value;
@@ -23,5 +23,5 @@ public class StatisticalData
     /// <summary>
     ///     Wartość statystyczna.
     /// </summary>
-    public object Value { get; set; } = null!;
+    public object? Value { get; set; } = null!;
 }

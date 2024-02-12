@@ -5,7 +5,7 @@ namespace Hirundo.Processors.Returning;
 /// <summary>
 ///     Budowniczy filtrów powracających osobników.
 /// </summary>
-public class ReturningSpecimenConditionsBuilder
+public class ReturningSpecimenConditionsBuilder : IReturningSpecimenConditionsBuilder
 {
     private readonly List<IReturningSpecimenCondition> _conditions = [];
 
@@ -18,7 +18,7 @@ public class ReturningSpecimenConditionsBuilder
         return new CompositeReturningSpecimenCondition([.. _conditions]);
     }
 
-    public ReturningSpecimenConditionsBuilder WithReturningSpecimensConditions(IEnumerable<IReturningSpecimenCondition> returningSpecimensConditions)
+    public IReturningSpecimenConditionsBuilder WithReturningSpecimensConditions(IEnumerable<IReturningSpecimenCondition> returningSpecimensConditions)
     {
         _conditions.AddRange(returningSpecimensConditions);
         return this;

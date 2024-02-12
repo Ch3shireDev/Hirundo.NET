@@ -1,5 +1,4 @@
 ﻿using Hirundo.Processors.Statistics.Operations;
-using Hirundo.Processors.Statistics.Operations.Outliers;
 
 namespace Hirundo.Processors.Statistics;
 
@@ -7,9 +6,8 @@ namespace Hirundo.Processors.Statistics;
 ///     Budowniczy obiektów typu <see cref="IStatisticsProcessor" />. Pozwala na przetworzenie konfiguracji użytkownika do
 ///     obiektu typu <see cref="IStatisticsProcessor" />.
 /// </summary>
-public class StatisticsProcessorBuilder
+public class StatisticsProcessorBuilder : IStatisticsProcessorBuilder
 {
-    private readonly List<IOutliersCondition> _outliersConditions = [];
     private readonly List<IStatisticalOperation> _statisticalOperations = [];
 
     /// <summary>
@@ -18,10 +16,10 @@ public class StatisticsProcessorBuilder
     /// <returns></returns>
     public IStatisticsProcessor Build()
     {
-        return new StatisticsProcessor(_statisticalOperations, _outliersConditions);
+        return new StatisticsProcessor(_statisticalOperations);
     }
 
-    public StatisticsProcessorBuilder WithStatisticsOperations(IEnumerable<IStatisticalOperation> statisticsOperations)
+    public IStatisticsProcessorBuilder WithStatisticsOperations(IEnumerable<IStatisticalOperation> statisticsOperations)
     {
         _statisticalOperations.AddRange(statisticsOperations);
         return this;

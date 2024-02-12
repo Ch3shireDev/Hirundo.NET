@@ -1,4 +1,5 @@
 ﻿using Hirundo.Databases;
+using Hirundo.Processors.Computed;
 using Hirundo.Processors.Observations.Conditions;
 using Hirundo.Processors.Population;
 using Hirundo.Processors.Returning;
@@ -12,44 +13,80 @@ namespace Hirundo.App;
 
 public class HirundoApp : IHirundoApp
 {
-    private readonly ReturningSpecimenConditionsBuilder _returningSpecimenConditionsBuilder = new();
-    private readonly DatabaseBuilder databaseBuilder = new();
-    private readonly ObservationFiltersBuilder observationFiltersBuilder = new();
-    private readonly PopulationProcessorBuilder populationProcessorBuilder = new();
-    private readonly SpecimensProcessorBuilder specimensProcessorBuilder = new();
-    private readonly StatisticsProcessorBuilder statisticsProcessorBuilder = new();
-    private readonly SummaryProcessorBuilder summaryProcessorBuilder = new();
-    private readonly SummaryWriterBuilder summaryWriterBuilder = new();
+    private readonly IComputedValuesCalculatorBuilder _calculatorBuilder = new ComputedValuesCalculatorBuilder();
+    private readonly IDatabaseBuilder _databaseBuilder = new DatabaseBuilder();
+    private readonly IObservationConditionsBuilder _observationConditionsBuilder = new ObservationConditionsBuilder();
+    private readonly IPopulationProcessorBuilder _populationProcessorBuilder = new PopulationProcessorBuilder();
+    private readonly IReturningSpecimenConditionsBuilder _returningSpecimenConditionsBuilder = new ReturningSpecimenConditionsBuilder();
+    private readonly ISpecimensProcessorBuilder _specimensProcessorBuilder = new SpecimensProcessorBuilder();
+    private readonly IStatisticsProcessorBuilder _statisticsProcessorBuilder = new StatisticsProcessorBuilder();
+    private readonly SummaryProcessorBuilder _summaryProcessorBuilder = new();
+    private readonly ISummaryWriterBuilder _summaryWriterBuilder = new SummaryWriterBuilder();
+
+    public HirundoApp()
+    {
+    }
+
+    public HirundoApp(IDatabaseBuilder databaseBuilder, ISummaryWriterBuilder summaryWriterBuilder)
+    {
+        _databaseBuilder = databaseBuilder;
+        _summaryWriterBuilder = summaryWriterBuilder;
+    }
+
+    public HirundoApp(
+        IDatabaseBuilder databaseBuilder,
+        IComputedValuesCalculatorBuilder calculatorBuilder,
+        IObservationConditionsBuilder observationsBuilder,
+        IReturningSpecimenConditionsBuilder returningBuilder,
+        IPopulationProcessorBuilder populationProcessorBuilder,
+        ISpecimensProcessorBuilder specimensProcessorBuilder,
+        IStatisticsProcessorBuilder statisticsProcessorBuilder,
+        ISummaryWriterBuilder summaryWriterBuilder
+    )
+    {
+        _databaseBuilder = databaseBuilder;
+        _calculatorBuilder = calculatorBuilder;
+        _observationConditionsBuilder = observationsBuilder;
+        _returningSpecimenConditionsBuilder = returningBuilder;
+        _populationProcessorBuilder = populationProcessorBuilder;
+        _specimensProcessorBuilder = specimensProcessorBuilder;
+        _statisticsProcessorBuilder = statisticsProcessorBuilder;
+        _summaryWriterBuilder = summaryWriterBuilder;
+    }
 
     public void Run(ApplicationConfig applicationConfig)
     {
         ArgumentNullException.ThrowIfNull(applicationConfig);
 
-        var database = databaseBuilder
+        var database = _databaseBuilder
             .WithDatabaseParameters(applicationConfig.Databases)
             .Build();
 
-        var observationFilters = observationFiltersBuilder
+        var observationConditions = _observationConditionsBuilder
             .WithObservationConditions(applicationConfig.Observations.Conditions)
             .Build();
 
-        var returningSpecimenFilters = _returningSpecimenConditionsBuilder
+        var computedValuesCalculator = _calculatorBuilder
+            .WithComputedValues(applicationConfig.ComputedValues)
+            .Build();
+
+        var returningSpecimenConditions = _returningSpecimenConditionsBuilder
             .WithReturningSpecimensConditions(applicationConfig.ReturningSpecimens.Conditions)
             .Build();
 
-        var populationProcessor = populationProcessorBuilder
+        var populationProcessor = _populationProcessorBuilder
             .WithPopulationConditions(applicationConfig.Population.Conditions)
             .Build();
 
-        var statisticsProcessor = statisticsProcessorBuilder
-            .WithStatisticsOperations(applicationConfig.Statistics.Operations)
-            .Build();
-
-        var specimensProcessor = specimensProcessorBuilder
+        var specimensProcessor = _specimensProcessorBuilder
             .WithSpecimensParameters(applicationConfig.Specimens)
             .Build();
 
-        var resultsWriter = summaryWriterBuilder
+        var statisticsProcessor = _statisticsProcessorBuilder
+            .WithStatisticsOperations(applicationConfig.Statistics.Operations)
+            .Build();
+
+        var resultsWriter = _summaryWriterBuilder
             .WithWriterParameters(applicationConfig.Results.Writer)
             .Build();
 
@@ -57,7 +94,7 @@ public class HirundoApp : IHirundoApp
 
         Log.Information($"Odczytano {observations.Length} obserwacji.");
 
-        var selectedObservations = observations.Where(observationFilters.IsAccepted).ToArray();
+        var selectedObservations = observations.Where(observationConditions.IsAccepted).ToArray();
 
         Log.Information($"Wybrano {selectedObservations.Length} obserwacji.");
 
@@ -65,11 +102,11 @@ public class HirundoApp : IHirundoApp
 
         Log.Information($"Wybrano {specimens.Length} osobników.");
 
-        var returningSpecimens = specimens.Where(returningSpecimenFilters.IsReturning).ToArray();
+        var returningSpecimens = specimens.Where(returningSpecimenConditions.IsReturning).ToArray();
 
         Log.Information($"Wybrano {returningSpecimens.Length} powracających osobników.");
 
-        var summaryProcessor = summaryProcessorBuilder
+        var summaryProcessor = _summaryProcessorBuilder
             .WithPopulationProcessor(populationProcessor)
             .WithStatisticsProcessor(statisticsProcessor)
             .WithTotalPopulation(specimens)

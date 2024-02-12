@@ -1,16 +1,16 @@
 ﻿namespace Hirundo.Processors.Specimens;
 
-public class SpecimensProcessorBuilder
+public class SpecimensProcessorBuilder : ISpecimensProcessorBuilder
 {
     private SpecimensProcessorParameters _parameters = null!;
 
-    public SpecimensProcessorBuilder WithSpecimensParameters(SpecimensProcessorParameters parameters)
+    public ISpecimensProcessorBuilder WithSpecimensParameters(SpecimensProcessorParameters parameters)
     {
         _parameters = parameters;
         return this;
     }
 
-    public SpecimensProcessor Build()
+    public ISpecimensProcessor Build()
     {
         return new SpecimensProcessor(_parameters);
     }

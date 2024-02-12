@@ -26,20 +26,20 @@ public class StatisticalOperationResult
         EmptyValueIds = emptyValueIds;
     }
 
-    public StatisticalOperationResult(IList<string> names, IList<object> values)
+    public StatisticalOperationResult(IList<string> names, IList<object?> values)
     {
         Names = names;
         Values = values;
     }
 
-    public StatisticalOperationResult(IList<string> names, IList<object> values, IList<object> populationIds)
+    public StatisticalOperationResult(IList<string> names, IList<object?> values, IList<object> populationIds)
     {
         Names = names;
         Values = values;
         PopulationIds = populationIds;
     }
 
-    public StatisticalOperationResult(IList<string> names, IList<object> values, IList<object> populationIds, IList<object> emptyValueIds)
+    public StatisticalOperationResult(IList<string> names, IList<object?> values, IList<object> populationIds, IList<object> emptyValueIds)
     {
         Names = names;
         Values = values;
@@ -47,7 +47,7 @@ public class StatisticalOperationResult
         EmptyValueIds = emptyValueIds;
     }
 
-    public StatisticalOperationResult(IList<string> names, IList<object> values, IList<object> populationIds, IList<object> emptyValueIds, IList<object> outlierIds)
+    public StatisticalOperationResult(IList<string> names, IList<object?> values, IList<object> populationIds, IList<object> emptyValueIds, IList<object> outlierIds)
     {
         Names = names;
         Values = values;
@@ -64,7 +64,7 @@ public class StatisticalOperationResult
     /// <summary>
     ///     Wartość statystyczna.
     /// </summary>
-    public IList<object> Values { get; init; }
+    public IList<object?> Values { get; init; }
 
     /// <summary>
     ///     Identyfikatory populacji, dla których została wyznaczona niepusta wartość statystyczna.
