@@ -17,10 +17,10 @@ public class Season
     /// <summary>
     ///     Konstruktor tworzący sezon na podstawie miesięcy i dni.
     /// </summary>
-    /// <param name="startMonth">Miesiąc od którego zaczyna się sezon.</param>
-    /// <param name="startDay">Dzień od którego zaczyna się sezon</param>
-    /// <param name="endMonth">Miesiąc na którym kończy się sezon.</param>
-    /// <param name="endDay">Dzień na którym kończy się sezon.</param>
+    /// <param name="startMonth">Miesiąc, od którego zaczyna się sezon.</param>
+    /// <param name="startDay">Dzień, od którego zaczyna się sezon</param>
+    /// <param name="endMonth">Miesiąc, na którym kończy się sezon.</param>
+    /// <param name="endDay">Dzień, na którym kończy się sezon.</param>
     public Season(int startMonth, int startDay, int endMonth, int endDay)
     {
         StartMonth = startMonth;
@@ -30,22 +30,22 @@ public class Season
     }
 
     /// <summary>
-    ///     Miesiąc od którego obowiązuje sezon, liczony od 1 (styczeń) do 12 (grudzień).
+    ///     Miesiąc, od którego obowiązuje sezon, liczony od 1 (styczeń) do 12 (grudzień).
     /// </summary>
     public int StartMonth { get; set; }
 
     /// <summary>
-    ///     Dzień miesiąca od którego obowiązuje sezon, liczony od 1 do 31.
+    ///     Dzień miesiąca, od którego obowiązuje sezon, liczony od 1 do 31.
     /// </summary>
-    public int StartDay { get; set; }
+    public int StartDay { get; set; } = 1;
 
     /// <summary>
-    ///     Miesiąc do którego obowiązuje sezon, liczony od 1 (styczeń) do 12 (grudzień).
+    ///     Miesiąc, do którego obowiązuje sezon, liczony od 1 (styczeń) do 12 (grudzień).
     /// </summary>
     public int EndMonth { get; set; }
 
     /// <summary>
-    ///     Dzień miesiąca do którego obowiązuje sezon, liczony od 1 do 31.
+    ///     Dzień miesiąca, do którego obowiązuje sezon, liczony od 1 do 31.
     /// </summary>
-    public int EndDay { get; set; }
+    public int EndDay { get; set; } = 1;
 }

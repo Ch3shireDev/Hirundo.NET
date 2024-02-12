@@ -10,7 +10,7 @@ namespace Hirundo.Processors.Observations.WPF.IsInTimeBlock;
     typeof(IsInTimeBlockCondition),
     typeof(IsInTimeBlockModel),
     typeof(IsInTimeBlockView),
-    "Czy pole danych jest w przedziale czasowym?",
+    "Czy dane są w przedziale godzinowym?",
     "Warunek sprawdzający godziny złapania osobnika."
 )]
 public class IsInTimeBlockViewModel(IsInTimeBlockModel model) : ParametersViewModel, IRemovable
