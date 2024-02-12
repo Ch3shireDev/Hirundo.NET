@@ -7,29 +7,17 @@ using Hirundo.Commons;
 
 namespace Hirundo.Writers.Summary;
 
-public sealed class CsvSummaryWriter : ISummaryWriter, IDisposable, IAsyncDisposable
+public sealed class CsvSummaryWriter(TextWriter streamWriter) : ISummaryWriter, IDisposable, IAsyncDisposable
 {
-    private readonly TextWriter _streamWriter;
-
-    public CsvSummaryWriter()
-    {
-        _streamWriter = new StreamWriter("summary.csv", false, Encoding.UTF8);
-    }
-
-    public CsvSummaryWriter(TextWriter streamWriter)
-    {
-        _streamWriter = streamWriter;
-    }
-
     public async ValueTask DisposeAsync()
     {
-        await _streamWriter.DisposeAsync().ConfigureAwait(false);
+        await streamWriter.DisposeAsync().ConfigureAwait(false);
         GC.SuppressFinalize(this);
     }
 
     public void Dispose()
     {
-        _streamWriter.Dispose();
+        streamWriter.Dispose();
         GC.SuppressFinalize(this);
     }
 
@@ -39,8 +27,7 @@ public sealed class CsvSummaryWriter : ISummaryWriter, IDisposable, IAsyncDispos
 
         if (records.Count == 0) throw new ArgumentException("No records to write.");
 
-        var firstRecord = records.First();
-        var headers = firstRecord.GetHeaders();
+        var headers = GetHeaders(records);
 
         IWriterConfiguration configuration = new CsvConfiguration(CultureInfo.InvariantCulture)
         {
@@ -51,7 +38,7 @@ public sealed class CsvSummaryWriter : ISummaryWriter, IDisposable, IAsyncDispos
 
         var options = new TypeConverterOptions { Formats = new[] { "yyyy-MM-dd" } };
 
-        using var csvWriter = new CsvWriter(_streamWriter, configuration);
+        using var csvWriter = new CsvWriter(streamWriter, configuration);
         csvWriter.Context.TypeConverterOptionsCache.AddOptions<DateTime>(options);
         csvWriter.Context.TypeConverterOptionsCache.AddOptions<DateTime?>(options);
 
@@ -66,7 +53,7 @@ public sealed class CsvSummaryWriter : ISummaryWriter, IDisposable, IAsyncDispos
 
             foreach (var record in records)
             {
-                var values = record.GetValues();
+                var values = record.GetValues(headers);
 
                 foreach (var value in values)
                 {
@@ -76,6 +63,21 @@ public sealed class CsvSummaryWriter : ISummaryWriter, IDisposable, IAsyncDispos
                 csvWriter.NextRecord();
             }
         }
+    }
+
+    private static string[] GetHeaders(IReadOnlyCollection<ReturningSpecimenSummary> records)
+    {
+        var headersList = records.Select(r => r.GetValueHeaders()).ToList();
+        var highestCount = headersList.Max(h => h.Length);
+        var valueHeaders = headersList.First(h => h.Length == highestCount).ToArray();
+
+        var statisticsHeaders = records
+            .SelectMany(r => r.GetStatisticsHeaders())
+            .Distinct()
+            .OrderBy(h => h)
+            .ToList();
+
+        return [.. valueHeaders, .. statisticsHeaders];
     }
 
     ~CsvSummaryWriter()

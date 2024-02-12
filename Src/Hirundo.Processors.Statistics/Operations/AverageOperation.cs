@@ -48,6 +48,11 @@ public class AverageOperation : IStatisticalOperation
     {
         var population = populationData.ToArray();
 
+        if (population.Length == 0)
+        {
+            return new StatisticalOperationResult([ResultNameAverage, ResultNameStandardDeviation], [null, null], Array.Empty<object>(), Array.Empty<object>(), Array.Empty<object>());
+        }
+
         var emptyValuesIds = population
             .Where(specimen => specimen.Observations.First().GetValue(ValueName) == null)
             .Select(specimen => specimen.Identifier)
@@ -56,8 +61,8 @@ public class AverageOperation : IStatisticalOperation
         object[] outliersIds = [];
         object[] oldOutliersIds;
 
-        object averageValue;
-        object standardDeviationValue;
+        object? averageValue;
+        object? standardDeviationValue;
 
         object[] populationIds;
 
@@ -78,16 +83,28 @@ public class AverageOperation : IStatisticalOperation
 
             (averageValue, standardDeviationValue) = GetValues(values);
 
+            if(averageValue == null || standardDeviationValue == null)
+            {
+                return new StatisticalOperationResult([ResultNameAverage, ResultNameStandardDeviation], [null, null], populationIds, emptyValuesIds, outliersIds);
+            }
+
             oldOutliersIds = outliersIds;
             outliersIds = Outliers.GetOutliersIds(population, ValueName, averageValue, standardDeviationValue);
+        
+        
         } while (oldOutliersIds.Length != outliersIds.Length);
 
 
         return new StatisticalOperationResult([ResultNameAverage, ResultNameStandardDeviation], [averageValue, standardDeviationValue], populationIds, emptyValuesIds, outliersIds);
     }
 
-    private static (object average, object standardDeviation) GetValues(object[] values)
+    private static (object? average, object? standardDeviation) GetValues(object[] values)
     {
+        if (values.Length == 0)
+        {
+            return (null, null);
+        }
+
         var type = values.First().GetType();
 
         if (type == typeof(int))

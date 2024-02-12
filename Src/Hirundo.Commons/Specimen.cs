@@ -26,4 +26,9 @@ public class Specimen(object identifier, IList<Observation> observations)
     {
         return Observations.FirstOrDefault()?.GetValues() ?? [];
     }
+
+    public object? GetValue(string header)
+    {
+        return Observations.FirstOrDefault()?.GetValue(header);
+    }
 }

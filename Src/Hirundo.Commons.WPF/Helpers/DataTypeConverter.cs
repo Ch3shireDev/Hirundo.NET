@@ -1,7 +1,8 @@
 ﻿using System.Globalization;
 using System.Windows.Data;
+using Hirundo.Databases;
 
-namespace Hirundo.Databases.WPF;
+namespace Hirundo.Commons.WPF.Helpers;
 
 public class DataTypeConverter : IValueConverter
 {
@@ -19,7 +20,7 @@ public class DataTypeConverter : IValueConverter
     {
         if (value == null) return value;
 
-        return valueDictionary.TryGetValue(value, out var result) ? result : value;
+        return ConvertToString(value);
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
@@ -27,5 +28,11 @@ public class DataTypeConverter : IValueConverter
         var valueStr = value?.ToString() ?? "";
 
         return valueDictionary.ContainsValue(valueStr) ? valueDictionary.FirstOrDefault(x => x.Value == valueStr).Key : value;
+    }
+
+    public static string ConvertToString(object? value)
+    {
+        if (value == null) return "";
+        return valueDictionary.TryGetValue(value, out var result) ? result : value.ToString() ?? "";
     }
 }

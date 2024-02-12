@@ -67,7 +67,7 @@ public class StatisticalOperationResult
     public IList<object> Values { get; init; }
 
     /// <summary>
-    ///     Identyfikatory populacji, dla których została wyznaczona wartość statystyczna.
+    ///     Identyfikatory populacji, dla których została wyznaczona niepusta wartość statystyczna.
     /// </summary>
     public IList<object> PopulationIds { get; init; } = [];
 

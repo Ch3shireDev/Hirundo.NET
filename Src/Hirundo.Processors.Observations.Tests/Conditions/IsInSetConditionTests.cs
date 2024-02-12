@@ -36,20 +36,16 @@ public class IsInSetConditionTests
     }
 
     [Test]
-    public void GivenColumnOutsideObservation_WhenIsAccepted_ThrowsException()
+    public void GivenColumnOutsideObservation_WhenIsAccepted_ReturnsFalse()
     {
         // Arrange
         var condition = new IsInSetCondition("AGE", "I", "J");
         var observation = new Observation(["ID"], new object[] { 1 });
 
         // Act
-        bool act()
-        {
-            return condition.IsAccepted(observation);
-        }
+        var result = condition.IsAccepted(observation);
 
         // Assert
-        Assert.That(act, Throws.Exception);
-        Assert.That(act, Throws.TypeOf<KeyNotFoundException>());
+        Assert.That(result, Is.False);
     }
 }

@@ -14,7 +14,8 @@
              xmlns:components="clr-namespace:Hirundo.App.WPF.Components"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="1000" d:Background="#FFF7FFF7"
+             d:DesignHeight="600" d:DesignWidth="1000" 
+             Background="#efefef"
              d:DataContext="{d:DesignInstance components:MainViewModel}">
     <UserControl.Resources>
 
@@ -83,7 +84,8 @@
             <TabControl TabStripPlacement="Left"
                         Grid.Column="0"
                         ItemsSource="{Binding ViewModels}"
-                        SelectedValue="{Binding SelectedViewModel}">
+                        SelectedValue="{Binding SelectedViewModel}"
+                        >
                 <TabControl.ItemContainerStyle>
                     <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                         <Setter Property="Header"
@@ -96,31 +98,32 @@
                     </DataTemplate>
                 </TabControl.ItemTemplate>
             </TabControl>
-            <ListBox Grid.Column="1" SelectionMode="Single" ItemsSource="{Binding LogEventsItems}">
-                <ListBox.Resources>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="Padding" Value="0" />
-                        <Setter Property="Margin" Value="0" />
-                    </Style>
-                </ListBox.Resources>
-                <b:Interaction.Behaviors>
-                    <wpf11:AutoScrollBehavior />
-                </b:Interaction.Behaviors>
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="Padding" Value="2,0" />
-                        <Setter Property="Margin" Value="2,0" />
-                    </Style>
-                </ListBox.ItemContainerStyle>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock TextWrapping="Wrap" Text="{Binding Converter={StaticResource LogEventConverter}}"
+            <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Visible">
+                <ListBox SelectionMode="Single" ItemsSource="{Binding LogEventsItems}">
+                    <ListBox.Resources>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Padding" Value="0" />
+                            <Setter Property="Margin" Value="0" />
+                        </Style>
+                    </ListBox.Resources>
+                    <b:Interaction.Behaviors>
+                        <wpf11:AutoScrollBehavior />
+                    </b:Interaction.Behaviors>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Padding" Value="2,0" />
+                            <Setter Property="Margin" Value="2,0" />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock TextWrapping="Wrap" Text="{Binding Converter={StaticResource LogEventConverter}}"
                                    FontFamily="Consolas" Padding="0" Margin="0"
                                    Foreground="{Binding Converter={StaticResource LogEventToColorConverter}}" />
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
         </Grid>
         <DockPanel Grid.Row="2">
             <Button HorizontalAlignment="Left" Command="{Binding CreateNewConfigCommand}">Stwórz nową konfigurację</Button>

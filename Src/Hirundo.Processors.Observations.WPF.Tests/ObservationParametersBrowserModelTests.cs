@@ -27,6 +27,8 @@ public class ObservationParametersBrowserModelTests
             new ParametersData()
         ]);
 
+        _model = new ObservationParametersBrowserModel(_factory.Object);
+
         // Act
         var parametersDataList = _model.ParametersDataList;
 

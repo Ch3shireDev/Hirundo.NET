@@ -89,4 +89,43 @@ public class AverageOperationTests
         Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList { "AAA111", "BBB222", "CCC333" }));
         Assert.That(result.OutlierIds, Is.EquivalentTo(new ArrayList { "DDD444" }));
     }
+
+    [Test]
+    public void GivenEmptyPopulation_WhenGetStatistics_ReturnsEmptyResult()
+    {
+        // Arrange
+        var operation = new AverageOperation("VALUE", "VALUE_AVG", "VALUE_SD");
+
+        // Act
+        var result = operation.GetStatistics(new List<Specimen>());
+
+        // Assert
+        Assert.That(result.Names, Is.EquivalentTo(new ArrayList { "VALUE_AVG", "VALUE_SD" }));
+        Assert.That(result.Values, Is.EquivalentTo(new ArrayList { null, null }));
+        Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList()));
+    }
+
+    [Test]
+    public void GivenEmptyValues_WhenGetStatistics_ReturnsEmptyResult()
+    {
+        // Arrange
+        var operation = new AverageOperation("VALUE", "VALUE_AVG", "VALUE_SD");
+
+        List<Specimen> population =
+        [
+            new Specimen("AAA111", [new Observation(["VALUE"], [null])]),
+            new Specimen("BBB222", [new Observation(["VALUE"], [null])]),
+            new Specimen("CCC333", [new Observation(["VALUE"], [null])])
+        ];
+
+        // Act
+        var result = operation.GetStatistics(population);
+
+        // Assert
+        Assert.That(result.Names, Is.EquivalentTo(new ArrayList { "VALUE_AVG", "VALUE_SD" }));
+        Assert.That(result.Values, Is.EquivalentTo(new ArrayList { null, null }));
+        Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList()));
+        Assert.That(result.EmptyValueIds, Is.EquivalentTo(new ArrayList { "AAA111", "BBB222", "CCC333" }));
+        Assert.That(result.OutlierIds, Is.EquivalentTo(new ArrayList()));
+    }
 }

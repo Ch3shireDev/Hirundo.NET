@@ -38,6 +38,7 @@ public class Observation
     public object? GetValue(string columnName)
     {
         var index = GetIndex(columnName);
+        if (index == -1) return null;
         return _values[index];
     }
 
@@ -70,7 +71,7 @@ public class Observation
             }
         }
 
-        throw new KeyNotFoundException($"Kolumna '{columnName}' nie występuje w danych.");
+        return -1;
     }
 
     /// <summary>

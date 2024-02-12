@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="Hirundo.Processors.Statistics.WPF.Histogram.HistogramView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Hirundo.Processors.Statistics.WPF.Histogram"
+             xmlns:labels="clr-namespace:Hirundo.Commons.WPF.Repositories.Labels;assembly=Hirundo.Commons.WPF"
+             mc:Ignorable="d" 
+             d:Background="AliceBlue"
+             d:DataContext="{d:DesignInstance local:HistogramViewModel}"
+             >
+    <StackPanel>
+        <WrapPanel>
+            <Label>Nazwa wartości</Label>
+            <labels:LabelsComboBox
+                ValueName="{Binding ValueName}"
+                DataType="{Binding DataType}"
+                Repository="{Binding Repository}" />
+        </WrapPanel>
+        <WrapPanel>
+            <Label>Prefiks wartości wynikowej</Label>
+            <TextBox Text="{Binding ResultName}" MinWidth="100"/>
+        </WrapPanel>
+        <WrapPanel>
+            <Label>Wartość minimalna</Label>
+            <TextBox Text="{Binding MinValue}" MinWidth="100"/>
+        </WrapPanel>
+        <WrapPanel>
+            <Label>Wartość maksymalna</Label>
+            <TextBox Text="{Binding MaxValue}" MinWidth="100" />
+        </WrapPanel>
+        <WrapPanel>
+            <Label>Szerokość przedziału</Label>
+            <TextBox Text="{Binding Interval}" MinWidth="100"/>
+        </WrapPanel>
+        <TextBlock
+            Margin="15"
+            Text="{Binding ErrorMessage}" Foreground="Red" FontWeight="Bold"/>
+    </StackPanel>
+</UserControl>

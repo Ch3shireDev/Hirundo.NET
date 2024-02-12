@@ -81,9 +81,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Databases.WPF.Tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Processors.Observations.WPF.Tests", "Hirundo.Processors.Observations.WPF.Tests\Hirundo.Processors.Observations.WPF.Tests.csproj", "{11FCD219-121C-48D5-B7A7-640AD25BB31B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Processors.Observations.WPF.Tests.Integration", "Hirundo.Processors.Observations.WPF.Tests.Integration\Hirundo.Processors.Observations.WPF.Tests.Integration.csproj", "{02E3E7E2-3278-4015-A0C2-C00902F2D178}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Processors.Observations.WPF.Tests.Integration", "Hirundo.Processors.Observations.WPF.Tests.Integration\Hirundo.Processors.Observations.WPF.Tests.Integration.csproj", "{02E3E7E2-3278-4015-A0C2-C00902F2D178}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Processors.Returning.WPF.Tests", "Hirundo.Processors.Returning.WPF.Tests\Hirundo.Processors.Returning.WPF.Tests.csproj", "{B356E048-8B56-4CA0-9061-8E6804206941}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Processors.Returning.WPF.Tests", "Hirundo.Processors.Returning.WPF.Tests\Hirundo.Processors.Returning.WPF.Tests.csproj", "{B356E048-8B56-4CA0-9061-8E6804206941}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Processors.Statistics.WPF.Tests", "Hirundo.Processors.Statistics.WPF.Tests\Hirundo.Processors.Statistics.WPF.Tests.csproj", "{DB5D3DB0-CBE6-4EDF-85D4-D0B0A165F26F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -243,6 +245,10 @@ Global
 		{B356E048-8B56-4CA0-9061-8E6804206941}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B356E048-8B56-4CA0-9061-8E6804206941}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B356E048-8B56-4CA0-9061-8E6804206941}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB5D3DB0-CBE6-4EDF-85D4-D0B0A165F26F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB5D3DB0-CBE6-4EDF-85D4-D0B0A165F26F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB5D3DB0-CBE6-4EDF-85D4-D0B0A165F26F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB5D3DB0-CBE6-4EDF-85D4-D0B0A165F26F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -286,6 +292,7 @@ Global
 		{11FCD219-121C-48D5-B7A7-640AD25BB31B} = {66952413-DE19-442D-BD7E-05B457715E11}
 		{02E3E7E2-3278-4015-A0C2-C00902F2D178} = {66952413-DE19-442D-BD7E-05B457715E11}
 		{B356E048-8B56-4CA0-9061-8E6804206941} = {66952413-DE19-442D-BD7E-05B457715E11}
+		{DB5D3DB0-CBE6-4EDF-85D4-D0B0A165F26F} = {66952413-DE19-442D-BD7E-05B457715E11}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7BB2E5CA-3E12-4544-8827-61B4CF679997}

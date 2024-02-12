@@ -23,8 +23,8 @@ public class ReturningSpecimenSummary(Specimen returningSpecimen, IList<Specimen
 
     public string[] GetHeaders()
     {
-        var returningSpecimenHeaders = ReturningSpecimen.GetHeaders();
-        var statisticsHeaders = Statistics.Select(s => s.Name).ToArray();
+        var returningSpecimenHeaders = GetValueHeaders();
+        var statisticsHeaders = GetStatisticsHeaders();
         return [..returningSpecimenHeaders, ..statisticsHeaders];
     }
 
@@ -33,5 +33,38 @@ public class ReturningSpecimenSummary(Specimen returningSpecimen, IList<Specimen
         var specimenData = ReturningSpecimen.GetValues();
         var statisticalData = Statistics.Select(s => s.Value);
         return [..specimenData, ..statisticalData];
+    }
+
+    public object?[] GetValues(string[] headers)
+    {
+        ArgumentNullException.ThrowIfNull(headers);
+
+        var output = new object?[headers.Length];
+
+        for (var i = 0; i < headers.Length; i++)
+        {
+            var header = headers[i];
+
+            if (ReturningSpecimen.GetHeaders().Contains(header))
+            {
+                output[i] = ReturningSpecimen.GetValue(header);
+            }
+            else
+            {
+                output[i] = Statistics.FirstOrDefault(s => s.Name == header)?.Value;
+            }
+        }
+
+        return output;
+    }
+
+    public string[] GetValueHeaders()
+    {
+        return ReturningSpecimen.GetHeaders();
+    }
+
+    public string[] GetStatisticsHeaders()
+    {
+        return Statistics.Select(s => s.Name).ToArray();
     }
 }
