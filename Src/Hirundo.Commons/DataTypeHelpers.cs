@@ -33,7 +33,7 @@ public static class DataTypeHelpers
         return value?.ToString() ?? string.Empty;
     }
 
-    public static object GetValueSetValueFromString(string value, DataType dataType)
+    public static object ConvertStringToDataType(string value, DataType dataType)
     {
         return dataType switch
         {
@@ -49,5 +49,67 @@ public static class DataTypeHelpers
             DataType.Undefined => value,
             _ => value
         };
+    }
+
+    public static T? ConvertValue<T>(object? value) where T : struct
+    {
+        switch (value)
+        {
+            case null:
+            case string stringValue when string.IsNullOrEmpty(stringValue):
+                return null;
+            case string stringValue:
+            {
+                if (typeof(T) == typeof(DateTime))
+                {
+                    if (DateTime.TryParse(stringValue, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dateValue))
+                    {
+                        return dateValue as T?;
+                    }
+                }
+                else if (typeof(T) == typeof(decimal))
+                {
+                    if (decimal.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var decimalValue))
+                    {
+                        return decimalValue as T?;
+                    }
+                }
+
+                else if (typeof(T) == typeof(int))
+                {
+                    if (int.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var intValue))
+                    {
+                        return intValue as T?;
+                    }
+                }
+                else if (typeof(T) == typeof(long))
+                {
+                    if (long.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var intValue))
+                    {
+                        return intValue as T?;
+                    }
+                }
+
+                else if (typeof(T) == typeof(double))
+                {
+                    if (double.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var doubleValue))
+                    {
+                        return doubleValue as T?;
+                    }
+                }
+
+                else if (typeof(T) == typeof(bool))
+                {
+                    if (bool.TryParse(stringValue, out var boolValue))
+                    {
+                        return boolValue as T?;
+                    }
+                }
+
+                return null;
+            }
+            default:
+                return Convert.ChangeType(value, typeof(T), CultureInfo.InvariantCulture) as T?;
+        }
     }
 }

@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="Hirundo.Processors.Computed.WPF.Symmetry.SymmetryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:symmetry="clr-namespace:Hirundo.Processors.Computed.WPF.Symmetry"
+             xmlns:labels="clr-namespace:Hirundo.Commons.WPF.Repositories.Labels;assembly=Hirundo.Commons.WPF"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d"
+             d:Background="AliceBlue"
+             d:DataContext="{d:DesignInstance symmetry:SymmetryViewModel}">
+    <StackPanel>
+        <WrapPanel>
+            <Label>Nazwa wyniku</Label>
+            <TextBox Text="{Binding ResultName, Mode=TwoWay}" MinWidth="100" />
+        </WrapPanel>
+        <WrapPanel>
+            <Label>Długość skrzydła</Label>
+            <labels:LabelsComboBox
+                ValueName="{Binding WingName}"
+                DataType="{Binding WingType}"
+                Repository="{Binding Repository}"
+                MinWidth="100" />
+        </WrapPanel>
+        <WrapPanel>
+            <Label>Kolumna D2</Label>
+            <labels:LabelsComboBox
+                ValueName="{Binding D2Name}"
+                DataType="{Binding D2Type}"
+                Repository="{Binding Repository}"
+                MinWidth="100" />
+        </WrapPanel>
+        <WrapPanel>
+            <Label>Kolumna D3</Label>
+            <labels:LabelsComboBox
+                ValueName="{Binding D3Name}"
+                DataType="{Binding D3Type}"
+                Repository="{Binding Repository}"
+                MinWidth="100" />
+        </WrapPanel>
+        <WrapPanel>
+            <Label>Kolumna D4</Label>
+            <labels:LabelsComboBox
+                ValueName="{Binding D4Name}"
+                DataType="{Binding D4Type}"
+                Repository="{Binding Repository}"
+                MinWidth="100" />
+        </WrapPanel>
+        <WrapPanel>
+            <Label>Kolumna D5</Label>
+            <labels:LabelsComboBox
+                ValueName="{Binding D5Name}"
+                DataType="{Binding D5Type}"
+                Repository="{Binding Repository}"
+                MinWidth="100" />
+        </WrapPanel>
+        <WrapPanel>
+            <Label>Kolumna D6</Label>
+            <labels:LabelsComboBox
+                ValueName="{Binding D6Name}"
+                DataType="{Binding D6Type}"
+                Repository="{Binding Repository}"
+                MinWidth="100" />
+        </WrapPanel>
+        <WrapPanel>
+            <Label>Kolumna D7</Label>
+            <labels:LabelsComboBox
+                ValueName="{Binding D7Name}"
+                DataType="{Binding D7Type}"
+                Repository="{Binding Repository}"
+                MinWidth="100" />
+        </WrapPanel>
+        <WrapPanel>
+            <Label>Kolumna D8</Label>
+            <labels:LabelsComboBox
+                ValueName="{Binding D8Name}"
+                DataType="{Binding D8Type}"
+                Repository="{Binding Repository}"
+                MinWidth="100" />
+        </WrapPanel>
+    </StackPanel>
+</UserControl>

@@ -21,7 +21,7 @@ public class IsEqualReturningModel(IsEqualReturningCondition condition, IDataLab
     public string ValueStr
     {
         get => DataTypeHelpers.GetValueToString(Condition.Value, DataType);
-        set => Condition.Value = DataTypeHelpers.GetValueSetValueFromString(value, DataType);
+        set => Condition.Value = DataTypeHelpers.ConvertStringToDataType(value, DataType);
     }
 
     public DataType DataType { get; set; }

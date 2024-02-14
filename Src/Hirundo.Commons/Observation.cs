@@ -9,8 +9,8 @@
 /// </summary>
 public class Observation
 {
-    private readonly string[] _names = null!;
-    private readonly object?[] _values = null!;
+    private string[] _names = null!;
+    private object?[] _values = null!;
 
     /// <summary>
     ///     Konstruktor bezparametrowy.
@@ -48,11 +48,28 @@ public class Observation
     /// <typeparam name="T">Typ wartości.</typeparam>
     /// <param name="columnName">Nazwa kolumny danych.</param>
     /// <returns></returns>
-    public T GetValue<T>(string columnName)
+    public T? GetValue<T>(string columnName)
     {
         var value = GetValue(columnName);
         if (value == null) return default!;
+        if (value is T valueOfType) return valueOfType;
         return (T)value;
+    }
+
+    public decimal? GetDecimal(string columnName)
+    {
+        var value = GetValue(columnName);
+        if (value == null) return null;
+        if (value is decimal decimalValue) return decimalValue;
+        return DataTypeHelpers.ConvertValue<decimal>(value);
+    }
+
+    public int? GetInt(string columnName)
+    {
+        var value = GetValue(columnName);
+        if (value == null) return null;
+        if (value is int intValue) return intValue;
+        return DataTypeHelpers.ConvertValue<int>(value);
     }
 
     /// <summary>
@@ -95,5 +112,45 @@ public class Observation
     public object?[] GetValues()
     {
         return [.. _values];
+    }
+
+    public object?[] GetValues(string[] columnNames)
+    {
+        ArgumentNullException.ThrowIfNull(columnNames);
+
+        var result = new object?[columnNames.Length];
+
+        for (var i = 0; i < columnNames.Length; i++)
+        {
+            result[i] = GetValue(columnNames[i]);
+        }
+
+        return result;
+    }
+
+    public int?[] GetIntValues(string[] columnNames)
+    {
+        ArgumentNullException.ThrowIfNull(columnNames);
+
+        var result = new int?[columnNames.Length];
+
+        for (var i = 0; i < columnNames.Length; i++)
+        {
+            result[i] = GetInt(columnNames[i]);
+        }
+
+        return result;
+    }
+
+    public void AddColumn(string columnName, object? columnValue)
+    {
+        var newNames = new string[_names.Length + 1];
+        var newValues = new object?[_values.Length + 1];
+        Array.Copy(_names, newNames, _names.Length);
+        Array.Copy(_values, newValues, _values.Length);
+        newNames[^1] = columnName;
+        newValues[^1] = columnValue;
+        _names = newNames;
+        _values = newValues;
     }
 }

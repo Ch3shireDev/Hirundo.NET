@@ -3,6 +3,7 @@ using Hirundo.App.WPF.Components;
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Databases;
 using Hirundo.Databases.WPF;
+using Hirundo.Processors.Computed.WPF;
 using Hirundo.Processors.Observations.WPF;
 using Hirundo.Processors.Population.WPF;
 using Hirundo.Processors.Returning.WPF;
@@ -41,6 +42,9 @@ internal static class ContainerExtensions
         var statisticsParametersViewModelsFactory = new StatisticsParametersFactory(repository.Object);
         builder.RegisterInstance(statisticsParametersViewModelsFactory).As<IStatisticsParametersFactory>().SingleInstance();
 
+        var computedParametersViewModelsFactory = new ComputedParametersFactory(repository.Object);
+        builder.RegisterInstance(computedParametersViewModelsFactory).As<IComputedParametersFactory>().SingleInstance();
+
         builder.RegisterType<DataSourceModel>().AsSelf().SingleInstance();
         builder.RegisterType<ObservationParametersBrowserModel>().AsSelf().SingleInstance();
         builder.RegisterType<PopulationModel>().AsSelf().SingleInstance();
@@ -48,6 +52,7 @@ internal static class ContainerExtensions
         builder.RegisterType<SpecimensModel>().AsSelf().SingleInstance();
         builder.RegisterType<StatisticsModel>().AsSelf().SingleInstance();
         builder.RegisterType<WriterModel>().AsSelf().SingleInstance();
+        builder.RegisterType<ComputedValuesModel>().AsSelf().SingleInstance();
 
         builder.RegisterType<MainModel>().AsSelf().SingleInstance();
 

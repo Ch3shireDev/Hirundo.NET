@@ -28,6 +28,7 @@ public sealed class MainViewModel : ObservableObject
 
         _model = model;
         DataSourceViewModel = new ParametersBrowserViewModel(model.DataSourceModel);
+        ComputedValuesViewModel = new ParametersBrowserViewModel(model.ComputedValuesModel);
         ParametersBrowserViewModel = new ParametersBrowserViewModel(model.ObservationParametersBrowserModel);
         ReturningSpecimensViewModel = new ParametersBrowserViewModel(model.ReturningSpecimensModel);
         PopulationViewModel = new ParametersBrowserViewModel(model.PopulationModel);
@@ -38,6 +39,7 @@ public sealed class MainViewModel : ObservableObject
         ViewModels = new List<ObservableObject>
         {
             DataSourceViewModel,
+            ComputedValuesViewModel,
             SpecimensViewModel,
             ParametersBrowserViewModel,
             ReturningSpecimensViewModel,
@@ -51,6 +53,7 @@ public sealed class MainViewModel : ObservableObject
 
     public Action RefreshWindow { get; set; } = () => { };
     public ParametersBrowserViewModel DataSourceViewModel { get; }
+    public ParametersBrowserViewModel ComputedValuesViewModel { get; }
     public ParametersBrowserViewModel ParametersBrowserViewModel { get; }
     public ParametersBrowserViewModel PopulationViewModel { get; }
     public ParametersBrowserViewModel ReturningSpecimensViewModel { get; }

@@ -31,6 +31,8 @@ public class ValueContainer : ObservableObject
         }
     }
 
+    public DataType DataType { get; set; }
+
     public static implicit operator string(ValueContainer valueContainer)
     {
         return valueContainer.Value;

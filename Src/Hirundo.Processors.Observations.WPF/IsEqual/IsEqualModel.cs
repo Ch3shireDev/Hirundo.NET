@@ -17,7 +17,7 @@ public class IsEqualModel(IsEqualObservationCondition observationCondition, IDat
     public string ValueStr
     {
         get => DataTypeHelpers.GetValueToString(ObservationCondition.Value, DataType);
-        set => ObservationCondition.Value = DataTypeHelpers.GetValueSetValueFromString(value, DataType);
+        set => ObservationCondition.Value = DataTypeHelpers.ConvertStringToDataType(value, DataType);
     }
 
     public DataType DataType { get; set; }

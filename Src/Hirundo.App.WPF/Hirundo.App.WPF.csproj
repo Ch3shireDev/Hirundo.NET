@@ -41,6 +41,10 @@
 		<PackageReference Include="MaterialDesignColors" Version="2.1.4" />
 		<PackageReference Include="MaterialDesignExtensions" Version="3.3.0" />
 		<PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 
@@ -48,6 +52,7 @@
 		<ProjectReference Include="..\Hirundo.App\Hirundo.App.csproj" />
 		<ProjectReference Include="..\Hirundo.Commons.WPF\Hirundo.Commons.WPF.csproj" />
 		<ProjectReference Include="..\Hirundo.Databases.WPF\Hirundo.Databases.WPF.csproj" />
+		<ProjectReference Include="..\Hirundo.Processors.Computed.WPF\Hirundo.Processors.Computed.WPF.csproj" />
 		<ProjectReference Include="..\Hirundo.Processors.Observations.WPF\Hirundo.Processors.Observations.WPF.csproj" />
 		<ProjectReference Include="..\Hirundo.Processors.Population.WPF\Hirundo.Processors.Population.WPF.csproj" />
 		<ProjectReference Include="..\Hirundo.Processors.Returning.WPF\Hirundo.Processors.Returning.WPF.csproj" />

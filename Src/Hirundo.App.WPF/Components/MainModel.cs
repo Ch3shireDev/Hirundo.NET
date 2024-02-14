@@ -1,5 +1,7 @@
 ﻿using Hirundo.Commons.Repositories.Labels;
+using Hirundo.Commons.WPF;
 using Hirundo.Databases.WPF;
+using Hirundo.Processors.Computed.WPF;
 using Hirundo.Processors.Observations.WPF;
 using Hirundo.Processors.Population.WPF;
 using Hirundo.Processors.Returning.WPF;
@@ -19,7 +21,8 @@ public class MainModel(
     SpecimensModel specimensModel,
     StatisticsModel statisticsModel,
     WriterModel writerModel,
-    IDataLabelRepository repository
+    IDataLabelRepository repository,
+    ComputedValuesModel computedValuesModel
 )
 {
     private bool _isProcessing;
@@ -31,6 +34,7 @@ public class MainModel(
     public StatisticsModel StatisticsModel { get; set; } = statisticsModel;
     public WriterModel WriterModel { get; set; } = writerModel;
     public IDataLabelRepository Repository { get; set; } = repository;
+    public ComputedValuesModel ComputedValuesModel { get; set; } = computedValuesModel;
 
     public void UpdateConfig(ApplicationConfig config)
     {

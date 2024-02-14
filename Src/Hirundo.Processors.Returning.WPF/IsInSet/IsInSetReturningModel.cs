@@ -24,13 +24,13 @@ public class IsInSetReturningModel(IsInSetReturningCondition condition, IDataLab
 
         foreach (var value in values)
         {
-            var castValue = DataTypeHelpers.GetValueSetValueFromString(value, ValueType);
+            var castValue = DataTypeHelpers.ConvertStringToDataType(value, ValueType);
             Values.Add(castValue);
         }
     }
 
     public void SetValue(string value, int index)
     {
-        Values[index] = DataTypeHelpers.GetValueSetValueFromString(value, ValueType);
+        Values[index] = DataTypeHelpers.ConvertStringToDataType(value, ValueType);
     }
 }

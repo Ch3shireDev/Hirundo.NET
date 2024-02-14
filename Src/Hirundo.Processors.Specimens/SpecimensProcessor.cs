@@ -17,7 +17,7 @@ public class SpecimensProcessor(SpecimensProcessorParameters parameters) : ISpec
         return observations
                 .GroupBy(x => x.GetValue<string>(parameters.SpecimenIdentifier))
                 .Where(pair => !string.IsNullOrWhiteSpace(pair.Key))
-                .Select(observationGroup => new Specimen(observationGroup.Key, [..observationGroup]))
+                .Select(observationGroup => new Specimen(observationGroup.Key ?? "", [..observationGroup]))
             ;
     }
 }
