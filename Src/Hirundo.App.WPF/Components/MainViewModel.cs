@@ -173,6 +173,7 @@ public sealed class MainViewModel : ObservableObject
     {
         _model.UpdateConfig(config);
         OnPropertyChanged(nameof(DataSourceViewModel));
+        OnPropertyChanged(nameof(ComputedValuesViewModel));
         OnPropertyChanged(nameof(ParametersBrowserViewModel));
         OnPropertyChanged(nameof(ReturningSpecimensViewModel));
         OnPropertyChanged(nameof(PopulationViewModel));

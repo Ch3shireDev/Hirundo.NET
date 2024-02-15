@@ -3,5 +3,5 @@
 public interface IComputedValuesCalculatorBuilder
 {
     public IComputedValuesCalculator Build();
-    IComputedValuesCalculatorBuilder WithComputedValues(ComputedValuesParameters computedValues);
+    IComputedValuesCalculatorBuilder WithComputedValues(IList<IComputedValuesCalculator> computedValues);
 }

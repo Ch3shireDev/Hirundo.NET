@@ -1,4 +1,5 @@
 ﻿using Hirundo.Commons;
+using Serilog;
 
 namespace Hirundo.Processors.Computed;
 
@@ -66,6 +67,8 @@ public class SymmetryCalculator : IComputedValuesCalculator
         var leftSum = wingValues.Take(zeroIndex).Sum();
         var rightSum = wingValues.Skip(zeroIndex).Sum();
 
-        return (rightSum - leftSum) / wingLength;
+        var result = (rightSum - leftSum) / wingLength;
+
+        return result;
     }
 }

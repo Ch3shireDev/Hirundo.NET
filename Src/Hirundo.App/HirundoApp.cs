@@ -67,7 +67,7 @@ public class HirundoApp : IHirundoApp
             .Build();
 
         var computedValuesCalculator = _calculatorBuilder
-            .WithComputedValues(applicationConfig.ComputedValues)
+            .WithComputedValues(applicationConfig.ComputedValues.ComputedValues)
             .Build();
 
         var returningSpecimenConditions = _returningSpecimenConditionsBuilder
@@ -92,19 +92,31 @@ public class HirundoApp : IHirundoApp
 
         var observations = database.GetObservations().ToArray();
 
-        Log.Information($"Odczytano {observations.Length} obserwacji.");
+        Log.Information($"Odczytano {observations.Length} obserwacji. Wyliczanie dodatkowych wartości...");
+
+        observations = observations
+            .Select(computedValuesCalculator.Calculate)
+            .ToArray();
+
+        Log.Information("Filtrowanie obserwacji po warunkach...");
 
         var selectedObservations = observations.Where(observationConditions.IsAccepted).ToArray();
 
         Log.Information($"Wybrano {selectedObservations.Length} obserwacji.");
 
+        Log.Information("Łączenie obserwacji w osobniki...");
+
         var specimens = specimensProcessor.GetSpecimens(selectedObservations).ToArray();
 
         Log.Information($"Wybrano {specimens.Length} osobników.");
 
+        Log.Information("Wybieranie powracających osobników...");
+
         var returningSpecimens = specimens.Where(returningSpecimenConditions.IsReturning).ToArray();
 
         Log.Information($"Wybrano {returningSpecimens.Length} powracających osobników.");
+
+        Log.Information("Przetwarzanie obliczeń...");
 
         var summaryProcessor = _summaryProcessorBuilder
             .WithPopulationProcessor(populationProcessor)

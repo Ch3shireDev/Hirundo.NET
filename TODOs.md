@@ -21,5 +21,6 @@
 19. [ ] Należy dodać możliwość wyboru ścieżki pliku wynikowego w zapisie wyników. 
 20. [ ] Przerzucić Label do klasy LabelsComboBox.
 21. [ ] Wewnątrz projektu `Databases` ustandaryzować strukturę do `ParametersBrowser`.
+22. [ ] Przy zapisie danych statystycznych do pliku wynikowego należy dodać automatyczne zapisywanie konfiguracji do pliku o tej samej nazwie (z rozszerzeniem `.json`).
 
 Powyższa lista cech stanowi wymagania dla kolejnej wersji aplikacji. Użytkownik musi być w stanie utworzyć podstawową konfigurację, w której jest w stanie uzyskać dane statystyczne dla powracających osobników. Użytkownik będzie w stanie wybrać interesujące go obserwacje, pola statystyczne, i określić warunek powrotu na podstawie wybranych kolumn. Wynikiem działania programu będzie plik z danymi w formacie `.csv` bądź `.xlsx` w którym przedstawiane są wybrane osobniki z wybranymi kolumnami i wartościami statystycznymi populacji.

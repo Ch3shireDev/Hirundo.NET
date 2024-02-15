@@ -49,6 +49,7 @@ public class MainModel(
 
         DataSourceModel.UpdateRepository();
 
+        ComputedValuesModel.ComputedValues = config.ComputedValues;
         ObservationParametersBrowserModel.ObservationsParameters = config.Observations;
         PopulationModel.ConfigPopulation = config.Population;
         ReturningSpecimensModel.ReturningSpecimensParameters = config.ReturningSpecimens;
@@ -62,6 +63,7 @@ public class MainModel(
         return new ApplicationConfig
         {
             Databases = DataSourceModel.DatabaseParameters,
+            ComputedValues = ComputedValuesModel.ComputedValues,
             Observations = ObservationParametersBrowserModel.ObservationsParameters,
             Population = PopulationModel.ConfigPopulation,
             ReturningSpecimens = ReturningSpecimensModel.ReturningSpecimensParameters!,

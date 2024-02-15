@@ -1,10 +1,13 @@
-﻿using Autofac;
+﻿using System.Collections;
+using Autofac;
 using Hirundo.App.WPF.Components;
 using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
 using Hirundo.Databases;
 using Hirundo.Databases.Conditions;
+using Hirundo.Processors.Computed;
+using Hirundo.Processors.Computed.WPF.Symmetry;
 using Hirundo.Processors.Observations.Conditions;
 using Hirundo.Processors.Observations.WPF.IsEqual;
 using Hirundo.Processors.Population;
@@ -403,5 +406,74 @@ public class MainViewModelTests
 
         // Assert
         _hirundoApp.Verify(a => a.Run(It.IsAny<ApplicationConfig>()), Times.Once);
+    }
+
+    [Test]
+    public void GivenComputedValuesInConfiguration_WhenUpdateConfig_ChangesParametersInComputedValues()
+    {
+        // Arrange
+        var config = new ApplicationConfig
+        {
+            ComputedValues = new ComputedValuesParameters
+            {
+                ComputedValues = new List<IComputedValuesCalculator>
+                {
+                    new SymmetryCalculator
+                    {
+                        ResultName = "SYMMETRY",
+                        WingParameters = ["D2", "D3", "D4", "D5", "D6", "D7", "D8"],
+                        WingName = "WING"
+                    }
+                }
+            }
+        };
+
+        // Act
+        _viewModel.UpdateConfig(config);
+
+        // Assert
+        var computedValuesViewModel = _viewModel.ViewModels.OfType<ParametersBrowserViewModel>().First(vm => vm.Header == "Wartości");
+        Assert.That(computedValuesViewModel, Is.Not.Null);
+        Assert.That(computedValuesViewModel.ParametersViewModels, Is.Not.Null);
+        Assert.That(computedValuesViewModel.ParametersViewModels.Count, Is.EqualTo(1));
+        var symmetryViewModel = computedValuesViewModel.ParametersViewModels.OfType<SymmetryViewModel>().First();
+        Assert.That(symmetryViewModel, Is.Not.Null);
+    }
+
+    [Test]
+    public void GivenChangeInComputedValuesViewModel_WhenGetConfigFromViewModels_ReturnsNewConfiguration()
+    {
+        // Arrange
+        var config = new ApplicationConfig
+        {
+            ComputedValues = new ComputedValuesParameters
+            {
+                ComputedValues = new List<IComputedValuesCalculator>
+                {
+                    new SymmetryCalculator
+                    {
+                        ResultName = "SYMMETRY-2",
+                        WingParameters = ["A", "B", "C", "D", "E", "F", "G"],
+                        WingName = "WING-2"
+                    }
+                }
+            }
+        };
+
+        _viewModel.UpdateConfig(config);
+
+        // Act
+        var result = _viewModel.GetConfig();
+
+        // Assert
+        var computedValues = result.ComputedValues;
+        Assert.That(computedValues, Is.Not.Null);
+        Assert.That(computedValues.ComputedValues, Is.Not.Null);
+        Assert.That(computedValues.ComputedValues.Count, Is.EqualTo(1));
+        Assert.That(computedValues.ComputedValues[0], Is.InstanceOf<SymmetryCalculator>());
+        var symmetryCalculator = (SymmetryCalculator)computedValues.ComputedValues[0];
+        Assert.That(symmetryCalculator.ResultName, Is.EqualTo("SYMMETRY-2"));
+        Assert.That(symmetryCalculator.WingParameters, Is.EqualTo(new ArrayList { "A", "B", "C", "D", "E", "F", "G" }));
+        Assert.That(symmetryCalculator.WingName, Is.EqualTo("WING-2"));
     }
 }
