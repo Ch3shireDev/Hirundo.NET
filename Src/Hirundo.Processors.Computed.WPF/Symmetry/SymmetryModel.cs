@@ -1,4 +1,5 @@
-﻿using Hirundo.Commons.Repositories.Labels;
+﻿using Hirundo.Commons;
+using Hirundo.Commons.Repositories.Labels;
 
 namespace Hirundo.Processors.Computed.WPF.Symmetry;
 
@@ -31,6 +32,9 @@ public class SymmetryModel(SymmetryCalculator parameters, IDataLabelRepository r
         get => parameters;
         set => parameters = value;
     }
+
+    private string OldResultName { get; set; } = string.Empty;
+
 
     public string GetDName(int i)
     {
@@ -74,5 +78,17 @@ public class SymmetryModel(SymmetryCalculator parameters, IDataLabelRepository r
         {
             parameters.WingParameters[n] = value;
         }
+    }
+
+    public void UpdateLabel()
+    {
+        Repository.RemoveAdditionalLabel(new DataLabel(OldResultName, DataType.Numeric));
+        Repository.AddAdditionalLabel(new DataLabel(ResultName, DataType.Numeric));
+        OldResultName = ResultName;
+    }
+
+    public void RemoveLabel()
+    {
+        Repository.RemoveAdditionalLabel(new DataLabel(ResultName, DataType.Numeric));
     }
 }

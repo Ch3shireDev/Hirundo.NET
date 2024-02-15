@@ -9,10 +9,21 @@
              mc:Ignorable="d"
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance symmetry:SymmetryViewModel}">
-    <StackPanel>
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction Command="{Binding LoadCommand}" />
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
+        <StackPanel>
         <WrapPanel>
             <Label>Nazwa wyniku</Label>
-            <TextBox Text="{Binding ResultName, Mode=TwoWay}" MinWidth="100" />
+            <TextBox Text="{Binding ResultName, Mode=TwoWay}" MinWidth="100" >
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="LostFocus">
+                        <b:InvokeCommandAction Command="{Binding UpdateLabelCommand}" />
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </TextBox>
         </WrapPanel>
         <WrapPanel>
             <Label>Długość skrzydła</Label>
@@ -26,7 +37,6 @@
             <Label>Kolumna D2</Label>
             <labels:LabelsComboBox
                 ValueName="{Binding D2Name}"
-                DataType="{Binding D2Type}"
                 Repository="{Binding Repository}"
                 MinWidth="100" />
         </WrapPanel>
@@ -34,7 +44,6 @@
             <Label>Kolumna D3</Label>
             <labels:LabelsComboBox
                 ValueName="{Binding D3Name}"
-                DataType="{Binding D3Type}"
                 Repository="{Binding Repository}"
                 MinWidth="100" />
         </WrapPanel>
@@ -42,7 +51,6 @@
             <Label>Kolumna D4</Label>
             <labels:LabelsComboBox
                 ValueName="{Binding D4Name}"
-                DataType="{Binding D4Type}"
                 Repository="{Binding Repository}"
                 MinWidth="100" />
         </WrapPanel>
@@ -50,7 +58,6 @@
             <Label>Kolumna D5</Label>
             <labels:LabelsComboBox
                 ValueName="{Binding D5Name}"
-                DataType="{Binding D5Type}"
                 Repository="{Binding Repository}"
                 MinWidth="100" />
         </WrapPanel>
@@ -58,7 +65,6 @@
             <Label>Kolumna D6</Label>
             <labels:LabelsComboBox
                 ValueName="{Binding D6Name}"
-                DataType="{Binding D6Type}"
                 Repository="{Binding Repository}"
                 MinWidth="100" />
         </WrapPanel>
@@ -66,7 +72,6 @@
             <Label>Kolumna D7</Label>
             <labels:LabelsComboBox
                 ValueName="{Binding D7Name}"
-                DataType="{Binding D7Type}"
                 Repository="{Binding Repository}"
                 MinWidth="100" />
         </WrapPanel>
@@ -74,7 +79,6 @@
             <Label>Kolumna D8</Label>
             <labels:LabelsComboBox
                 ValueName="{Binding D8Name}"
-                DataType="{Binding D8Type}"
                 Repository="{Binding Repository}"
                 MinWidth="100" />
         </WrapPanel>

@@ -32,7 +32,7 @@ public class DataSourceModelTests
         viewModel?.UpdateLabelsCommand.Execute(null);
 
         // Assert
-        _repository.Verify(r => r.UpdateLabels(It.IsAny<IList<DataLabel>>()), Times.Once);
+        _repository.Verify(r => r.SetLabels(It.IsAny<IList<DataLabel>>()), Times.Once);
     }
 
     [Test]
@@ -48,6 +48,6 @@ public class DataSourceModelTests
         viewModel?.UpdateLabelsCommand.Execute(null);
 
         // Assert
-        _repository.Verify(r => r.UpdateLabels(It.IsAny<IList<DataLabel>>()), Times.Once);
+        _repository.Verify(r => r.SetLabels(It.IsAny<IList<DataLabel>>()), Times.Once);
     }
 }

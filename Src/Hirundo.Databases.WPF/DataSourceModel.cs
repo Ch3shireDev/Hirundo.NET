@@ -110,7 +110,7 @@ public class DataSourceModel(IDataLabelRepository dataLabelRepository, IAccessMe
 
         var groups = labels.GroupBy(l => l.Name).Select(x => x.First()).ToArray();
 
-        dataLabelRepository.UpdateLabels(groups);
+        dataLabelRepository.SetLabels(groups);
     }
 
     private DataLabel GetDataLabel(ColumnMapping columnMapping)

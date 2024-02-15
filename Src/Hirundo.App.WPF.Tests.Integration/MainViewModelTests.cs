@@ -165,9 +165,9 @@ public class MainViewModelTests
         _viewModel.UpdateConfig(config);
 
         // Assert
-        _repository.Verify(r => r.UpdateLabels(It.IsAny<IEnumerable<DataLabel>>()), Times.Once);
-        _repository.Verify(r => r.UpdateLabels(It.Is<IEnumerable<DataLabel>>(l => l.Count() == 1)), Times.Once);
-        _repository.Verify(r => r.UpdateLabels(It.Is<IEnumerable<DataLabel>>(l => l.First().Name == "XXX")), Times.Once);
+        _repository.Verify(r => r.SetLabels(It.IsAny<IEnumerable<DataLabel>>()), Times.Once);
+        _repository.Verify(r => r.SetLabels(It.Is<IEnumerable<DataLabel>>(l => l.Count() == 1)), Times.Once);
+        _repository.Verify(r => r.SetLabels(It.Is<IEnumerable<DataLabel>>(l => l.First().Name == "XXX")), Times.Once);
     }
 
     [Test]

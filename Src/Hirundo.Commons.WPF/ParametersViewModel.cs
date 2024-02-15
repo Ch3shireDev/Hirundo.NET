@@ -12,7 +12,7 @@ public abstract class ParametersViewModel : ObservableObject, IRemovable
     public abstract ICommand RemoveCommand { get; }
     public event EventHandler<ParametersEventArgs>? Removed;
 
-    protected void Remove(object condition)
+    protected virtual void Remove(object condition)
     {
         Removed?.Invoke(this, new ParametersEventArgs(condition));
     }

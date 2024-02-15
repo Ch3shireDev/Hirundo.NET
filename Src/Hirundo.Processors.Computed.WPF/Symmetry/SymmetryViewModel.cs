@@ -52,23 +52,26 @@ public class SymmetryViewModel : ParametersViewModel
     }
 
     public ObservableCollection<ValueContainer> WingParameters { get; }
-
-    public override ICommand RemoveCommand => new RelayCommand(() => Remove(_model.ComputedValue));
     public DataType WingType { get; set; }
+    public override ICommand RemoveCommand => new RelayCommand(() => Remove(_model.ComputedValue));
     public IDataLabelRepository Repository => _model.Repository;
-    public ICommand AddValueCommand => new RelayCommand(() => WingParameters.Add(string.Empty));
-    public ICommand RemoveValueCommand => new RelayCommand(RemoveValue);
-    public string D2Name { 
-        get=>_model.GetDName(2); set
+    public ICommand UpdateLabelCommand => new RelayCommand(_model.UpdateLabel);
+    public ICommand LoadCommand => new RelayCommand(_model.UpdateLabel);
+
+    public string D2Name
+    {
+        get => _model.GetDName(2);
+        set
         {
             _model.SetDName(2, value);
             OnPropertyChanged();
         }
     }
-    
+
     public string D3Name
     {
-        get=>_model.GetDName(3); set
+        get => _model.GetDName(3);
+        set
         {
             _model.SetDName(3, value);
             OnPropertyChanged();
@@ -77,7 +80,8 @@ public class SymmetryViewModel : ParametersViewModel
 
     public string D4Name
     {
-        get=>_model.GetDName(4); set
+        get => _model.GetDName(4);
+        set
         {
             _model.SetDName(4, value);
             OnPropertyChanged();
@@ -86,7 +90,8 @@ public class SymmetryViewModel : ParametersViewModel
 
     public string D5Name
     {
-        get=>_model.GetDName(5); set
+        get => _model.GetDName(5);
+        set
         {
             _model.SetDName(5, value);
             OnPropertyChanged();
@@ -95,7 +100,8 @@ public class SymmetryViewModel : ParametersViewModel
 
     public string D6Name
     {
-        get=>_model.GetDName(6); set
+        get => _model.GetDName(6);
+        set
         {
             _model.SetDName(6, value);
             OnPropertyChanged();
@@ -104,7 +110,8 @@ public class SymmetryViewModel : ParametersViewModel
 
     public string D7Name
     {
-        get=>_model.GetDName(7); set
+        get => _model.GetDName(7);
+        set
         {
             _model.SetDName(7, value);
             OnPropertyChanged();
@@ -113,16 +120,18 @@ public class SymmetryViewModel : ParametersViewModel
 
     public string D8Name
     {
-        get=>_model.GetDName(8); set
+        get => _model.GetDName(8);
+        set
         {
             _model.SetDName(8, value);
             OnPropertyChanged();
         }
     }
 
-    private void RemoveValue()
+
+    protected override void Remove(object parameters)
     {
-        if (WingParameters.Count <= 0) return;
-        WingParameters.RemoveAt(WingParameters.Count - 1);
+        base.Remove(parameters);
+        _model.RemoveLabel();
     }
 }
