@@ -8,17 +8,17 @@
 6. [x] Dodać IsInSeasonCondition do Obserwacji.
 7. [x] Dodać nową kategorię danych dodawania parametrów dla obserwacji.
 8. [x] Dodać dodawanie parametru "symmetry".
-9. [ ] Dodać dodawanie parametru "pointedness".
-10. [ ] Dodać przeglądanie dostępnych gatunków w zakładce "Osobniki".
-11. [ ] W polu osobniki dodać informację o ilości osobników w bazie danych, maksymalnej liczbie obserwacji przypadającej na osobnika.
-12. [ ] Dodać przeglądanie dostępnych gatunków w zakładce "Osobniki".
-13. [ ] Dodać przeglądanie rozkładu wartości w Obserwacje.
-14. [ ] Dodać polskie opisy do warunków dla źródeł danych.
-15. [ ] Sprawdzić, czy w filtrze IsEqual typ wartości jest automatycznie pobierany z typu kolumny.
-16. [ ] Przenieść RemoveCommand, Remove oraz Remove event do abstrakcji.
-17. [ ] Zapis danych statystycznych do CSV powinien pozwalać na dodawanie informacji na temat populacji, pustych wartości oraz wartości odstających.
-18. [ ] Operacja statystyczna AVERAGE powinna mieć wartość `ResultValueNamePrefix` zamiast osobnych nazw dla average i sd. Domyślną nazwą dla `ResultValueNamePrefix` powinna być nazwa bieżącej kolumny.
-19. [ ] Należy dodać możliwość wyboru ścieżki pliku wynikowego w zapisie wyników. 
+9. [x] Dodać dodawanie parametru "pointedness".
+10. [ ] Należy dodać możliwość wyboru ścieżki pliku wynikowego w zapisie wyników. 
+11. [ ] Dodać przeglądanie dostępnych gatunków w zakładce "Osobniki".
+12. [ ] W polu osobniki dodać informację o liczbie osobników w bazie danych, maksymalnej liczbie obserwacji przypadającej na osobnika.
+13. [ ] Dodać przeglądanie dostępnych gatunków w zakładce "Osobniki".
+14. [ ] Dodać przeglądanie rozkładu wartości w Obserwacje.
+15. [ ] Dodać polskie opisy do warunków dla źródeł danych.
+16. [ ] Sprawdzić, czy w filtrze IsEqual typ wartości jest automatycznie pobierany z typu kolumny.
+17. [ ] Przenieść RemoveCommand, Remove oraz Remove event do abstrakcji.
+18. [ ] Zapis danych statystycznych do CSV powinien pozwalać na dodawanie informacji na temat populacji, pustych wartości oraz wartości odstających.
+19. [ ] Operacja statystyczna AVERAGE powinna mieć wartość `ResultValueNamePrefix` zamiast osobnych nazw dla average i sd. Domyślną nazwą dla `ResultValueNamePrefix` powinna być nazwa bieżącej kolumny.
 20. [ ] Przerzucić Label do klasy LabelsComboBox.
 21. [ ] Wewnątrz projektu `Databases` ustandaryzować strukturę do `ParametersBrowser`.
 22. [ ] Przy zapisie danych statystycznych do pliku wynikowego należy dodać automatyczne zapisywanie konfiguracji do pliku o tej samej nazwie (z rozszerzeniem `.json`).

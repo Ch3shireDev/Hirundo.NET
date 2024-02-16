@@ -1,13 +1,13 @@
 ﻿using System.Windows.Controls;
 
-namespace Hirundo.Processors.Computed.WPF.Symmetry;
+namespace Hirundo.Processors.Computed.WPF;
 
 /// <summary>
 ///     Interaction logic for SymmetryView.xaml
 /// </summary>
-public partial class SymmetryView : UserControl
+public partial class WingParametersView : UserControl
 {
-    public SymmetryView()
+    public WingParametersView()
     {
         InitializeComponent();
     }

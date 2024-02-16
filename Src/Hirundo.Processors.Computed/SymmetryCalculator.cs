@@ -1,14 +1,20 @@
 ﻿using Hirundo.Commons;
-using Serilog;
 
 namespace Hirundo.Processors.Computed;
+
+public class WingParametersBase
+{
+    public virtual string[] WingParameters { get; set; } = ["D2", "D3", "D4", "D5", "D6", "D7", "D8"];
+    public virtual string WingName { get; set; } = "WING";
+    public virtual string ResultName { get; set; } = string.Empty;
+}
 
 /// <summary>
 ///     Kalkulator symetrii, opisywany jako suma wartości na prawo minus suma wartości na lewo od pierwszego znalezionego
 ///     zera w parametrach skrzydła, podzielona przez sumę wszystkich wartości.
 /// </summary>
 [TypeDescription("Symmetry")]
-public class SymmetryCalculator : IComputedValuesCalculator
+public class SymmetryCalculator : WingParametersBase, IComputedValuesCalculator
 {
     /// <summary>
     ///     Kalkulator symetrii, opisywany jako suma wartości na prawo minus suma wartości na lewo od pierwszego znalezionego
@@ -28,9 +34,9 @@ public class SymmetryCalculator : IComputedValuesCalculator
     {
     }
 
-    public string[] WingParameters { get; set; } = [ "D2", "D3", "D4", "D5", "D6", "D7", "D8" ];
-    public string WingName { get; set; } = "WING";
-    public string ResultName { get; set; } = "SYMMETRY";
+    public override string[] WingParameters { get; set; } = ["D2", "D3", "D4", "D5", "D6", "D7", "D8"];
+    public override string WingName { get; set; } = "WING";
+    public override string ResultName { get; set; } = "SYMMETRY";
 
     public Observation Calculate(Observation observation)
     {

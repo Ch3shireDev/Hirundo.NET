@@ -1,25 +1,24 @@
-﻿using System.Collections;
-using Hirundo.Commons.Repositories.Labels;
-using Hirundo.Processors.Computed.WPF.Symmetry;
+﻿using Hirundo.Commons.Repositories.Labels;
 using Moq;
 using NUnit.Framework;
+using System.Collections;
 
 namespace Hirundo.Processors.Computed.WPF.Tests;
 
 public class SymmetryViewModelTests
 {
-    private SymmetryModel _model = null!;
+    private WingParametersModel<WingParametersBase> _model = null!;
     private SymmetryCalculator _parameters = null!;
     private Mock<IDataLabelRepository> _repository = null!;
-    private SymmetryViewModel _viewModel = null!;
+    private WingParametersViewModel<WingParametersBase> _viewModel = null!;
 
     [SetUp]
     public void Initialize()
     {
         _repository = new Mock<IDataLabelRepository>();
         _parameters = new SymmetryCalculator();
-        _model = new SymmetryModel(_parameters, _repository.Object);
-        _viewModel = new SymmetryViewModel(_model);
+        _model = new WingParametersModel<WingParametersBase>(_parameters, _repository.Object);
+        _viewModel = new WingParametersViewModel<WingParametersBase>(_model);
     }
 
     [Test]

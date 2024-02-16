@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using Autofac;
+﻿using Autofac;
 using Hirundo.App.WPF.Components;
 using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
@@ -21,6 +20,7 @@ using Hirundo.Processors.Statistics.Operations.Outliers;
 using Hirundo.Writers.Summary;
 using Moq;
 using NUnit.Framework;
+using System.Collections;
 
 namespace Hirundo.App.WPF.Tests.Integration;
 
