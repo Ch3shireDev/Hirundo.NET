@@ -3,15 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:Hirundo.Writers.WPF.CsvWriter"
+             xmlns:local="clr-namespace:Hirundo.Writers.WPF.CsvWriter" xmlns:wpf="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
              mc:Ignorable="d"
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance local:CsvWriterViewModel}">
     <StackPanel>
         <Label FontWeight="Bold">Zapis do pliku CSV</Label>
         <WrapPanel>
-            <Label>Ścieżka do pliku wyjściowego</Label>
-            <TextBox Text="{Binding Path, Mode=TwoWay}" MinWidth="100" />
+            <wpf:FileDestinationControl Path="{Binding Path, Mode=TwoWay}"/>
         </WrapPanel>
     </StackPanel>
 </UserControl>
