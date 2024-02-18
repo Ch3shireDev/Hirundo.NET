@@ -1,5 +1,5 @@
-﻿using Hirundo.Commons.Repositories.Labels;
-using Hirundo.Commons.WPF;
+﻿using Hirundo.App.WPF.Helpers;
+using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Databases.WPF;
 using Hirundo.Processors.Computed.WPF;
 using Hirundo.Processors.Observations.WPF;
@@ -9,6 +9,7 @@ using Hirundo.Processors.Specimens.WPF;
 using Hirundo.Processors.Statistics.WPF;
 using Hirundo.Writers.WPF;
 using Serilog;
+using System.IO;
 
 namespace Hirundo.App.WPF.Components;
 
@@ -85,6 +86,10 @@ public class MainModel(
             _isProcessing = true;
             var config = GetConfigFromViewModels();
             await Task.Run(() => app.Run(config));
+            var json = JsonTools.Serialize(config);
+            var configFilename = GetJsonPath(config.Results.Writer.Path);
+            await File.WriteAllTextAsync(configFilename, json);
+
         }
         catch (Exception e)
         {
@@ -95,6 +100,13 @@ public class MainModel(
         {
             _isProcessing = false;
         }
+    }
+
+    private static string GetJsonPath(string path)
+    {
+        var directory = Path.GetDirectoryName(path) ?? ".";
+        var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(path);
+        return Path.Combine(directory, $"{fileNameWithoutExtension}.json");
     }
 
     public void Run()

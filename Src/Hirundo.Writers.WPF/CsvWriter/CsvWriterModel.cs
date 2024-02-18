@@ -9,18 +9,7 @@ public class CsvWriterModel
         Parameters = parameters;
     }
 
-    public CsvSummaryWriterParameters Parameters
-    {
-        get => new()
-        {
-            Path = Path
-        };
-        set
-        {
-            ArgumentNullException.ThrowIfNull(value, nameof(value));
-            Path = value.Path;
-        }
-    }
+    public CsvSummaryWriterParameters Parameters { get; set; }
 
-    public string Path { get; set; } = null!;
+    public string Path { get => Parameters.Path; set => Parameters.Path = value; }
 }

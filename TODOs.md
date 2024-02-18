@@ -10,7 +10,7 @@
 8. [x] Dodać dodawanie parametru "symmetry".
 9. [x] Dodać dodawanie parametru "pointedness".
 10. [x] Należy dodać możliwość wyboru ścieżki pliku wynikowego w zapisie wyników. 
-21. [ ] Przy zapisie danych statystycznych do pliku wynikowego należy dodać automatyczne zapisywanie konfiguracji do pliku o tej samej nazwie (z rozszerzeniem `.json`).
+11. [x] Przy zapisie danych statystycznych do pliku wynikowego należy dodać automatyczne zapisywanie konfiguracji do pliku o tej samej nazwie (z rozszerzeniem `.json`).
 12. [ ] Zapis danych statystycznych do CSV powinien pozwalać na dodawanie informacji na temat populacji, pustych wartości oraz wartości odstających.
 13. [ ] Operacja statystyczna AVERAGE powinna mieć wartość `ResultValueNamePrefix` zamiast osobnych nazw dla average i sd. Domyślną nazwą dla `ResultValueNamePrefix` powinna być nazwa bieżącej kolumny.
 14. [ ] Dodać polskie opisy do warunków dla źródeł danych.
