@@ -312,7 +312,7 @@ public class MainViewModelTests
             {
                 Operations =
                 [
-                    new AverageOperation("WEIGHT", "WEIGHT_AVG", "WEIGHT_SD", new StandardDeviationOutliersCondition(5))
+                    new AverageOperation("WEIGHT", "WEIGHT_PREFIX", new StandardDeviationOutliersCondition(5))
                 ]
             }
         };
@@ -329,8 +329,7 @@ public class MainViewModelTests
         Assert.That(result.Statistics.Operations[0], Is.InstanceOf<AverageOperation>());
         var averageAndDeviationOperation = (AverageOperation)result.Statistics.Operations[0];
         Assert.That(averageAndDeviationOperation.ValueName, Is.EqualTo("WEIGHT"));
-        Assert.That(averageAndDeviationOperation.ResultNameAverage, Is.EqualTo("WEIGHT_AVG"));
-        Assert.That(averageAndDeviationOperation.ResultNameStandardDeviation, Is.EqualTo("WEIGHT_SD"));
+        Assert.That(averageAndDeviationOperation.ResultPrefixName, Is.EqualTo("WEIGHT_PREFIX"));
         Assert.That(averageAndDeviationOperation.Outliers, Is.InstanceOf<StandardDeviationOutliersCondition>());
         var standardDeviationOutliersCondition = averageAndDeviationOperation.Outliers;
         Assert.That(standardDeviationOutliersCondition.Threshold, Is.EqualTo(5));

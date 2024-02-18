@@ -1,9 +1,9 @@
-﻿using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
 using Hirundo.Processors.Statistics.Operations;
+using System.Windows.Input;
 
 namespace Hirundo.Processors.Statistics.WPF.Average;
 
@@ -21,9 +21,15 @@ public class AverageViewModel(AverageModel model) : ParametersViewModel
         get => model.ValueName;
         set
         {
+            UpdatePrefix(value);
             model.ValueName = value;
             OnPropertyChanged();
         }
+    }
+
+    void UpdatePrefix(string value)
+    {
+        model.ResultPrefixName = model.ResultPrefixName == model.ValueName ? value : model.ResultPrefixName;
     }
 
     public IDataLabelRepository Repository => model.Repository;
@@ -38,22 +44,12 @@ public class AverageViewModel(AverageModel model) : ParametersViewModel
         }
     }
 
-    public string ResultNameAverage
+    public string ResultPrefixName
     {
-        get => model.ResultNameAverage;
+        get => model.ResultPrefixName;
         set
         {
-            model.ResultNameAverage = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public string ResultNameStandardDeviation
-    {
-        get => model.ResultNameStandardDeviation;
-        set
-        {
-            model.ResultNameStandardDeviation = value;
+            model.ResultPrefixName = value;
             OnPropertyChanged();
         }
     }

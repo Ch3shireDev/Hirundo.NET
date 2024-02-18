@@ -17,31 +17,27 @@ public class AverageOperation : IStatisticalOperation
     ///     Zwraca wartość średnią po danej wartości w populacji. W przypadku napotkania wartości null pomija.
     /// </summary>
     /// <param name="valueName">Nazwa parametru, po którym jest brana wartość średnia.</param>
-    /// <param name="resultNameAverage">Nazwa parametru wynikowego.</param>
-    /// <param name="resultNameStandardDeviation"></param>
+    /// <param name="prefixName">Nazwa prefiksu dla wyników.</param>
     /// <param name="outliers"></param>
     public AverageOperation(string valueName,
-        string resultNameAverage,
-        string resultNameStandardDeviation,
+        string prefixName,
         StandardDeviationOutliersCondition outliers)
     {
         ValueName = valueName;
-        ResultNameAverage = resultNameAverage;
-        ResultNameStandardDeviation = resultNameStandardDeviation;
+        ResultPrefixName = prefixName;
         Outliers = outliers;
     }
 
 
-    public AverageOperation(string valueName, string resultNameAverage, string resultNameStandardDeviation)
+    public AverageOperation(string valueName, string prefixName)
     {
         ValueName = valueName;
-        ResultNameAverage = resultNameAverage;
-        ResultNameStandardDeviation = resultNameStandardDeviation;
+        ResultPrefixName = prefixName;
     }
 
     public string ValueName { get; set; } = null!;
-    public string ResultNameAverage { get; set; } = null!;
-    public string ResultNameStandardDeviation { get; set; } = null!;
+    public string ResultPrefixName { get; set; } = null!;
+
     public StandardDeviationOutliersCondition Outliers { get; set; } = new() { RejectOutliers = false };
 
     public StatisticalOperationResult GetStatistics(IEnumerable<Specimen> populationData)
@@ -50,7 +46,7 @@ public class AverageOperation : IStatisticalOperation
 
         if (population.Length == 0)
         {
-            return new StatisticalOperationResult([ResultNameAverage, ResultNameStandardDeviation], [null, null], Array.Empty<object>(), Array.Empty<object>(), Array.Empty<object>());
+            return GetResult([null, null], [], [], []);
         }
 
         var emptyValuesIds = population
@@ -83,19 +79,33 @@ public class AverageOperation : IStatisticalOperation
 
             (averageValue, standardDeviationValue) = GetValues(values);
 
-            if(averageValue == null || standardDeviationValue == null)
+            if (averageValue == null || standardDeviationValue == null)
             {
-                return new StatisticalOperationResult([ResultNameAverage, ResultNameStandardDeviation], [null, null], populationIds, emptyValuesIds, outliersIds);
+                return GetResult([null, null], populationIds, emptyValuesIds, outliersIds);
             }
 
             oldOutliersIds = outliersIds;
             outliersIds = Outliers.GetOutliersIds(population, ValueName, averageValue, standardDeviationValue);
-        
-        
+
+
         } while (oldOutliersIds.Length != outliersIds.Length);
 
+        return GetResult([averageValue, standardDeviationValue], populationIds, emptyValuesIds, outliersIds);
+    }
 
-        return new StatisticalOperationResult([ResultNameAverage, ResultNameStandardDeviation], [averageValue, standardDeviationValue], populationIds, emptyValuesIds, outliersIds);
+    StatisticalOperationResult GetResult(object?[] values, object[] populationIds, object[] emptyValuesIds, object[] outliersIds)
+    {
+        string[] names = [
+            $"{ResultPrefixName}_AVERAGE",
+            $"{ResultPrefixName}_STANDARD_DEVIATION",
+            $"{ResultPrefixName}_POPULATION_SIZE",
+            $"{ResultPrefixName}_EMPTY_SIZE",
+            $"{ResultPrefixName}_OUTLIER_SIZE"
+            ];
+
+        object?[] valuesWithPopulation = [.. values, populationIds.Length, emptyValuesIds.Length, outliersIds.Length];
+
+        return new StatisticalOperationResult(names, valuesWithPopulation, populationIds, emptyValuesIds, outliersIds);
     }
 
     private static (object? average, object? standardDeviation) GetValues(object[] values)

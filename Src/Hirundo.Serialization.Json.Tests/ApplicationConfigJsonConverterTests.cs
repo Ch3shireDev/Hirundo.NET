@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-using Hirundo.App;
+﻿using Hirundo.App;
 using Hirundo.Databases;
 using Hirundo.Processors.Observations.Conditions;
 using Hirundo.Processors.Population.Conditions;
@@ -9,6 +8,7 @@ using Hirundo.Processors.Statistics.Operations.Outliers;
 using Hirundo.Writers.Summary;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using System.Runtime.Serialization;
 
 namespace Hirundo.Serialization.Json.Tests;
 
@@ -273,8 +273,7 @@ public class ApplicationConfigJsonConverterTests
               {
                 ""Type"": ""AverageAndDeviation"",
                 ""ValueName"": ""WEIGHT"",
-                ""ResultNameAverage"": ""WEIGHT_AVERAGE"",
-                ""ResultNameStandardDeviation"": ""WEIGHT_SD"",
+                ""ResultPrefixName"": ""WEIGHT"",
                 ""Outliers"": {
                   ""Type"": ""StandardDeviation"",
                   ""RejectOutliers"": true,
@@ -299,8 +298,7 @@ public class ApplicationConfigJsonConverterTests
 
         var operation0 = (AverageOperation)config.Statistics.Operations[0];
         Assert.That(operation0.ValueName, Is.EqualTo("WEIGHT"));
-        Assert.That(operation0.ResultNameAverage, Is.EqualTo("WEIGHT_AVERAGE"));
-        Assert.That(operation0.ResultNameStandardDeviation, Is.EqualTo("WEIGHT_SD"));
+        Assert.That(operation0.ResultPrefixName, Is.EqualTo("WEIGHT"));
         Assert.That(operation0.Outliers, Is.Not.Null);
         Assert.That(operation0.Outliers.RejectOutliers, Is.True);
         Assert.That(operation0.Outliers, Is.InstanceOf<StandardDeviationOutliersCondition>());
@@ -320,8 +318,7 @@ public class ApplicationConfigJsonConverterTests
               {
                 ""Type"": ""AverageAndDeviation"",
                 ""ValueName"": ""WEIGHT"",
-                ""ResultNameAverage"": ""WEIGHT_AVERAGE"",
-                ""ResultNameStandardDeviation"": ""WEIGHT_SD""
+                ""ResultPrefixName"": ""WEIGHT"", 
               }
             ]
           }
@@ -339,8 +336,7 @@ public class ApplicationConfigJsonConverterTests
 
         var operation0 = (AverageOperation)config.Statistics.Operations[0];
         Assert.That(operation0.ValueName, Is.EqualTo("WEIGHT"));
-        Assert.That(operation0.ResultNameAverage, Is.EqualTo("WEIGHT_AVERAGE"));
-        Assert.That(operation0.ResultNameStandardDeviation, Is.EqualTo("WEIGHT_SD"));
+        Assert.That(operation0.ResultPrefixName, Is.EqualTo("WEIGHT"));
         Assert.That(operation0.Outliers, Is.Not.Null);
         Assert.That(operation0.Outliers.RejectOutliers, Is.False);
         Assert.That(operation0.Outliers, Is.InstanceOf<StandardDeviationOutliersCondition>());

@@ -14,15 +14,12 @@
             <labels:LabelsComboBox
                 ValueName="{Binding ValueName}"
                 DataType="{Binding DataType}"
-                Repository="{Binding Repository}" />
+                Repository="{Binding Repository}"
+                />
         </WrapPanel>
         <WrapPanel>
-            <Label>Średnia</Label>
-            <TextBox Text="{Binding ResultNameAverage, Mode=TwoWay}" Width="100" />
-        </WrapPanel>
-        <WrapPanel>
-            <Label Content="Odchylenie standardowe" />
-            <TextBox Text="{Binding ResultNameStandardDeviation, Mode=TwoWay}" Width="100" />
+            <Label>Przedrostek wartości wyjściowych</Label>
+            <TextBox Text="{Binding ResultPrefixName, Mode=TwoWay}" Width="100" />
         </WrapPanel>
         <WrapPanel Margin="10">
             <CheckBox IsChecked="{Binding RejectOutliers, Mode=TwoWay}">Czy odrzucać wartości skrajne?</CheckBox>
@@ -32,14 +29,6 @@
                 <Label>Próg odrzucania</Label>
                 <TextBox Text="{Binding Threshold, Mode=TwoWay}" Width="100" />
             </WrapPanel>
-            <!--<WrapPanel>
-                    <Label>Wzór górnego progu</Label>
-                    <TextBox Text="{Binding UpperBound, Mode=TwoWay}" MinWidth="100" />
-                </WrapPanel>
-                <WrapPanel>
-                    <Label>Wzór dolnego progu</Label>
-                    <TextBox Text="{Binding LowerBound, Mode=TwoWay}" MinWidth="100" />
-                </WrapPanel>-->
         </StackPanel>
     </StackPanel>
 </UserControl>

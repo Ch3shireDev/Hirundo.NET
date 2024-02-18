@@ -14,16 +14,10 @@ public class AverageModel(AverageOperation operation, IDataLabelRepository repos
         set => Operation.ValueName = value;
     }
 
-    public string ResultNameAverage
+    public string ResultPrefixName
     {
-        get => Operation.ResultNameAverage;
-        set => Operation.ResultNameAverage = value;
-    }
-
-    public string ResultNameStandardDeviation
-    {
-        get => Operation.ResultNameStandardDeviation;
-        set => Operation.ResultNameStandardDeviation = value;
+        get => Operation.ResultPrefixName;
+        set => Operation.ResultPrefixName = value;
     }
 
     public double Threshold
