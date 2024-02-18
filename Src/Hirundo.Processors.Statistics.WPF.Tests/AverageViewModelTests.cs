@@ -57,22 +57,25 @@ public class AverageViewModelTests
     public void GivenPrefixSameAsValueName_WhenChangeValue_PrefixIsChanged()
     {
         // Arrange
-        _operation.ValueName = "VALUE";
-        _operation.ResultPrefixName = "VALUE";
+        _viewModel.ValueName = "VALUE";
+        _viewModel.ResultPrefixName = "VALUE";
+        var isChanged = false;
+        _viewModel.PropertyChanged += (sender, args) => { if (args.PropertyName == "ResultPrefixName") isChanged = true; };
 
         // Act
         _viewModel.ValueName = "VALUE2";
 
         // Assert
         Assert.That(_viewModel.ResultPrefixName, Is.EqualTo("VALUE2"));
+        Assert.That(isChanged, Is.True);
     }
 
     [Test]
     public void GivenPrefixOtherThanValueName_WhenChangeValue_PrefixIsNotChanged()
     {
         // Arrange
-        _operation.ValueName = "VALUE";
-        _operation.ResultPrefixName = "PREFIX";
+        _viewModel.ValueName = "VALUE";
+        _viewModel.ResultPrefixName = "PREFIX";
 
         // Act
         _viewModel.ValueName = "VALUE2";

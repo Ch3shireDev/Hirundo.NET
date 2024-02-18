@@ -29,7 +29,7 @@ public class AverageViewModel(AverageModel model) : ParametersViewModel
 
     void UpdatePrefix(string value)
     {
-        model.ResultPrefixName = model.ResultPrefixName == model.ValueName ? value : model.ResultPrefixName;
+        ResultPrefixName = model.ResultPrefixName == model.ValueName ? value : model.ResultPrefixName;
     }
 
     public IDataLabelRepository Repository => model.Repository;
