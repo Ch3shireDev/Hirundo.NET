@@ -48,6 +48,16 @@ public class IsEqualObservationCondition : IObservationCondition
     {
         ArgumentNullException.ThrowIfNull(observation);
         var observationValue = observation.GetValue(ValueName);
-        return Equals(Value, observationValue);
+        if (observationValue == null)
+        {
+            return Value == null;
+        }
+
+        var observationType = observationValue.GetType();
+
+        if (Value.GetType() == observationType) return Equals(Value, observationValue);
+
+        var typeValue = DataTypeHelpers.ConvertValue(Value, observationType);
+        return Equals(typeValue, observationValue);
     }
 }

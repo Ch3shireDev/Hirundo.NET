@@ -1,7 +1,7 @@
-﻿using System.Text;
-using Hirundo.Commons;
+﻿using Hirundo.Commons;
 using Hirundo.Processors.Observations.Conditions;
 using NUnit.Framework;
+using System.Text;
 
 namespace Hirundo.Processors.Observations.Tests.Conditions;
 
@@ -51,6 +51,22 @@ public class IsEqualObservationConditionTests
         var filter = new IsEqualObservationCondition(valueName, stringBuilder.ToString());
 
         var observation = new Observation(["SPECIES", "XYZ"], ["REG.REG", 123]);
+
+        // Act
+        var result = filter.IsAccepted(observation);
+
+        // Assert
+        Assert.That(result, Is.True);
+    }
+
+    [Test]
+    public void GivenValueOfDifferentTypeButSameValue_WhenIsAccepted_ReturnsTrue()
+    {
+        // Arrange
+        var valueName = "WEIGHT";
+        var filter = new IsEqualObservationCondition(valueName, "10.0");
+
+        var observation = new Observation(["WEIGHT"], [10.0M]);
 
         // Act
         var result = filter.IsAccepted(observation);

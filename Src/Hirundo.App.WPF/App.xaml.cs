@@ -1,15 +1,10 @@
-﻿using System.IO;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Windows;
-using Autofac;
+﻿using Autofac;
 using Hirundo.App.WPF.Components;
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
 using Hirundo.Databases;
 using Hirundo.Databases.WPF;
-using Hirundo.Processors.Computed;
 using Hirundo.Processors.Computed.WPF;
 using Hirundo.Processors.Observations.WPF;
 using Hirundo.Processors.Population.WPF;
@@ -20,6 +15,10 @@ using Hirundo.Serialization.Json;
 using Hirundo.Writers.WPF;
 using Newtonsoft.Json;
 using Serilog;
+using System.IO;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Windows;
 
 namespace Hirundo.App.WPF;
 
@@ -36,7 +35,7 @@ public partial class App : Application
         builder.RegisterType<AccessMetadataService>().As<IAccessMetadataService>();
 
         builder.RegisterType<DataSourceModel>().AsSelf().SingleInstance();
-        
+
         builder.RegisterType<ObservationParametersBrowserModel>().AsSelf().SingleInstance();
 
         builder.RegisterType<PopulationModel>().AsSelf().SingleInstance();
@@ -103,7 +102,7 @@ public partial class App : Application
 
         view.Show();
 
-        Log.Debug($"Wersja aplikacji {Assembly.GetExecutingAssembly().GetName().Version}");
+        Log.Information($"Wersja aplikacji {Assembly.GetExecutingAssembly().GetName().Version}");
     }
 
     private static ApplicationConfig GetConfig()

@@ -51,7 +51,21 @@ public static class DataTypeHelpers
         };
     }
 
-    public static T? ConvertValue<T>(object? value) where T : struct
+    public static object ConvertValueToDataType(object value, DataType dataType)
+    {
+        return dataType switch
+        {
+            DataType.Text => ConvertToString(value),
+            DataType.Number => ConvertValue<int>(value) ?? 0,
+            DataType.Numeric => ConvertValue<double>(value) ?? 0,
+            DataType.Date => ConvertValue<DateTime>(value) ?? DateTime.MinValue,
+            DataType.Boolean => ConvertValue<bool>(value) ?? false,
+            DataType.Undefined => value,
+            _ => value
+        };
+    }
+
+    public static object? ConvertValue(object? value, Type type)
     {
         switch (value)
         {
@@ -59,57 +73,67 @@ public static class DataTypeHelpers
             case string stringValue when string.IsNullOrEmpty(stringValue):
                 return null;
             case string stringValue:
-            {
-                if (typeof(T) == typeof(DateTime))
                 {
-                    if (DateTime.TryParse(stringValue, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dateValue))
+                    if (type == typeof(string))
                     {
-                        return dateValue as T?;
+                        return stringValue;
                     }
-                }
-                else if (typeof(T) == typeof(decimal))
-                {
-                    if (decimal.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var decimalValue))
+                    else if (type == typeof(DateTime))
                     {
-                        return decimalValue as T?;
+                        if (DateTime.TryParse(stringValue, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dateValue))
+                        {
+                            return dateValue;
+                        }
                     }
-                }
+                    else if (type == typeof(decimal))
+                    {
+                        if (decimal.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var decimalValue))
+                        {
+                            return decimalValue;
+                        }
+                    }
 
-                else if (typeof(T) == typeof(int))
-                {
-                    if (int.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var intValue))
+                    else if (type == typeof(int))
                     {
-                        return intValue as T?;
+                        if (int.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var intValue))
+                        {
+                            return intValue;
+                        }
                     }
-                }
-                else if (typeof(T) == typeof(long))
-                {
-                    if (long.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var intValue))
+                    else if (type == typeof(long))
                     {
-                        return intValue as T?;
+                        if (long.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var intValue))
+                        {
+                            return intValue;
+                        }
                     }
-                }
 
-                else if (typeof(T) == typeof(double))
-                {
-                    if (double.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var doubleValue))
+                    else if (type == typeof(double))
                     {
-                        return doubleValue as T?;
+                        if (double.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var doubleValue))
+                        {
+                            return doubleValue;
+                        }
                     }
-                }
 
-                else if (typeof(T) == typeof(bool))
-                {
-                    if (bool.TryParse(stringValue, out var boolValue))
+                    else if (type == typeof(bool))
                     {
-                        return boolValue as T?;
+                        if (bool.TryParse(stringValue, out var boolValue))
+                        {
+                            return boolValue;
+                        }
                     }
-                }
 
-                return null;
-            }
+                    return null;
+                }
             default:
-                return Convert.ChangeType(value, typeof(T), CultureInfo.InvariantCulture) as T?;
+                return Convert.ChangeType(value, type, CultureInfo.InvariantCulture);
         }
+
+    }
+
+    public static T? ConvertValue<T>(object? value) where T : struct
+    {
+        return ConvertValue(value, typeof(T)) as T?;
     }
 }

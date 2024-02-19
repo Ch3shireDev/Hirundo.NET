@@ -1,9 +1,9 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using Hirundo.Commons.WPF;
 using Hirundo.Databases.Conditions;
 using Serilog;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Hirundo.Databases.WPF.Access;
 
@@ -82,7 +82,7 @@ public class AccessDataSourceViewModel(AccessDatabaseParameters parameters, IAcc
             if (string.IsNullOrWhiteSpace(Path)) return;
             if (!force && Tables.Any()) return;
             var metadata = accessMetadataService.GetTables(Path).ToArray();
-            Log.Information($"Załadowano metadane: {metadata.Length} tabel.");
+            Log.Debug($"Załadowano metadane: {metadata.Length} tabel.");
 
             var selectedTable = Table;
 
