@@ -1,10 +1,7 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using Hirundo.Commons;
-using Hirundo.Commons.Repositories.Labels;
+﻿using Hirundo.Commons;
 using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
 using Hirundo.Processors.Statistics.Operations;
-using System.Windows.Input;
 
 namespace Hirundo.Processors.Statistics.WPF.Histogram;
 
@@ -15,7 +12,7 @@ namespace Hirundo.Processors.Statistics.WPF.Histogram;
     "Histogram",
     "Oblicza histogram dla wybranej wartości."
 )]
-public class HistogramViewModel(HistogramModel model) : ParametersViewModel
+public class HistogramViewModel(HistogramModel model) : ParametersViewModel(model)
 {
     public string ValueName
     {
@@ -38,8 +35,6 @@ public class HistogramViewModel(HistogramModel model) : ParametersViewModel
             OnPropertyChanged(nameof(ErrorMessage));
         }
     }
-
-    public override ICommand RemoveCommand => new RelayCommand(() => Remove(model.Operation));
 
     public decimal Interval
     {
@@ -86,8 +81,6 @@ public class HistogramViewModel(HistogramModel model) : ParametersViewModel
     }
 
     public string ErrorMessage => GetErrorMessage();
-
-    public override IDataLabelRepository Repository => model.Repository;
 
     private string GetErrorMessage()
     {

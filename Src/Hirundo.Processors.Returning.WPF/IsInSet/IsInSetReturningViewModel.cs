@@ -1,11 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using Hirundo.Commons.Repositories.Labels;
+using Hirundo.Commons;
 using Hirundo.Commons.WPF;
 using Hirundo.Processors.Returning.Conditions;
 using Serilog;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Hirundo.Commons;
 
 namespace Hirundo.Processors.Returning.WPF.IsInSet;
 
@@ -16,11 +15,11 @@ namespace Hirundo.Processors.Returning.WPF.IsInSet;
     "Czy dane powracającego osobnika są w zbiorze?",
     "Warunek sprawdzający, czy pole danych dla osobnika powracającego znajduje się w zbiorze wartości."
 )]
-public class IsInSetReturningViewModel: ParametersViewModel
+public class IsInSetReturningViewModel : ParametersViewModel
 {
     private readonly IsInSetReturningModel _model;
 
-    public IsInSetReturningViewModel(IsInSetReturningModel model)
+    public IsInSetReturningViewModel(IsInSetReturningModel model) : base(model)
     {
         _model = model;
 
@@ -31,8 +30,6 @@ public class IsInSetReturningViewModel: ParametersViewModel
 
         Values.CollectionChanged += (_, _) => { model.SetValues(Values.Select(v => v.Value)); };
     }
-
-    public override IDataLabelRepository Repository => _model.Repository;
 
     public string ValueName
     {
@@ -57,7 +54,6 @@ public class IsInSetReturningViewModel: ParametersViewModel
     public ObservableCollection<ValueContainer> Values { get; set; } = [];
     public ICommand AddValueCommand => new RelayCommand(AddValue);
     public ICommand RemoveValueCommand => new RelayCommand(RemoveValue);
-    public override ICommand RemoveCommand => new RelayCommand(() => Remove(_model.Condition));
 
     public void AddValue()
     {

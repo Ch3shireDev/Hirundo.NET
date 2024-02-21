@@ -1,9 +1,6 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using Hirundo.Commons;
-using Hirundo.Commons.Repositories.Labels;
+﻿using Hirundo.Commons;
 using Hirundo.Commons.WPF;
 using Hirundo.Processors.Returning.Conditions;
-using System.Windows.Input;
 
 namespace Hirundo.Processors.Returning.WPF.AfterTimePeriod;
 
@@ -14,7 +11,7 @@ namespace Hirundo.Processors.Returning.WPF.AfterTimePeriod;
     "Czy powrót nastąpił po określonym czasie?",
     "Osobnik wraca nie wcześniej niż po określonej liczbie dni."
 )]
-public class AfterTimePeriodViewModel(AfterTimePeriodModel model) : ParametersViewModel, IRemovable
+public class AfterTimePeriodViewModel(AfterTimePeriodModel model) : ParametersViewModel(model), IRemovable
 {
     public string DateValueName
     {
@@ -25,8 +22,6 @@ public class AfterTimePeriodViewModel(AfterTimePeriodModel model) : ParametersVi
             OnPropertyChanged();
         }
     }
-
-    public override IDataLabelRepository Repository => model.Repository;
 
     public DataType DataType
     {
@@ -47,6 +42,4 @@ public class AfterTimePeriodViewModel(AfterTimePeriodModel model) : ParametersVi
             OnPropertyChanged();
         }
     }
-
-    public override ICommand RemoveCommand => new RelayCommand(() => Remove(model.Condition));
 }

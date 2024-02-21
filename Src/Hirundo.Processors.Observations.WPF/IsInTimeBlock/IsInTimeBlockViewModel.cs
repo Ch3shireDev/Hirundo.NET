@@ -1,7 +1,4 @@
-﻿using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
-using Hirundo.Commons.Repositories.Labels;
-using Hirundo.Commons.WPF;
+﻿using Hirundo.Commons.WPF;
 using Hirundo.Processors.Observations.Conditions;
 
 namespace Hirundo.Processors.Observations.WPF.IsInTimeBlock;
@@ -13,10 +10,8 @@ namespace Hirundo.Processors.Observations.WPF.IsInTimeBlock;
     "Czy dane są w przedziale godzinowym?",
     "Warunek sprawdzający godziny złapania osobnika."
 )]
-public class IsInTimeBlockViewModel(IsInTimeBlockModel model) : ParametersViewModel, IRemovable
+public class IsInTimeBlockViewModel(IsInTimeBlockModel model) : ParametersViewModel(model), IRemovable
 {
-    public override IDataLabelRepository Repository => model.Repository;
-
     public string ValueName
     {
         get => model.ValueName;
@@ -46,6 +41,4 @@ public class IsInTimeBlockViewModel(IsInTimeBlockModel model) : ParametersViewMo
             OnPropertyChanged();
         }
     }
-
-    public override ICommand RemoveCommand => new RelayCommand(() => Remove(model.Condition));
 }

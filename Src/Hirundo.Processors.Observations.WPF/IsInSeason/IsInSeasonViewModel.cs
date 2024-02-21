@@ -1,7 +1,4 @@
-﻿using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
-using Hirundo.Commons;
-using Hirundo.Commons.Repositories.Labels;
+﻿using Hirundo.Commons;
 using Hirundo.Commons.WPF;
 using Hirundo.Processors.Observations.Conditions;
 
@@ -14,7 +11,7 @@ namespace Hirundo.Processors.Observations.WPF.IsInSeason;
     "Czy dane są w sezonie?",
     "Sprawdza, czy dana obserwacja zaszła w zadanym przedziale dat, dowolnego roku.")
 ]
-public class IsInSeasonViewModel(IsInSeasonModel model) : ParametersViewModel
+public class IsInSeasonViewModel(IsInSeasonModel model) : ParametersViewModel(model)
 {
     public string ValueName
     {
@@ -28,7 +25,6 @@ public class IsInSeasonViewModel(IsInSeasonModel model) : ParametersViewModel
     }
 
     public DataType ValueType { get; set; }
-    public override IDataLabelRepository Repository => model.Repository;
 
     public int StartMonth
     {
@@ -73,9 +69,6 @@ public class IsInSeasonViewModel(IsInSeasonModel model) : ParametersViewModel
             OnPropertyChanged(nameof(ErrorMessage));
         }
     }
-
-    public override ICommand RemoveCommand => new RelayCommand(() => Remove(model.Condition));
-
 
     public string ErrorMessage => GetErrorMessage();
 

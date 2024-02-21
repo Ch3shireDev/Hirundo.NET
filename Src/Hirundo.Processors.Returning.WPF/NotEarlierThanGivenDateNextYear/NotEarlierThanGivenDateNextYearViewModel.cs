@@ -1,7 +1,4 @@
-﻿using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
-using Hirundo.Commons;
-using Hirundo.Commons.Repositories.Labels;
+﻿using Hirundo.Commons;
 using Hirundo.Commons.WPF;
 using Hirundo.Processors.Returning.Conditions;
 
@@ -14,7 +11,7 @@ namespace Hirundo.Processors.Returning.WPF.NotEarlierThanGivenDateNextYear;
     "Czy powrót nastąpił po określonej dacie kolejnego roku?",
     "Osobnik wraca nie wcześniej niż w określonej dacie w przyszłym roku."
 )]
-public class NotEarlierThanGivenDateNextYearViewModel(NotEarlierThanGivenDateNextYearModel model) : ParametersViewModel, IRemovable
+public class NotEarlierThanGivenDateNextYearViewModel(NotEarlierThanGivenDateNextYearModel model) : ParametersViewModel(model)
 {
     public string DateValueName
     {
@@ -46,8 +43,6 @@ public class NotEarlierThanGivenDateNextYearViewModel(NotEarlierThanGivenDateNex
         }
     }
 
-    public override IDataLabelRepository Repository => model.Repository;
-
     public DataType DataType
     {
         get => model.ValueType;
@@ -57,6 +52,4 @@ public class NotEarlierThanGivenDateNextYearViewModel(NotEarlierThanGivenDateNex
             OnPropertyChanged();
         }
     }
-
-    public override ICommand RemoveCommand => new RelayCommand(() => Remove(model.Condition));
 }

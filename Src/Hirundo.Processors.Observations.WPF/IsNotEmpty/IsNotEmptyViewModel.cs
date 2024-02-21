@@ -1,7 +1,4 @@
-﻿using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
-using Hirundo.Commons.Repositories.Labels;
-using Hirundo.Commons.WPF;
+﻿using Hirundo.Commons.WPF;
 using Hirundo.Processors.Observations.Conditions;
 
 namespace Hirundo.Processors.Observations.WPF.IsNotEmpty;
@@ -13,7 +10,7 @@ namespace Hirundo.Processors.Observations.WPF.IsNotEmpty;
     "Czy dane nie są puste?",
     "Warunek sprawdzający, czy pole danych nie jest puste."
 )]
-public class IsNotEmptyViewModel(IsNotEmptyModel model) : ParametersViewModel, IRemovable
+public class IsNotEmptyViewModel(IsNotEmptyModel model) : ParametersViewModel(model)
 {
     public string ValueName
     {
@@ -24,8 +21,4 @@ public class IsNotEmptyViewModel(IsNotEmptyModel model) : ParametersViewModel, I
             OnPropertyChanged();
         }
     }
-
-    public override IDataLabelRepository Repository => model.Repository;
-
-    public override ICommand RemoveCommand => new RelayCommand(() => Remove(model.Condition));
 }

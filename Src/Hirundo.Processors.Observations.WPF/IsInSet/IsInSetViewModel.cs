@@ -1,11 +1,10 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using Hirundo.Commons;
-using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
 using Hirundo.Processors.Observations.Conditions;
 using Serilog;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Hirundo.Processors.Observations.WPF.IsInSet;
 
@@ -20,7 +19,7 @@ public class IsInSetViewModel : ParametersViewModel
 {
     private readonly IsInSetModel _model;
 
-    public IsInSetViewModel(IsInSetModel model)
+    public IsInSetViewModel(IsInSetModel model) : base(model)
     {
         _model = model;
 
@@ -31,8 +30,6 @@ public class IsInSetViewModel : ParametersViewModel
 
         Values.CollectionChanged += (_, _) => { model.SetValues(Values.Select(v => v.Value)); };
     }
-
-    public override IDataLabelRepository Repository => _model.Repository;
 
     public string ValueName
     {
@@ -57,7 +54,6 @@ public class IsInSetViewModel : ParametersViewModel
     public ObservableCollection<ValueContainer> Values { get; set; } = [];
     public ICommand AddValueCommand => new RelayCommand(AddValue);
     public ICommand RemoveValueCommand => new RelayCommand(RemoveValue);
-    public override ICommand RemoveCommand => new RelayCommand(() => Remove(_model.Condition));
 
     public void AddValue()
     {

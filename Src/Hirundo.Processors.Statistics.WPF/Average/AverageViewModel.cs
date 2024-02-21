@@ -1,9 +1,6 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using Hirundo.Commons;
-using Hirundo.Commons.Repositories.Labels;
+﻿using Hirundo.Commons;
 using Hirundo.Commons.WPF;
 using Hirundo.Processors.Statistics.Operations;
-using System.Windows.Input;
 
 namespace Hirundo.Processors.Statistics.WPF.Average;
 
@@ -14,7 +11,7 @@ namespace Hirundo.Processors.Statistics.WPF.Average;
     "Wartość średnia i odchylenie standardowe",
     "Oblicza wartość średnią i odchylenie standardowe dla wybranej wartości."
 )]
-public class AverageViewModel(AverageModel model) : ParametersViewModel
+public class AverageViewModel(AverageModel model) : ParametersViewModel(model)
 {
     public string ValueName
     {
@@ -31,8 +28,6 @@ public class AverageViewModel(AverageModel model) : ParametersViewModel
     {
         ResultPrefixName = model.ResultPrefixName == model.ValueName ? value : model.ResultPrefixName;
     }
-
-    public override IDataLabelRepository Repository => model.Repository;
 
     public DataType DataType
     {
@@ -94,6 +89,4 @@ public class AverageViewModel(AverageModel model) : ParametersViewModel
             OnPropertyChanged();
         }
     }
-
-    public override ICommand RemoveCommand => new RelayCommand(() => Remove(model.Operation));
 }

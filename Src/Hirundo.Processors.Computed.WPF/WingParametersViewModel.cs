@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Hirundo.Commons;
-using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -12,7 +11,7 @@ public class WingParametersViewModel<T> : ParametersViewModel where T : WingPara
 {
     private readonly WingParametersModel<T> _model;
 
-    public WingParametersViewModel(WingParametersModel<T> model)
+    public WingParametersViewModel(WingParametersModel<T> model) : base(model)
     {
         _model = model;
         WingParameters = new ObservableCollection<ValueContainer>(_model.WingParameters.Select(p => new ValueContainer(p)));
@@ -47,8 +46,6 @@ public class WingParametersViewModel<T> : ParametersViewModel where T : WingPara
 
     public ObservableCollection<ValueContainer> WingParameters { get; }
     public DataType WingType { get; set; }
-    public override ICommand RemoveCommand => new RelayCommand(() => Remove(_model.ComputedValue));
-    public override IDataLabelRepository Repository => _model.Repository;
     public ICommand UpdateLabelCommand => new RelayCommand(_model.UpdateLabel);
     public ICommand LoadCommand => new RelayCommand(_model.UpdateLabel);
 

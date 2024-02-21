@@ -5,17 +5,9 @@ using System.Windows.Input;
 
 namespace Hirundo.Commons.WPF;
 
-public abstract class ParametersViewModel : ObservableObject, IRemovable
+public abstract class ParametersViewModel(ParametersModel model) : ObservableObject, IRemovable
 {
-    public ParametersViewModel() { }
-    public ParametersViewModel(ParametersModel model)
-    {
-        this.model = model;
-    }
-
-
-    private readonly ParametersModel? model = null!;
-
+    private readonly ParametersModel model = model;
     public string Type { get; set; } = null!;
     public virtual string Name { get; set; } = string.Empty;
     public virtual string Description { get; set; } = string.Empty;
@@ -28,6 +20,6 @@ public abstract class ParametersViewModel : ObservableObject, IRemovable
         Removed?.Invoke(this, new ParametersEventArgs(condition));
     }
 
-    public virtual IDataLabelRepository Repository => model?.Repository ?? throw new Exception($"Błąd polimorfizmu obiektu Repository.");
-    public virtual ICommand RemoveCommand => new RelayCommand(() => Remove(model?.Parameters ?? throw new Exception($"Błąd polimorfizmu obiektu RemoveCommand.")));
+    public virtual IDataLabelRepository Repository => model.Repository;
+    public virtual ICommand RemoveCommand => new RelayCommand(() => Remove(model.Parameters));
 }

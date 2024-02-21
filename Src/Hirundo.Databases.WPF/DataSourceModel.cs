@@ -1,8 +1,8 @@
-﻿using System.Windows;
-using Hirundo.Commons;
+﻿using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
 using Hirundo.Databases.WPF.Access;
+using System.Windows;
 
 namespace Hirundo.Databases.WPF;
 
@@ -90,7 +90,7 @@ public class DataSourceModel(IDataLabelRepository dataLabelRepository, IAccessMe
     {
         return parameters switch
         {
-            AccessDatabaseParameters accessDatabaseParameters => new AccessDataSourceViewModel(accessDatabaseParameters, accessMetadataService),
+            AccessDatabaseParameters accessDatabaseParameters => new AccessDataSourceViewModel(new AccessDataSourceModel(accessDatabaseParameters, dataLabelRepository), accessMetadataService),
             _ => throw new NotImplementedException()
         };
     }

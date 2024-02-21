@@ -2,9 +2,9 @@
 
 1.  [x] Dodać polskie opisy do warunków dla źródeł danych.
 2.  [x] Dodać tytuł i opis operacji w Obserwacjach.
-3.  [ ] Przenieść RemoveCommand, Remove oraz Remove event do abstrakcji.
+3.  [x] Przenieść RemoveCommand, Remove oraz Remove event do abstrakcji.
 4.  [ ] Przerzucić Label do klasy LabelsComboBox.
-5.  [ ] Wewnątrz projektu `Databases` ustandaryzować strukturę do `ParametersBrowser`.
+5.  [x] Wewnątrz projektu `Databases` ustandaryzować strukturę do `ParametersBrowser`.
 6.  [ ] Dodać przeglądanie dostępnych gatunków w zakładce Osobniki
 7.  [ ] W polu osobniki dodać informację o liczbie osobników w bazie danych, maksymalnej liczbie obserwacji przypadającej na osobnika.
 8.  [ ] Dodać przeglądanie rozkładu wartości w Obserwacje.

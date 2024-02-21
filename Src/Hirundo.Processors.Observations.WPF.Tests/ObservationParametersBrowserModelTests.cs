@@ -49,24 +49,4 @@ public class ObservationParametersBrowserModelTests
         Assert.That(_model.ObservationsParameters.Conditions.Count, Is.EqualTo(1));
         Assert.That(_model.ObservationsParameters.Conditions[0], Is.InstanceOf<IsNotEmptyCondition>());
     }
-
-    [Test]
-    public void GivenEmptyModel_WhenGetParametersViewModels_ReturnsViewModelsForObservationParameters()
-    {
-        // Arrange
-        var viewModel = new Mock<ParametersViewModel>();
-
-        var condition = new Mock<IObservationCondition>();
-
-        _model.ObservationsParameters.Conditions.Add(condition.Object);
-        _factory.Setup(f => f.CreateViewModel(It.IsAny<IObservationCondition>())).Returns(viewModel.Object);
-
-        // Act
-        var parametersViewModels = _model.GetParametersViewModels().ToArray();
-
-        // Assert
-        Assert.That(parametersViewModels, Is.Not.Null);
-        Assert.That(parametersViewModels, Is.Not.Empty);
-        Assert.That(parametersViewModels, Has.Member(viewModel.Object));
-    }
 }

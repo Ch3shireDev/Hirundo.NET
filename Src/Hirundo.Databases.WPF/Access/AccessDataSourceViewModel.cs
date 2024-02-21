@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace Hirundo.Databases.WPF.Access;
 
-public class AccessDataSourceViewModel(AccessDatabaseParameters parameters, IAccessMetadataService accessMetadataService) : ParametersViewModel, IRemovable, ILabelsUpdater
+public class AccessDataSourceViewModel(AccessDataSourceModel model, IAccessMetadataService accessMetadataService) : ParametersViewModel(model), ILabelsUpdater
 {
     public override string Name => "Źródło danych Access";
     public override string Description => "Źródło danych z pliku Access.";
@@ -15,20 +15,20 @@ public class AccessDataSourceViewModel(AccessDatabaseParameters parameters, IAcc
 
     public string Path
     {
-        get => parameters.Path;
+        get => model.Path;
         set
         {
-            parameters.Path = value;
+            model.Path = value;
             OnPropertyChanged();
         }
     }
 
     public string Table
     {
-        get => parameters.Table;
+        get => model.Table;
         set
         {
-            parameters.Table = value;
+            model.Table = value;
             SetDataColumns(value);
             OnPropertyChanged();
         }
@@ -43,8 +43,8 @@ public class AccessDataSourceViewModel(AccessDatabaseParameters parameters, IAcc
 
     private void RemoveValues()
     {
-        parameters.Columns.Clear();
-        parameters.Conditions.Clear();
+        model.Columns.Clear();
+        model.Conditions.Clear();
 
         Columns.Clear();
         Conditions.Clear();
@@ -110,7 +110,6 @@ public class AccessDataSourceViewModel(AccessDatabaseParameters parameters, IAcc
         }
     }
 
-
     public void TableSelectionChanged()
     {
         RemoveValues();
@@ -119,7 +118,7 @@ public class AccessDataSourceViewModel(AccessDatabaseParameters parameters, IAcc
     public void AddColumn()
     {
         var newColumnMapping = new ColumnMapping();
-        parameters.Columns.Add(newColumnMapping);
+        model.Columns.Add(newColumnMapping);
         Columns.Add(newColumnMapping);
     }
 
@@ -127,24 +126,23 @@ public class AccessDataSourceViewModel(AccessDatabaseParameters parameters, IAcc
     {
         if (Columns.Count <= 0) return;
         var column = Columns.Last();
-        parameters.Columns.Remove(column);
+        model.Columns.Remove(column);
         Columns.Remove(column);
         UpdateLabels();
     }
 
-    private void AddCondition()
+    public void AddCondition()
     {
         var newCondition = new DatabaseCondition();
-        parameters.Conditions.Add(newCondition);
+        model.Conditions.Add(newCondition);
         Conditions.Add(newCondition);
     }
 
-
-    private void RemoveCondition()
+    public void RemoveCondition()
     {
         if (Conditions.Count <= 0) return;
         var condition = Conditions.Last();
-        parameters.Conditions.Remove(condition);
+        model.Conditions.Remove(condition);
         Conditions.Remove(condition);
     }
 
@@ -153,7 +151,6 @@ public class AccessDataSourceViewModel(AccessDatabaseParameters parameters, IAcc
     public ICommand LoadedCommand => new RelayCommand(() => LoadMetadata());
     public ICommand AfterFileCommand => new RelayCommand(() => LoadMetadata(true));
     public ICommand UpdateLabelsCommand => new RelayCommand(UpdateLabels);
-    public override ICommand RemoveCommand => new RelayCommand(() => Remove(parameters));
     public ICommand RemoveValuesCommand => new RelayCommand(RemoveValues);
     public ICommand TableSelectionChangedCommand => new RelayCommand(TableSelectionChanged);
     public ICommand AddColumnCommand => new RelayCommand(AddColumn);
@@ -165,8 +162,8 @@ public class AccessDataSourceViewModel(AccessDatabaseParameters parameters, IAcc
 
     #region collections
 
-    public IList<ColumnMapping> Columns { get; } = new ObservableCollection<ColumnMapping>(parameters.Columns);
-    public IList<DatabaseCondition> Conditions { get; } = new ObservableCollection<DatabaseCondition>(parameters.Conditions);
+    public IList<ColumnMapping> Columns { get; } = new ObservableCollection<ColumnMapping>(model.Columns);
+    public IList<DatabaseCondition> Conditions { get; } = new ObservableCollection<DatabaseCondition>(model.Conditions);
 
     #endregion
 }
