@@ -1,10 +1,11 @@
 ﻿using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
+using Hirundo.Commons.WPF;
 using Hirundo.Processors.Returning.Conditions;
 
 namespace Hirundo.Processors.Returning.WPF.AfterTimePeriod;
 
-public class AfterTimePeriodModel(ReturnsAfterTimePeriodCondition condition, IDataLabelRepository repository)
+public class AfterTimePeriodModel(ReturnsAfterTimePeriodCondition condition, IDataLabelRepository repository) : ParametersModel(condition, repository)
 {
     public string DateValueName
     {
@@ -19,6 +20,5 @@ public class AfterTimePeriodModel(ReturnsAfterTimePeriodCondition condition, IDa
     }
 
     public ReturnsAfterTimePeriodCondition Condition { get; } = condition;
-    public IDataLabelRepository Repository => repository;
     public DataType ValueType { get; set; }
 }

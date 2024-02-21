@@ -1,12 +1,12 @@
 ﻿using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
+using Hirundo.Commons.WPF;
 using Hirundo.Processors.Returning.Conditions;
 
 namespace Hirundo.Processors.Returning.WPF.IsInSet;
 
-public class IsInSetReturningModel(IsInSetReturningCondition condition, IDataLabelRepository repository)
+public class IsInSetReturningModel(IsInSetReturningCondition condition, IDataLabelRepository repository) : ParametersModel(condition, repository)
 {
-    public IDataLabelRepository Repository { get; } = repository;
     public IsInSetReturningCondition Condition { get; init; } = condition;
 
     public string ValueName

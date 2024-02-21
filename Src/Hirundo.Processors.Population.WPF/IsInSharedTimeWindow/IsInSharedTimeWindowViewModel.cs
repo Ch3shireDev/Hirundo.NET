@@ -41,7 +41,7 @@ public class IsInSharedTimeWindowViewModel(IsInSharedTimeWindowModel model) : Pa
         }
     }
 
-    public IDataLabelRepository Repository => model.Repository;
+    public override IDataLabelRepository Repository => model.Repository;
 
     public override ICommand RemoveCommand => new RelayCommand(() => Remove(model.ConditionBuilder));
 }

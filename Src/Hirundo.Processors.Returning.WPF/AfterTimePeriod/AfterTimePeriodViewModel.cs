@@ -1,9 +1,9 @@
-﻿using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
 using Hirundo.Processors.Returning.Conditions;
+using System.Windows.Input;
 
 namespace Hirundo.Processors.Returning.WPF.AfterTimePeriod;
 
@@ -26,7 +26,7 @@ public class AfterTimePeriodViewModel(AfterTimePeriodModel model) : ParametersVi
         }
     }
 
-    public IDataLabelRepository Repository => model.Repository;
+    public override IDataLabelRepository Repository => model.Repository;
 
     public DataType DataType
     {

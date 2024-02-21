@@ -48,7 +48,7 @@ public class WingParametersViewModel<T> : ParametersViewModel where T : WingPara
     public ObservableCollection<ValueContainer> WingParameters { get; }
     public DataType WingType { get; set; }
     public override ICommand RemoveCommand => new RelayCommand(() => Remove(_model.ComputedValue));
-    public IDataLabelRepository Repository => _model.Repository;
+    public override IDataLabelRepository Repository => _model.Repository;
     public ICommand UpdateLabelCommand => new RelayCommand(_model.UpdateLabel);
     public ICommand LoadCommand => new RelayCommand(_model.UpdateLabel);
 

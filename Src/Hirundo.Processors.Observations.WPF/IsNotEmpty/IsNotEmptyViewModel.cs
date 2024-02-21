@@ -25,7 +25,7 @@ public class IsNotEmptyViewModel(IsNotEmptyModel model) : ParametersViewModel, I
         }
     }
 
-    public IDataLabelRepository Repository => model.Repository;
+    public override IDataLabelRepository Repository => model.Repository;
 
     public override ICommand RemoveCommand => new RelayCommand(() => Remove(model.Condition));
 }

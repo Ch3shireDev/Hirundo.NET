@@ -1,7 +1,4 @@
-﻿using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
-using Hirundo.Commons;
-using Hirundo.Commons.Repositories.Labels;
+﻿using Hirundo.Commons;
 using Hirundo.Commons.WPF;
 using Hirundo.Processors.Observations.Conditions;
 
@@ -14,7 +11,7 @@ namespace Hirundo.Processors.Observations.WPF.IsEqual;
     "Czy wartość jest równa?",
     "Warunek porównujący pole danych z podaną wartością."
 )]
-public class IsEqualViewModel(IsEqualModel model) : ParametersViewModel, IRemovable
+public class IsEqualViewModel(IsEqualModel model) : ParametersViewModel(model)
 {
     public IsEqualModel Model => model;
 
@@ -38,7 +35,6 @@ public class IsEqualViewModel(IsEqualModel model) : ParametersViewModel, IRemova
         }
     }
 
-    public IDataLabelRepository Repository => model.Repository;
 
     public DataType DataType
     {
@@ -49,6 +45,4 @@ public class IsEqualViewModel(IsEqualModel model) : ParametersViewModel, IRemova
             OnPropertyChanged();
         }
     }
-
-    public override ICommand RemoveCommand => new RelayCommand(() => Remove(model.ObservationCondition));
 }

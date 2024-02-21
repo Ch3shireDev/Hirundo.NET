@@ -32,7 +32,7 @@ public class AverageViewModel(AverageModel model) : ParametersViewModel
         ResultPrefixName = model.ResultPrefixName == model.ValueName ? value : model.ResultPrefixName;
     }
 
-    public IDataLabelRepository Repository => model.Repository;
+    public override IDataLabelRepository Repository => model.Repository;
 
     public DataType DataType
     {

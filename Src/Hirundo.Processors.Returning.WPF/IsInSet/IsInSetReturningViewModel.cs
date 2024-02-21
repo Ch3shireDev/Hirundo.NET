@@ -32,7 +32,7 @@ public class IsInSetReturningViewModel: ParametersViewModel
         Values.CollectionChanged += (_, _) => { model.SetValues(Values.Select(v => v.Value)); };
     }
 
-    public IDataLabelRepository Repository => _model.Repository;
+    public override IDataLabelRepository Repository => _model.Repository;
 
     public string ValueName
     {

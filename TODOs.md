@@ -1,7 +1,7 @@
 # Zadania / pomysły do dodania
 
 1.  [x] Dodać polskie opisy do warunków dla źródeł danych.
-2.  [ ] Dodać tytuł i opis operacji w Obserwacjach.
+2.  [x] Dodać tytuł i opis operacji w Obserwacjach.
 3.  [ ] Przenieść RemoveCommand, Remove oraz Remove event do abstrakcji.
 4.  [ ] Przerzucić Label do klasy LabelsComboBox.
 5.  [ ] Wewnątrz projektu `Databases` ustandaryzować strukturę do `ParametersBrowser`.

@@ -1,10 +1,10 @@
-﻿using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
 using Hirundo.Processors.Statistics.Operations;
+using System.Windows.Input;
 
 namespace Hirundo.Processors.Statistics.WPF.Histogram;
 
@@ -87,7 +87,7 @@ public class HistogramViewModel(HistogramModel model) : ParametersViewModel
 
     public string ErrorMessage => GetErrorMessage();
 
-    public IDataLabelRepository Repository => model.Repository;
+    public override IDataLabelRepository Repository => model.Repository;
 
     private string GetErrorMessage()
     {

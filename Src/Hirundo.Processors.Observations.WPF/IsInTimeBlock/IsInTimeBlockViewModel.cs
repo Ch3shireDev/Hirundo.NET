@@ -15,7 +15,7 @@ namespace Hirundo.Processors.Observations.WPF.IsInTimeBlock;
 )]
 public class IsInTimeBlockViewModel(IsInTimeBlockModel model) : ParametersViewModel, IRemovable
 {
-    public IDataLabelRepository Repository => model.Repository;
+    public override IDataLabelRepository Repository => model.Repository;
 
     public string ValueName
     {

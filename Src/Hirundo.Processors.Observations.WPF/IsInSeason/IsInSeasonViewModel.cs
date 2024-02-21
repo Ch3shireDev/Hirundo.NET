@@ -28,7 +28,7 @@ public class IsInSeasonViewModel(IsInSeasonModel model) : ParametersViewModel
     }
 
     public DataType ValueType { get; set; }
-    public IDataLabelRepository Repository => model.Repository;
+    public override IDataLabelRepository Repository => model.Repository;
 
     public int StartMonth
     {

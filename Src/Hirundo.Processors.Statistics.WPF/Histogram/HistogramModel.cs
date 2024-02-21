@@ -1,10 +1,11 @@
 ﻿using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
+using Hirundo.Commons.WPF;
 using Hirundo.Processors.Statistics.Operations;
 
 namespace Hirundo.Processors.Statistics.WPF.Histogram;
 
-public class HistogramModel(HistogramOperation parameters, IDataLabelRepository repository)
+public class HistogramModel(HistogramOperation parameters, IDataLabelRepository repository) : ParametersModel(parameters, repository)
 {
     public HistogramOperation Operation
     {
@@ -42,6 +43,5 @@ public class HistogramModel(HistogramOperation parameters, IDataLabelRepository 
         set => parameters.Interval = value;
     }
 
-    public IDataLabelRepository Repository => repository;
     public DataType DataType { get; set; }
 }

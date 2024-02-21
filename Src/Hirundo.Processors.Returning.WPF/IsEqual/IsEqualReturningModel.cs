@@ -1,10 +1,11 @@
 ﻿using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
+using Hirundo.Commons.WPF;
 using Hirundo.Processors.Returning.Conditions;
 
 namespace Hirundo.Processors.Returning.WPF.IsEqual;
 
-public class IsEqualReturningModel(IsEqualReturningCondition condition, IDataLabelRepository repository)
+public class IsEqualReturningModel(IsEqualReturningCondition condition, IDataLabelRepository repository) : ParametersModel(condition, repository)
 {
     public IsEqualReturningCondition Condition
     {
@@ -25,5 +26,4 @@ public class IsEqualReturningModel(IsEqualReturningCondition condition, IDataLab
     }
 
     public DataType DataType { get; set; }
-    public IDataLabelRepository Repository { get; } = repository;
 }

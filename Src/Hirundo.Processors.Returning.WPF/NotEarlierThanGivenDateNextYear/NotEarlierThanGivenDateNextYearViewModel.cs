@@ -46,7 +46,7 @@ public class NotEarlierThanGivenDateNextYearViewModel(NotEarlierThanGivenDateNex
         }
     }
 
-    public IDataLabelRepository Repository => model.Repository;
+    public override IDataLabelRepository Repository => model.Repository;
 
     public DataType DataType
     {

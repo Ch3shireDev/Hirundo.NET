@@ -1,9 +1,10 @@
 ﻿using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
+using Hirundo.Commons.WPF;
 
 namespace Hirundo.Processors.Computed.WPF;
 
-public class WingParametersModel<T>(T parameters, IDataLabelRepository repository) where T : WingParametersBase
+public class WingParametersModel<T>(T parameters, IDataLabelRepository repository) : ParametersModel(parameters, repository) where T : WingParametersBase
 {
     private const int NumberOfParameters = 7;
 
@@ -12,8 +13,6 @@ public class WingParametersModel<T>(T parameters, IDataLabelRepository repositor
         get => parameters.ResultName;
         set => parameters.ResultName = value;
     }
-
-    public IDataLabelRepository Repository => repository;
 
     public string WingName
     {
