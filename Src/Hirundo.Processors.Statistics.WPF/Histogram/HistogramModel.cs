@@ -13,10 +13,10 @@ public class HistogramModel(HistogramOperation parameters, IDataLabelRepository 
         set => parameters.ValueName = value;
     }
 
-    public string ResultName
+    public string ResultPrefix
     {
-        get => parameters.ResultName;
-        set => parameters.ResultName = value;
+        get => parameters.ResultPrefix;
+        set => parameters.ResultPrefix = value;
     }
 
     public decimal MaxValue

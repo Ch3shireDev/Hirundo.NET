@@ -274,9 +274,7 @@
         "Outliers": {
           "Type": "StandardDeviation",
           "RejectOutliers": true,
-          "Threshold": 3,
-          "UpperBound": "WEIGHT_AVERAGE + (WEIGHT_SD * Threshold)",
-          "LowerBound": "WEIGHT_AVERAGE - (WEIGHT_SD * Threshold)"
+          "Threshold": 3
         }
       }
     ]

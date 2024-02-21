@@ -16,7 +16,7 @@
                 Repository="{Binding Repository}" />
         <WrapPanel>
             <Label>Prefiks wartości wynikowej</Label>
-            <TextBox Text="{Binding ResultName}" MinWidth="100"/>
+            <TextBox Text="{Binding ResultPrefix}" MinWidth="100"/>
         </WrapPanel>
         <WrapPanel>
             <Label>Wartość minimalna</Label>

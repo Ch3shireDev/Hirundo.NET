@@ -29,14 +29,14 @@ public class AverageViewModelTests
     {
         // Arrange
         _operation.ValueName = "VALUE";
-        _operation.ResultPrefixName = "VALUE_PREFIX";
+        _operation.ResultPrefix = "VALUE_PREFIX";
 
         // Act
         _viewModel.ValueName = "VALUE2";
-        _viewModel.ResultPrefixName = "PREFIX2";
+        _viewModel.ResultPrefix = "PREFIX2";
 
         Assert.That(_operation.ValueName, Is.EqualTo("VALUE2"));
-        Assert.That(_operation.ResultPrefixName, Is.EqualTo("PREFIX2"));
+        Assert.That(_operation.ResultPrefix, Is.EqualTo("PREFIX2"));
     }
 
     [Test]
@@ -46,11 +46,11 @@ public class AverageViewModelTests
 
         // Act
         _operation.ValueName = "VALUE3";
-        _operation.ResultPrefixName = "PREFIX3";
+        _operation.ResultPrefix = "PREFIX3";
 
         // Assert
         Assert.That(_viewModel.ValueName, Is.EqualTo("VALUE3"));
-        Assert.That(_viewModel.ResultPrefixName, Is.EqualTo("PREFIX3"));
+        Assert.That(_viewModel.ResultPrefix, Is.EqualTo("PREFIX3"));
     }
 
     [Test]
@@ -58,15 +58,15 @@ public class AverageViewModelTests
     {
         // Arrange
         _viewModel.ValueName = "VALUE";
-        _viewModel.ResultPrefixName = "VALUE";
+        _viewModel.ResultPrefix = "VALUE";
         var isChanged = false;
-        _viewModel.PropertyChanged += (sender, args) => { if (args.PropertyName == "ResultPrefixName") isChanged = true; };
+        _viewModel.PropertyChanged += (sender, args) => { if (args.PropertyName == nameof(AverageViewModel.ResultPrefix)) isChanged = true; };
 
         // Act
         _viewModel.ValueName = "VALUE2";
 
         // Assert
-        Assert.That(_viewModel.ResultPrefixName, Is.EqualTo("VALUE2"));
+        Assert.That(_viewModel.ResultPrefix, Is.EqualTo("VALUE2"));
         Assert.That(isChanged, Is.True);
     }
 
@@ -75,12 +75,12 @@ public class AverageViewModelTests
     {
         // Arrange
         _viewModel.ValueName = "VALUE";
-        _viewModel.ResultPrefixName = "PREFIX";
+        _viewModel.ResultPrefix = "PREFIX";
 
         // Act
         _viewModel.ValueName = "VALUE2";
 
         // Assert
-        Assert.That(_viewModel.ResultPrefixName, Is.EqualTo("PREFIX"));
+        Assert.That(_viewModel.ResultPrefix, Is.EqualTo("PREFIX"));
     }
 }

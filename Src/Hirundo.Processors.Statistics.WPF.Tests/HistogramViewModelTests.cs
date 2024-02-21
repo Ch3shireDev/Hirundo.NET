@@ -28,18 +28,18 @@ public class HistogramViewModelTests
     {
         // Arrange
         _parameters.ValueName = string.Empty;
-        _parameters.ResultName = string.Empty;
+        _parameters.ResultPrefix = string.Empty;
 
         // Act
         _viewModel.ValueName = "D2";
-        _viewModel.ResultName = "D2-HISTOGRAM";
+        _viewModel.ResultPrefix = "D2-HISTOGRAM";
         _viewModel.Interval = 2;
         _viewModel.MinValue = 0;
         _viewModel.MaxValue = 10;
 
         // Assert
         Assert.That(_parameters.ValueName, Is.EqualTo("D2"));
-        Assert.That(_parameters.ResultName, Is.EqualTo("D2-HISTOGRAM"));
+        Assert.That(_parameters.ResultPrefix, Is.EqualTo("D2-HISTOGRAM"));
         Assert.That(_parameters.Interval, Is.EqualTo(2));
         Assert.That(_parameters.MinValue, Is.EqualTo(0));
         Assert.That(_parameters.MaxValue, Is.EqualTo(10));

@@ -17,15 +17,15 @@
                 />
         <WrapPanel>
             <Label>Przedrostek wartości wyjściowych</Label>
-            <TextBox Text="{Binding ResultPrefixName, Mode=TwoWay}" Width="100" />
+            <TextBox Text="{Binding ResultPrefix, Mode=TwoWay}" Width="100" />
         </WrapPanel>
         <WrapPanel Margin="10">
             <CheckBox IsChecked="{Binding RejectOutliers, Mode=TwoWay}">Czy odrzucać wartości skrajne?</CheckBox>
         </WrapPanel>
         <StackPanel IsEnabled="{Binding RejectOutliers}">
             <WrapPanel>
-                <Label>Próg odrzucania</Label>
-                <TextBox Text="{Binding Threshold, Mode=TwoWay}" Width="100" />
+                <Label>Próg odrzucania (odchylenia standardowe)</Label>
+                <TextBox Text="{Binding Threshold, Mode=TwoWay}" Width="30" HorizontalContentAlignment="Center" />
             </WrapPanel>
         </StackPanel>
     </StackPanel>

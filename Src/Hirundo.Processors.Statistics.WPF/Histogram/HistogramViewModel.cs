@@ -19,21 +19,27 @@ public class HistogramViewModel(HistogramModel model) : ParametersViewModel(mode
         get => model.ValueName;
         set
         {
+            UpdatePrefix(value);
             model.ValueName = value;
             OnPropertyChanged();
             OnPropertyChanged(nameof(ErrorMessage));
         }
     }
 
-    public string ResultName
+    public string ResultPrefix
     {
-        get => model.ResultName;
+        get => model.ResultPrefix;
         set
         {
-            model.ResultName = value;
+            model.ResultPrefix = value;
             OnPropertyChanged();
             OnPropertyChanged(nameof(ErrorMessage));
         }
+    }
+
+    void UpdatePrefix(string value)
+    {
+        ResultPrefix = model.ResultPrefix == model.ValueName ? value : model.ResultPrefix;
     }
 
     public decimal Interval

@@ -13,28 +13,16 @@ public class AverageModel(AverageOperation operation, IDataLabelRepository repos
         set => operation.ValueName = value;
     }
 
-    public string ResultPrefixName
+    public string ResultPrefix
     {
-        get => operation.ResultPrefixName;
-        set => operation.ResultPrefixName = value;
+        get => operation.ResultPrefix;
+        set => operation.ResultPrefix = value;
     }
 
     public double Threshold
     {
         get => operation.Outliers.Threshold;
         set => operation.Outliers.Threshold = value;
-    }
-
-    public string UpperBound
-    {
-        get => operation.Outliers.UpperBound;
-        set => operation.Outliers.UpperBound = value;
-    }
-
-    public string LowerBound
-    {
-        get => operation.Outliers.LowerBound;
-        set => operation.Outliers.LowerBound = value;
     }
 
     public bool RejectOutliers

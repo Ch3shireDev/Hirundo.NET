@@ -273,13 +273,11 @@ public class ApplicationConfigJsonConverterTests
               {
                 ""Type"": ""AverageAndDeviation"",
                 ""ValueName"": ""WEIGHT"",
-                ""ResultPrefixName"": ""WEIGHT"",
+                ""ResultPrefix"": ""WEIGHT"",
                 ""Outliers"": {
                   ""Type"": ""StandardDeviation"",
                   ""RejectOutliers"": true,
-                  ""Threshold"": 3,
-                  ""UpperBound"": ""WEIGHT_AVERAGE + (WEIGHT_SD * Threshold)"",
-                  ""LowerBound"": ""WEIGHT_AVERAGE - (WEIGHT_SD * Threshold)""
+                  ""Threshold"": 3
                 }
               }
             ]
@@ -298,14 +296,12 @@ public class ApplicationConfigJsonConverterTests
 
         var operation0 = (AverageOperation)config.Statistics.Operations[0];
         Assert.That(operation0.ValueName, Is.EqualTo("WEIGHT"));
-        Assert.That(operation0.ResultPrefixName, Is.EqualTo("WEIGHT"));
+        Assert.That(operation0.ResultPrefix, Is.EqualTo("WEIGHT"));
         Assert.That(operation0.Outliers, Is.Not.Null);
         Assert.That(operation0.Outliers.RejectOutliers, Is.True);
         Assert.That(operation0.Outliers, Is.InstanceOf<StandardDeviationOutliersCondition>());
         var outlierDetection0 = operation0.Outliers;
         Assert.That(outlierDetection0.Threshold, Is.EqualTo(3));
-        Assert.That(outlierDetection0.UpperBound, Is.EqualTo("WEIGHT_AVERAGE + (WEIGHT_SD * Threshold)"));
-        Assert.That(outlierDetection0.LowerBound, Is.EqualTo("WEIGHT_AVERAGE - (WEIGHT_SD * Threshold)"));
     }
 
     [Test]
@@ -318,7 +314,7 @@ public class ApplicationConfigJsonConverterTests
               {
                 ""Type"": ""AverageAndDeviation"",
                 ""ValueName"": ""WEIGHT"",
-                ""ResultPrefixName"": ""WEIGHT"", 
+                ""ResultPrefix"": ""WEIGHT"", 
               }
             ]
           }
@@ -336,7 +332,7 @@ public class ApplicationConfigJsonConverterTests
 
         var operation0 = (AverageOperation)config.Statistics.Operations[0];
         Assert.That(operation0.ValueName, Is.EqualTo("WEIGHT"));
-        Assert.That(operation0.ResultPrefixName, Is.EqualTo("WEIGHT"));
+        Assert.That(operation0.ResultPrefix, Is.EqualTo("WEIGHT"));
         Assert.That(operation0.Outliers, Is.Not.Null);
         Assert.That(operation0.Outliers.RejectOutliers, Is.False);
         Assert.That(operation0.Outliers, Is.InstanceOf<StandardDeviationOutliersCondition>());

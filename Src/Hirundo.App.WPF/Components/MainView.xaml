@@ -25,7 +25,7 @@
 
         <Style TargetType="{x:Type Menu}" BasedOn="{StaticResource {x:Type Menu}}">
             <Setter Property="Background" Value="LightGray" />
-            <Setter Property="Padding" Value="10,0" />
+            <Setter Property="Padding" Value="5,0" />
         </Style>
 
         <Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
@@ -70,9 +70,9 @@
         </Grid.RowDefinitions>
         <Menu>
             <MenuItem Header="Plik">
-                <MenuItem Header="Stwórz nową konfigurację" Command="{Binding CreateNewConfigCommand}" />
-                <MenuItem Header="Zapisz bieżącą konfigurację" Command="{Binding SaveCurrentConfigCommand}" />
-                <MenuItem Header="Wczytaj nową konfiguracją" Command="{Binding LoadNewConfigCommand}" />
+                <MenuItem Header="Nowy" Command="{Binding CreateNewConfigCommand}" />
+                <MenuItem Header="Zapisz" Command="{Binding SaveCurrentConfigCommand}" />
+                <MenuItem Header="Wczytaj" Command="{Binding LoadNewConfigCommand}" />
             </MenuItem>
         </Menu>
 

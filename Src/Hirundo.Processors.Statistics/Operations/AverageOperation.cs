@@ -24,7 +24,7 @@ public class AverageOperation : IStatisticalOperation
         StandardDeviationOutliersCondition outliers)
     {
         ValueName = valueName;
-        ResultPrefixName = prefixName;
+        ResultPrefix = prefixName;
         Outliers = outliers;
     }
 
@@ -32,11 +32,11 @@ public class AverageOperation : IStatisticalOperation
     public AverageOperation(string valueName, string prefixName)
     {
         ValueName = valueName;
-        ResultPrefixName = prefixName;
+        ResultPrefix = prefixName;
     }
 
     public string ValueName { get; set; } = null!;
-    public string ResultPrefixName { get; set; } = null!;
+    public string ResultPrefix { get; set; } = null!;
 
     public StandardDeviationOutliersCondition Outliers { get; set; } = new() { RejectOutliers = false };
 
@@ -96,11 +96,11 @@ public class AverageOperation : IStatisticalOperation
     StatisticalOperationResult GetResult(object?[] values, object[] populationIds, object[] emptyValuesIds, object[] outliersIds)
     {
         string[] names = [
-            $"{ResultPrefixName}_AVERAGE",
-            $"{ResultPrefixName}_STANDARD_DEVIATION",
-            $"{ResultPrefixName}_POPULATION_SIZE",
-            $"{ResultPrefixName}_EMPTY_SIZE",
-            $"{ResultPrefixName}_OUTLIER_SIZE"
+            $"{ResultPrefix}_AVERAGE",
+            $"{ResultPrefix}_STANDARD_DEVIATION",
+            $"{ResultPrefix}_POPULATION_SIZE",
+            $"{ResultPrefix}_EMPTY_SIZE",
+            $"{ResultPrefix}_OUTLIER_SIZE"
             ];
 
         object?[] valuesWithPopulation = [.. values, populationIds.Length, emptyValuesIds.Length, outliersIds.Length];

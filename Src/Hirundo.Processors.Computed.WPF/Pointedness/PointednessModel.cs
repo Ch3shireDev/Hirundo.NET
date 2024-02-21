@@ -2,9 +2,6 @@
 
 namespace Hirundo.Processors.Computed.WPF.Pointedness;
 
-public class PointednessModel : WingParametersModel<PointednessCalculator>
+public class PointednessModel(PointednessCalculator parameters, IDataLabelRepository repository) : WingParametersModel<PointednessCalculator>(parameters, repository)
 {
-    public PointednessModel(PointednessCalculator parameters, IDataLabelRepository repository) : base(parameters, repository)
-    {
-    }
 }

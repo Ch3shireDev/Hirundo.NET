@@ -1,5 +1,5 @@
-﻿using System.Globalization;
-using Hirundo.Commons;
+﻿using Hirundo.Commons;
+using System.Globalization;
 
 namespace Hirundo.Processors.Statistics.Operations.Outliers;
 
@@ -16,8 +16,6 @@ public class StandardDeviationOutliersCondition : IOutliersCondition
     }
 
     public double Threshold { get; set; } = 3;
-    public string UpperBound { get; set; } = "WEIGHT_AVERAGE + (WEIGHT_SD * Threshold)";
-    public string LowerBound { get; set; } = "WEIGHT_AVERAGE - (WEIGHT_SD * Threshold)";
     public bool RejectOutliers { get; set; } = true;
 
     public object[] GetOutliersIds(Specimen[] population, string valueName, object averageValue, object standardDeviationValue)
@@ -40,7 +38,7 @@ public class StandardDeviationOutliersCondition : IOutliersCondition
             outliersIds.Add(specimen.Identifier);
         }
 
-        return [..outliersIds];
+        return [.. outliersIds];
     }
 
     private static bool IsInBounds(object value, object upperBound, object lowerBound)

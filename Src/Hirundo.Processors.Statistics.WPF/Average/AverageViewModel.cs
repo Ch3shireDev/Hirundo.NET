@@ -26,7 +26,7 @@ public class AverageViewModel(AverageModel model) : ParametersViewModel(model)
 
     void UpdatePrefix(string value)
     {
-        ResultPrefixName = model.ResultPrefixName == model.ValueName ? value : model.ResultPrefixName;
+        ResultPrefix = model.ResultPrefix == model.ValueName ? value : model.ResultPrefix;
     }
 
     public DataType DataType
@@ -39,12 +39,12 @@ public class AverageViewModel(AverageModel model) : ParametersViewModel(model)
         }
     }
 
-    public string ResultPrefixName
+    public string ResultPrefix
     {
-        get => model.ResultPrefixName;
+        get => model.ResultPrefix;
         set
         {
-            model.ResultPrefixName = value;
+            model.ResultPrefix = value;
             OnPropertyChanged();
         }
     }
@@ -55,27 +55,6 @@ public class AverageViewModel(AverageModel model) : ParametersViewModel(model)
         set
         {
             model.Threshold = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public string UpperBound
-    {
-        get => model.UpperBound;
-        set
-        {
-            model.UpperBound = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public string LowerBound
-    {
-        get => model.LowerBound;
-        set
-        {
-            model.LowerBound = value;
-
             OnPropertyChanged();
         }
     }

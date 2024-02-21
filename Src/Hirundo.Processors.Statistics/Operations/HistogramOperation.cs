@@ -9,7 +9,7 @@ public class HistogramOperation : IStatisticalOperation
     public HistogramOperation(string valueName, string resultName, decimal minValue, decimal maxValue, decimal interval = 1)
     {
         ValueName = valueName;
-        ResultName = resultName;
+        ResultPrefix = resultName;
         MinValue = minValue;
         MaxValue = maxValue;
         Interval = interval;
@@ -20,7 +20,7 @@ public class HistogramOperation : IStatisticalOperation
     }
 
     public string ValueName { get; set; } = string.Empty;
-    public string ResultName { get; set; } = string.Empty;
+    public string ResultPrefix { get; set; } = string.Empty;
 
     public decimal MinValue { get; set; }
     public decimal MaxValue { get; set; } = 9;
@@ -58,7 +58,7 @@ public class HistogramOperation : IStatisticalOperation
         for (var x = MinValue; x <= MaxValue; x += Interval)
         {
             var valueStr = x.ToString(CultureInfo.InvariantCulture);
-            valueLabels.Add($"{ResultName}-{valueStr}");
+            valueLabels.Add($"{ResultPrefix}-{valueStr}");
         }
 
         var values = new List<object?>();
