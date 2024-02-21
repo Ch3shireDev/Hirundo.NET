@@ -7,22 +7,16 @@ namespace Hirundo.Processors.Observations.WPF.IsEqual;
 
 public class IsEqualModel(IsEqualObservationCondition condition, IDataLabelRepository repository) : ParametersModel(condition, repository)
 {
-    public IsEqualObservationCondition Condition
-    {
-        get => condition;
-        set => condition = value;
-    }
-
     public string ValueName
     {
-        get => Condition.ValueName;
-        set => Condition.ValueName = value;
+        get => condition.ValueName;
+        set => condition.ValueName = value;
     }
 
     public string ValueStr
     {
-        get => DataTypeHelpers.GetValueToString(Condition.Value, DataType);
-        set => Condition.Value = DataTypeHelpers.ConvertStringToDataType(value, DataType);
+        get => DataTypeHelpers.GetValueToString(condition.Value, DataType);
+        set => condition.Value = DataTypeHelpers.ConvertStringToDataType(value, DataType);
     }
 
     public DataType DataType { get; set; }

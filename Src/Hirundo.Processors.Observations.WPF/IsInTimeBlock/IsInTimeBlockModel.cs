@@ -6,23 +6,21 @@ namespace Hirundo.Processors.Observations.WPF.IsInTimeBlock;
 
 public class IsInTimeBlockModel(IsInTimeBlockCondition condition, IDataLabelRepository repository) : ParametersModel(condition, repository)
 {
-    public IsInTimeBlockCondition Condition { get; set; } = condition;
-
     public string ValueName
     {
-        get => Condition.ValueName;
-        set => Condition.ValueName = value;
+        get => condition.ValueName;
+        set => condition.ValueName = value;
     }
 
     public int StartHour
     {
-        get => Condition.TimeBlock.StartHour;
-        set => Condition.TimeBlock.StartHour = value;
+        get => condition.TimeBlock.StartHour;
+        set => condition.TimeBlock.StartHour = value;
     }
 
     public int EndHour
     {
-        get => Condition.TimeBlock.EndHour;
-        set => Condition.TimeBlock.EndHour = value;
+        get => condition.TimeBlock.EndHour;
+        set => condition.TimeBlock.EndHour = value;
     }
 }

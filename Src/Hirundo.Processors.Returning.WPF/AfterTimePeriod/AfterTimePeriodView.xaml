@@ -4,18 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:afterTimePeriod="clr-namespace:Hirundo.Processors.Returning.WPF.AfterTimePeriod"
-             xmlns:labels="clr-namespace:Hirundo.Commons.WPF.Repositories.Labels;assembly=Hirundo.Commons.WPF"
+             xmlns:labels="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
              mc:Ignorable="d"
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance afterTimePeriod:AfterTimePeriodViewModel}">
     <StackPanel>
-        <WrapPanel>
-            <Label>Nazwa pola daty</Label>
-            <labels:LabelsComboBox
+        <labels:LabelsComboBox
+                ValueLabel="Nazwa pola daty"
                 ValueName="{Binding DateValueName}"
                 DataType="{Binding DataType}"
                 Repository="{Binding Repository}" />
-        </WrapPanel>
         <WrapPanel>
             <Label>Liczba dni</Label>
             <TextBox Text="{Binding TimePeriodInDays, Mode=TwoWay}" MinWidth="100" />

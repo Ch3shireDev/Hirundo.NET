@@ -7,12 +7,6 @@ namespace Hirundo.Processors.Statistics.WPF.Histogram;
 
 public class HistogramModel(HistogramOperation parameters, IDataLabelRepository repository) : ParametersModel(parameters, repository)
 {
-    public HistogramOperation Operation
-    {
-        get => parameters;
-        set => parameters = value;
-    }
-
     public string ValueName
     {
         get => parameters.ValueName;
@@ -24,6 +18,7 @@ public class HistogramModel(HistogramOperation parameters, IDataLabelRepository 
         get => parameters.ResultName;
         set => parameters.ResultName = value;
     }
+
     public decimal MaxValue
     {
         get => parameters.MaxValue;
@@ -35,7 +30,6 @@ public class HistogramModel(HistogramOperation parameters, IDataLabelRepository 
         get => parameters.MinValue;
         set => parameters.MinValue = value;
     }
-
 
     public decimal Interval
     {

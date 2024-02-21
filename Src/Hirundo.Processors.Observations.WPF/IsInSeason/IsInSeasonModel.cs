@@ -6,12 +6,6 @@ namespace Hirundo.Processors.Observations.WPF.IsInSeason;
 
 public class IsInSeasonModel(IsInSeasonCondition condition, IDataLabelRepository repository) : ParametersModel(condition, repository)
 {
-    public IsInSeasonCondition Condition
-    {
-        get => condition;
-        set => condition = value;
-    }
-
     public string ValueName
     {
         get => condition.DateColumnName;

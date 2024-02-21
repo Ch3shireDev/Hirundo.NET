@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:symmetry="clr-namespace:Hirundo.Processors.Computed.WPF"
-             xmlns:labels="clr-namespace:Hirundo.Commons.WPF.Repositories.Labels;assembly=Hirundo.Commons.WPF"
+             xmlns:labels="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d"
              d:Background="AliceBlue">
@@ -24,62 +24,47 @@
                 </b:Interaction.Triggers>
             </TextBox>
         </WrapPanel>
-        <WrapPanel>
-            <Label>Długość skrzydła</Label>
-            <labels:LabelsComboBox
+        <labels:LabelsComboBox
+                ValueLabel="Długość skrzydła"
                 ValueName="{Binding WingName}"
                 DataType="{Binding WingType}"
                 Repository="{Binding Repository}"
                 MinWidth="100" />
-        </WrapPanel>
-        <WrapPanel>
-            <Label>Kolumna D2</Label>
-            <labels:LabelsComboBox
+        <labels:LabelsComboBox
+                ValueLabel="Kolumna D2"
                 ValueName="{Binding D2Name}"
                 Repository="{Binding Repository}"
                 MinWidth="100" />
-        </WrapPanel>
-        <WrapPanel>
-            <Label>Kolumna D3</Label>
-            <labels:LabelsComboBox
+        <labels:LabelsComboBox
+                ValueLabel="Kolumna D3"
                 ValueName="{Binding D3Name}"
                 Repository="{Binding Repository}"
                 MinWidth="100" />
-        </WrapPanel>
-        <WrapPanel>
-            <Label>Kolumna D4</Label>
-            <labels:LabelsComboBox
+        <labels:LabelsComboBox
+                ValueLabel="Kolumna D4"
                 ValueName="{Binding D4Name}"
                 Repository="{Binding Repository}"
                 MinWidth="100" />
-        </WrapPanel>
-        <WrapPanel>
-            <Label>Kolumna D5</Label>
-            <labels:LabelsComboBox
+        <labels:LabelsComboBox
+                ValueLabel="Kolumna D5"
                 ValueName="{Binding D5Name}"
                 Repository="{Binding Repository}"
                 MinWidth="100" />
-        </WrapPanel>
-        <WrapPanel>
-            <Label>Kolumna D6</Label>
-            <labels:LabelsComboBox
+        <labels:LabelsComboBox
+                ValueLabel="Kolumna D6"
                 ValueName="{Binding D6Name}"
                 Repository="{Binding Repository}"
                 MinWidth="100" />
-        </WrapPanel>
-        <WrapPanel>
-            <Label>Kolumna D7</Label>
-            <labels:LabelsComboBox
+        <labels:LabelsComboBox
+                ValueLabel="Kolumna D7"
                 ValueName="{Binding D7Name}"
                 Repository="{Binding Repository}"
                 MinWidth="100" />
-        </WrapPanel>
-        <WrapPanel>
-            <Label>Kolumna D8</Label>
-            <labels:LabelsComboBox
+        <labels:LabelsComboBox
+                ValueLabel="Kolumna D8"
                 ValueName="{Binding D8Name}"
                 Repository="{Binding Repository}"
                 MinWidth="100" />
-        </WrapPanel>
+ 
     </StackPanel>
 </UserControl>

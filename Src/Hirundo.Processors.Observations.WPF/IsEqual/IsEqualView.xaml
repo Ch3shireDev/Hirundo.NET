@@ -4,18 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:isEqual="clr-namespace:Hirundo.Processors.Observations.WPF.IsEqual"
-             xmlns:labels="clr-namespace:Hirundo.Commons.WPF.Repositories.Labels;assembly=Hirundo.Commons.WPF"
+             xmlns:labels="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
              mc:Ignorable="d"
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance isEqual:IsEqualViewModel}">
     <StackPanel>
-        <WrapPanel>
-            <Label>Nazwa wartości</Label>
-            <labels:LabelsComboBox
+        <labels:LabelsComboBox
+                ValueLabel="Nazwa wartości"
                 ValueName="{Binding ValueName}"
                 DataType="{Binding DataType}"
                 Repository="{Binding Repository}" />
-        </WrapPanel>
         <WrapPanel>
             <Label>Wartość do porównania</Label>
             <TextBox Text="{Binding Value, Mode=TwoWay}" MinWidth="100" />

@@ -4,14 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Hirundo.Processors.Observations.WPF.IsNotEmpty"
-             xmlns:labels="clr-namespace:Hirundo.Commons.WPF.Repositories.Labels;assembly=Hirundo.Commons.WPF"
+             xmlns:labels="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance local:IsNotEmptyViewModel}"
              d:Background="AliceBlue">
     <StackPanel>
-        <WrapPanel>
-            <Label>Nazwa wartości</Label>
-            <labels:LabelsComboBox ValueName="{Binding ValueName, Mode=TwoWay}" Repository="{Binding Repository}" />
-        </WrapPanel>
+        <labels:LabelsComboBox ValueName="{Binding ValueName, Mode=TwoWay}" Repository="{Binding Repository}" />
     </StackPanel>
 </UserControl>

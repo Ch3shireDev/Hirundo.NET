@@ -9,16 +9,14 @@ public class IsInSharedTimeWindowModel(IsInSharedTimeWindowConditionBuilder cond
 {
     public string DateValueName
     {
-        get => ConditionBuilder.DateValueName;
-        set => ConditionBuilder.DateValueName = value;
+        get => conditionBuilder.DateValueName;
+        set => conditionBuilder.DateValueName = value;
     }
 
     public int MaxTimeDistanceInDays
     {
-        get => ConditionBuilder.MaxTimeDistanceInDays;
-        set => ConditionBuilder.MaxTimeDistanceInDays = value;
+        get => conditionBuilder.MaxTimeDistanceInDays;
+        set => conditionBuilder.MaxTimeDistanceInDays = value;
     }
-
-    public IsInSharedTimeWindowConditionBuilder ConditionBuilder { get; set; } = conditionBuilder;
     public DataType ValueType { get; set; }
 }

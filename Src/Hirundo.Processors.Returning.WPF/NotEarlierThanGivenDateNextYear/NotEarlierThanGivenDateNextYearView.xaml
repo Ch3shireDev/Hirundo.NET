@@ -5,19 +5,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:notEarlierThanGivenDateNextYear="clr-namespace:Hirundo.Processors.Returning.WPF.NotEarlierThanGivenDateNextYear"
-    xmlns:labels="clr-namespace:Hirundo.Commons.WPF.Repositories.Labels;assembly=Hirundo.Commons.WPF"
+    xmlns:labels="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
     mc:Ignorable="d"
     d:Background="AliceBlue"
     d:DataContext="{d:DesignInstance notEarlierThanGivenDateNextYear:NotEarlierThanGivenDateNextYearViewModel}"
     Width="300">
     <StackPanel>
-        <WrapPanel>
-            <Label>Nazwa pola daty</Label>
-            <labels:LabelsComboBox
+        <labels:LabelsComboBox
+                ValueLabel="Nazwa pola daty"
                 ValueName="{Binding DateValueName}"
                 DataType="{Binding DataType}"
                 Repository="{Binding Repository}" />
-        </WrapPanel>
         <WrapPanel>
             <Label>Miesiąc</Label>
             <TextBox MinWidth="100" Text="{Binding Month}" />

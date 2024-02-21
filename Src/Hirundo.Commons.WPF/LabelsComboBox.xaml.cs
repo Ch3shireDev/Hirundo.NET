@@ -1,13 +1,22 @@
-﻿using System.ComponentModel;
+﻿using Hirundo.Commons.Repositories.Labels;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using Hirundo.Commons.Repositories.Labels;
 
-namespace Hirundo.Commons.WPF.Repositories.Labels;
+namespace Hirundo.Commons.WPF;
 
 public partial class LabelsComboBox : UserControl, INotifyPropertyChanged
 {
+    public string ValueLabel
+    {
+        get { return (string)GetValue(ValueLabelProperty); }
+        set { SetValue(ValueLabelProperty, value); }
+    }
+
+    public static readonly DependencyProperty ValueLabelProperty =
+        DependencyProperty.Register(nameof(ValueLabel), typeof(string), typeof(LabelsComboBox), new PropertyMetadata("Nazwa wartości"));
+
     public static readonly DependencyProperty RepositoryProperty =
         DependencyProperty.Register(nameof(Repository), typeof(IDataLabelRepository), typeof(LabelsComboBox), new PropertyMetadata(OnDataLabelRepositoryChanged));
 
@@ -92,7 +101,7 @@ public partial class LabelsComboBox : UserControl, INotifyPropertyChanged
 
     private static void OnValueNameChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is not LabelsComboBox comboBox) return;
+        if (d is not LabelsComboBox) return;
     }
 
     private void OnLabelsChanged(object? sender, EventArgs e)
@@ -104,7 +113,7 @@ public partial class LabelsComboBox : UserControl, INotifyPropertyChanged
     {
         if (Repository is null) return;
         var valueName = ValueName;
-        Labels = [..Repository.GetLabels()];
+        Labels = [.. Repository.GetLabels()];
         SelectedLabel = Labels.FirstOrDefault(l => l.Name == valueName);
         ComboBox.ItemsSource = Labels;
         ComboBox.SelectedValue = SelectedLabel;

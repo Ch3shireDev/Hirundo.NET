@@ -11,10 +11,4 @@ public class IsNotEmptyModel(IsNotEmptyCondition condition, IDataLabelRepository
         get => condition.ValueName;
         set => condition.ValueName = value;
     }
-
-    public IsNotEmptyCondition Condition
-    {
-        get => condition;
-        set => condition = value;
-    }
 }

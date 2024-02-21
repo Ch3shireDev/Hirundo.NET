@@ -4,15 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:isInTimeBlock="clr-namespace:Hirundo.Processors.Observations.WPF.IsInTimeBlock"
-             xmlns:labels="clr-namespace:Hirundo.Commons.WPF.Repositories.Labels;assembly=Hirundo.Commons.WPF"
+             xmlns:labels="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
              mc:Ignorable="d"
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance isInTimeBlock:IsInTimeBlockViewModel}">
     <StackPanel>
-        <WrapPanel>
-            <Label>Nazwa wartości</Label>
-            <labels:LabelsComboBox ValueName="{Binding ValueName, Mode=TwoWay}" Repository="{Binding Repository}" />
-        </WrapPanel>
+        <labels:LabelsComboBox 
+                ValueName="{Binding ValueName, Mode=TwoWay}" 
+                Repository="{Binding Repository}" 
+                />
         <WrapPanel>
             <Label>Godzina początkowa</Label>
             <TextBox Text="{Binding StartHour}" MinWidth="100" />

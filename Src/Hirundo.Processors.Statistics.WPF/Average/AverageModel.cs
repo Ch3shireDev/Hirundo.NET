@@ -7,42 +7,40 @@ namespace Hirundo.Processors.Statistics.WPF.Average;
 
 public class AverageModel(AverageOperation operation, IDataLabelRepository repository) : ParametersModel(operation, repository)
 {
-    public AverageOperation Operation { get; set; } = operation;
-
     public string ValueName
     {
-        get => Operation.ValueName;
-        set => Operation.ValueName = value;
+        get => operation.ValueName;
+        set => operation.ValueName = value;
     }
 
     public string ResultPrefixName
     {
-        get => Operation.ResultPrefixName;
-        set => Operation.ResultPrefixName = value;
+        get => operation.ResultPrefixName;
+        set => operation.ResultPrefixName = value;
     }
 
     public double Threshold
     {
-        get => Operation.Outliers.Threshold;
-        set => Operation.Outliers.Threshold = value;
+        get => operation.Outliers.Threshold;
+        set => operation.Outliers.Threshold = value;
     }
 
     public string UpperBound
     {
-        get => Operation.Outliers.UpperBound;
-        set => Operation.Outliers.UpperBound = value;
+        get => operation.Outliers.UpperBound;
+        set => operation.Outliers.UpperBound = value;
     }
 
     public string LowerBound
     {
-        get => Operation.Outliers.LowerBound;
-        set => Operation.Outliers.LowerBound = value;
+        get => operation.Outliers.LowerBound;
+        set => operation.Outliers.LowerBound = value;
     }
 
     public bool RejectOutliers
     {
-        get => Operation.Outliers.RejectOutliers;
-        set => Operation.Outliers.RejectOutliers = value;
+        get => operation.Outliers.RejectOutliers;
+        set => operation.Outliers.RejectOutliers = value;
     }
 
     public DataType ValueType { get; set; }

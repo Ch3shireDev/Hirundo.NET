@@ -7,22 +7,16 @@ namespace Hirundo.Processors.Returning.WPF.IsEqual;
 
 public class IsEqualReturningModel(IsEqualReturningCondition condition, IDataLabelRepository repository) : ParametersModel(condition, repository)
 {
-    public IsEqualReturningCondition Condition
-    {
-        get => condition;
-        set => condition = value;
-    }
-
     public string ValueName
     {
-        get => Condition.ValueName;
-        set => Condition.ValueName = value;
+        get => condition.ValueName;
+        set => condition.ValueName = value;
     }
 
     public string ValueStr
     {
-        get => DataTypeHelpers.GetValueToString(Condition.Value, DataType);
-        set => Condition.Value = DataTypeHelpers.ConvertStringToDataType(value, DataType);
+        get => DataTypeHelpers.GetValueToString(condition.Value, DataType);
+        set => condition.Value = DataTypeHelpers.ConvertStringToDataType(value, DataType);
     }
 
     public DataType DataType { get; set; }

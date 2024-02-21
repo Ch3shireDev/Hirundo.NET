@@ -9,16 +9,15 @@ public class AfterTimePeriodModel(ReturnsAfterTimePeriodCondition condition, IDa
 {
     public string DateValueName
     {
-        get => Condition.DateValueName;
-        set => Condition.DateValueName = value;
+        get => condition.DateValueName;
+        set => condition.DateValueName = value;
     }
 
     public int TimePeriodInDays
     {
-        get => Condition.TimePeriodInDays;
-        set => Condition.TimePeriodInDays = value;
+        get => condition.TimePeriodInDays;
+        set => condition.TimePeriodInDays = value;
     }
 
-    public ReturnsAfterTimePeriodCondition Condition { get; } = condition;
     public DataType ValueType { get; set; }
 }

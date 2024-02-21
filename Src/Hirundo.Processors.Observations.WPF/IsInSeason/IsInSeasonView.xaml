@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:labels="clr-namespace:Hirundo.Commons.WPF.Repositories.Labels;assembly=Hirundo.Commons.WPF"
+             xmlns:labels="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
              xmlns:isInSeason="clr-namespace:Hirundo.Processors.Observations.WPF.IsInSeason"
              xmlns:helpers="clr-namespace:Hirundo.Commons.WPF.Helpers;assembly=Hirundo.Commons.WPF"
              mc:Ignorable="d"
@@ -13,13 +13,10 @@
         <helpers:MonthConverter x:Key="MonthConverter" />
     </UserControl.Resources>
     <StackPanel>
-        <WrapPanel>
-            <Label>Nazwa wartości</Label>
-            <labels:LabelsComboBox
+        <labels:LabelsComboBox
                 ValueName="{Binding ValueName}"
                 DataType="{Binding ValueType}"
                 Repository="{Binding Repository}" />
-        </WrapPanel>
         <WrapPanel>
             <Label>Miesiąc początkowy</Label>
             <ComboBox

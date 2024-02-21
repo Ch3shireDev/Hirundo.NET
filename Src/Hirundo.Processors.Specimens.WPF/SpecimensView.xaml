@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:wpf="clr-namespace:Hirundo.Processors.Specimens.WPF"
-             xmlns:labels="clr-namespace:Hirundo.Commons.WPF.Repositories.Labels;assembly=Hirundo.Commons.WPF"
+             xmlns:labels="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
              mc:Ignorable="d" d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance wpf:SpecimensViewModel}">
     <StackPanel Margin="10">
@@ -18,8 +18,8 @@
             <Label FontWeight="Bold">Osobniki</Label>
         </WrapPanel>
         <WrapPanel Margin="10">
-            <Label>Identyfikator osobnika</Label>
             <labels:LabelsComboBox
+                ValueLabel="Identyfikator osobnika"
                 ValueName="{Binding SpecimenIdentifier}"
                 DataType="{Binding DataType}"
                 Repository="{Binding Repository}" />

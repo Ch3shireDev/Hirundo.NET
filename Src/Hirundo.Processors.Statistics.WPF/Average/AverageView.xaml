@@ -4,19 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:average="clr-namespace:Hirundo.Processors.Statistics.WPF.Average"
-             xmlns:labels="clr-namespace:Hirundo.Commons.WPF.Repositories.Labels;assembly=Hirundo.Commons.WPF"
+             xmlns:labels="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
              mc:Ignorable="d"
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance average:AverageViewModel}">
     <StackPanel>
-        <WrapPanel>
-            <Label>Nazwa wartości wejściowej</Label>
-            <labels:LabelsComboBox
+        <labels:LabelsComboBox
+                ValueLabel="Nazwa wartości wejściowej"
                 ValueName="{Binding ValueName}"
                 DataType="{Binding DataType}"
                 Repository="{Binding Repository}"
                 />
-        </WrapPanel>
         <WrapPanel>
             <Label>Przedrostek wartości wyjściowych</Label>
             <TextBox Text="{Binding ResultPrefixName, Mode=TwoWay}" Width="100" />

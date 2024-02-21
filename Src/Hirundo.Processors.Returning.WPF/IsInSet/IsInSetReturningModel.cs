@@ -7,16 +7,14 @@ namespace Hirundo.Processors.Returning.WPF.IsInSet;
 
 public class IsInSetReturningModel(IsInSetReturningCondition condition, IDataLabelRepository repository) : ParametersModel(condition, repository)
 {
-    public IsInSetReturningCondition Condition { get; init; } = condition;
-
     public string ValueName
     {
-        get => Condition.ValueName;
-        set => Condition.ValueName = value;
+        get => condition.ValueName;
+        set => condition.ValueName = value;
     }
 
     public DataType ValueType { get; set; }
-    public IList<object> Values => Condition.Values;
+    public IList<object> Values => condition.Values;
 
     public void SetValues(IEnumerable<string> values)
     {
