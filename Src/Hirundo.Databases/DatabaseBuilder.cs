@@ -1,4 +1,5 @@
-﻿namespace Hirundo.Databases;
+﻿
+namespace Hirundo.Databases;
 
 /// <summary>
 ///     Budowniczy obiektów typu <see cref="IDatabase" />. Jak na razie umożliwia dodawanie baz danych Access. Ze względu
@@ -9,12 +10,7 @@ public class DatabaseBuilder : IDatabaseBuilder
 {
     private readonly List<IDatabase> _databases = [];
 
-    public IDatabaseBuilder WithDatabaseParameters(params IDatabaseParameters[] appConfigDatabases)
-    {
-        return WithDatabaseParameters(appConfigDatabases.ToList());
-    }
-
-    public IDatabaseBuilder WithDatabaseParameters(IEnumerable<IDatabaseParameters> appConfigDatabases)
+    public IDatabaseBuilder WithDatabaseParameters(IEnumerable<IDatabaseParameters> appConfigDatabases, CancellationToken? token = null)
     {
         ArgumentNullException.ThrowIfNull(appConfigDatabases);
 
@@ -23,7 +19,7 @@ public class DatabaseBuilder : IDatabaseBuilder
             switch (databaseParameters)
             {
                 case AccessDatabaseParameters accessDatabaseParameters:
-                    AddMdbAccessDatabase(accessDatabaseParameters);
+                    AddMdbAccessDatabase(accessDatabaseParameters, token);
                     break;
                 default:
                     throw new ArgumentException($"Unknown database type: {databaseParameters.GetType()}");
@@ -38,9 +34,9 @@ public class DatabaseBuilder : IDatabaseBuilder
     /// </summary>
     /// <param name="databaseParameters"></param>
     /// <returns></returns>
-    public IDatabaseBuilder AddMdbAccessDatabase(AccessDatabaseParameters databaseParameters)
+    public IDatabaseBuilder AddMdbAccessDatabase(AccessDatabaseParameters databaseParameters, CancellationToken? token = null)
     {
-        _databases.Add(new MdbAccessDatabase(databaseParameters));
+        _databases.Add(new MdbAccessDatabase(databaseParameters, token));
         return this;
     }
 
@@ -50,6 +46,6 @@ public class DatabaseBuilder : IDatabaseBuilder
     /// <returns></returns>
     public IDatabase Build()
     {
-        return new CompositeDatabase([.._databases]);
+        return new CompositeDatabase([.. _databases]);
     }
 }

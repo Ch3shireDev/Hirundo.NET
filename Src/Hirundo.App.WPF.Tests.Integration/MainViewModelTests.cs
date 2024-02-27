@@ -404,7 +404,7 @@ public class MainViewModelTests
         await _viewModel.ProcessAndSaveAsync();
 
         // Assert
-        _hirundoApp.Verify(a => a.Run(It.IsAny<ApplicationConfig>()), Times.Once);
+        _hirundoApp.Verify(a => a.Run(It.IsAny<ApplicationConfig>(), It.IsAny<CancellationToken>()), Times.Once);
     }
 
     [Test]
@@ -415,15 +415,15 @@ public class MainViewModelTests
         {
             ComputedValues = new ComputedValuesParameters
             {
-                ComputedValues = new List<IComputedValuesCalculator>
-                {
+                ComputedValues =
+                [
                     new SymmetryCalculator
                     {
                         ResultName = "SYMMETRY",
                         WingParameters = ["D2", "D3", "D4", "D5", "D6", "D7", "D8"],
                         WingName = "WING"
                     }
-                }
+                ]
             }
         };
 
@@ -447,15 +447,15 @@ public class MainViewModelTests
         {
             ComputedValues = new ComputedValuesParameters
             {
-                ComputedValues = new List<IComputedValuesCalculator>
-                {
+                ComputedValues =
+                [
                     new SymmetryCalculator
                     {
                         ResultName = "SYMMETRY-2",
                         WingParameters = ["A", "B", "C", "D", "E", "F", "G"],
                         WingName = "WING-2"
                     }
-                }
+                ]
             }
         };
 

@@ -22,15 +22,15 @@ public class HirundoAppTests
         _databaseBuilder = new Mock<IDatabaseBuilder>();
 
         _databaseBuilder
+            .Setup(x => x.WithDatabaseParameters(It.IsAny<IList<IDatabaseParameters>>(), It.IsAny<CancellationToken?>()))
+            .Returns(_databaseBuilder.Object);
+
+        _databaseBuilder
             .Setup(x => x.Build())
             .Returns(_database.Object);
 
-        _databaseBuilder
-            .Setup(x => x.WithDatabaseParameters(It.IsAny<IList<IDatabaseParameters>>()))
-            .Returns(_databaseBuilder.Object);
-
         _summaryWriter = new Mock<ISummaryWriter>();
-        
+
         _summaryWriterBuilder = new Mock<ISummaryWriterBuilder>();
 
         _summaryWriterBuilder
@@ -48,13 +48,13 @@ public class HirundoAppTests
     public void GivenEmptyObservationsList_WhenRun_ResultsInEmptySummary()
     {
         // Arrange
-        _database.Setup(x=>x.GetObservations()).Returns(new List<Observation>());
+        _database.Setup(x => x.GetObservations()).Returns([]);
 
         // Act
         _app.Run(new ApplicationConfig());
 
         // Assert
-        _database.Verify(x=>x.GetObservations(), Times.Once);
-        _summaryWriter.Verify(x=>x.Write(It.IsAny<IEnumerable<ReturningSpecimenSummary>>()), Times.Once);
+        _database.Verify(x => x.GetObservations(), Times.Once);
+        _summaryWriter.Verify(x => x.Write(It.IsAny<IEnumerable<ReturningSpecimenSummary>>()), Times.Once);
     }
 }

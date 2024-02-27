@@ -54,12 +54,12 @@ public class HirundoApp : IHirundoApp
         _summaryWriterBuilder = summaryWriterBuilder;
     }
 
-    public void Run(ApplicationConfig applicationConfig)
+    public void Run(ApplicationConfig applicationConfig, CancellationToken? token = null)
     {
         ArgumentNullException.ThrowIfNull(applicationConfig);
 
         var database = _databaseBuilder
-            .WithDatabaseParameters(applicationConfig.Databases)
+            .WithDatabaseParameters(applicationConfig.Databases, token)
             .Build();
 
         var observationConditions = _observationConditionsBuilder
@@ -86,7 +86,7 @@ public class HirundoApp : IHirundoApp
             .WithStatisticsOperations(applicationConfig.Statistics.Operations)
             .Build();
 
-        var resultsWriter = _summaryWriterBuilder
+        using var resultsWriter = _summaryWriterBuilder
             .WithWriterParameters(applicationConfig.Results.Writer)
             .Build();
 

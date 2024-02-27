@@ -6,7 +6,7 @@ namespace Hirundo.Writers.Summary;
 ///     Zapisuje podsumowanie dla wprowadzonych podsumowań na temat powracających osobników. Sposób zapisu jest zależny od
 ///     implementacji.
 /// </summary>
-public interface ISummaryWriter
+public interface ISummaryWriter : IDisposable
 {
     /// <summary>
     ///     Zapisz podsumowania na temat powracających osobników.

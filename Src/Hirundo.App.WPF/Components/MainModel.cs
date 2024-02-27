@@ -74,6 +74,8 @@ public class MainModel(
         };
     }
 
+    private CancellationTokenSource? _cancellationTokenSource;
+
     public async Task RunAsync()
     {
         if (_isProcessing)
@@ -85,11 +87,17 @@ public class MainModel(
         {
             _isProcessing = true;
             var config = GetConfigFromViewModels();
-            await Task.Run(() => app.Run(config));
+            _cancellationTokenSource = new CancellationTokenSource();
+            await Task.Run(() => app.Run(config, _cancellationTokenSource.Token), _cancellationTokenSource.Token);
             var json = JsonTools.Serialize(config);
             var configFilename = GetJsonPath(config.Results.Writer.Path);
             await File.WriteAllTextAsync(configFilename, json);
 
+        }
+        catch (OperationCanceledException e)
+        {
+            Log.Information($"Przerwano działanie aplikacji z polecenia użytkownika.");
+            return;
         }
         catch (Exception e)
         {
@@ -122,6 +130,11 @@ public class MainModel(
             var config = GetConfigFromViewModels();
             app.Run(config);
         }
+        catch (OperationCanceledException e)
+        {
+            Log.Information($"Przerwano działanie aplikacji z polecenia użytkownika.");
+            return;
+        }
         catch (Exception e)
         {
             Log.Error($"Błąd działania aplikacji: {e.Message}", e);
@@ -152,5 +165,16 @@ public class MainModel(
         }
 
         return true;
+    }
+
+    internal async Task BreakAsync()
+    {
+        if (_cancellationTokenSource is not null)
+        {
+            _cancellationTokenSource.Cancel();
+            await Task.Delay(100).ConfigureAwait(false);
+            _cancellationTokenSource.Dispose();
+            _cancellationTokenSource = null;
+        }
     }
 }

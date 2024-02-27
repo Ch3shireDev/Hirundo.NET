@@ -1,8 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.IO;
-using System.Windows;
-using System.Windows.Input;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Hirundo.App.WPF.Helpers;
 using Hirundo.Commons;
@@ -12,6 +8,10 @@ using Hirundo.Writers.WPF;
 using Microsoft.Win32;
 using Serilog;
 using Serilog.Events;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Windows;
+using System.Windows.Input;
 
 namespace Hirundo.App.WPF.Components;
 
@@ -36,8 +36,8 @@ public sealed class MainViewModel : ObservableObject
         StatisticsViewModel = new ParametersBrowserViewModel(model.StatisticsModel);
         WriterViewModel = new WriterViewModel(model.WriterModel, ProcessAndSaveAsync);
 
-        ViewModels = new List<ObservableObject>
-        {
+        ViewModels =
+        [
             DataSourceViewModel,
             ComputedValuesViewModel,
             SpecimensViewModel,
@@ -46,7 +46,7 @@ public sealed class MainViewModel : ObservableObject
             PopulationViewModel,
             StatisticsViewModel,
             WriterViewModel
-        };
+        ];
 
         SelectedViewModel = DataSourceViewModel;
     }
@@ -63,6 +63,7 @@ public sealed class MainViewModel : ObservableObject
     public ObservableCollection<LogEvent> LogEventsItems { get; } = [];
     public ICommand PreviousCommand => new RelayCommand(Previous, CanGoPrevious);
     public ICommand NextCommand => new RelayCommand(Next, CanGoNext);
+    public ICommand BreakCommand => new AsyncRelayCommand(BreakAsync, CanBreak);
     public ICommand ProcessAndSaveCommand => new AsyncRelayCommand(ProcessAndSaveAsync, CanProcessAndSave);
     public ICommand SaveCurrentConfigCommand => new RelayCommand(SaveCurrentConfig);
     public ICommand LoadNewConfigCommand => new RelayCommand(LoadNewConfig);
@@ -149,6 +150,8 @@ public sealed class MainViewModel : ObservableObject
         try
         {
             IsProcessing = true;
+            OnPropertyChanged(nameof(ProcessAndSaveCommand));
+            OnPropertyChanged(nameof(BreakCommand));
             await _model.RunAsync().ConfigureAwait(false);
             IsProcessing = false;
         }
@@ -167,6 +170,20 @@ public sealed class MainViewModel : ObservableObject
         {
             IsProcessing = false;
         }
+    }
+
+    public async Task BreakAsync()
+    {
+        if (IsProcessing)
+        {
+            await _model.BreakAsync();
+            IsProcessing = false;
+        }
+    }
+
+    public bool CanBreak()
+    {
+        return IsProcessing;
     }
 
     public void UpdateConfig(ApplicationConfig config)

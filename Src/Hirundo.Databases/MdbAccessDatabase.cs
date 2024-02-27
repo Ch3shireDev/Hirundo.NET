@@ -1,6 +1,6 @@
-﻿using System.Data.Odbc;
-using Hirundo.Commons;
+﻿using Hirundo.Commons;
 using Serilog;
+using System.Data.Odbc;
 
 namespace Hirundo.Databases;
 
@@ -9,7 +9,7 @@ namespace Hirundo.Databases;
 ///     nazwa tabeli oraz zestaw kolumn do pobrania.
 /// </summary>
 /// <param name="parameters"></param>
-public class MdbAccessDatabase(AccessDatabaseParameters parameters) : IDatabase
+public class MdbAccessDatabase(AccessDatabaseParameters parameters, CancellationToken? token = null) : IDatabase
 {
     /// <summary>
     ///     ConnectionString jest tworzony z użyciem Microsoft Access Driver dla połączenia ODBC.
@@ -48,6 +48,8 @@ public class MdbAccessDatabase(AccessDatabaseParameters parameters) : IDatabase
         {
             var dataValues = GetValuesFromReader(reader);
             yield return new Observation(dataColumns, dataValues);
+
+            token?.ThrowIfCancellationRequested();
         }
 
         Log.Information("Zakończono odczyt danych z bazy danych Access.");

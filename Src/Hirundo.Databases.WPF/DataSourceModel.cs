@@ -8,7 +8,7 @@ namespace Hirundo.Databases.WPF;
 
 public class DataSourceModel(IDataLabelRepository dataLabelRepository, IAccessMetadataService accessMetadataService) : ParametersBrowserModel
 {
-    public IList<IDatabaseParameters> DatabaseParameters { get; } = new List<IDatabaseParameters>();
+    public IList<IDatabaseParameters> DatabaseParameters { get; } = [];
 
     public override string Description => "W tym panelu wybierasz źródło danych.";
     public override string AddParametersCommandText => "Dodaj nowe źródło danych";

@@ -23,10 +23,10 @@ public class ApplicationConfigJsonConverterTests
             TypeNameHandling = TypeNameHandling.None,
             NullValueHandling = NullValueHandling.Ignore,
             Formatting = Formatting.Indented,
-            Converters = new List<JsonConverter>
-            {
+            Converters =
+            [
                 new HirundoJsonConverter()
-            }
+            ]
         };
     }
 

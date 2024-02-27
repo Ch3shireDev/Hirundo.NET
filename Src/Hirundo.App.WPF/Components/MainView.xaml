@@ -131,6 +131,7 @@
                 <Button HorizontalAlignment="Right" Command="{Binding PreviousCommand}">Poprzedni</Button>
                 <Button HorizontalAlignment="Right" Command="{Binding NextCommand}">Następny</Button>
                 <Button HorizontalAlignment="Right" Command="{Binding ProcessAndSaveCommand}">Przetwarzaj dane</Button>
+                <Button HorizontalAlignment="Right" Command="{Binding BreakCommand}">Przerwij</Button>
             </WrapPanel>
         </DockPanel>
     </Grid>
