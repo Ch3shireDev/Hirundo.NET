@@ -94,9 +94,9 @@ public class MainModel(
             await File.WriteAllTextAsync(configFilename, json);
 
         }
-        catch (OperationCanceledException e)
+        catch (OperationCanceledException)
         {
-            Log.Information($"Przerwano działanie aplikacji z polecenia użytkownika.");
+            Log.Information($"Przerwano obliczenia z polecenia użytkownika.");
             return;
         }
         catch (Exception e)
