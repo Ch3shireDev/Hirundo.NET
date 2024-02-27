@@ -167,4 +167,19 @@ public class MdbAccessQueryBuilderTests
         // Assert
         Assert.That(query, Is.EqualTo("SELECT IIF(IsNull([IDR_Podab]), Null, CLNG([IDR_Podab])) FROM [example table 10] WHERE [DATE] > DateSerial(1967, 8, 16) AND [DATE] < DateSerial(1967, 8, 17)"));
     }
+
+    [Test]
+    public void GivenNotEqualOperator_WhenBuild_TranslatesToInequalityOperator()
+    {
+        // Arrange
+        _builder.WithTable("example table 11");
+        _builder.WithColumn(new ColumnMapping("IDR_Podab", "ID", DataValueType.LongInt));
+        _builder.WithCondition(new DatabaseCondition("SPECIES", "REG.REG", DatabaseConditionType.IsNotEqual));
+
+        // Act
+        var query = _builder.Build();
+
+        // Assert
+        Assert.That(query, Is.EqualTo("SELECT IIF(IsNull([IDR_Podab]), Null, CLNG([IDR_Podab])) FROM [example table 11] WHERE [SPECIES] <> 'REG.REG'"));
+    }
 }

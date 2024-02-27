@@ -3,6 +3,7 @@
 public enum DatabaseConditionType
 {
     IsEqual,
+    IsNotEqual,
     IsGreaterThan,
     IsGreaterOrEqual,
     IsLowerThan,

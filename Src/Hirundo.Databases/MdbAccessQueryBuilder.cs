@@ -1,6 +1,6 @@
-﻿using System.Globalization;
+﻿using Hirundo.Databases.Conditions;
+using System.Globalization;
 using System.Text;
-using Hirundo.Databases.Conditions;
 
 namespace Hirundo.Databases;
 
@@ -132,6 +132,7 @@ public class MdbAccessQueryBuilder(string rowSeparator = " ")
         return conditionType switch
         {
             DatabaseConditionType.IsEqual => "=",
+            DatabaseConditionType.IsNotEqual => "<>",
             DatabaseConditionType.IsGreaterThan => ">",
             DatabaseConditionType.IsGreaterOrEqual => ">=",
             DatabaseConditionType.IsLowerThan => "<",

@@ -155,7 +155,7 @@
                                 <ComboBox
                                     Margin="2,0"
                                     ItemsSource="{Binding Source={StaticResource DatabaseConditionOperatorTypeListProvider}}"
-                                    SelectedValue="{Binding ConditionOperator}"
+                                    SelectedValue="{Binding ConditionOperator, UpdateSourceTrigger=PropertyChanged}"
                                     Style="{DynamicResource MaterialDesignDataGridComboBox}" >
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
@@ -173,7 +173,7 @@
                                 <ComboBox
                                     Margin="2,0"
                                     ItemsSource="{Binding DataContext.DataColumns, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                    SelectedValue="{Binding DatabaseColumn}"
+                                    SelectedValue="{Binding DatabaseColumn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     Style="{DynamicResource MaterialDesignDataGridComboBox}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -185,7 +185,7 @@
                                 <ComboBox
                                     Margin="2,0"
                                     ItemsSource="{Binding Source={StaticResource DatabaseConditionTypeListProvider}}"
-                                    SelectedValue="{Binding Type}"
+                                    SelectedValue="{Binding Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     Style="{DynamicResource MaterialDesignDataGridComboBox}" >
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
@@ -200,7 +200,7 @@
 
                     <DataGridTextColumn
                         Header="Wartość"
-                        Binding="{Binding Value}" />
+                        Binding="{Binding Value, UpdateSourceTrigger=PropertyChanged}" />
                 </DataGrid.Columns>
             </DataGrid>
             <WrapPanel>
