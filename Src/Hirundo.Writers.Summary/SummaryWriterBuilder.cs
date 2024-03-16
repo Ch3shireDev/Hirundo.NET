@@ -1,4 +1,5 @@
-﻿namespace Hirundo.Writers.Summary;
+﻿
+namespace Hirundo.Writers.Summary;
 
 /// <summary>
 ///     Budowniczy dla <see cref="ISummaryWriter" />.
@@ -6,6 +7,7 @@
 public class SummaryWriterBuilder : ISummaryWriterBuilder
 {
     private string _filename = null!;
+    private CancellationToken? _cancellationToken;
 
     public ISummaryWriterBuilder WithCsvSummaryWriterParameters(CsvSummaryWriterParameters parameters)
     {
@@ -24,10 +26,16 @@ public class SummaryWriterBuilder : ISummaryWriterBuilder
         };
     }
 
+    public ISummaryWriterBuilder WithCancellationToken(CancellationToken? cancellationToken)
+    {
+        _cancellationToken = cancellationToken;
+        return this;
+    }
+
     public ISummaryWriter Build()
     {
         var streamWriter = new StreamWriter(_filename);
-        var resultsWriter = new CsvSummaryWriter(streamWriter);
+        var resultsWriter = new CsvSummaryWriter(streamWriter, _cancellationToken);
         return resultsWriter;
     }
 }

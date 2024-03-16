@@ -8,6 +8,7 @@ namespace Hirundo.Processors.Population;
 public class PopulationProcessorBuilder : IPopulationProcessorBuilder
 {
     private readonly List<IPopulationConditionBuilder> _conditionBuilders = [];
+    private CancellationToken? _cancellationToken;
 
     /// <summary>
     ///     Tworzy obiekt typu <see cref="IPopulationProcessor" />.
@@ -15,8 +16,14 @@ public class PopulationProcessorBuilder : IPopulationProcessorBuilder
     /// <returns></returns>
     public IPopulationProcessor Build()
     {
-        var conditionBuilder = new CompositePopulationConditionBuilder([.._conditionBuilders]);
-        return new PopulationProcessor(conditionBuilder);
+        var conditionBuilder = new CompositePopulationConditionBuilder([.. _conditionBuilders]);
+        return new PopulationProcessor(conditionBuilder, _cancellationToken);
+    }
+
+    public IPopulationProcessorBuilder WithCancellationToken(CancellationToken? token)
+    {
+        _cancellationToken = token;
+        return this;
     }
 
     public IPopulationProcessorBuilder WithPopulationConditions(IEnumerable<IPopulationConditionBuilder> populationConditions)

@@ -8,6 +8,7 @@ namespace Hirundo.Processors.Returning;
 public class ReturningSpecimenConditionsBuilder : IReturningSpecimenConditionsBuilder
 {
     private readonly List<IReturningSpecimenCondition> _conditions = [];
+    private CancellationToken? _cancellationToken;
 
     /// <summary>
     ///     Buduje filtr powracających osobników.
@@ -15,7 +16,13 @@ public class ReturningSpecimenConditionsBuilder : IReturningSpecimenConditionsBu
     /// <returns></returns>
     public IReturningSpecimenCondition Build()
     {
-        return new CompositeReturningSpecimenCondition([.. _conditions]);
+        return new CompositeReturningSpecimenCondition([.. _conditions], _cancellationToken);
+    }
+
+    public IReturningSpecimenConditionsBuilder WithCancellationToken(CancellationToken? cancellationToken)
+    {
+        _cancellationToken = cancellationToken;
+        return this;
     }
 
     public IReturningSpecimenConditionsBuilder WithReturningSpecimensConditions(IEnumerable<IReturningSpecimenCondition> returningSpecimensConditions)

@@ -3,6 +3,7 @@
 public class SpecimensProcessorBuilder : ISpecimensProcessorBuilder
 {
     private SpecimensProcessorParameters _parameters = null!;
+    private CancellationToken? _cancellationToken;
 
     public ISpecimensProcessorBuilder WithSpecimensParameters(SpecimensProcessorParameters parameters)
     {
@@ -10,8 +11,14 @@ public class SpecimensProcessorBuilder : ISpecimensProcessorBuilder
         return this;
     }
 
+    public ISpecimensProcessorBuilder WithCancellationToken(CancellationToken? cancellationToken)
+    {
+        _cancellationToken = cancellationToken;
+        return this;
+    }
+
     public ISpecimensProcessor Build()
     {
-        return new SpecimensProcessor(_parameters);
+        return new SpecimensProcessor(_parameters, _cancellationToken);
     }
 }

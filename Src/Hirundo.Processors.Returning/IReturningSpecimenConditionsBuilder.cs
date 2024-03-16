@@ -9,6 +9,6 @@ public interface IReturningSpecimenConditionsBuilder
     /// </summary>
     /// <returns></returns>
     IReturningSpecimenCondition Build();
-
     IReturningSpecimenConditionsBuilder WithReturningSpecimensConditions(IEnumerable<IReturningSpecimenCondition> returningSpecimensConditions);
+    IReturningSpecimenConditionsBuilder WithCancellationToken(CancellationToken? cancellationToken);
 }

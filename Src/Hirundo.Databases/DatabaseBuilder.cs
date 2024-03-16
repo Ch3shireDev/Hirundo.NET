@@ -22,8 +22,7 @@ public class DatabaseBuilder : IDatabaseBuilder
             {
                 case AccessDatabaseParameters accessDatabaseParameters:
 
-                    _builders.Add(() =>
-                    new MdbAccessDatabase(accessDatabaseParameters, _token)
+                    _builders.Add(() => new MdbAccessDatabase(accessDatabaseParameters, _token)
                     );
 
                     break;

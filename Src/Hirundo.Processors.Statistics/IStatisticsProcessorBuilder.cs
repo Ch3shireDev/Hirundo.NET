@@ -9,6 +9,6 @@ public interface IStatisticsProcessorBuilder
     /// </summary>
     /// <returns></returns>
     IStatisticsProcessor Build();
-
     IStatisticsProcessorBuilder WithStatisticsOperations(IEnumerable<IStatisticalOperation> statisticsOperations);
+    IStatisticsProcessorBuilder WithCancellationToken(CancellationToken? token);
 }

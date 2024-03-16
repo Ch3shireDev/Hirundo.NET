@@ -21,15 +21,15 @@ public class DatabaseBuilderTests
         {
             Path = "example path",
             Table = "example table",
-            Columns = new List<ColumnMapping>
-            {
+            Columns =
+            [
                 new("IDR_Podab", "ID", DataValueType.LongInt),
                 new("RING", "RING", DataValueType.Text)
-            },
-            Conditions = new List<DatabaseCondition>
-            {
+            ],
+            Conditions =
+            [
                 new DatabaseCondition("ID", "1", DatabaseConditionType.IsEqual)
-            }
+            ]
         };
 
         // Act
@@ -52,15 +52,15 @@ public class DatabaseBuilderTests
         {
             Path = "example path",
             Table = "example table",
-            Columns = new List<ColumnMapping>
-            {
+            Columns =
+            [
                 new("IDR_Podab", "ID", DataValueType.LongInt),
                 new("RING", "RING", DataValueType.Text)
-            },
-            Conditions = new List<DatabaseCondition>
-            {
+            ],
+            Conditions =
+            [
                 new DatabaseCondition("ID", "1", DatabaseConditionType.IsEqual)
-            }
+            ]
         };
 
         var cancellationToken = new CancellationToken();

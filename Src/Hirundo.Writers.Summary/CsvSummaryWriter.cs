@@ -1,25 +1,14 @@
-﻿using System.Globalization;
-using System.Text;
-using CsvHelper;
+﻿using CsvHelper;
 using CsvHelper.Configuration;
 using CsvHelper.TypeConversion;
 using Hirundo.Commons;
+using System.Globalization;
+using System.Text;
 
 namespace Hirundo.Writers.Summary;
 
-public sealed class CsvSummaryWriter(TextWriter streamWriter) : ISummaryWriter, IDisposable, IAsyncDisposable
+public sealed class CsvSummaryWriter(TextWriter streamWriter, CancellationToken? token = null) : ISummaryWriter, IDisposable, IAsyncDisposable
 {
-    public async ValueTask DisposeAsync()
-    {
-        await streamWriter.DisposeAsync().ConfigureAwait(false);
-        GC.SuppressFinalize(this);
-    }
-
-    public void Dispose()
-    {
-        streamWriter.Dispose();
-        GC.SuppressFinalize(this);
-    }
 
     public void Write(IEnumerable<ReturningSpecimenSummary> summary)
     {
@@ -36,7 +25,7 @@ public sealed class CsvSummaryWriter(TextWriter streamWriter) : ISummaryWriter, 
             Encoding = Encoding.UTF8
         };
 
-        var options = new TypeConverterOptions { Formats = new[] { "yyyy-MM-dd" } };
+        var options = new TypeConverterOptions { Formats = ["yyyy-MM-dd"] };
 
         using var csvWriter = new CsvWriter(streamWriter, configuration);
         csvWriter.Context.TypeConverterOptionsCache.AddOptions<DateTime>(options);
@@ -53,6 +42,8 @@ public sealed class CsvSummaryWriter(TextWriter streamWriter) : ISummaryWriter, 
 
             foreach (var record in records)
             {
+                token?.ThrowIfCancellationRequested();
+
                 var values = record.GetValues(headers);
 
                 foreach (var value in values)
@@ -78,6 +69,18 @@ public sealed class CsvSummaryWriter(TextWriter streamWriter) : ISummaryWriter, 
             .ToList();
 
         return [.. valueHeaders, .. statisticsHeaders];
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await streamWriter.DisposeAsync().ConfigureAwait(false);
+        GC.SuppressFinalize(this);
+    }
+
+    public void Dispose()
+    {
+        streamWriter.Dispose();
+        GC.SuppressFinalize(this);
     }
 
     ~CsvSummaryWriter()

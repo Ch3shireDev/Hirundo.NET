@@ -4,4 +4,5 @@ public interface IComputedValuesCalculatorBuilder
 {
     public IComputedValuesCalculator Build();
     IComputedValuesCalculatorBuilder WithComputedValues(IList<IComputedValuesCalculator> computedValues);
+    IComputedValuesCalculatorBuilder WithCancellationToken(CancellationToken? cancellationToken);
 }

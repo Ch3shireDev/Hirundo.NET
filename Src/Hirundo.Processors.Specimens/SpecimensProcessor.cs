@@ -5,7 +5,7 @@ namespace Hirundo.Processors.Specimens;
 /// <summary>
 ///     Procesor osobników pozwala na zgrupowanie obserwacji w osobniki o ustalonym identyfikatorze obrączki.
 /// </summary>
-public class SpecimensProcessor(SpecimensProcessorParameters parameters) : ISpecimensProcessor
+public class SpecimensProcessor(SpecimensProcessorParameters parameters, CancellationToken? cancellationToken = null) : ISpecimensProcessor
 {
     /// <summary>
     ///     Zwraca osobniki na podstawie listy obserwacji.
@@ -14,10 +14,12 @@ public class SpecimensProcessor(SpecimensProcessorParameters parameters) : ISpec
     /// <returns></returns>
     public IEnumerable<Specimen> GetSpecimens(IEnumerable<Observation> observations)
     {
+        cancellationToken?.ThrowIfCancellationRequested();
+
         return observations
                 .GroupBy(x => x.GetValue<string>(parameters.SpecimenIdentifier))
                 .Where(pair => !string.IsNullOrWhiteSpace(pair.Key))
-                .Select(observationGroup => new Specimen(observationGroup.Key ?? "", [..observationGroup]))
+                .Select(observationGroup => new Specimen(observationGroup.Key ?? "", [.. observationGroup]))
             ;
     }
 }

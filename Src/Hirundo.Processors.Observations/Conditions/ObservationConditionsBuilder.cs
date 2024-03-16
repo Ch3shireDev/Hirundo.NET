@@ -1,4 +1,5 @@
-﻿namespace Hirundo.Processors.Observations.Conditions;
+﻿
+namespace Hirundo.Processors.Observations.Conditions;
 
 /// <summary>
 ///     Budowniczy filtrów obserwacji. Filtry mogą być budowane na podstawie danych wprowadzonych przez użytkownika,
@@ -7,6 +8,7 @@
 public class ObservationConditionsBuilder : IObservationConditionsBuilder
 {
     private readonly List<IObservationCondition> _observationFilters = [];
+    private CancellationToken? _cancellationToken;
 
     /// <summary>
     ///     Tworzy nowy filtr obserwacji.
@@ -14,7 +16,13 @@ public class ObservationConditionsBuilder : IObservationConditionsBuilder
     /// <returns></returns>
     public IObservationCondition Build()
     {
-        return new CompositeObservationCondition([.._observationFilters]);
+        return new CompositeObservationCondition([.. _observationFilters], _cancellationToken);
+    }
+
+    public IObservationConditionsBuilder WithCancellationToken(CancellationToken? cancellationToken)
+    {
+        _cancellationToken = cancellationToken;
+        return this;
     }
 
     public IObservationConditionsBuilder WithObservationConditions(IEnumerable<IObservationCondition> observationsConditions)

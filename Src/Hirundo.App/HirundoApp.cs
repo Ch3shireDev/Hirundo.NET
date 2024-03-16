@@ -65,30 +65,37 @@ public class HirundoApp : IHirundoApp
 
         var observationConditions = _observationConditionsBuilder
             .WithObservationConditions(applicationConfig.Observations.Conditions)
+            .WithCancellationToken(token)
             .Build();
 
         var computedValuesCalculator = _calculatorBuilder
             .WithComputedValues(applicationConfig.ComputedValues.ComputedValues)
+            .WithCancellationToken(token)
             .Build();
 
         var returningSpecimenConditions = _returningSpecimenConditionsBuilder
             .WithReturningSpecimensConditions(applicationConfig.ReturningSpecimens.Conditions)
+            .WithCancellationToken(token)
             .Build();
 
         var populationProcessor = _populationProcessorBuilder
             .WithPopulationConditions(applicationConfig.Population.Conditions)
+            .WithCancellationToken(token)
             .Build();
 
         var specimensProcessor = _specimensProcessorBuilder
             .WithSpecimensParameters(applicationConfig.Specimens)
+            .WithCancellationToken(token)
             .Build();
 
         var statisticsProcessor = _statisticsProcessorBuilder
             .WithStatisticsOperations(applicationConfig.Statistics.Operations)
+            .WithCancellationToken(token)
             .Build();
 
         using var resultsWriter = _summaryWriterBuilder
             .WithWriterParameters(applicationConfig.Results.Writer)
+            .WithCancellationToken(token)
             .Build();
 
         var observations = database.GetObservations().ToArray();

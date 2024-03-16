@@ -9,6 +9,6 @@ public interface IPopulationProcessorBuilder
     /// </summary>
     /// <returns></returns>
     IPopulationProcessor Build();
-
+    IPopulationProcessorBuilder WithCancellationToken(CancellationToken? token);
     IPopulationProcessorBuilder WithPopulationConditions(IEnumerable<IPopulationConditionBuilder> populationConditions);
 }
