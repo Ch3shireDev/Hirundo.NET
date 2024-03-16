@@ -1,6 +1,5 @@
 using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
-using Hirundo.Processors.Observations.Conditions;
 using Hirundo.Processors.Observations.WPF.IsEqual;
 using Moq;
 using NUnit.Framework;

@@ -1,6 +1,6 @@
 ﻿using Hirundo.Commons;
 
-namespace Hirundo.Processors.Observations.Conditions;
+namespace Hirundo.Processors.Observations;
 
 /// <summary>
 ///     Warunek obserwacji. Podczas przetwarzania danych z bazy danych, obserwacje są filtrowane warunkami zadanymi przez

@@ -1,5 +1,4 @@
 ﻿using Hirundo.Commons.WPF;
-using Hirundo.Processors.Observations.Conditions;
 
 namespace Hirundo.Processors.Observations.WPF.IsNotEmpty;
 

@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using Hirundo.Commons;
 
-namespace Hirundo.Processors.Observations.Conditions;
+namespace Hirundo.Processors.Observations;
 
 [TypeDescription("IsInTimeBlock")]
 public class IsInTimeBlockCondition : IObservationCondition

@@ -1,6 +1,6 @@
 ﻿using Hirundo.Commons;
 
-namespace Hirundo.Processors.Observations.Conditions;
+namespace Hirundo.Processors.Observations;
 
 /// <summary>
 ///     Warunek sprawdzający, czy wartość obserwacji z zadanego pola znajduje się w zbiorze wartości.

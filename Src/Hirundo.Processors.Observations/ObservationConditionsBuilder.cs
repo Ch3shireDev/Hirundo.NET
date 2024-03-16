@@ -1,7 +1,6 @@
-﻿
-using Serilog;
+﻿using Serilog;
 
-namespace Hirundo.Processors.Observations.Conditions;
+namespace Hirundo.Processors.Observations;
 
 /// <summary>
 ///     Budowniczy filtrów obserwacji. Filtry mogą być budowane na podstawie danych wprowadzonych przez użytkownika,

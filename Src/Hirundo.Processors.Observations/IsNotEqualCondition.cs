@@ -1,6 +1,6 @@
 ﻿using Hirundo.Commons;
 
-namespace Hirundo.Processors.Observations.Conditions;
+namespace Hirundo.Processors.Observations;
 
 [TypeDescription("IsNotEqual")]
 public class IsNotEqualCondition(string valueName, object value) : IObservationCondition

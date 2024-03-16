@@ -1,6 +1,6 @@
 ﻿using Hirundo.Databases;
 using Hirundo.Processors.Computed;
-using Hirundo.Processors.Observations.Conditions;
+using Hirundo.Processors.Observations;
 using Hirundo.Processors.Population;
 using Hirundo.Processors.Returning;
 using Hirundo.Processors.Specimens;

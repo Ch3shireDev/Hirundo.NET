@@ -1,6 +1,6 @@
 ﻿using Hirundo.Commons;
 
-namespace Hirundo.Processors.Observations.Conditions;
+namespace Hirundo.Processors.Observations;
 
 [TypeDescription("IsNotEmpty")]
 public class IsNotEmptyCondition(string valueName) : IObservationCondition

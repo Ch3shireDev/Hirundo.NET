@@ -1,5 +1,5 @@
 ﻿using Hirundo.Commons;
-using Hirundo.Processors.Observations.Conditions;
+using Hirundo.Processors.Observations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;

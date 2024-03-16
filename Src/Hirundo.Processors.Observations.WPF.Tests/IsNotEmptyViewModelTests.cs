@@ -1,5 +1,4 @@
 using Hirundo.Commons.Repositories.Labels;
-using Hirundo.Processors.Observations.Conditions;
 using Hirundo.Processors.Observations.WPF.IsNotEmpty;
 using Moq;
 using NUnit.Framework;

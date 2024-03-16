@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Hirundo.Commons;
 using Hirundo.Commons.WPF;
-using Hirundo.Processors.Observations.Conditions;
 using Serilog;
 using System.Collections.ObjectModel;
 using System.Windows.Input;

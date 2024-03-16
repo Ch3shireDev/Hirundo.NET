@@ -1,5 +1,5 @@
 ﻿using Hirundo.Databases;
-using Hirundo.Processors.Observations.Conditions;
+using Hirundo.Processors.Observations;
 using Hirundo.Processors.Population.Conditions;
 using Hirundo.Processors.Returning.Conditions;
 using Hirundo.Processors.Statistics.Operations;

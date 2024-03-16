@@ -1,9 +1,8 @@
 ﻿using Hirundo.Commons;
-using Hirundo.Processors.Observations.Conditions;
 using NUnit.Framework;
 using System.Text;
 
-namespace Hirundo.Processors.Observations.Tests.Conditions;
+namespace Hirundo.Processors.Observations.Tests;
 
 [TestFixture]
 public class IsEqualObservationConditionTests

@@ -1,5 +1,4 @@
 ﻿using Hirundo.Commons.WPF;
-using Hirundo.Processors.Observations.Conditions;
 using Moq;
 using NUnit.Framework;
 

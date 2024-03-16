@@ -1,7 +1,6 @@
 using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
-using Hirundo.Processors.Observations.Conditions;
 using Hirundo.Processors.Observations.WPF.IsInSet;
 using Moq;
 using NUnit.Framework;

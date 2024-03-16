@@ -1,5 +1,4 @@
-﻿
-namespace Hirundo.Processors.Observations.Conditions;
+﻿namespace Hirundo.Processors.Observations;
 
 public interface IObservationConditionsBuilder
 {
