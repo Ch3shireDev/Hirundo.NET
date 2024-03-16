@@ -109,4 +109,20 @@ public class IsEqualConditionTests
         // Assert
         Assert.That(isAccepted, Is.EqualTo(result), message: $"Compare {conditionValue} ({conditionValue?.GetType()?.Name}) to {observationValue} ({observationValue?.GetType()?.Name}))");
     }
+
+    [Test]
+    public void GivenDatesToCompare_WhenIsAccepted_ReturnsIsEqual()
+    {
+        // Arrange
+        var valueName = "Date";
+        var condition = new IsEqualCondition(valueName, new DateTime(2020, 01, 02));
+
+        var observation = new Observation([valueName], ["2020-01-02"]);
+
+        // Act
+        var isAccepted = condition.IsAccepted(observation);
+
+        // Assert
+        Assert.That(isAccepted, Is.True);
+    }
 }

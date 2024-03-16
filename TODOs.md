@@ -14,7 +14,7 @@
 12. [x] Uzupełnić przerywanie działania programu dla pozostałych operacji.
 13. [x] Rozwiązać problem związany z trzymaniem stanu HirundoApp i wykorzystywanych builderów.
 14. [x] Dodać operator IsNotEqual w Obserwacjach.
-15. [ ] Dodać operator IsGreaterThan w Obserwacjach.
+15. [x] Dodać operator IsGreaterThan w Obserwacjach.
 16. [ ] Dodać operator IsLessThan w Obserwacjach.
 17. [ ] Dodać operator IsGreaterOrEqual w Obserwacjach.
 18. [ ] Dodać operator IsLessOrEqual w Obserwacjach.

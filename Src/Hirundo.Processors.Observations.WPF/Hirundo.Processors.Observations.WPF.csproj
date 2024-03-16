@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0-windows</TargetFramework>
@@ -33,6 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="IsGreaterThan\IsGreaterThanView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="IsNotEqual\IsNotEqualView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

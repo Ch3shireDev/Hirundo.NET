@@ -82,6 +82,11 @@ public static class DataTypeHelpers
             return true;
         }
 
+        if (DoesEqualAsSoftDate(value1, value2))
+        {
+            return true;
+        }
+
         if (value1.GetType() == value2.GetType())
         {
             return Equals(value1, value2);
@@ -89,6 +94,17 @@ public static class DataTypeHelpers
 
         var typeValue = ConvertValue(value1, value2.GetType());
         return Equals(typeValue, value2);
+    }
+
+    private static bool DoesEqualAsSoftDate(object? value1, object? value2)
+    {
+        if (!IsConvertableToDate(value1)) return false;
+        if (!IsConvertableToDate(value2)) return false;
+
+        var date1 = Convert.ToDateTime(value1, CultureInfo.InvariantCulture);
+        var date2 = Convert.ToDateTime(value2, CultureInfo.InvariantCulture);
+
+        return date1.Equals(date2);
     }
 
     private static bool DoesEqualAsSoftNumber(object? value1, object? value2)
@@ -102,13 +118,47 @@ public static class DataTypeHelpers
         return Equals(number1, number2);
     }
 
+    public static bool IsGreaterThanNumeric(object? value1, object? value2)
+    {
+        if (!IsConvertableToNumber(value1)) return false;
+        if (!IsConvertableToNumber(value2)) return false;
+
+        var number1 = Convert.ToDouble(value1, CultureInfo.InvariantCulture);
+        var number2 = Convert.ToDouble(value2, CultureInfo.InvariantCulture);
+
+        return number1 > number2;
+    }
+
+    public static bool IsGreaterThanDate(object? value1, object? value2)
+    {
+        if (!IsConvertableToDate(value1)) return false;
+        if (!IsConvertableToDate(value2)) return false;
+
+        var date1 = Convert.ToDateTime(value1, CultureInfo.InvariantCulture);
+        var date2 = Convert.ToDateTime(value2, CultureInfo.InvariantCulture);
+
+        return date1 > date2;
+    }
+
+    public static bool IsConvertableToDate(object? value)
+    {
+        if (value == null) return false;
+        if (value is DateTime) return true;
+        if (value is string valueStr)
+        {
+            return DateTime.TryParse(valueStr, CultureInfo.InvariantCulture, DateTimeStyles.None, out _);
+
+        }
+        return false;
+    }
+
     private static bool IsNullOrEmptyString(object? value)
     {
         if (value == null) return true;
         return value is string str && string.IsNullOrEmpty(str);
     }
 
-    private static bool IsConvertableToNumber(object? value)
+    public static bool IsConvertableToNumber(object? value)
     {
         if (value == null) return false;
         if (value is int || value is double || value is float || value is decimal) return true;
