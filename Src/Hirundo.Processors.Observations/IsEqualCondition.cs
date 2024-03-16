@@ -6,12 +6,12 @@ namespace Hirundo.Processors.Observations;
 ///     Warunek sprawdzający, czy wartość obserwacji jest równa podanej wartości.
 /// </summary>
 [TypeDescription("IsEqual")]
-public class IsEqualObservationCondition : IObservationCondition
+public class IsEqualCondition : IObservationCondition
 {
     /// <summary>
     ///     Domyślny konstruktor. Ustawia wartości domyślne jako pusty string.
     /// </summary>
-    public IsEqualObservationCondition()
+    public IsEqualCondition()
     {
         ValueName = string.Empty;
         Value = string.Empty;
@@ -22,7 +22,7 @@ public class IsEqualObservationCondition : IObservationCondition
     /// </summary>
     /// <param name="valueName">Nazwa sprawdzanej wartości obserwacji.</param>
     /// <param name="value">Wartość, do której jest przyrównywana wartość obserwacji.</param>
-    public IsEqualObservationCondition(string valueName, object value)
+    public IsEqualCondition(string valueName, object? value)
     {
         ValueName = valueName;
         Value = value;
@@ -36,7 +36,7 @@ public class IsEqualObservationCondition : IObservationCondition
     /// <summary>
     ///     Wartość, do której jest przyrównywana wartość obserwacji.
     /// </summary>
-    public object Value { get; set; }
+    public object? Value { get; set; }
 
     /// <summary>
     ///     Czy wartość obserwacji jest równa podanej wartości?
@@ -48,16 +48,6 @@ public class IsEqualObservationCondition : IObservationCondition
     {
         ArgumentNullException.ThrowIfNull(observation);
         var observationValue = observation.GetValue(ValueName);
-        if (observationValue == null)
-        {
-            return Value == null;
-        }
-
-        var observationType = observationValue.GetType();
-
-        if (Value.GetType() == observationType) return Equals(Value, observationValue);
-
-        var typeValue = DataTypeHelpers.ConvertValue(Value, observationType);
-        return Equals(typeValue, observationValue);
+        return DataTypeHelpers.SoftEquals(Value, observationValue);
     }
 }

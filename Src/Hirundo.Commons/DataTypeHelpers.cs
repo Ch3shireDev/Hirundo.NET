@@ -65,6 +65,60 @@ public static class DataTypeHelpers
         };
     }
 
+    public static bool SoftEquals(object? value1, object? value2)
+    {
+        if (value1 is null)
+        {
+            return IsNullOrEmptyString(value2);
+        }
+
+        if (value2 is null)
+        {
+            return IsNullOrEmptyString(value1);
+        }
+
+        if (DoesEqualAsSoftNumber(value1, value2))
+        {
+            return true;
+        }
+
+        if (value1.GetType() == value2.GetType())
+        {
+            return Equals(value1, value2);
+        }
+
+        var typeValue = ConvertValue(value1, value2.GetType());
+        return Equals(typeValue, value2);
+    }
+
+    private static bool DoesEqualAsSoftNumber(object? value1, object? value2)
+    {
+        if (!IsConvertableToNumber(value1)) return false;
+        if (!IsConvertableToNumber(value2)) return false;
+
+        var number1 = Convert.ToDouble(value1, CultureInfo.InvariantCulture);
+        var number2 = Convert.ToDouble(value2, CultureInfo.InvariantCulture);
+
+        return Equals(number1, number2);
+    }
+
+    private static bool IsNullOrEmptyString(object? value)
+    {
+        if (value == null) return true;
+        return value is string str && string.IsNullOrEmpty(str);
+    }
+
+    private static bool IsConvertableToNumber(object? value)
+    {
+        if (value == null) return false;
+        if (value is int || value is double || value is float || value is decimal) return true;
+        if (value is string valueStr)
+        {
+            return double.TryParse(valueStr, out _);
+        }
+        return false;
+    }
+
     public static object? ConvertValue(object? value, Type type)
     {
         switch (value)

@@ -18,7 +18,7 @@ public class ObservationConditionsBuilderTests
     public void GivenOneObservationCondition_WhenBuild_ReturnsCompositeCondition()
     {
         // Arrange
-        var condition = new IsEqualObservationCondition("valueName", "value");
+        var condition = new IsEqualCondition("valueName", "value");
 
         // Act
         var result = _builder.WithObservationConditions([condition]).Build();
@@ -35,7 +35,7 @@ public class ObservationConditionsBuilderTests
     public void GivenCancellationToken_WhenBuild_ReturnsConditionWithCancellationToken()
     {
         // Arrange
-        var condition = new IsEqualObservationCondition("valueName", "value");
+        var condition = new IsEqualCondition("valueName", "value");
         var cancellationToken = new CancellationToken();
 
         // Act

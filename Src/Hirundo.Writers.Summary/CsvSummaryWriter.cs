@@ -2,6 +2,7 @@
 using CsvHelper.Configuration;
 using CsvHelper.TypeConversion;
 using Hirundo.Commons;
+using Serilog;
 using System.Globalization;
 using System.Text;
 
@@ -14,7 +15,11 @@ public sealed class CsvSummaryWriter(TextWriter streamWriter, CancellationToken?
     {
         var records = summary.ToList();
 
-        if (records.Count == 0) throw new ArgumentException("No records to write.");
+        if (records.Count == 0)
+        {
+            Log.Warning("Brak danych do zapisu.");
+            return;
+        }
 
         var headers = GetHeaders(records);
 

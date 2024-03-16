@@ -13,12 +13,16 @@
 11. [x] Dodać możliwość przerywania działania programu (klawisz przerwij).
 12. [x] Uzupełnić przerywanie działania programu dla pozostałych operacji.
 13. [x] Rozwiązać problem związany z trzymaniem stanu HirundoApp i wykorzystywanych builderów.
-14. [ ] Dodać operatory IsNotEqual, IsGreaterThan, IsLessThan, IsGreaterOrEqual, IsLessOrEqual w Obserwacjach.
-15. [ ] Dodać przeglądanie dostępnych gatunków w zakładce Osobniki
-16. [ ] W polu osobniki dodać informację o liczbie osobników w bazie danych, maksymalnej liczbie obserwacji przypadającej na osobnika.
-17. [ ] Dodać przeglądanie rozkładu wartości w Obserwacje.
-18. [ ] Upewnić się, czy powrót po określonym czasie w Powrotach jest odporny na format daty.
-19. [ ] Dodać abstrakcję ParametersBrowser do zakładki Zapis wyników.
-20. [ ] DatabaseConditionType powinien spełniać regułę OCP.
+14. [x] Dodać operator IsNotEqual w Obserwacjach.
+15. [ ] Dodać operator IsGreaterThan w Obserwacjach.
+16. [ ] Dodać operator IsLessThan w Obserwacjach.
+17. [ ] Dodać operator IsGreaterOrEqual w Obserwacjach.
+18. [ ] Dodać operator IsLessOrEqual w Obserwacjach.
+19. [ ] Dodać przeglądanie dostępnych gatunków w zakładce Osobniki
+20. [ ] W polu osobniki dodać informację o liczbie osobników w bazie danych, maksymalnej liczbie obserwacji przypadającej na osobnika.
+21. [ ] Dodać przeglądanie rozkładu wartości w Obserwacje.
+22. [ ] Upewnić się, czy powrót po określonym czasie w Powrotach jest odporny na format daty.
+23. [ ] Dodać abstrakcję ParametersBrowser do zakładki Zapis wyników.
+24. [ ] DatabaseConditionType powinien spełniać regułę OCP.
 
 Powyższa lista cech stanowi wymagania dla kolejnej wersji aplikacji. Użytkownik musi być w stanie utworzyć podstawową konfigurację, w której jest w stanie uzyskać dane statystyczne dla powracających osobników. Użytkownik będzie w stanie wybrać interesujące go obserwacje, pola statystyczne, i określić warunek powrotu na podstawie wybranych kolumn. Wynikiem działania programu będzie plik z danymi w formacie `.csv` bądź `.xlsx` w którym przedstawiane są wybrane osobniki z wybranymi kolumnami i wartościami statystycznymi populacji.

@@ -1,18 +1,18 @@
 ﻿using Hirundo.Commons;
 using Hirundo.Commons.WPF;
 
-namespace Hirundo.Processors.Observations.WPF.IsEqual;
+namespace Hirundo.Processors.Observations.WPF.IsNotEqual;
 
 [ParametersData(
-    typeof(IsEqualCondition),
-    typeof(IsEqualModel),
-    typeof(IsEqualView),
-    "Czy wartość jest równa?",
+    typeof(IsNotEqualCondition),
+    typeof(IsNotEqualModel),
+    typeof(IsNotEqualView),
+    "Czy wartość nie jest równa?",
     "Warunek porównujący pole danych z podaną wartością."
 )]
-public class IsEqualViewModel(IsEqualModel model) : ParametersViewModel(model)
+public class IsNotEqualViewModel(IsNotEqualModel model) : ParametersViewModel(model)
 {
-    public IsEqualModel Model => model;
+    public IsNotEqualModel Model => model;
 
     public string Value
     {

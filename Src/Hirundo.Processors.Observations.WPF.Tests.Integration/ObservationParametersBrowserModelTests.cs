@@ -20,7 +20,7 @@ public class ObservationParametersBrowserModelTests
 
     [Test]
     [TestCase(typeof(IsNotEmptyCondition))]
-    [TestCase(typeof(IsEqualObservationCondition))]
+    [TestCase(typeof(IsEqualCondition))]
     [TestCase(typeof(IsInTimeBlockCondition))]
     [TestCase(typeof(IsInSetCondition))]
     //[TestCase(typeof(IsInSeasonCondition))]
@@ -42,7 +42,7 @@ public class ObservationParametersBrowserModelTests
 
     [Test]
     [TestCase(typeof(IsNotEmptyCondition))]
-    [TestCase(typeof(IsEqualObservationCondition))]
+    [TestCase(typeof(IsEqualCondition))]
     [TestCase(typeof(IsInTimeBlockCondition))]
     [TestCase(typeof(IsInSetCondition))]
     public void GivenModelWithIsEqual_WhenRemoveIsEqualViewModel_RemovesIsEqualViewModel(Type conditionType)

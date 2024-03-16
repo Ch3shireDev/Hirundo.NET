@@ -2,9 +2,9 @@
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
 
-namespace Hirundo.Processors.Observations.WPF.IsEqual;
+namespace Hirundo.Processors.Observations.WPF.IsNotEqual;
 
-public class IsEqualModel(IsEqualCondition condition, IDataLabelRepository repository) : ParametersModel(condition, repository)
+public class IsNotEqualModel(IsNotEqualCondition condition, IDataLabelRepository repository) : ParametersModel(condition, repository)
 {
     public string ValueName
     {

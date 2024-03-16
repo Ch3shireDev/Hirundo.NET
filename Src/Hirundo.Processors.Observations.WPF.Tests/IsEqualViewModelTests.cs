@@ -14,14 +14,14 @@ public class IsEqualViewModelTests
     {
         _repository = new Mock<IDataLabelRepository>();
 
-        _observationCondition = new IsEqualObservationCondition();
+        _observationCondition = new IsEqualCondition();
         _model = new IsEqualModel(_observationCondition, _repository.Object);
         _viewModel = new IsEqualViewModel(_model);
     }
 
     private Mock<IDataLabelRepository> _repository = null!;
 
-    private IsEqualObservationCondition _observationCondition = null!;
+    private IsEqualCondition _observationCondition = null!;
     private IsEqualModel _model = null!;
     private IsEqualViewModel _viewModel = null!;
 
