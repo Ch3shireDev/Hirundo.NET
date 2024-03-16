@@ -1,4 +1,6 @@
 ﻿
+using Serilog;
+
 namespace Hirundo.Databases;
 
 /// <summary>
@@ -11,6 +13,25 @@ public class DatabaseBuilder : IDatabaseBuilder
     private readonly List<Func<IDatabase>> _builders = [];
 
     private CancellationToken? _token;
+
+    /// <summary>
+    ///     Tworzy obiekt typu <see cref="IDatabase" />.
+    /// </summary>
+    /// <returns></returns>
+    public IDatabase Build()
+    {
+        Log.Information("Budowanie źródeł baz danych. Liczba baz danych: {_buildersCount}.", _builders.Count);
+
+        if (_builders.Count == 1)
+        {
+            return _builders[0]();
+        }
+        else
+        {
+            return new CompositeDatabase([.. _builders.Select(x => x())]);
+        }
+    }
+
     public IDatabaseBuilder NewBuilder()
     {
         return new DatabaseBuilder();
@@ -48,22 +69,6 @@ public class DatabaseBuilder : IDatabaseBuilder
         _builders.Add(() => new MdbAccessDatabase(databaseParameters, _token));
 
         return this;
-    }
-
-    /// <summary>
-    ///     Tworzy obiekt typu <see cref="IDatabase" />.
-    /// </summary>
-    /// <returns></returns>
-    public IDatabase Build()
-    {
-        if (_builders.Count == 1)
-        {
-            return _builders[0]();
-        }
-        else
-        {
-            return new CompositeDatabase([.. _builders.Select(x => x())]);
-        }
     }
 
     /// <summary>

@@ -12,7 +12,6 @@ public interface IDatabaseBuilder
     /// <returns></returns>
     IDatabaseBuilder AddMdbAccessDatabase(AccessDatabaseParameters databaseParameters);
 
-
     /// <summary>
     ///     Dodaje token anulowania operacji.
     /// </summary>

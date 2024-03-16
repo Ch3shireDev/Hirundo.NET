@@ -1,4 +1,5 @@
 ﻿using Hirundo.Processors.Returning.Conditions;
+using Serilog;
 
 namespace Hirundo.Processors.Returning;
 
@@ -16,6 +17,7 @@ public class ReturningSpecimenConditionsBuilder : IReturningSpecimenConditionsBu
     /// <returns></returns>
     public IReturningSpecimenCondition Build()
     {
+        Log.Information("Budowanie warunków powracających osobników. Liczba warunków: {_conditionsCount}.", _conditions.Count);
         return new CompositeReturningSpecimenCondition([.. _conditions], _cancellationToken);
     }
 

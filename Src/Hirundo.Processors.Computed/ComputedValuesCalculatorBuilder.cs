@@ -1,4 +1,6 @@
-﻿namespace Hirundo.Processors.Computed;
+﻿using Serilog;
+
+namespace Hirundo.Processors.Computed;
 
 public class ComputedValuesCalculatorBuilder : IComputedValuesCalculatorBuilder
 {
@@ -7,6 +9,7 @@ public class ComputedValuesCalculatorBuilder : IComputedValuesCalculatorBuilder
 
     public IComputedValuesCalculator Build()
     {
+        Log.Information("Budowanie kalkulatora wartości obliczonych. Liczba kalkulatorów: {_computedValuesCount}.", _computedValues.Count);
         return new CompositeCalculator([.. _computedValues], _cancellationToken);
     }
 

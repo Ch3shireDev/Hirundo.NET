@@ -1,4 +1,5 @@
 ﻿using Hirundo.Processors.Statistics.Operations;
+using Serilog;
 
 namespace Hirundo.Processors.Statistics;
 
@@ -17,6 +18,7 @@ public class StatisticsProcessorBuilder : IStatisticsProcessorBuilder
     /// <returns></returns>
     public IStatisticsProcessor Build()
     {
+        Log.Information("Budowanie procesora statystyk. Liczba operacji: {_statisticalOperationsCount}.", _statisticalOperations.Count);
         return new StatisticsProcessor(_statisticalOperations, _token);
     }
 

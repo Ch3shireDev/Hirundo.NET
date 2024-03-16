@@ -1,4 +1,6 @@
 ﻿
+using Serilog;
+
 namespace Hirundo.Writers.Summary;
 
 /// <summary>
@@ -34,6 +36,8 @@ public class SummaryWriterBuilder : ISummaryWriterBuilder
 
     public ISummaryWriter Build()
     {
+        ArgumentNullException.ThrowIfNull(_filename);
+        Log.Information("Budowanie zapisywacza podsumowań do pliku: {_filename}.", _filename);
         var streamWriter = new StreamWriter(_filename);
         var resultsWriter = new CsvSummaryWriter(streamWriter, _cancellationToken);
         return resultsWriter;

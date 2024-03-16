@@ -1,4 +1,6 @@
-﻿namespace Hirundo.Processors.Specimens;
+﻿using Serilog;
+
+namespace Hirundo.Processors.Specimens;
 
 public class SpecimensProcessorBuilder : ISpecimensProcessorBuilder
 {
@@ -19,6 +21,7 @@ public class SpecimensProcessorBuilder : ISpecimensProcessorBuilder
 
     public ISpecimensProcessor Build()
     {
+        Log.Information("Budowanie procesora osobników.");
         return new SpecimensProcessor(_parameters, _cancellationToken);
     }
 

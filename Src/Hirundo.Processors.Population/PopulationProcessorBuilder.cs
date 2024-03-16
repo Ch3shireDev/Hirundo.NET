@@ -1,4 +1,5 @@
 ﻿using Hirundo.Processors.Population.Conditions;
+using Serilog;
 
 namespace Hirundo.Processors.Population;
 
@@ -16,6 +17,7 @@ public class PopulationProcessorBuilder : IPopulationProcessorBuilder
     /// <returns></returns>
     public IPopulationProcessor Build()
     {
+        Log.Information("Budowanie procesora populacji. Liczba warunków: {_conditionsCount}.", _conditionBuilders.Count);
         var conditionBuilder = new CompositePopulationConditionBuilder([.. _conditionBuilders]);
         return new PopulationProcessor(conditionBuilder, _cancellationToken);
     }

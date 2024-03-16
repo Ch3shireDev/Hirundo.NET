@@ -1,4 +1,6 @@
 ﻿
+using Serilog;
+
 namespace Hirundo.Processors.Observations.Conditions;
 
 /// <summary>
@@ -7,7 +9,7 @@ namespace Hirundo.Processors.Observations.Conditions;
 /// </summary>
 public class ObservationConditionsBuilder : IObservationConditionsBuilder
 {
-    private readonly List<IObservationCondition> _observationFilters = [];
+    private readonly List<IObservationCondition> _observationConditions = [];
     private CancellationToken? _cancellationToken;
 
     /// <summary>
@@ -16,7 +18,8 @@ public class ObservationConditionsBuilder : IObservationConditionsBuilder
     /// <returns></returns>
     public IObservationCondition Build()
     {
-        return new CompositeObservationCondition([.. _observationFilters], _cancellationToken);
+        Log.Information("Budowanie warunków obserwacji. Liczba warunków: {_observationConditionsCount}.", _observationConditions.Count);
+        return new CompositeObservationCondition([.. _observationConditions], _cancellationToken);
     }
 
     public IObservationConditionsBuilder NewBuilder()
@@ -32,7 +35,7 @@ public class ObservationConditionsBuilder : IObservationConditionsBuilder
 
     public IObservationConditionsBuilder WithObservationConditions(IEnumerable<IObservationCondition> observationsConditions)
     {
-        _observationFilters.AddRange(observationsConditions);
+        _observationConditions.AddRange(observationsConditions);
         return this;
     }
 }
