@@ -22,7 +22,11 @@ public class HirundoAppTests
         _databaseBuilder = new Mock<IDatabaseBuilder>();
 
         _databaseBuilder
-            .Setup(x => x.WithDatabaseParameters(It.IsAny<IList<IDatabaseParameters>>(), It.IsAny<CancellationToken?>()))
+            .Setup(x => x.WithDatabaseParameters(It.IsAny<IDatabaseParameters[]>()))
+            .Returns(_databaseBuilder.Object);
+
+        _databaseBuilder
+            .Setup(x => x.WithCancellationToken(It.IsAny<CancellationToken?>()))
             .Returns(_databaseBuilder.Object);
 
         _databaseBuilder

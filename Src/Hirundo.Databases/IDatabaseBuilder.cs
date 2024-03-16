@@ -3,14 +3,22 @@ namespace Hirundo.Databases;
 
 public interface IDatabaseBuilder
 {
-    IDatabaseBuilder WithDatabaseParameters(IEnumerable<IDatabaseParameters> appConfigDatabases, CancellationToken? token = null);
+    IDatabaseBuilder WithDatabaseParameters(params IDatabaseParameters[] appConfigDatabases);
 
     /// <summary>
     ///     Dodaje parametry bazy danych Access.
     /// </summary>
     /// <param name="databaseParameters"></param>
     /// <returns></returns>
-    IDatabaseBuilder AddMdbAccessDatabase(AccessDatabaseParameters databaseParameters, CancellationToken? token = null);
+    IDatabaseBuilder AddMdbAccessDatabase(AccessDatabaseParameters databaseParameters);
+
+
+    /// <summary>
+    ///     Dodaje token anulowania operacji.
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    IDatabaseBuilder WithCancellationToken(CancellationToken? cancellationToken);
 
     /// <summary>
     ///     Tworzy obiekt typu <see cref="IDatabase" />.

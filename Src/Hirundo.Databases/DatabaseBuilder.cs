@@ -8,9 +8,11 @@ namespace Hirundo.Databases;
 /// </summary>
 public class DatabaseBuilder : IDatabaseBuilder
 {
-    private readonly List<IDatabase> _databases = [];
+    private readonly List<Func<IDatabase>> _builders = [];
 
-    public IDatabaseBuilder WithDatabaseParameters(IEnumerable<IDatabaseParameters> appConfigDatabases, CancellationToken? token = null)
+    private CancellationToken? _token;
+
+    public IDatabaseBuilder WithDatabaseParameters(params IDatabaseParameters[] appConfigDatabases)
     {
         ArgumentNullException.ThrowIfNull(appConfigDatabases);
 
@@ -19,7 +21,11 @@ public class DatabaseBuilder : IDatabaseBuilder
             switch (databaseParameters)
             {
                 case AccessDatabaseParameters accessDatabaseParameters:
-                    AddMdbAccessDatabase(accessDatabaseParameters, token);
+
+                    _builders.Add(() =>
+                    new MdbAccessDatabase(accessDatabaseParameters, _token)
+                    );
+
                     break;
                 default:
                     throw new ArgumentException($"Unknown database type: {databaseParameters.GetType()}");
@@ -34,9 +40,10 @@ public class DatabaseBuilder : IDatabaseBuilder
     /// </summary>
     /// <param name="databaseParameters"></param>
     /// <returns></returns>
-    public IDatabaseBuilder AddMdbAccessDatabase(AccessDatabaseParameters databaseParameters, CancellationToken? token = null)
+    public IDatabaseBuilder AddMdbAccessDatabase(AccessDatabaseParameters databaseParameters)
     {
-        _databases.Add(new MdbAccessDatabase(databaseParameters, token));
+        _builders.Add(() => new MdbAccessDatabase(databaseParameters, _token));
+
         return this;
     }
 
@@ -46,6 +53,24 @@ public class DatabaseBuilder : IDatabaseBuilder
     /// <returns></returns>
     public IDatabase Build()
     {
-        return new CompositeDatabase([.. _databases]);
+        if (_builders.Count == 1)
+        {
+            return _builders[0]();
+        }
+        else
+        {
+            return new CompositeDatabase([.. _builders.Select(x => x())]);
+        }
+    }
+
+    /// <summary>
+    ///     Dodaje token anulowania operacji.
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public IDatabaseBuilder WithCancellationToken(CancellationToken? cancellationToken)
+    {
+        _token = cancellationToken;
+        return this;
     }
 }

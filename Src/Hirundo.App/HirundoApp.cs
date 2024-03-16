@@ -59,7 +59,8 @@ public class HirundoApp : IHirundoApp
         ArgumentNullException.ThrowIfNull(applicationConfig);
 
         var database = _databaseBuilder
-            .WithDatabaseParameters(applicationConfig.Databases, token)
+            .WithDatabaseParameters([.. applicationConfig.Databases])
+            .WithCancellationToken(token)
             .Build();
 
         var observationConditions = _observationConditionsBuilder

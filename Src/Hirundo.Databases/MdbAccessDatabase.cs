@@ -11,6 +11,9 @@ namespace Hirundo.Databases;
 /// <param name="parameters"></param>
 public class MdbAccessDatabase(AccessDatabaseParameters parameters, CancellationToken? token = null) : IDatabase
 {
+    public CancellationToken? CancellationToken => token;
+    public AccessDatabaseParameters? Parameters => parameters;
+
     /// <summary>
     ///     ConnectionString jest tworzony z użyciem Microsoft Access Driver dla połączenia ODBC.
     /// </summary>

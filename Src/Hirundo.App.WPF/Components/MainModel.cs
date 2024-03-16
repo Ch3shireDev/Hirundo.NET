@@ -130,7 +130,7 @@ public class MainModel(
             var config = GetConfigFromViewModels();
             app.Run(config);
         }
-        catch (OperationCanceledException e)
+        catch (OperationCanceledException)
         {
             Log.Information($"Przerwano działanie aplikacji z polecenia użytkownika.");
             return;
