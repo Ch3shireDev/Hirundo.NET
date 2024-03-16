@@ -19,6 +19,11 @@ public class ObservationConditionsBuilder : IObservationConditionsBuilder
         return new CompositeObservationCondition([.. _observationFilters], _cancellationToken);
     }
 
+    public IObservationConditionsBuilder NewBuilder()
+    {
+        return new ObservationConditionsBuilder();
+    }
+
     public IObservationConditionsBuilder WithCancellationToken(CancellationToken? cancellationToken)
     {
         _cancellationToken = cancellationToken;

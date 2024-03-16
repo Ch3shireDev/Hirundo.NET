@@ -20,6 +20,11 @@ public class PopulationProcessorBuilder : IPopulationProcessorBuilder
         return new PopulationProcessor(conditionBuilder, _cancellationToken);
     }
 
+    public IPopulationProcessorBuilder NewBuilder()
+    {
+        return new PopulationProcessorBuilder();
+    }
+
     public IPopulationProcessorBuilder WithCancellationToken(CancellationToken? token)
     {
         _cancellationToken = token;

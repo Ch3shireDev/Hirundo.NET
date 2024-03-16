@@ -21,4 +21,9 @@ public class SpecimensProcessorBuilder : ISpecimensProcessorBuilder
     {
         return new SpecimensProcessor(_parameters, _cancellationToken);
     }
+
+    public ISpecimensProcessorBuilder NewBuilder()
+    {
+        return new SpecimensProcessorBuilder();
+    }
 }

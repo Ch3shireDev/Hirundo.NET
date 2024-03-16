@@ -33,6 +33,10 @@ public class HirundoAppTests
             .Setup(x => x.Build())
             .Returns(_database.Object);
 
+        _databaseBuilder
+            .Setup(x => x.NewBuilder())
+            .Returns(_databaseBuilder.Object);
+
         _summaryWriter = new Mock<ISummaryWriter>();
 
         _summaryWriterBuilder = new Mock<ISummaryWriterBuilder>();
@@ -43,6 +47,14 @@ public class HirundoAppTests
 
         _summaryWriterBuilder
             .Setup(x => x.WithWriterParameters(It.IsAny<IWriterParameters>()))
+            .Returns(_summaryWriterBuilder.Object);
+
+        _summaryWriterBuilder
+            .Setup(x => x.WithCancellationToken(It.IsAny<CancellationToken?>()))
+            .Returns(_summaryWriterBuilder.Object);
+
+        _summaryWriterBuilder
+            .Setup(x => x.NewBuilder())
             .Returns(_summaryWriterBuilder.Object);
 
         _app = new HirundoApp(_databaseBuilder.Object, _summaryWriterBuilder.Object);

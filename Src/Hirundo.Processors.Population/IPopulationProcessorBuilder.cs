@@ -9,6 +9,12 @@ public interface IPopulationProcessorBuilder
     /// </summary>
     /// <returns></returns>
     IPopulationProcessor Build();
+
+    /// <summary>
+    ///     Tworzy nowego Budowniczego tego samego typu.
+    /// </summary>
+    /// <returns></returns>
+    IPopulationProcessorBuilder NewBuilder();
     IPopulationProcessorBuilder WithCancellationToken(CancellationToken? token);
     IPopulationProcessorBuilder WithPopulationConditions(IEnumerable<IPopulationConditionBuilder> populationConditions);
 }

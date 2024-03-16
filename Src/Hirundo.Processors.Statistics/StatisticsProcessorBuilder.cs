@@ -32,4 +32,8 @@ public class StatisticsProcessorBuilder : IStatisticsProcessorBuilder
         return this;
     }
 
+    public IStatisticsProcessorBuilder NewBuilder()
+    {
+        return new StatisticsProcessorBuilder();
+    }
 }

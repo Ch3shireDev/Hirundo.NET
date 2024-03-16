@@ -59,41 +59,49 @@ public class HirundoApp : IHirundoApp
         ArgumentNullException.ThrowIfNull(applicationConfig);
 
         var database = _databaseBuilder
+            .NewBuilder()
             .WithDatabaseParameters([.. applicationConfig.Databases])
             .WithCancellationToken(token)
             .Build();
 
         var observationConditions = _observationConditionsBuilder
+            .NewBuilder()
             .WithObservationConditions(applicationConfig.Observations.Conditions)
             .WithCancellationToken(token)
             .Build();
 
         var computedValuesCalculator = _calculatorBuilder
+            .NewBuilder()
             .WithComputedValues(applicationConfig.ComputedValues.ComputedValues)
             .WithCancellationToken(token)
             .Build();
 
         var returningSpecimenConditions = _returningSpecimenConditionsBuilder
+            .NewBuilder()
             .WithReturningSpecimensConditions(applicationConfig.ReturningSpecimens.Conditions)
             .WithCancellationToken(token)
             .Build();
 
         var populationProcessor = _populationProcessorBuilder
+            .NewBuilder()
             .WithPopulationConditions(applicationConfig.Population.Conditions)
             .WithCancellationToken(token)
             .Build();
 
         var specimensProcessor = _specimensProcessorBuilder
+            .NewBuilder()
             .WithSpecimensParameters(applicationConfig.Specimens)
             .WithCancellationToken(token)
             .Build();
 
         var statisticsProcessor = _statisticsProcessorBuilder
+            .NewBuilder()
             .WithStatisticsOperations(applicationConfig.Statistics.Operations)
             .WithCancellationToken(token)
             .Build();
 
         using var resultsWriter = _summaryWriterBuilder
+            .NewBuilder()
             .WithWriterParameters(applicationConfig.Results.Writer)
             .WithCancellationToken(token)
             .Build();

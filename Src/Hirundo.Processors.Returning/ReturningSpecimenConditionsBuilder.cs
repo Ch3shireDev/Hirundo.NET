@@ -19,6 +19,11 @@ public class ReturningSpecimenConditionsBuilder : IReturningSpecimenConditionsBu
         return new CompositeReturningSpecimenCondition([.. _conditions], _cancellationToken);
     }
 
+    public IReturningSpecimenConditionsBuilder NewBuilder()
+    {
+        return new ReturningSpecimenConditionsBuilder();
+    }
+
     public IReturningSpecimenConditionsBuilder WithCancellationToken(CancellationToken? cancellationToken)
     {
         _cancellationToken = cancellationToken;

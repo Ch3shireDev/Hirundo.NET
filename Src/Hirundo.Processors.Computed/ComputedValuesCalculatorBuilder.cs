@@ -22,4 +22,9 @@ public class ComputedValuesCalculatorBuilder : IComputedValuesCalculatorBuilder
         _cancellationToken = cancellationToken;
         return this;
     }
+
+    public IComputedValuesCalculatorBuilder NewBuilder()
+    {
+        return new ComputedValuesCalculatorBuilder();
+    }
 }

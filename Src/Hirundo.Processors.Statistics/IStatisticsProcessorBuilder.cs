@@ -11,4 +11,10 @@ public interface IStatisticsProcessorBuilder
     IStatisticsProcessor Build();
     IStatisticsProcessorBuilder WithStatisticsOperations(IEnumerable<IStatisticalOperation> statisticsOperations);
     IStatisticsProcessorBuilder WithCancellationToken(CancellationToken? token);
+
+    /// <summary>
+    ///     Tworzy nowego Budowniczego tego samego typu.
+    /// </summary>
+    /// <returns></returns>
+    IStatisticsProcessorBuilder NewBuilder();
 }

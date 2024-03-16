@@ -11,6 +11,10 @@ public class DatabaseBuilder : IDatabaseBuilder
     private readonly List<Func<IDatabase>> _builders = [];
 
     private CancellationToken? _token;
+    public IDatabaseBuilder NewBuilder()
+    {
+        return new DatabaseBuilder();
+    }
 
     public IDatabaseBuilder WithDatabaseParameters(params IDatabaseParameters[] appConfigDatabases)
     {
@@ -72,4 +76,5 @@ public class DatabaseBuilder : IDatabaseBuilder
         _token = cancellationToken;
         return this;
     }
+
 }

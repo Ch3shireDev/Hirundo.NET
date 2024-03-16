@@ -38,4 +38,9 @@ public class SummaryWriterBuilder : ISummaryWriterBuilder
         var resultsWriter = new CsvSummaryWriter(streamWriter, _cancellationToken);
         return resultsWriter;
     }
+
+    public ISummaryWriterBuilder NewBuilder()
+    {
+        return new SummaryWriterBuilder();
+    }
 }

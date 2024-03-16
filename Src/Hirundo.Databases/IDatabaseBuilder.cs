@@ -21,14 +21,14 @@ public interface IDatabaseBuilder
     IDatabaseBuilder WithCancellationToken(CancellationToken? cancellationToken);
 
     /// <summary>
+    ///     Tworzy nowego Budowniczego tego samego typu.
+    /// </summary>
+    /// <returns></returns>
+    IDatabaseBuilder NewBuilder();
+
+    /// <summary>
     ///     Tworzy obiekt typu <see cref="IDatabase" />.
     /// </summary>
     /// <returns></returns>
     IDatabase Build();
-
-    /// <summary>
-    ///    Ustala token anulowania operacji.
-    /// </summary>
-    /// <param name="token"></param>
-    /// <returns></returns>
 }
