@@ -6,7 +6,7 @@ namespace Hirundo.Processors.Observations;
 ///     Warunek sprawdzający, czy wartość obserwacji jest równa podanej wartości.
 /// </summary>
 [TypeDescription("IsEqual")]
-public class IsEqualCondition : IObservationCondition
+public class IsEqualCondition : ICompareValueCondition, IObservationCondition
 {
     /// <summary>
     ///     Domyślny konstruktor. Ustawia wartości domyślne jako pusty string.
@@ -48,6 +48,6 @@ public class IsEqualCondition : IObservationCondition
     {
         ArgumentNullException.ThrowIfNull(observation);
         var observationValue = observation.GetValue(ValueName);
-        return DataTypeHelpers.SoftEquals(Value, observationValue);
+        return DataTypeHelpers.IsSoftEqual(Value, observationValue);
     }
 }

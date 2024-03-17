@@ -11,7 +11,7 @@ public class IsInSetConditionTests
     {
         // Arrange
         var condition = new IsInSetCondition("AGE", "I", "J");
-        var observation = new Observation(["AGE"], new object[] { "I" });
+        var observation = new Observation(["AGE"], ["I"]);
 
         // Act
         var result = condition.IsAccepted(observation);
@@ -25,7 +25,7 @@ public class IsInSetConditionTests
     {
         // Arrange
         var condition = new IsInSetCondition("AGE", "I", "J");
-        var observation = new Observation(["AGE"], new object[] { "K" });
+        var observation = new Observation(["AGE"], ["K"]);
 
         // Act
         var result = condition.IsAccepted(observation);
@@ -39,7 +39,7 @@ public class IsInSetConditionTests
     {
         // Arrange
         var condition = new IsInSetCondition("AGE", "I", "J");
-        var observation = new Observation(["ID"], new object[] { 1 });
+        var observation = new Observation(["ID"], [1]);
 
         // Act
         var result = condition.IsAccepted(observation);

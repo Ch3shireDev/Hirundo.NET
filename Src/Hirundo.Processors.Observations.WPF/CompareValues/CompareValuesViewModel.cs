@@ -1,18 +1,11 @@
 ﻿using Hirundo.Commons;
 using Hirundo.Commons.WPF;
 
-namespace Hirundo.Processors.Observations.WPF.IsEqual;
-
-[ParametersData(
-    typeof(IsEqualCondition),
-    typeof(IsEqualModel),
-    typeof(IsEqualView),
-    "Czy wartość jest równa?",
-    "Warunek porównujący pole danych z podaną wartością."
-)]
-public class IsEqualViewModel(IsEqualModel model) : ParametersViewModel(model)
+namespace Hirundo.Processors.Observations.WPF.CompareValues;
+public class CompareValuesViewModel<TCondition>(CompareValuesModel<TCondition> model) : ParametersViewModel(model), ICompareValuesViewModel
+    where TCondition : ICompareValueCondition
 {
-    public IsEqualModel Model => model;
+    public virtual string ValueDescription => "Wartość do porównania";
 
     public string Value
     {
@@ -33,7 +26,6 @@ public class IsEqualViewModel(IsEqualModel model) : ParametersViewModel(model)
             OnPropertyChanged();
         }
     }
-
 
     public DataType DataType
     {

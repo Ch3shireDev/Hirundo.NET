@@ -1,5 +1,5 @@
-﻿using System.Globalization;
-using Hirundo.Commons;
+﻿using Hirundo.Commons;
+using System.Globalization;
 
 namespace Hirundo.Processors.Observations;
 

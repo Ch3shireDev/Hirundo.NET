@@ -5,14 +5,14 @@ namespace Hirundo.Processors.Observations;
 /// <summary>
 ///     Warunek sprawdzający, czy wartość obserwacji jest większa niż podana wartość.
 /// </summary>
-[TypeDescription("IsGreaterThan")]
-public class IsGreaterThanCondition : IObservationCondition, ICompareValueCondition
+[TypeDescription("IsGreaterOrEqual")]
+public class IsGreaterOrEqualCondition : IObservationCondition, ICompareValueCondition
 {
-    public IsGreaterThanCondition()
+    public IsGreaterOrEqualCondition()
     {
     }
 
-    public IsGreaterThanCondition(string valueName, object? value)
+    public IsGreaterOrEqualCondition(string valueName, object? value)
     {
         ValueName = valueName;
         Value = value;
@@ -27,6 +27,7 @@ public class IsGreaterThanCondition : IObservationCondition, ICompareValueCondit
         var observationValue = observation.GetValue(ValueName);
         if (DataTypeHelpers.IsGreaterThanNumeric(observationValue, Value)) return true;
         if (DataTypeHelpers.IsGreaterThanDate(observationValue, Value)) return true;
+        if (DataTypeHelpers.IsSoftEqual(observationValue, Value)) return true;
         return false;
     }
 }

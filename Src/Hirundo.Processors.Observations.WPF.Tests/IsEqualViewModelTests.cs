@@ -1,6 +1,6 @@
 using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
-using Hirundo.Processors.Observations.WPF.IsEqual;
+using Hirundo.Processors.Observations.WPF.CompareValues;
 using Moq;
 using NUnit.Framework;
 
@@ -15,14 +15,14 @@ public class IsEqualViewModelTests
         _repository = new Mock<IDataLabelRepository>();
 
         _observationCondition = new IsEqualCondition();
-        _model = new IsEqualModel(_observationCondition, _repository.Object);
+        _model = new CompareValuesModel<IsEqualCondition>(_observationCondition, _repository.Object);
         _viewModel = new IsEqualViewModel(_model);
     }
 
     private Mock<IDataLabelRepository> _repository = null!;
 
     private IsEqualCondition _observationCondition = null!;
-    private IsEqualModel _model = null!;
+    private CompareValuesModel<IsEqualCondition> _model = null!;
     private IsEqualViewModel _viewModel = null!;
 
     [Test]

@@ -16,10 +16,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="IsEqual\IsEqualView.xaml~RF75528eec.TMP" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>
@@ -33,13 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="IsGreaterThan\IsGreaterThanView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="IsNotEqual\IsNotEqualView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="IsEqual\IsEqualView.xaml.cs">
+    <Compile Update="CompareValues\CompareValuesView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="IsInTimeBlock\IsInTimeBlockView.xaml.cs">

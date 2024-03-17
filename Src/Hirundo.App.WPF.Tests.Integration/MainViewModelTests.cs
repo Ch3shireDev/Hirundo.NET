@@ -8,7 +8,7 @@ using Hirundo.Databases.Conditions;
 using Hirundo.Processors.Computed;
 using Hirundo.Processors.Computed.WPF.Symmetry;
 using Hirundo.Processors.Observations;
-using Hirundo.Processors.Observations.WPF.IsEqual;
+using Hirundo.Processors.Observations.WPF.CompareValues;
 using Hirundo.Processors.Population;
 using Hirundo.Processors.Population.Conditions;
 using Hirundo.Processors.Returning;

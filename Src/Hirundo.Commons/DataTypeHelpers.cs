@@ -65,7 +65,7 @@ public static class DataTypeHelpers
         };
     }
 
-    public static bool SoftEquals(object? value1, object? value2)
+    public static bool IsSoftEqual(object? value1, object? value2)
     {
         if (value1 is null)
         {
@@ -129,6 +129,17 @@ public static class DataTypeHelpers
         return number1 > number2;
     }
 
+    public static bool IsLowerThanNumeric(object? value1, object? value2)
+    {
+        if (!IsConvertableToNumber(value1)) return false;
+        if (!IsConvertableToNumber(value2)) return false;
+
+        var number1 = Convert.ToDouble(value1, CultureInfo.InvariantCulture);
+        var number2 = Convert.ToDouble(value2, CultureInfo.InvariantCulture);
+
+        return number1 < number2;
+    }
+
     public static bool IsGreaterThanDate(object? value1, object? value2)
     {
         if (!IsConvertableToDate(value1)) return false;
@@ -138,6 +149,16 @@ public static class DataTypeHelpers
         var date2 = Convert.ToDateTime(value2, CultureInfo.InvariantCulture);
 
         return date1 > date2;
+    }
+    public static bool IsLowerThanDate(object? value1, object? value2)
+    {
+        if (!IsConvertableToDate(value1)) return false;
+        if (!IsConvertableToDate(value2)) return false;
+
+        var date1 = Convert.ToDateTime(value1, CultureInfo.InvariantCulture);
+        var date2 = Convert.ToDateTime(value2, CultureInfo.InvariantCulture);
+
+        return date1 < date2;
     }
 
     public static bool IsConvertableToDate(object? value)

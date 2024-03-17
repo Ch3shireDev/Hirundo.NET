@@ -3,7 +3,7 @@
 namespace Hirundo.Processors.Observations;
 
 [TypeDescription("IsNotEqual")]
-public class IsNotEqualCondition : IObservationCondition
+public class IsNotEqualCondition : IObservationCondition, ICompareValueCondition
 {
     public IsNotEqualCondition() { }
 
@@ -20,6 +20,6 @@ public class IsNotEqualCondition : IObservationCondition
     {
         ArgumentNullException.ThrowIfNull(observation);
         var observationValue = observation.GetValue(ValueName);
-        return !DataTypeHelpers.SoftEquals(Value, observationValue);
+        return !DataTypeHelpers.IsSoftEqual(Value, observationValue);
     }
 }
