@@ -2,6 +2,44 @@
 
 namespace Hirundo.Commons;
 
+public static class ComparisonHelpers
+{
+    public static bool IsEqual(object? observationValue, object? value)
+    {
+        return DataTypeHelpers.IsSoftEqual(value, observationValue);
+    }
+
+    public static bool IsGreaterOrEqual(object? value1, object? value2)
+    {
+        if (DataTypeHelpers.IsGreaterThanNumeric(value1, value2)) return true;
+        if (DataTypeHelpers.IsGreaterThanDate(value1, value2)) return true;
+        if (DataTypeHelpers.IsSoftEqual(value1, value2)) return true;
+        return false;
+    }
+
+    public static bool IsGreater(object? value1, object? value2)
+    {
+        if (DataTypeHelpers.IsGreaterThanNumeric(value1, value2)) return true;
+        if (DataTypeHelpers.IsGreaterThanDate(value1, value2)) return true;
+        return false;
+    }
+
+    public static bool IsLowerOrEqual(object? value1, object? value2)
+    {
+        if (DataTypeHelpers.IsGreaterThanNumeric(value1, value2)) return true;
+        if (DataTypeHelpers.IsGreaterThanDate(value1, value2)) return true;
+        if (DataTypeHelpers.IsSoftEqual(value1, value2)) return true;
+        return false;
+    }
+
+    public static bool IsLower(object? value1, object? value2)
+    {
+        if (DataTypeHelpers.IsLowerThanNumeric(value1, value2)) return true;
+        if (DataTypeHelpers.IsLowerThanDate(value1, value2)) return true;
+        return false;
+    }
+}
+
 public static class DataTypeHelpers
 {
     public static string GetValueToString(object? value, DataType dataType)

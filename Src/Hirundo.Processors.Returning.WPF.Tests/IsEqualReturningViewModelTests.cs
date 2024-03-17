@@ -1,10 +1,10 @@
-﻿using System.Globalization;
-using Hirundo.Commons;
+﻿using Hirundo.Commons;
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Processors.Returning.Conditions;
-using Hirundo.Processors.Returning.WPF.IsEqual;
+using Hirundo.Processors.Returning.WPF.CompareValues;
 using Moq;
 using NUnit.Framework;
+using System.Globalization;
 
 namespace Hirundo.Processors.Returning.WPF.Tests;
 
@@ -16,13 +16,13 @@ public class IsEqualReturningViewModelTests
     {
         _repository = new Mock<IDataLabelRepository>();
         _condition = new IsEqualReturningCondition();
-        _model = new IsEqualReturningModel(_condition, _repository.Object);
+        _model = new CompareValuesReturningModel<IsEqualReturningCondition>(_condition, _repository.Object);
         _viewModel = new IsEqualReturningViewModel(_model);
     }
 
     private Mock<IDataLabelRepository> _repository = null!;
     private IsEqualReturningCondition _condition = null!;
-    private IsEqualReturningModel _model = null!;
+    private CompareValuesReturningModel<IsEqualReturningCondition> _model = null!;
     private IsEqualReturningViewModel _viewModel = null!;
 
     [Test]

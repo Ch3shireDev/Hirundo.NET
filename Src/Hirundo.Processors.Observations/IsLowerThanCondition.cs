@@ -25,8 +25,6 @@ public class IsLowerThanCondition : IObservationCondition, ICompareValueConditio
     {
         ArgumentNullException.ThrowIfNull(observation);
         var observationValue = observation.GetValue(ValueName);
-        if (DataTypeHelpers.IsLowerThanNumeric(observationValue, Value)) return true;
-        if (DataTypeHelpers.IsLowerThanDate(observationValue, Value)) return true;
-        return false;
+        return ComparisonHelpers.IsLower(observationValue, Value);
     }
 }

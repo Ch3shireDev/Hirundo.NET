@@ -48,6 +48,6 @@ public class IsEqualCondition : ICompareValueCondition, IObservationCondition
     {
         ArgumentNullException.ThrowIfNull(observation);
         var observationValue = observation.GetValue(ValueName);
-        return DataTypeHelpers.IsSoftEqual(Value, observationValue);
+        return ComparisonHelpers.IsEqual(observationValue, Value);
     }
 }

@@ -3,9 +3,10 @@ using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
 using Hirundo.Processors.Returning.Conditions;
 
-namespace Hirundo.Processors.Returning.WPF.IsEqual;
+namespace Hirundo.Processors.Returning.WPF.CompareValues;
 
-public class IsEqualReturningModel(IsEqualReturningCondition condition, IDataLabelRepository repository) : ParametersModel(condition, repository)
+public class CompareValuesReturningModel<TCondition>(IsEqualReturningCondition condition, IDataLabelRepository repository) : ParametersModel(condition, repository)
+    where TCondition : CompareValuesReturningCondition
 {
     public string ValueName
     {

@@ -25,9 +25,6 @@ public class IsGreaterOrEqualCondition : IObservationCondition, ICompareValueCon
     {
         ArgumentNullException.ThrowIfNull(observation);
         var observationValue = observation.GetValue(ValueName);
-        if (DataTypeHelpers.IsGreaterThanNumeric(observationValue, Value)) return true;
-        if (DataTypeHelpers.IsGreaterThanDate(observationValue, Value)) return true;
-        if (DataTypeHelpers.IsSoftEqual(observationValue, Value)) return true;
-        return false;
+        return ComparisonHelpers.IsGreaterOrEqual(observationValue, Value);
     }
 }

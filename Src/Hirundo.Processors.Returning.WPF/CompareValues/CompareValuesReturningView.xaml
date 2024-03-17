@@ -1,12 +1,12 @@
-﻿<UserControl x:Class="Hirundo.Processors.Returning.WPF.IsEqual.IsEqualReturningView"
+﻿<UserControl x:Class="Hirundo.Processors.Returning.WPF.CompareValues.CompareValuesReturningView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:Hirundo.Processors.Returning.WPF.IsEqual"
+             xmlns:local="clr-namespace:Hirundo.Processors.Returning.WPF.CompareValues"
              xmlns:labels="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance local:IsEqualReturningViewModel}"
+             d:DataContext="{d:DesignInstance local:ICompareValuesReturningViewModel}"
              d:Background="AliceBlue"
              >
     <StackPanel>
@@ -16,7 +16,7 @@
                 DataType="{Binding DataType}"
                 Repository="{Binding Repository}" />
         <WrapPanel>
-            <Label>Wartość</Label>
+            <Label Content="{Binding ValueDescription}"/>
             <TextBox Text="{Binding Value}" MinWidth="100" />
         </WrapPanel>
     </StackPanel>
