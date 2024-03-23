@@ -1,4 +1,5 @@
 ﻿using Hirundo.Databases;
+using Hirundo.Processors.Computed;
 using Hirundo.Processors.Observations;
 using Hirundo.Processors.Population.Conditions;
 using Hirundo.Processors.Returning.Conditions;
@@ -13,6 +14,7 @@ public class HirundoJsonConverter : JsonConverter
     private static readonly IList<JsonConverter> _converters = new List<JsonConverter>
     {
         new DynamicPolymorphicJsonConverter(typeof(IDatabaseParameters)),
+        new DynamicPolymorphicJsonConverter(typeof(IComputedValuesCalculator)),
         new DynamicPolymorphicJsonConverter(typeof(IObservationCondition)),
         new DynamicPolymorphicJsonConverter(typeof(IPopulationConditionBuilder)),
         new DynamicPolymorphicJsonConverter(typeof(IStatisticalOperation)),
