@@ -3,7 +3,6 @@ using Hirundo.Processors.Observations;
 using Hirundo.Processors.Population.Conditions;
 using Hirundo.Processors.Returning.Conditions;
 using Hirundo.Processors.Statistics.Operations;
-using Hirundo.Processors.Statistics.Operations.Outliers;
 using Hirundo.Writers.Summary;
 using Newtonsoft.Json;
 
@@ -16,7 +15,7 @@ public class HirundoJsonConverter : JsonConverter
         new DynamicPolymorphicJsonConverter(typeof(IDatabaseParameters)),
         new DynamicPolymorphicJsonConverter(typeof(IObservationCondition)),
         new DynamicPolymorphicJsonConverter(typeof(IPopulationConditionBuilder)),
-        new DynamicPolymorphicJsonConverter(typeof(IStatisticalOperation), new DynamicPolymorphicJsonConverter(typeof(IOutliersCondition))),
+        new DynamicPolymorphicJsonConverter(typeof(IStatisticalOperation)),
         new DynamicPolymorphicJsonConverter(typeof(IReturningSpecimenCondition)),
         new DynamicPolymorphicJsonConverter(typeof(IWriterParameters))
     };

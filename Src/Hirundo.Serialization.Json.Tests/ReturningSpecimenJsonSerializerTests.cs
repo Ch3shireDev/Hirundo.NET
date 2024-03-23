@@ -76,4 +76,72 @@ public class ReturningSpecimenJsonSerializerTests
         Assert.That(((ReturnsNotEarlierThanGivenDateNextYearCondition)deserialized.Conditions[1]).Month, Is.EqualTo(06));
         Assert.That(((ReturnsNotEarlierThanGivenDateNextYearCondition)deserialized.Conditions[1]).Day, Is.EqualTo(14));
     }
+
+    [Test]
+    public void GivenAlternativeReturningSpecimenConditions_WhenSerialize_ReturnsJsonWithConditions()
+    {
+        // Arrange
+        var condition = new AlternativeReturningCondition(
+            new ReturnsAfterTimePeriodCondition("DATE1", 20),
+            new ReturnsNotEarlierThanGivenDateNextYearCondition("DATE2", 07, 15)
+        );
+        var parameters = new ReturningSpecimensParameters([condition]);
+
+        // Act
+        var result = JsonConvert.SerializeObject(parameters, _settings);
+
+        // Assert
+        var parametersJson = JObject.Parse(result);
+
+        Assert.That(parametersJson["Conditions"]?.Count(), Is.EqualTo(1));
+
+        var alternativeCondition = parametersJson["Conditions"]?[0] ?? throw new InvalidOperationException();
+
+        Assert.That(alternativeCondition["Type"]?.Value<string>(), Is.EqualTo("Alternative"));
+        var conditions = alternativeCondition["Conditions"] as JArray ?? throw new InvalidOperationException();
+        Assert.That(conditions.Count, Is.EqualTo(2));
+
+        var firstCondition = conditions[0] as JObject ?? throw new InvalidOperationException();
+        Assert.That(firstCondition["Type"]?.Value<string>(), Is.EqualTo("ReturnsAfterTimePeriod"));
+        Assert.That(firstCondition["DateValueName"]?.Value<string>(), Is.EqualTo("DATE1"));
+        Assert.That(firstCondition["TimePeriodInDays"]?.Value<int>(), Is.EqualTo(20));
+
+        var secondCondition = conditions[1] as JObject ?? throw new InvalidOperationException();
+        Assert.That(secondCondition["Type"]?.Value<string>(), Is.EqualTo("ReturnsNotEarlierThanGivenDateNextYear"));
+        Assert.That(secondCondition["DateValueName"]?.Value<string>(), Is.EqualTo("DATE2"));
+        Assert.That(secondCondition["Month"]?.Value<int>(), Is.EqualTo(07));
+        Assert.That(secondCondition["Day"]?.Value<int>(), Is.EqualTo(15));
+    }
+
+    [Test]
+    public void GivenAlternativeReturningSpecimenConditions_WhenSerializeAndDeserialize_ReturnsSameValue()
+    {
+        // Arrange
+        var condition = new AlternativeReturningCondition(
+            new ReturnsAfterTimePeriodCondition("DATE1", 20),
+            new ReturnsNotEarlierThanGivenDateNextYearCondition("DATE2", 07, 15)
+        );
+        var parameters = new ReturningSpecimensParameters([condition]);
+
+        // Act
+        var result = JsonConvert.SerializeObject(parameters, _settings);
+        var resultParameters = JsonConvert.DeserializeObject<ReturningSpecimensParameters>(result, _settings)!;
+
+        // Assert
+        Assert.That(resultParameters.Conditions.Count, Is.EqualTo(1));
+        Assert.That(resultParameters.Conditions[0], Is.TypeOf<AlternativeReturningCondition>());
+        var alternative = (AlternativeReturningCondition)resultParameters.Conditions[0];
+        Assert.That(alternative.Conditions.Count, Is.EqualTo(2));
+
+        var firstCondition = alternative.Conditions[0] as ReturnsAfterTimePeriodCondition;
+        Assert.That(firstCondition, Is.Not.Null);
+        Assert.That(firstCondition!.DateValueName, Is.EqualTo("DATE1"));
+        Assert.That(firstCondition.TimePeriodInDays, Is.EqualTo(20));
+
+        var secondCondition = alternative.Conditions[1] as ReturnsNotEarlierThanGivenDateNextYearCondition;
+        Assert.That(secondCondition, Is.Not.Null);
+        Assert.That(secondCondition!.DateValueName, Is.EqualTo("DATE2"));
+        Assert.That(secondCondition.Month, Is.EqualTo(07));
+        Assert.That(secondCondition.Day, Is.EqualTo(15));
+    }
 }
