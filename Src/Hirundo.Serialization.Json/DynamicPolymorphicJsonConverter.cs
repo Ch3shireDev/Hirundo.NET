@@ -45,8 +45,7 @@ internal sealed class DynamicPolymorphicJsonConverter(Type interfaceType, params
         foreach (var jProperty in jObject.Properties())
         {
             if (jProperty.Value is not JArray jArray) continue;
-            var conditions = value.GetType().GetProperty(jProperty.Name)?.GetValue(value) as IList;
-            if (conditions == null) continue;
+            if (value.GetType().GetProperty(jProperty.Name)?.GetValue(value) is not IList conditions) continue;
             ConvertListElements(jArray, conditions);
         }
     }
@@ -56,8 +55,7 @@ internal sealed class DynamicPolymorphicJsonConverter(Type interfaceType, params
         if (conditions == null) return;
         for (var i = 0; i < jArray.Count; i++)
         {
-            var jObjectCondition = jArray[i] as JObject;
-            if (jObjectCondition == null) continue;
+            if (jArray[i] is not JObject jObjectCondition) continue;
             var condition = conditions[i];
             if (condition == null) continue;
             if (TypeIsInherited(condition.GetType())) continue;
@@ -120,9 +118,8 @@ internal sealed class DynamicPolymorphicJsonConverter(Type interfaceType, params
         if (result == null) return;
         string? conditionsListName = GetConditionsListName(givenType);
         if (conditionsListName == null) return;
-        var elementConditionsList = result.GetType().GetProperty(conditionsListName)?.GetValue(result) as IList;
 
-        if (elementConditionsList != null)
+        if (result.GetType().GetProperty(conditionsListName)?.GetValue(result) is IList elementConditionsList)
         {
             foreach (var resultCondition in resultConditions)
             {
@@ -138,13 +135,11 @@ internal sealed class DynamicPolymorphicJsonConverter(Type interfaceType, params
 
         var resultConditions = new ArrayList();
 
-        var conditions = jobject[conditionsListName] as JArray;
-        if (conditions != null)
+        if (jobject[conditionsListName] is JArray conditions)
         {
             for (var i = 0; i < conditions.Count; i++)
             {
-                var jCondition = conditions[i] as JObject;
-                if (jCondition == null) continue;
+                if (conditions[i] is not JObject jCondition) continue;
                 var condition = ReadJObject(jCondition);
                 resultConditions.Add(condition);
             }

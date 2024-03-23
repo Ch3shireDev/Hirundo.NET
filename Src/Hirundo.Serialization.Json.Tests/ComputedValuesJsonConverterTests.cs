@@ -13,7 +13,7 @@ public class ComputedValuesJsonConverterTests
     {
         _settings = new JsonSerializerSettings
         {
-            Converters = new List<JsonConverter> { new HirundoJsonConverter() }
+            Converters = [new HirundoJsonConverter()]
         };
     }
 

@@ -11,8 +11,8 @@ namespace Hirundo.Serialization.Json;
 
 public class HirundoJsonConverter : JsonConverter
 {
-    private static readonly IList<JsonConverter> _converters = new List<JsonConverter>
-    {
+    private static readonly IList<JsonConverter> _converters =
+    [
         new DynamicPolymorphicJsonConverter(typeof(IDatabaseParameters)),
         new DynamicPolymorphicJsonConverter(typeof(IComputedValuesCalculator)),
         new DynamicPolymorphicJsonConverter(typeof(IObservationCondition)),
@@ -20,7 +20,7 @@ public class HirundoJsonConverter : JsonConverter
         new DynamicPolymorphicJsonConverter(typeof(IStatisticalOperation)),
         new DynamicPolymorphicJsonConverter(typeof(IReturningSpecimenCondition)),
         new DynamicPolymorphicJsonConverter(typeof(IWriterParameters))
-    };
+    ];
 
     public override bool CanConvert(Type objectType)
     {

@@ -17,10 +17,10 @@ public class ReturningSpecimenJsonSerializerTests
             TypeNameHandling = TypeNameHandling.None,
             NullValueHandling = NullValueHandling.Ignore,
             Formatting = Formatting.Indented,
-            Converters = new List<JsonConverter>
-            {
+            Converters =
+            [
                 new HirundoJsonConverter()
-            }
+            ]
         };
     }
 
@@ -172,7 +172,7 @@ public class ReturningSpecimenJsonSerializerTests
 
         // Act
         var serialized = JsonConvert.SerializeObject(parameters, _settings);
-        var deserialized = JsonConvert.DeserializeObject<ReturningSpecimensParameters>(serialized, _settings);
+        var deserialized = JsonConvert.DeserializeObject<ReturningSpecimensParameters>(serialized, _settings)!;
 
         // Assert
         var result2 = deserialized.Conditions[0];

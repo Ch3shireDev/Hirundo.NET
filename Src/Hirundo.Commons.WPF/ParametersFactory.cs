@@ -1,9 +1,11 @@
-﻿using System.Reflection;
-using Hirundo.Commons.Repositories.Labels;
+﻿using Hirundo.Commons.Repositories.Labels;
+using System.Reflection;
 
 namespace Hirundo.Commons.WPF;
 
-public class ParametersFactory<TCondition, TBrowserModel>(IDataLabelRepository repository) : IParametersFactory<TCondition> where TCondition : class
+public class ParametersFactory<TCondition, TBrowserModel>(IDataLabelRepository repository) : IParametersFactory<TCondition>
+    where TCondition : class
+    where TBrowserModel : ParametersBrowserModel
 {
     public TCondition CreateCondition(ParametersData parametersData)
     {
@@ -15,12 +17,12 @@ public class ParametersFactory<TCondition, TBrowserModel>(IDataLabelRepository r
 
     public IEnumerable<ParametersData> GetParametersData()
     {
-        return GetAssemblyAttributes().Select(attribute => new ParametersData(attribute.ConditionType, attribute.Name, attribute.Description));
+        return ParametersFactory<TCondition, TBrowserModel>.GetAssemblyAttributes().Select(attribute => new ParametersData(attribute.ConditionType, attribute.Name, attribute.Description));
     }
 
     public ParametersViewModel CreateViewModel(TCondition condition)
     {
-        var attribute = GetConditionAttribute(condition);
+        var attribute = ParametersFactory<TCondition, TBrowserModel>.GetConditionAttribute(condition);
         var viewModel = GetViewModelFromCondition(condition);
         viewModel.Name = attribute.Name;
         viewModel.Description = attribute.Description;
@@ -29,9 +31,9 @@ public class ParametersFactory<TCondition, TBrowserModel>(IDataLabelRepository r
 
     private ParametersViewModel GetViewModelFromCondition(TCondition condition)
     {
-        var attribute = GetConditionAttribute(condition);
+        var attribute = ParametersFactory<TCondition, TBrowserModel>.GetConditionAttribute(condition);
         var model = GetModelFromCondition(attribute, condition);
-        var viewModelType = GetViewModelType(attribute);
+        var viewModelType = ParametersFactory<TCondition, TBrowserModel>.GetViewModelType(attribute);
         var viewModelConstructor = viewModelType.GetConstructor([model.GetType()]);
         var viewModel = viewModelConstructor?.Invoke([model]) as ParametersViewModel;
         return viewModel ?? throw new InvalidOperationException($"Błąd tworzenia modelu dla warunku {condition.GetType().Name}");
@@ -41,18 +43,18 @@ public class ParametersFactory<TCondition, TBrowserModel>(IDataLabelRepository r
     {
         var modelType = attribute.ModelType;
         var modelConstructor = modelType.GetConstructor([condition.GetType(), typeof(IDataLabelRepository)]);
-        var model = modelConstructor?.Invoke(new object[] { condition, repository });
+        var model = modelConstructor?.Invoke([condition, repository]);
         return model ?? throw new InvalidOperationException($"Nie znaleziono modelu dla warunku {condition.GetType().Name}");
     }
 
-    private ParametersDataAttribute GetConditionAttribute(TCondition condition)
+    private static ParametersDataAttribute GetConditionAttribute(TCondition condition)
     {
-        var attributes = GetAssemblyAttributes().ToArray();
+        var attributes = ParametersFactory<TCondition, TBrowserModel>.GetAssemblyAttributes().ToArray();
         var attribute = attributes.FirstOrDefault(a => a.ConditionType == condition.GetType());
         return attribute ?? throw new InvalidOperationException($"Nie znaleziono atrybutu dla warunku {condition.GetType().Name}");
     }
 
-    private IEnumerable<Type> GetViewModelsTypes()
+    private static IEnumerable<Type> GetViewModelsTypes()
     {
         var assembly = Assembly.GetAssembly(typeof(TBrowserModel));
 
@@ -62,9 +64,9 @@ public class ParametersFactory<TCondition, TBrowserModel>(IDataLabelRepository r
         return viewModelsTypes;
     }
 
-    private IEnumerable<ParametersDataAttribute> GetAssemblyAttributes()
+    private static IEnumerable<ParametersDataAttribute> GetAssemblyAttributes()
     {
-        var viewModelTypes = GetViewModelsTypes();
+        var viewModelTypes = ParametersFactory<TCondition, TBrowserModel>.GetViewModelsTypes();
 
         foreach (var viewModelType in viewModelTypes)
         {
@@ -77,9 +79,9 @@ public class ParametersFactory<TCondition, TBrowserModel>(IDataLabelRepository r
         }
     }
 
-    private Type GetViewModelType(ParametersDataAttribute attribute)
+    private static Type GetViewModelType(ParametersDataAttribute attribute)
     {
-        var viewModelTypes = GetViewModelsTypes();
+        var viewModelTypes = ParametersFactory<TCondition, TBrowserModel>.GetViewModelsTypes();
 
         return viewModelTypes.First(t => t.GetCustomAttribute<ParametersDataAttribute>()?.ConditionType == attribute.ConditionType);
     }

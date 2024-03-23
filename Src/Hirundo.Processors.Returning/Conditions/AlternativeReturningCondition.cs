@@ -5,7 +5,7 @@ namespace Hirundo.Processors.Returning.Conditions;
 [TypeDescription("Alternative", true)]
 public class AlternativeReturningCondition : IReturningSpecimenCondition
 {
-    public IList<IReturningSpecimenCondition> Conditions { get; } = new List<IReturningSpecimenCondition>();
+    public IList<IReturningSpecimenCondition> Conditions { get; } = [];
 
     public AlternativeReturningCondition(params IReturningSpecimenCondition[] conditions)
     {

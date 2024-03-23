@@ -5,7 +5,7 @@ using Hirundo.Processors.Returning.Conditions;
 
 namespace Hirundo.Processors.Returning.WPF.CompareValues;
 
-public class CompareValuesReturningModel<TCondition>(IsEqualReturningCondition condition, IDataLabelRepository repository) : ParametersModel(condition, repository)
+public class CompareValuesReturningModel<TCondition>(TCondition condition, IDataLabelRepository repository) : ParametersModel(condition, repository)
     where TCondition : CompareValuesReturningCondition
 {
     public string ValueName
