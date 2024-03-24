@@ -108,4 +108,58 @@ public class AlternativeViewModelTests
         Assert.That(_condition.Conditions[0], Is.InstanceOf<IsGreaterThanReturningCondition>());
         Assert.That(_condition.Conditions[1], Is.InstanceOf<IsLowerThanReturningCondition>());
     }
+
+    [Test]
+    public void GivenConditions_WhenChangeSelectedCondition_ThenViewModelsAreChanged()
+    {
+        // Arrange
+        _condition.Conditions.Clear();
+        _condition.Conditions.Add(new IsEqualReturningCondition("DATA1", 123));
+        _condition.Conditions.Add(new IsNotEqualReturningCondition("DATA2", 456));
+
+        var isGreaterParameter = _viewModel.Options.First(o => o.ConditionType == typeof(IsGreaterThanReturningCondition));
+        var isLowerParameter = _viewModel.Options.First(o => o.ConditionType == typeof(IsLowerThanReturningCondition));
+
+        // Act
+        _viewModel.FirstParameter = isGreaterParameter;
+        _viewModel.SecondParameter = isLowerParameter;
+
+        // Assert
+        Assert.That(_viewModel.FirstViewModel, Is.InstanceOf<IsGreaterReturningViewModel>());
+        Assert.That(_viewModel.SecondViewModel, Is.InstanceOf<IsLowerReturningViewModel>());
+    }
+
+    [Test]
+    public void GivenSetConditions_WhenChangeSecondConditionToNull_ThenThereIsOnlyOneCondition()
+    {
+        // Arrange
+        _condition.Conditions.Clear();
+        _condition.Conditions.Add(new IsEqualReturningCondition("DATA1", 123));
+        _condition.Conditions.Add(new IsNotEqualReturningCondition("DATA2", 456));
+
+        // Act
+        _viewModel.SecondParameter = null;
+
+        // Assert
+        Assert.That(_condition.Conditions.Count, Is.EqualTo(1));
+    }
+
+    [Test]
+    public void GivenSetConditions_WhenChangeFirstConditionToNull_SecondConditionBecomesFirstCondition()
+    {
+        // Arrange
+        _condition.Conditions.Clear();
+        _condition.Conditions.Add(new IsEqualReturningCondition("DATA1", 123));
+        _condition.Conditions.Add(new IsNotEqualReturningCondition("DATA2", 456));
+
+        // Act
+        _viewModel.FirstParameter = null;
+
+        // Assert
+        Assert.That(_condition.Conditions.Count, Is.EqualTo(1));
+        Assert.That(_condition.Conditions[0], Is.InstanceOf<IsNotEqualReturningCondition>());
+        var secondCondition = _condition.Conditions[0] as IsNotEqualReturningCondition;
+        Assert.That(secondCondition!.ValueName, Is.EqualTo("DATA2"));
+        Assert.That(secondCondition.Value, Is.EqualTo(456));
+    }
 }

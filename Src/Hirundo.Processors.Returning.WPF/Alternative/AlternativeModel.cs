@@ -25,7 +25,25 @@ public class AlternativeModel : ParametersModel
         set
         {
             firstParameter = value;
-            if (firstParameter == null) return;
+            if (firstParameter == null)
+            {
+
+                if (Condition.Conditions.Count < 2)
+                {
+                    Condition.Conditions.Clear();
+                    return;
+                }
+                else
+                {
+                    var secondCondition = Condition.Conditions[1];
+                    Condition.Conditions.Clear();
+                    if (secondCondition != null)
+                    {
+                        Condition.Conditions.Add(secondCondition);
+                    }
+                    return;
+                }
+            }
             var condition = returningParametersFactory.CreateCondition(firstParameter);
             if (Condition.Conditions.Count == 0) Condition.Conditions.Add(condition);
             else Condition.Conditions[0] = condition;
@@ -39,7 +57,19 @@ public class AlternativeModel : ParametersModel
         set
         {
             secondParameter = value;
-            if (secondParameter == null) return;
+            if (secondParameter == null)
+            {
+                if (Condition.Conditions.Count > 1)
+                {
+                    var firstCondition = Condition.Conditions[0];
+                    Condition.Conditions.Clear();
+                    if (firstCondition != null)
+                    {
+                        Condition.Conditions.Add(firstCondition);
+                    }
+                }
+                return;
+            }
             var condition = returningParametersFactory.CreateCondition(secondParameter);
             if (Condition.Conditions.Count == 0) return;
             if (Condition.Conditions.Count == 1) Condition.Conditions.Add(condition);
