@@ -82,7 +82,13 @@ public partial class App : Application
             WindowStartupLocation = WindowStartupLocation.CenterScreen
         };
 
-        viewModel.RefreshWindow = view.InvalidateVisual;
+        viewModel.RefreshWindow = () =>
+        {
+            Current.Dispatcher.Invoke(() =>
+            {
+                view.InvalidateVisual();
+            });
+        };
 
         var viewModelTypes = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(a => a.GetTypes())
