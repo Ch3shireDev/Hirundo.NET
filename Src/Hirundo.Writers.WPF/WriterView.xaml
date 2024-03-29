@@ -17,6 +17,7 @@
         <WrapPanel Margin="10">
             <TextBlock TextWrapping="WrapWithOverflow">W tym panelu wybierasz sposób zapisu wyników.</TextBlock>
         </WrapPanel>
+        <ComboBox></ComboBox>
         <WrapPanel>
             <ContentControl Content="{Binding DataWriterViewModel}" />
         </WrapPanel>

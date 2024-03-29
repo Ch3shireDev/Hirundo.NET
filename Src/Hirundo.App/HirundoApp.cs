@@ -102,7 +102,7 @@ public class HirundoApp : IHirundoApp
 
         using var resultsWriter = _summaryWriterBuilder
             .NewBuilder()
-            .WithWriterParameters(applicationConfig.Results.Writer)
+            .WithWriterParameters(applicationConfig.Results.Writers)
             .WithCancellationToken(token)
             .Build();
 
@@ -148,6 +148,9 @@ public class HirundoApp : IHirundoApp
 
         resultsWriter.Write(summary);
 
-        Log.Information($"Zapisano dane wynikowe do pliku {applicationConfig.Results.Writer.Path}.");
+        foreach (var writer in applicationConfig.Results.Writers)
+        {
+            Log.Information($"Zapisano dane wynikowe do pliku {writer.Path}.");
+        }
     }
 }

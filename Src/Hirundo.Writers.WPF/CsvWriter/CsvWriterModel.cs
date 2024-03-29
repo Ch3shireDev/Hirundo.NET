@@ -2,14 +2,9 @@
 
 namespace Hirundo.Writers.WPF.CsvWriter;
 
-public class CsvWriterModel
+public class CsvWriterModel(CsvSummaryWriterParameters parameters)
 {
-    public CsvWriterModel(CsvSummaryWriterParameters parameters)
-    {
-        Parameters = parameters;
-    }
-
-    public CsvSummaryWriterParameters Parameters { get; set; }
+    public CsvSummaryWriterParameters Parameters { get; set; } = parameters;
 
     public string Path { get => Parameters.Path; set => Parameters.Path = value; }
 }

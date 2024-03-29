@@ -4,6 +4,7 @@ public interface ISummaryWriterBuilder
 {
     ISummaryWriterBuilder WithCsvSummaryWriterParameters(CsvSummaryWriterParameters parameters);
     ISummaryWriterBuilder WithWriterParameters(IWriterParameters resultsWriter);
+    ISummaryWriterBuilder WithWriterParameters(IList<IWriterParameters> resultsWriters);
     ISummaryWriterBuilder WithCancellationToken(CancellationToken? cancellationToken);
 
     /// <summary>

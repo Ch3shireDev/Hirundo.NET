@@ -11,11 +11,16 @@ public class SummaryWriterBuilder : ISummaryWriterBuilder
     private string _filename = null!;
     private CancellationToken? _cancellationToken;
 
-    public ISummaryWriterBuilder WithCsvSummaryWriterParameters(CsvSummaryWriterParameters parameters)
-    {
-        ArgumentNullException.ThrowIfNull(parameters);
 
-        _filename = parameters.Path;
+    public ISummaryWriterBuilder WithWriterParameters(IList<IWriterParameters> resultsWriters)
+    {
+        ArgumentNullException.ThrowIfNull(resultsWriters);
+
+        foreach (var writer in resultsWriters)
+        {
+            WithWriterParameters(writer);
+        }
+
         return this;
     }
 
@@ -28,6 +33,13 @@ public class SummaryWriterBuilder : ISummaryWriterBuilder
         };
     }
 
+    public ISummaryWriterBuilder WithCsvSummaryWriterParameters(CsvSummaryWriterParameters parameters)
+    {
+        ArgumentNullException.ThrowIfNull(parameters);
+
+        _filename = parameters.Path;
+        return this;
+    }
     public ISummaryWriterBuilder WithCancellationToken(CancellationToken? cancellationToken)
     {
         _cancellationToken = cancellationToken;
@@ -39,8 +51,20 @@ public class SummaryWriterBuilder : ISummaryWriterBuilder
         ArgumentNullException.ThrowIfNull(_filename);
         Log.Information("Budowanie zapisywacza podsumowań do pliku: {_filename}.", _filename);
         var streamWriter = new StreamWriter(_filename);
-        var resultsWriter = new CsvSummaryWriter(streamWriter, _cancellationToken);
-        return resultsWriter;
+        try
+        {
+            var resultsWriter = new CsvSummaryWriter(streamWriter, _cancellationToken);
+            streamWriter = null;
+            return resultsWriter;
+        }
+        catch
+        {
+            throw;
+        }
+        finally
+        {
+            streamWriter?.Dispose();
+        }
     }
 
     public ISummaryWriterBuilder NewBuilder()

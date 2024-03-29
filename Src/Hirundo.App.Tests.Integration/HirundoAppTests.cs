@@ -50,6 +50,10 @@ public class HirundoAppTests
             .Returns(_summaryWriterBuilder.Object);
 
         _summaryWriterBuilder
+            .Setup(x => x.WithWriterParameters(It.IsAny<IList<IWriterParameters>>()))
+            .Returns(_summaryWriterBuilder.Object);
+
+        _summaryWriterBuilder
             .Setup(x => x.WithCancellationToken(It.IsAny<CancellationToken?>()))
             .Returns(_summaryWriterBuilder.Object);
 

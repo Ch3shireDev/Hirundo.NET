@@ -346,10 +346,12 @@ public class ApplicationConfigJsonConverterTests
         // Arrange
         var json = @"{
           ""Results"": {
-            ""Writer"": {
-              ""Type"": ""Csv"",
-              ""Path"": ""REG-REG.csv""
-            }
+            ""Writers"": [
+              {
+                ""Type"": ""Csv"",
+                ""Path"": ""REG-REG.csv""
+              }
+            ]
           }
         }";
 
@@ -359,10 +361,10 @@ public class ApplicationConfigJsonConverterTests
         // Assert
         Assert.That(config, Is.Not.Null);
         Assert.That(config.Results, Is.Not.Null);
-        Assert.That(config.Results.Writer, Is.Not.Null);
-        Assert.That(config.Results.Writer, Is.TypeOf<CsvSummaryWriterParameters>());
-
-        var writer0 = (CsvSummaryWriterParameters)config.Results.Writer;
-        Assert.That(writer0.Path, Is.EqualTo("REG-REG.csv"));
+        Assert.That(config.Results.Writers, Is.Not.Null);
+        Assert.That(config.Results.Writers.Count, Is.EqualTo(1));
+        var writer = config.Results.Writers.First() as CsvSummaryWriterParameters;
+        Assert.That(writer, Is.TypeOf<CsvSummaryWriterParameters>());
+        Assert.That(writer!.Path, Is.EqualTo("REG-REG.csv"));
     }
 }

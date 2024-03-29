@@ -10,7 +10,6 @@ namespace Hirundo.Writers.Summary;
 
 public sealed class CsvSummaryWriter(TextWriter streamWriter, CancellationToken? token = null) : ISummaryWriter, IDisposable, IAsyncDisposable
 {
-
     public void Write(IEnumerable<ReturningSpecimenSummary> summary)
     {
         var records = summary.ToList();

@@ -343,10 +343,10 @@ public class MainViewModelTests
         {
             Results = new SummaryParameters
             {
-                Writer = new CsvSummaryWriterParameters
+                Writers = [ new CsvSummaryWriterParameters
                 {
                     Path = "abc.csv"
-                }
+                }]
             }
         };
 
@@ -357,8 +357,9 @@ public class MainViewModelTests
         // Assert
         Assert.That(result, Is.Not.Null);
         Assert.That(result.Results, Is.Not.Null);
-        Assert.That(result.Results.Writer, Is.InstanceOf<CsvSummaryWriterParameters>());
-        var csvSummaryWriterParameters = (CsvSummaryWriterParameters)result.Results.Writer;
+        var writer = result.Results.Writers.First();
+        Assert.That(writer, Is.InstanceOf<CsvSummaryWriterParameters>());
+        var csvSummaryWriterParameters = (CsvSummaryWriterParameters)writer;
         Assert.That(csvSummaryWriterParameters.Path, Is.EqualTo("abc.csv"));
     }
 

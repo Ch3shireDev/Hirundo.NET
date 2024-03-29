@@ -2,5 +2,5 @@
 
 public class SummaryParameters
 {
-    public IWriterParameters Writer { get; set; } = new CsvSummaryWriterParameters();
+    public IList<IWriterParameters> Writers { get; init; } = [];
 }
