@@ -15,11 +15,6 @@ public class DataSourceModel(IDataLabelRepository dataLabelRepository, IAccessMe
 
     public override IList<IDatabaseParameters> Parameters { get => ParametersContainer.Databases; }
 
-    public override void AddParameters(ParametersData parametersData)
-    {
-        AddDatasource(parametersData.ConditionType);
-    }
-
     public override IEnumerable<ParametersViewModel> GetParametersViewModels()
     {
         return ParametersContainer
@@ -30,19 +25,6 @@ public class DataSourceModel(IDataLabelRepository dataLabelRepository, IAccessMe
             ;
     }
 
-    public void AddDatasource(Type selectedDataSourceType)
-    {
-        switch (selectedDataSourceType)
-        {
-            case { } accessDatabaseParametersType when accessDatabaseParametersType == typeof(AccessDatabaseParameters):
-                ParametersContainer
-                    .Databases
-                    .Add(new AccessDatabaseParameters());
-                break;
-            default:
-                throw new NotImplementedException();
-        }
-    }
 
     private ParametersViewModel AddUpdaterListener(ParametersViewModel viewModel)
     {

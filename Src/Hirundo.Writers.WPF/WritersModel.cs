@@ -8,6 +8,9 @@ public class WritersModel : ParametersBrowserModel<SummaryParameters, IWriterPar
     public WritersModel(IParametersFactory<IWriterParameters> factory) : base(factory)
     {
     }
+    //public WritersModel(IDataLabelRepository repository) : base(repository)
+    //{
+    //}
 
     public override string Header => "Wyniki";
     public override string Title => "Zapis wyników";
@@ -16,18 +19,4 @@ public class WritersModel : ParametersBrowserModel<SummaryParameters, IWriterPar
 
     public override IList<IWriterParameters> Parameters => ParametersContainer.Writers;
 
-    public override void AddParameters(ParametersData parametersData)
-    {
-        var writer = _factory.CreateCondition(parametersData);
-        ParametersContainer.Writers.Add(writer);
-    }
-
-    public override IEnumerable<ParametersViewModel> GetParametersViewModels()
-    {
-        return ParametersContainer
-                .Writers
-                .Select(_factory.CreateViewModel)
-                .Select(AddEventListener)
-            ;
-    }
 }

@@ -12,20 +12,4 @@ public class ObservationParametersBrowserModel : ParametersBrowserModel<Observat
     public override string Title => "Warunki obserwacji";
 
     public override IList<IObservationCondition> Parameters => ParametersContainer.Conditions;
-
-    public override void AddParameters(ParametersData parametersData)
-    {
-        var condition = _factory.CreateCondition(parametersData);
-        ParametersContainer.Conditions.Add(condition);
-    }
-
-    public override IEnumerable<ParametersViewModel> GetParametersViewModels()
-    {
-        return
-            ParametersContainer
-                .Conditions
-                .Select(_factory.CreateViewModel)
-                .Select(AddEventListener)
-            ;
-    }
 }

@@ -1,4 +1,6 @@
-﻿namespace Hirundo.Commons.WPF;
+﻿using Hirundo.Commons.Repositories.Labels;
+
+namespace Hirundo.Commons.WPF;
 
 public interface IParametersBrowserModel
 {
@@ -20,6 +22,11 @@ public abstract class ParametersBrowserModel<TConditionContainer, TCondition> : 
         _factory = factory;
         ParametersDataList = _factory.GetParametersData().ToArray();
     }
+    protected ParametersBrowserModel(IDataLabelRepository repository)
+    {
+        _factory = new InnerParametersFactory(repository);
+        ParametersDataList = _factory.GetParametersData().ToArray();
+    }
     protected readonly IParametersFactory<TCondition> _factory;
     public TConditionContainer ParametersContainer { get; set; } = new();
     public abstract IList<TCondition> Parameters { get; }
@@ -28,9 +35,6 @@ public abstract class ParametersBrowserModel<TConditionContainer, TCondition> : 
     public abstract string Description { get; }
     public abstract string AddParametersCommandText { get; }
     public virtual IList<ParametersData> ParametersDataList { get; }
-    public abstract void AddParameters(ParametersData parametersData);
-    public abstract IEnumerable<ParametersViewModel> GetParametersViewModels();
-
 
     protected ParametersViewModel AddEventListener(ParametersViewModel viewModel)
     {
@@ -45,5 +49,22 @@ public abstract class ParametersBrowserModel<TConditionContainer, TCondition> : 
         };
 
         return viewModel;
+    }
+    public void AddParameters(ParametersData parametersData)
+    {
+        var writer = _factory.CreateCondition(parametersData);
+        Parameters.Add(writer);
+    }
+
+    public virtual IEnumerable<ParametersViewModel> GetParametersViewModels()
+    {
+        return Parameters
+                .Select(_factory.CreateViewModel)
+                .Select(AddEventListener)
+            ;
+    }
+
+    private class InnerParametersFactory(IDataLabelRepository repository) : ParametersFactory<TCondition, ParametersBrowserModel<TConditionContainer, TCondition>>(repository), IParametersFactory<TCondition>
+    {
     }
 }

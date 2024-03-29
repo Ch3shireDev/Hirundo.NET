@@ -13,19 +13,4 @@ public class ComputedValuesModel : ParametersBrowserModel<ComputedValuesParamete
     public override string AddParametersCommandText => "Dodaj wartość";
 
     public override IList<IComputedValuesCalculator> Parameters => ParametersContainer.ComputedValues;
-
-    public override void AddParameters(ParametersData parametersData)
-    {
-        var computedValue = _factory.CreateCondition(parametersData);
-        ParametersContainer.ComputedValues.Add(computedValue);
-    }
-
-    public override IEnumerable<ParametersViewModel> GetParametersViewModels()
-    {
-        return ParametersContainer
-                .ComputedValues
-                .Select(_factory.CreateViewModel)
-                .Select(AddEventListener)
-            ;
-    }
 }
