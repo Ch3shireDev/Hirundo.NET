@@ -1,8 +1,7 @@
-﻿using System.Globalization;
-using System.Windows.Data;
-using Hirundo.Commons.WPF;
+﻿using Hirundo.Commons.WPF;
 using Hirundo.Processors.Specimens.WPF;
-using Hirundo.Writers.WPF;
+using System.Globalization;
+using System.Windows.Data;
 
 namespace Hirundo.App.WPF.Helpers;
 
@@ -14,7 +13,6 @@ public class ViewModelToTabItemHeaderConverter : IValueConverter
         {
             ParametersBrowserViewModel viewModel => viewModel.Header,
             SpecimensViewModel => "Osobniki",
-            WriterViewModel => "Zapis wyników",
             _ => throw new ArgumentOutOfRangeException(nameof(value))
         };
     }
