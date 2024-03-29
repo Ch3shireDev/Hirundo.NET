@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using Hirundo.App.WPF.Components;
 using Hirundo.Commons.Repositories.Labels;
-using Hirundo.Commons.WPF;
 using Hirundo.Databases;
 using Hirundo.Databases.WPF;
 using Hirundo.Processors.Computed.WPF;
@@ -10,7 +9,6 @@ using Hirundo.Processors.Population.WPF;
 using Hirundo.Processors.Returning.WPF;
 using Hirundo.Processors.Specimens.WPF;
 using Hirundo.Processors.Statistics.WPF;
-using Hirundo.Writers.Summary;
 using Hirundo.Writers.WPF;
 using Moq;
 
@@ -28,12 +26,6 @@ internal static class ContainerExtensions
 
         var accessMetadataService = new Mock<IAccessMetadataService>();
         builder.RegisterInstance(accessMetadataService.Object).As<IAccessMetadataService>().SingleInstance();
-
-        var writersParametersViewModelsFactory = new Mock<IParametersFactory<IWriterParameters>>();
-        builder.RegisterInstance(writersParametersViewModelsFactory.Object).As<IParametersFactory<IWriterParameters>>().SingleInstance();
-
-        var databaseFactory = new DatabaseParametersFactory(repository.Object);
-        builder.RegisterInstance(databaseFactory).As<IDatabaseParametersFactory>().SingleInstance();
 
         builder.RegisterType<DataSourceModel>().AsSelf().SingleInstance();
         builder.RegisterType<ObservationsModel>().AsSelf().SingleInstance();

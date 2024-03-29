@@ -33,9 +33,6 @@ internal static class ContainerExtensions
         builder.RegisterInstance(accessMetadataService).As<Mock<IAccessMetadataService>>().SingleInstance();
         builder.RegisterInstance(accessMetadataService.Object).As<IAccessMetadataService>().SingleInstance();
 
-        var databaseFactory = new DatabaseParametersFactory(repository.Object);
-        builder.RegisterInstance(databaseFactory).As<IDatabaseParametersFactory>().SingleInstance();
-
         builder.RegisterType<DataSourceModel>().AsSelf().SingleInstance();
         builder.RegisterType<ObservationsModel>().AsSelf().SingleInstance();
         builder.RegisterType<PopulationModel>().AsSelf().SingleInstance();

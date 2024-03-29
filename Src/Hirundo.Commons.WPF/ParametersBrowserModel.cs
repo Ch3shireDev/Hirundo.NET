@@ -14,21 +14,16 @@ public interface IParametersBrowserModel
 }
 
 public abstract class ParametersBrowserModel<TConditionContainer, TCondition, TBrowser> : IParametersBrowserModel
-    where TCondition : class
     where TConditionContainer : class, new()
+    where TCondition : class
     where TBrowser : IParametersBrowserModel
 {
-    protected ParametersBrowserModel(IParametersFactory<TCondition> factory)
-    {
-        _factory = factory;
-        ParametersDataList = _factory.GetParametersData().ToArray();
-    }
     protected ParametersBrowserModel(IDataLabelRepository repository)
     {
-        _factory = new InnerParametersFactory(repository);
+        _factory = new ParametersFactory<TCondition, TBrowser>(repository);
         ParametersDataList = _factory.GetParametersData().ToArray();
     }
-    protected readonly IParametersFactory<TCondition> _factory;
+    protected readonly ParametersFactory<TCondition, TBrowser> _factory;
     public TConditionContainer ParametersContainer { get; set; } = new();
     public abstract IList<TCondition> Parameters { get; }
     public abstract string Header { get; }
@@ -63,9 +58,5 @@ public abstract class ParametersBrowserModel<TConditionContainer, TCondition, TB
                 .Select(_factory.CreateViewModel)
                 .Select(AddEventListener)
             ;
-    }
-
-    private class InnerParametersFactory(IDataLabelRepository repository) : ParametersFactory<TCondition, TBrowser>(repository), IParametersFactory<TCondition>
-    {
     }
 }

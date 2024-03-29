@@ -39,11 +39,11 @@ public class MainModel(
     {
         ArgumentNullException.ThrowIfNull(config);
 
-        DatabasesBrowserModel.ParametersContainer.Databases.Clear();
+        DatabasesBrowserModel.Parameters.Clear();
 
         foreach (var database in config.Databases.Databases)
         {
-            DatabasesBrowserModel.ParametersContainer.Databases.Add(database);
+            DatabasesBrowserModel.Parameters.Add(database);
         }
 
         DatabasesBrowserModel.UpdateRepository();

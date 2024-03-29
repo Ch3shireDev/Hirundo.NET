@@ -15,7 +15,7 @@ public class DataSourceModel(IDataLabelRepository repository, IAccessMetadataSer
     public override string Header => "Źródła danych";
     public override string Title => "Źródła danych";
 
-    public override IList<IDatabaseParameters> Parameters { get => ParametersContainer.Databases; }
+    public override IList<IDatabaseParameters> Parameters => ParametersContainer.Databases;
 
     public override IEnumerable<ParametersViewModel> GetParametersViewModels()
     {
@@ -54,7 +54,7 @@ public class DataSourceModel(IDataLabelRepository repository, IAccessMetadataSer
 
         var labels = new List<DataLabel>();
 
-        foreach (var databaseParameters in ParametersContainer.Databases)
+        foreach (var databaseParameters in Parameters)
         {
             var dbLabels = databaseParameters.Columns.Select(GetDataLabel).ToList();
             labels.AddRange(dbLabels);

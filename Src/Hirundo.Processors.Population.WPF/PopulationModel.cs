@@ -6,7 +6,6 @@ namespace Hirundo.Processors.Population.WPF;
 
 public class PopulationModel(IDataLabelRepository repository) : ParametersBrowserModel<PopulationProcessorParameters, IPopulationConditionBuilder, PopulationModel>(repository)
 {
-    public IList<IPopulationConditionBuilder> Conditions => ParametersContainer.Conditions;
     public override string Header => "Populacja";
     public override string Title => "Warunki populacji";
     public override string Description => "W tym panelu określasz warunki określające populację dla danego osobnika powracającego.";

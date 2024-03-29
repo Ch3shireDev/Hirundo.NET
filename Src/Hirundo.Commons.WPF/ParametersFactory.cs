@@ -3,6 +3,12 @@ using System.Reflection;
 
 namespace Hirundo.Commons.WPF;
 
+public interface IParametersFactory<TCondition>
+{
+    IEnumerable<ParametersData> GetParametersData();
+    ParametersViewModel CreateViewModel(TCondition condition);
+    TCondition CreateCondition(ParametersData parametersData);
+}
 public class ParametersFactory<TCondition, TBrowserModel>(IDataLabelRepository repository) : IParametersFactory<TCondition>
     where TCondition : class
     where TBrowserModel : IParametersBrowserModel

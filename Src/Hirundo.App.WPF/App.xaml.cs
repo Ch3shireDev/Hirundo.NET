@@ -50,8 +50,6 @@ public partial class App : Application
         builder.RegisterType<MainViewModel>().AsSelf().SingleInstance();
         builder.RegisterType<DataLabelRepository>().As<IDataLabelRepository>().SingleInstance();
 
-        builder.RegisterType<DatabaseParametersFactory>().As<IDatabaseParametersFactory>().SingleInstance();
-
         var container = builder.Build();
 
         var viewModel = container.Resolve<MainViewModel>();
