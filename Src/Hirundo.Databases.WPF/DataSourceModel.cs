@@ -23,7 +23,7 @@ public class DataSourceModel(IDataLabelRepository repository, IAccessMetadataSer
                 .Databases
                 .Select(AsParametersViewModel)
                 .Select(AddUpdaterListener)
-                .Select(AddEventListener)
+                .Select(AddRemovedListener)
             ;
     }
 

@@ -65,10 +65,10 @@ public class MainModel(
             ComputedValues = ComputedValuesModel.ParametersContainer,
             Observations = ObservationParametersBrowserModel.ParametersContainer,
             Population = PopulationModel.ParametersContainer,
-            ReturningSpecimens = ReturningSpecimensModel.ParametersContainer!,
-            Specimens = SpecimensModel.SpecimensProcessorParameters ?? throw new InvalidOperationException("Config not loaded"),
-            Statistics = StatisticsModel.ParametersContainer ?? throw new InvalidOperationException("Config not loaded"),
-            Results = WriterModel.ParametersContainer ?? throw new InvalidOperationException("Config not loaded")
+            ReturningSpecimens = ReturningSpecimensModel.ParametersContainer,
+            Specimens = SpecimensModel.SpecimensProcessorParameters,
+            Statistics = StatisticsModel.ParametersContainer,
+            Results = WriterModel.ParametersContainer
         };
     }
 

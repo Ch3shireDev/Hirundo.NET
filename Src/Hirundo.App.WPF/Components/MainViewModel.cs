@@ -4,6 +4,7 @@ using Hirundo.App.WPF.Helpers;
 using Hirundo.Commons;
 using Hirundo.Commons.WPF;
 using Hirundo.Processors.Specimens.WPF;
+using Hirundo.Writers.Summary;
 using Microsoft.Win32;
 using Serilog;
 using Serilog.Events;
@@ -48,6 +49,8 @@ public sealed class MainViewModel : ObservableObject
         ];
 
         SelectedViewModel = DataSourceViewModel;
+
+        model.WriterModel.Process = () => Task.Run(ProcessAndSaveAsync);
     }
 
     public Action RefreshWindow { get; set; } = () => { };
@@ -148,6 +151,32 @@ public sealed class MainViewModel : ObservableObject
 
         try
         {
+            var config = _model.GetConfigFromViewModels();
+            var results = config.Results;
+
+            foreach (var result in results.Writers)
+            {
+                if (result is CsvSummaryWriterParameters parameters)
+                {
+                    var dialog = new SaveFileDialog
+                    {
+                        Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*",
+                        InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                        Title = "Wybierz docelową lokalizację pliku CSV.",
+                        FileName = "results.csv"
+                    };
+
+                    if (dialog.ShowDialog() == true)
+                    {
+                        parameters.Path = dialog.FileName;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            }
+
             IsProcessing = true;
             OnPropertyChanged(nameof(ProcessAndSaveCommand));
             OnPropertyChanged(nameof(BreakCommand));

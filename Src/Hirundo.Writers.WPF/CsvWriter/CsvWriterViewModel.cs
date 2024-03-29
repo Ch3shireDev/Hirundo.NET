@@ -21,4 +21,6 @@ public class CsvWriterViewModel(CsvWriterModel model) : ParametersViewModel(mode
             OnPropertyChanged();
         }
     }
+
+    public override string RemoveText => "Usuń format";
 }

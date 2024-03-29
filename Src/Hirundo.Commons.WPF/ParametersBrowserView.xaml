@@ -12,6 +12,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <WrapPanel Margin="10" Grid.Row="0">
@@ -25,7 +26,12 @@
             <ComboBox ItemsSource="{Binding Options}" SelectedValue="{Binding SelectedParameter}"
                       DisplayMemberPath="Title" MinWidth="200" />
         </WrapPanel>
-        <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="3">
+        <StackPanel Grid.Row="3" Visibility="{Binding ProcessVisibility}">
+            <WrapPanel Margin="10">
+                <Button Command="{Binding ProcessCommand}" Content="{Binding ProcessLabel}"/>
+            </WrapPanel>
+        </StackPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="4">
             <ItemsControl ItemsSource="{Binding ParametersViewModels}" HorizontalAlignment="Left">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>

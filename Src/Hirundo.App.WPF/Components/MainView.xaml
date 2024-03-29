@@ -5,11 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:wpf4="clr-namespace:Hirundo.Processors.Specimens.WPF;assembly=Hirundo.Processors.Specimens.WPF"
              xmlns:helpers="clr-namespace:Hirundo.Commons.WPF.Helpers;assembly=Hirundo.Commons.WPF"
-             xmlns:wpf6="clr-namespace:Hirundo.Writers.WPF;assembly=Hirundo.Writers.WPF"
              xmlns:wpf11="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
-             xmlns:access="clr-namespace:Hirundo.Databases.WPF.Access;assembly=Hirundo.Databases.WPF"
-             xmlns:isInSharedTimeWindow="clr-namespace:Hirundo.Processors.Population.WPF.IsInSharedTimeWindow;assembly=Hirundo.Processors.Population.WPF"
-             xmlns:average="clr-namespace:Hirundo.Processors.Statistics.WPF.Average;assembly=Hirundo.Processors.Statistics.WPF"
              xmlns:helpers2="clr-namespace:Hirundo.App.WPF.Helpers"
              xmlns:components="clr-namespace:Hirundo.App.WPF.Components"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
@@ -37,20 +33,8 @@
             <wpf11:ParametersBrowserView />
         </DataTemplate>
 
-        <DataTemplate DataType="{x:Type access:AccessDataSourceViewModel}">
-            <access:AccessDataSourceView />
-        </DataTemplate>
-
         <DataTemplate DataType="{x:Type wpf4:SpecimensViewModel}">
             <wpf4:SpecimensView />
-        </DataTemplate>
-
-        <DataTemplate DataType="{x:Type isInSharedTimeWindow:IsInSharedTimeWindowViewModel}">
-            <isInSharedTimeWindow:IsInSharedTimeWindowView />
-        </DataTemplate>
-
-        <DataTemplate DataType="{x:Type average:AverageViewModel}">
-            <average:AverageView />
         </DataTemplate>
 
         <helpers2:ViewModelToTabItemHeaderConverter x:Key="ViewModelToTabItemHeaderConverter" />

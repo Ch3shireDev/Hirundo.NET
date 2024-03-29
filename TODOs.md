@@ -1,6 +1,6 @@
 # Zadania / pomysły do dodania
 
-1.  [ ] Guziki "Wybierz plik" oraz "Zapisz dane" to powinien być jeden guzik - wybór pliku automatycznie przelicza dane.
+1.  [x] Guziki "Wybierz plik" oraz "Zapisz dane" to powinien być jeden guzik - wybór pliku automatycznie przelicza dane.
 2.  [ ] Dodać przetwarzanie konfiguracji na "ludzki" zapis, tj. opis zrozumiały dla użytkownika.
 3.  [ ] Dodać możliwość zapisu wyników do pliku .xlsx. Na drugim arkuszu powinna być napisana konfiguracja programu.
 4.  [ ] Upewnić się, czy powrót po określonym czasie w Powrotach jest odporny na format daty.

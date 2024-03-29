@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Hirundo.Commons.WPF;
@@ -14,6 +15,12 @@ public class ParametersBrowserViewModel(IParametersBrowserModel parametersBrowse
     public IList<ParametersData> Options => parametersBrowserModel.ParametersDataList;
     public ParametersData? SelectedParameter { get; set; } = parametersBrowserModel.ParametersDataList.FirstOrDefault();
     public IList<ParametersViewModel> ParametersViewModels => [.. parametersBrowserModel.GetParametersViewModels().Select(SetRefreshOnUpdate)];
+
+    public ICommand ProcessCommand => new RelayCommand(() => parametersBrowserModel.Process?.Invoke(), () => parametersBrowserModel.CanProcess);
+
+    public bool CanProcess => parametersBrowserModel.CanProcess;
+    public string ProcessLabel => parametersBrowserModel.ProcessLabel;
+    public Visibility ProcessVisibility => CanProcess ? Visibility.Visible : Visibility.Collapsed;
 
     private ParametersViewModel SetRefreshOnUpdate(ParametersViewModel viewModelBase)
     {

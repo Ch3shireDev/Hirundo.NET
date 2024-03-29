@@ -9,6 +9,10 @@ public interface IParametersBrowserModel
     string Header { get; }
     IList<ParametersData> ParametersDataList { get; }
     string Title { get; }
+    Action? Process { get; }
+    bool CanProcess { get; }
+    string ProcessLabel { get; }
+
     void AddParameters(ParametersData parametersData);
     IEnumerable<ParametersViewModel> GetParametersViewModels();
 }
@@ -31,8 +35,11 @@ public abstract class ParametersBrowserModel<TConditionContainer, TCondition, TB
     public abstract string Description { get; }
     public abstract string AddParametersCommandText { get; }
     public virtual IList<ParametersData> ParametersDataList { get; }
+    public virtual Action? Process { get; set; }
+    public bool CanProcess => Process is not null;
+    public virtual string ProcessLabel => "Przetwarzaj";
 
-    protected ParametersViewModel AddEventListener(ParametersViewModel viewModel)
+    protected ParametersViewModel AddRemovedListener(ParametersViewModel viewModel)
     {
         if (viewModel is not IRemovable removable) return viewModel;
 
@@ -56,7 +63,7 @@ public abstract class ParametersBrowserModel<TConditionContainer, TCondition, TB
     {
         return Parameters
                 .Select(_factory.CreateViewModel)
-                .Select(AddEventListener)
+                .Select(AddRemovedListener)
             ;
     }
 }

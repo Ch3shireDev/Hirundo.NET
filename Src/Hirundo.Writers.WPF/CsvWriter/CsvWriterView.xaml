@@ -7,10 +7,4 @@
              mc:Ignorable="d"
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance local:CsvWriterViewModel}">
-    <StackPanel>
-        <Label FontWeight="Bold">Zapis do pliku CSV</Label>
-        <WrapPanel>
-            <wpf:FileDestinationControl Path="{Binding Path, Mode=TwoWay}"/>
-        </WrapPanel>
-    </StackPanel>
 </UserControl>
