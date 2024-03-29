@@ -12,8 +12,7 @@ public class ObservationParametersBrowserModelTests
     public void Initialize()
     {
         var repository = new Mock<IDataLabelRepository>();
-        var factory = new ObservationParametersFactory(repository.Object);
-        _model = new ObservationParametersBrowserModel(factory);
+        _model = new ObservationParametersBrowserModel(repository.Object);
     }
 
     private ObservationParametersBrowserModel _model = null!;

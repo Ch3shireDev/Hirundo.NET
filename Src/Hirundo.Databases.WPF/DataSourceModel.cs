@@ -6,8 +6,11 @@ using System.Windows;
 
 namespace Hirundo.Databases.WPF;
 
-public class DataSourceModel(IDataLabelRepository dataLabelRepository, IAccessMetadataService accessMetadataService, IDatabaseParametersFactory factory) : ParametersBrowserModel<DatabaseParameters, IDatabaseParameters>(factory)
+public class DataSourceModel(IDataLabelRepository repository, IAccessMetadataService accessMetadataService) : ParametersBrowserModel<DatabaseParameters, IDatabaseParameters, DataSourceModel>(repository)
 {
+    private readonly IDataLabelRepository repository = repository;
+    private readonly IAccessMetadataService accessMetadataService = accessMetadataService;
+
     public override string Description => "W tym panelu wybierasz źródło danych.";
     public override string AddParametersCommandText => "Dodaj nowe źródło danych";
     public override string Header => "Źródła danych";
@@ -70,7 +73,7 @@ public class DataSourceModel(IDataLabelRepository dataLabelRepository, IAccessMe
     {
         return parameters switch
         {
-            AccessDatabaseParameters accessDatabaseParameters => new AccessDataSourceViewModel(new AccessDataSourceModel(accessDatabaseParameters, dataLabelRepository), accessMetadataService),
+            AccessDatabaseParameters accessDatabaseParameters => new AccessDataSourceViewModel(new AccessDataSourceModel(accessDatabaseParameters, repository), accessMetadataService),
             _ => throw new NotImplementedException()
         };
     }
@@ -90,7 +93,7 @@ public class DataSourceModel(IDataLabelRepository dataLabelRepository, IAccessMe
 
         var groups = labels.GroupBy(l => l.Name).Select(x => x.First()).ToArray();
 
-        dataLabelRepository.SetLabels(groups);
+        repository.SetLabels(groups);
     }
 
     private DataLabel GetDataLabel(ColumnMapping columnMapping)

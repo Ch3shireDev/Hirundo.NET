@@ -1,12 +1,10 @@
-﻿using Hirundo.Commons.WPF;
+﻿using Hirundo.Commons.Repositories.Labels;
+using Hirundo.Commons.WPF;
 
 namespace Hirundo.Processors.Computed.WPF;
 
-public class ComputedValuesModel : ParametersBrowserModel<ComputedValuesParameters, IComputedValuesCalculator>
+public class ComputedValuesModel(IDataLabelRepository repository) : ParametersBrowserModel<ComputedValuesParameters, IComputedValuesCalculator, ComputedValuesModel>(repository)
 {
-
-    public ComputedValuesModel(IComputedParametersFactory factory) : base(factory) { }
-
     public override string Header => "Wartości";
     public override string Title => "Wartości";
     public override string Description => "W tym panelu ustalasz, jakie wartości mają być obliczane na podstawie wartości z bazy danych.";

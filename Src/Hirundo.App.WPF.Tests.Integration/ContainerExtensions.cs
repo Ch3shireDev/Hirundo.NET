@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using Hirundo.App.WPF.Components;
 using Hirundo.Commons.Repositories.Labels;
-using Hirundo.Commons.WPF;
 using Hirundo.Databases;
 using Hirundo.Databases.WPF;
 using Hirundo.Processors.Computed.WPF;
@@ -10,7 +9,6 @@ using Hirundo.Processors.Population.WPF;
 using Hirundo.Processors.Returning.WPF;
 using Hirundo.Processors.Specimens.WPF;
 using Hirundo.Processors.Statistics.WPF;
-using Hirundo.Writers.Summary;
 using Hirundo.Writers.WPF;
 using Moq;
 
@@ -34,24 +32,6 @@ internal static class ContainerExtensions
 
         builder.RegisterInstance(accessMetadataService).As<Mock<IAccessMetadataService>>().SingleInstance();
         builder.RegisterInstance(accessMetadataService.Object).As<IAccessMetadataService>().SingleInstance();
-
-        var observationParametersViewModelsFactory = new ObservationParametersFactory(repository.Object);
-        builder.RegisterInstance(observationParametersViewModelsFactory).As<IObservationParametersFactory>().SingleInstance();
-
-        var returningParametersViewModelsFactory = new ReturningParametersFactory(repository.Object);
-        builder.RegisterInstance(returningParametersViewModelsFactory).As<IReturningParametersFactory>().SingleInstance();
-
-        var statisticsParametersViewModelsFactory = new StatisticsParametersFactory(repository.Object);
-        builder.RegisterInstance(statisticsParametersViewModelsFactory).As<IStatisticsParametersFactory>().SingleInstance();
-
-        var computedParametersViewModelsFactory = new ComputedParametersFactory(repository.Object);
-        builder.RegisterInstance(computedParametersViewModelsFactory).As<IComputedParametersFactory>().SingleInstance();
-
-        var writersParametersViewModelsFactory = new WritersParametersFactory(repository.Object);
-        builder.RegisterInstance(writersParametersViewModelsFactory).As<IParametersFactory<IWriterParameters>>().SingleInstance();
-
-        var populationFactory = new PopulationParametersFactory(repository.Object);
-        builder.RegisterInstance(populationFactory).As<IPopulationParametersFactory>().SingleInstance();
 
         var databaseFactory = new DatabaseParametersFactory(repository.Object);
         builder.RegisterInstance(databaseFactory).As<IDatabaseParametersFactory>().SingleInstance();

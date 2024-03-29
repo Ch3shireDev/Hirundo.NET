@@ -13,9 +13,10 @@ public interface IParametersBrowserModel
     IEnumerable<ParametersViewModel> GetParametersViewModels();
 }
 
-public abstract class ParametersBrowserModel<TConditionContainer, TCondition> : IParametersBrowserModel
+public abstract class ParametersBrowserModel<TConditionContainer, TCondition, TBrowser> : IParametersBrowserModel
     where TCondition : class
     where TConditionContainer : class, new()
+    where TBrowser : IParametersBrowserModel
 {
     protected ParametersBrowserModel(IParametersFactory<TCondition> factory)
     {
@@ -64,7 +65,7 @@ public abstract class ParametersBrowserModel<TConditionContainer, TCondition> : 
             ;
     }
 
-    private class InnerParametersFactory(IDataLabelRepository repository) : ParametersFactory<TCondition, ParametersBrowserModel<TConditionContainer, TCondition>>(repository), IParametersFactory<TCondition>
+    private class InnerParametersFactory(IDataLabelRepository repository) : ParametersFactory<TCondition, TBrowser>(repository), IParametersFactory<TCondition>
     {
     }
 }

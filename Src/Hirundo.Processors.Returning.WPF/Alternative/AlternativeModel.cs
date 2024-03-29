@@ -5,12 +5,12 @@ using Hirundo.Processors.Returning.Conditions;
 namespace Hirundo.Processors.Returning.WPF.Alternative;
 public class AlternativeModel : ParametersModel
 {
-    private readonly ReturningParametersFactory returningParametersFactory;
+    private readonly ParametersFactory<IReturningSpecimenCondition, ReturningSpecimensModel> _factory;
 
     public AlternativeModel(object parameters, IDataLabelRepository repository) : base(parameters, repository)
     {
-        returningParametersFactory = new ReturningParametersFactory(repository);
-        AvailableParameters = returningParametersFactory.GetParametersData().ToArray();
+        _factory = new ParametersFactory<IReturningSpecimenCondition, ReturningSpecimensModel>(repository);
+        AvailableParameters = _factory.GetParametersData().ToArray();
         FirstParameter = AvailableParameters.FirstOrDefault();
         SecondParameter = AvailableParameters.Skip(1).FirstOrDefault();
     }
@@ -44,12 +44,12 @@ public class AlternativeModel : ParametersModel
                     return;
                 }
             }
-            var condition = returningParametersFactory.CreateCondition(firstParameter);
+            var condition = _factory.CreateCondition(firstParameter);
             if (Condition.Conditions.Count == 0) Condition.Conditions.Add(condition);
             else Condition.Conditions[0] = condition;
         }
     }
-    public ParametersViewModel? FirstViewModel => FirstParameter != null ? returningParametersFactory.CreateViewModel(Condition.Conditions[0]) : null;
+    public ParametersViewModel? FirstViewModel => FirstParameter != null ? _factory.CreateViewModel(Condition.Conditions[0]) : null;
     private ParametersData? secondParameter;
     public ParametersData? SecondParameter
     {
@@ -70,11 +70,11 @@ public class AlternativeModel : ParametersModel
                 }
                 return;
             }
-            var condition = returningParametersFactory.CreateCondition(secondParameter);
+            var condition = _factory.CreateCondition(secondParameter);
             if (Condition.Conditions.Count == 0) return;
             if (Condition.Conditions.Count == 1) Condition.Conditions.Add(condition);
             else Condition.Conditions[1] = condition;
         }
     }
-    public ParametersViewModel? SecondViewModel => SecondParameter != null ? returningParametersFactory.CreateViewModel(Condition.Conditions[1]) : null;
+    public ParametersViewModel? SecondViewModel => SecondParameter != null ? _factory.CreateViewModel(Condition.Conditions[1]) : null;
 }

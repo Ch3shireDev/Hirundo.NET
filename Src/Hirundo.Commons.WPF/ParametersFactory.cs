@@ -17,12 +17,12 @@ public class ParametersFactory<TCondition, TBrowserModel>(IDataLabelRepository r
 
     public IEnumerable<ParametersData> GetParametersData()
     {
-        return ParametersFactory<TCondition, TBrowserModel>.GetAssemblyAttributes().Select(attribute => new ParametersData(attribute.ConditionType, attribute.Name, attribute.Description));
+        return GetAssemblyAttributes().Select(attribute => new ParametersData(attribute.ConditionType, attribute.Name, attribute.Description));
     }
 
     public ParametersViewModel CreateViewModel(TCondition condition)
     {
-        var attribute = ParametersFactory<TCondition, TBrowserModel>.GetConditionAttribute(condition);
+        var attribute = GetConditionAttribute(condition);
         var viewModel = GetViewModelFromCondition(condition);
         viewModel.Name = attribute.Name;
         viewModel.Description = attribute.Description;
@@ -31,9 +31,9 @@ public class ParametersFactory<TCondition, TBrowserModel>(IDataLabelRepository r
 
     private ParametersViewModel GetViewModelFromCondition(TCondition condition)
     {
-        var attribute = ParametersFactory<TCondition, TBrowserModel>.GetConditionAttribute(condition);
+        var attribute = GetConditionAttribute(condition);
         var model = GetModelFromCondition(attribute, condition);
-        var viewModelType = ParametersFactory<TCondition, TBrowserModel>.GetViewModelType(attribute);
+        var viewModelType = GetViewModelType(attribute);
         var viewModelConstructor = viewModelType.GetConstructor([model.GetType()]);
         var viewModel = viewModelConstructor?.Invoke([model]) as ParametersViewModel;
         return viewModel ?? throw new InvalidOperationException($"Błąd tworzenia modelu dla warunku {condition.GetType().Name}");
@@ -47,26 +47,26 @@ public class ParametersFactory<TCondition, TBrowserModel>(IDataLabelRepository r
         return model ?? throw new InvalidOperationException($"Nie znaleziono modelu dla warunku {condition.GetType().Name}");
     }
 
-    private static ParametersDataAttribute GetConditionAttribute(TCondition condition)
+    private ParametersDataAttribute GetConditionAttribute(TCondition condition)
     {
-        var attributes = ParametersFactory<TCondition, TBrowserModel>.GetAssemblyAttributes().ToArray();
+        var attributes = GetAssemblyAttributes().ToArray();
         var attribute = attributes.FirstOrDefault(a => a.ConditionType == condition.GetType());
         return attribute ?? throw new InvalidOperationException($"Nie znaleziono atrybutu dla warunku {condition.GetType().Name}");
     }
 
-    private static IEnumerable<Type> GetViewModelsTypes()
+    private Type[] GetViewModelsTypes()
     {
         var assembly = Assembly.GetAssembly(typeof(TBrowserModel));
 
         var viewModelsTypes = assembly?
             .GetTypes()
-            .Where(t => t is { IsClass: true, IsAbstract: false } && t.IsSubclassOf(typeof(ParametersViewModel))) ?? [];
+            .Where(t => t is { IsClass: true, IsAbstract: false } && t.IsSubclassOf(typeof(ParametersViewModel)))?.ToArray() ?? [];
         return viewModelsTypes;
     }
 
-    private static IEnumerable<ParametersDataAttribute> GetAssemblyAttributes()
+    private IEnumerable<ParametersDataAttribute> GetAssemblyAttributes()
     {
-        var viewModelTypes = ParametersFactory<TCondition, TBrowserModel>.GetViewModelsTypes();
+        var viewModelTypes = GetViewModelsTypes();
 
         foreach (var viewModelType in viewModelTypes)
         {
@@ -79,9 +79,9 @@ public class ParametersFactory<TCondition, TBrowserModel>(IDataLabelRepository r
         }
     }
 
-    private static Type GetViewModelType(ParametersDataAttribute attribute)
+    private Type GetViewModelType(ParametersDataAttribute attribute)
     {
-        var viewModelTypes = ParametersFactory<TCondition, TBrowserModel>.GetViewModelsTypes();
+        var viewModelTypes = GetViewModelsTypes();
 
         return viewModelTypes.First(t => t.GetCustomAttribute<ParametersDataAttribute>()?.ConditionType == attribute.ConditionType);
     }

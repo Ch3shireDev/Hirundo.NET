@@ -20,10 +20,4 @@
 		<ProjectReference Include="..\Hirundo.Writers.Summary\Hirundo.Writers.Summary.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Compile Update="WriterView.xaml.cs">
-			<SubType>Code</SubType>
-		</Compile>
-	</ItemGroup>
-
 </Project>

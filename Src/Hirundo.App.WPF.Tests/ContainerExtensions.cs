@@ -29,23 +29,8 @@ internal static class ContainerExtensions
         var accessMetadataService = new Mock<IAccessMetadataService>();
         builder.RegisterInstance(accessMetadataService.Object).As<IAccessMetadataService>().SingleInstance();
 
-        var observationParametersViewModelsFactory = new Mock<IObservationParametersFactory>();
-        builder.RegisterInstance(observationParametersViewModelsFactory.Object).As<IObservationParametersFactory>().SingleInstance();
-
-        var returningParametersViewModelsFactory = new Mock<IReturningParametersFactory>();
-        builder.RegisterInstance(returningParametersViewModelsFactory.Object).As<IReturningParametersFactory>().SingleInstance();
-
-        var statisticsParametersViewModelsFactory = new Mock<IStatisticsParametersFactory>();
-        builder.RegisterInstance(statisticsParametersViewModelsFactory.Object).As<IStatisticsParametersFactory>().SingleInstance();
-
-        var computedParametersViewModelsFactory = new Mock<IComputedParametersFactory>();
-        builder.RegisterInstance(computedParametersViewModelsFactory.Object).As<IComputedParametersFactory>().SingleInstance();
-
         var writersParametersViewModelsFactory = new Mock<IParametersFactory<IWriterParameters>>();
         builder.RegisterInstance(writersParametersViewModelsFactory.Object).As<IParametersFactory<IWriterParameters>>().SingleInstance();
-
-        var populationFactory = new PopulationParametersFactory(repository.Object);
-        builder.RegisterInstance(populationFactory).As<IPopulationParametersFactory>().SingleInstance();
 
         var databaseFactory = new DatabaseParametersFactory(repository.Object);
         builder.RegisterInstance(databaseFactory).As<IDatabaseParametersFactory>().SingleInstance();

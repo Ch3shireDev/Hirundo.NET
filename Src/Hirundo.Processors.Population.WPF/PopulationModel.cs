@@ -1,9 +1,10 @@
-﻿using Hirundo.Commons.WPF;
+﻿using Hirundo.Commons.Repositories.Labels;
+using Hirundo.Commons.WPF;
 using Hirundo.Processors.Population.Conditions;
 
 namespace Hirundo.Processors.Population.WPF;
 
-public class PopulationModel : ParametersBrowserModel<PopulationProcessorParameters, IPopulationConditionBuilder>
+public class PopulationModel(IDataLabelRepository repository) : ParametersBrowserModel<PopulationProcessorParameters, IPopulationConditionBuilder, PopulationModel>(repository)
 {
     public IList<IPopulationConditionBuilder> Conditions => ParametersContainer.Conditions;
     public override string Header => "Populacja";
@@ -11,5 +12,4 @@ public class PopulationModel : ParametersBrowserModel<PopulationProcessorParamet
     public override string Description => "W tym panelu określasz warunki określające populację dla danego osobnika powracającego.";
     public override string AddParametersCommandText => "Dodaj nowy warunek";
     public override IList<IPopulationConditionBuilder> Parameters => ParametersContainer.Conditions;
-    public PopulationModel(IPopulationParametersFactory factory) : base(factory) { }
 }
