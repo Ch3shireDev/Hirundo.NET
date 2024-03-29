@@ -39,6 +39,12 @@ internal static class ContainerExtensions
         var computedParametersViewModelsFactory = new Mock<IComputedParametersFactory>();
         builder.RegisterInstance(computedParametersViewModelsFactory.Object).As<IComputedParametersFactory>().SingleInstance();
 
+        var writersParametersViewModelsFactory = new Mock<IWritersParametersFactory>();
+        builder.RegisterInstance(writersParametersViewModelsFactory.Object).As<IWritersParametersFactory>().SingleInstance();
+
+        var populationFactory = new PopulationParametersFactory(repository.Object);
+        builder.RegisterInstance(populationFactory).As<IPopulationParametersFactory>().SingleInstance();
+
         builder.RegisterType<DataSourceModel>().AsSelf().SingleInstance();
         builder.RegisterType<ObservationParametersBrowserModel>().AsSelf().SingleInstance();
         builder.RegisterType<PopulationModel>().AsSelf().SingleInstance();

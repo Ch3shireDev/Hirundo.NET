@@ -25,7 +25,7 @@ public class MainModel(
 )
 {
     private bool _isProcessing;
-    public DataSourceModel DataSourceModel { get; set; } = dataSourceModel;
+    public DataSourceModel DatabasesBrowserModel { get; set; } = dataSourceModel;
     public ObservationParametersBrowserModel ObservationParametersBrowserModel { get; set; } = observationParametersBrowserModel;
     public PopulationModel PopulationModel { get; set; } = populationModel;
     public ReturningSpecimensModel ReturningSpecimensModel { get; set; } = returningSpecimensModel;
@@ -39,36 +39,36 @@ public class MainModel(
     {
         ArgumentNullException.ThrowIfNull(config);
 
-        DataSourceModel.DatabaseParameters.Clear();
+        DatabasesBrowserModel.ParametersContainer.Databases.Clear();
 
-        foreach (var database in config.Databases)
+        foreach (var database in config.Databases.Databases)
         {
-            DataSourceModel.DatabaseParameters.Add(database);
+            DatabasesBrowserModel.ParametersContainer.Databases.Add(database);
         }
 
-        DataSourceModel.UpdateRepository();
+        DatabasesBrowserModel.UpdateRepository();
 
-        ComputedValuesModel.ComputedValues = config.ComputedValues;
-        ObservationParametersBrowserModel.ObservationsParameters = config.Observations;
-        PopulationModel.ConfigPopulation = config.Population;
-        ReturningSpecimensModel.ReturningSpecimensParameters = config.ReturningSpecimens;
+        ComputedValuesModel.ParametersContainer = config.ComputedValues;
+        ObservationParametersBrowserModel.ParametersContainer = config.Observations;
+        PopulationModel.ParametersContainer = config.Population;
+        ReturningSpecimensModel.ParametersContainer = config.ReturningSpecimens;
         SpecimensModel.SpecimensProcessorParameters = config.Specimens;
-        StatisticsModel.StatisticsProcessorParameters = config.Statistics;
-        WriterModel.SummaryParameters = config.Results;
+        StatisticsModel.ParametersContainer = config.Statistics;
+        WriterModel.ParametersContainer = config.Results;
     }
 
     public ApplicationConfig GetConfigFromViewModels()
     {
         return new ApplicationConfig
         {
-            Databases = DataSourceModel.DatabaseParameters,
-            ComputedValues = ComputedValuesModel.ComputedValues,
-            Observations = ObservationParametersBrowserModel.ObservationsParameters,
-            Population = PopulationModel.ConfigPopulation,
-            ReturningSpecimens = ReturningSpecimensModel.ReturningSpecimensParameters!,
+            Databases = DatabasesBrowserModel.ParametersContainer,
+            ComputedValues = ComputedValuesModel.ParametersContainer,
+            Observations = ObservationParametersBrowserModel.ParametersContainer,
+            Population = PopulationModel.ParametersContainer,
+            ReturningSpecimens = ReturningSpecimensModel.ParametersContainer!,
             Specimens = SpecimensModel.SpecimensProcessorParameters ?? throw new InvalidOperationException("Config not loaded"),
-            Statistics = StatisticsModel.StatisticsProcessorParameters ?? throw new InvalidOperationException("Config not loaded"),
-            Results = WriterModel.SummaryParameters ?? throw new InvalidOperationException("Config not loaded")
+            Statistics = StatisticsModel.ParametersContainer ?? throw new InvalidOperationException("Config not loaded"),
+            Results = WriterModel.ParametersContainer ?? throw new InvalidOperationException("Config not loaded")
         };
     }
 

@@ -45,7 +45,7 @@ public class ObservationParametersBrowserModelTests
         _model.AddParameters(new ParametersData());
 
         // Assert
-        Assert.That(_model.ObservationsParameters.Conditions.Count, Is.EqualTo(1));
-        Assert.That(_model.ObservationsParameters.Conditions[0], Is.InstanceOf<IsNotEmptyCondition>());
+        Assert.That(_model.ParametersContainer.Conditions.Count, Is.EqualTo(1));
+        Assert.That(_model.ParametersContainer.Conditions[0], Is.InstanceOf<IsNotEmptyCondition>());
     }
 }

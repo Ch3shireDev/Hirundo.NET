@@ -2,7 +2,7 @@
 
 namespace Hirundo.Processors.Observations.WPF;
 
-public class ObservationParametersBrowserModel : ParametersBrowserModel
+public class ObservationParametersBrowserModel : ParametersBrowserModel<ObservationsParameters, IObservationCondition>
 {
     private readonly IObservationParametersFactory _factory;
 
@@ -12,7 +12,6 @@ public class ObservationParametersBrowserModel : ParametersBrowserModel
         ParametersDataList = _factory.GetParametersData().ToArray();
     }
 
-    public ObservationsParameters ObservationsParameters { get; set; } = new();
     public override string Description => "W tym panelu ustalasz warunki, jakie mają spełniać wybierane obserwacje do obliczeń.";
     public override string AddParametersCommandText => "Dodaj nowy warunek";
     public override string Header => "Obserwacje";
@@ -20,35 +19,21 @@ public class ObservationParametersBrowserModel : ParametersBrowserModel
 
     public override IList<ParametersData> ParametersDataList { get; }
 
+    public override IList<IObservationCondition> Parameters => ParametersContainer.Conditions;
 
     public override void AddParameters(ParametersData parametersData)
     {
         var condition = _factory.CreateCondition(parametersData);
-        ObservationsParameters.Conditions.Add(condition);
+        ParametersContainer.Conditions.Add(condition);
     }
 
     public override IEnumerable<ParametersViewModel> GetParametersViewModels()
     {
         return
-            ObservationsParameters
+            ParametersContainer
                 .Conditions
                 .Select(_factory.CreateViewModel)
                 .Select(AddEventListener)
             ;
-    }
-
-    private ParametersViewModel AddEventListener(ParametersViewModel viewModel)
-    {
-        if (viewModel is not IRemovable removable) return viewModel;
-
-        removable.Removed += (_, args) =>
-        {
-            if (args.Parameters is IObservationCondition conditionToRemove)
-            {
-                ObservationsParameters.Conditions.Remove(conditionToRemove);
-            }
-        };
-
-        return viewModel;
     }
 }

@@ -26,7 +26,7 @@ public sealed class MainViewModel : ObservableObject
         ArgumentNullException.ThrowIfNull(model);
 
         _model = model;
-        DataSourceViewModel = new ParametersBrowserViewModel(model.DataSourceModel);
+        DataSourceViewModel = new ParametersBrowserViewModel(model.DatabasesBrowserModel);
         ComputedValuesViewModel = new ParametersBrowserViewModel(model.ComputedValuesModel);
         ParametersBrowserViewModel = new ParametersBrowserViewModel(model.ObservationParametersBrowserModel);
         ReturningSpecimensViewModel = new ParametersBrowserViewModel(model.ReturningSpecimensModel);

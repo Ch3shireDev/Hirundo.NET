@@ -3,7 +3,7 @@ using Hirundo.Writers.Summary;
 
 namespace Hirundo.Writers.WPF;
 
-public class WritersModel : ParametersBrowserModel
+public class WritersModel : ParametersBrowserModel<SummaryParameters, IWriterParameters>
 {
     private readonly IWritersParametersFactory _factory;
 
@@ -12,8 +12,6 @@ public class WritersModel : ParametersBrowserModel
         _factory = factory;
         ParametersDataList = _factory.GetParametersData().ToArray();
     }
-
-    public SummaryParameters SummaryParameters { get; set; } = new();
 
     public override string Header => "Wyniki";
 
@@ -25,32 +23,20 @@ public class WritersModel : ParametersBrowserModel
 
     public override IList<ParametersData> ParametersDataList { get; }
 
+    public override IList<IWriterParameters> Parameters => ParametersContainer.Writers;
+
     public override void AddParameters(ParametersData parametersData)
     {
         var writer = _factory.CreateCondition(parametersData);
-        SummaryParameters.Writers.Add(writer);
+        ParametersContainer.Writers.Add(writer);
     }
 
     public override IEnumerable<ParametersViewModel> GetParametersViewModels()
     {
-        return SummaryParameters
+        return ParametersContainer
                 .Writers
                 .Select(_factory.CreateViewModel)
                 .Select(AddEventListener)
             ;
-    }
-    private ParametersViewModel AddEventListener(ParametersViewModel viewModel)
-    {
-        if (viewModel is not IRemovable removable) return viewModel;
-
-        removable.Removed += (_, args) =>
-        {
-            if (args.Parameters is IWriterParameters writerParametersToRemove)
-            {
-                SummaryParameters.Writers.Remove(writerParametersToRemove);
-            }
-        };
-
-        return viewModel;
     }
 }

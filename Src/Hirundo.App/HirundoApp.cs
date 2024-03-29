@@ -60,7 +60,7 @@ public class HirundoApp : IHirundoApp
 
         var database = _databaseBuilder
             .NewBuilder()
-            .WithDatabaseParameters([.. applicationConfig.Databases])
+            .WithDatabaseParameters([.. applicationConfig.Databases.Databases])
             .WithCancellationToken(token)
             .Build();
 

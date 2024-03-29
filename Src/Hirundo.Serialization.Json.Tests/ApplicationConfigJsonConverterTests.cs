@@ -37,52 +37,54 @@ public class ApplicationConfigJsonConverterTests
     {
         // Arrange
         var json = @"{
-          ""Databases"": [
-            {
-              ""Type"": ""Access"",
-              ""Path"": ""D:\\Ring_00_PODAB.mdb"",
-              ""Table"": ""TAB_RING_PODAB"",
-              ""Columns"": [
+          ""Databases"": {
+              ""Databases"": [
                 {
-                  ""DatabaseColumn"": ""IDR_Podab"",
-                  ""ValueName"": ""ID"",
-                  ""DataType"": ""LongInt""
+                  ""Type"": ""Access"",
+                  ""Path"": ""D:\\Ring_00_PODAB.mdb"",
+                  ""Table"": ""TAB_RING_PODAB"",
+                  ""Columns"": [
+                    {
+                      ""DatabaseColumn"": ""IDR_Podab"",
+                      ""ValueName"": ""ID"",
+                      ""DataType"": ""LongInt""
+                    },
+                    {
+                      ""DatabaseColumn"": ""RING"",
+                      ""ValueName"": ""RING"",
+                      ""DataType"": ""Text""
+                    },
+                    {
+                      ""DatabaseColumn"": ""DATE"",
+                      ""ValueName"": ""DATE"",
+                      ""DataType"": ""DateTime""
+                    }
+                  ]
                 },
                 {
-                  ""DatabaseColumn"": ""RING"",
-                  ""ValueName"": ""RING"",
-                  ""DataType"": ""Text""
-                },
-                {
-                  ""DatabaseColumn"": ""DATE"",
-                  ""ValueName"": ""DATE"",
-                  ""DataType"": ""DateTime""
+                  ""Type"": ""SqlServer"",
+                  ""ConnectionString"": ""Server=localhost;Database=DB"",
+                  ""Table"": ""AB 2017_18_19_20_21S"",
+                  ""Columns"": [
+                    {
+                      ""DatabaseColumn"": ""IDR_Podab"",
+                      ""ValueName"": ""ID"",
+                      ""DataType"": ""LongInt""
+                    },
+                    {
+                      ""DatabaseColumn"": ""RING"",
+                      ""ValueName"": ""RING"",
+                      ""DataType"": ""Text""
+                    },
+                    {
+                      ""DatabaseColumn"": ""DATE2"",
+                      ""ValueName"": ""DATE"",
+                      ""DataType"": ""DateTime""
+                    },
+                  ]
                 }
               ]
-            },
-            {
-              ""Type"": ""SqlServer"",
-              ""ConnectionString"": ""Server=localhost;Database=DB"",
-              ""Table"": ""AB 2017_18_19_20_21S"",
-              ""Columns"": [
-                {
-                  ""DatabaseColumn"": ""IDR_Podab"",
-                  ""ValueName"": ""ID"",
-                  ""DataType"": ""LongInt""
-                },
-                {
-                  ""DatabaseColumn"": ""RING"",
-                  ""ValueName"": ""RING"",
-                  ""DataType"": ""Text""
-                },
-                {
-                  ""DatabaseColumn"": ""DATE2"",
-                  ""ValueName"": ""DATE"",
-                  ""DataType"": ""DateTime""
-                },
-              ]
-            }
-          ]
+          }
         }";
 
         // Act
@@ -90,11 +92,11 @@ public class ApplicationConfigJsonConverterTests
 
         // Assert
         Assert.That(config, Is.Not.Null);
-        Assert.That(config.Databases, Has.Count.EqualTo(2));
-        Assert.That(config.Databases[0], Is.TypeOf<AccessDatabaseParameters>());
-        Assert.That(config.Databases[1], Is.TypeOf<SqlServerParameters>());
+        Assert.That(config.Databases.Databases, Has.Count.EqualTo(2));
+        Assert.That(config.Databases.Databases[0], Is.TypeOf<AccessDatabaseParameters>());
+        Assert.That(config.Databases.Databases[1], Is.TypeOf<SqlServerParameters>());
 
-        var databaseParameters0 = (AccessDatabaseParameters)config.Databases[0];
+        var databaseParameters0 = (AccessDatabaseParameters)config.Databases.Databases[0];
         Assert.That(databaseParameters0.Path, Is.EqualTo(@"D:\Ring_00_PODAB.mdb"));
         Assert.That(databaseParameters0.Table, Is.EqualTo("TAB_RING_PODAB"));
         Assert.That(databaseParameters0.Columns, Has.Count.EqualTo(3));
@@ -108,7 +110,7 @@ public class ApplicationConfigJsonConverterTests
         Assert.That(databaseParameters0.Columns[2].ValueName, Is.EqualTo("DATE"));
         Assert.That(databaseParameters0.Columns[2].DataType, Is.EqualTo(DataValueType.DateTime));
 
-        var databaseParameters1 = (SqlServerParameters)config.Databases[1];
+        var databaseParameters1 = (SqlServerParameters)config.Databases.Databases[1];
         Assert.That(databaseParameters1.ConnectionString, Is.EqualTo("Server=localhost;Database=DB"));
         Assert.That(databaseParameters1.Table, Is.EqualTo("AB 2017_18_19_20_21S"));
         Assert.That(databaseParameters1.Columns, Has.Count.EqualTo(3));

@@ -70,7 +70,9 @@ public class MainViewModelTests
         // Arrange
         var config = new ApplicationConfig
         {
-            Databases =
+            Databases = new()
+            {
+                Databases =
             [
                 new AccessDatabaseParameters
                 {
@@ -97,6 +99,7 @@ public class MainViewModelTests
                     ]
                 }
             ]
+            }
         };
 
         // Act
@@ -106,9 +109,9 @@ public class MainViewModelTests
         // Assert
         Assert.That(result, Is.Not.Null);
         Assert.That(result.Databases, Is.Not.Null);
-        Assert.That(result.Databases.Count, Is.EqualTo(1));
-        Assert.That(result.Databases[0], Is.InstanceOf<AccessDatabaseParameters>());
-        var accessDatabaseParameters = (AccessDatabaseParameters)result.Databases[0];
+        Assert.That(result.Databases.Databases.Count, Is.EqualTo(1));
+        Assert.That(result.Databases.Databases[0], Is.InstanceOf<AccessDatabaseParameters>());
+        var accessDatabaseParameters = (AccessDatabaseParameters)result.Databases.Databases[0];
         Assert.That(accessDatabaseParameters.Path, Is.EqualTo("abc.mdb"));
         Assert.That(accessDatabaseParameters.Table, Is.EqualTo("table"));
         Assert.That(accessDatabaseParameters.Conditions, Is.Not.Null);
@@ -135,8 +138,9 @@ public class MainViewModelTests
         // Arrange
         var config = new ApplicationConfig
         {
-            Databases =
-            [
+            Databases = new()
+            {
+                Databases = [
                 new AccessDatabaseParameters
                 {
                     Path = "abc.mdb",
@@ -162,6 +166,7 @@ public class MainViewModelTests
                     ]
                 }
             ]
+            }
         };
 
         // Act

@@ -6,10 +6,8 @@ using System.Windows;
 
 namespace Hirundo.Databases.WPF;
 
-public class DataSourceModel(IDataLabelRepository dataLabelRepository, IAccessMetadataService accessMetadataService) : ParametersBrowserModel
+public class DataSourceModel(IDataLabelRepository dataLabelRepository, IAccessMetadataService accessMetadataService) : ParametersBrowserModel<DatabaseParameters, IDatabaseParameters>
 {
-    public IList<IDatabaseParameters> DatabaseParameters { get; } = [];
-
     public override string Description => "W tym panelu wybierasz źródło danych.";
     public override string AddParametersCommandText => "Dodaj nowe źródło danych";
     public override string Header => "Źródła danych";
@@ -19,6 +17,7 @@ public class DataSourceModel(IDataLabelRepository dataLabelRepository, IAccessMe
     [
         new ParametersData(typeof(AccessDatabaseParameters), "Baza danych Access (*.mdb)", "Źródło danych wyszczególniające tabelę bazy danych Access")
     ];
+    public override IList<IDatabaseParameters> Parameters { get => ParametersContainer.Databases; }
 
     public override void AddParameters(ParametersData parametersData)
     {
@@ -27,7 +26,8 @@ public class DataSourceModel(IDataLabelRepository dataLabelRepository, IAccessMe
 
     public override IEnumerable<ParametersViewModel> GetParametersViewModels()
     {
-        return DatabaseParameters
+        return ParametersContainer
+                .Databases
                 .Select(AsParametersViewModel)
                 .Select(AddUpdaterListener)
                 .Select(AddRemovedListener)
@@ -39,7 +39,9 @@ public class DataSourceModel(IDataLabelRepository dataLabelRepository, IAccessMe
         switch (selectedDataSourceType)
         {
             case { } accessDatabaseParametersType when accessDatabaseParametersType == typeof(AccessDatabaseParameters):
-                DatabaseParameters.Add(new AccessDatabaseParameters());
+                ParametersContainer
+                    .Databases
+                    .Add(new AccessDatabaseParameters());
                 break;
             default:
                 throw new NotImplementedException();
@@ -83,7 +85,7 @@ public class DataSourceModel(IDataLabelRepository dataLabelRepository, IAccessMe
             if (result != MessageBoxResult.Yes) return;
         }
 
-        DatabaseParameters.Remove(p);
+        ParametersContainer.Databases.Remove(p);
     }
 
     private ParametersViewModel AsParametersViewModel(IDatabaseParameters parameters)
@@ -102,7 +104,7 @@ public class DataSourceModel(IDataLabelRepository dataLabelRepository, IAccessMe
 
         var labels = new List<DataLabel>();
 
-        foreach (var databaseParameters in DatabaseParameters)
+        foreach (var databaseParameters in ParametersContainer.Databases)
         {
             var dbLabels = databaseParameters.Columns.Select(GetDataLabel).ToList();
             labels.AddRange(dbLabels);

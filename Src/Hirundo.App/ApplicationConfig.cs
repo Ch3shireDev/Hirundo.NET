@@ -11,7 +11,7 @@ namespace Hirundo.App;
 
 public class ApplicationConfig
 {
-    public IList<IDatabaseParameters> Databases { get; init; } = [];
+    public DatabaseParameters Databases { get; init; } = new();
     public ObservationsParameters Observations { get; set; } = new();
     public ComputedValuesParameters ComputedValues { get; set; } = new();
     public SpecimensProcessorParameters Specimens { get; set; } = new();

@@ -55,6 +55,7 @@ public partial class App : Application
         builder.RegisterType<StatisticsParametersFactory>().As<IStatisticsParametersFactory>().SingleInstance();
         builder.RegisterType<ComputedParametersFactory>().As<IComputedParametersFactory>().SingleInstance();
         builder.RegisterType<WritersParametersFactory>().As<IWritersParametersFactory>().SingleInstance();
+        builder.RegisterType<PopulationParametersFactory>().As<IPopulationParametersFactory>().SingleInstance();
 
         var container = builder.Build();
 

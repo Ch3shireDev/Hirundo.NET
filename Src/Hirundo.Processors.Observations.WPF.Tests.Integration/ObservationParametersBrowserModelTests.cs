@@ -27,7 +27,7 @@ public class ObservationParametersBrowserModelTests
     public void GivenModelWithIsEqual_WhenAddParameters_AddsObservationParameter(Type conditionType)
     {
         // Arrange
-        _model.ObservationsParameters.Conditions.Clear();
+        _model.ParametersContainer.Conditions.Clear();
 
         // Act
         _model.AddParameters(new ParametersData
@@ -36,8 +36,8 @@ public class ObservationParametersBrowserModelTests
         });
 
         // Assert
-        Assert.That(_model.ObservationsParameters.Conditions.Count, Is.EqualTo(1));
-        Assert.That(_model.ObservationsParameters.Conditions[0], Is.InstanceOf(conditionType));
+        Assert.That(_model.ParametersContainer.Conditions.Count, Is.EqualTo(1));
+        Assert.That(_model.ParametersContainer.Conditions[0], Is.InstanceOf(conditionType));
     }
 
     [Test]
@@ -58,6 +58,6 @@ public class ObservationParametersBrowserModelTests
         viewModel.RemoveCommand.Execute(null);
 
         // Assert
-        Assert.That(_model.ObservationsParameters.Conditions.Count, Is.EqualTo(0));
+        Assert.That(_model.ParametersContainer.Conditions.Count, Is.EqualTo(0));
     }
 }

@@ -3,7 +3,7 @@ using Hirundo.Processors.Returning.Conditions;
 
 namespace Hirundo.Processors.Returning.WPF;
 
-public class ReturningSpecimensModel : ParametersBrowserModel
+public class ReturningSpecimensModel : ParametersBrowserModel<ReturningSpecimensParameters, IReturningSpecimenCondition>
 {
     private readonly IReturningParametersFactory _factory;
 
@@ -13,8 +13,7 @@ public class ReturningSpecimensModel : ParametersBrowserModel
         ParametersDataList = _factory.GetParametersData().ToList();
     }
 
-    public ReturningSpecimensParameters? ReturningSpecimensParameters { get; set; } = new();
-    public IList<IReturningSpecimenCondition> Conditions => ReturningSpecimensParameters!.Conditions;
+    public IList<IReturningSpecimenCondition> Conditions => ParametersContainer!.Conditions;
 
     public override string Header => "Powroty";
     public override string Title => "Warunki powracających osobników";
@@ -23,6 +22,7 @@ public class ReturningSpecimensModel : ParametersBrowserModel
 
     public override IList<ParametersData> ParametersDataList { get; }
 
+    public override IList<IReturningSpecimenCondition> Parameters => ParametersContainer.Conditions;
 
     public override void AddParameters(ParametersData parametersData)
     {
@@ -33,21 +33,5 @@ public class ReturningSpecimensModel : ParametersBrowserModel
     public override IEnumerable<ParametersViewModel> GetParametersViewModels()
     {
         return Conditions.Select(_factory.CreateViewModel).Select(AddEventListener);
-    }
-
-    private ParametersViewModel AddEventListener(ParametersViewModel viewModel)
-    {
-        if (viewModel is IRemovable removable)
-        {
-            removable.Removed += (_, args) =>
-            {
-                if (args.Parameters is IReturningSpecimenCondition filter)
-                {
-                    Conditions.Remove(filter);
-                }
-            };
-        }
-
-        return viewModel;
     }
 }
