@@ -5,23 +5,14 @@ namespace Hirundo.Writers.WPF;
 
 public class WritersModel : ParametersBrowserModel<SummaryParameters, IWriterParameters>
 {
-    private readonly IWritersParametersFactory _factory;
-
-    public WritersModel(IWritersParametersFactory factory)
+    public WritersModel(IParametersFactory<IWriterParameters> factory) : base(factory)
     {
-        _factory = factory;
-        ParametersDataList = _factory.GetParametersData().ToArray();
     }
 
     public override string Header => "Wyniki";
-
     public override string Title => "Zapis wyników";
-
     public override string Description => "W tym panelu wybierasz sposób zapisu wyników.";
-
     public override string AddParametersCommandText => "Dodaj nowy sposób zapisu";
-
-    public override IList<ParametersData> ParametersDataList { get; }
 
     public override IList<IWriterParameters> Parameters => ParametersContainer.Writers;
 

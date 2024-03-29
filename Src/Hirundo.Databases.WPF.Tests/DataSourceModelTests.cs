@@ -13,7 +13,8 @@ public class DataSourceModelTests
     {
         _repository = new Mock<IDataLabelRepository>();
         _metadataService = new Mock<IAccessMetadataService>();
-        _model = new DataSourceModel(_repository.Object, _metadataService.Object);
+        var factory = new Mock<IDatabaseParametersFactory>();
+        _model = new DataSourceModel(_repository.Object, _metadataService.Object, factory.Object);
     }
 
     private Mock<IAccessMetadataService> _metadataService = null!;

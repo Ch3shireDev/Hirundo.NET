@@ -15,13 +15,19 @@ public abstract class ParametersBrowserModel<TConditionContainer, TCondition> : 
     where TCondition : class
     where TConditionContainer : class, new()
 {
+    protected ParametersBrowserModel(IParametersFactory<TCondition> factory)
+    {
+        _factory = factory;
+        ParametersDataList = _factory.GetParametersData().ToArray();
+    }
+    protected readonly IParametersFactory<TCondition> _factory;
     public TConditionContainer ParametersContainer { get; set; } = new();
     public abstract IList<TCondition> Parameters { get; }
     public abstract string Header { get; }
     public abstract string Title { get; }
     public abstract string Description { get; }
     public abstract string AddParametersCommandText { get; }
-    public abstract IList<ParametersData> ParametersDataList { get; }
+    public virtual IList<ParametersData> ParametersDataList { get; }
     public abstract void AddParameters(ParametersData parametersData);
     public abstract IEnumerable<ParametersViewModel> GetParametersViewModels();
 

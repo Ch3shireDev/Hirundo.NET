@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Hirundo.App.WPF.Components;
 using Hirundo.Commons.Repositories.Labels;
+using Hirundo.Commons.WPF;
 using Hirundo.Databases;
 using Hirundo.Databases.WPF;
 using Hirundo.Processors.Computed.WPF;
@@ -9,6 +10,7 @@ using Hirundo.Processors.Population.WPF;
 using Hirundo.Processors.Returning.WPF;
 using Hirundo.Processors.Specimens.WPF;
 using Hirundo.Processors.Statistics.WPF;
+using Hirundo.Writers.Summary;
 using Hirundo.Writers.WPF;
 using Moq;
 
@@ -46,10 +48,13 @@ internal static class ContainerExtensions
         builder.RegisterInstance(computedParametersViewModelsFactory).As<IComputedParametersFactory>().SingleInstance();
 
         var writersParametersViewModelsFactory = new WritersParametersFactory(repository.Object);
-        builder.RegisterInstance(writersParametersViewModelsFactory).As<IWritersParametersFactory>().SingleInstance();
+        builder.RegisterInstance(writersParametersViewModelsFactory).As<IParametersFactory<IWriterParameters>>().SingleInstance();
 
         var populationFactory = new PopulationParametersFactory(repository.Object);
         builder.RegisterInstance(populationFactory).As<IPopulationParametersFactory>().SingleInstance();
+
+        var databaseFactory = new DatabaseParametersFactory(repository.Object);
+        builder.RegisterInstance(databaseFactory).As<IDatabaseParametersFactory>().SingleInstance();
 
         builder.RegisterType<DataSourceModel>().AsSelf().SingleInstance();
         builder.RegisterType<ObservationParametersBrowserModel>().AsSelf().SingleInstance();

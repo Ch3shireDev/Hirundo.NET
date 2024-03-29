@@ -6,17 +6,13 @@ using System.Windows;
 
 namespace Hirundo.Databases.WPF;
 
-public class DataSourceModel(IDataLabelRepository dataLabelRepository, IAccessMetadataService accessMetadataService) : ParametersBrowserModel<DatabaseParameters, IDatabaseParameters>
+public class DataSourceModel(IDataLabelRepository dataLabelRepository, IAccessMetadataService accessMetadataService, IDatabaseParametersFactory factory) : ParametersBrowserModel<DatabaseParameters, IDatabaseParameters>(factory)
 {
     public override string Description => "W tym panelu wybierasz źródło danych.";
     public override string AddParametersCommandText => "Dodaj nowe źródło danych";
     public override string Header => "Źródła danych";
     public override string Title => "Źródła danych";
 
-    public override IList<ParametersData> ParametersDataList { get; } =
-    [
-        new ParametersData(typeof(AccessDatabaseParameters), "Baza danych Access (*.mdb)", "Źródło danych wyszczególniające tabelę bazy danych Access")
-    ];
     public override IList<IDatabaseParameters> Parameters { get => ParametersContainer.Databases; }
 
     public override void AddParameters(ParametersData parametersData)

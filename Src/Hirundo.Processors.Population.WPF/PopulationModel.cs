@@ -10,21 +10,9 @@ public class PopulationModel : ParametersBrowserModel<PopulationProcessorParamet
     public override string Title => "Warunki populacji";
     public override string Description => "W tym panelu określasz warunki określające populację dla danego osobnika powracającego.";
     public override string AddParametersCommandText => "Dodaj nowy warunek";
-
-    public override IList<ParametersData> ParametersDataList { get; } =
-    [
-        new ParametersData(typeof(IsInSharedTimeWindowConditionBuilder), "Czy jest we współdzielonym oknie czasowym?", "Czy jest we współdzielonym oknie czasowym?")
-    ];
-
     public override IList<IPopulationConditionBuilder> Parameters => ParametersContainer.Conditions;
 
-    public PopulationModel(IPopulationParametersFactory factory)
-    {
-        _factory = factory;
-        ParametersDataList = _factory.GetParametersData().ToArray();
-    }
-
-    private readonly IPopulationParametersFactory _factory;
+    public PopulationModel(IPopulationParametersFactory factory) : base(factory) { }
 
     public override IEnumerable<ParametersViewModel> GetParametersViewModels()
     {

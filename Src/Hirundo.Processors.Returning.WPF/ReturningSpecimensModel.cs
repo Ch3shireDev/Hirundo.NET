@@ -5,12 +5,8 @@ namespace Hirundo.Processors.Returning.WPF;
 
 public class ReturningSpecimensModel : ParametersBrowserModel<ReturningSpecimensParameters, IReturningSpecimenCondition>
 {
-    private readonly IReturningParametersFactory _factory;
-
-    public ReturningSpecimensModel(IReturningParametersFactory factory)
+    public ReturningSpecimensModel(IReturningParametersFactory factory) : base(factory)
     {
-        _factory = factory;
-        ParametersDataList = _factory.GetParametersData().ToList();
     }
 
     public IList<IReturningSpecimenCondition> Conditions => ParametersContainer!.Conditions;
@@ -19,8 +15,6 @@ public class ReturningSpecimensModel : ParametersBrowserModel<ReturningSpecimens
     public override string Title => "Warunki powracających osobników";
     public override string Description => "W tym panelu ustalasz warunki wyróżniające osobniki powracające spośród wszystkich osobników.";
     public override string AddParametersCommandText => "Dodaj warunek";
-
-    public override IList<ParametersData> ParametersDataList { get; }
 
     public override IList<IReturningSpecimenCondition> Parameters => ParametersContainer.Conditions;
 

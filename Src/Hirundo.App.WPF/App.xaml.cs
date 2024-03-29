@@ -12,6 +12,7 @@ using Hirundo.Processors.Returning.WPF;
 using Hirundo.Processors.Specimens.WPF;
 using Hirundo.Processors.Statistics.WPF;
 using Hirundo.Serialization.Json;
+using Hirundo.Writers.Summary;
 using Hirundo.Writers.WPF;
 using Newtonsoft.Json;
 using Serilog;
@@ -50,11 +51,12 @@ public partial class App : Application
         builder.RegisterType<MainViewModel>().AsSelf().SingleInstance();
         builder.RegisterType<DataLabelRepository>().As<IDataLabelRepository>().SingleInstance();
 
+        builder.RegisterType<DatabaseParametersFactory>().As<IDatabaseParametersFactory>().SingleInstance();
         builder.RegisterType<ObservationParametersFactory>().As<IObservationParametersFactory>().SingleInstance();
         builder.RegisterType<ReturningParametersFactory>().As<IReturningParametersFactory>().SingleInstance();
         builder.RegisterType<StatisticsParametersFactory>().As<IStatisticsParametersFactory>().SingleInstance();
         builder.RegisterType<ComputedParametersFactory>().As<IComputedParametersFactory>().SingleInstance();
-        builder.RegisterType<WritersParametersFactory>().As<IWritersParametersFactory>().SingleInstance();
+        builder.RegisterType<WritersParametersFactory>().As<IParametersFactory<IWriterParameters>>().SingleInstance();
         builder.RegisterType<PopulationParametersFactory>().As<IPopulationParametersFactory>().SingleInstance();
 
         var container = builder.Build();

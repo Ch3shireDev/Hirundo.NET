@@ -7,6 +7,7 @@ using System.Windows.Input;
 
 namespace Hirundo.Databases.WPF.Access;
 
+[ParametersData(typeof(AccessDatabaseParameters), typeof(AccessDataSourceModel), typeof(AccessDataSourceView), "Źródło danych Access", "Źródło danych z pliku Access.")]
 public class AccessDataSourceViewModel(AccessDataSourceModel model, IAccessMetadataService accessMetadataService) : ParametersViewModel(model), ILabelsUpdater
 {
     public override string Name => "Źródło danych Access";
