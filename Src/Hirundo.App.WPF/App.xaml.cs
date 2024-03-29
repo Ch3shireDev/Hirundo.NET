@@ -36,7 +36,7 @@ public partial class App : Application
 
         builder.RegisterType<DataSourceModel>().AsSelf().SingleInstance();
 
-        builder.RegisterType<ObservationParametersBrowserModel>().AsSelf().SingleInstance();
+        builder.RegisterType<ObservationsModel>().AsSelf().SingleInstance();
 
         builder.RegisterType<PopulationModel>().AsSelf().SingleInstance();
         builder.RegisterType<ReturningSpecimensModel>().AsSelf().SingleInstance();

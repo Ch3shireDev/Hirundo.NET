@@ -81,8 +81,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Databases.WPF.Tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Processors.Observations.WPF.Tests", "Hirundo.Processors.Observations.WPF.Tests\Hirundo.Processors.Observations.WPF.Tests.csproj", "{11FCD219-121C-48D5-B7A7-640AD25BB31B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Processors.Observations.WPF.Tests.Integration", "Hirundo.Processors.Observations.WPF.Tests.Integration\Hirundo.Processors.Observations.WPF.Tests.Integration.csproj", "{02E3E7E2-3278-4015-A0C2-C00902F2D178}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Processors.Returning.WPF.Tests", "Hirundo.Processors.Returning.WPF.Tests\Hirundo.Processors.Returning.WPF.Tests.csproj", "{B356E048-8B56-4CA0-9061-8E6804206941}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Processors.Statistics.WPF.Tests", "Hirundo.Processors.Statistics.WPF.Tests\Hirundo.Processors.Statistics.WPF.Tests.csproj", "{DB5D3DB0-CBE6-4EDF-85D4-D0B0A165F26F}"
@@ -97,7 +95,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Processors.Computed
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.App.Tests.Integration", "Hirundo.App.Tests.Integration\Hirundo.App.Tests.Integration.csproj", "{DD58177D-2C5B-47EC-86D4-5CB9F0036B78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hirundo.Writers.WPF.Tests", "Hirundo.Writers.WPF.Tests\Hirundo.Writers.WPF.Tests.csproj", "{A8FD5AA3-6D1D-43C5-B015-48C04060DF0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hirundo.Writers.WPF.Tests", "Hirundo.Writers.WPF.Tests\Hirundo.Writers.WPF.Tests.csproj", "{A8FD5AA3-6D1D-43C5-B015-48C04060DF0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -249,10 +247,6 @@ Global
 		{11FCD219-121C-48D5-B7A7-640AD25BB31B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11FCD219-121C-48D5-B7A7-640AD25BB31B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11FCD219-121C-48D5-B7A7-640AD25BB31B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{02E3E7E2-3278-4015-A0C2-C00902F2D178}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{02E3E7E2-3278-4015-A0C2-C00902F2D178}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{02E3E7E2-3278-4015-A0C2-C00902F2D178}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{02E3E7E2-3278-4015-A0C2-C00902F2D178}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B356E048-8B56-4CA0-9061-8E6804206941}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B356E048-8B56-4CA0-9061-8E6804206941}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B356E048-8B56-4CA0-9061-8E6804206941}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -326,7 +320,6 @@ Global
 		{35B4EB75-1F57-4545-8325-D25524AEBCF4} = {08F44D1D-B8D6-4172-B8D0-B0383A77C5AE}
 		{2F003FAB-5501-4091-820F-5B2A5717B4D8} = {66952413-DE19-442D-BD7E-05B457715E11}
 		{11FCD219-121C-48D5-B7A7-640AD25BB31B} = {66952413-DE19-442D-BD7E-05B457715E11}
-		{02E3E7E2-3278-4015-A0C2-C00902F2D178} = {66952413-DE19-442D-BD7E-05B457715E11}
 		{B356E048-8B56-4CA0-9061-8E6804206941} = {66952413-DE19-442D-BD7E-05B457715E11}
 		{DB5D3DB0-CBE6-4EDF-85D4-D0B0A165F26F} = {66952413-DE19-442D-BD7E-05B457715E11}
 		{D5FA9899-2490-43CC-98C3-7F747833F6AB} = {095ED9C4-38CC-415A-92E4-1E5EADBDD439}

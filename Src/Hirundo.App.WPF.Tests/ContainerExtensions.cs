@@ -36,7 +36,7 @@ internal static class ContainerExtensions
         builder.RegisterInstance(databaseFactory).As<IDatabaseParametersFactory>().SingleInstance();
 
         builder.RegisterType<DataSourceModel>().AsSelf().SingleInstance();
-        builder.RegisterType<ObservationParametersBrowserModel>().AsSelf().SingleInstance();
+        builder.RegisterType<ObservationsModel>().AsSelf().SingleInstance();
         builder.RegisterType<PopulationModel>().AsSelf().SingleInstance();
         builder.RegisterType<ReturningSpecimensModel>().AsSelf().SingleInstance();
         builder.RegisterType<SpecimensModel>().AsSelf().SingleInstance();

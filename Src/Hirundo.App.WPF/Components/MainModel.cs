@@ -14,7 +14,7 @@ namespace Hirundo.App.WPF.Components;
 public class MainModel(
     IHirundoApp app,
     DataSourceModel dataSourceModel,
-    ObservationParametersBrowserModel observationParametersBrowserModel,
+    ObservationsModel observationParametersBrowserModel,
     PopulationModel populationModel,
     ReturningSpecimensModel returningSpecimensModel,
     SpecimensModel specimensModel,
@@ -26,7 +26,7 @@ public class MainModel(
 {
     private bool _isProcessing;
     public DataSourceModel DatabasesBrowserModel { get; set; } = dataSourceModel;
-    public ObservationParametersBrowserModel ObservationParametersBrowserModel { get; set; } = observationParametersBrowserModel;
+    public ObservationsModel ObservationParametersBrowserModel { get; set; } = observationParametersBrowserModel;
     public PopulationModel PopulationModel { get; set; } = populationModel;
     public ReturningSpecimensModel ReturningSpecimensModel { get; set; } = returningSpecimensModel;
     public SpecimensModel SpecimensModel { get; set; } = specimensModel;

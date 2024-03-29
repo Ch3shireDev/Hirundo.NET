@@ -9,6 +9,5 @@ public class ComputedValuesModel(IDataLabelRepository repository) : ParametersBr
     public override string Title => "Wartości";
     public override string Description => "W tym panelu ustalasz, jakie wartości mają być obliczane na podstawie wartości z bazy danych.";
     public override string AddParametersCommandText => "Dodaj wartość";
-
     public override IList<IComputedValuesCalculator> Parameters => ParametersContainer.ComputedValues;
 }

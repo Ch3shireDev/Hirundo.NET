@@ -27,6 +27,7 @@ public class IsNotEmptyViewModelTests
     public void GivenTextDataType_AfterSetValueInViewModel_ConditionHasSetValue()
     {
         // Arrange
+        _viewModel.ValueName = "";
 
         // Act
         _viewModel.ValueName = "AGE";

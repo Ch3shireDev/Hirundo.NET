@@ -2,7 +2,6 @@
 using Hirundo.Commons.Repositories.Labels;
 using Hirundo.Commons.WPF;
 using Hirundo.Databases.WPF.Access;
-using System.Windows;
 
 namespace Hirundo.Databases.WPF;
 
@@ -24,7 +23,7 @@ public class DataSourceModel(IDataLabelRepository repository, IAccessMetadataSer
                 .Databases
                 .Select(AsParametersViewModel)
                 .Select(AddUpdaterListener)
-                .Select(AddRemovedListener)
+                .Select(AddEventListener)
             ;
     }
 
@@ -37,36 +36,6 @@ public class DataSourceModel(IDataLabelRepository repository, IAccessMetadataSer
         }
 
         return viewModel;
-    }
-
-    private ParametersViewModel AddRemovedListener(ParametersViewModel viewModel)
-    {
-        if (viewModel is IRemovable removable)
-        {
-            removable.Removed += (_, p) =>
-            {
-                if (p.Parameters is IDatabaseParameters parametersToRemove)
-                {
-                    Remove(parametersToRemove);
-                }
-            };
-        }
-
-        return viewModel;
-    }
-
-    private void Remove(IDatabaseParameters p)
-    {
-        var mainWindow = Application.Current.MainWindow;
-
-        if (mainWindow != null)
-        {
-            var result = MessageBox.Show(mainWindow, "Czy na pewno chcesz skasować bieżące źródło danych?", "Uwaga", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-
-            if (result != MessageBoxResult.Yes) return;
-        }
-
-        ParametersContainer.Databases.Remove(p);
     }
 
     private ParametersViewModel AsParametersViewModel(IDatabaseParameters parameters)
