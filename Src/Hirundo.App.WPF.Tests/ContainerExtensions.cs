@@ -45,7 +45,7 @@ internal static class ContainerExtensions
         builder.RegisterType<ReturningSpecimensModel>().AsSelf().SingleInstance();
         builder.RegisterType<SpecimensModel>().AsSelf().SingleInstance();
         builder.RegisterType<StatisticsModel>().AsSelf().SingleInstance();
-        builder.RegisterType<WriterModel>().AsSelf().SingleInstance();
+        builder.RegisterType<WritersModel>().AsSelf().SingleInstance();
         builder.RegisterType<ComputedValuesModel>().AsSelf().SingleInstance();
 
         builder.RegisterType<MainModel>().AsSelf().SingleInstance();

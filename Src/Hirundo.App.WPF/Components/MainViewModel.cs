@@ -4,7 +4,6 @@ using Hirundo.App.WPF.Helpers;
 using Hirundo.Commons;
 using Hirundo.Commons.WPF;
 using Hirundo.Processors.Specimens.WPF;
-using Hirundo.Writers.WPF;
 using Microsoft.Win32;
 using Serilog;
 using Serilog.Events;
@@ -34,7 +33,7 @@ public sealed class MainViewModel : ObservableObject
         PopulationViewModel = new ParametersBrowserViewModel(model.PopulationModel);
         SpecimensViewModel = new SpecimensViewModel(model.SpecimensModel, model.Repository);
         StatisticsViewModel = new ParametersBrowserViewModel(model.StatisticsModel);
-        WriterViewModel = new WriterViewModel(model.WriterModel, ProcessAndSaveAsync);
+        WriterViewModel = new ParametersBrowserViewModel(model.WriterModel);
 
         ViewModels =
         [
@@ -59,7 +58,7 @@ public sealed class MainViewModel : ObservableObject
     public ParametersBrowserViewModel ReturningSpecimensViewModel { get; }
     public ParametersBrowserViewModel StatisticsViewModel { get; }
     public SpecimensViewModel SpecimensViewModel { get; }
-    public WriterViewModel WriterViewModel { get; }
+    public ParametersBrowserViewModel WriterViewModel { get; }
     public ObservableCollection<LogEvent> LogEventsItems { get; } = [];
     public ICommand PreviousCommand => new RelayCommand(Previous, CanGoPrevious);
     public ICommand NextCommand => new RelayCommand(Next, CanGoNext);

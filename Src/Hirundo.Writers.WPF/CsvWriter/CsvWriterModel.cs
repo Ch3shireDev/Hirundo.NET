@@ -1,10 +1,14 @@
-﻿using Hirundo.Writers.Summary;
+﻿using Hirundo.Commons.Repositories.Labels;
+using Hirundo.Commons.WPF;
+using Hirundo.Writers.Summary;
 
 namespace Hirundo.Writers.WPF.CsvWriter;
 
-public class CsvWriterModel(CsvSummaryWriterParameters parameters)
+public class CsvWriterModel(CsvSummaryWriterParameters parameters, IDataLabelRepository repository = null!) : ParametersModel(parameters, repository)
 {
-    public CsvSummaryWriterParameters Parameters { get; set; } = parameters;
-
-    public string Path { get => Parameters.Path; set => Parameters.Path = value; }
+    public string Path
+    {
+        get => parameters.Path;
+        set => parameters.Path = value;
+    }
 }

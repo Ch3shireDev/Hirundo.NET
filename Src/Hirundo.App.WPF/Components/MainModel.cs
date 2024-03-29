@@ -19,7 +19,7 @@ public class MainModel(
     ReturningSpecimensModel returningSpecimensModel,
     SpecimensModel specimensModel,
     StatisticsModel statisticsModel,
-    WriterModel writerModel,
+    WritersModel writerModel,
     IDataLabelRepository repository,
     ComputedValuesModel computedValuesModel
 )
@@ -31,7 +31,7 @@ public class MainModel(
     public ReturningSpecimensModel ReturningSpecimensModel { get; set; } = returningSpecimensModel;
     public SpecimensModel SpecimensModel { get; set; } = specimensModel;
     public StatisticsModel StatisticsModel { get; set; } = statisticsModel;
-    public WriterModel WriterModel { get; set; } = writerModel;
+    public WritersModel WriterModel { get; set; } = writerModel;
     public IDataLabelRepository Repository { get; set; } = repository;
     public ComputedValuesModel ComputedValuesModel { get; set; } = computedValuesModel;
 

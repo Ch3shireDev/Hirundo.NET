@@ -1,11 +1,17 @@
-﻿using Hirundo.Writers.Summary;
+﻿using Hirundo.Commons.Repositories.Labels;
+using Hirundo.Commons.WPF;
+using Hirundo.Writers.Summary;
 using Hirundo.Writers.WPF.CsvWriter;
 
 namespace Hirundo.Writers.WPF;
 
-public static class DataWriterViewModelFactory
+public interface IWritersParametersFactory : IParametersFactory<IWriterParameters>
 {
-    public static DataWriterViewModel Create(IWriterParameters writerParameters)
+}
+
+public class WritersParametersFactory(IDataLabelRepository repository) : ParametersFactory<IWriterParameters, WritersModel>(repository), IWritersParametersFactory
+{
+    public static ParametersViewModel Create(IWriterParameters writerParameters)
     {
         return writerParameters switch
         {

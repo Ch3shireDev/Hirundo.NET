@@ -42,7 +42,7 @@ public partial class App : Application
         builder.RegisterType<ReturningSpecimensModel>().AsSelf().SingleInstance();
         builder.RegisterType<SpecimensModel>().AsSelf().SingleInstance();
         builder.RegisterType<StatisticsModel>().AsSelf().SingleInstance();
-        builder.RegisterType<WriterModel>().AsSelf().SingleInstance();
+        builder.RegisterType<WritersModel>().AsSelf().SingleInstance();
 
         builder.RegisterType<ComputedValuesModel>().AsSelf().SingleInstance();
 
@@ -54,6 +54,7 @@ public partial class App : Application
         builder.RegisterType<ReturningParametersFactory>().As<IReturningParametersFactory>().SingleInstance();
         builder.RegisterType<StatisticsParametersFactory>().As<IStatisticsParametersFactory>().SingleInstance();
         builder.RegisterType<ComputedParametersFactory>().As<IComputedParametersFactory>().SingleInstance();
+        builder.RegisterType<WritersParametersFactory>().As<IWritersParametersFactory>().SingleInstance();
 
         var container = builder.Build();
 
