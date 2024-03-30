@@ -4,10 +4,10 @@ namespace Hirundo.Processors.Specimens;
 
 public class SpecimensProcessorBuilder : ISpecimensProcessorBuilder
 {
-    private SpecimensProcessorParameters _parameters = null!;
+    private SpecimensParameters _parameters = null!;
     private CancellationToken? _cancellationToken;
 
-    public ISpecimensProcessorBuilder WithSpecimensParameters(SpecimensProcessorParameters parameters)
+    public ISpecimensProcessorBuilder WithSpecimensParameters(SpecimensParameters parameters)
     {
         _parameters = parameters;
         return this;

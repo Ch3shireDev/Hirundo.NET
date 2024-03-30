@@ -2,7 +2,7 @@
 
 namespace Hirundo.Processors.Statistics;
 
-public class StatisticsProcessorParameters
+public class StatisticsParameters
 {
     public IList<IStatisticalOperation> Operations { get; init; } = [];
 }

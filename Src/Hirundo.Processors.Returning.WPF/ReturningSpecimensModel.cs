@@ -4,7 +4,7 @@ using Hirundo.Processors.Returning.Conditions;
 
 namespace Hirundo.Processors.Returning.WPF;
 
-public class ReturningSpecimensModel(IDataLabelRepository repository) : ParametersBrowserModel<ReturningSpecimensParameters, IReturningSpecimenCondition, ReturningSpecimensModel>(repository)
+public class ReturningSpecimensModel(IDataLabelRepository repository) : ParametersBrowserModel<ReturningParameters, IReturningSpecimenCondition, ReturningSpecimensModel>(repository)
 {
     public override string Header => "Powroty";
     public override string Title => "Warunki powracających osobników";

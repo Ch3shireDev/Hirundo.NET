@@ -5,7 +5,7 @@ namespace Hirundo.Processors.Specimens;
 /// <summary>
 ///     Procesor osobników pozwala na zgrupowanie obserwacji w osobniki o ustalonym identyfikatorze obrączki.
 /// </summary>
-public class SpecimensProcessor(SpecimensProcessorParameters parameters, CancellationToken? cancellationToken = null) : ISpecimensProcessor
+public class SpecimensProcessor(SpecimensParameters parameters, CancellationToken? cancellationToken = null) : ISpecimensProcessor
 {
     /// <summary>
     ///     Zwraca osobniki na podstawie listy obserwacji.

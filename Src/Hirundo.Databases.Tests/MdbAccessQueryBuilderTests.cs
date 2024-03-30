@@ -18,7 +18,7 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table");
-        _builder.WithColumn(new ColumnMapping("IDR_Podab", "ID", DataValueType.LongInt));
+        _builder.WithColumn(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
 
         // Act
         var query = _builder.Build();
@@ -32,8 +32,8 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table 2");
-        _builder.WithColumn(new ColumnMapping("IDR_Podab", "ID", DataValueType.LongInt));
-        _builder.WithColumn(new ColumnMapping("RING", "RING", DataValueType.Text));
+        _builder.WithColumn(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
+        _builder.WithColumn(new ColumnParameters("RING", "RING", DataValueType.Text));
 
         // Act
         var query = _builder.Build();
@@ -47,7 +47,7 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table 3");
-        _builder.WithColumn(new ColumnMapping("HOUR", "HOUR", DataValueType.ShortInt));
+        _builder.WithColumn(new ColumnParameters("HOUR", "HOUR", DataValueType.ShortInt));
 
         // Act
         var query = _builder.Build();
@@ -57,15 +57,16 @@ public class MdbAccessQueryBuilderTests
     }
 
     /// <summary>
-    ///     Ze względu na błąd w starych bazach danych Access, nie mamy możliwości używania funkcji CDEC,
-    ///     która konwertuje element na liczbę zmiennoprzecinkową.
+    ///     Ze względu na błąd w starych bazach danych Access, 
+    ///     nie mamy możliwości używania funkcji CDEC, która 
+    ///     konwertuje element na liczbę zmiennoprzecinkową.
     /// </summary>
     [Test]
     public void GivenDecimalColumn_WhenBuild_ReturnsQueryWithDoubleColumn()
     {
         // Arrange
         _builder.WithTable("example table 4");
-        _builder.WithColumn(new ColumnMapping("WEIGHT", "WEIGHT", DataValueType.Numeric));
+        _builder.WithColumn(new ColumnParameters("WEIGHT", "WEIGHT", DataValueType.Numeric));
 
         // Act
         var query = _builder.Build();
@@ -79,7 +80,7 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table 5");
-        _builder.WithColumn(new ColumnMapping("DATE", "DATE", DataValueType.DateTime));
+        _builder.WithColumn(new ColumnParameters("DATE", "DATE", DataValueType.DateTime));
 
         // Act
         var query = _builder.Build();
@@ -93,7 +94,7 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table 6");
-        _builder.WithColumn(new ColumnMapping("IDR_Podab", "ID", DataValueType.LongInt));
+        _builder.WithColumn(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
         _builder.WithCondition(new DatabaseCondition("SPECIES", "REG.REG", DatabaseConditionType.IsEqual));
 
         // Act
@@ -108,7 +109,7 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table 7");
-        _builder.WithColumn(new ColumnMapping("IDR_Podab", "ID", DataValueType.LongInt));
+        _builder.WithColumn(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
         _builder.WithCondition(new DatabaseCondition("SPECIES", "REG.REG", DatabaseConditionType.IsEqual));
         _builder.WithCondition(new DatabaseCondition("RING", "J634038", DatabaseConditionType.IsEqual));
 
@@ -124,7 +125,7 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table 8");
-        _builder.WithColumn(new ColumnMapping("IDR_Podab", "ID", DataValueType.LongInt));
+        _builder.WithColumn(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
         _builder.WithCondition(new DatabaseCondition("SPECIES", "REG.REG", DatabaseConditionType.IsEqual));
         _builder.WithCondition(new DatabaseCondition("RING", "J634038", DatabaseConditionType.IsEqual, DatabaseConditionOperator.Or));
 
@@ -140,7 +141,7 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table 9");
-        _builder.WithColumn(new ColumnMapping("IDR_Podab", "ID", DataValueType.LongInt));
+        _builder.WithColumn(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
         _builder.WithCondition(new DatabaseCondition("SPECIES", "REG.REG", DatabaseConditionType.IsEqual));
         _builder.WithCondition(new DatabaseCondition("RING", "J634038", DatabaseConditionType.IsEqual, DatabaseConditionOperator.Or));
         _builder.WithCondition(new DatabaseCondition("RING", "J664040", DatabaseConditionType.IsEqual));
@@ -157,7 +158,7 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table 10");
-        _builder.WithColumn(new ColumnMapping("IDR_Podab", "ID", DataValueType.LongInt));
+        _builder.WithColumn(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
         _builder.WithCondition(new DatabaseCondition("DATE", new DateTime(1967, 08, 16), DatabaseConditionType.IsGreaterThan));
         _builder.WithCondition(new DatabaseCondition("DATE", new DateTime(1967, 08, 17), DatabaseConditionType.IsLowerThan));
 
@@ -173,7 +174,7 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table 11");
-        _builder.WithColumn(new ColumnMapping("IDR_Podab", "ID", DataValueType.LongInt));
+        _builder.WithColumn(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
         _builder.WithCondition(new DatabaseCondition("SPECIES", "REG.REG", DatabaseConditionType.IsNotEqual));
 
         // Act

@@ -30,7 +30,7 @@ public class ReturningSpecimenJsonSerializerTests
     public void GivenReturningSpecimenConditions_WhenSerialize_ReturnsJsonWithConditions()
     {
         // Arrange
-        var parameters = new ReturningSpecimensParameters(
+        var parameters = new ReturningParameters(
             [
                 new ReturnsAfterTimePeriodCondition("DATE1", 20),
                 new ReturnsNotEarlierThanGivenDateNextYearCondition("DATE2", 07, 15)
@@ -57,11 +57,11 @@ public class ReturningSpecimenJsonSerializerTests
     public void GivenReturningSpecimenConditions_WhenSerializeAndDeserialize_ReturnsSameConditions()
     {
         // Arrange
-        var parameters = new ReturningSpecimensParameters([new ReturnsAfterTimePeriodCondition("DATE1", 20), new ReturnsNotEarlierThanGivenDateNextYearCondition("DATE2", 06, 14)]);
+        var parameters = new ReturningParameters([new ReturnsAfterTimePeriodCondition("DATE1", 20), new ReturnsNotEarlierThanGivenDateNextYearCondition("DATE2", 06, 14)]);
 
         // Act
         var serialized = JsonConvert.SerializeObject(parameters, _settings);
-        var deserialized = JsonConvert.DeserializeObject<ReturningSpecimensParameters>(serialized, _settings)!;
+        var deserialized = JsonConvert.DeserializeObject<ReturningParameters>(serialized, _settings)!;
 
         // Assert
         Assert.That(deserialized.Conditions.Count, Is.EqualTo(2));
@@ -85,7 +85,7 @@ public class ReturningSpecimenJsonSerializerTests
             new ReturnsAfterTimePeriodCondition("DATE1", 20),
             new ReturnsNotEarlierThanGivenDateNextYearCondition("DATE2", 07, 15)
         );
-        var parameters = new ReturningSpecimensParameters([condition]);
+        var parameters = new ReturningParameters([condition]);
 
         // Act
         var result = JsonConvert.SerializeObject(parameters, _settings);
@@ -121,11 +121,11 @@ public class ReturningSpecimenJsonSerializerTests
             new ReturnsAfterTimePeriodCondition("DATE1", 20),
             new ReturnsNotEarlierThanGivenDateNextYearCondition("DATE2", 07, 15)
         );
-        var parameters = new ReturningSpecimensParameters([condition]);
+        var parameters = new ReturningParameters([condition]);
 
         // Act
         var result = JsonConvert.SerializeObject(parameters, _settings);
-        var resultParameters = JsonConvert.DeserializeObject<ReturningSpecimensParameters>(result, _settings)!;
+        var resultParameters = JsonConvert.DeserializeObject<ReturningParameters>(result, _settings)!;
 
         // Assert
         Assert.That(resultParameters.Conditions.Count, Is.EqualTo(1));
@@ -150,7 +150,7 @@ public class ReturningSpecimenJsonSerializerTests
     {
         // Arrange
         var condition = new ReturnsAfterTimePeriodCondition("DATE1", 20);
-        var parameters = new ReturningSpecimensParameters([condition]);
+        var parameters = new ReturningParameters([condition]);
 
         // Act
         var result = JsonConvert.SerializeObject(parameters, _settings);
@@ -168,11 +168,11 @@ public class ReturningSpecimenJsonSerializerTests
     {
         // Arrange
         var condition = new ReturnsAfterTimePeriodCondition("DATE2", 30);
-        var parameters = new ReturningSpecimensParameters([condition]);
+        var parameters = new ReturningParameters([condition]);
 
         // Act
         var serialized = JsonConvert.SerializeObject(parameters, _settings);
-        var deserialized = JsonConvert.DeserializeObject<ReturningSpecimensParameters>(serialized, _settings)!;
+        var deserialized = JsonConvert.DeserializeObject<ReturningParameters>(serialized, _settings)!;
 
         // Assert
         var result2 = deserialized.Conditions[0];
@@ -207,7 +207,7 @@ public class ReturningSpecimenJsonSerializerTests
                         new ReturnsAfterTimePeriodCondition("DATE1", 20),
                         new ReturnsNotEarlierThanGivenDateNextYearCondition("DATE2", 07, 15)
                     );
-        var parameters = new ReturningSpecimensParameters([condition]);
+        var parameters = new ReturningParameters([condition]);
 
         // Act
         var result = JsonConvert.SerializeObject(parameters, _settings);
@@ -230,11 +230,11 @@ public class ReturningSpecimenJsonSerializerTests
                         new ReturnsAfterTimePeriodCondition("DATE1", 20),
                         new ReturnsNotEarlierThanGivenDateNextYearCondition("DATE2", 07, 15)
                     );
-        var parameters = new ReturningSpecimensParameters([condition]);
+        var parameters = new ReturningParameters([condition]);
 
         // Act
         var result = JsonConvert.SerializeObject(parameters, _settings);
-        var deserialized = JsonConvert.DeserializeObject<ReturningSpecimensParameters>(result, _settings)!;
+        var deserialized = JsonConvert.DeserializeObject<ReturningParameters>(result, _settings)!;
 
         // Assert
         Assert.That(deserialized.Conditions.Count, Is.EqualTo(1));

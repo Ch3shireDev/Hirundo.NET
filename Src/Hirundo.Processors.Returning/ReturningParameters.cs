@@ -2,13 +2,13 @@
 
 namespace Hirundo.Processors.Returning;
 
-public class ReturningSpecimensParameters
+public class ReturningParameters
 {
-    public ReturningSpecimensParameters()
+    public ReturningParameters()
     {
     }
 
-    public ReturningSpecimensParameters(IList<IReturningSpecimenCondition> conditions)
+    public ReturningParameters(IList<IReturningSpecimenCondition> conditions)
     {
         Conditions = conditions;
     }

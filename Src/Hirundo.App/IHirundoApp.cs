@@ -2,5 +2,5 @@
 
 public interface IHirundoApp
 {
-    void Run(ApplicationConfig applicationConfig, CancellationToken? token = null);
+    void Run(ApplicationParameters applicationConfig, CancellationToken? token = null);
 }

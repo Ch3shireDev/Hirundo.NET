@@ -68,7 +68,7 @@ public class MainViewModelTests
     public void GivenDataSourceConfig_WhenSaveConfig_ShouldResultWithSameConfig()
     {
         // Arrange
-        var config = new ApplicationConfig
+        var config = new ApplicationParameters
         {
             Databases = new()
             {
@@ -90,7 +90,7 @@ public class MainViewModelTests
                     ],
                     Columns =
                     [
-                        new ColumnMapping
+                        new ColumnParameters
                         {
                             DatabaseColumn = "AAA",
                             ValueName = "XXX",
@@ -136,7 +136,7 @@ public class MainViewModelTests
     public void GivenDataSourceConfig_WhenSaveConfig_ShouldUpdateRepository()
     {
         // Arrange
-        var config = new ApplicationConfig
+        var config = new ApplicationParameters
         {
             Databases = new()
             {
@@ -157,7 +157,7 @@ public class MainViewModelTests
                     ],
                     Columns =
                     [
-                        new ColumnMapping
+                        new ColumnParameters
                         {
                             DatabaseColumn = "AAA",
                             ValueName = "XXX",
@@ -182,7 +182,7 @@ public class MainViewModelTests
     public void GivenObservationsConfig_WhenSaveConfig_ShouldResultWithSameConfig()
     {
         // Arrange
-        var config = new ApplicationConfig
+        var config = new ApplicationParameters
         {
             Observations = new ObservationsParameters
             {
@@ -221,9 +221,9 @@ public class MainViewModelTests
     public void GivenSpecimensParameters_WhenSaveConfig_ShouldResultWithSameConfig()
     {
         // Arrange
-        var config = new ApplicationConfig
+        var config = new ApplicationParameters
         {
-            Specimens = new SpecimensProcessorParameters
+            Specimens = new SpecimensParameters
             {
                 SpecimenIdentifier = "KEY",
                 IncludeEmptyValues = true
@@ -245,9 +245,9 @@ public class MainViewModelTests
     public void GivenReturningSpecimensParameters_WhenSaveConfig_ShouldResultWithSameConfig()
     {
         // Arrange
-        var config = new ApplicationConfig
+        var config = new ApplicationParameters
         {
-            ReturningSpecimens = new ReturningSpecimensParameters
+            ReturningSpecimens = new ReturningParameters
             {
                 Conditions =
                 [
@@ -281,9 +281,9 @@ public class MainViewModelTests
     public void GivenPopulationParameters_WhenSaveConfig_ShouldResultWithSameConfig()
     {
         // Arrange
-        var config = new ApplicationConfig
+        var config = new ApplicationParameters
         {
-            Population = new PopulationProcessorParameters
+            Population = new PopulationParameters
             {
                 Conditions =
                 [
@@ -311,9 +311,9 @@ public class MainViewModelTests
     public void GivenStatisticsParameters_WhenSaveConfig_ShouldResultWithSameConfig()
     {
         // Arrange
-        var config = new ApplicationConfig
+        var config = new ApplicationParameters
         {
-            Statistics = new StatisticsProcessorParameters
+            Statistics = new StatisticsParameters
             {
                 Operations =
                 [
@@ -344,9 +344,9 @@ public class MainViewModelTests
     public void GivenWriterParameters_WhenSaveConfig_ShouldResultWithSameConfig()
     {
         // Arrange
-        var config = new ApplicationConfig
+        var config = new ApplicationParameters
         {
-            Results = new SummaryParameters
+            Results = new ResultsParameters
             {
                 Writers = [ new CsvSummaryWriterParameters
                 {
@@ -372,7 +372,7 @@ public class MainViewModelTests
     public void GivenIsEqualObservation_WhenChangeParameters_ReturnsChangedConfig()
     {
         // Arrange
-        var config = new ApplicationConfig
+        var config = new ApplicationParameters
         {
             Observations = new ObservationsParameters
             {
@@ -404,20 +404,20 @@ public class MainViewModelTests
     public async Task GivenReadyConfig_WhenProcessAndSave_RunsTaskToTheEnd()
     {
         // Arrange
-        _viewModel.UpdateConfig(new ApplicationConfig());
+        _viewModel.UpdateConfig(new ApplicationParameters());
 
         // Act
         await _viewModel.ProcessAndSaveAsync();
 
         // Assert
-        _hirundoApp.Verify(a => a.Run(It.IsAny<ApplicationConfig>(), It.IsAny<CancellationToken>()), Times.Once);
+        _hirundoApp.Verify(a => a.Run(It.IsAny<ApplicationParameters>(), It.IsAny<CancellationToken>()), Times.Once);
     }
 
     [Test]
     public void GivenComputedValuesInConfiguration_WhenUpdateConfig_ChangesParametersInComputedValues()
     {
         // Arrange
-        var config = new ApplicationConfig
+        var config = new ApplicationParameters
         {
             ComputedValues = new ComputedValuesParameters
             {
@@ -449,7 +449,7 @@ public class MainViewModelTests
     public void GivenChangeInComputedValuesViewModel_WhenGetConfigFromViewModels_ReturnsNewConfiguration()
     {
         // Arrange
-        var config = new ApplicationConfig
+        var config = new ApplicationParameters
         {
             ComputedValues = new ComputedValuesParameters
             {

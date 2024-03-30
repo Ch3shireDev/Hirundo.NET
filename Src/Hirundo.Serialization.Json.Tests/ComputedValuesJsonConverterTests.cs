@@ -25,7 +25,7 @@ public class ComputedValuesJsonConverterTests
         // Arrange
         var computedValue = new PointednessCalculator("POINTEDNESS", ["D2", "D3", "D4", "D5", "D6", "D7", "D8"], "WING");
 
-        var config = new ApplicationConfig
+        var config = new ApplicationParameters
         {
             ComputedValues = new()
             {
@@ -35,7 +35,7 @@ public class ComputedValuesJsonConverterTests
 
         // Act
         var json = JsonConvert.SerializeObject(config, _settings);
-        var result = JsonConvert.DeserializeObject<ApplicationConfig>(json, _settings)!;
+        var result = JsonConvert.DeserializeObject<ApplicationParameters>(json, _settings)!;
 
         // Assert
         Assert.That(result, Is.Not.Null);

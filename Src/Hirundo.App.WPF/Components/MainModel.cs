@@ -35,7 +35,7 @@ public class MainModel(
     public IDataLabelRepository Repository { get; set; } = repository;
     public ComputedValuesModel ComputedValuesModel { get; set; } = computedValuesModel;
 
-    public void UpdateConfig(ApplicationConfig config)
+    public void UpdateConfig(ApplicationParameters config)
     {
         ArgumentNullException.ThrowIfNull(config);
 
@@ -57,9 +57,9 @@ public class MainModel(
         WriterModel.ParametersContainer = config.Results;
     }
 
-    public ApplicationConfig GetConfigFromViewModels()
+    public ApplicationParameters GetConfigFromViewModels()
     {
-        return new ApplicationConfig
+        return new ApplicationParameters
         {
             Databases = DatabasesBrowserModel.ParametersContainer,
             ComputedValues = ComputedValuesModel.ParametersContainer,

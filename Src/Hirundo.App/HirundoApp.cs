@@ -13,8 +13,8 @@ namespace Hirundo.App;
 
 public class HirundoApp : IHirundoApp
 {
-    private readonly IComputedValuesCalculatorBuilder _calculatorBuilder = new ComputedValuesCalculatorBuilder();
     private readonly IDatabaseBuilder _databaseBuilder = new DatabaseBuilder();
+    private readonly IComputedValuesCalculatorBuilder _calculatorBuilder = new ComputedValuesCalculatorBuilder();
     private readonly IObservationConditionsBuilder _observationConditionsBuilder = new ObservationConditionsBuilder();
     private readonly IPopulationProcessorBuilder _populationProcessorBuilder = new PopulationProcessorBuilder();
     private readonly IReturningSpecimenConditionsBuilder _returningSpecimenConditionsBuilder = new ReturningSpecimenConditionsBuilder();
@@ -54,7 +54,7 @@ public class HirundoApp : IHirundoApp
         _summaryWriterBuilder = summaryWriterBuilder;
     }
 
-    public void Run(ApplicationConfig applicationConfig, CancellationToken? token = null)
+    public void Run(ApplicationParameters applicationConfig, CancellationToken? token = null)
     {
         ArgumentNullException.ThrowIfNull(applicationConfig);
 

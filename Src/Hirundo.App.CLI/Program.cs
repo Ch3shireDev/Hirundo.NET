@@ -25,11 +25,11 @@ internal sealed class Program
         app.Run(appConfig);
     }
 
-    private static ApplicationConfig GetConfig()
+    private static ApplicationParameters GetConfig()
     {
         var converter = new HirundoJsonConverter();
         var jsonConfig = File.ReadAllText("appsettings.json");
-        var appConfig = JsonConvert.DeserializeObject<ApplicationConfig>(jsonConfig, converter) ?? throw new SerializationException("Błąd parsowania konfiguracji.");
+        var appConfig = JsonConvert.DeserializeObject<ApplicationParameters>(jsonConfig, converter) ?? throw new SerializationException("Błąd parsowania konfiguracji.");
         return appConfig;
     }
 }

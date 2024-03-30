@@ -2,7 +2,7 @@
 
 public class SpecimensModel
 {
-    public SpecimensProcessorParameters SpecimensProcessorParameters
+    public SpecimensParameters SpecimensProcessorParameters
     {
         get => new()
         {

@@ -6,19 +6,20 @@ namespace Hirundo.Databases;
 
 /// <summary>
 ///     Budowniczy zapytań dla bazy danych Access 2003 (pliki .mdb). Zapytanie jest tworzone na podstawie nazwy tabeli oraz
-///     <see cref="ColumnMapping" />.
+///     <see cref="ColumnParameters" />.
 /// </summary>
 public class MdbAccessQueryBuilder(string rowSeparator = " ")
 {
-    private readonly List<ColumnMapping> _columns = [];
+    private readonly List<ColumnParameters> _columns = [];
     private readonly List<DatabaseCondition> _conditions = [];
     private string? _tableName;
 
     public string RowSeparator { get; } = rowSeparator;
 
     /// <summary>
-    ///     Ustalana jest nazwa tabeli, do której odwołuje się zapytanie SELECT.
-    ///     Nazwa tabeli nie powinna zawierać nawiasów kwadratowych.
+    ///     Ustalana jest nazwa tabeli, do której odwołuje się 
+    ///     zapytanie SELECT. Nazwa tabeli nie powinna zawierać
+    ///     nawiasów kwadratowych.
     /// </summary>
     /// <param name="tableName"></param>
     /// <returns></returns>
@@ -29,24 +30,26 @@ public class MdbAccessQueryBuilder(string rowSeparator = " ")
     }
 
     /// <summary>
-    ///     Dodawana jest lista kolumn (bądź wyrażeń) do zapytania SELECT. Zależnie od podanego typu danych,
+    ///     Dodawana jest lista kolumn (bądź wyrażeń) do 
+    ///     zapytania SELECT. Zależnie od podanego typu danych,
     ///     wartości są konwertowane na poziomie zapytania SQL.
     /// </summary>
     /// <param name="columns"></param>
     /// <returns></returns>
-    public MdbAccessQueryBuilder WithColumns(IEnumerable<ColumnMapping> columns)
+    public MdbAccessQueryBuilder WithColumns(IEnumerable<ColumnParameters> columns)
     {
         _columns.AddRange(columns);
         return this;
     }
 
     /// <summary>
-    ///     Dodawana jest pojedyncza kolumna (bądź wyrażenie) do zapytania SELECT. Zależnie od podanego typu danych,
+    ///     Dodawana jest pojedyncza kolumna (bądź wyrażenie) do 
+    ///     zapytania SELECT. Zależnie od podanego typu danych,
     ///     wartość jest konwertowana na poziomie zapytania SQL.
     /// </summary>
     /// <param name="columnMapping"></param>
     /// <returns></returns>
-    public MdbAccessQueryBuilder WithColumn(ColumnMapping columnMapping)
+    public MdbAccessQueryBuilder WithColumn(ColumnParameters columnMapping)
     {
         _columns.Add(columnMapping);
         return this;
@@ -176,7 +179,7 @@ public class MdbAccessQueryBuilder(string rowSeparator = " ")
     /// <param name="columnMapping"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
-    private static string GetSqlColumnExpression(ColumnMapping columnMapping)
+    private static string GetSqlColumnExpression(ColumnParameters columnMapping)
     {
         return columnMapping.DataType switch
         {

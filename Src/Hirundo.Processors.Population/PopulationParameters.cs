@@ -2,7 +2,7 @@
 
 namespace Hirundo.Processors.Population;
 
-public class PopulationProcessorParameters
+public class PopulationParameters
 {
     public IList<IPopulationConditionBuilder> Conditions { get; init; } = [];
 }

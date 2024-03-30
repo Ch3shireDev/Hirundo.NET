@@ -13,11 +13,11 @@ public class CompositeDatabaseTests
             Table = "old_table",
             Columns =
             [
-                new ColumnMapping("IDR_Podab", "ID", DataValueType.LongInt),
-                new ColumnMapping("RING", "RING", DataValueType.Text),
-                new ColumnMapping("SPEC", "SPECIES", DataValueType.Text),
-                new ColumnMapping("DATE", "DATE", DataValueType.DateTime),
-                new ColumnMapping("MASS", "WEIGHT", DataValueType.Numeric)
+                new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt),
+                new ColumnParameters("RING", "RING", DataValueType.Text),
+                new ColumnParameters("SPEC", "SPECIES", DataValueType.Text),
+                new ColumnParameters("DATE", "DATE", DataValueType.DateTime),
+                new ColumnParameters("MASS", "WEIGHT", DataValueType.Numeric)
             ]
         };
 
@@ -27,11 +27,11 @@ public class CompositeDatabaseTests
             Table = "new_table",
             Columns =
             [
-                new ColumnMapping("IDR_Podab", "ID", DataValueType.LongInt),
-                new ColumnMapping("RING", "RING", DataValueType.Text),
-                new ColumnMapping("Species Code", "SPECIES", DataValueType.Text),
-                new ColumnMapping("DATE2", "DATE", DataValueType.DateTime),
-                new ColumnMapping("WEIGHT", "WEIGHT", DataValueType.Numeric)
+                new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt),
+                new ColumnParameters("RING", "RING", DataValueType.Text),
+                new ColumnParameters("Species Code", "SPECIES", DataValueType.Text),
+                new ColumnParameters("DATE2", "DATE", DataValueType.DateTime),
+                new ColumnParameters("WEIGHT", "WEIGHT", DataValueType.Numeric)
             ]
         };
 

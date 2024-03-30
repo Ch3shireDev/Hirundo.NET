@@ -6,6 +6,7 @@ using NUnit.Framework;
 
 namespace Hirundo.App.Tests.Integration;
 
+[TestFixture]
 public class HirundoAppTests
 {
     private HirundoApp _app = null!;
@@ -71,7 +72,7 @@ public class HirundoAppTests
         _database.Setup(x => x.GetObservations()).Returns([]);
 
         // Act
-        _app.Run(new ApplicationConfig());
+        _app.Run(new ApplicationParameters());
 
         // Assert
         _database.Verify(x => x.GetObservations(), Times.Once);

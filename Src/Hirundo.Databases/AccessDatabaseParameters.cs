@@ -20,12 +20,12 @@ public class AccessDatabaseParameters : IDatabaseParameters
     public string Table { get; set; } = null!;
 
     /// <summary>
+    ///     Lista kolumn z danymi.
+    /// </summary>
+    public IList<ColumnParameters> Columns { get; init; } = [];
+
+    /// <summary>
     ///     Lista warunków do spełnienia przez kolumny danych (klauzula WHERE).
     /// </summary>
     public IList<DatabaseCondition> Conditions { get; init; } = [];
-
-    /// <summary>
-    ///     Lista kolumn z danymi.
-    /// </summary>
-    public IList<ColumnMapping> Columns { get; init; } = [];
 }

@@ -118,7 +118,7 @@ public class AccessDataSourceViewModel(AccessDataSourceModel model, IAccessMetad
 
     public void AddColumn()
     {
-        var newColumnMapping = new ColumnMapping();
+        var newColumnMapping = new ColumnParameters();
         model.Columns.Add(newColumnMapping);
         Columns.Add(newColumnMapping);
     }
@@ -163,7 +163,7 @@ public class AccessDataSourceViewModel(AccessDataSourceModel model, IAccessMetad
 
     #region collections
 
-    public IList<ColumnMapping> Columns { get; } = new ObservableCollection<ColumnMapping>(model.Columns);
+    public IList<ColumnParameters> Columns { get; } = new ObservableCollection<ColumnParameters>(model.Columns);
     public IList<DatabaseCondition> Conditions { get; } = new ObservableCollection<DatabaseCondition>(model.Conditions);
 
     #endregion

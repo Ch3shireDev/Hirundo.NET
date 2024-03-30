@@ -29,7 +29,7 @@ public sealed class MainViewModel : ObservableObject
         _model = model;
         DataSourceViewModel = new ParametersBrowserViewModel(model.DatabasesBrowserModel);
         ComputedValuesViewModel = new ParametersBrowserViewModel(model.ComputedValuesModel);
-        ParametersBrowserViewModel = new ParametersBrowserViewModel(model.ObservationParametersBrowserModel);
+        ObservationsViewModel = new ParametersBrowserViewModel(model.ObservationParametersBrowserModel);
         ReturningSpecimensViewModel = new ParametersBrowserViewModel(model.ReturningSpecimensModel);
         PopulationViewModel = new ParametersBrowserViewModel(model.PopulationModel);
         SpecimensViewModel = new SpecimensViewModel(model.SpecimensModel, model.Repository);
@@ -39,9 +39,9 @@ public sealed class MainViewModel : ObservableObject
         ViewModels =
         [
             DataSourceViewModel,
-            ComputedValuesViewModel,
             SpecimensViewModel,
-            ParametersBrowserViewModel,
+            ComputedValuesViewModel,
+            ObservationsViewModel,
             ReturningSpecimensViewModel,
             PopulationViewModel,
             StatisticsViewModel,
@@ -56,12 +56,12 @@ public sealed class MainViewModel : ObservableObject
     public Action RefreshWindow { get; set; } = () => { };
     public ParametersBrowserViewModel DataSourceViewModel { get; }
     public ParametersBrowserViewModel ComputedValuesViewModel { get; }
-    public ParametersBrowserViewModel ParametersBrowserViewModel { get; }
+    public ParametersBrowserViewModel ObservationsViewModel { get; }
     public ParametersBrowserViewModel PopulationViewModel { get; }
     public ParametersBrowserViewModel ReturningSpecimensViewModel { get; }
     public ParametersBrowserViewModel StatisticsViewModel { get; }
-    public SpecimensViewModel SpecimensViewModel { get; }
     public ParametersBrowserViewModel WriterViewModel { get; }
+    public SpecimensViewModel SpecimensViewModel { get; }
     public ObservableCollection<LogEvent> LogEventsItems { get; } = [];
     public ICommand PreviousCommand => new RelayCommand(Previous, CanGoPrevious);
     public ICommand NextCommand => new RelayCommand(Next, CanGoNext);
@@ -113,7 +113,7 @@ public sealed class MainViewModel : ObservableObject
         var dialog = MessageBox.Show("Czy na pewno chcesz utworzyć nową konfigurację? Niezapisane zmiany w bieżącej konfiguracji zostaną utracone.", "Uwaga", MessageBoxButton.YesNo,
             MessageBoxImage.Warning);
         if (dialog != MessageBoxResult.Yes) return;
-        UpdateConfig(new ApplicationConfig());
+        UpdateConfig(new ApplicationParameters());
 
         SelectedViewModel = null;
         await Task.Delay(100).ConfigureAwait(false);
@@ -214,12 +214,12 @@ public sealed class MainViewModel : ObservableObject
         return IsProcessing;
     }
 
-    public void UpdateConfig(ApplicationConfig config)
+    public void UpdateConfig(ApplicationParameters config)
     {
         _model.UpdateConfig(config);
         OnPropertyChanged(nameof(DataSourceViewModel));
         OnPropertyChanged(nameof(ComputedValuesViewModel));
-        OnPropertyChanged(nameof(ParametersBrowserViewModel));
+        OnPropertyChanged(nameof(ObservationsViewModel));
         OnPropertyChanged(nameof(ReturningSpecimensViewModel));
         OnPropertyChanged(nameof(PopulationViewModel));
         OnPropertyChanged(nameof(SpecimensViewModel));
@@ -228,7 +228,7 @@ public sealed class MainViewModel : ObservableObject
         SelectedViewModel = DataSourceViewModel;
     }
 
-    public ApplicationConfig GetConfig()
+    public ApplicationParameters GetConfig()
     {
         return _model.GetConfigFromViewModels();
     }

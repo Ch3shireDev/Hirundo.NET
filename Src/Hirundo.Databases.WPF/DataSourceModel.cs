@@ -10,10 +10,10 @@ public class DataSourceModel(IDataLabelRepository repository, IAccessMetadataSer
     private readonly IDataLabelRepository repository = repository;
     private readonly IAccessMetadataService accessMetadataService = accessMetadataService;
 
+    public override string Header => "Źródła";
+    public override string Title => "Źródła danych";
     public override string Description => "W tym panelu wybierasz źródło danych.";
     public override string AddParametersCommandText => "Dodaj nowe źródło danych";
-    public override string Header => "Źródła danych";
-    public override string Title => "Źródła danych";
 
     public override IList<IDatabaseParameters> Parameters => ParametersContainer.Databases;
 
@@ -65,7 +65,7 @@ public class DataSourceModel(IDataLabelRepository repository, IAccessMetadataSer
         repository.SetLabels(groups);
     }
 
-    private DataLabel GetDataLabel(ColumnMapping columnMapping)
+    private DataLabel GetDataLabel(ColumnParameters columnMapping)
     {
         var dataType = columnMapping.DataType switch
         {

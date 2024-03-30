@@ -43,8 +43,8 @@ public class AccessDataSourceViewModelTests
     {
         // Arrange
         _parameters.Columns.Clear();
-        _parameters.Columns.Add(new ColumnMapping("Column1", "Text1", DataValueType.Text));
-        _parameters.Columns.Add(new ColumnMapping("Column2", "Text2", DataValueType.Text));
+        _parameters.Columns.Add(new ColumnParameters("Column1", "Text1", DataValueType.Text));
+        _parameters.Columns.Add(new ColumnParameters("Column2", "Text2", DataValueType.Text));
         _viewModel.Columns.Add(_parameters.Columns[0]);
         _viewModel.Columns.Add(_parameters.Columns[1]);
 

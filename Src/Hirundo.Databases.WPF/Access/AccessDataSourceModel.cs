@@ -18,6 +18,6 @@ public class AccessDataSourceModel(AccessDatabaseParameters parameters, IDataLab
         set => parameters.Table = value;
     }
 
-    public IList<ColumnMapping> Columns => parameters.Columns;
+    public IList<ColumnParameters> Columns => parameters.Columns;
     public IList<DatabaseCondition> Conditions => parameters.Conditions;
 }

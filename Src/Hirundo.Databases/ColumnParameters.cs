@@ -6,12 +6,12 @@
 ///     <see cref="DataValueType.Undefined" /> powoduje zwrócenie wartości o ustawionym typie w bazie danych. Inne typy
 ///     danych powodują rzutowanie wartości na typ zdefiniowany w <see cref="DataType" />.
 /// </summary>
-public class ColumnMapping
+public class ColumnParameters
 {
     /// <summary>
     ///     Konstruktor bezparametrowy.
     /// </summary>
-    public ColumnMapping()
+    public ColumnParameters()
     {
     }
 
@@ -21,7 +21,7 @@ public class ColumnMapping
     /// <param name="databaseColumn">Nazwa kolumny w bazie danych.</param>
     /// <param name="valueName">Nazwa kolumny w danych wynikowych.</param>
     /// <param name="dataType">Typ danych, wymagany do rzutowania.</param>
-    public ColumnMapping(string databaseColumn, string valueName, DataValueType dataType)
+    public ColumnParameters(string databaseColumn, string valueName, DataValueType dataType)
     {
         DatabaseColumn = databaseColumn;
         ValueName = valueName;

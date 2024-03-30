@@ -88,7 +88,7 @@ public class ApplicationConfigJsonConverterTests
         }";
 
         // Act
-        var config = JsonConvert.DeserializeObject<ApplicationConfig>(json, _settings) ?? throw new SerializationException();
+        var config = JsonConvert.DeserializeObject<ApplicationParameters>(json, _settings) ?? throw new SerializationException();
 
         // Assert
         Assert.That(config, Is.Not.Null);
@@ -150,7 +150,7 @@ public class ApplicationConfigJsonConverterTests
         }";
 
         // Act
-        var config = JsonConvert.DeserializeObject<ApplicationConfig>(json, _settings) ?? throw new SerializationException();
+        var config = JsonConvert.DeserializeObject<ApplicationParameters>(json, _settings) ?? throw new SerializationException();
 
         // Assert
         Assert.That(config, Is.Not.Null);
@@ -181,7 +181,7 @@ public class ApplicationConfigJsonConverterTests
         }";
 
         // Act
-        var config = JsonConvert.DeserializeObject<ApplicationConfig>(json, _settings) ?? throw new SerializationException();
+        var config = JsonConvert.DeserializeObject<ApplicationParameters>(json, _settings) ?? throw new SerializationException();
 
         // Assert
         Assert.That(config, Is.Not.Null);
@@ -214,7 +214,7 @@ public class ApplicationConfigJsonConverterTests
         }";
 
         // Act
-        var config = JsonConvert.DeserializeObject<ApplicationConfig>(json, _settings) ?? throw new SerializationException();
+        var config = JsonConvert.DeserializeObject<ApplicationParameters>(json, _settings) ?? throw new SerializationException();
 
         // Assert
         Assert.That(config, Is.Not.Null);
@@ -251,7 +251,7 @@ public class ApplicationConfigJsonConverterTests
         }";
 
         // Act
-        var config = JsonConvert.DeserializeObject<ApplicationConfig>(json, _settings) ?? throw new SerializationException();
+        var config = JsonConvert.DeserializeObject<ApplicationParameters>(json, _settings) ?? throw new SerializationException();
 
         // Assert
         Assert.That(config, Is.Not.Null);
@@ -287,7 +287,7 @@ public class ApplicationConfigJsonConverterTests
         }";
 
         // Act
-        var config = JsonConvert.DeserializeObject<ApplicationConfig>(json, _settings) ?? throw new SerializationException();
+        var config = JsonConvert.DeserializeObject<ApplicationParameters>(json, _settings) ?? throw new SerializationException();
 
         // Assert
         Assert.That(config, Is.Not.Null);
@@ -323,7 +323,7 @@ public class ApplicationConfigJsonConverterTests
         }";
 
         // Act
-        var config = JsonConvert.DeserializeObject<ApplicationConfig>(json, _settings) ?? throw new SerializationException();
+        var config = JsonConvert.DeserializeObject<ApplicationParameters>(json, _settings) ?? throw new SerializationException();
 
         // Assert
         Assert.That(config, Is.Not.Null);
@@ -358,7 +358,7 @@ public class ApplicationConfigJsonConverterTests
         }";
 
         // Act
-        var config = JsonConvert.DeserializeObject<ApplicationConfig>(json, _settings) ?? throw new SerializationException();
+        var config = JsonConvert.DeserializeObject<ApplicationParameters>(json, _settings) ?? throw new SerializationException();
 
         // Assert
         Assert.That(config, Is.Not.Null);

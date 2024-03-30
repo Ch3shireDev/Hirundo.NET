@@ -4,7 +4,7 @@ using Hirundo.Processors.Statistics.Operations;
 
 namespace Hirundo.Processors.Statistics.WPF;
 
-public class StatisticsModel(IDataLabelRepository repository) : ParametersBrowserModel<StatisticsProcessorParameters, IStatisticalOperation, StatisticsModel>(repository)
+public class StatisticsModel(IDataLabelRepository repository) : ParametersBrowserModel<StatisticsParameters, IStatisticalOperation, StatisticsModel>(repository)
 {
     public override string Header => "Statystyki";
     public override string Title => "Operacje statystyczne";

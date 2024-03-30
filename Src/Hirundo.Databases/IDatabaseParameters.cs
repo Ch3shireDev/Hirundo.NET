@@ -2,5 +2,5 @@
 
 public interface IDatabaseParameters
 {
-    IList<ColumnMapping> Columns { get; }
+    IList<ColumnParameters> Columns { get; }
 }

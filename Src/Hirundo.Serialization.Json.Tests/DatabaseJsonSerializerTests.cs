@@ -32,7 +32,7 @@ public class DatabaseJsonSerializerTests
         var parameters = new SqlServerParameters
         {
             ConnectionString = "Server=localhost;Database=DB",
-            Columns = [new ColumnMapping("SQL_COLUMN", "SQL_DATA", DataValueType.LongInt)]
+            Columns = [new ColumnParameters("SQL_COLUMN", "SQL_DATA", DataValueType.LongInt)]
         };
 
         // Act
@@ -58,7 +58,7 @@ public class DatabaseJsonSerializerTests
         {
             Path = "example.mdb",
             Table = "EXAMPLE_TABLE",
-            Columns = [new ColumnMapping("COLUMN", "DATA", DataValueType.ShortInt)]
+            Columns = [new ColumnParameters("COLUMN", "DATA", DataValueType.ShortInt)]
         };
 
         // Act
@@ -84,7 +84,7 @@ public class DatabaseJsonSerializerTests
         {
             Path = "other_example.mdb",
             Table = "OTHER_EXAMPLE_TABLE",
-            Columns = [new ColumnMapping("OTHER_COLUMN", "OTHER_DATA", DataValueType.Text)]
+            Columns = [new ColumnParameters("OTHER_COLUMN", "OTHER_DATA", DataValueType.Text)]
         };
 
         // Act
