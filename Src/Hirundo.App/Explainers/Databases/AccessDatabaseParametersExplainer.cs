@@ -1,8 +1,10 @@
 ﻿using Hirundo.Commons.Helpers;
+using Hirundo.Databases;
+using Hirundo.Databases.Conditions;
 using System.Globalization;
 using System.Text;
 
-namespace Hirundo.Databases;
+namespace Hirundo.App.Explainers.Databases;
 
 public class AccessDatabaseParametersExplainer : ParametersExplainer<AccessDatabaseParameters>
 {
@@ -15,7 +17,10 @@ public class AccessDatabaseParametersExplainer : ParametersExplainer<AccessDatab
 
         var sb = new StringBuilder();
 
+        sb.AppendLine("Konfiguracja bazy danych Access:");
         sb.AppendLine(string.Format(CultureInfo.InvariantCulture, DataSourceInfo, config.Path, config.Table));
+        sb.AppendLine();
+        sb.AppendLine("Kolumny:");
         foreach (var column in config.Columns)
         {
             sb.AppendLine(string.Format(CultureInfo.InvariantCulture, ColumnInfo, column.DatabaseColumn, column.ValueName,
@@ -23,9 +28,26 @@ public class AccessDatabaseParametersExplainer : ParametersExplainer<AccessDatab
                 )
                 ));
         }
+        sb.AppendLine();
+        sb.AppendLine("Warunki:");
+        foreach (var condition in config.Conditions)
+        {
+            sb.AppendLine($"Kolumna {condition.DatabaseColumn} {GetOperationName(condition.Type)} {condition.Value}");
+        }
 
         return sb.ToString();
     }
+
+    private static string GetOperationName(DatabaseConditionType condition) => condition switch
+    {
+        DatabaseConditionType.IsEqual => "równa się",
+        DatabaseConditionType.IsNotEqual => "nie równa się",
+        DatabaseConditionType.IsGreaterThan => "jest większa niż",
+        DatabaseConditionType.IsGreaterOrEqual => "jest większa lub równa",
+        DatabaseConditionType.IsLowerThan => "jest mniejsza niż",
+        DatabaseConditionType.IsLowerOrEqual => "jest mniejsza lub równa",
+        _ => throw new NotImplementedException()
+    };
 
     private static string ExplainDataType(DataValueType dataType) => dataType switch
     {

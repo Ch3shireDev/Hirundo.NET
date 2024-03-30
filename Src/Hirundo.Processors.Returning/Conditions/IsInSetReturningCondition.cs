@@ -1,4 +1,5 @@
 ﻿using Hirundo.Commons;
+using Hirundo.Commons.Helpers;
 using Hirundo.Commons.Models;
 
 namespace Hirundo.Processors.Returning.Conditions;
@@ -27,6 +28,6 @@ public class IsInSetReturningCondition : IReturningSpecimenCondition
     private bool IsInSet(Observation observation)
     {
         var value = observation.GetValue(ValueName);
-        return Values.Any(v => v.Equals(value));
+        return Values.Any(v => ComparisonHelpers.IsEqual(v, value));
     }
 }

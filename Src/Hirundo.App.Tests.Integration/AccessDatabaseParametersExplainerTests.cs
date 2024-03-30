@@ -1,4 +1,8 @@
-﻿namespace Hirundo.Databases.Tests;
+﻿using Hirundo.App.Explainers.Databases;
+using Hirundo.Databases;
+using NUnit.Framework;
+
+namespace Hirundo.App.Tests.Integration;
 
 [TestFixture]
 public class AccessDatabaseParametersExplainerTests

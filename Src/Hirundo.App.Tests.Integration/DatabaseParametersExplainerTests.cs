@@ -1,15 +1,20 @@
-﻿namespace Hirundo.Databases.Tests;
+﻿using Hirundo.App.Explainers.Databases;
+using Hirundo.Commons.Helpers;
+using Hirundo.Databases;
+using NUnit.Framework;
+
+namespace Hirundo.App.Tests.Integration;
 
 [TestFixture]
-public class DatabaseConfigExplainerTests
+public class DatabaseParametersExplainerTests
 {
-    private DatabaseConfigExplainer _explainer = null!;
+    private DatabaseParametersExplainer _explainer = null!;
     private DatabaseParameters _config = null!;
     [SetUp]
     public void Initialize()
     {
         _config = new DatabaseParameters();
-        _explainer = new DatabaseConfigExplainer();
+        _explainer = new DatabaseParametersExplainer();
     }
 
     [Test]
@@ -20,7 +25,7 @@ public class DatabaseConfigExplainerTests
         _explainer.Header = "Konfiguracja źródła danych";
 
         // Act
-        var explanation = _explainer.Explain(_config);
+        var explanation = ExplainerHelpers.Explain(_config);
 
         // Assert
         Assert.That(explanation, Does.StartWith("Konfiguracja źródła danych"));
@@ -34,7 +39,7 @@ public class DatabaseConfigExplainerTests
         _explainer.SubheaderText = "Liczba źródeł danych: {0}.";
 
         // Act
-        var explanation = _explainer.Explain(_config);
+        var explanation = ExplainerHelpers.Explain(_config);
 
         // Assert
         Assert.That(explanation, Does.Contain("Liczba źródeł danych: 1."));
