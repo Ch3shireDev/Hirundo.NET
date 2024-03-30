@@ -1,4 +1,4 @@
-﻿namespace Hirundo.Commons;
+﻿namespace Hirundo.Commons.Models;
 
 public enum DataType
 {

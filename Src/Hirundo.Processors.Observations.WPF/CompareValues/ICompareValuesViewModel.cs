@@ -1,5 +1,5 @@
-﻿using Hirundo.Commons;
-using Hirundo.Commons.Repositories.Labels;
+﻿using Hirundo.Commons.Models;
+using Hirundo.Commons.Repositories;
 
 namespace Hirundo.Processors.Observations.WPF.CompareValues;
 

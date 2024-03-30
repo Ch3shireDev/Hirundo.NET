@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using Hirundo.App.WPF.Components;
-using Hirundo.Commons.Repositories.Labels;
+using Hirundo.Commons.Repositories;
 using Hirundo.Databases;
 using Hirundo.Databases.WPF;
 using Hirundo.Processors.Computed.WPF;

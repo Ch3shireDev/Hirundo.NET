@@ -1,4 +1,4 @@
-using Hirundo.Commons.Repositories.Labels;
+using Hirundo.Commons.Repositories;
 using Hirundo.Processors.Observations.WPF.IsInTimeBlock;
 using Moq;
 using NUnit.Framework;

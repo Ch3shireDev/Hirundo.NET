@@ -1,7 +1,7 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
 using CsvHelper.TypeConversion;
-using Hirundo.Commons;
+using Hirundo.Commons.Models;
 using Serilog;
 using System.Globalization;
 using System.Text;

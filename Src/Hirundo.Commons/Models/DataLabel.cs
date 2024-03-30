@@ -1,4 +1,6 @@
-﻿namespace Hirundo.Commons.Repositories.Labels;
+﻿using Hirundo.Commons.Models;
+
+namespace Hirundo.Commons.Repositories.Labels;
 
 public class DataLabel(string name, DataType dataType = DataType.Text)
 {

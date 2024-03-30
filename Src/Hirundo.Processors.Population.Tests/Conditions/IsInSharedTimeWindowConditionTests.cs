@@ -1,7 +1,8 @@
-﻿using System.Globalization;
-using Hirundo.Commons;
+﻿using Hirundo.Commons;
+using Hirundo.Commons.Models;
 using Hirundo.Processors.Population.Conditions;
 using NUnit.Framework;
+using System.Globalization;
 
 namespace Hirundo.Processors.Population.Tests.Conditions;
 

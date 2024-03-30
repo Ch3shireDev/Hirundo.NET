@@ -1,4 +1,4 @@
-﻿namespace Hirundo.Commons;
+﻿namespace Hirundo.Commons.Models;
 
 /// <summary>
 ///     Zbiór wyników zawierający listę osobników powracających wraz z wartościami kluczowymi,
@@ -25,14 +25,14 @@ public class ReturningSpecimenSummary(Specimen returningSpecimen, IList<Specimen
     {
         var returningSpecimenHeaders = GetValueHeaders();
         var statisticsHeaders = GetStatisticsHeaders();
-        return [..returningSpecimenHeaders, ..statisticsHeaders];
+        return [.. returningSpecimenHeaders, .. statisticsHeaders];
     }
 
     public object?[] GetValues()
     {
         var specimenData = ReturningSpecimen.GetValues();
         var statisticalData = Statistics.Select(s => s.Value);
-        return [..specimenData, ..statisticalData];
+        return [.. specimenData, .. statisticalData];
     }
 
     public object?[] GetValues(string[] headers)

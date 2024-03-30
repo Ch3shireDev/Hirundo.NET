@@ -1,4 +1,4 @@
-﻿using Hirundo.Commons.Repositories.Labels;
+﻿using Hirundo.Commons.Repositories;
 using System.Reflection;
 
 namespace Hirundo.Commons.WPF;

@@ -1,4 +1,4 @@
-﻿namespace Hirundo.Commons;
+﻿namespace Hirundo.Commons.Models;
 
 /// <summary>
 ///     Sezon określa przedział kalendarzowy w roku. Określenie, że jakaś obserwacja

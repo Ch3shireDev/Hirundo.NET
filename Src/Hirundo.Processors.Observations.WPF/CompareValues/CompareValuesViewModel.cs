@@ -1,4 +1,4 @@
-﻿using Hirundo.Commons;
+﻿using Hirundo.Commons.Models;
 using Hirundo.Commons.WPF;
 
 namespace Hirundo.Processors.Observations.WPF.CompareValues;

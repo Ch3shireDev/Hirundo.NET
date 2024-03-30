@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Hirundo.App.WPF.Helpers;
-using Hirundo.Commons;
+using Hirundo.Commons.Helpers;
 using Hirundo.Commons.WPF;
 using Hirundo.Processors.Specimens.WPF;
 using Hirundo.Writers.Summary;

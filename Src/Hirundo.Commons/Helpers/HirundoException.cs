@@ -1,4 +1,4 @@
-﻿namespace Hirundo.Commons;
+﻿namespace Hirundo.Commons.Helpers;
 
 public class HirundoException : Exception
 {

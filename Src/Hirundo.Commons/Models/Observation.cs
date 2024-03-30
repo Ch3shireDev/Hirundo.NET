@@ -1,4 +1,6 @@
-﻿namespace Hirundo.Commons;
+﻿using Hirundo.Commons.Helpers;
+
+namespace Hirundo.Commons.Models;
 
 /// <summary>
 ///     Klasa reprezentująca zaobserwowanego osobnika w danym miejscu i czasie.

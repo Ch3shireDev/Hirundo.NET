@@ -1,4 +1,4 @@
-﻿using Hirundo.Commons.Repositories.Labels;
+﻿using Hirundo.Commons.Repositories;
 
 namespace Hirundo.Processors.Computed.WPF.Symmetry;
 

@@ -1,4 +1,4 @@
-﻿namespace Hirundo.Commons;
+﻿namespace Hirundo.Commons.Helpers;
 
 public abstract class ParametersExplainer<TParameters> where TParameters : class, new()
 {

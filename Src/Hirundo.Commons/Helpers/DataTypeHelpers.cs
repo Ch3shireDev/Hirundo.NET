@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
+using Hirundo.Commons.Models;
 
-namespace Hirundo.Commons;
+namespace Hirundo.Commons.Helpers;
 
 public static class ComparisonHelpers
 {

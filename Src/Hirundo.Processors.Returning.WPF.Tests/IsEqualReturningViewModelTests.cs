@@ -1,5 +1,5 @@
-﻿using Hirundo.Commons;
-using Hirundo.Commons.Repositories.Labels;
+﻿using Hirundo.Commons.Models;
+using Hirundo.Commons.Repositories;
 using Hirundo.Processors.Returning.Conditions;
 using Hirundo.Processors.Returning.WPF.CompareValues;
 using Moq;

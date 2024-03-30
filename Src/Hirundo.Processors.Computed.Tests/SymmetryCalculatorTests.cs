@@ -1,4 +1,4 @@
-﻿using Hirundo.Commons;
+﻿using Hirundo.Commons.Models;
 using NUnit.Framework;
 
 namespace Hirundo.Processors.Computed.Tests;

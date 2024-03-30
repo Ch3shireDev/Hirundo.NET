@@ -1,4 +1,4 @@
-﻿using Hirundo.Commons.Repositories.Labels;
+﻿using Hirundo.Commons.Repositories;
 using Hirundo.Processors.Statistics.Operations;
 using Hirundo.Processors.Statistics.WPF.Average;
 using Moq;

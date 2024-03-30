@@ -1,4 +1,4 @@
-﻿using Hirundo.Commons.Repositories.Labels;
+﻿using Hirundo.Commons.Repositories;
 using Hirundo.Processors.Returning.Conditions;
 using Hirundo.Processors.Returning.WPF.Alternative;
 using Hirundo.Processors.Returning.WPF.CompareValues;

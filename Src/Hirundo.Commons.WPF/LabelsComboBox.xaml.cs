@@ -1,4 +1,6 @@
-﻿using Hirundo.Commons.Repositories.Labels;
+﻿using Hirundo.Commons.Models;
+using Hirundo.Commons.Repositories;
+using Hirundo.Commons.Repositories.Labels;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;

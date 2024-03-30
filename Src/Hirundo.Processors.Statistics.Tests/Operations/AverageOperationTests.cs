@@ -1,4 +1,5 @@
 ﻿using Hirundo.Commons;
+using Hirundo.Commons.Models;
 using Hirundo.Processors.Statistics.Operations;
 using Hirundo.Processors.Statistics.Operations.Outliers;
 using NUnit.Framework;
@@ -115,7 +116,7 @@ public class AverageOperationTests
         var operation = new AverageOperation("VALUE", "PREFIX");
 
         // Act
-        var result = operation.GetStatistics(new List<Specimen>());
+        var result = operation.GetStatistics([]);
 
         // Assert
         Assert.That(result.Names, Is.EquivalentTo(new ArrayList {

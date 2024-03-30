@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Hirundo.Commons.Models;
 
 namespace Hirundo.Commons.WPF;
 

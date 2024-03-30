@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using Hirundo.Commons;
+using Hirundo.Commons.Models;
 using Hirundo.Commons.WPF;
 using Hirundo.Processors.Returning.Conditions;
 using Serilog;

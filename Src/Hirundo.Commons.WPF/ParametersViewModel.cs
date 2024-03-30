@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Hirundo.Commons.Repositories.Labels;
+using Hirundo.Commons.Repositories;
 using System.Windows.Input;
 
 namespace Hirundo.Commons.WPF;

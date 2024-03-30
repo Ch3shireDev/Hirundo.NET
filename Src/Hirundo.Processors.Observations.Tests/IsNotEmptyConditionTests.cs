@@ -1,4 +1,4 @@
-﻿using Hirundo.Commons;
+﻿using Hirundo.Commons.Models;
 using NUnit.Framework;
 
 namespace Hirundo.Processors.Observations.Tests;
@@ -11,7 +11,7 @@ public class IsNotEmptyConditionTests
     {
         // Arrange
         var condition = new IsNotEmptyCondition("AGE");
-        var observation = new Observation(["AGE"], new object[] { "" });
+        var observation = new Observation(["AGE"], [""]);
 
         // Act
         var result = condition.IsAccepted(observation);
@@ -25,7 +25,7 @@ public class IsNotEmptyConditionTests
     {
         // Arrange
         var condition = new IsNotEmptyCondition("AGE");
-        var observation = new Observation(["AGE"], new object[] { "J" });
+        var observation = new Observation(["AGE"], ["J"]);
 
         // Act
         var result = condition.IsAccepted(observation);
