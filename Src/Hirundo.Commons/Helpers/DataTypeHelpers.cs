@@ -1,5 +1,5 @@
-﻿using System.Globalization;
-using Hirundo.Commons.Models;
+﻿using Hirundo.Commons.Models;
+using System.Globalization;
 
 namespace Hirundo.Commons.Helpers;
 
@@ -299,5 +299,10 @@ public static class DataTypeHelpers
     public static T? ConvertValue<T>(object? value) where T : struct
     {
         return ConvertValue(value, typeof(T)) as T?;
+    }
+
+    public static DateTime? ConvertToDate(object? value)
+    {
+        return ConvertValue(value, typeof(DateTime)) as DateTime?;
     }
 }

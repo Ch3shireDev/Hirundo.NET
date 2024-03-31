@@ -1,4 +1,5 @@
 ﻿using Hirundo.Commons;
+using Hirundo.Commons.Helpers;
 
 namespace Hirundo.Processors.Returning.Conditions;
 
@@ -40,7 +41,9 @@ public class ReturnsAfterTimePeriodCondition : IReturningSpecimenCondition
         }
 
         var datesAreInOrder = specimen.Observations
-            .Select(o => o.GetValue<DateTime>(DateValueName).Date)
+            .Select(o => DataTypeHelpers.ConvertToDate(o.GetValue(DateValueName))?.Date)
+            .Where(d => d != null)
+            .Select(d => d!.Value)
             .OrderBy(d => d)
             .ToArray();
 

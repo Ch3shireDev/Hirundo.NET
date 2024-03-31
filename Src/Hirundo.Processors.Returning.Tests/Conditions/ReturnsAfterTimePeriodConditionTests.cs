@@ -65,4 +65,24 @@ public class ReturnsAfterTimePeriodConditionTests
         // Assert
         Assert.That(result, Is.False);
     }
+
+    [Test]
+    public void GivenDateAsString_WhenIsReturning_ReturnsTrue()
+    {
+        // Arrange
+        var filter = new ReturnsAfterTimePeriodCondition("DATE", 20);
+
+        var specimen = new Specimen("AB123", [
+            new Observation(["DATE"], ["2021-06-01"]),
+            new Observation(["DATE"], ["2021-06-05"]),
+            new Observation(["DATE"], ["2021-06-27"])
+        ]);
+
+        // Act
+        var result = filter.IsReturning(specimen);
+
+        // Assert
+        Assert.That(result, Is.True);
+    }
+
 }
