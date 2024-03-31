@@ -4,6 +4,7 @@ using NUnit.Framework;
 
 namespace Hirundo.Writers.Tests;
 
+[TestFixture]
 public class CsvSummaryWriterTests
 {
     [Test]

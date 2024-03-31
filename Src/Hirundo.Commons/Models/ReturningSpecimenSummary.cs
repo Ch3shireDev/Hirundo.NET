@@ -1,11 +1,5 @@
 ﻿namespace Hirundo.Commons.Models;
 
-public class ReturningSpecimensResults
-{
-    public IList<ReturningSpecimenSummary> Results { get; init; } = [];
-    public string Explanation { get; set; } = string.Empty;
-}
-
 /// <summary>
 ///     Zbiór wyników zawierający listę osobników powracających wraz z wartościami kluczowymi,
 ///     wartościami pomiarowymi oraz wartościami statystycznymi.

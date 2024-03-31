@@ -33,6 +33,7 @@ public class SummaryWriterBuilder : ISummaryWriterBuilder
         {
             CsvSummaryWriterParameters csvSummaryWriterParameters => WithCsvSummaryWriterParameters(csvSummaryWriterParameters),
             ExplanationWriterParameters explanationWriterParameters => WithExplanationWriterParameters(explanationWriterParameters),
+            XlsxSummaryWriterParameters xlsxSummaryWriterParameters => WithXlsxSummaryWriterParameters(xlsxSummaryWriterParameters),
             _ => throw new ArgumentException($"Unknown writer type: {resultsWriter.GetType().Name}")
         };
     }
@@ -49,6 +50,19 @@ public class SummaryWriterBuilder : ISummaryWriterBuilder
     {
         ArgumentNullException.ThrowIfNull(parameters);
         var action = GetSummaryWriter(parameters.Path, (streamWriter, cancellationToken) => new ExplanationWriter(streamWriter, cancellationToken));
+        writers.Add(action);
+        return this;
+    }
+
+    public ISummaryWriterBuilder WithXlsxSummaryWriterParameters(XlsxSummaryWriterParameters parameters)
+    {
+        ArgumentNullException.ThrowIfNull(parameters);
+        var action = GetSummaryWriter(parameters.Path, (streamWriter, cancellationToken) => new XlsxSummaryWriter(streamWriter, cancellationToken)
+        {
+            IncludeExplanation = parameters.IncludeExplanation,
+            Title = parameters.SpreadsheetTitle,
+            Subtitle = parameters.SpreadsheetSubtitle
+        });
         writers.Add(action);
         return this;
     }
