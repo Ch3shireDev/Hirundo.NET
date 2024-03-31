@@ -18,7 +18,7 @@ using Hirundo.Processors.Specimens;
 using Hirundo.Processors.Statistics;
 using Hirundo.Processors.Statistics.Operations;
 using Hirundo.Processors.Statistics.Operations.Outliers;
-using Hirundo.Writers.Summary;
+using Hirundo.Writers;
 using Moq;
 using NUnit.Framework;
 using System.Collections;

@@ -1,6 +1,6 @@
 ﻿using Hirundo.Commons.Models;
 
-namespace Hirundo.Writers.Summary;
+namespace Hirundo.Writers;
 
 /// <summary>
 ///     Zapisuje podsumowanie dla wprowadzonych podsumowań na temat powracających osobników. Sposób zapisu jest zależny od
@@ -12,5 +12,5 @@ public interface ISummaryWriter : IDisposable
     ///     Zapisz podsumowania na temat powracających osobników.
     /// </summary>
     /// <param name="summary"></param>
-    void Write(IEnumerable<ReturningSpecimenSummary> summary);
+    void Write(ReturningSpecimensResults results);
 }

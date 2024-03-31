@@ -66,7 +66,9 @@ public class ParametersFactory<TCondition, TBrowserModel>(IDataLabelRepository r
 
         var viewModelsTypes = assembly?
             .GetTypes()
-            .Where(t => t is { IsClass: true, IsAbstract: false } && t.IsSubclassOf(typeof(ParametersViewModel)))?.ToArray() ?? [];
+            .Where(t => t is { IsClass: true, IsAbstract: false } && t.IsSubclassOf(typeof(ParametersViewModel)))?
+            .OrderBy(t => t.Name)?
+            .ToArray() ?? [];
         return viewModelsTypes;
     }
 

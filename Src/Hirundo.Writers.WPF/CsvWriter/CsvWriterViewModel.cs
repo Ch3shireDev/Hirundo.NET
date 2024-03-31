@@ -1,5 +1,4 @@
 ﻿using Hirundo.Commons.WPF;
-using Hirundo.Writers.Summary;
 
 namespace Hirundo.Writers.WPF.CsvWriter;
 
@@ -7,7 +6,7 @@ namespace Hirundo.Writers.WPF.CsvWriter;
     typeof(CsvSummaryWriterParameters),
     typeof(CsvWriterModel),
     typeof(CsvWriterView),
-    "Zapis do pliku .csv",
+    "Zapis wyników do pliku .csv",
     "Zapisuje wyniki do standardowego formatu pliku .csv."
     )]
 public class CsvWriterViewModel(CsvWriterModel model) : ParametersViewModel(model)

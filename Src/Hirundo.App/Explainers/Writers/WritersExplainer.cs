@@ -1,5 +1,5 @@
 ﻿using Hirundo.Commons.Helpers;
-using Hirundo.Writers.Summary;
+using Hirundo.Writers;
 using System.Text;
 
 namespace Hirundo.App.Explainers.Writers;

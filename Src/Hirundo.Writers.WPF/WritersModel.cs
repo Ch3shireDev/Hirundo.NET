@@ -1,6 +1,5 @@
 ﻿using Hirundo.Commons.Repositories;
 using Hirundo.Commons.WPF;
-using Hirundo.Writers.Summary;
 
 namespace Hirundo.Writers.WPF;
 

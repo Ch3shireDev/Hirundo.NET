@@ -6,7 +6,7 @@
              xmlns:wpf1="clr-namespace:Hirundo.Commons.WPF"
              mc:Ignorable="d"
              d:Background="AliceBlue"
-             d:DataContext="{d:DesignInstance wpf1:ParametersBrowserViewModel}">
+             d:DataContext="{d:DesignInstance ParametersBrowserViewModel}">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

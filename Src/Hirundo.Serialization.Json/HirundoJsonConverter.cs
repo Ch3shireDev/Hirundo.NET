@@ -4,7 +4,7 @@ using Hirundo.Processors.Observations;
 using Hirundo.Processors.Population.Conditions;
 using Hirundo.Processors.Returning.Conditions;
 using Hirundo.Processors.Statistics.Operations;
-using Hirundo.Writers.Summary;
+using Hirundo.Writers;
 using Newtonsoft.Json;
 
 namespace Hirundo.Serialization.Json;

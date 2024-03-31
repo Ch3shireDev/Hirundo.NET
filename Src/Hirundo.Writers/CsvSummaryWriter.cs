@@ -6,12 +6,21 @@ using Serilog;
 using System.Globalization;
 using System.Text;
 
-namespace Hirundo.Writers.Summary;
+namespace Hirundo.Writers;
 
 public sealed class CsvSummaryWriter(TextWriter streamWriter, CancellationToken? token = null) : ISummaryWriter, IDisposable, IAsyncDisposable
 {
-    public void Write(IEnumerable<ReturningSpecimenSummary> summary)
+    public string NewLine { get; set; } = "\r\n";
+    public string Delimiter { get; set; } = ",";
+    public Encoding Encoding { get; set; } = Encoding.UTF8;
+    public bool IncludeExplanation { get; set; } = false;
+
+    public void Write(ReturningSpecimensResults results)
     {
+        ArgumentNullException.ThrowIfNull(results);
+
+        var summary = results.Results;
+
         var records = summary.ToList();
 
         if (records.Count == 0)
@@ -24,9 +33,9 @@ public sealed class CsvSummaryWriter(TextWriter streamWriter, CancellationToken?
 
         IWriterConfiguration configuration = new CsvConfiguration(CultureInfo.InvariantCulture)
         {
-            NewLine = "\r\n",
-            Delimiter = ",",
-            Encoding = Encoding.UTF8
+            NewLine = NewLine,
+            Delimiter = Delimiter,
+            Encoding = Encoding
         };
 
         var options = new TypeConverterOptions { Formats = ["yyyy-MM-dd"] };
@@ -58,6 +67,15 @@ public sealed class CsvSummaryWriter(TextWriter streamWriter, CancellationToken?
                 csvWriter.NextRecord();
             }
         }
+
+        if (IncludeExplanation && !string.IsNullOrWhiteSpace(results.Explanation))
+        {
+            foreach (var line in results.Explanation.Split(NewLine))
+            {
+                csvWriter.WriteComment(line);
+                csvWriter.NextRecord();
+            }
+        }
     }
 
     private static string[] GetHeaders(IReadOnlyCollection<ReturningSpecimenSummary> records)
@@ -86,6 +104,7 @@ public sealed class CsvSummaryWriter(TextWriter streamWriter, CancellationToken?
         streamWriter.Dispose();
         GC.SuppressFinalize(this);
     }
+
 
     ~CsvSummaryWriter()
     {

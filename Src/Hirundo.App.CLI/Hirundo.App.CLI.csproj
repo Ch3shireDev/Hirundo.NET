@@ -37,7 +37,6 @@
 		<ProjectReference Include="..\Hirundo.Processors.Statistics\Hirundo.Processors.Statistics.csproj" />
 		<ProjectReference Include="..\Hirundo.Processors.Summary\Hirundo.Processors.Summary.csproj" />
 		<ProjectReference Include="..\Hirundo.Serialization.Json\Hirundo.Serialization.Json.csproj" />
-		<ProjectReference Include="..\Hirundo.Writers.Summary\Hirundo.Writers.Summary.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

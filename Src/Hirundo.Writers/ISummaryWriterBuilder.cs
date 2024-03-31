@@ -1,4 +1,4 @@
-﻿namespace Hirundo.Writers.Summary;
+﻿namespace Hirundo.Writers;
 
 public interface ISummaryWriterBuilder
 {

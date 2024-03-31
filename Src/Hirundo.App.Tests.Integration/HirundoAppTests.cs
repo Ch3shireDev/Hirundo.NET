@@ -1,6 +1,6 @@
 ﻿using Hirundo.Commons.Models;
 using Hirundo.Databases;
-using Hirundo.Writers.Summary;
+using Hirundo.Writers;
 using Moq;
 using NUnit.Framework;
 
@@ -12,7 +12,6 @@ public class HirundoAppTests
     private HirundoApp _app = null!;
     private Mock<IDatabase> _database = null!;
     private Mock<IDatabaseBuilder> _databaseBuilder = null!;
-
     private Mock<ISummaryWriterBuilder> _summaryWriterBuilder = null!;
     private Mock<ISummaryWriter> _summaryWriter = null!;
 
@@ -76,6 +75,6 @@ public class HirundoAppTests
 
         // Assert
         _database.Verify(x => x.GetObservations(), Times.Once);
-        _summaryWriter.Verify(x => x.Write(It.IsAny<IEnumerable<ReturningSpecimenSummary>>()), Times.Once);
+        _summaryWriter.Verify(x => x.Write(It.IsAny<ReturningSpecimensResults>()), Times.Once);
     }
 }

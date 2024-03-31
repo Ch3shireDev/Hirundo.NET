@@ -1,4 +1,6 @@
-﻿using Hirundo.Databases;
+﻿using Hirundo.Commons.Helpers;
+using Hirundo.Commons.Models;
+using Hirundo.Databases;
 using Hirundo.Processors.Computed;
 using Hirundo.Processors.Observations;
 using Hirundo.Processors.Population;
@@ -6,7 +8,7 @@ using Hirundo.Processors.Returning;
 using Hirundo.Processors.Specimens;
 using Hirundo.Processors.Statistics;
 using Hirundo.Processors.Summary;
-using Hirundo.Writers.Summary;
+using Hirundo.Writers;
 using Serilog;
 
 namespace Hirundo.App;
@@ -144,9 +146,15 @@ public class HirundoApp : IHirundoApp
             .Select(summaryProcessor.GetSummary)
             .ToList();
 
+        var results = new ReturningSpecimensResults
+        {
+            Results = summary,
+            Explanation = ExplainerHelpers.Explain(applicationConfig)
+        };
+
         Log.Information($"Przygotowano {summary.Count} wierszy danych wynikowych.");
 
-        resultsWriter.Write(summary);
+        resultsWriter.Write(results);
 
         foreach (var writer in applicationConfig.Results.Writers)
         {

@@ -19,7 +19,7 @@ public static class ExplainerHelpers
         return explainer.Explain(value);
     }
 
-    public static IExplainer GetExplainerForValue(object value)
+    public static IExplainer? GetExplainerForValue(object value)
     {
         ArgumentNullException.ThrowIfNull(value, nameof(value));
 
@@ -43,6 +43,8 @@ public static class ExplainerHelpers
 
                 if (!type.GetInterfaces().Contains(typeof(IExplainer))) continue;
 
+                if (type.BaseType == null) continue;
+
                 if (type.BaseType.Name != typeof(ParametersExplainer<>).Name)
                     continue;
                 var typeArguments = type.BaseType.GetGenericArguments();
@@ -53,7 +55,7 @@ public static class ExplainerHelpers
 
                 if (typeArgument != propertyType) continue;
 
-                return (IExplainer)Activator.CreateInstance(type);
+                return Activator.CreateInstance(type) as IExplainer;
             }
         }
 

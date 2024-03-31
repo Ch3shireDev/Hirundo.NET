@@ -5,7 +5,7 @@ using Hirundo.Processors.Population;
 using Hirundo.Processors.Returning;
 using Hirundo.Processors.Specimens;
 using Hirundo.Processors.Statistics;
-using Hirundo.Writers.Summary;
+using Hirundo.Writers;
 
 namespace Hirundo.App;
 

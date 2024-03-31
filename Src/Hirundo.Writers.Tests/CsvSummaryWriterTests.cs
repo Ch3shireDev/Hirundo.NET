@@ -2,7 +2,7 @@
 using Hirundo.Commons.Models;
 using NUnit.Framework;
 
-namespace Hirundo.Writers.Summary.Tests;
+namespace Hirundo.Writers.Tests;
 
 public class CsvSummaryWriterTests
 {
@@ -17,9 +17,10 @@ public class CsvSummaryWriterTests
         StatisticalData[] statistics = [];
 
         List<ReturningSpecimenSummary> summary = [new ReturningSpecimenSummary(returningSpecimen, population, statistics)];
+        var results = new ReturningSpecimensResults { Results = summary };
 
         // Act
-        writer.Write(summary);
+        writer.Write(results);
 
         // Assert
         var result = stringWriter.ToString();
@@ -38,9 +39,10 @@ public class CsvSummaryWriterTests
         StatisticalData[] statistics = [];
 
         List<ReturningSpecimenSummary> summary = [new ReturningSpecimenSummary(returningSpecimen, population, statistics)];
+        var results = new ReturningSpecimensResults { Results = summary };
 
         // Act
-        writer.Write(summary);
+        writer.Write(results);
 
         // Assert
         var result = stringWriter.ToString();
@@ -60,9 +62,10 @@ public class CsvSummaryWriterTests
         StatisticalData[] statistics = [new StatisticalData("MEAN_WEIGHT", 22.5)];
 
         List<ReturningSpecimenSummary> summary = [new ReturningSpecimenSummary(returningSpecimen, population, statistics)];
+        var results = new ReturningSpecimensResults { Results = summary };
 
         // Act
-        writer.Write(summary);
+        writer.Write(results);
 
         // Assert
         var result = stringWriter.ToString();
@@ -89,8 +92,10 @@ public class CsvSummaryWriterTests
             new ReturningSpecimenSummary(returningSpecimen2, population, statistics)
         ];
 
+        var results = new ReturningSpecimensResults { Results = summary };
+
         // Act
-        writer.Write(summary);
+        writer.Write(results);
 
         // Assert
         var result = stringWriter.ToString();
@@ -124,8 +129,10 @@ public class CsvSummaryWriterTests
             new ReturningSpecimenSummary(returningSpecimen2, population, statistics2)
         ];
 
+        var results = new ReturningSpecimensResults { Results = summary };
+
         // Act
-        writer.Write(summary);
+        writer.Write(results);
 
         // Assert
         var result = stringWriter.ToString();

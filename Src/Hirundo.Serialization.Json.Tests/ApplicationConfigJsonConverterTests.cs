@@ -5,7 +5,7 @@ using Hirundo.Processors.Population.Conditions;
 using Hirundo.Processors.Returning.Conditions;
 using Hirundo.Processors.Statistics.Operations;
 using Hirundo.Processors.Statistics.Operations.Outliers;
-using Hirundo.Writers.Summary;
+using Hirundo.Writers;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using System.Runtime.Serialization;

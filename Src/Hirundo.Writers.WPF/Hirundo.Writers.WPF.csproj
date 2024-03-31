@@ -17,7 +17,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Hirundo.Commons.WPF\Hirundo.Commons.WPF.csproj" />
-		<ProjectReference Include="..\Hirundo.Writers.Summary\Hirundo.Writers.Summary.csproj" />
+		<ProjectReference Include="..\Hirundo.Writers\Hirundo.Writers.csproj" />
 	</ItemGroup>
 
 </Project>

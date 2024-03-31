@@ -4,7 +4,7 @@ using Hirundo.App.WPF.Helpers;
 using Hirundo.Commons.Helpers;
 using Hirundo.Commons.WPF;
 using Hirundo.Processors.Specimens.WPF;
-using Hirundo.Writers.Summary;
+using Hirundo.Writers;
 using Microsoft.Win32;
 using Serilog;
 using Serilog.Events;
@@ -156,14 +156,14 @@ public sealed class MainViewModel : ObservableObject
 
             foreach (var result in results.Writers)
             {
-                if (result is CsvSummaryWriterParameters parameters)
+                if (result is IWriterParameters parameters)
                 {
                     var dialog = new SaveFileDialog
                     {
-                        Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*",
                         InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
-                        Title = "Wybierz docelową lokalizację pliku CSV.",
-                        FileName = "results.csv"
+                        Filter = parameters.Filter,
+                        Title = parameters.Title,
+                        FileName = parameters.DefaultFileName
                     };
 
                     if (dialog.ShowDialog() == true)

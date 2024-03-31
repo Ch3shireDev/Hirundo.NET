@@ -1,4 +1,4 @@
-﻿using Hirundo.Writers.Summary;
+﻿using Hirundo.Writers;
 using Hirundo.Writers.WPF.CsvWriter;
 using NUnit.Framework;
 
