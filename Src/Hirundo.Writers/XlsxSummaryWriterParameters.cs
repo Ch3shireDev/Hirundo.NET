@@ -1,7 +1,8 @@
-﻿using System.Text.Json.Serialization;
-
+﻿
+using Hirundo.Commons;
 namespace Hirundo.Writers;
 
+[TypeDescription("Xlsx")]
 public class XlsxSummaryWriterParameters : IWriterParameters
 {
     public string Path { get; set; } = null!;
@@ -11,11 +12,4 @@ public class XlsxSummaryWriterParameters : IWriterParameters
     public string SpreadsheetTitle { get; set; } = "Wyniki";
 
     public string SpreadsheetSubtitle { get; set; } = "Wyjaśnienia";
-
-    [JsonIgnore]
-    public string Filter { get; set; } = "XLSX files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
-    [JsonIgnore]
-    public string Title { get; set; } = "Wybierz docelową lokalizację pliku XLSX.";
-    [JsonIgnore]
-    public string DefaultFileName { get; set; } = "results.xlsx";
 }

@@ -6,6 +6,7 @@ using Hirundo.Commons.Models;
 using Hirundo.Commons.WPF;
 using Hirundo.Processors.Specimens.WPF;
 using Hirundo.Writers;
+using Hirundo.Writers.WPF;
 using Microsoft.Win32;
 using Serilog;
 using Serilog.Events;
@@ -159,13 +160,7 @@ public sealed class MainViewModel : ObservableObject
             {
                 if (result is IWriterParameters parameters)
                 {
-                    var dialog = new SaveFileDialog
-                    {
-                        InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
-                        Filter = parameters.Filter,
-                        Title = parameters.Title,
-                        FileName = parameters.DefaultFileName
-                    };
+                    var dialog = FileDialogFactory.GetFileDialogForWriter(parameters);
 
                     if (dialog.ShowDialog() == true)
                     {

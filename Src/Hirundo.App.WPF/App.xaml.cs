@@ -29,6 +29,18 @@ public partial class App : Application
 {
     protected override void OnStartup(StartupEventArgs e)
     {
+        try
+        {
+            Start();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Wystąpił błąd podczas uruchamiania aplikacji: {ex.Message}", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    private void Start()
+    {
         var builder = new ContainerBuilder();
 
         builder.RegisterType<HirundoApp>().As<IHirundoApp>();
@@ -109,10 +121,17 @@ public partial class App : Application
 
     private static ApplicationParameters GetConfig()
     {
-        var converter = new HirundoJsonConverter();
-        var jsonConfig = File.ReadAllText("appsettings.json");
-        var appConfig = JsonConvert.DeserializeObject<ApplicationParameters>(jsonConfig, converter) ?? throw new SerializationException("Błąd parsowania konfiguracji.");
-        return appConfig;
+        try
+        {
+            var converter = new HirundoJsonConverter();
+            var jsonConfig = File.ReadAllText("appsettings.json");
+            var appConfig = JsonConvert.DeserializeObject<ApplicationParameters>(jsonConfig, converter) ?? throw new SerializationException("Błąd parsowania konfiguracji.");
+            return appConfig;
+        }
+        catch (Exception e)
+        {
+            throw new JsonReaderException($"Błąd odczytu pliku konfiguracyjnego. {e.Message}", e);
+        }
     }
 
     private static void AddViewModelBinding(Type viewModelType, Type viewType)
