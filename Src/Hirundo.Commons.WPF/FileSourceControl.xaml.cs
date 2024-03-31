@@ -1,10 +1,11 @@
-﻿using System.ComponentModel;
+﻿using CommunityToolkit.Mvvm.Input;
+using Microsoft.Win32;
+using Serilog;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
-using Microsoft.Win32;
 
 namespace Hirundo.Commons.WPF;
 
@@ -55,20 +56,42 @@ public partial class FileSourceControl : UserControl, INotifyPropertyChanged
 
     private void SelectFile()
     {
-        var dialog = new OpenFileDialog
+        try
         {
-            Filter = "Access files (*.mdb)|*.mdb|All files (*.*)|*.*",
-            InitialDirectory = Path,
-            Multiselect = false,
-            Title = "Wybierz plik bazy danych Access."
-        };
+            string initialDirectory = GetInitialDirectory();
 
-        if (dialog.ShowDialog() == true)
+            var dialog = new OpenFileDialog
+            {
+                Filter = "Access files (*.mdb)|*.mdb|All files (*.*)|*.*",
+                InitialDirectory = initialDirectory,
+                Multiselect = false,
+                Title = "Wybierz plik bazy danych Access."
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                Path = dialog.FileName;
+            }
+
+            Command?.Execute(this);
+        }
+        catch (Exception ex)
         {
-            Path = dialog.FileName;
+            Log.Error("Błąd podczas ładowania pliku. Informacja o błędzie: {error}", ex.Message);
+            MessageBox.Show(ex.Message, "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    private string GetInitialDirectory()
+    {
+        var initialDirectory = System.IO.Path.GetDirectoryName(Path) ?? string.Empty;
+
+        if (!System.IO.Directory.Exists(initialDirectory))
+        {
+            initialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         }
 
-        Command?.Execute(this);
+        return initialDirectory;
     }
 
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)

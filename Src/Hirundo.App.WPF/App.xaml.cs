@@ -55,6 +55,7 @@ public partial class App : Application
         var viewModel = container.Resolve<MainViewModel>();
 
         var config = GetConfig();
+        config = viewModel.EnsureExistingDataSources(config);
         viewModel.UpdateConfig(config);
 
         Log.Logger = new LoggerConfiguration()

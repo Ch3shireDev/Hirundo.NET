@@ -1,4 +1,5 @@
 ﻿using Hirundo.Commons;
+using Hirundo.Commons.Models;
 using Hirundo.Databases.Conditions;
 
 namespace Hirundo.Databases;
@@ -7,7 +8,7 @@ namespace Hirundo.Databases;
 ///     Parametry bazy danych Access.
 /// </summary>
 [TypeDescription("Access")]
-public class AccessDatabaseParameters : IDatabaseParameters
+public class AccessDatabaseParameters : IDatabaseParameters, IFileSource
 {
     /// <summary>
     ///     Nazwa pliku bazy danych. Obsługuje pliki .mdb.

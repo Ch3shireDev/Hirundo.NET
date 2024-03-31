@@ -43,11 +43,17 @@ jobs:
     - name: Run tests
       run: dotnet test --no-restore --verbosity normal
 
-    - name: Publish Release
+    - name: Publish Release x64
       if: env.RELEASE_TRIGGERED == 'true'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: dotnet publish Hirundo.App.WPF --self-contained --configuration Release -o ./publish
+      run: dotnet publish Hirundo.App.WPF --self-contained --runtime win-x64 --configuration Release -o ./publish-x64
+
+    - name: Publish Release x86
+      if: env.RELEASE_TRIGGERED == 'true'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: dotnet publish Hirundo.App.WPF --self-contained --runtime win-x86 --configuration Release -o ./publish-x86
 
     - name: Get Version
       id: get_version
@@ -55,20 +61,30 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        $exePath = "./publish/Hirundo.App.WPF.exe"
+        $exePath = "./publish-x64/Hirundo.App.WPF.exe"
         $versionInfo = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($exePath)
         $version = $versionInfo.FileVersion
         "VERSION=$version" | Out-File -FilePath $env:GITHUB_ENV -Append
 
-    - name: Remove .pdb files
+    - name: Remove .pdb files from x64
       if: env.RELEASE_TRIGGERED == 'true'
-      run: Remove-Item -Path ./publish/*.pdb
+      run: Remove-Item -Path ./publish-x64/*.pdb
+
+    - name: Remove .pdb files from x86
+      if: env.RELEASE_TRIGGERED == 'true'
+      run: Remove-Item -Path ./publish-x86/*.pdb
         
-    - name: Zip Release
+    - name: Zip Release x64
       if: env.RELEASE_TRIGGERED == 'true'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: Compress-Archive -Path ./publish/* -DestinationPath hirundo-net-${{ env.VERSION }}.zip
+      run: Compress-Archive -Path ./publish-x64/* -DestinationPath hirundo-net-${{ env.VERSION }}-x64.zip
+
+    - name: Zip Release x86
+      if: env.RELEASE_TRIGGERED == 'true'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: Compress-Archive -Path ./publish-x86/* -DestinationPath hirundo-net-${{ env.VERSION }}-x86.zip
 
     - name: Create Release
       if: env.RELEASE_TRIGGERED == 'true'
@@ -82,13 +98,24 @@ jobs:
           draft: false
           prerelease: false
 
-    - name: Upload Release Asset
+    - name: Upload Release Asset x64
       if: env.RELEASE_TRIGGERED == 'true'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       uses: actions/upload-release-asset@v1
       with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./Src/hirundo-net-${{ env.VERSION }}.zip
-          asset_name: hirundo-net-${{ env.VERSION }}.zip
+          asset_path: ./Src/hirundo-net-${{ env.VERSION }}-x64.zip
+          asset_name: hirundo-net-${{ env.VERSION }}-x64.zip
+          asset_content_type: application/zip
+
+    - name: Upload Release Asset x86
+      if: env.RELEASE_TRIGGERED == 'true'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: actions/upload-release-asset@v1
+      with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./Src/hirundo-net-${{ env.VERSION }}-x86.zip
+          asset_name: hirundo-net-${{ env.VERSION }}-x86.zip
           asset_content_type: application/zip

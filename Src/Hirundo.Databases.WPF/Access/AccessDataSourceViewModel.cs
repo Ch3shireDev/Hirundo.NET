@@ -104,6 +104,8 @@ public class AccessDataSourceViewModel(AccessDataSourceModel model, IAccessMetad
         {
             Log.Error(e, $"Błąd podczas ładowania metadanych z pliku {Path}.");
 
+            Log.Debug("Informacja o błędzie: {error}", e.Message);
+
             if (!string.IsNullOrEmpty(Table))
             {
                 Tables.Add(Table);

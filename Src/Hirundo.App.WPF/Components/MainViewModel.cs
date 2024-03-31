@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using Hirundo.App.WPF.Helpers;
 using Hirundo.Commons.Helpers;
+using Hirundo.Commons.Models;
 using Hirundo.Commons.WPF;
 using Hirundo.Processors.Specimens.WPF;
 using Hirundo.Writers;
@@ -228,6 +229,24 @@ public sealed class MainViewModel : ObservableObject
         SelectedViewModel = DataSourceViewModel;
     }
 
+    public string GetFileSourcePathFromUser(IFileSource fileSource)
+    {
+        var dialog = new OpenFileDialog
+        {
+            Filter = "Access files (*.mdb)|*.mdb|All files (*.*)|*.*",
+            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+            Multiselect = false,
+            Title = "Wybierz plik bazy danych Access."
+        };
+
+        if (dialog.ShowDialog() == true)
+        {
+            return dialog.FileName;
+        }
+
+        return fileSource.Path;
+    }
+
     public ApplicationParameters GetConfig()
     {
         return _model.GetConfigFromViewModels();
@@ -316,6 +335,8 @@ public sealed class MainViewModel : ObservableObject
             {
                 var json = File.ReadAllText(loadFileDialog.FileName);
                 var config = JsonTools.Deserialize(json);
+
+
                 UpdateConfig(config);
             }
 
@@ -329,5 +350,21 @@ public sealed class MainViewModel : ObservableObject
             MessageBox.Show(message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             throw;
         }
+    }
+
+    public ApplicationParameters EnsureExistingDataSources(ApplicationParameters config)
+    {
+        foreach (var database in config.Databases.Databases)
+        {
+            if (database is IFileSource fileSource)
+            {
+                if (!File.Exists(fileSource.Path))
+                {
+                    fileSource.Path = GetFileSourcePathFromUser(fileSource);
+                }
+            }
+        }
+
+        return config;
     }
 }
