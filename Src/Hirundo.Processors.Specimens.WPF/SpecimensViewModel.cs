@@ -16,16 +16,6 @@ public class SpecimensViewModel(SpecimensModel model, IDataLabelRepository repos
         }
     }
 
-    public bool IncludeEmptyValues
-    {
-        get => model.IncludeEmptyValues;
-        set
-        {
-            model.IncludeEmptyValues = value;
-            OnPropertyChanged();
-        }
-    }
-
     public DataType DataType { get; set; }
     public IDataLabelRepository Repository { get; } = repository;
 }

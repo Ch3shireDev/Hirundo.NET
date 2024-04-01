@@ -24,8 +24,5 @@
                 DataType="{Binding DataType}"
                 Repository="{Binding Repository}" />
         </WrapPanel>
-        <WrapPanel Margin="10">
-            <CheckBox IsChecked="{Binding IncludeEmptyValues}">Czy dodawać obserwacje o pustych identyfikatorach?</CheckBox>
-        </WrapPanel>
     </StackPanel>
 </UserControl>

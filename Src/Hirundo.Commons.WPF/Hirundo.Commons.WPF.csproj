@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ParametersBrowser\**" />
+    <EmbeddedResource Remove="ParametersBrowser\**" />
+    <None Remove="ParametersBrowser\**" />
+    <Page Remove="ParametersBrowser\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>
@@ -29,10 +36,6 @@
     <Compile Update="ParametersBrowserView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ParametersBrowser\" />
   </ItemGroup>
 
 </Project>

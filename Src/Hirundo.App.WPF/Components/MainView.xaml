@@ -13,6 +13,11 @@
              d:DesignHeight="600" d:DesignWidth="1000" 
              Background="#efefef"
              d:DataContext="{d:DesignInstance components:MainViewModel}">
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
     <UserControl.Resources>
 
         <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
@@ -51,8 +56,8 @@
         <Menu>
             <MenuItem Header="Plik">
                 <MenuItem Header="Nowy" Command="{Binding CreateNewConfigCommand}" />
+                <MenuItem Header="Otwórz" Command="{Binding LoadNewConfigCommand}" />
                 <MenuItem Header="Zapisz" Command="{Binding SaveCurrentConfigCommand}" />
-                <MenuItem Header="Wczytaj" Command="{Binding LoadNewConfigCommand}" />
             </MenuItem>
         </Menu>
 
@@ -106,10 +111,11 @@
             </ScrollViewer>
         </Grid>
         <DockPanel Grid.Row="2">
-            <Button HorizontalAlignment="Left" Command="{Binding CreateNewConfigCommand}">Stwórz nową konfigurację</Button>
-            <WrapPanel HorizontalAlignment="Right">
+            <WrapPanel HorizontalAlignment="Left">
                 <Button HorizontalAlignment="Right" Command="{Binding PreviousCommand}">Poprzedni</Button>
                 <Button HorizontalAlignment="Right" Command="{Binding NextCommand}">Następny</Button>
+            </WrapPanel>
+            <WrapPanel HorizontalAlignment="Right">
                 <Button HorizontalAlignment="Right" Command="{Binding ProcessAndSaveCommand}">Przetwarzaj dane</Button>
                 <Button HorizontalAlignment="Right" Command="{Binding BreakCommand}">Przerwij</Button>
             </WrapPanel>

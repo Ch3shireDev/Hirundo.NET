@@ -175,8 +175,7 @@ public class ApplicationConfigJsonConverterTests
         // Arrange
         var json = @"{
           ""Specimens"": {
-            ""SpecimenIdentifier"": ""RING"",
-            ""IncludeEmptyValues"": false
+            ""SpecimenIdentifier"": ""RING""
           }
         }";
 
@@ -188,7 +187,6 @@ public class ApplicationConfigJsonConverterTests
 
         Assert.That(config.Specimens, Is.Not.Null);
         Assert.That(config.Specimens.SpecimenIdentifier, Is.EqualTo("RING"));
-        Assert.That(config.Specimens.IncludeEmptyValues, Is.False);
     }
 
     [Test]

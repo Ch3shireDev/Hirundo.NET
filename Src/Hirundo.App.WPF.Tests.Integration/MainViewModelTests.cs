@@ -226,8 +226,7 @@ public class MainViewModelTests
         {
             Specimens = new SpecimensParameters
             {
-                SpecimenIdentifier = "KEY",
-                IncludeEmptyValues = true
+                SpecimenIdentifier = "KEY"
             }
         };
 
@@ -239,7 +238,6 @@ public class MainViewModelTests
         Assert.That(result, Is.Not.Null);
         Assert.That(result.Specimens, Is.Not.Null);
         Assert.That(result.Specimens.SpecimenIdentifier, Is.EqualTo("KEY"));
-        Assert.That(result.Specimens.IncludeEmptyValues, Is.True);
     }
 
     [Test]

@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:labels="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF" 
-             xmlns:wpf="clr-namespace:Hirundo.Processors.Observations.WPF"
+             xmlns:wpf="clr-namespace:Hirundo.Processors.Observations.WPF.CompareValues"
              mc:Ignorable="d"
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance wpf:ICompareValuesViewModel}">

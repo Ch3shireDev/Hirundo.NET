@@ -9,8 +9,7 @@
              xmlns:access="clr-namespace:Hirundo.Databases.WPF.Access"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:wpf="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
-             xmlns:helpers="clr-namespace:Hirundo.Commons.WPF.Helpers;assembly=Hirundo.Commons.WPF" 
-             xmlns:helpers1="clr-namespace:Hirundo.Databases.WPF.Helpers"
+             xmlns:helpers1="clr-namespace:Hirundo.Databases.WPF.Helpers" xmlns:helpers="clr-namespace:Hirundo.Commons.WPF.Helpers;assembly=Hirundo.Commons.WPF"
              mc:Ignorable="d"
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance access:AccessDataSourceViewModel}">

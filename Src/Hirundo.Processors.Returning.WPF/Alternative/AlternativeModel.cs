@@ -11,8 +11,10 @@ public class AlternativeModel : ParametersModel
     {
         _factory = new ParametersFactory<IReturningSpecimenCondition, ReturningSpecimensModel>(repository);
         AvailableParameters = _factory.GetParametersData().ToArray();
-        FirstParameter = AvailableParameters.FirstOrDefault();
-        SecondParameter = AvailableParameters.Skip(1).FirstOrDefault();
+
+        var conditions = AvailableParameters.Where(p => p.ConditionType != typeof(AlternativeReturningCondition)).ToArray();
+        FirstParameter = conditions.FirstOrDefault();
+        SecondParameter = conditions.Skip(1).FirstOrDefault();
     }
 
     public AlternativeReturningCondition Condition => (AlternativeReturningCondition)Parameters;

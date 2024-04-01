@@ -81,7 +81,7 @@ public partial class LabelsComboBox : UserControl, INotifyPropertyChanged
         }
     }
 
-    private IList<DataLabel> Labels { get; set; } = new List<DataLabel>();
+    private IList<DataLabel> Labels { get; set; } = [];
 
     public event PropertyChangedEventHandler? PropertyChanged;
 

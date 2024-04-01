@@ -10,9 +10,4 @@ public class SpecimensParameters
     ///     Jednoznaczny identyfikator osobnika, np. numer obrączki.
     /// </summary>
     public string SpecimenIdentifier { get; set; } = null!;
-
-    /// <summary>
-    ///     Czy należy uwzględniać przypadki, gdy wartość identyfikatora osobnika jest pusta? Domyślnie <c>false</c>.
-    /// </summary>
-    public bool IncludeEmptyValues { get; set; }
 }

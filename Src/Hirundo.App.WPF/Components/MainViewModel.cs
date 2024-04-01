@@ -24,6 +24,9 @@ public sealed class MainViewModel : ObservableObject
 
     private bool isProcessing;
 
+    public ICommand LoadedCommand => new RelayCommand(() => IsLoaded = true);
+
+    public bool IsLoaded { get; private set; }
     public MainViewModel(MainModel model)
     {
         ArgumentNullException.ThrowIfNull(model);
@@ -178,6 +181,11 @@ public sealed class MainViewModel : ObservableObject
             OnPropertyChanged(nameof(BreakCommand));
             await _model.RunAsync().ConfigureAwait(false);
             IsProcessing = false;
+
+            if (IsLoaded)
+            {
+                MessageBox.Show("Proces zakończony pomyślnie.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
         catch (HirundoException e)
         {
