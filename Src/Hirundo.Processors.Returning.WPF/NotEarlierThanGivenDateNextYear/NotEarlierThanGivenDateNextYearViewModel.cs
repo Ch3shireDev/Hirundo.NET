@@ -32,6 +32,7 @@ public class NotEarlierThanGivenDateNextYearViewModel(NotEarlierThanGivenDateNex
             OnPropertyChanged();
         }
     }
+    public IList<int> Months { get; } = Enumerable.Range(1, 12).ToList();
 
     public int Day
     {

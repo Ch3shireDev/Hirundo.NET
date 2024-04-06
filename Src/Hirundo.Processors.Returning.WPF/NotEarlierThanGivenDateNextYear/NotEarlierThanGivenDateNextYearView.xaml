@@ -5,11 +5,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:notEarlierThanGivenDateNextYear="clr-namespace:Hirundo.Processors.Returning.WPF.NotEarlierThanGivenDateNextYear"
-    xmlns:labels="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
+    xmlns:labels="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF" 
+    xmlns:helpers="clr-namespace:Hirundo.Commons.WPF.Helpers;assembly=Hirundo.Commons.WPF"
     mc:Ignorable="d"
     d:Background="AliceBlue"
     d:DataContext="{d:DesignInstance notEarlierThanGivenDateNextYear:NotEarlierThanGivenDateNextYearViewModel}"
     Width="300">
+    <UserControl.Resources>
+        <helpers:MonthConverter x:Key="MonthConverter" />
+    </UserControl.Resources>
     <StackPanel>
         <labels:LabelsComboBox
                 ValueLabel="Nazwa pola daty"
@@ -18,7 +22,17 @@
                 Repository="{Binding Repository}" />
         <WrapPanel>
             <Label>Miesiąc</Label>
-            <TextBox MinWidth="100" Text="{Binding Month}" />
+            <ComboBox
+                MinWidth="100"
+                SelectedValue="{Binding Month}"
+                ItemsSource="{Binding Months}">
+
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Converter={StaticResource MonthConverter}}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </WrapPanel>
         <WrapPanel>
             <Label>Dzień</Label>
