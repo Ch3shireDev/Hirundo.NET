@@ -7,7 +7,7 @@ public class AlternativeModel : ParametersModel
 {
     private readonly ParametersFactory<IReturningSpecimenCondition, ReturningSpecimensModel> _factory;
 
-    public AlternativeModel(object parameters, IDataLabelRepository repository) : base(parameters, repository)
+    public AlternativeModel(object parameters, ILabelsRepository repository) : base(parameters, repository)
     {
         _factory = new ParametersFactory<IReturningSpecimenCondition, ReturningSpecimensModel>(repository);
         AvailableParameters = _factory.GetParametersData().ToArray();

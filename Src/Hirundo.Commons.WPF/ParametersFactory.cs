@@ -9,7 +9,7 @@ public interface IParametersFactory<TCondition>
     ParametersViewModel CreateViewModel(TCondition condition);
     TCondition CreateCondition(ParametersData parametersData);
 }
-public class ParametersFactory<TCondition, TBrowserModel>(IDataLabelRepository repository) : IParametersFactory<TCondition>
+public class ParametersFactory<TCondition, TBrowserModel>(ILabelsRepository repository) : IParametersFactory<TCondition>
     where TCondition : class
     where TBrowserModel : IParametersBrowserModel
 {
@@ -48,7 +48,7 @@ public class ParametersFactory<TCondition, TBrowserModel>(IDataLabelRepository r
     private object GetModelFromCondition(ParametersDataAttribute attribute, TCondition condition)
     {
         var modelType = attribute.ModelType;
-        var modelConstructor = modelType.GetConstructor([condition.GetType(), typeof(IDataLabelRepository)]);
+        var modelConstructor = modelType.GetConstructor([condition.GetType(), typeof(ILabelsRepository)]);
         var model = modelConstructor?.Invoke([condition, repository]);
         return model ?? throw new InvalidOperationException($"Nie znaleziono modelu dla warunku {condition.GetType().Name}");
     }

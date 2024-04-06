@@ -17,8 +17,8 @@ internal static class ContainerExtensions
 {
     internal static void AddViewModel(this ContainerBuilder builder)
     {
-        var repository = new Mock<IDataLabelRepository>();
-        builder.RegisterInstance(repository.Object).As<IDataLabelRepository>().SingleInstance();
+        var repository = new Mock<ILabelsRepository>();
+        builder.RegisterInstance(repository.Object).As<ILabelsRepository>().SingleInstance();
 
         var hirundoApp = new Mock<IHirundoApp>();
         builder.RegisterInstance(hirundoApp.Object).As<IHirundoApp>().SingleInstance();

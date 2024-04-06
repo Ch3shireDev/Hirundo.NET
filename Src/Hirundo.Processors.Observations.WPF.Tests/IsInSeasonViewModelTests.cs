@@ -12,13 +12,13 @@ public class IsInSeasonViewModelTests
     [SetUp]
     public void Initialize()
     {
-        _repository = new Mock<IDataLabelRepository>();
+        _repository = new Mock<ILabelsRepository>();
         _condition = new IsInSeasonCondition();
         _model = new IsInSeasonModel(_condition, _repository.Object);
         _viewModel = new IsInSeasonViewModel(_model);
     }
 
-    private Mock<IDataLabelRepository> _repository = null!;
+    private Mock<ILabelsRepository> _repository = null!;
     private IsInSeasonCondition _condition = null!;
     private IsInSeasonModel _model = null!;
     private IsInSeasonViewModel _viewModel = null!;

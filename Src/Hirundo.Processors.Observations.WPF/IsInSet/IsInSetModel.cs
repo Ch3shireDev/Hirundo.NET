@@ -5,7 +5,7 @@ using Hirundo.Commons.WPF;
 
 namespace Hirundo.Processors.Observations.WPF.IsInSet;
 
-public class IsInSetModel(IsInSetCondition condition, IDataLabelRepository repository) : ParametersModel(condition, repository)
+public class IsInSetModel(IsInSetCondition condition, ILabelsRepository repository) : ParametersModel(condition, repository)
 {
     public string ValueName
     {

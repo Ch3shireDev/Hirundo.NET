@@ -2,7 +2,15 @@
 
 namespace Hirundo.Commons.Repositories;
 
-public class DataLabelRepository : IDataLabelRepository
+public interface ILabelsRepository
+{
+    IEnumerable<DataLabel> GetLabels();
+    void SetLabels(IEnumerable<DataLabel> labels);
+    event EventHandler? LabelsChanged;
+    void AddAdditionalLabel(DataLabel label);
+    void RemoveAdditionalLabel(DataLabel label);
+}
+public class LabelsRepository : ILabelsRepository
 {
     private readonly List<DataLabel> _additionalLabels = [];
     private readonly List<DataLabel> _labels = [];

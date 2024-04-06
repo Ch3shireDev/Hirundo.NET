@@ -14,7 +14,7 @@ public class ReturningSpecimensModelTests
     public void GivenAlternativeViewModelSelected_WhenAdded_IsNotInfiniteLoop()
     {
         // Arrange
-        var repository = new Mock<IDataLabelRepository>();
+        var repository = new Mock<ILabelsRepository>();
         var model = new ReturningSpecimensModel(repository.Object);
         var viewModel = new ParametersBrowserViewModel(model);
 

@@ -27,7 +27,7 @@ namespace Hirundo.App.WPF.Tests.Integration;
 public class MainViewModelTests
 {
     private Mock<IHirundoApp> _hirundoApp = null!;
-    private Mock<IDataLabelRepository> _repository = null!;
+    private Mock<ILabelsRepository> _repository = null!;
     private MainViewModel _viewModel = null!;
 
     [SetUp]
@@ -36,7 +36,7 @@ public class MainViewModelTests
         var builder = new ContainerBuilder();
         builder.AddViewModel();
         var container = builder.Build();
-        _repository = container.Resolve<Mock<IDataLabelRepository>>();
+        _repository = container.Resolve<Mock<ILabelsRepository>>();
         _hirundoApp = container.Resolve<Mock<IHirundoApp>>();
         _viewModel = container.Resolve<MainViewModel>();
     }

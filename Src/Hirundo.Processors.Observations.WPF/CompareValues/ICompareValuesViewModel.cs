@@ -5,7 +5,7 @@ namespace Hirundo.Processors.Observations.WPF.CompareValues;
 
 public interface ICompareValuesViewModel
 {
-    public IDataLabelRepository Repository { get; }
+    public ILabelsRepository Repository { get; }
     public string ValueDescription { get; }
     public string ValueName { get; set; }
     public string Value { get; set; }

@@ -22,7 +22,7 @@ public abstract class ParametersBrowserModel<TConditionContainer, TCondition, TB
     where TCondition : class
     where TBrowser : IParametersBrowserModel
 {
-    protected ParametersBrowserModel(IDataLabelRepository repository)
+    protected ParametersBrowserModel(ILabelsRepository repository)
     {
         _factory = new ParametersFactory<TCondition, TBrowser>(repository);
         ParametersDataList = _factory.GetParametersData().ToArray();

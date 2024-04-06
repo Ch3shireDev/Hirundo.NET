@@ -58,7 +58,7 @@ public partial class App : Application
 
         builder.RegisterType<MainModel>().AsSelf().SingleInstance();
         builder.RegisterType<MainViewModel>().AsSelf().SingleInstance();
-        builder.RegisterType<DataLabelRepository>().As<IDataLabelRepository>().SingleInstance();
+        builder.RegisterType<LabelsRepository>().As<ILabelsRepository>().SingleInstance();
 
         var container = builder.Build();
 
@@ -73,7 +73,7 @@ public partial class App : Application
             .WriteTo.Sink(new LogEventSink(viewModel.LogEventsItems))
             .CreateLogger();
 
-        var repository = container.Resolve<IDataLabelRepository>();
+        var repository = container.Resolve<ILabelsRepository>();
 
         repository.LabelsChanged += (_, _) =>
         {

@@ -10,13 +10,13 @@ public class SymmetryViewModelTests
 {
     private WingParametersModel<WingParametersBase> _model = null!;
     private SymmetryCalculator _parameters = null!;
-    private Mock<IDataLabelRepository> _repository = null!;
+    private Mock<ILabelsRepository> _repository = null!;
     private WingParametersViewModel<WingParametersBase> _viewModel = null!;
 
     [SetUp]
     public void Initialize()
     {
-        _repository = new Mock<IDataLabelRepository>();
+        _repository = new Mock<ILabelsRepository>();
         _parameters = new SymmetryCalculator();
         _model = new WingParametersModel<WingParametersBase>(_parameters, _repository.Object);
         _viewModel = new WingParametersViewModel<WingParametersBase>(_model);

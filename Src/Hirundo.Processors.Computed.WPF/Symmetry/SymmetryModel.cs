@@ -2,6 +2,6 @@
 
 namespace Hirundo.Processors.Computed.WPF.Symmetry;
 
-public class SymmetryModel(SymmetryCalculator parameters, IDataLabelRepository repository) : WingParametersModel<SymmetryCalculator>(parameters, repository)
+public class SymmetryModel(SymmetryCalculator parameters, ILabelsRepository repository) : WingParametersModel<SymmetryCalculator>(parameters, repository)
 {
 }

@@ -11,14 +11,14 @@ public class IsInTimeBlockModelTests
     [SetUp]
     public void Setup()
     {
-        _repository = new Mock<IDataLabelRepository>();
+        _repository = new Mock<ILabelsRepository>();
 
         _condition = new IsInTimeBlockCondition();
         _model = new IsInTimeBlockModel(_condition, _repository.Object);
         _viewModel = new IsInTimeBlockViewModel(_model);
     }
 
-    private Mock<IDataLabelRepository> _repository = null!;
+    private Mock<ILabelsRepository> _repository = null!;
     private IsInTimeBlockCondition _condition = null!;
     private IsInTimeBlockModel _model = null!;
     private IsInTimeBlockViewModel _viewModel = null!;

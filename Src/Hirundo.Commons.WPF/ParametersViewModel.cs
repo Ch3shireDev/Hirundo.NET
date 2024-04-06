@@ -20,6 +20,6 @@ public abstract class ParametersViewModel(ParametersModel model) : ObservableObj
         Removed?.Invoke(this, new ParametersEventArgs(condition));
     }
 
-    public virtual IDataLabelRepository Repository => model.Repository;
+    public virtual ILabelsRepository Repository => model.Repository;
     public virtual ICommand RemoveCommand => new RelayCommand(() => Remove(model.Parameters));
 }

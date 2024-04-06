@@ -14,7 +14,7 @@ public class AlternativeViewModelTests
     public void Initialize()
     {
         _condition = new AlternativeReturningCondition();
-        _repository = new Mock<IDataLabelRepository>();
+        _repository = new Mock<ILabelsRepository>();
         _model = new AlternativeModel(_condition, _repository.Object);
         _viewModel = new AlternativeViewModel(_model);
     }
@@ -22,7 +22,7 @@ public class AlternativeViewModelTests
     private AlternativeReturningCondition _condition = null!;
     private AlternativeModel _model = null!;
     private AlternativeViewModel _viewModel = null!;
-    private Mock<IDataLabelRepository> _repository = null!;
+    private Mock<ILabelsRepository> _repository = null!;
 
     [Test]
     public void GivenSetConditions_WhenGetValuesFromViewModel_ThenValuesAreSet()

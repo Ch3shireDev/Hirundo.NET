@@ -2,7 +2,7 @@
 using Hirundo.Commons.WPF;
 
 namespace Hirundo.Writers.WPF.XlsxWriter;
-public class XlsxWriterModel(XlsxSummaryWriterParameters parameters, IDataLabelRepository repository) : ParametersModel(parameters, repository)
+public class XlsxWriterModel(XlsxSummaryWriterParameters parameters, ILabelsRepository repository) : ParametersModel(parameters, repository)
 {
     private XlsxSummaryWriterParameters xlsxParameters { get; } = parameters;
 

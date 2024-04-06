@@ -5,7 +5,7 @@ using Hirundo.Processors.Statistics.Operations;
 
 namespace Hirundo.Processors.Statistics.WPF.Histogram;
 
-public class HistogramModel(HistogramOperation parameters, IDataLabelRepository repository) : ParametersModel(parameters, repository)
+public class HistogramModel(HistogramOperation parameters, ILabelsRepository repository) : ParametersModel(parameters, repository)
 {
     public string ValueName
     {

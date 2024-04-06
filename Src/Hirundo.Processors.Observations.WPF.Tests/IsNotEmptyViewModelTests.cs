@@ -11,14 +11,14 @@ public class IsNotEmptyViewModelTests
     [SetUp]
     public void Setup()
     {
-        _repository = new Mock<IDataLabelRepository>();
+        _repository = new Mock<ILabelsRepository>();
 
         _condition = new IsNotEmptyCondition();
         _model = new IsNotEmptyModel(_condition, _repository.Object);
         _viewModel = new IsNotEmptyViewModel(_model);
     }
 
-    private Mock<IDataLabelRepository> _repository = null!;
+    private Mock<ILabelsRepository> _repository = null!;
     private IsNotEmptyCondition _condition = null!;
     private IsNotEmptyModel _model = null!;
     private IsNotEmptyViewModel _viewModel = null!;

@@ -4,7 +4,7 @@ using Hirundo.Databases.Conditions;
 
 namespace Hirundo.Databases.WPF.Access;
 
-public class AccessDataSourceModel(AccessDatabaseParameters parameters, IDataLabelRepository repository) : ParametersModel(parameters, repository)
+public class AccessDataSourceModel(AccessDatabaseParameters parameters, ILabelsRepository repository) : ParametersModel(parameters, repository)
 {
     public string Path
     {

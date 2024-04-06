@@ -12,7 +12,7 @@ public class HistogramViewModelTests
     [SetUp]
     public void Initialize()
     {
-        _repository = new Mock<IDataLabelRepository>();
+        _repository = new Mock<ILabelsRepository>();
         _parameters = new HistogramOperation();
         _model = new HistogramModel(_parameters, _repository.Object);
         _viewModel = new HistogramViewModel(_model);
@@ -21,7 +21,7 @@ public class HistogramViewModelTests
     private HistogramOperation _parameters = null!;
     private HistogramModel _model = null!;
     private HistogramViewModel _viewModel = null!;
-    private Mock<IDataLabelRepository> _repository = null!;
+    private Mock<ILabelsRepository> _repository = null!;
 
     [Test]
     public void GivenEmptyParameters_WhenSetValuesInViewModel_ThenParametersAreSet()

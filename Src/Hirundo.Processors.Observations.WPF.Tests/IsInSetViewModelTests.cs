@@ -13,7 +13,7 @@ public class IsInSetViewModelTests
     [SetUp]
     public void Initialize()
     {
-        _repository = new Mock<IDataLabelRepository>();
+        _repository = new Mock<ILabelsRepository>();
         _parameters = new IsInSetCondition();
         _model = new IsInSetModel(_parameters, _repository.Object);
         _viewModel = new IsInSetViewModel(_model);
@@ -22,7 +22,7 @@ public class IsInSetViewModelTests
     private IsInSetCondition _parameters = null!;
     private IsInSetViewModel _viewModel = null!;
     private IsInSetModel _model = null!;
-    private Mock<IDataLabelRepository> _repository = null!;
+    private Mock<ILabelsRepository> _repository = null!;
 
     [Test]
     public void GivenSelectedColumnAndIntDataType_WhenSetValue_CastsToIntegerType()

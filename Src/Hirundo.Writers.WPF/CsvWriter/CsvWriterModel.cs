@@ -3,7 +3,7 @@ using Hirundo.Commons.WPF;
 
 namespace Hirundo.Writers.WPF.CsvWriter;
 
-public class CsvWriterModel(CsvSummaryWriterParameters parameters, IDataLabelRepository repository = null!) : ParametersModel(parameters, repository)
+public class CsvWriterModel(CsvSummaryWriterParameters parameters, ILabelsRepository repository = null!) : ParametersModel(parameters, repository)
 {
     public string Path
     {

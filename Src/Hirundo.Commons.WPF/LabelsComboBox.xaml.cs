@@ -20,7 +20,7 @@ public partial class LabelsComboBox : UserControl, INotifyPropertyChanged
         DependencyProperty.Register(nameof(ValueLabel), typeof(string), typeof(LabelsComboBox), new PropertyMetadata("Nazwa wartości"));
 
     public static readonly DependencyProperty RepositoryProperty =
-        DependencyProperty.Register(nameof(Repository), typeof(IDataLabelRepository), typeof(LabelsComboBox), new PropertyMetadata(OnDataLabelRepositoryChanged));
+        DependencyProperty.Register(nameof(Repository), typeof(ILabelsRepository), typeof(LabelsComboBox), new PropertyMetadata(OnDataLabelRepositoryChanged));
 
     public static readonly DependencyProperty ValueNameProperty =
         DependencyProperty.Register(
@@ -58,9 +58,9 @@ public partial class LabelsComboBox : UserControl, INotifyPropertyChanged
         set => SetValue(DataTypeProperty, value);
     }
 
-    public IDataLabelRepository? Repository
+    public ILabelsRepository? Repository
     {
-        get => (IDataLabelRepository)GetValue(RepositoryProperty);
+        get => (ILabelsRepository)GetValue(RepositoryProperty);
         set => SetValue(RepositoryProperty, value);
     }
 
@@ -89,7 +89,7 @@ public partial class LabelsComboBox : UserControl, INotifyPropertyChanged
     {
         if (d is not LabelsComboBox comboBox) return;
 
-        if (e.NewValue is IDataLabelRepository repository)
+        if (e.NewValue is ILabelsRepository repository)
         {
             repository.LabelsChanged -= comboBox.OnLabelsChanged;
             repository.LabelsChanged += comboBox.OnLabelsChanged;

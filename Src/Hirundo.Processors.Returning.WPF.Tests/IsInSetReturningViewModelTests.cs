@@ -11,7 +11,7 @@ namespace Hirundo.Processors.Returning.WPF.Tests;
 [TestFixture]
 public class IsInSetReturningViewModelTests
 {
-    Mock<IDataLabelRepository> _repository = null!;
+    Mock<ILabelsRepository> _repository = null!;
     IsInSetReturningCondition _parameters = null!;
     IsInSetReturningModel _model = null!;
     IsInSetReturningViewModel _viewModel = null!;
@@ -19,7 +19,7 @@ public class IsInSetReturningViewModelTests
     [SetUp]
     public void Initialize()
     {
-        _repository = new Mock<IDataLabelRepository>();
+        _repository = new Mock<ILabelsRepository>();
         _parameters = new IsInSetReturningCondition();
         _model = new IsInSetReturningModel(_parameters, _repository.Object);
         _viewModel = new IsInSetReturningViewModel(_model);

@@ -11,10 +11,10 @@ public class DataLabelRepositoryTests
     [SetUp]
     public void Setup()
     {
-        _repository = new DataLabelRepository();
+        _repository = new LabelsRepository();
     }
 
-    private DataLabelRepository _repository = null!;
+    private LabelsRepository _repository = null!;
 
     [Test]
     public void GivenEmptyRepository_WhenGetLabels_ReturnsEmpty()

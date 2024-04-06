@@ -6,7 +6,7 @@ using Hirundo.Processors.Returning.Conditions;
 
 namespace Hirundo.Processors.Returning.WPF.IsInSet;
 
-public class IsInSetReturningModel(IsInSetReturningCondition condition, IDataLabelRepository repository) : ParametersModel(condition, repository)
+public class IsInSetReturningModel(IsInSetReturningCondition condition, ILabelsRepository repository) : ParametersModel(condition, repository)
 {
     public string ValueName
     {

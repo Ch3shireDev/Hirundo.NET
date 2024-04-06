@@ -6,9 +6,9 @@ using Hirundo.Databases.WPF.Access;
 
 namespace Hirundo.Databases.WPF;
 
-public class DataSourceModel(IDataLabelRepository repository, IAccessMetadataService accessMetadataService) : ParametersBrowserModel<DatabaseParameters, IDatabaseParameters, DataSourceModel>(repository)
+public class DataSourceModel(ILabelsRepository repository, IAccessMetadataService accessMetadataService) : ParametersBrowserModel<DatabaseParameters, IDatabaseParameters, DataSourceModel>(repository)
 {
-    private readonly IDataLabelRepository repository = repository;
+    private readonly ILabelsRepository repository = repository;
     private readonly IAccessMetadataService accessMetadataService = accessMetadataService;
 
     public override string Header => "Źródła";

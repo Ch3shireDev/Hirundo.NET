@@ -13,12 +13,12 @@ public class AverageViewModelTests
     AverageModel _model = null!;
     AverageViewModel _viewModel = null!;
 
-    Mock<IDataLabelRepository> _repository = null!;
+    Mock<ILabelsRepository> _repository = null!;
 
     [SetUp]
     public void Initialize()
     {
-        _repository = new Mock<IDataLabelRepository>();
+        _repository = new Mock<ILabelsRepository>();
         _operation = new AverageOperation("VALUE", "VALUE_PREFIX");
         _model = new AverageModel(_operation, _repository.Object);
         _viewModel = new AverageViewModel(_model);

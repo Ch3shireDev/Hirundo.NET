@@ -18,7 +18,7 @@ public class MainModel(
     ReturningSpecimensModel returningSpecimensModel,
     StatisticsModel statisticsModel,
     WritersModel writerModel,
-    IDataLabelRepository repository,
+    ILabelsRepository repository,
     ComputedValuesModel computedValuesModel
 )
 {
@@ -29,7 +29,7 @@ public class MainModel(
     public ReturningSpecimensModel ReturningSpecimensModel { get; set; } = returningSpecimensModel;
     public StatisticsModel StatisticsModel { get; set; } = statisticsModel;
     public WritersModel WriterModel { get; set; } = writerModel;
-    public IDataLabelRepository Repository { get; set; } = repository;
+    public ILabelsRepository Repository { get; set; } = repository;
     public ComputedValuesModel ComputedValuesModel { get; set; } = computedValuesModel;
 
     public void UpdateConfig(ApplicationParameters config)

@@ -11,7 +11,7 @@ public class AccessDataSourceViewModelTests
     [SetUp]
     public void Setup()
     {
-        _repository = new Mock<IDataLabelRepository>();
+        _repository = new Mock<ILabelsRepository>();
         _parameters = new AccessDatabaseParameters();
         _model = new AccessDataSourceModel(_parameters, _repository.Object);
         _metadataService = new Mock<IAccessMetadataService>();
@@ -19,7 +19,7 @@ public class AccessDataSourceViewModelTests
     }
 
     private Mock<IAccessMetadataService> _metadataService = null!;
-    private Mock<IDataLabelRepository> _repository = null!;
+    private Mock<ILabelsRepository> _repository = null!;
     private AccessDataSourceViewModel _viewModel = null!;
     private AccessDataSourceModel _model = null!;
     private AccessDatabaseParameters _parameters = null!;
