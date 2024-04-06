@@ -26,11 +26,11 @@ public class PointednessCalculatorTests
 
         // Assert
         Assert.That(result, Is.Not.Null);
-        var columns = result.GetHeaders();
+        var columns = result.Headers;
         Assert.That(columns, Contains.Item("POINTEDNESS"));
         Assert.That(result.GetValue("POINTEDNESS"), Is.EqualTo(0));
         Assert.That(result, Is.SameAs(observation));
-        Assert.That(result.GetHeaders().Count, Is.EqualTo(9));
+        Assert.That(result.Headers.Count, Is.EqualTo(9));
     }
 
     [Test]

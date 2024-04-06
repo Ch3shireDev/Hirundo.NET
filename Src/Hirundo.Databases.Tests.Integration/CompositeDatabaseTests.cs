@@ -11,6 +11,8 @@ public class CompositeDatabaseTests
         {
             Path = "./Assets/access_example_union_db.mdb",
             Table = "old_table",
+            RingIdentifier = "RING",
+            DateIdentifier = "DATE",
             Columns =
             [
                 new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt),
@@ -25,6 +27,8 @@ public class CompositeDatabaseTests
         {
             Path = "./Assets/access_example_union_db.mdb",
             Table = "new_table",
+            RingIdentifier = "RING",
+            DateIdentifier = "DATE",
             Columns =
             [
                 new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt),

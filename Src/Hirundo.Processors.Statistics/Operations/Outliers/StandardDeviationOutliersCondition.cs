@@ -36,7 +36,7 @@ public class StandardDeviationOutliersCondition : IOutliersCondition
             if (value == null) continue;
             if (IsInBounds(value, upperBound, lowerBound)) continue;
 
-            outliersIds.Add(specimen.Identifier);
+            outliersIds.Add(specimen.Ring);
         }
 
         return [.. outliersIds];

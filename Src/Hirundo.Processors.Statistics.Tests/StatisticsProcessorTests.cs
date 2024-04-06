@@ -38,8 +38,8 @@ public class StatisticsProcessorTests
 
         var population = new[]
         {
-            new Specimen(1, [new Observation(["Value"], [1])]),
-            new Specimen(2, [new Observation(["OPERATION2"], [2])])
+            new Specimen("1", [new Observation(["Value"], [1])]),
+            new Specimen("2", [new Observation(["OPERATION2"], [2])])
         };
 
         // Act

@@ -11,12 +11,21 @@ namespace Hirundo.Commons.Models;
 /// </summary>
 public class Observation
 {
-    private string[] _names = null!;
-    private object?[] _values = null!;
+    public string Ring { get; init; } = string.Empty;
+    public DateTime Date { get; init; } = DateTime.MinValue;
 
-    public string Ring { get; set; } = string.Empty;
-    public DateTime Date { get; set; } = DateTime.MinValue;
-
+    private IList<string> _headers = [];
+    private readonly IList<object?> _values = [];
+    public IList<string> Headers
+    {
+        get => _headers;
+        init => _headers = value.ToList();
+    }
+    public IList<object?> Values
+    {
+        get => _values;
+        init => _values = value.ToList();
+    }
     /// <summary>
     ///     Konstruktor bezparametrowy.
     /// </summary>
@@ -29,10 +38,12 @@ public class Observation
     /// </summary>
     /// <param name="names">Nazwy kolumn danych.</param>
     /// <param name="values">Wartości.</param>
-    public Observation(string[] names, object?[] values)
+    public Observation(IList<string> names, IList<object?> values)
     {
-        _names = names;
-        _values = values;
+#pragma warning disable IDE0305
+        Headers = names.ToList();
+        Values = values.ToList();
+#pragma warning restore IDE0305
     }
 
     /// <summary>
@@ -44,7 +55,7 @@ public class Observation
     {
         var index = GetIndex(columnName);
         if (index == -1) return null;
-        return _values[index];
+        return Values[index];
     }
 
     /// <summary>
@@ -85,9 +96,9 @@ public class Observation
     /// <exception cref="KeyNotFoundException"></exception>
     private int GetIndex(string columnName)
     {
-        for (var i = 0; i < _names.Length; i++)
+        for (var i = 0; i < Headers.Count; i++)
         {
-            if (string.Equals(_names[i], columnName, StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(Headers[i], columnName, StringComparison.OrdinalIgnoreCase))
             {
                 return i;
             }
@@ -96,14 +107,7 @@ public class Observation
         return -1;
     }
 
-    /// <summary>
-    ///     Zwraca listę kolumn.
-    /// </summary>
-    /// <returns></returns>
-    public string[] GetHeaders()
-    {
-        return [.. _names];
-    }
+
 
     /// <summary>
     ///     Zwraca listę typów.
@@ -111,15 +115,10 @@ public class Observation
     /// <returns></returns>
     public Type?[] GetTypes()
     {
-        return _values.Select(x => x?.GetType()).ToArray();
+        return Values.Select(x => x?.GetType()).ToArray();
     }
 
-    public object?[] GetValues()
-    {
-        return [.. _values];
-    }
-
-    public object?[] GetValues(string[] columnNames)
+    public object?[] SelectValues(string[] columnNames)
     {
         ArgumentNullException.ThrowIfNull(columnNames);
 
@@ -133,7 +132,7 @@ public class Observation
         return result;
     }
 
-    public int?[] GetIntValues(string[] columnNames)
+    public int?[] SelectIntValues(string[] columnNames)
     {
         ArgumentNullException.ThrowIfNull(columnNames);
 
@@ -149,13 +148,7 @@ public class Observation
 
     public void AddColumn(string columnName, object? columnValue)
     {
-        var newNames = new string[_names.Length + 1];
-        var newValues = new object?[_values.Length + 1];
-        Array.Copy(_names, newNames, _names.Length);
-        Array.Copy(_values, newValues, _values.Length);
-        newNames[^1] = columnName;
-        newValues[^1] = columnValue;
-        _names = newNames;
-        _values = newValues;
+        Headers.Add(columnName);
+        Values.Add(columnValue);
     }
 }

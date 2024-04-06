@@ -41,7 +41,7 @@ public class PointednessCalculator : WingParametersBase, IComputedValuesCalculat
             return 0;
         }
 
-        var wingParameters = observation.GetIntValues(WingParameters);
+        var wingParameters = observation.SelectIntValues(WingParameters);
 
         if (wingParameters.Any(w => w == null))
         {

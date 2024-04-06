@@ -4,16 +4,14 @@
 ///     Zbiór wyników zawierający listę osobników powracających wraz z wartościami kluczowymi,
 ///     wartościami pomiarowymi oraz wartościami statystycznymi.
 /// </summary>
-public class ReturningSpecimenSummary
+public class ReturningSpecimenSummary(string[] headers, object?[] values)
 {
-    public ReturningSpecimenSummary(string[] headers, object?[] values)
-    {
-        Headers = headers;
-        Values = values;
-    }
+    public string Ring { get; set; } = "123";
+    public DateTime DateFirstSeen { get; set; } = new DateTime(2020, 06, 01);
+    public DateTime DateLastSeen { get; set; } = new DateTime(2021, 06, 01);
 
-    public IReadOnlyList<string> Headers { get; }
-    public IReadOnlyList<object?> Values { get; }
+    public IReadOnlyList<string> Headers { get; } = headers;
+    public IReadOnlyList<object?> Values { get; } = values;
 
     public object?[] SelectValues(IList<string> headers)
     {
@@ -30,25 +28,5 @@ public class ReturningSpecimenSummary
         }
 
         return output;
-    }
-
-    public static string[] GetHeadersInternal(Specimen returningSpecimen, IList<StatisticalData> statistics)
-    {
-        ArgumentNullException.ThrowIfNull(returningSpecimen);
-        ArgumentNullException.ThrowIfNull(statistics);
-
-        var returningSpecimenHeaders = returningSpecimen.GetHeaders();
-        var statisticsHeaders = statistics.Select(s => s.Name).ToArray();
-        return [.. returningSpecimenHeaders, .. statisticsHeaders];
-    }
-
-    public static object?[] GetValuesInternal(Specimen returningSpecimen, IList<StatisticalData> statistics)
-    {
-        ArgumentNullException.ThrowIfNull(returningSpecimen);
-        ArgumentNullException.ThrowIfNull(statistics);
-
-        var specimenData = returningSpecimen.GetValues();
-        var statisticalData = statistics.Select(s => s.Value);
-        return [.. specimenData, .. statisticalData];
     }
 }

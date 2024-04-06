@@ -52,7 +52,7 @@ public class AverageOperation : IStatisticalOperation
 
         var emptyValuesIds = population
             .Where(specimen => specimen.Observations.First().GetValue(ValueName) == null)
-            .Select(specimen => specimen.Identifier)
+            .Select(specimen => specimen.Ring)
             .ToArray();
 
         object[] outliersIds = [];
@@ -66,13 +66,13 @@ public class AverageOperation : IStatisticalOperation
         do
         {
             populationIds = population
-                .Select(specimen => specimen.Identifier)
+                .Select(specimen => specimen.Ring)
                 .Where(id => !emptyValuesIds.Contains(id))
                 .Where(id => !outliersIds.Contains(id))
                 .ToArray();
 
             var values = population
-                .Where(specimen => populationIds.Contains(specimen.Identifier))
+                .Where(specimen => populationIds.Contains(specimen.Ring))
                 .Select(specimen => specimen.Observations.First())
                 .Select(observation => observation.GetValue(ValueName))
                 .Select(value => value!)

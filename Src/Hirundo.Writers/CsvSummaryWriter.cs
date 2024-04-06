@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Hirundo.Writers;
 
-public sealed class CsvSummaryWriter(TextWriter streamWriter, CancellationToken? token = null) : ISummaryWriter, IDisposable, IAsyncDisposable
+public sealed class CsvSummaryWriter(CsvSummaryWriterParameters parameters, TextWriter streamWriter, CancellationToken? token = null) : ISummaryWriter, IDisposable, IAsyncDisposable
 {
     public string NewLine { get; set; } = "\r\n";
     public string Delimiter { get; set; } = ",";
@@ -18,6 +18,7 @@ public sealed class CsvSummaryWriter(TextWriter streamWriter, CancellationToken?
     public void Write(ReturningSpecimensResults results)
     {
         ArgumentNullException.ThrowIfNull(results);
+        token?.ThrowIfCancellationRequested();
 
         var summary = results.Results;
 
@@ -29,7 +30,7 @@ public sealed class CsvSummaryWriter(TextWriter streamWriter, CancellationToken?
             return;
         }
 
-        var headers = GetHeaders(records);
+        string[] headers = [.. GetDataHeaders(records)];
 
         IWriterConfiguration configuration = new CsvConfiguration(CultureInfo.InvariantCulture)
         {
@@ -46,6 +47,10 @@ public sealed class CsvSummaryWriter(TextWriter streamWriter, CancellationToken?
 
         if (records.Count > 0)
         {
+            csvWriter.WriteField(parameters.RingHeaderName);
+            csvWriter.WriteField(parameters.DateFirstSeenHeaderName);
+            csvWriter.WriteField(parameters.DateLastSeenHeaderName);
+
             foreach (var header in headers)
             {
                 csvWriter.WriteField(header);
@@ -55,7 +60,9 @@ public sealed class CsvSummaryWriter(TextWriter streamWriter, CancellationToken?
 
             foreach (var record in records)
             {
-                token?.ThrowIfCancellationRequested();
+                csvWriter.WriteField(record.Ring);
+                csvWriter.WriteField(record.DateFirstSeen);
+                csvWriter.WriteField(record.DateLastSeen);
 
                 var values = record.SelectValues(headers);
 
@@ -78,14 +85,14 @@ public sealed class CsvSummaryWriter(TextWriter streamWriter, CancellationToken?
         }
     }
 
-    private static string[] GetHeaders(IReadOnlyCollection<ReturningSpecimenSummary> records)
+    private static string[] GetDataHeaders(IReadOnlyCollection<ReturningSpecimenSummary> records)
     {
         if (records.Count == 0)
         {
             return [];
         }
 
-        return [..records.First().Headers];
+        return [.. records.First().Headers];
     }
 
     public async ValueTask DisposeAsync()
@@ -99,7 +106,6 @@ public sealed class CsvSummaryWriter(TextWriter streamWriter, CancellationToken?
         streamWriter.Dispose();
         GC.SuppressFinalize(this);
     }
-
 
     ~CsvSummaryWriter()
     {

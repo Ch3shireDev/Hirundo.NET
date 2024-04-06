@@ -41,7 +41,7 @@ public class SummaryWriterBuilder : ISummaryWriterBuilder
     public ISummaryWriterBuilder WithCsvSummaryWriterParameters(CsvSummaryWriterParameters parameters)
     {
         ArgumentNullException.ThrowIfNull(parameters);
-        var action = GetSummaryWriter(parameters.Path, (streamWriter, cancellationToken) => new CsvSummaryWriter(streamWriter, cancellationToken));
+        var action = GetSummaryWriter(parameters.Path, (streamWriter, cancellationToken) => new CsvSummaryWriter(parameters, streamWriter, cancellationToken));
         writers.Add(action);
         return this;
     }
@@ -57,12 +57,7 @@ public class SummaryWriterBuilder : ISummaryWriterBuilder
     public ISummaryWriterBuilder WithXlsxSummaryWriterParameters(XlsxSummaryWriterParameters parameters)
     {
         ArgumentNullException.ThrowIfNull(parameters);
-        var action = GetSummaryWriter(parameters.Path, (streamWriter, cancellationToken) => new XlsxSummaryWriter(streamWriter, cancellationToken)
-        {
-            IncludeExplanation = parameters.IncludeExplanation,
-            Title = parameters.SpreadsheetTitle,
-            Subtitle = parameters.SpreadsheetSubtitle
-        });
+        var action = GetSummaryWriter(parameters.Path, (streamWriter, cancellationToken) => new XlsxSummaryWriter(parameters, streamWriter, cancellationToken));
         writers.Add(action);
         return this;
     }

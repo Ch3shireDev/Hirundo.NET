@@ -1,5 +1,4 @@
 ﻿using Hirundo.Commons;
-using System.Text.Json.Serialization;
 
 namespace Hirundo.Writers;
 
@@ -13,11 +12,7 @@ public class CsvSummaryWriterParameters : IWriterParameters
     ///     Lokalizacja pliku wynikowego z danymi.
     /// </summary>
     public string Path { get; set; } = null!;
-
-    [JsonIgnore]
-    public string Filter { get; set; } = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
-    [JsonIgnore]
-    public string Title { get; set; } = "Wybierz docelową lokalizację pliku CSV.";
-    [JsonIgnore]
-    public string DefaultFileName { get; set; } = "results.csv";
+    public string RingHeaderName { get; set; } = "Ring";
+    public string DateFirstSeenHeaderName { get; set; } = "DateFirstSeen";
+    public string DateLastSeenHeaderName { get; set; } = "DateLastSeen";
 }

@@ -2,19 +2,21 @@
 using Hirundo.Commons.Models;
 
 namespace Hirundo.Writers;
-public class XlsxSummaryWriter(StreamWriter stream, CancellationToken? cancellationToken = null) : ISummaryWriter, IDisposable, IAsyncDisposable
+public class XlsxSummaryWriter(XlsxSummaryWriterParameters parameters, StreamWriter stream, CancellationToken? cancellationToken = null) : ISummaryWriter, IDisposable, IAsyncDisposable
 {
     private readonly StreamWriter _streamWriter = stream;
     private readonly CancellationToken? _cancellationToken = cancellationToken;
 
-    public bool IncludeExplanation { get; set; } = false;
-    public string Title { get; set; } = string.Empty;
-    public string Subtitle { get; set; } = string.Empty;
+    public bool IncludeExplanation => parameters.IncludeExplanation;
+    public string Title => parameters.SpreadsheetTitle;
+    public string Subtitle => parameters.SpreadsheetSubtitle;
 
     private static readonly string[] separator = ["\r\n", "\n"];
 
     public void Write(ReturningSpecimensResults results)
     {
+        _cancellationToken?.ThrowIfCancellationRequested();
+
         var workbook = new XLWorkbook();
         var summary = workbook.AddWorksheet("Summary");
 
@@ -43,29 +45,31 @@ public class XlsxSummaryWriter(StreamWriter stream, CancellationToken? cancellat
 
         if (startingRow != 1) startingRow += 1;
 
-        if (results.Results.Count == 0)
+        var resultsRows = results.Results;
+
+        if (resultsRows.Count == 0)
         {
             summary.Cell(startingRow, 1).Value = "No results to display.";
         }
         else
         {
-            var headers = results.Results[0].Headers;
-            var values = results.Results.Select(r => r.Values).ToArray();
+            string[] headers = GetHeaders(resultsRows);
 
-            for (var i = 0; i < headers.Count; i++)
+            for (var i = 0; i < headers.Length; i++)
             {
-                _cancellationToken?.ThrowIfCancellationRequested();
-
                 var headerCell = summary.Cell(startingRow, i + 1);
                 headerCell.Value = headers[i];
                 headerCell.Style.Font.Bold = true;
             }
 
-            for (var i = 0; i < values.Length; i++)
+            for (var i = 0; i < resultsRows.Count; i++)
             {
-                for (var j = 0; j < headers.Count; j++)
+                var resultsRow = resultsRows[i];
+                object?[] values = GetValues(resultsRow);
+
+                for (var j = 0; j < headers.Length; j++)
                 {
-                    summary.Cell(i + startingRow + 1, j + 1).Value = GetCellValue(values[i][j]);
+                    summary.Cell(i + startingRow + 1, j + 1).Value = GetCellValue(values[j]);
                 }
             }
 
@@ -86,6 +90,21 @@ public class XlsxSummaryWriter(StreamWriter stream, CancellationToken? cancellat
             AutoFitColumns(summary);
         }
         workbook.SaveAs(_streamWriter.BaseStream);
+    }
+
+    private string[] GetHeaders(IList<ReturningSpecimenSummary> resultsRows)
+    {
+        return [
+            parameters.RingHeaderName,
+                parameters.DateFirstSeenHeaderName,
+                parameters.DateLastSeenHeaderName,
+                .. resultsRows[0].Headers
+        ];
+    }
+
+    private static object?[] GetValues(ReturningSpecimenSummary resultsRow)
+    {
+        return [resultsRow.Ring, resultsRow.DateFirstSeen, resultsRow.DateLastSeen, .. resultsRow.Values];
     }
 
     private static void AutoFitColumns(IXLWorksheet summary)

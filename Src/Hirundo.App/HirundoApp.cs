@@ -155,6 +155,7 @@ public class HirundoApp : IHirundoApp
     private static Specimen[] GetSpecimens(Observation[] selectedObservations)
     {
         return selectedObservations
+            .Where(observation => !string.IsNullOrWhiteSpace(observation.Ring))
             .GroupBy(observation => observation.Ring)
             .Select(group => new Specimen(group.Key, [.. group.OrderBy(o => o.Date)]))
             .ToArray();

@@ -41,7 +41,7 @@ public class SymmetryCalculator : WingParametersBase, IComputedValuesCalculator
 
     private decimal? CalculateSymmetry(Observation observation)
     {
-        var wingValues = observation.GetIntValues(WingParameters);
+        var wingValues = observation.SelectIntValues(WingParameters);
 
         if (wingValues.Any(x => x is null))
         {

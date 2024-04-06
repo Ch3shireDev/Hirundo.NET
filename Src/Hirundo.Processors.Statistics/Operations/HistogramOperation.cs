@@ -37,17 +37,17 @@ public class HistogramOperation : IStatisticalOperation
 
         var populationIds = pairs
             .Where(tuple => tuple.Value != null && IsInRange(tuple.Value.Value))
-            .Select(tuple => tuple.specimen.Identifier)
+            .Select(tuple => tuple.specimen.Ring)
             .ToArray();
 
         var outliersIds = pairs
             .Where(tuple => tuple.Value != null && !IsInRange(tuple.Value.Value))
-            .Select(tuple => tuple.specimen.Identifier)
+            .Select(tuple => tuple.specimen.Ring)
             .ToArray();
 
         var emptyIds = pairs
             .Where(tuple => tuple.Value == null)
-            .Select(tuple => tuple.specimen.Identifier)
+            .Select(tuple => tuple.specimen.Ring)
             .ToArray();
 
         var values2 = pairs

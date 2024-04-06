@@ -25,6 +25,9 @@ public class MdbAccessDatabase(AccessDatabaseParameters parameters, Cancellation
     /// <returns></returns>
     public IEnumerable<Observation> GetObservations()
     {
+        ThrowIfRingIdentifierIsInvalid();
+        ThrowIfDateIdentifierIsInvalid();
+
         Log.Information("Nawiązywanie połączenia z bazą danych Access.");
         using var connection = new OdbcConnection(ConnectionString);
 
@@ -43,22 +46,66 @@ public class MdbAccessDatabase(AccessDatabaseParameters parameters, Cancellation
 #pragma warning restore CA2100
         using var reader = command.ExecuteReader();
 
-        var dataColumns = parameters.Columns.Select(x => x.ValueName).ToArray();
 
         Log.Information($"Odczytywanie danych z tabeli {parameters.Table}.");
 
+        var headers = GetDataColumns(parameters);
+        int ringIndex = GetRingIndex(parameters);
+        int dateIndex = GetDateIndex(parameters);
+
         while (reader.Read())
         {
-            var dataValues = GetValuesFromReader(reader);
-            var observation = new Observation(dataColumns, dataValues);
-            observation.Ring = observation.GetValue<string>(parameters.RingIdentifier) ?? "";
-            observation.Date = observation.GetValue<DateTime>(parameters.DateIdentifier);
-            yield return observation;
+            var values = GetValuesFromReader(reader);
+
+            var ring = values[ringIndex] as string ?? "";
+            var date = values[dateIndex] as DateTime? ?? DateTime.MinValue;
+
+            yield return new Observation
+            {
+                Ring = ring,
+                Date = date,
+                Headers = headers,
+                Values = values
+            };
 
             token?.ThrowIfCancellationRequested();
         }
 
         Log.Information("Zakończono odczyt danych z bazy danych Access.");
+    }
+
+    private void ThrowIfRingIdentifierIsInvalid()
+    {
+        if (GetRingIndex(parameters) == -1)
+        {
+            throw new ArgumentException("Należy podać nazwę pola danych z numerem obrączki.");
+        }
+    }
+
+    private void ThrowIfDateIdentifierIsInvalid()
+    {
+        if (GetDateIndex(parameters) == -1)
+        {
+            throw new ArgumentException("Należy podać nazwę pola danych z datą obserwacji.");
+        }
+    }
+    private static int GetDateIndex(AccessDatabaseParameters parameters)
+    {
+        var dataColumns2 = GetDataColumns(parameters);
+        var dateIndex = Array.IndexOf(dataColumns2, parameters.DateIdentifier);
+        return dateIndex;
+    }
+
+    private static int GetRingIndex(AccessDatabaseParameters parameters)
+    {
+        var dataColumns = GetDataColumns(parameters);
+        var ringIndex = Array.IndexOf(dataColumns, parameters.RingIdentifier);
+        return ringIndex;
+    }
+
+    private static string[] GetDataColumns(AccessDatabaseParameters parameters)
+    {
+        return parameters.Columns.Select(x => x.ValueName).ToArray();
     }
 
     /// <summary>
