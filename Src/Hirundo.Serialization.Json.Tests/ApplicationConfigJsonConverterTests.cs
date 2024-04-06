@@ -203,11 +203,9 @@ public class ApplicationConfigJsonConverterTests
         Assert.That(config.ReturningSpecimens.Conditions[1], Is.TypeOf<ReturnsNotEarlierThanGivenDateNextYearCondition>());
 
         var returningSpecimenFilter0 = (ReturnsAfterTimePeriodCondition)config.ReturningSpecimens.Conditions[0];
-        Assert.That(returningSpecimenFilter0.DateValueName, Is.EqualTo("DATE"));
         Assert.That(returningSpecimenFilter0.TimePeriodInDays, Is.EqualTo(20));
 
         var returningSpecimenFilter1 = (ReturnsNotEarlierThanGivenDateNextYearCondition)config.ReturningSpecimens.Conditions[1];
-        Assert.That(returningSpecimenFilter1.DateValueName, Is.EqualTo("DATE"));
         Assert.That(returningSpecimenFilter1.Month, Is.EqualTo(6));
         Assert.That(returningSpecimenFilter1.Day, Is.EqualTo(15));
     }
@@ -221,7 +219,6 @@ public class ApplicationConfigJsonConverterTests
             ""Conditions"": [
               {
                 ""Type"": ""IsInSharedTimeWindow"",
-                ""DateValueName"": ""DATE"",
                 ""MaxTimeDistanceInDays"": 20
               }
             ]
@@ -239,7 +236,6 @@ public class ApplicationConfigJsonConverterTests
         Assert.That(config.Population.Conditions[0], Is.TypeOf<IsInSharedTimeWindowConditionBuilder>());
 
         var populationFilter0 = (IsInSharedTimeWindowConditionBuilder)config.Population.Conditions[0];
-        Assert.That(populationFilter0.DateValueName, Is.EqualTo("DATE"));
         Assert.That(populationFilter0.MaxTimeDistanceInDays, Is.EqualTo(20));
     }
 

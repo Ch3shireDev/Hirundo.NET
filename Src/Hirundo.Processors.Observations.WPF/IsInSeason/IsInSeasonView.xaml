@@ -13,10 +13,6 @@
         <helpers:MonthConverter x:Key="MonthConverter" />
     </UserControl.Resources>
     <StackPanel>
-        <labels:LabelsComboBox
-                ValueName="{Binding ValueName}"
-                DataType="{Binding ValueType}"
-                Repository="{Binding Repository}" />
         <WrapPanel>
             <Label>Miesiąc początkowy</Label>
             <ComboBox

@@ -10,14 +10,12 @@ public class ReturnsNotEarlierThanGivenDateNextYearCondition : IReturningSpecime
     {
     }
 
-    public ReturnsNotEarlierThanGivenDateNextYearCondition(string dateValueName, int month, int day)
+    public ReturnsNotEarlierThanGivenDateNextYearCondition(int month, int day)
     {
-        DateValueName = dateValueName;
         Month = month;
         Day = day;
     }
 
-    public string DateValueName { get; set; } = "DATE";
     public int Month { get; set; } = 06;
     public int Day { get; set; } = 01;
 
@@ -31,7 +29,7 @@ public class ReturnsNotEarlierThanGivenDateNextYearCondition : IReturningSpecime
         }
 
         var dates = specimen.Observations
-            .Select(o => o.GetValue<DateTime>(DateValueName).Date)
+            .Select(o => o.Date)
             .OrderBy(d => d)
             .ToList();
 

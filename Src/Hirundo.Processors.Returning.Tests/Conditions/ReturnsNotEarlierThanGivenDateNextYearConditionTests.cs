@@ -1,8 +1,6 @@
-﻿using Hirundo.Commons;
-using Hirundo.Commons.Models;
+﻿using Hirundo.Commons.Models;
 using Hirundo.Processors.Returning.Conditions;
 using NUnit.Framework;
-using System.Globalization;
 
 namespace Hirundo.Processors.Returning.Tests.Conditions;
 
@@ -13,11 +11,11 @@ public class ReturnsNotEarlierThanGivenDateNextYearConditionTests
     public void GivenTwoObservationsWithDistantDates_WhenIsReturning_ReturnsTrue()
     {
         // Arrange
-        var filter = new ReturnsNotEarlierThanGivenDateNextYearCondition("DATE", 06, 01);
+        var filter = new ReturnsNotEarlierThanGivenDateNextYearCondition(06, 01);
 
         var specimen = new Specimen("AB123", [
-            new Observation(["DATE"], [DateTime.Parse("2021-06-20", CultureInfo.InvariantCulture)]),
-            new Observation(["DATE"], [DateTime.Parse("2022-06-01", CultureInfo.InvariantCulture)])
+            new Observation{Date = new DateTime(2021, 06, 20)},
+            new Observation{Date = new DateTime(2022, 06, 01)}
         ]);
 
         // Act
@@ -31,11 +29,11 @@ public class ReturnsNotEarlierThanGivenDateNextYearConditionTests
     public void GivenTwoObservationsBeforeDateNextYear_WhenIsReturning_ReturnsFalse()
     {
         // Arrange
-        var filter = new ReturnsNotEarlierThanGivenDateNextYearCondition("DATE", 06, 15);
+        var filter = new ReturnsNotEarlierThanGivenDateNextYearCondition(06, 15);
 
         var specimen = new Specimen("AB123", [
-            new Observation(["DATE"], [DateTime.Parse("2021-06-01", CultureInfo.InvariantCulture)]),
-            new Observation(["DATE"], [DateTime.Parse("2022-06-01", CultureInfo.InvariantCulture)])
+            new Observation{Date = new DateTime(2021, 06, 01)},
+            new Observation{Date = new DateTime(2022, 06, 01)}
         ]);
 
         // Act
@@ -49,12 +47,12 @@ public class ReturnsNotEarlierThanGivenDateNextYearConditionTests
     public void GivenMoreThanTwoObservations_WhenIsReturning_ReturnsTrueIfDistanceIsGreaterThanTimePeriod()
     {
         // Arrange
-        var filter = new ReturnsNotEarlierThanGivenDateNextYearCondition("DATE", 06, 15);
+        var filter = new ReturnsNotEarlierThanGivenDateNextYearCondition(06, 15);
 
         var specimen = new Specimen("AB123", [
-            new Observation(["DATE"], [DateTime.Parse("2021-06-01", CultureInfo.InvariantCulture)]),
-            new Observation(["DATE"], [DateTime.Parse("2022-06-05", CultureInfo.InvariantCulture)]),
-            new Observation(["DATE"], [DateTime.Parse("2023-06-15", CultureInfo.InvariantCulture)])
+            new Observation{Date = new DateTime(2021, 06, 01)},
+            new Observation{Date = new DateTime(2022, 06, 05)},
+            new Observation{Date = new DateTime(2023, 06, 15)}
         ]);
 
         // Act
@@ -68,12 +66,12 @@ public class ReturnsNotEarlierThanGivenDateNextYearConditionTests
     public void GivenMoreThanTwoObservations_WhenIsReturning_ReturnsFalseIfNoPairGivesDistance()
     {
         // Arrange
-        var filter = new ReturnsNotEarlierThanGivenDateNextYearCondition("DATE", 06, 15);
+        var filter = new ReturnsNotEarlierThanGivenDateNextYearCondition(06, 15);
 
         var specimen = new Specimen("AB123", [
-            new Observation(["DATE"], [DateTime.Parse("2021-06-01", CultureInfo.InvariantCulture)]),
-            new Observation(["DATE"], [DateTime.Parse("2022-06-05", CultureInfo.InvariantCulture)]),
-            new Observation(["DATE"], [DateTime.Parse("2022-06-20", CultureInfo.InvariantCulture)])
+            new Observation{Date = new DateTime(2021, 06, 01)},
+            new Observation{Date = new DateTime(2022, 06, 05)},
+            new Observation{Date = new DateTime(2022, 06, 20)}
         ]);
 
         // Act

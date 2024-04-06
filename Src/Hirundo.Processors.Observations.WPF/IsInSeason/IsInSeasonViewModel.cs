@@ -1,5 +1,4 @@
-﻿using Hirundo.Commons.Models;
-using Hirundo.Commons.WPF;
+﻿using Hirundo.Commons.WPF;
 
 namespace Hirundo.Processors.Observations.WPF.IsInSeason;
 
@@ -12,18 +11,7 @@ namespace Hirundo.Processors.Observations.WPF.IsInSeason;
 ]
 public class IsInSeasonViewModel(IsInSeasonModel model) : ParametersViewModel(model)
 {
-    public string ValueName
-    {
-        get => model.ValueName;
-        set
-        {
-            model.ValueName = value;
-            OnPropertyChanged();
-            OnPropertyChanged(nameof(ErrorMessage));
-        }
-    }
-
-    public DataType ValueType { get; set; }
+    public IList<int> Months { get; } = Enumerable.Range(1, 12).ToList();
 
     public int StartMonth
     {
@@ -34,8 +22,6 @@ public class IsInSeasonViewModel(IsInSeasonModel model) : ParametersViewModel(mo
             OnPropertyChanged();
         }
     }
-
-    public IList<int> Months { get; } = Enumerable.Range(1, 12).ToList();
 
     public int StartDay
     {
@@ -73,13 +59,6 @@ public class IsInSeasonViewModel(IsInSeasonModel model) : ParametersViewModel(mo
 
     private string GetErrorMessage()
     {
-        if (string.IsNullOrEmpty(ValueName)) return string.Empty;
-
-        if (ValueType != DataType.Date)
-        {
-            return $"Wybrana kolumna musi być typu {nameof(DataType.Date)}";
-        }
-
         if (StartDay > 31 || StartDay < 1 || EndDay > 31 || EndDay < 1)
         {
             return "Dzień musi być z zakresu od 1 do 31";

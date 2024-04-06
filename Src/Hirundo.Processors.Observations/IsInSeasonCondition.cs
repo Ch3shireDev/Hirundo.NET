@@ -6,9 +6,8 @@ namespace Hirundo.Processors.Observations;
 [TypeDescription("IsInSeason")]
 public class IsInSeasonCondition : IObservationCondition
 {
-    public IsInSeasonCondition(string dateColumnName, Season season)
+    public IsInSeasonCondition(Season season)
     {
-        DateColumnName = dateColumnName;
         Season = season;
     }
 
@@ -16,20 +15,13 @@ public class IsInSeasonCondition : IObservationCondition
     {
     }
 
-    public string DateColumnName { get; set; } = string.Empty;
     public Season Season { get; set; } = new();
 
     public bool IsAccepted(Observation observation)
     {
         ArgumentNullException.ThrowIfNull(observation);
-        var dateTimeValue = observation.GetValue(DateColumnName);
 
-        if (dateTimeValue is DateTime dateTime)
-        {
-            return IsInDateRange(dateTime);
-        }
-
-        throw new ArgumentException($"Value of column {DateColumnName} is not a DateTime.");
+        return IsInDateRange(observation.Date);
     }
 
     private bool IsInDateRange(DateTime date)

@@ -10,29 +10,25 @@ public sealed class IsInSharedTimeWindowConditionBuilder : IPopulationConditionB
     {
     }
 
-    public IsInSharedTimeWindowConditionBuilder(string dateValueName,
-        int maxTimeDistanceInDays)
+    public IsInSharedTimeWindowConditionBuilder(int maxTimeDistanceInDays)
     {
-        DateValueName = dateValueName;
         MaxTimeDistanceInDays = maxTimeDistanceInDays;
     }
 
-    public string DateValueName { get; set; } = "";
     public int MaxTimeDistanceInDays { get; set; } = 300;
 
     public IPopulationCondition GetPopulationCondition(Specimen returningSpecimen)
     {
-        return new IsInSharedTimeWindowCondition(returningSpecimen, DateValueName, MaxTimeDistanceInDays);
+        return new IsInSharedTimeWindowCondition(returningSpecimen, MaxTimeDistanceInDays);
     }
 
     private sealed class IsInSharedTimeWindowCondition(
         Specimen returningSpecimen,
-        string dateValueName,
         int days) : IPopulationCondition
     {
         private readonly DateTime returningSpecimenFirstDate = returningSpecimen
             .Observations
-            .Select(o => o.GetValue<DateTime>(dateValueName))
+            .Select(o => o.Date)
             .Min()
             .Date;
 
@@ -40,7 +36,7 @@ public sealed class IsInSharedTimeWindowConditionBuilder : IPopulationConditionB
         {
             var date = specimen
                 .Observations
-                .Select(o => o.GetValue<DateTime>(dateValueName))
+                .Select(o => o.Date)
                 .Min()
                 .Date;
 

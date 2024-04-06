@@ -66,7 +66,7 @@ public class IsInSeasonExplainer : ParametersExplainer<IsInSeasonCondition>
 {
     public override string Explain(IsInSeasonCondition parameters)
     {
-        return $"Wartość {parameters.DateColumnName} musi być w sezonie - w zakresie od {parameters.Season.StartMonth:D2}.{parameters.Season.StartDay:D2} do {parameters.Season.EndMonth:D2}.{parameters.Season.EndDay:D2}, dowolnego roku.";
+        return $"Wartość daty musi być w sezonie - w zakresie od {parameters.Season.StartMonth:D2}.{parameters.Season.StartDay:D2} do {parameters.Season.EndMonth:D2}.{parameters.Season.EndDay:D2}, dowolnego roku.";
     }
 }
 

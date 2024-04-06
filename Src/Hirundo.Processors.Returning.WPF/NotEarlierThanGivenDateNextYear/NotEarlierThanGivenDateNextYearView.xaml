@@ -15,11 +15,6 @@
         <helpers:MonthConverter x:Key="MonthConverter" />
     </UserControl.Resources>
     <StackPanel>
-        <labels:LabelsComboBox
-                ValueLabel="Nazwa pola daty"
-                ValueName="{Binding DateValueName}"
-                DataType="{Binding DataType}"
-                Repository="{Binding Repository}" />
         <WrapPanel>
             <Label>Miesiąc</Label>
             <ComboBox

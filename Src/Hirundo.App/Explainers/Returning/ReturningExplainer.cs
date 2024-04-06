@@ -100,7 +100,7 @@ public class ReturnsAfterTimePeriodExplainer : ParametersExplainer<ReturnsAfterT
 {
     public override string Explain(ReturnsAfterTimePeriodCondition parameters)
     {
-        return $"Osobnik powraca po upływie {parameters.TimePeriodInDays} od ostatniego wystąpienia - istnieje odstęp dat (wartość {parameters.DateValueName}) większy lub równy niż {parameters.TimePeriodInDays} dni.";
+        return $"Osobnik powraca po upływie {parameters.TimePeriodInDays} od ostatniego wystąpienia - istnieje odstęp dat większy lub równy niż {parameters.TimePeriodInDays} dni.";
     }
 }
 
@@ -108,6 +108,6 @@ public class ReturnsNotEarlierThanGivenDateExplainer : ParametersExplainer<Retur
 {
     public override string Explain(ReturnsNotEarlierThanGivenDateNextYearCondition parameters)
     {
-        return $"Osobnik powraca nie wcześniej niż w {parameters.Month:D2}.{parameters.Day:D2} następnego roku, obliczane na podstawie daty {parameters.DateValueName}.";
+        return $"Osobnik powraca nie wcześniej niż w {parameters.Month:D2}.{parameters.Day:D2} następnego roku, obliczane na podstawie daty.";
     }
 }

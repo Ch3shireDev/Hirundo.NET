@@ -1,8 +1,6 @@
-﻿using Hirundo.Commons;
-using Hirundo.Commons.Models;
+﻿using Hirundo.Commons.Models;
 using Hirundo.Processors.Population.Conditions;
 using NUnit.Framework;
-using System.Globalization;
 
 namespace Hirundo.Processors.Population.Tests.Conditions;
 
@@ -12,14 +10,13 @@ public class IsInSharedTimeWindowConditionTests
     [Test]
     public void GivenSpecimenFromTimeWindow_WhenIsAccepted_ReturnsTrue()
     {
-        var returningSpecimen = new Specimen("XXX", [new Observation(["DATE"], [DateTime.Parse("2020-06-01", CultureInfo.InvariantCulture)])]);
+        var returningSpecimen = new Specimen("XXX", [new Observation { Date = new DateTime(2020, 06, 01) }]);
 
-        var dateValueName = "DATE";
         var days = 20;
 
-        var specimen = new Specimen("ABC123", [new Observation(["DATE"], [DateTime.Parse("2020-05-20", CultureInfo.InvariantCulture)])]);
+        var specimen = new Specimen("ABC123", [new Observation { Date = new DateTime(2020, 05, 20) }]);
 
-        var condition = new IsInSharedTimeWindowConditionBuilder(dateValueName, days);
+        var condition = new IsInSharedTimeWindowConditionBuilder(days);
         var @internal = condition.GetPopulationCondition(returningSpecimen);
 
         // Act
@@ -34,17 +31,18 @@ public class IsInSharedTimeWindowConditionTests
     {
         // Arrange
         var returningSpecimen = new Specimen("XX123", [
-                new Observation(["DATE"], [DateTime.Parse("2020-06-01", CultureInfo.InvariantCulture)]),
-                new Observation(["DATE"], [DateTime.Parse("2021-06-01", CultureInfo.InvariantCulture)])
+                new Observation{Date = new DateTime(2020, 06, 01)},
+                new Observation{Date = new DateTime(2021, 06, 01)}
             ]
         );
 
-        var dateValueName = "DATE";
         var days = 20;
 
-        var specimen = new Specimen("ABC123", [new Observation(["DATE"], [DateTime.Parse("2020-05-05", CultureInfo.InvariantCulture)])]);
+        var specimen = new Specimen("ABC123", [
+            new Observation{Date = new DateTime(2020, 05, 05)}
+            ]);
 
-        var filterBuilder = new IsInSharedTimeWindowConditionBuilder(dateValueName, days);
+        var filterBuilder = new IsInSharedTimeWindowConditionBuilder(days);
         var filter = filterBuilder.GetPopulationCondition(returningSpecimen);
 
         // Act

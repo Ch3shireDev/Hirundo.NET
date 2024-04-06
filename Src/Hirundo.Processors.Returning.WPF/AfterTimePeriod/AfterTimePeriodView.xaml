@@ -9,11 +9,6 @@
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance afterTimePeriod:AfterTimePeriodViewModel}">
     <StackPanel>
-        <labels:LabelsComboBox
-                ValueLabel="Nazwa pola daty"
-                ValueName="{Binding DateValueName}"
-                DataType="{Binding DataType}"
-                Repository="{Binding Repository}" />
         <WrapPanel>
             <Label>Liczba dni</Label>
             <TextBox Text="{Binding TimePeriodInDays, Mode=TwoWay}" MinWidth="100" />

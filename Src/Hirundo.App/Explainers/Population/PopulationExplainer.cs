@@ -26,6 +26,6 @@ public class IsInSharedTimeWindowExplainer : ParametersExplainer<IsInSharedTimeW
 {
     public override string Explain(IsInSharedTimeWindowConditionBuilder parameters)
     {
-        return $"Czy różnica dat (parametr {parameters.DateValueName}) między pierwszą obserwacją osobnika powracającego a pierwszą obserwacją osobnika jest mniejsza lub równa niż {parameters.MaxTimeDistanceInDays} dni?";
+        return $"Czy różnica dat między pierwszą obserwacją osobnika powracającego a pierwszą obserwacją osobnika jest mniejsza lub równa niż {parameters.MaxTimeDistanceInDays} dni?";
     }
 }

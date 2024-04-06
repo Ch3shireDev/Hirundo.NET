@@ -1,6 +1,5 @@
 ﻿using Hirundo.Commons.Models;
 using NUnit.Framework;
-using System.Globalization;
 
 namespace Hirundo.Processors.Observations.Tests;
 
@@ -12,8 +11,11 @@ public class IsInSeasonConditionTests
     {
         // Arrange
         var season = new Season(06, 01, 08, 31);
-        var filter = new IsInSeasonCondition("DATE", season);
-        var observation = new Observation(["DATE"], [DateTime.Parse("2021-06-01", CultureInfo.InvariantCulture)]);
+        var filter = new IsInSeasonCondition(season);
+        var observation = new Observation
+        {
+            Date = new DateTime(2021, 06, 01)
+        };
 
         // Act
         var result = filter.IsAccepted(observation);
@@ -27,8 +29,11 @@ public class IsInSeasonConditionTests
     {
         // Arrange
         var season = new Season(06, 15, 08, 15);
-        var filter = new IsInSeasonCondition("DATE", season);
-        var observation = new Observation(["DATE"], [DateTime.Parse("2021-05-16", CultureInfo.InvariantCulture)]);
+        var filter = new IsInSeasonCondition(season);
+        var observation = new Observation
+        {
+            Date = new DateTime(2021, 05, 16)
+        };
 
         // Act
         var result = filter.IsAccepted(observation);

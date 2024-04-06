@@ -1,5 +1,4 @@
-﻿using Hirundo.Commons.Models;
-using Hirundo.Commons.WPF;
+﻿using Hirundo.Commons.WPF;
 using Hirundo.Processors.Returning.Conditions;
 
 namespace Hirundo.Processors.Returning.WPF.NotEarlierThanGivenDateNextYear;
@@ -13,15 +12,7 @@ namespace Hirundo.Processors.Returning.WPF.NotEarlierThanGivenDateNextYear;
 )]
 public class NotEarlierThanGivenDateNextYearViewModel(NotEarlierThanGivenDateNextYearModel model) : ParametersViewModel(model)
 {
-    public string DateValueName
-    {
-        get => model.DateValueName;
-        set
-        {
-            model.DateValueName = value;
-            OnPropertyChanged();
-        }
-    }
+    public IList<int> Months { get; } = Enumerable.Range(1, 12).ToList();
 
     public int Month
     {
@@ -32,24 +23,12 @@ public class NotEarlierThanGivenDateNextYearViewModel(NotEarlierThanGivenDateNex
             OnPropertyChanged();
         }
     }
-    public IList<int> Months { get; } = Enumerable.Range(1, 12).ToList();
-
     public int Day
     {
         get => model.Day;
         set
         {
             model.Day = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public DataType DataType
-    {
-        get => model.ValueType;
-        set
-        {
-            model.ValueType = value;
             OnPropertyChanged();
         }
     }

@@ -1,5 +1,4 @@
 ﻿using Hirundo.Commons;
-using Hirundo.Commons.Helpers;
 using Hirundo.Commons.Models;
 
 namespace Hirundo.Processors.Returning.Conditions;
@@ -17,11 +16,10 @@ public class ReturnsAfterTimePeriodCondition : IReturningSpecimenCondition
     ///     uznany za powracający, muszą istnieć co najmniej dwie sąsiednie obserwacje, których różnica
     ///     dat jest większa lub równa podanej liczbie dni.
     /// </summary>
-    /// <param name="dateValueName">Nazwa kolumny danych reprezentującej datę.</param>
     /// <param name="timePeriodInDays">Minimalna liczba dni różnicy pomiędzy obserwacjami.</param>
-    public ReturnsAfterTimePeriodCondition(string dateValueName, int timePeriodInDays)
+    /// 
+    public ReturnsAfterTimePeriodCondition(int timePeriodInDays)
     {
-        DateValueName = dateValueName;
         TimePeriodInDays = timePeriodInDays;
     }
 
@@ -29,7 +27,6 @@ public class ReturnsAfterTimePeriodCondition : IReturningSpecimenCondition
     {
     }
 
-    public string DateValueName { get; set; } = null!;
     public int TimePeriodInDays { get; set; } = 300;
 
     public bool IsReturning(Specimen specimen)
@@ -42,9 +39,7 @@ public class ReturnsAfterTimePeriodCondition : IReturningSpecimenCondition
         }
 
         var datesAreInOrder = specimen.Observations
-            .Select(o => DataTypeHelpers.ConvertToDate(o.GetValue(DateValueName))?.Date)
-            .Where(d => d != null)
-            .Select(d => d!.Value)
+            .Select(o => o.Date)
             .OrderBy(d => d)
             .ToArray();
 

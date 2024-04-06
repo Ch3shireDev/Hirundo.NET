@@ -1,5 +1,4 @@
-﻿using Hirundo.Commons;
-using Hirundo.Commons.Models;
+﻿using Hirundo.Commons.Models;
 using Hirundo.Processors.Returning.Conditions;
 using NUnit.Framework;
 using System.Globalization;
@@ -13,11 +12,11 @@ public class ReturnsAfterTimePeriodConditionTests
     public void GivenTwoObservationsWithDistantDates_WhenIsReturning_ReturnsTrue()
     {
         // Arrange
-        var filter = new ReturnsAfterTimePeriodCondition("DATE", 20);
+        var filter = new ReturnsAfterTimePeriodCondition(20);
 
         var specimen = new Specimen("AB123", [
-            new Observation(["DATE"], [DateTime.Parse("2021-06-01", CultureInfo.InvariantCulture)]),
-            new Observation(["DATE"], [DateTime.Parse("2021-06-21", CultureInfo.InvariantCulture)])
+            new Observation{Date = new DateTime(2021, 06, 01)},
+            new Observation{Date = new DateTime(2021, 06, 21)}
         ]);
 
         // Act
@@ -31,12 +30,12 @@ public class ReturnsAfterTimePeriodConditionTests
     public void GivenMoreThanTwoObservationsWithDistantDates_WhenIsReturning_ReturnsTrue()
     {
         // Arrange
-        var filter = new ReturnsAfterTimePeriodCondition("DATE", 20);
+        var filter = new ReturnsAfterTimePeriodCondition(20);
 
         var specimen = new Specimen("AB123", [
-            new Observation(["DATE"], [DateTime.Parse("2021-06-01", CultureInfo.InvariantCulture)]),
-            new Observation(["DATE"], [DateTime.Parse("2021-06-05", CultureInfo.InvariantCulture)]),
-            new Observation(["DATE"], [DateTime.Parse("2021-06-27", CultureInfo.InvariantCulture)])
+            new Observation{Date = new DateTime(2021, 06, 01)},
+            new Observation{Date = new DateTime(2021, 06, 05)},
+            new Observation{Date = new DateTime(2021, 06, 27)},
         ]);
 
         // Act
@@ -50,7 +49,7 @@ public class ReturnsAfterTimePeriodConditionTests
     public void GivenMoreThanTwoObservationsWithDistanceLessThanTimePeriod_WhenIsReturning_ReturnsFalse()
     {
         // Arrange
-        var filter = new ReturnsAfterTimePeriodCondition("DATE", 20);
+        var filter = new ReturnsAfterTimePeriodCondition(20);
 
         var specimen = new Specimen("AB123",
         [
@@ -70,12 +69,16 @@ public class ReturnsAfterTimePeriodConditionTests
     public void GivenDateAsString_WhenIsReturning_ReturnsTrue()
     {
         // Arrange
-        var filter = new ReturnsAfterTimePeriodCondition("DATE", 20);
+        var filter = new ReturnsAfterTimePeriodCondition(20);
 
         var specimen = new Specimen("AB123", [
-            new Observation(["DATE"], ["2021-06-01"]),
-            new Observation(["DATE"], ["2021-06-05"]),
-            new Observation(["DATE"], ["2021-06-27"])
+            //new Observation(["DATE"], ["2021-06-01"]),
+            //new Observation(["DATE"], ["2021-06-05"]),
+            //new Observation(["DATE"], ["2021-06-27"])
+            new Observation{Date = new DateTime(2021, 06, 01)},
+            new Observation{Date = new DateTime(2021, 06, 05)},
+            new Observation{Date = new DateTime(2021, 06, 27)},
+
         ]);
 
         // Act

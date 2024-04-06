@@ -27,18 +27,15 @@ public class IsInSeasonViewModelTests
     public void GivenTextDataType_AfterSetValueInViewModel_ConditionHasSetValue()
     {
         // Arrange
-        _condition.DateColumnName = string.Empty;
         _condition.Season = new Season();
 
         // Act
-        _viewModel.ValueName = "DATE";
         _viewModel.StartMonth = 7;
         _viewModel.StartDay = 15;
         _viewModel.EndMonth = 8;
         _viewModel.EndDay = 20;
 
         // Assert
-        Assert.That(_condition.DateColumnName, Is.EqualTo("DATE"));
         Assert.That(_condition.Season.StartMonth, Is.EqualTo(7));
         Assert.That(_condition.Season.StartDay, Is.EqualTo(15));
         Assert.That(_condition.Season.EndMonth, Is.EqualTo(8));
