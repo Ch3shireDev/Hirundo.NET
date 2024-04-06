@@ -350,7 +350,7 @@ public sealed class MainViewModel : ObservableObject
         }
     }
 
-    public ApplicationParameters EnsureExistingDataSources(ApplicationParameters config)
+    public static ApplicationParameters EnsureExistingDataSources(ApplicationParameters config)
     {
         foreach (var database in config.Databases.Databases)
         {

@@ -4,67 +4,51 @@
 ///     Zbiór wyników zawierający listę osobników powracających wraz z wartościami kluczowymi,
 ///     wartościami pomiarowymi oraz wartościami statystycznymi.
 /// </summary>
-public class ReturningSpecimenSummary(Specimen returningSpecimen, IList<Specimen> population, IList<StatisticalData> statistics)
+public class ReturningSpecimenSummary
 {
-    /// <summary>
-    ///     Osobnik powracający.
-    /// </summary>
-    public Specimen ReturningSpecimen { get; } = returningSpecimen;
-
-    /// <summary>
-    ///     Dane populacji.
-    /// </summary>
-    public IList<Specimen> Population { get; } = population;
-
-    /// <summary>
-    ///     Dane statystyczne.
-    /// </summary>
-    public IList<StatisticalData> Statistics { get; } = statistics;
-
-    public string[] GetHeaders()
+    public ReturningSpecimenSummary(string[] headers, object?[] values)
     {
-        var returningSpecimenHeaders = GetValueHeaders();
-        var statisticsHeaders = GetStatisticsHeaders();
-        return [.. returningSpecimenHeaders, .. statisticsHeaders];
+        Headers = headers;
+        Values = values;
     }
 
-    public object?[] GetValues()
-    {
-        var specimenData = ReturningSpecimen.GetValues();
-        var statisticalData = Statistics.Select(s => s.Value);
-        return [.. specimenData, .. statisticalData];
-    }
+    public IReadOnlyList<string> Headers { get; }
+    public IReadOnlyList<object?> Values { get; }
 
-    public object?[] GetValues(string[] headers)
+    public object?[] SelectValues(IList<string> headers)
     {
         ArgumentNullException.ThrowIfNull(headers);
 
-        var output = new object?[headers.Length];
+        var allValues = Values;
+        var allHeaders = Headers.ToArray();
 
-        for (var i = 0; i < headers.Length; i++)
+        var output = new object?[headers.Count];
+        foreach (var header in allHeaders)
         {
-            var header = headers[i];
-
-            if (ReturningSpecimen.GetHeaders().Contains(header))
-            {
-                output[i] = ReturningSpecimen.GetValue(header);
-            }
-            else
-            {
-                output[i] = Statistics.FirstOrDefault(s => s.Name == header)?.Value;
-            }
+            if (!headers.Contains(header)) continue;
+            output[headers.IndexOf(header)] = allValues[Array.IndexOf(allHeaders, header)];
         }
 
         return output;
     }
 
-    public string[] GetValueHeaders()
+    public static string[] GetHeadersInternal(Specimen returningSpecimen, IList<StatisticalData> statistics)
     {
-        return ReturningSpecimen.GetHeaders();
+        ArgumentNullException.ThrowIfNull(returningSpecimen);
+        ArgumentNullException.ThrowIfNull(statistics);
+
+        var returningSpecimenHeaders = returningSpecimen.GetHeaders();
+        var statisticsHeaders = statistics.Select(s => s.Name).ToArray();
+        return [.. returningSpecimenHeaders, .. statisticsHeaders];
     }
 
-    public string[] GetStatisticsHeaders()
+    public static object?[] GetValuesInternal(Specimen returningSpecimen, IList<StatisticalData> statistics)
     {
-        return Statistics.Select(s => s.Name).ToArray();
+        ArgumentNullException.ThrowIfNull(returningSpecimen);
+        ArgumentNullException.ThrowIfNull(statistics);
+
+        var specimenData = returningSpecimen.GetValues();
+        var statisticalData = statistics.Select(s => s.Value);
+        return [.. specimenData, .. statisticalData];
     }
 }

@@ -2,20 +2,16 @@
 using Hirundo.Commons.Models;
 
 namespace Hirundo.Writers;
-public class XlsxSummaryWriter : ISummaryWriter, IDisposable, IAsyncDisposable
+public class XlsxSummaryWriter(StreamWriter stream, CancellationToken? cancellationToken = null) : ISummaryWriter, IDisposable, IAsyncDisposable
 {
-    private readonly StreamWriter _streamWriter;
-    private readonly CancellationToken? _cancellationToken;
+    private readonly StreamWriter _streamWriter = stream;
+    private readonly CancellationToken? _cancellationToken = cancellationToken;
 
     public bool IncludeExplanation { get; set; } = false;
     public string Title { get; set; } = string.Empty;
     public string Subtitle { get; set; } = string.Empty;
 
-    public XlsxSummaryWriter(StreamWriter stream, CancellationToken? cancellationToken = null)
-    {
-        _streamWriter = stream;
-        _cancellationToken = cancellationToken;
-    }
+    private static readonly string[] separator = ["\r\n", "\n"];
 
     public void Write(ReturningSpecimensResults results)
     {
@@ -53,11 +49,13 @@ public class XlsxSummaryWriter : ISummaryWriter, IDisposable, IAsyncDisposable
         }
         else
         {
-            var headers = results.Results[0].GetHeaders();
-            var values = results.Results.Select(r => r.GetValues(headers)).ToArray();
+            var headers = results.Results[0].Headers;
+            var values = results.Results.Select(r => r.Values).ToArray();
 
-            for (var i = 0; i < headers.Length; i++)
+            for (var i = 0; i < headers.Count; i++)
             {
+                _cancellationToken?.ThrowIfCancellationRequested();
+
                 var headerCell = summary.Cell(startingRow, i + 1);
                 headerCell.Value = headers[i];
                 headerCell.Style.Font.Bold = true;
@@ -65,7 +63,7 @@ public class XlsxSummaryWriter : ISummaryWriter, IDisposable, IAsyncDisposable
 
             for (var i = 0; i < values.Length; i++)
             {
-                for (var j = 0; j < headers.Length; j++)
+                for (var j = 0; j < headers.Count; j++)
                 {
                     summary.Cell(i + startingRow + 1, j + 1).Value = GetCellValue(values[i][j]);
                 }
@@ -78,7 +76,7 @@ public class XlsxSummaryWriter : ISummaryWriter, IDisposable, IAsyncDisposable
         {
             var worksheet = workbook.AddWorksheet("Explanation");
 
-            var lines = results.Explanation.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
+            var lines = results.Explanation.Split(separator, StringSplitOptions.None);
 
             for (var i = 0; i < lines.Length; i++)
             {
@@ -95,22 +93,22 @@ public class XlsxSummaryWriter : ISummaryWriter, IDisposable, IAsyncDisposable
         summary.Columns().AdjustToContents();
     }
 
-    private void MergeWholeRow(int startingRow, IXLWorksheet summary, ReturningSpecimensResults results)
+    private static void MergeWholeRow(int startingRow, IXLWorksheet summary, ReturningSpecimensResults results)
     {
         summary.Range(startingRow, 1, startingRow, GetColumnsNumber(results)).Merge();
     }
 
-    public int GetColumnsNumber(ReturningSpecimensResults results)
+    public static int GetColumnsNumber(ReturningSpecimensResults results)
     {
         if (results.Results.Count == 0)
         {
             return 1;
         }
 
-        return results.Results[0].GetHeaders().Length;
+        return results.Results[0].Headers.Count;
     }
 
-    private XLCellValue GetCellValue(object? value)
+    private static XLCellValue GetCellValue(object? value)
     {
         var cellValue = new XLCellValue();
 

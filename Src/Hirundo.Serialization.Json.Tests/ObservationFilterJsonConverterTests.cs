@@ -15,10 +15,10 @@ public class ObservationFilterJsonConverterTests
         TypeNameHandling = TypeNameHandling.None,
         NullValueHandling = NullValueHandling.Ignore,
         Formatting = Formatting.Indented,
-        Converters = new List<JsonConverter>
-        {
+        Converters =
+        [
             new HirundoJsonConverter()
-        }
+        ]
     };
 
     [Test]

@@ -1,5 +1,4 @@
 ﻿using ClosedXML.Excel;
-using Hirundo.Commons;
 using Hirundo.Commons.Models;
 using NUnit.Framework;
 
@@ -63,9 +62,7 @@ public class XlsxSummaryWriterTests
     public void GivenReturningSpecimen_WhenWrite_CreatesSpreadsheetWithHeaderAndRecord()
     {
         // Arrange
-        var observations = new Observation(["COL1"], ["ROW1"]);
-        var returningSpecimen = new Specimen("ABC123", [observations]);
-        var summary = new ReturningSpecimenSummary(returningSpecimen, [], []);
+        var summary = new ReturningSpecimenSummary(["COL1"], ["ROW1"]);
         var results = new ReturningSpecimensResults(summary);
 
         // Act
@@ -82,9 +79,7 @@ public class XlsxSummaryWriterTests
     public void GivenNumberInData_WhenWrite_CreatesNumberInsteadOfText()
     {
         // Arrange
-        var observations = new Observation(["COL1"], [1]);
-        var returningSpecimen = new Specimen("ABC123", [observations]);
-        var summary = new ReturningSpecimenSummary(returningSpecimen, [], []);
+        var summary = new ReturningSpecimenSummary(["COL1"], [1]);
         var results = new ReturningSpecimensResults(summary);
 
         // Act
@@ -100,9 +95,7 @@ public class XlsxSummaryWriterTests
     public void GivenTitle_WhenWrite_AddsTitleToSpreadsheet()
     {
         // Arrange
-        var observations = new Observation(["COL1"], [1]);
-        var returningSpecimen = new Specimen("ABC123", [observations]);
-        var summary = new ReturningSpecimenSummary(returningSpecimen, [], []);
+        var summary = new ReturningSpecimenSummary(["COL1"], [1]);
         var results = new ReturningSpecimensResults(summary);
 
         _writer.Title = "Zestawienie dla XXX";
@@ -123,9 +116,7 @@ public class XlsxSummaryWriterTests
     public void GivenSubtitle_WhenWrite_AddsSubtitleToSpreadsheet()
     {
         // Arrange
-        var observations = new Observation(["COL1"], [1]);
-        var returningSpecimen = new Specimen("ABC123", [observations]);
-        var summary = new ReturningSpecimenSummary(returningSpecimen, [], []);
+        var summary = new ReturningSpecimenSummary(["COL1"], [1]);
         var results = new ReturningSpecimensResults(summary);
 
         _writer.Subtitle = "Dodatkowy opis dla XXX";
@@ -146,9 +137,7 @@ public class XlsxSummaryWriterTests
     public void GivenTitleAndSubtitle_WhenWrite_AddsBothToSpreadsheet()
     {
         // Arrange
-        var observations = new Observation(["COL1"], [1]);
-        var returningSpecimen = new Specimen("ABC123", [observations]);
-        var summary = new ReturningSpecimenSummary(returningSpecimen, [], []);
+        var summary = new ReturningSpecimenSummary(["COL1"], [1]);
         var results = new ReturningSpecimensResults(summary);
 
         _writer.Title = "Tytuł";

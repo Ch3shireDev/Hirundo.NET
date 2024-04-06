@@ -57,7 +57,7 @@ public sealed class CsvSummaryWriter(TextWriter streamWriter, CancellationToken?
             {
                 token?.ThrowIfCancellationRequested();
 
-                var values = record.GetValues(headers);
+                var values = record.SelectValues(headers);
 
                 foreach (var value in values)
                 {
@@ -80,17 +80,12 @@ public sealed class CsvSummaryWriter(TextWriter streamWriter, CancellationToken?
 
     private static string[] GetHeaders(IReadOnlyCollection<ReturningSpecimenSummary> records)
     {
-        var headersList = records.Select(r => r.GetValueHeaders()).ToList();
-        var highestCount = headersList.Max(h => h.Length);
-        var valueHeaders = headersList.First(h => h.Length == highestCount).ToArray();
+        if (records.Count == 0)
+        {
+            return [];
+        }
 
-        var statisticsHeaders = records
-            .SelectMany(r => r.GetStatisticsHeaders())
-            .Distinct()
-            .OrderBy(h => h)
-            .ToList();
-
-        return [.. valueHeaders, .. statisticsHeaders];
+        return [..records.First().Headers];
     }
 
     public async ValueTask DisposeAsync()

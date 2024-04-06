@@ -13,6 +13,8 @@ public class CompositeSummaryWriter(params ISummaryWriter[] writers) : ISummaryW
 
     public void Dispose()
     {
+        GC.SuppressFinalize(this);
+
         foreach (var writer in writers)
         {
             if (writer is IDisposable disposableWriter)
@@ -28,6 +30,8 @@ public class CompositeSummaryWriter(params ISummaryWriter[] writers) : ISummaryW
 
     public async ValueTask DisposeAsync()
     {
+        GC.SuppressFinalize(this);
+
         foreach (var writer in writers)
         {
             if (writer is IAsyncDisposable asyncDisposableWriter)

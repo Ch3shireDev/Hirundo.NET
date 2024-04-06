@@ -26,6 +26,9 @@ public class SummaryProcessor(
         var population = populationProcessor.GetPopulation(returningSpecimen, totalSpecimens).ToArray();
         var statistics = statisticsProcessor.GetStatistics(population).ToArray();
 
-        return new ReturningSpecimenSummary(returningSpecimen, population, statistics);
+        var headers = ReturningSpecimenSummary.GetHeadersInternal(returningSpecimen, statistics);
+        var values = ReturningSpecimenSummary.GetValuesInternal(returningSpecimen, statistics);
+
+        return new ReturningSpecimenSummary(headers, values);
     }
 }
