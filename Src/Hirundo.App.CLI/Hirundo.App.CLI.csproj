@@ -33,7 +33,6 @@
 		<ProjectReference Include="..\Hirundo.App\Hirundo.App.csproj" />
 		<ProjectReference Include="..\Hirundo.Databases\Hirundo.Databases.csproj" />
 		<ProjectReference Include="..\Hirundo.Processors.Population\Hirundo.Processors.Population.csproj" />
-		<ProjectReference Include="..\Hirundo.Processors.Specimens\Hirundo.Processors.Specimens.csproj" />
 		<ProjectReference Include="..\Hirundo.Processors.Statistics\Hirundo.Processors.Statistics.csproj" />
 		<ProjectReference Include="..\Hirundo.Processors.Summary\Hirundo.Processors.Summary.csproj" />
 		<ProjectReference Include="..\Hirundo.Serialization.Json\Hirundo.Serialization.Json.csproj" />

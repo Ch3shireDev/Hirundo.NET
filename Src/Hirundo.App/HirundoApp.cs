@@ -5,7 +5,6 @@ using Hirundo.Processors.Computed;
 using Hirundo.Processors.Observations;
 using Hirundo.Processors.Population;
 using Hirundo.Processors.Returning;
-using Hirundo.Processors.Specimens;
 using Hirundo.Processors.Statistics;
 using Hirundo.Processors.Summary;
 using Hirundo.Writers;
@@ -20,7 +19,6 @@ public class HirundoApp : IHirundoApp
     private readonly IObservationConditionsBuilder _observationConditionsBuilder = new ObservationConditionsBuilder();
     private readonly IPopulationProcessorBuilder _populationProcessorBuilder = new PopulationProcessorBuilder();
     private readonly IReturningSpecimenConditionsBuilder _returningSpecimenConditionsBuilder = new ReturningSpecimenConditionsBuilder();
-    private readonly ISpecimensProcessorBuilder _specimensProcessorBuilder = new SpecimensProcessorBuilder();
     private readonly IStatisticsProcessorBuilder _statisticsProcessorBuilder = new StatisticsProcessorBuilder();
     private readonly SummaryProcessorBuilder _summaryProcessorBuilder = new();
     private readonly ISummaryWriterBuilder _summaryWriterBuilder = new SummaryWriterBuilder();
@@ -41,7 +39,6 @@ public class HirundoApp : IHirundoApp
         IObservationConditionsBuilder observationsBuilder,
         IReturningSpecimenConditionsBuilder returningBuilder,
         IPopulationProcessorBuilder populationProcessorBuilder,
-        ISpecimensProcessorBuilder specimensProcessorBuilder,
         IStatisticsProcessorBuilder statisticsProcessorBuilder,
         ISummaryWriterBuilder summaryWriterBuilder
     )
@@ -51,7 +48,6 @@ public class HirundoApp : IHirundoApp
         _observationConditionsBuilder = observationsBuilder;
         _returningSpecimenConditionsBuilder = returningBuilder;
         _populationProcessorBuilder = populationProcessorBuilder;
-        _specimensProcessorBuilder = specimensProcessorBuilder;
         _statisticsProcessorBuilder = statisticsProcessorBuilder;
         _summaryWriterBuilder = summaryWriterBuilder;
     }
@@ -90,12 +86,6 @@ public class HirundoApp : IHirundoApp
             .WithCancellationToken(token)
             .Build();
 
-        var specimensProcessor = _specimensProcessorBuilder
-            .NewBuilder()
-            .WithSpecimensParameters(applicationConfig.Specimens)
-            .WithCancellationToken(token)
-            .Build();
-
         var statisticsProcessor = _statisticsProcessorBuilder
             .NewBuilder()
             .WithStatisticsOperations(applicationConfig.Statistics.Operations)
@@ -124,7 +114,7 @@ public class HirundoApp : IHirundoApp
 
         Log.Information("Łączenie obserwacji w osobniki...");
 
-        var specimens = specimensProcessor.GetSpecimens(selectedObservations).ToArray();
+        Specimen[] specimens = GetSpecimens(selectedObservations);
 
         Log.Information($"Wybrano {specimens.Length} osobników.");
 
@@ -160,5 +150,13 @@ public class HirundoApp : IHirundoApp
         {
             Log.Information($"Zapisano dane wynikowe do pliku {writer.Path}.");
         }
+    }
+
+    private static Specimen[] GetSpecimens(Observation[] selectedObservations)
+    {
+        return selectedObservations
+            .GroupBy(observation => observation.Ring)
+            .Select(group => new Specimen(group.Key, [.. group.OrderBy(o => o.Date)]))
+            .ToArray();
     }
 }

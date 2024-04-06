@@ -1,4 +1,4 @@
-﻿using Hirundo.Commons;
+﻿using Hirundo.Commons.Models;
 using Hirundo.Processors.Population.Conditions;
 
 namespace Hirundo.Processors.Population;

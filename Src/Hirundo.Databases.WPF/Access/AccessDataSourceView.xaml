@@ -71,6 +71,8 @@
                 </b:Interaction.Triggers>
             </ComboBox>
         </WrapPanel>
+        <wpf:LabelsComboBox ValueLabel="Nazwa pola obrączki" ValueName="{Binding RingIdentifier}" Repository="{Binding Repository}"/>
+        <wpf:LabelsComboBox ValueLabel="Nazwa pola daty" ValueName="{Binding DateIdentifier}" Repository="{Binding Repository}"/>
         <WrapPanel>
             <Button
                 Command="{Binding RemoveValuesCommand}"

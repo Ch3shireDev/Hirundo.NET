@@ -7,7 +7,6 @@ using Hirundo.Processors.Computed.WPF;
 using Hirundo.Processors.Observations.WPF;
 using Hirundo.Processors.Population.WPF;
 using Hirundo.Processors.Returning.WPF;
-using Hirundo.Processors.Specimens.WPF;
 using Hirundo.Processors.Statistics.WPF;
 using Hirundo.Writers.WPF;
 using Moq;
@@ -37,7 +36,6 @@ internal static class ContainerExtensions
         builder.RegisterType<ObservationsModel>().AsSelf().SingleInstance();
         builder.RegisterType<PopulationModel>().AsSelf().SingleInstance();
         builder.RegisterType<ReturningSpecimensModel>().AsSelf().SingleInstance();
-        builder.RegisterType<SpecimensModel>().AsSelf().SingleInstance();
         builder.RegisterType<StatisticsModel>().AsSelf().SingleInstance();
         builder.RegisterType<WritersModel>().AsSelf().SingleInstance();
         builder.RegisterType<ComputedValuesModel>().AsSelf().SingleInstance();

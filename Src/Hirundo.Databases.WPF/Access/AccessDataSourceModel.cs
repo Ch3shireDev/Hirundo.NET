@@ -18,6 +18,18 @@ public class AccessDataSourceModel(AccessDatabaseParameters parameters, IDataLab
         set => parameters.Table = value;
     }
 
+    public string RingIdentifier
+    {
+        get => parameters.RingIdentifier;
+        set => parameters.RingIdentifier = value;
+    }
+
+    public string DateIdentifier
+    {
+        get => parameters.DateIdentifier;
+        set => parameters.DateIdentifier = value;
+    }
+
     public IList<ColumnParameters> Columns => parameters.Columns;
     public IList<DatabaseCondition> Conditions => parameters.Conditions;
 }

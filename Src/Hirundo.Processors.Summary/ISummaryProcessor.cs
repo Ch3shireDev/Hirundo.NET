@@ -1,5 +1,4 @@
-﻿using Hirundo.Commons;
-using Hirundo.Commons.Models;
+﻿using Hirundo.Commons.Models;
 
 namespace Hirundo.Processors.Summary;
 

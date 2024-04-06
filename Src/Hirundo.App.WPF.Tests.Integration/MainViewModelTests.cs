@@ -14,7 +14,6 @@ using Hirundo.Processors.Population;
 using Hirundo.Processors.Population.Conditions;
 using Hirundo.Processors.Returning;
 using Hirundo.Processors.Returning.Conditions;
-using Hirundo.Processors.Specimens;
 using Hirundo.Processors.Statistics;
 using Hirundo.Processors.Statistics.Operations;
 using Hirundo.Processors.Statistics.Operations.Outliers;
@@ -216,28 +215,6 @@ public class MainViewModelTests
         Assert.That(isInSeasonFilter.Season.StartDay, Is.EqualTo(01));
         Assert.That(isInSeasonFilter.Season.EndMonth, Is.EqualTo(08));
         Assert.That(isInSeasonFilter.Season.EndDay, Is.EqualTo(15));
-    }
-
-    [Test]
-    public void GivenSpecimensParameters_WhenSaveConfig_ShouldResultWithSameConfig()
-    {
-        // Arrange
-        var config = new ApplicationParameters
-        {
-            Specimens = new SpecimensParameters
-            {
-                SpecimenIdentifier = "KEY"
-            }
-        };
-
-        // Act
-        _viewModel.UpdateConfig(config);
-        var result = _viewModel.GetConfig();
-
-        // Assert
-        Assert.That(result, Is.Not.Null);
-        Assert.That(result.Specimens, Is.Not.Null);
-        Assert.That(result.Specimens.SpecimenIdentifier, Is.EqualTo("KEY"));
     }
 
     [Test]

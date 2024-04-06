@@ -35,6 +35,26 @@ public class AccessDataSourceViewModel(AccessDataSourceModel model, IAccessMetad
         }
     }
 
+    public string RingIdentifier
+    {
+        get => model.RingIdentifier;
+        set
+        {
+            model.RingIdentifier = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string DateIdentifier
+    {
+        get => model.DateIdentifier;
+        set
+        {
+            model.DateIdentifier = value;
+            OnPropertyChanged();
+        }
+    }
+
     public ObservableCollection<string> DataColumns { get; } = [];
     public ObservableCollection<AccessTableMetadata> MetadatataTables { get; } = [];
     public ObservableCollection<string> Tables { get; } = [];

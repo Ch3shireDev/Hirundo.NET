@@ -1,5 +1,4 @@
-﻿using Hirundo.Commons;
-using Hirundo.Commons.Models;
+﻿using Hirundo.Commons.Models;
 using Hirundo.Processors.Statistics.Operations;
 using NUnit.Framework;
 using System.Collections;

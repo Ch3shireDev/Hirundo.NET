@@ -9,8 +9,8 @@
 		<PublishSingleFile>true</PublishSingleFile>
 		<EnableWindowsTargeting>true</EnableWindowsTargeting>
 		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
-		<AssemblyVersion>0.15.6</AssemblyVersion>
-		<FileVersion>0.15.6</FileVersion>
+		<AssemblyVersion>0.16</AssemblyVersion>
+		<FileVersion>0.16</FileVersion>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
 		<EnableNETAnalyzers>True</EnableNETAnalyzers>
 		<Title>Hirundo.NET</Title>
@@ -64,7 +64,6 @@
 		<ProjectReference Include="..\Hirundo.Processors.Observations.WPF\Hirundo.Processors.Observations.WPF.csproj" />
 		<ProjectReference Include="..\Hirundo.Processors.Population.WPF\Hirundo.Processors.Population.WPF.csproj" />
 		<ProjectReference Include="..\Hirundo.Processors.Returning.WPF\Hirundo.Processors.Returning.WPF.csproj" />
-		<ProjectReference Include="..\Hirundo.Processors.Specimens.WPF\Hirundo.Processors.Specimens.WPF.csproj" />
 		<ProjectReference Include="..\Hirundo.Processors.Statistics.WPF\Hirundo.Processors.Statistics.WPF.csproj" />
 		<ProjectReference Include="..\Hirundo.Serialization.Json\Hirundo.Serialization.Json.csproj" />
 		<ProjectReference Include="..\Hirundo.Writers.WPF\Hirundo.Writers.WPF.csproj" />

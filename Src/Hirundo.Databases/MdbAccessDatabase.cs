@@ -50,7 +50,10 @@ public class MdbAccessDatabase(AccessDatabaseParameters parameters, Cancellation
         while (reader.Read())
         {
             var dataValues = GetValuesFromReader(reader);
-            yield return new Observation(dataColumns, dataValues);
+            var observation = new Observation(dataColumns, dataValues);
+            observation.Ring = observation.GetValue<string>(parameters.RingIdentifier) ?? "";
+            observation.Date = observation.GetValue<DateTime>(parameters.DateIdentifier);
+            yield return observation;
 
             token?.ThrowIfCancellationRequested();
         }

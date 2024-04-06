@@ -170,26 +170,6 @@ public class ApplicationConfigJsonConverterTests
     }
 
     [Test]
-    public void GivenSpecimensConfigurationJson_WhenDeserialized_ThenAllPropertiesAreDeserialized()
-    {
-        // Arrange
-        var json = @"{
-          ""Specimens"": {
-            ""SpecimenIdentifier"": ""RING""
-          }
-        }";
-
-        // Act
-        var config = JsonConvert.DeserializeObject<ApplicationParameters>(json, _settings) ?? throw new SerializationException();
-
-        // Assert
-        Assert.That(config, Is.Not.Null);
-
-        Assert.That(config.Specimens, Is.Not.Null);
-        Assert.That(config.Specimens.SpecimenIdentifier, Is.EqualTo("RING"));
-    }
-
-    [Test]
     public void GivenReturningSpecimensConfigurationJson_WhenDeserialized_ThenAllPropertiesAreDeserialized()
     {
         // Arrange

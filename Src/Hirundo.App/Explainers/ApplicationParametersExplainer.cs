@@ -9,7 +9,6 @@ public class ApplicationParametersExplainer : ParametersExplainer<ApplicationPar
     {
         var sb = new StringBuilder();
         sb.AppendLine(ExplainerHelpers.Explain(config.Databases));
-        sb.AppendLine(ExplainerHelpers.Explain(config.Specimens));
         sb.AppendLine(ExplainerHelpers.Explain(config.ComputedValues));
         sb.AppendLine(ExplainerHelpers.Explain(config.Observations));
         sb.AppendLine(ExplainerHelpers.Explain(config.ReturningSpecimens));

@@ -1,5 +1,6 @@
 ﻿using Hirundo.Commons;
 using Hirundo.Commons.Helpers;
+using Hirundo.Commons.Models;
 
 namespace Hirundo.Processors.Returning.Conditions;
 

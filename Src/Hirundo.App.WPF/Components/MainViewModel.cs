@@ -4,7 +4,6 @@ using Hirundo.App.WPF.Helpers;
 using Hirundo.Commons.Helpers;
 using Hirundo.Commons.Models;
 using Hirundo.Commons.WPF;
-using Hirundo.Processors.Specimens.WPF;
 using Hirundo.Writers;
 using Hirundo.Writers.WPF;
 using Microsoft.Win32;
@@ -37,14 +36,12 @@ public sealed class MainViewModel : ObservableObject
         ObservationsViewModel = new ParametersBrowserViewModel(model.ObservationParametersBrowserModel);
         ReturningSpecimensViewModel = new ParametersBrowserViewModel(model.ReturningSpecimensModel);
         PopulationViewModel = new ParametersBrowserViewModel(model.PopulationModel);
-        SpecimensViewModel = new SpecimensViewModel(model.SpecimensModel, model.Repository);
         StatisticsViewModel = new ParametersBrowserViewModel(model.StatisticsModel);
         WriterViewModel = new ParametersBrowserViewModel(model.WriterModel);
 
         ViewModels =
         [
             DataSourceViewModel,
-            SpecimensViewModel,
             ComputedValuesViewModel,
             ObservationsViewModel,
             ReturningSpecimensViewModel,
@@ -66,7 +63,6 @@ public sealed class MainViewModel : ObservableObject
     public ParametersBrowserViewModel ReturningSpecimensViewModel { get; }
     public ParametersBrowserViewModel StatisticsViewModel { get; }
     public ParametersBrowserViewModel WriterViewModel { get; }
-    public SpecimensViewModel SpecimensViewModel { get; }
     public ObservableCollection<LogEvent> LogEventsItems { get; } = [];
     public ICommand PreviousCommand => new RelayCommand(Previous, CanGoPrevious);
     public ICommand NextCommand => new RelayCommand(Next, CanGoNext);
@@ -226,13 +222,12 @@ public sealed class MainViewModel : ObservableObject
         OnPropertyChanged(nameof(ObservationsViewModel));
         OnPropertyChanged(nameof(ReturningSpecimensViewModel));
         OnPropertyChanged(nameof(PopulationViewModel));
-        OnPropertyChanged(nameof(SpecimensViewModel));
         OnPropertyChanged(nameof(StatisticsViewModel));
         OnPropertyChanged(nameof(WriterViewModel));
         SelectedViewModel = DataSourceViewModel;
     }
 
-    public string GetFileSourcePathFromUser(IFileSource fileSource)
+    private static string GetFileSourcePathFromUser(IFileSource fileSource)
     {
         var dialog = new OpenFileDialog
         {

@@ -9,7 +9,6 @@ using Hirundo.Processors.Computed.WPF;
 using Hirundo.Processors.Observations.WPF;
 using Hirundo.Processors.Population.WPF;
 using Hirundo.Processors.Returning.WPF;
-using Hirundo.Processors.Specimens.WPF;
 using Hirundo.Processors.Statistics.WPF;
 using Hirundo.Serialization.Json;
 using Hirundo.Writers.WPF;
@@ -39,7 +38,7 @@ public partial class App : Application
         }
     }
 
-    private void Start()
+    private static void Start()
     {
         var builder = new ContainerBuilder();
 
@@ -52,7 +51,6 @@ public partial class App : Application
 
         builder.RegisterType<PopulationModel>().AsSelf().SingleInstance();
         builder.RegisterType<ReturningSpecimensModel>().AsSelf().SingleInstance();
-        builder.RegisterType<SpecimensModel>().AsSelf().SingleInstance();
         builder.RegisterType<StatisticsModel>().AsSelf().SingleInstance();
         builder.RegisterType<WritersModel>().AsSelf().SingleInstance();
 

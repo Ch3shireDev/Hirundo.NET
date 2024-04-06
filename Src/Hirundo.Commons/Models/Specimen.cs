@@ -1,6 +1,4 @@
-﻿using Hirundo.Commons.Models;
-
-namespace Hirundo.Commons;
+﻿namespace Hirundo.Commons.Models;
 
 /// <summary>
 ///     Klasa reprezentująca zaobserwowane zwierzę oznaczone obrączką z unikalnym numerem. Osobnik charakteryzuje się

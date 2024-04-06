@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:wpf4="clr-namespace:Hirundo.Processors.Specimens.WPF;assembly=Hirundo.Processors.Specimens.WPF"
              xmlns:helpers="clr-namespace:Hirundo.Commons.WPF.Helpers;assembly=Hirundo.Commons.WPF"
              xmlns:wpf11="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
              xmlns:helpers2="clr-namespace:Hirundo.App.WPF.Helpers"
@@ -38,12 +37,7 @@
             <wpf11:ParametersBrowserView />
         </DataTemplate>
 
-        <DataTemplate DataType="{x:Type wpf4:SpecimensViewModel}">
-            <wpf4:SpecimensView />
-        </DataTemplate>
-
         <helpers2:ViewModelToTabItemHeaderConverter x:Key="ViewModelToTabItemHeaderConverter" />
-
         <helpers:LogEventMessageConverter x:Key="LogEventConverter" />
         <helpers:LogEventToColorConverter x:Key="LogEventToColorConverter" />
     </UserControl.Resources>

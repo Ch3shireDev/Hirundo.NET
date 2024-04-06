@@ -4,7 +4,6 @@ using Hirundo.Processors.Computed.WPF;
 using Hirundo.Processors.Observations.WPF;
 using Hirundo.Processors.Population.WPF;
 using Hirundo.Processors.Returning.WPF;
-using Hirundo.Processors.Specimens.WPF;
 using Hirundo.Processors.Statistics.WPF;
 using Hirundo.Writers.WPF;
 using Serilog;
@@ -17,7 +16,6 @@ public class MainModel(
     ObservationsModel observationParametersBrowserModel,
     PopulationModel populationModel,
     ReturningSpecimensModel returningSpecimensModel,
-    SpecimensModel specimensModel,
     StatisticsModel statisticsModel,
     WritersModel writerModel,
     IDataLabelRepository repository,
@@ -29,7 +27,6 @@ public class MainModel(
     public ObservationsModel ObservationParametersBrowserModel { get; set; } = observationParametersBrowserModel;
     public PopulationModel PopulationModel { get; set; } = populationModel;
     public ReturningSpecimensModel ReturningSpecimensModel { get; set; } = returningSpecimensModel;
-    public SpecimensModel SpecimensModel { get; set; } = specimensModel;
     public StatisticsModel StatisticsModel { get; set; } = statisticsModel;
     public WritersModel WriterModel { get; set; } = writerModel;
     public IDataLabelRepository Repository { get; set; } = repository;
@@ -52,7 +49,6 @@ public class MainModel(
         ObservationParametersBrowserModel.ParametersContainer = config.Observations;
         PopulationModel.ParametersContainer = config.Population;
         ReturningSpecimensModel.ParametersContainer = config.ReturningSpecimens;
-        SpecimensModel.SpecimensProcessorParameters = config.Specimens;
         StatisticsModel.ParametersContainer = config.Statistics;
         WriterModel.ParametersContainer = config.Results;
     }
@@ -66,7 +62,6 @@ public class MainModel(
             Observations = ObservationParametersBrowserModel.ParametersContainer,
             Population = PopulationModel.ParametersContainer,
             ReturningSpecimens = ReturningSpecimensModel.ParametersContainer,
-            Specimens = SpecimensModel.SpecimensProcessorParameters,
             Statistics = StatisticsModel.ParametersContainer,
             Results = WriterModel.ParametersContainer
         };

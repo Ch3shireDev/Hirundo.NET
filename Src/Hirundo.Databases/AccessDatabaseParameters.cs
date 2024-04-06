@@ -21,6 +21,15 @@ public class AccessDatabaseParameters : IDatabaseParameters, IFileSource
     public string Table { get; set; } = null!;
 
     /// <summary>
+    ///     Nazwa kolumny identyfikującej osobnika.
+    /// </summary>
+    public string RingIdentifier { get; set; } = null!;
+    /// <summary>
+    ///     Nazwa kolumny identyfikującej datę.
+    /// </summary>
+    public string DateIdentifier { get; set; } = null!;
+
+    /// <summary>
     ///     Lista kolumn z danymi.
     /// </summary>
     public IList<ColumnParameters> Columns { get; init; } = [];
@@ -29,4 +38,5 @@ public class AccessDatabaseParameters : IDatabaseParameters, IFileSource
     ///     Lista warunków do spełnienia przez kolumny danych (klauzula WHERE).
     /// </summary>
     public IList<DatabaseCondition> Conditions { get; init; } = [];
+
 }

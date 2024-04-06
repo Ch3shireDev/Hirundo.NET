@@ -14,6 +14,9 @@ public class Observation
     private string[] _names = null!;
     private object?[] _values = null!;
 
+    public string Ring { get; set; } = string.Empty;
+    public DateTime Date { get; set; } = DateTime.MinValue;
+
     /// <summary>
     ///     Konstruktor bezparametrowy.
     /// </summary>
