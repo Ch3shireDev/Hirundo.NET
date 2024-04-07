@@ -132,9 +132,7 @@ public class HirundoApp : IHirundoApp
             .WithTotalPopulation(specimens)
             .Build();
 
-        var summary = returningSpecimens
-            .Select(summaryProcessor.GetSummary)
-            .ToList();
+        List<ReturningSpecimenSummary> summary = ProcessSummaries(returningSpecimens, summaryProcessor);
 
         var results = new ReturningSpecimensResults
         {
@@ -150,6 +148,26 @@ public class HirundoApp : IHirundoApp
         {
             Log.Information($"Zapisano dane wynikowe do pliku {writer.Path}.");
         }
+    }
+
+    private static List<ReturningSpecimenSummary> ProcessSummaries(Specimen[] returningSpecimens, ISummaryProcessor summaryProcessor)
+    {
+        var summary = new List<ReturningSpecimenSummary>();
+
+        var total = returningSpecimens.Length;
+        Log.Information("Przetwarzanie danych {total} powracających osobników.", total);
+
+        foreach (var returningSpecimen in returningSpecimens)
+        {
+            var index = Array.IndexOf(returningSpecimens, returningSpecimen) + 1;
+            Log.Information("Obliczanie statystyk: {index}/{total}.", index, total);
+            var summaryResult = summaryProcessor.GetSummary(returningSpecimen);
+            summary.Add(summaryResult);
+        }
+
+        Log.Information("Przetworzono dane statystyczne {total} powracających osobników.", total);
+
+        return summary;
     }
 
     private static Specimen[] GetSpecimens(Observation[] selectedObservations)

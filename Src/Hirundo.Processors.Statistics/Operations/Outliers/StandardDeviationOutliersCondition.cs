@@ -19,7 +19,7 @@ public class StandardDeviationOutliersCondition : IOutliersCondition
     public double Threshold { get; set; } = 3;
     public bool RejectOutliers { get; set; } = true;
 
-    public object[] GetOutliersIds(Specimen[] population, string valueName, object averageValue, object standardDeviationValue)
+    public string[] GetOutliersIds(Specimen[] population, string valueName, object averageValue, object standardDeviationValue)
     {
         ArgumentNullException.ThrowIfNull(population, nameof(population));
 
@@ -28,7 +28,7 @@ public class StandardDeviationOutliersCondition : IOutliersCondition
         var upperBound = GetUpperBound(averageValue, standardDeviationValue);
         var lowerBound = GetLowerBound(averageValue, standardDeviationValue);
 
-        var outliersIds = new List<object>();
+        var outliersIds = new List<string>();
 
         foreach (var specimen in population)
         {

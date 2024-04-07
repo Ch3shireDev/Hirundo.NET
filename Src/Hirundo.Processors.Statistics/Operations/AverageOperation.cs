@@ -53,48 +53,59 @@ public class AverageOperation : IStatisticalOperation
         var emptyValuesIds = population
             .Where(specimen => specimen.Observations.First().GetValue(ValueName) == null)
             .Select(specimen => specimen.Ring)
-            .ToArray();
+            .ToHashSet();
 
-        object[] outliersIds = [];
-        object[] oldOutliersIds;
+        HashSet<string> outliersIds = [];
+        HashSet<string> oldOutliersIds;
 
         object? averageValue;
         object? standardDeviationValue;
 
-        object[] populationIds;
+        HashSet<string> calculatedPopulationIds;
 
         do
         {
-            populationIds = population
-                .Select(specimen => specimen.Ring)
-                .Where(id => !emptyValuesIds.Contains(id))
-                .Where(id => !outliersIds.Contains(id))
-                .ToArray();
-
-            var values = population
-                .Where(specimen => populationIds.Contains(specimen.Ring))
-                .Select(specimen => specimen.Observations.First())
-                .Select(observation => observation.GetValue(ValueName))
-                .Select(value => value!)
-                .ToArray();
+            var populationIds = GetPopulationIds(population, emptyValuesIds, outliersIds).ToHashSet();
+            var values = GetValues(population, populationIds);
+            calculatedPopulationIds = populationIds;
 
             (averageValue, standardDeviationValue) = GetValues(values);
 
             if (averageValue == null || standardDeviationValue == null)
             {
-                return GetResult([null, null], populationIds, emptyValuesIds, outliersIds);
+                return GetResult([null, null], populationIds.ToArray(), emptyValuesIds.ToArray(), outliersIds.ToArray());
             }
 
             oldOutliersIds = outliersIds;
-            outliersIds = Outliers.GetOutliersIds(population, ValueName, averageValue, standardDeviationValue);
+            outliersIds = [.. Outliers.GetOutliersIds(population, ValueName, averageValue, standardDeviationValue)];
 
 
-        } while (oldOutliersIds.Length != outliersIds.Length);
+        } while (oldOutliersIds.Count != outliersIds.Count);
 
-        return GetResult([averageValue, standardDeviationValue], populationIds, emptyValuesIds, outliersIds);
+        return GetResult([averageValue, standardDeviationValue], calculatedPopulationIds.ToArray(), emptyValuesIds.ToArray(), outliersIds.ToArray());
     }
 
-    StatisticalOperationResult GetResult(object?[] values, object[] populationIds, object[] emptyValuesIds, object[] outliersIds)
+    private static string[] GetPopulationIds(Specimen[] population, HashSet<string> emptyValuesIds, HashSet<string> outliersIds)
+    {
+        return population
+            .Select(specimen => specimen.Ring)
+            .Where(id => !emptyValuesIds.Contains(id))
+            .Where(id => !outliersIds.Contains(id))
+            .ToArray();
+    }
+
+    private object[] GetValues(Specimen[] population, HashSet<string> populationIds)
+    {
+        return population
+            .Where(specimen => populationIds.Contains(specimen.Ring))
+            .Select(specimen => specimen.Observations.First())
+            .Select(observation => observation.GetValue(ValueName))
+            .Select(value => value!)
+            .ToArray();
+    }
+
+
+    private StatisticalOperationResult GetResult(object?[] values, object[] populationIds, object[] emptyValuesIds, object[] outliersIds)
     {
         string[] names = [
             $"{ResultPrefix}_AVERAGE",

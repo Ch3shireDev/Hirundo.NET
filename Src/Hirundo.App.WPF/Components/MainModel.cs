@@ -31,6 +31,7 @@ public class MainModel(
     public WritersModel WriterModel { get; set; } = writerModel;
     public ILabelsRepository Repository { get; set; } = repository;
     public ComputedValuesModel ComputedValuesModel { get; set; } = computedValuesModel;
+    public bool IsProcessed { get; internal set; }
 
     public void UpdateConfig(ApplicationParameters config)
     {
@@ -82,10 +83,12 @@ public class MainModel(
             var config = GetConfigFromViewModels();
             _cancellationTokenSource = new CancellationTokenSource();
             await Task.Run(() => app.Run(config, _cancellationTokenSource.Token), _cancellationTokenSource.Token);
+            IsProcessed = true;
         }
         catch (OperationCanceledException)
         {
             Log.Information($"Przerwano obliczenia z polecenia użytkownika.");
+            IsProcessed = false;
             return;
         }
         catch (Exception e)

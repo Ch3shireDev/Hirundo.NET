@@ -175,10 +175,11 @@ public sealed class MainViewModel : ObservableObject
             IsProcessing = true;
             OnPropertyChanged(nameof(ProcessAndSaveCommand));
             OnPropertyChanged(nameof(BreakCommand));
+            _model.IsProcessed = false;
             await _model.RunAsync().ConfigureAwait(false);
             IsProcessing = false;
 
-            if (IsLoaded)
+            if (IsLoaded && _model.IsProcessed)
             {
                 MessageBox.Show("Proces zakończony pomyślnie.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }

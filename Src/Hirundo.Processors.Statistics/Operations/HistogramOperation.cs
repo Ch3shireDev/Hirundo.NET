@@ -1,6 +1,6 @@
-﻿using System.Globalization;
-using Hirundo.Commons;
+﻿using Hirundo.Commons;
 using Hirundo.Commons.Models;
+using System.Globalization;
 
 namespace Hirundo.Processors.Statistics.Operations;
 

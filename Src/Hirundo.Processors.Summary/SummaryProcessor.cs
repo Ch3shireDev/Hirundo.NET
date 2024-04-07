@@ -2,6 +2,7 @@
 using Hirundo.Commons.Models;
 using Hirundo.Processors.Population;
 using Hirundo.Processors.Statistics;
+using Serilog;
 
 namespace Hirundo.Processors.Summary;
 
@@ -27,6 +28,17 @@ public class SummaryProcessor(
         ArgumentNullException.ThrowIfNull(returningSpecimen, nameof(returningSpecimen));
 
         var population = populationProcessor.GetPopulation(returningSpecimen, totalSpecimens).ToArray();
+
+        if (population.Length == 0)
+        {
+            Log.Warning("Osobnik {ring} ma pustą populację. Należy zmienić warunki dobierania populacji.", returningSpecimen.Ring);
+        }
+
+        if (population.Length > 1000)
+        {
+            Log.Warning("Osobnik {ring} ma zbyt dużą populację ({populationCount}). Należy zmienić warunki dobierania populacji.", returningSpecimen.Ring, population.Length);
+        }
+
         var statistics = statisticsProcessor.GetStatistics(population).ToArray();
 
         var headers = GetHeadersInternal(returningSpecimen, statistics);
