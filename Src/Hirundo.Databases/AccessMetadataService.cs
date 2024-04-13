@@ -34,6 +34,28 @@ public class AccessMetadataService : IAccessMetadataService
 
         return result;
     }
+    public IEnumerable<object?> GetDistinctValues(string path, string table, string columnName)
+    {
+        // Replace with your actual database file path and connection string details
+        var connectionString = $"Driver={{Microsoft Access Driver (*.mdb, *.accdb)}};Dbq={path};";
+
+        using var connection = new OdbcConnection(connectionString);
+
+        // Open the connection
+        connection.Open();
+
+        // make query for distinct values of column
+        using var query = connection.CreateCommand();
+
+        query.CommandText = $"SELECT DISTINCT [{columnName}] FROM [{table}]";
+
+        using var reader = query.ExecuteReader();
+
+        while (reader.Read())
+        {
+            yield return reader[0];
+        }
+    }
 
     private static IEnumerable<AccessTableMetadata> GetAccessTableMetadatas(DataTable tables, OdbcConnection connection)
     {
@@ -78,4 +100,5 @@ public class AccessMetadataService : IAccessMetadataService
             };
         }
     }
+
 }

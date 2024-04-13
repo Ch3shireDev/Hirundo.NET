@@ -11,7 +11,7 @@
     <StackPanel>
         <labels:LabelsComboBox 
                 ValueName="{Binding ValueName, Mode=TwoWay}" 
-                Repository="{Binding Repository}" 
+                LabelsRepository="{Binding LabelsRepository}" 
                 />
         <WrapPanel>
             <Label>Godzina początkowa</Label>

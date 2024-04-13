@@ -15,7 +15,8 @@ public class ReturningSpecimensModelTests
     {
         // Arrange
         var repository = new Mock<ILabelsRepository>();
-        var model = new ReturningSpecimensModel(repository.Object);
+        var speciesRepository = new Mock<ISpeciesRepository>();
+        var model = new ReturningSpecimensModel(repository.Object, speciesRepository.Object);
         var viewModel = new ParametersBrowserViewModel(model);
 
         // Act

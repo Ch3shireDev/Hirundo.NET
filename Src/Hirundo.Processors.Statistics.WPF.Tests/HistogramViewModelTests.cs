@@ -14,7 +14,8 @@ public class HistogramViewModelTests
     {
         _repository = new Mock<ILabelsRepository>();
         _parameters = new HistogramOperation();
-        _model = new HistogramModel(_parameters, _repository.Object);
+        var speciesRepository = new Mock<ISpeciesRepository>();
+        _model = new HistogramModel(_parameters, _repository.Object, speciesRepository.Object);
         _viewModel = new HistogramViewModel(_model);
     }
 

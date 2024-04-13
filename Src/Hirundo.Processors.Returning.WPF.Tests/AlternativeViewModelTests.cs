@@ -15,7 +15,8 @@ public class AlternativeViewModelTests
     {
         _condition = new AlternativeReturningCondition();
         _repository = new Mock<ILabelsRepository>();
-        _model = new AlternativeModel(_condition, _repository.Object);
+        var speciesRepository = new Mock<ISpeciesRepository>();
+        _model = new AlternativeModel(_condition, _repository.Object, speciesRepository.Object);
         _viewModel = new AlternativeViewModel(_model);
     }
 

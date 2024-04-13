@@ -18,7 +18,7 @@ public class MainModel(
     ReturningSpecimensModel returningSpecimensModel,
     StatisticsModel statisticsModel,
     WritersModel writerModel,
-    ILabelsRepository repository,
+    ILabelsRepository labelsRepository,
     ComputedValuesModel computedValuesModel
 )
 {
@@ -29,7 +29,7 @@ public class MainModel(
     public ReturningSpecimensModel ReturningSpecimensModel { get; set; } = returningSpecimensModel;
     public StatisticsModel StatisticsModel { get; set; } = statisticsModel;
     public WritersModel WriterModel { get; set; } = writerModel;
-    public ILabelsRepository Repository { get; set; } = repository;
+    public ILabelsRepository Repository { get; set; } = labelsRepository;
     public ComputedValuesModel ComputedValuesModel { get; set; } = computedValuesModel;
     public bool IsProcessed { get; internal set; }
 

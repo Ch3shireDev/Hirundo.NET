@@ -35,6 +35,16 @@ public class AccessDataSourceViewModel(AccessDataSourceModel model, IAccessMetad
         }
     }
 
+    public string SpeciesIdentifier
+    {
+        get => model.SpeciesIdentifier;
+        set
+        {
+            model.SpeciesIdentifier = value;
+            OnPropertyChanged();
+        }
+    }
+
     public string RingIdentifier
     {
         get => model.RingIdentifier;
@@ -169,6 +179,23 @@ public class AccessDataSourceViewModel(AccessDataSourceModel model, IAccessMetad
         Conditions.Remove(condition);
     }
 
+    private void GetSpecies()
+    {
+        if (string.IsNullOrEmpty(SpeciesIdentifier)) return;
+        if (string.IsNullOrEmpty(Table)) return;
+        var columnData = Columns.FirstOrDefault(c => c.ValueName == SpeciesIdentifier);
+        if (columnData == null) return;
+        if (columnData.DataType != DataValueType.Text) return;
+        var speciesColumn = columnData.DatabaseColumn;
+        if (string.IsNullOrEmpty(speciesColumn)) return;
+        var speciesList = accessMetadataService.GetDistinctValues(Path, Table, speciesColumn)
+            .Select(val => val?.ToString() ?? "")
+            .Where(val => !string.IsNullOrWhiteSpace(val))
+            .ToArray();
+        Log.Information("Pobrano listę gatunków: {species}", string.Join(", ", speciesList));
+        SpeciesRepository.UpdateSpecies(speciesList);
+    }
+
     #region commands
 
     public ICommand LoadedCommand => new RelayCommand(() => LoadMetadata());
@@ -180,6 +207,7 @@ public class AccessDataSourceViewModel(AccessDataSourceModel model, IAccessMetad
     public ICommand RemoveColumnCommand => new RelayCommand(RemoveColumn);
     public ICommand AddConditionCommand => new RelayCommand(AddCondition);
     public ICommand RemoveConditionCommand => new RelayCommand(RemoveCondition);
+    public ICommand GetSpeciesCommand => new RelayCommand(GetSpecies);
 
     #endregion
 

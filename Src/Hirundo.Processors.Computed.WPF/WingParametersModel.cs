@@ -5,7 +5,7 @@ using Hirundo.Commons.WPF;
 
 namespace Hirundo.Processors.Computed.WPF;
 
-public class WingParametersModel<T>(T parameters, ILabelsRepository repository) : ParametersModel(parameters, repository) where T : WingParametersBase
+public class WingParametersModel<T>(T parameters, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository) : ParametersModel(parameters, labelsRepository, speciesRepository) where T : WingParametersBase
 {
     private const int NumberOfParameters = 7;
 
@@ -82,13 +82,13 @@ public class WingParametersModel<T>(T parameters, ILabelsRepository repository) 
 
     public void UpdateLabel()
     {
-        Repository.RemoveAdditionalLabel(new DataLabel(OldResultName, DataType.Numeric));
-        Repository.AddAdditionalLabel(new DataLabel(ResultName, DataType.Numeric));
+        LabelsRepository.RemoveAdditionalLabel(new DataLabel(OldResultName, DataType.Numeric));
+        LabelsRepository.AddAdditionalLabel(new DataLabel(ResultName, DataType.Numeric));
         OldResultName = ResultName;
     }
 
     public void RemoveLabel()
     {
-        Repository.RemoveAdditionalLabel(new DataLabel(ResultName, DataType.Numeric));
+        LabelsRepository.RemoveAdditionalLabel(new DataLabel(ResultName, DataType.Numeric));
     }
 }

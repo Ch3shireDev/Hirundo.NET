@@ -3,7 +3,7 @@ using Hirundo.Commons.WPF;
 
 namespace Hirundo.Processors.Observations.WPF.IsInSeason;
 
-public class IsInSeasonModel(IsInSeasonCondition condition, ILabelsRepository repository) : ParametersModel(condition, repository)
+public class IsInSeasonModel(IsInSeasonCondition condition, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository) : ParametersModel(condition, labelsRepository, speciesRepository)
 {
     public int StartMonth
     {

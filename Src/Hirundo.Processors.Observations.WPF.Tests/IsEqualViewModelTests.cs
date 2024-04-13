@@ -15,7 +15,8 @@ public class IsEqualViewModelTests
         _repository = new Mock<ILabelsRepository>();
 
         _observationCondition = new IsEqualCondition();
-        _model = new CompareValuesModel<IsEqualCondition>(_observationCondition, _repository.Object);
+        var speciesRepository = new Mock<ISpeciesRepository>();
+        _model = new CompareValuesModel<IsEqualCondition>(_observationCondition, _repository.Object, speciesRepository.Object);
         _viewModel = new IsEqualViewModel(_model);
     }
 

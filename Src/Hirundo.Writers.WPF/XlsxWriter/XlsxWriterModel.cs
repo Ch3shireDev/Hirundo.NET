@@ -2,23 +2,23 @@
 using Hirundo.Commons.WPF;
 
 namespace Hirundo.Writers.WPF.XlsxWriter;
-public class XlsxWriterModel(XlsxSummaryWriterParameters parameters, ILabelsRepository repository) : ParametersModel(parameters, repository)
+public class XlsxWriterModel(XlsxSummaryWriterParameters parameters, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository) : ParametersModel(parameters, labelsRepository, speciesRepository)
 {
-    private XlsxSummaryWriterParameters xlsxParameters { get; } = parameters;
+    private XlsxSummaryWriterParameters XlsxParameters { get; } = parameters;
 
     public string Title
     {
-        get => xlsxParameters.SpreadsheetTitle;
-        set => xlsxParameters.SpreadsheetTitle = value;
+        get => XlsxParameters.SpreadsheetTitle;
+        set => XlsxParameters.SpreadsheetTitle = value;
     }
     public string Subtitle
     {
-        get => xlsxParameters.SpreadsheetSubtitle;
-        set => xlsxParameters.SpreadsheetSubtitle = value;
+        get => XlsxParameters.SpreadsheetSubtitle;
+        set => XlsxParameters.SpreadsheetSubtitle = value;
     }
     public bool IncludeExplanation
     {
-        get => xlsxParameters.IncludeExplanation;
-        set => xlsxParameters.IncludeExplanation = value;
+        get => XlsxParameters.IncludeExplanation;
+        set => XlsxParameters.IncludeExplanation = value;
     }
 }

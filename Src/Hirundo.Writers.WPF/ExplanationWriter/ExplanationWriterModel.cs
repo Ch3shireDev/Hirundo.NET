@@ -2,7 +2,7 @@
 using Hirundo.Commons.WPF;
 
 namespace Hirundo.Writers.WPF.ExplanationWriter;
-public class ExplanationWriterModel(ExplanationWriterParameters parameters, ILabelsRepository repository) : ParametersModel(parameters, repository)
+public class ExplanationWriterModel(ExplanationWriterParameters parameters, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository) : ParametersModel(parameters, labelsRepository, speciesRepository)
 {
     public string Path
     {

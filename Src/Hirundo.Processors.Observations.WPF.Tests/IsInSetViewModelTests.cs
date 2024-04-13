@@ -15,7 +15,8 @@ public class IsInSetViewModelTests
     {
         _repository = new Mock<ILabelsRepository>();
         _parameters = new IsInSetCondition();
-        _model = new IsInSetModel(_parameters, _repository.Object);
+        var speciesRepository = new Mock<ISpeciesRepository>();
+        _model = new IsInSetModel(_parameters, _repository.Object, speciesRepository.Object);
         _viewModel = new IsInSetViewModel(_model);
     }
 

@@ -7,9 +7,9 @@ public class AlternativeModel : ParametersModel
 {
     private readonly ParametersFactory<IReturningSpecimenCondition, ReturningSpecimensModel> _factory;
 
-    public AlternativeModel(object parameters, ILabelsRepository repository) : base(parameters, repository)
+    public AlternativeModel(object parameters, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository) : base(parameters, labelsRepository, speciesRepository)
     {
-        _factory = new ParametersFactory<IReturningSpecimenCondition, ReturningSpecimensModel>(repository);
+        _factory = new ParametersFactory<IReturningSpecimenCondition, ReturningSpecimensModel>(labelsRepository, speciesRepository);
         AvailableParameters = _factory.GetParametersData().ToArray();
 
         var conditions = AvailableParameters.Where(p => p.ConditionType != typeof(AlternativeReturningCondition)).ToArray();

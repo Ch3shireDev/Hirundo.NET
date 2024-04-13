@@ -9,5 +9,5 @@ public interface ICompareValuesReturningViewModel
     public string Value { get; set; }
     public string ValueDescription { get; }
     public DataType DataType { get; set; }
-    public ILabelsRepository Repository { get; }
+    public ILabelsRepository LabelsRepository { get; }
 }

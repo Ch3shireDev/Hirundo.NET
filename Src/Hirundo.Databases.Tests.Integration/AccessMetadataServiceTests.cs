@@ -12,7 +12,7 @@ public class AccessMetadataServiceTests
     private AccessMetadataService _service = null!;
 
     [Test]
-    public void Test()
+    public void GetTables_WhenLoadFromFile_ReturnsTablesList()
     {
         // Arrange
         var path = "./Assets/access_example_union_db.mdb";
@@ -40,22 +40,41 @@ public class AccessMetadataServiceTests
         Assert.That(oldTable.Columns[0].TypeName, Is.EqualTo("COUNTER"));
         Assert.That(oldTable.Columns[0].DataType, Is.EqualTo(4));
         Assert.That(oldTable.Columns[0].IsNullable, Is.EqualTo(false));
+    }
 
-        var dataTypes = new Dictionary<int, string>();
+    [Test]
+    public void GetDistinctValues_WhenLoadFromFileOldTable_ReturnsDistinctValues()
+    {
+        // Arrange
+        var path = "./Assets/access_example_union_db.mdb";
+        var tableName = "old_table";
+        var columnName = "Spec";
 
-        foreach (var column in oldTable.Columns)
-        {
-            dataTypes[column.DataType] = column.TypeName;
-        }
+        // Act
+        var species = _service.GetDistinctValues(path, tableName, columnName).ToArray();
 
-        foreach (var column in newTable.Columns)
-        {
-            dataTypes[column.DataType] = column.TypeName;
-        }
+        // Assert
+        Assert.That(species, Is.Not.Null);
+        Assert.That(species.Length, Is.EqualTo(1));
+        Assert.That(species[0], Is.EqualTo("PHY.LUS"));
+    }
 
-        foreach (var pair in dataTypes)
-        {
-            Console.WriteLine($"{pair.Key} => {pair.Value}");
-        }
+    [Test]
+    public void GetDistinctValues_WhenLoadFromFileNewTable_ReturnsDistinctValues()
+    {
+        // Arrange
+        var path = "./Assets/access_example_union_db.mdb";
+        var tableName = "new_table";
+        var columnName = "Species Code";
+
+        // Act
+        var species = _service.GetDistinctValues(path, tableName, columnName).ToArray();
+
+        // Assert
+        Assert.That(species, Is.Not.Null);
+        Assert.That(species.Length, Is.EqualTo(3));
+        Assert.That(species[0], Is.EqualTo("CER.FAM"));
+        Assert.That(species[1], Is.EqualTo("REG.REG"));
+        Assert.That(species[2], Is.EqualTo("TRO.TRO"));
     }
 }

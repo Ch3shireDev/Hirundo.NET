@@ -59,6 +59,7 @@ public partial class App : Application
         builder.RegisterType<MainModel>().AsSelf().SingleInstance();
         builder.RegisterType<MainViewModel>().AsSelf().SingleInstance();
         builder.RegisterType<LabelsRepository>().As<ILabelsRepository>().SingleInstance();
+        builder.RegisterType<SpeciesRepository>().As<ISpeciesRepository>().SingleInstance();
 
         var container = builder.Build();
 

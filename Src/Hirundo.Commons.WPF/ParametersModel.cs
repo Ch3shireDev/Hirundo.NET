@@ -2,8 +2,9 @@
 
 namespace Hirundo.Commons.WPF;
 
-public class ParametersModel(object parameters, ILabelsRepository repository)
+public class ParametersModel(object parameters, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository)
 {
     public object Parameters => parameters;
-    public ILabelsRepository Repository => repository;
+    public ILabelsRepository LabelsRepository => labelsRepository;
+    public ISpeciesRepository SpeciesRepository => speciesRepository;
 }

@@ -14,7 +14,8 @@ public class IsNotEmptyViewModelTests
         _repository = new Mock<ILabelsRepository>();
 
         _condition = new IsNotEmptyCondition();
-        _model = new IsNotEmptyModel(_condition, _repository.Object);
+        var speciesRepository = new Mock<ISpeciesRepository>();
+        _model = new IsNotEmptyModel(_condition, _repository.Object, speciesRepository.Object);
         _viewModel = new IsNotEmptyViewModel(_model);
     }
 

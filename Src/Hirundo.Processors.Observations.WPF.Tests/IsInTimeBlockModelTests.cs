@@ -14,7 +14,8 @@ public class IsInTimeBlockModelTests
         _repository = new Mock<ILabelsRepository>();
 
         _condition = new IsInTimeBlockCondition();
-        _model = new IsInTimeBlockModel(_condition, _repository.Object);
+        var speciesRepository = new Mock<ISpeciesRepository>();
+        _model = new IsInTimeBlockModel(_condition, _repository.Object, speciesRepository.Object);
         _viewModel = new IsInTimeBlockViewModel(_model);
     }
 

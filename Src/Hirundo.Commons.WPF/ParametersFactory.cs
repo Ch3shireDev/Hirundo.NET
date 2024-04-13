@@ -9,7 +9,7 @@ public interface IParametersFactory<TCondition>
     ParametersViewModel CreateViewModel(TCondition condition);
     TCondition CreateCondition(ParametersData parametersData);
 }
-public class ParametersFactory<TCondition, TBrowserModel>(ILabelsRepository repository) : IParametersFactory<TCondition>
+public class ParametersFactory<TCondition, TBrowserModel>(ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository) : IParametersFactory<TCondition>
     where TCondition : class
     where TBrowserModel : IParametersBrowserModel
 {
@@ -23,12 +23,12 @@ public class ParametersFactory<TCondition, TBrowserModel>(ILabelsRepository repo
 
     public IEnumerable<ParametersData> GetParametersData()
     {
-        return GetAssemblyAttributes().Select(attribute => new ParametersData(attribute.ConditionType, attribute.Name, attribute.Description));
+        return ParametersFactory<TCondition, TBrowserModel>.GetAssemblyAttributes().Select(attribute => new ParametersData(attribute.ConditionType, attribute.Name, attribute.Description));
     }
 
     public ParametersViewModel CreateViewModel(TCondition condition)
     {
-        var attribute = GetConditionAttribute(condition);
+        var attribute = ParametersFactory<TCondition, TBrowserModel>.GetConditionAttribute(condition);
         var viewModel = GetViewModelFromCondition(condition);
         viewModel.Name = attribute.Name;
         viewModel.Description = attribute.Description;
@@ -37,9 +37,9 @@ public class ParametersFactory<TCondition, TBrowserModel>(ILabelsRepository repo
 
     private ParametersViewModel GetViewModelFromCondition(TCondition condition)
     {
-        var attribute = GetConditionAttribute(condition);
+        var attribute = ParametersFactory<TCondition, TBrowserModel>.GetConditionAttribute(condition);
         var model = GetModelFromCondition(attribute, condition);
-        var viewModelType = GetViewModelType(attribute);
+        var viewModelType = ParametersFactory<TCondition, TBrowserModel>.GetViewModelType(attribute);
         var viewModelConstructor = viewModelType.GetConstructor([model.GetType()]);
         var viewModel = viewModelConstructor?.Invoke([model]) as ParametersViewModel;
         return viewModel ?? throw new InvalidOperationException($"Błąd tworzenia modelu dla warunku {condition.GetType().Name}");
@@ -48,19 +48,25 @@ public class ParametersFactory<TCondition, TBrowserModel>(ILabelsRepository repo
     private object GetModelFromCondition(ParametersDataAttribute attribute, TCondition condition)
     {
         var modelType = attribute.ModelType;
-        var modelConstructor = modelType.GetConstructor([condition.GetType(), typeof(ILabelsRepository)]);
-        var model = modelConstructor?.Invoke([condition, repository]);
-        return model ?? throw new InvalidOperationException($"Nie znaleziono modelu dla warunku {condition.GetType().Name}");
+        var modelConstructor = modelType.GetConstructor([condition.GetType(), typeof(ILabelsRepository), typeof(ISpeciesRepository)]);
+        if (modelConstructor is not null)
+        {
+            var model = modelConstructor?.Invoke([condition, labelsRepository, speciesRepository]);
+            return model ?? throw new InvalidOperationException($"Nie znaleziono modelu dla warunku {condition.GetType().Name}");
+        }
+
+        var secondModelConstructor = modelType.GetConstructor([condition.GetType(), typeof(ILabelsRepository)]);
+        return secondModelConstructor?.Invoke([condition, labelsRepository]) ?? throw new InvalidOperationException($"Nie znaleziono modelu dla warunku {condition.GetType().Name}");
     }
 
-    private ParametersDataAttribute GetConditionAttribute(TCondition condition)
+    private static ParametersDataAttribute GetConditionAttribute(TCondition condition)
     {
-        var attributes = GetAssemblyAttributes().ToArray();
+        var attributes = ParametersFactory<TCondition, TBrowserModel>.GetAssemblyAttributes().ToArray();
         var attribute = attributes.FirstOrDefault(a => a.ConditionType == condition.GetType());
         return attribute ?? throw new InvalidOperationException($"Nie znaleziono atrybutu dla warunku {condition.GetType().Name}");
     }
 
-    private Type[] GetViewModelsTypes()
+    private static Type[] GetViewModelsTypes()
     {
         var assembly = Assembly.GetAssembly(typeof(TBrowserModel));
 
@@ -72,9 +78,9 @@ public class ParametersFactory<TCondition, TBrowserModel>(ILabelsRepository repo
         return viewModelsTypes;
     }
 
-    private IEnumerable<ParametersDataAttribute> GetAssemblyAttributes()
+    private static IEnumerable<ParametersDataAttribute> GetAssemblyAttributes()
     {
-        var viewModelTypes = GetViewModelsTypes();
+        var viewModelTypes = ParametersFactory<TCondition, TBrowserModel>.GetViewModelsTypes();
 
         foreach (var viewModelType in viewModelTypes)
         {
@@ -87,9 +93,9 @@ public class ParametersFactory<TCondition, TBrowserModel>(ILabelsRepository repo
         }
     }
 
-    private Type GetViewModelType(ParametersDataAttribute attribute)
+    private static Type GetViewModelType(ParametersDataAttribute attribute)
     {
-        var viewModelTypes = GetViewModelsTypes();
+        var viewModelTypes = ParametersFactory<TCondition, TBrowserModel>.GetViewModelsTypes();
 
         return viewModelTypes.First(t => t.GetCustomAttribute<ParametersDataAttribute>()?.ConditionType == attribute.ConditionType);
     }

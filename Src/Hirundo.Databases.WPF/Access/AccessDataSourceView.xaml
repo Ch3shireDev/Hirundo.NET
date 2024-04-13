@@ -71,9 +71,15 @@
                 </b:Interaction.Triggers>
             </ComboBox>
         </WrapPanel>
-        <wpf:LabelsComboBox ValueLabel="Nazwa pola obrączki" ValueName="{Binding RingIdentifier}" Repository="{Binding Repository}"/>
-        <wpf:LabelsComboBox ValueLabel="Nazwa pola daty" ValueName="{Binding DateIdentifier}" Repository="{Binding Repository}"/>
+        <wpf:LabelsComboBox ValueLabel="Nazwa pola gatunku" ValueName="{Binding SpeciesIdentifier}" LabelsRepository="{Binding LabelsRepository}"/>
+        <wpf:LabelsComboBox ValueLabel="Nazwa pola obrączki" ValueName="{Binding RingIdentifier}" LabelsRepository="{Binding LabelsRepository}"/>
+        <wpf:LabelsComboBox ValueLabel="Nazwa pola daty" ValueName="{Binding DateIdentifier}" LabelsRepository="{Binding LabelsRepository}"/>
         <WrapPanel>
+            <Button
+                Command="{Binding GetSpeciesCommand}"
+                >
+                Pobierz gatunki
+            </Button>
             <Button
                 Command="{Binding RemoveValuesCommand}"
                 Background="DarkRed"

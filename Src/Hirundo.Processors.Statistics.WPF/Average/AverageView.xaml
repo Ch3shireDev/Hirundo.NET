@@ -13,7 +13,7 @@
                 ValueLabel="Nazwa wartości wejściowej"
                 ValueName="{Binding ValueName}"
                 DataType="{Binding DataType}"
-                Repository="{Binding Repository}"
+                LabelsRepository="{Binding LabelsRepository}"
                 />
         <WrapPanel>
             <Label>Przedrostek wartości wyjściowych</Label>

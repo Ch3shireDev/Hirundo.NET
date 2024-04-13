@@ -14,7 +14,8 @@ public class IsInSeasonViewModelTests
     {
         _repository = new Mock<ILabelsRepository>();
         _condition = new IsInSeasonCondition();
-        _model = new IsInSeasonModel(_condition, _repository.Object);
+        var speciesRepository = new Mock<ISpeciesRepository>();
+        _model = new IsInSeasonModel(_condition, _repository.Object, speciesRepository.Object);
         _viewModel = new IsInSeasonViewModel(_model);
     }
 

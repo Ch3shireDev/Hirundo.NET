@@ -1,5 +1,6 @@
-﻿using Hirundo.Writers;
+﻿using Hirundo.Commons.Repositories;
 using Hirundo.Writers.WPF.CsvWriter;
+using Moq;
 using NUnit.Framework;
 
 namespace Hirundo.Writers.WPF.Tests;
@@ -15,7 +16,9 @@ public class CsvWriterViewModelTests
     public void SetUp()
     {
         _parameters = new CsvSummaryWriterParameters();
-        _model = new CsvWriterModel(_parameters);
+        var speciesRepository = new Mock<ISpeciesRepository>();
+        var labelsRepository = new Mock<ILabelsRepository>();
+        _model = new CsvWriterModel(_parameters, labelsRepository.Object, speciesRepository.Object);
         _viewModel = new CsvWriterViewModel(_model);
     }
 

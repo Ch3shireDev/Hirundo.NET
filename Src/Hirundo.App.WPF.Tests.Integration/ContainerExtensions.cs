@@ -22,6 +22,10 @@ internal static class ContainerExtensions
         builder.RegisterInstance(repository).As<Mock<ILabelsRepository>>();
         builder.RegisterInstance(repository.Object).As<ILabelsRepository>().SingleInstance();
 
+        var speciesRepository = new Mock<ISpeciesRepository>();
+        builder.RegisterInstance(speciesRepository).As<Mock<ISpeciesRepository>>().SingleInstance();
+        builder.RegisterInstance(speciesRepository.Object).As<ISpeciesRepository>().SingleInstance();
+
         var hirundoApp = new Mock<IHirundoApp>();
 
         builder.RegisterInstance(hirundoApp).As<Mock<IHirundoApp>>().SingleInstance();

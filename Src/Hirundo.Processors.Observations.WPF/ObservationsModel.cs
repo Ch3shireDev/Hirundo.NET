@@ -3,7 +3,7 @@ using Hirundo.Commons.WPF;
 
 namespace Hirundo.Processors.Observations.WPF;
 
-public class ObservationsModel(ILabelsRepository repository) : ParametersBrowserModel<ObservationsParameters, IObservationCondition, ObservationsModel>(repository)
+public class ObservationsModel(ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository) : ParametersBrowserModel<ObservationsParameters, IObservationCondition, ObservationsModel>(labelsRepository, speciesRepository)
 {
     public override string Description => "W tym panelu ustalasz warunki, jakie mają spełniać wybierane obserwacje do obliczeń.";
     public override string AddParametersCommandText => "Dodaj nowy warunek";

@@ -18,7 +18,8 @@ public class SymmetryViewModelTests
     {
         _repository = new Mock<ILabelsRepository>();
         _parameters = new SymmetryCalculator();
-        _model = new WingParametersModel<WingParametersBase>(_parameters, _repository.Object);
+        var speciesRepository = new Mock<ISpeciesRepository>();
+        _model = new WingParametersModel<WingParametersBase>(_parameters, _repository.Object, speciesRepository.Object);
         _viewModel = new WingParametersViewModel<WingParametersBase>(_model);
     }
 

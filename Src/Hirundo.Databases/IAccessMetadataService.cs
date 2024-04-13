@@ -2,5 +2,6 @@
 
 public interface IAccessMetadataService
 {
-    public IEnumerable<AccessTableMetadata> GetTables(string path);
+    IEnumerable<object?> GetDistinctValues(string path, string table, string columnName);
+    IEnumerable<AccessTableMetadata> GetTables(string path);
 }

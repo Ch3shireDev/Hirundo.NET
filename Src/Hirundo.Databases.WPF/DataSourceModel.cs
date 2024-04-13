@@ -6,9 +6,10 @@ using Hirundo.Databases.WPF.Access;
 
 namespace Hirundo.Databases.WPF;
 
-public class DataSourceModel(ILabelsRepository repository, IAccessMetadataService accessMetadataService) : ParametersBrowserModel<DatabaseParameters, IDatabaseParameters, DataSourceModel>(repository)
+public class DataSourceModel(ILabelsRepository labelsRepository, IAccessMetadataService accessMetadataService, ISpeciesRepository speciesRepository) : ParametersBrowserModel<DatabaseParameters, IDatabaseParameters, DataSourceModel>(labelsRepository, speciesRepository)
 {
-    private readonly ILabelsRepository repository = repository;
+    private readonly ILabelsRepository labelsRepository = labelsRepository;
+    private readonly ISpeciesRepository speciesRepository = speciesRepository;
     private readonly IAccessMetadataService accessMetadataService = accessMetadataService;
 
     public override string Header => "Źródła";
@@ -43,7 +44,7 @@ public class DataSourceModel(ILabelsRepository repository, IAccessMetadataServic
     {
         return parameters switch
         {
-            AccessDatabaseParameters accessDatabaseParameters => new AccessDataSourceViewModel(new AccessDataSourceModel(accessDatabaseParameters, repository), accessMetadataService),
+            AccessDatabaseParameters accessDatabaseParameters => new AccessDataSourceViewModel(new AccessDataSourceModel(accessDatabaseParameters, labelsRepository, speciesRepository), accessMetadataService),
             _ => throw new NotImplementedException()
         };
     }
@@ -63,7 +64,7 @@ public class DataSourceModel(ILabelsRepository repository, IAccessMetadataServic
 
         var groups = labels.GroupBy(l => l.Name).Select(x => x.First()).ToArray();
 
-        repository.SetLabels(groups);
+        labelsRepository.SetLabels(groups);
     }
 
     private DataLabel GetDataLabel(ColumnParameters columnMapping)

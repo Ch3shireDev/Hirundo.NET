@@ -5,7 +5,7 @@ using Hirundo.Processors.Population.Conditions;
 
 namespace Hirundo.Processors.Population.WPF.IsInSharedTimeWindow;
 
-public class IsInSharedTimeWindowModel(IsInSharedTimeWindowConditionBuilder conditionBuilder, ILabelsRepository repository) : ParametersModel(conditionBuilder, repository)
+public class IsInSharedTimeWindowModel(IsInSharedTimeWindowConditionBuilder conditionBuilder, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository) : ParametersModel(conditionBuilder, labelsRepository, speciesRepository)
 {
     public int MaxTimeDistanceInDays
     {

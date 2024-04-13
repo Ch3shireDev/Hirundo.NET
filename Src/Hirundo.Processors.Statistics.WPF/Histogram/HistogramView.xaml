@@ -13,7 +13,7 @@
         <labels:LabelsComboBox
                 ValueName="{Binding ValueName}"
                 DataType="{Binding DataType}"
-                Repository="{Binding Repository}" />
+                LabelsRepository="{Binding LabelsRepository}" />
         <WrapPanel>
             <Label>Prefiks wartości wynikowej</Label>
             <TextBox Text="{Binding ResultPrefix}" MinWidth="100"/>

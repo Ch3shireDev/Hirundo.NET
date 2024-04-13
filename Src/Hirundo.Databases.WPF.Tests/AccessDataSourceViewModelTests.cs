@@ -13,7 +13,8 @@ public class AccessDataSourceViewModelTests
     {
         _repository = new Mock<ILabelsRepository>();
         _parameters = new AccessDatabaseParameters();
-        _model = new AccessDataSourceModel(_parameters, _repository.Object);
+        var _speciesRepository = new Mock<ISpeciesRepository>();
+        _model = new AccessDataSourceModel(_parameters, _repository.Object, _speciesRepository.Object);
         _metadataService = new Mock<IAccessMetadataService>();
         _viewModel = new AccessDataSourceViewModel(_model, _metadataService.Object);
     }

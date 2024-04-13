@@ -16,7 +16,8 @@ public class IsEqualReturningViewModelTests
     {
         _repository = new Mock<ILabelsRepository>();
         _condition = new IsEqualReturningCondition();
-        _model = new CompareValuesReturningModel<IsEqualReturningCondition>(_condition, _repository.Object);
+        var speciesRepository = new Mock<ISpeciesRepository>();
+        _model = new CompareValuesReturningModel<IsEqualReturningCondition>(_condition, _repository.Object, speciesRepository.Object);
         _viewModel = new IsEqualReturningViewModel(_model);
     }
 

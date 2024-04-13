@@ -9,18 +9,18 @@ namespace Hirundo.Processors.Statistics.WPF.Tests;
 [TestFixture]
 public class AverageViewModelTests
 {
-    AverageOperation _operation = null!;
-    AverageModel _model = null!;
-    AverageViewModel _viewModel = null!;
-
-    Mock<ILabelsRepository> _repository = null!;
+    private AverageOperation _operation = null!;
+    private AverageModel _model = null!;
+    private AverageViewModel _viewModel = null!;
+    private Mock<ILabelsRepository> _repository = null!;
 
     [SetUp]
     public void Initialize()
     {
         _repository = new Mock<ILabelsRepository>();
         _operation = new AverageOperation("VALUE", "VALUE_PREFIX");
-        _model = new AverageModel(_operation, _repository.Object);
+        var speciesRepository = new Mock<ISpeciesRepository>();
+        _model = new AverageModel(_operation, _repository.Object, speciesRepository.Object);
         _viewModel = new AverageViewModel(_model);
     }
 

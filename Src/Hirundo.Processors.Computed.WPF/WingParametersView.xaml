@@ -27,42 +27,42 @@
                 ValueLabel="Długość skrzydła"
                 ValueName="{Binding WingName}"
                 DataType="{Binding WingType}"
-                Repository="{Binding Repository}"
+                LabelsRepository="{Binding LabelsRepository}"
                 MinWidth="100" />
         <labels:LabelsComboBox
                 ValueLabel="Kolumna D2"
                 ValueName="{Binding D2Name}"
-                Repository="{Binding Repository}"
+                LabelsRepository="{Binding LabelsRepository}"
                 MinWidth="100" />
         <labels:LabelsComboBox
                 ValueLabel="Kolumna D3"
                 ValueName="{Binding D3Name}"
-                Repository="{Binding Repository}"
+                LabelsRepository="{Binding LabelsRepository}"
                 MinWidth="100" />
         <labels:LabelsComboBox
                 ValueLabel="Kolumna D4"
                 ValueName="{Binding D4Name}"
-                Repository="{Binding Repository}"
+                LabelsRepository="{Binding LabelsRepository}"
                 MinWidth="100" />
         <labels:LabelsComboBox
                 ValueLabel="Kolumna D5"
                 ValueName="{Binding D5Name}"
-                Repository="{Binding Repository}"
+                LabelsRepository="{Binding LabelsRepository}"
                 MinWidth="100" />
         <labels:LabelsComboBox
                 ValueLabel="Kolumna D6"
                 ValueName="{Binding D6Name}"
-                Repository="{Binding Repository}"
+                LabelsRepository="{Binding LabelsRepository}"
                 MinWidth="100" />
         <labels:LabelsComboBox
                 ValueLabel="Kolumna D7"
                 ValueName="{Binding D7Name}"
-                Repository="{Binding Repository}"
+                LabelsRepository="{Binding LabelsRepository}"
                 MinWidth="100" />
         <labels:LabelsComboBox
                 ValueLabel="Kolumna D8"
                 ValueName="{Binding D8Name}"
-                Repository="{Binding Repository}"
+                LabelsRepository="{Binding LabelsRepository}"
                 MinWidth="100" />
  
     </StackPanel>

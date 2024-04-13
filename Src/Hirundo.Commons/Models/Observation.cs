@@ -13,19 +13,21 @@ public class Observation
 {
     public string Ring { get; init; } = string.Empty;
     public DateTime Date { get; init; } = DateTime.MinValue;
+    public string Species { get; set; } = string.Empty;
 
     private IList<string> _headers = [];
     private readonly IList<object?> _values = [];
     public IList<string> Headers
     {
         get => _headers;
-        init => _headers = value.ToList();
+        init => _headers = [.. value];
     }
     public IList<object?> Values
     {
         get => _values;
-        init => _values = value.ToList();
+        init => _values = [.. value];
     }
+
     /// <summary>
     ///     Konstruktor bezparametrowy.
     /// </summary>

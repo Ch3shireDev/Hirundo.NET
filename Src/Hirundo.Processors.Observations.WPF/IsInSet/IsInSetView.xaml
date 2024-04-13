@@ -13,7 +13,7 @@
         <labels:LabelsComboBox
                 ValueName="{Binding ValueName}"
                 DataType="{Binding ValueType}"
-                Repository="{Binding Repository}" />
+                LabelsRepository="{Binding LabelsRepository}" />
         <StackPanel Margin="10">
             <DataGrid
                 ItemsSource="{Binding Values}"

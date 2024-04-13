@@ -4,7 +4,7 @@ using Hirundo.Processors.Population.Conditions;
 
 namespace Hirundo.Processors.Population.WPF;
 
-public class PopulationModel(ILabelsRepository repository) : ParametersBrowserModel<PopulationParameters, IPopulationConditionBuilder, PopulationModel>(repository)
+public class PopulationModel(ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository) : ParametersBrowserModel<PopulationParameters, IPopulationConditionBuilder, PopulationModel>(labelsRepository, speciesRepository)
 {
     public override string Header => "Populacja";
     public override string Title => "Warunki populacji";

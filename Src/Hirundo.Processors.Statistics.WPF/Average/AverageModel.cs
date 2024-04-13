@@ -5,7 +5,7 @@ using Hirundo.Processors.Statistics.Operations;
 
 namespace Hirundo.Processors.Statistics.WPF.Average;
 
-public class AverageModel(AverageOperation operation, ILabelsRepository repository) : ParametersModel(operation, repository)
+public class AverageModel(AverageOperation operation, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository) : ParametersModel(operation, labelsRepository, speciesRepository)
 {
     public string ValueName
     {

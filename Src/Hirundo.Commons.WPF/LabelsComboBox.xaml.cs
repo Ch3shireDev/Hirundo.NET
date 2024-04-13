@@ -19,8 +19,8 @@ public partial class LabelsComboBox : UserControl, INotifyPropertyChanged
     public static readonly DependencyProperty ValueLabelProperty =
         DependencyProperty.Register(nameof(ValueLabel), typeof(string), typeof(LabelsComboBox), new PropertyMetadata("Nazwa wartości"));
 
-    public static readonly DependencyProperty RepositoryProperty =
-        DependencyProperty.Register(nameof(Repository), typeof(ILabelsRepository), typeof(LabelsComboBox), new PropertyMetadata(OnDataLabelRepositoryChanged));
+    public static readonly DependencyProperty LabelsRepositoryProperty =
+        DependencyProperty.Register(nameof(LabelsRepository), typeof(ILabelsRepository), typeof(LabelsComboBox), new PropertyMetadata(OnDataLabelRepositoryChanged));
 
     public static readonly DependencyProperty ValueNameProperty =
         DependencyProperty.Register(
@@ -58,10 +58,10 @@ public partial class LabelsComboBox : UserControl, INotifyPropertyChanged
         set => SetValue(DataTypeProperty, value);
     }
 
-    public ILabelsRepository? Repository
+    public ILabelsRepository? LabelsRepository
     {
-        get => (ILabelsRepository)GetValue(RepositoryProperty);
-        set => SetValue(RepositoryProperty, value);
+        get => (ILabelsRepository)GetValue(LabelsRepositoryProperty);
+        set => SetValue(LabelsRepositoryProperty, value);
     }
 
     public string? ValueName
@@ -113,9 +113,9 @@ public partial class LabelsComboBox : UserControl, INotifyPropertyChanged
 
     private void OnLabelsChanged()
     {
-        if (Repository is null) return;
+        if (LabelsRepository is null) return;
         var valueName = ValueName;
-        Labels = [.. Repository.GetLabels()];
+        Labels = [.. LabelsRepository.GetLabels()];
         SelectedLabel = Labels.FirstOrDefault(l => l.Name == valueName);
         ComboBox.ItemsSource = Labels;
         ComboBox.SelectedValue = SelectedLabel;

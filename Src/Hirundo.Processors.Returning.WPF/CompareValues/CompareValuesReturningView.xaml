@@ -14,7 +14,7 @@
                 ValueLabel="Nazwa pola"
                 ValueName="{Binding ValueName}"
                 DataType="{Binding DataType}"
-                Repository="{Binding Repository}" />
+                LabelsRepository="{Binding LabelsRepository}" />
         <WrapPanel>
             <Label Content="{Binding ValueDescription}"/>
             <TextBox Text="{Binding Value}" MinWidth="100" />

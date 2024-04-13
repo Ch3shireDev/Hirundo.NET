@@ -3,7 +3,7 @@ using Hirundo.Commons.WPF;
 
 namespace Hirundo.Processors.Computed.WPF;
 
-public class ComputedValuesModel(ILabelsRepository repository) : ParametersBrowserModel<ComputedValuesParameters, IComputedValuesCalculator, ComputedValuesModel>(repository)
+public class ComputedValuesModel(ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository) : ParametersBrowserModel<ComputedValuesParameters, IComputedValuesCalculator, ComputedValuesModel>(labelsRepository, speciesRepository)
 {
     public override string Header => "Wartości";
     public override string Title => "Wartości";
