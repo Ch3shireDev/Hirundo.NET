@@ -304,11 +304,11 @@ public sealed class MainViewModel : ObservableObject
             if (saveFileDialog.ShowDialog() == true)
             {
                 File.WriteAllText(saveFileDialog.FileName, json);
+
+                var message = $"Konfiguracja została zapisana w {saveFileDialog.FileName}.";
+
+                Log.Information(message);
             }
-
-            var message = $"Konfiguracja została zapisana w {saveFileDialog.FileName}.";
-
-            Log.Information(message);
         }
         catch (Exception e)
         {
@@ -337,10 +337,10 @@ public sealed class MainViewModel : ObservableObject
 
 
                 UpdateConfig(config);
-            }
 
-            var message = $"Konfiguracja została wczytana z {loadFileDialog.FileName}.";
-            Log.Information(message);
+                var message = $"Konfiguracja została wczytana z {loadFileDialog.FileName}.";
+                Log.Information(message);
+            }
         }
         catch (Exception e)
         {
