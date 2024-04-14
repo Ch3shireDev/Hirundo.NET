@@ -7,7 +7,7 @@ namespace Hirundo.App.Explain;
 
 internal class Program
 {
-    private static void Main(string[] args)
+    private static void Main()
     {
         var config = GetConfig();
         var result = ExplainerHelpers.Explain(config);

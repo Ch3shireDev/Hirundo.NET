@@ -16,7 +16,7 @@ public class HirundoJsonConverter : JsonConverter
         new DynamicPolymorphicJsonConverter(typeof(IDatabaseParameters)),
         new DynamicPolymorphicJsonConverter(typeof(IComputedValuesCalculator)),
         new DynamicPolymorphicJsonConverter(typeof(IObservationCondition)),
-        new DynamicPolymorphicJsonConverter(typeof(IPopulationConditionBuilder)),
+        new DynamicPolymorphicJsonConverter(typeof(IPopulationCondition)),
         new DynamicPolymorphicJsonConverter(typeof(IStatisticalOperation)),
         new DynamicPolymorphicJsonConverter(typeof(IReturningSpecimenCondition)),
         new DynamicPolymorphicJsonConverter(typeof(IWriterParameters))

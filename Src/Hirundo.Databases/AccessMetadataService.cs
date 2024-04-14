@@ -45,9 +45,11 @@ public class AccessMetadataService : IAccessMetadataService
         connection.Open();
 
         // make query for distinct values of column
-        using var query = connection.CreateCommand();
 
-        query.CommandText = $"SELECT DISTINCT [{columnName}] FROM [{table}]";
+#pragma warning disable CA2100
+        var command = $"SELECT DISTINCT [{columnName}] FROM [{table}]";
+        using var query = new OdbcCommand(command, connection);
+#pragma warning restore CA2100
 
         using var reader = query.ExecuteReader();
 

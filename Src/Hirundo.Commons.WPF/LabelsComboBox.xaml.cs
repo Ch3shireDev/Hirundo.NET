@@ -29,8 +29,7 @@ public partial class LabelsComboBox : UserControl, INotifyPropertyChanged
             typeof(LabelsComboBox),
             new FrameworkPropertyMetadata(
                 string.Empty,
-                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
-                OnValueNameChanged
+                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault
             )
         );
 
@@ -99,11 +98,6 @@ public partial class LabelsComboBox : UserControl, INotifyPropertyChanged
         {
             comboBox.ComboBox.ItemsSource = null;
         }
-    }
-
-    private static void OnValueNameChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        if (d is not LabelsComboBox) return;
     }
 
     private void OnLabelsChanged(object? sender, EventArgs e)

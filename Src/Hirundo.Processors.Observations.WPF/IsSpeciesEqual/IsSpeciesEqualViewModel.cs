@@ -5,9 +5,7 @@ namespace Hirundo.Processors.Observations.WPF.IsSpeciesEqual;
 [ParametersData(
     typeof(IsSpeciesEqualCondition),
     typeof(IsSpeciesEqualModel),
-    typeof(IsSpeciesEqualView),
-    "Czy jest danego gatunku?",
-    "Warunek sprawdzający, zaobserwowany osobnik należy do wskazanego gatunku."
+    typeof(IsSpeciesEqualView)
 )]
 public class IsSpeciesEqualViewModel(IsSpeciesEqualModel model) : ParametersViewModel(model)
 {

@@ -7,7 +7,7 @@ namespace Hirundo.Databases;
 /// <summary>
 ///     Parametry bazy danych Access.
 /// </summary>
-[TypeDescription("Access")]
+[TypeDescription("Access", "Źródło danych Access", "Źródło danych z pliku Access.")]
 public class AccessDatabaseParameters : IDatabaseParameters, IFileSource
 {
     /// <summary>

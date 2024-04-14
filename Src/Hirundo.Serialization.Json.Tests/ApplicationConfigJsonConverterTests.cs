@@ -233,9 +233,9 @@ public class ApplicationConfigJsonConverterTests
 
         Assert.That(config.Population, Is.Not.Null);
         Assert.That(config.Population.Conditions, Has.Count.EqualTo(1));
-        Assert.That(config.Population.Conditions[0], Is.TypeOf<IsInSharedTimeWindowConditionBuilder>());
+        Assert.That(config.Population.Conditions[0], Is.TypeOf<IsInSharedTimeWindowCondition>());
 
-        var populationFilter0 = (IsInSharedTimeWindowConditionBuilder)config.Population.Conditions[0];
+        var populationFilter0 = (IsInSharedTimeWindowCondition)config.Population.Conditions[0];
         Assert.That(populationFilter0.MaxTimeDistanceInDays, Is.EqualTo(20));
     }
 

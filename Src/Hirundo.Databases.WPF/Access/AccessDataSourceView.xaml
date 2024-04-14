@@ -9,7 +9,8 @@
              xmlns:access="clr-namespace:Hirundo.Databases.WPF.Access"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:wpf="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
-             xmlns:helpers1="clr-namespace:Hirundo.Databases.WPF.Helpers" xmlns:helpers="clr-namespace:Hirundo.Commons.WPF.Helpers;assembly=Hirundo.Commons.WPF"
+             xmlns:helpers="clr-namespace:Hirundo.Databases.WPF.Helpers" 
+             xmlns:helpers2="clr-namespace:Hirundo.Commons.WPF.Helpers;assembly=Hirundo.Commons.WPF"
              mc:Ignorable="d"
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance access:AccessDataSourceViewModel}">
@@ -22,9 +23,9 @@
             <Setter Property="Margin" Value="10 0" />
             <Setter Property="MinWidth" Value="200" />
         </Style>
-        <helpers:DataTypeConverter x:Key="DataTypeConverter" />
-        <helpers1:DatabaseConditionOperatorConverter x:Key="DatabaseConditionOperatorConverter" />
-        <helpers1:DatabaseConditionTypeConverter x:Key="DatabaseConditionTypeConverter" />
+        <helpers2:DataTypeConverter x:Key="DataTypeConverter" />
+        <helpers:DatabaseConditionOperatorConverter x:Key="DatabaseConditionOperatorConverter" />
+        <helpers:DatabaseConditionTypeConverter x:Key="DatabaseConditionTypeConverter" />
         <ObjectDataProvider MethodName="GetValues"
                             ObjectType="{x:Type sys:Enum}"
                             x:Key="DataValueTypeListProvider">
@@ -107,7 +108,7 @@
                                 <ComboBox
                                     Margin="2,0"
                                     ItemsSource="{Binding DataContext.DataColumns, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                    SelectedValue="{Binding DatabaseColumn}"
+                                    SelectedValue="{Binding DatabaseColumn, Mode=TwoWay}"
                                     Style="{DynamicResource MaterialDesignDataGridComboBox}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

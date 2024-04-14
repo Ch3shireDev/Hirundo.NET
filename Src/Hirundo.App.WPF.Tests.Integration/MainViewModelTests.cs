@@ -260,7 +260,7 @@ public class MainViewModelTests
             {
                 Conditions =
                 [
-                    new IsInSharedTimeWindowConditionBuilder(100)
+                    new IsInSharedTimeWindowCondition(100)
                 ]
             }
         };
@@ -274,8 +274,8 @@ public class MainViewModelTests
         Assert.That(result.Population, Is.Not.Null);
         Assert.That(result.Population.Conditions, Is.Not.Null);
         Assert.That(result.Population.Conditions.Count, Is.EqualTo(1));
-        Assert.That(result.Population.Conditions[0], Is.InstanceOf<IsInSharedTimeWindowConditionBuilder>());
-        var isInSharedTimeWindowFilterBuilder = (IsInSharedTimeWindowConditionBuilder)result.Population.Conditions[0];
+        Assert.That(result.Population.Conditions[0], Is.InstanceOf<IsInSharedTimeWindowCondition>());
+        var isInSharedTimeWindowFilterBuilder = (IsInSharedTimeWindowCondition)result.Population.Conditions[0];
         Assert.That(isInSharedTimeWindowFilterBuilder.MaxTimeDistanceInDays, Is.EqualTo(100));
     }
 

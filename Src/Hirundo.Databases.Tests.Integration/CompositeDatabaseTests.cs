@@ -13,6 +13,7 @@ public class CompositeDatabaseTests
             Table = "old_table",
             RingIdentifier = "RING",
             DateIdentifier = "DATE",
+            SpeciesIdentifier = "SPECIES",
             Columns =
             [
                 new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt),
@@ -29,6 +30,7 @@ public class CompositeDatabaseTests
             Table = "new_table",
             RingIdentifier = "RING",
             DateIdentifier = "DATE",
+            SpeciesIdentifier = "SPECIES",
             Columns =
             [
                 new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt),

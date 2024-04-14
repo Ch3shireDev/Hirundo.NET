@@ -39,7 +39,7 @@ public class MdbAccessDatabase(AccessDatabaseParameters parameters, Cancellation
             .WithConditions(parameters.Conditions)
             .Build();
 
-        Log.Debug($"Access query: {query}");
+        Log.Debug("Access query: {query}", query);
 
 #pragma warning disable CA2100
         using var command = new OdbcCommand(query, connection);
@@ -52,18 +52,21 @@ public class MdbAccessDatabase(AccessDatabaseParameters parameters, Cancellation
         var headers = GetDataColumns(parameters);
         int ringIndex = GetRingIndex(parameters);
         int dateIndex = GetDateIndex(parameters);
+        int speciesIndex = GetSpeciesIndex(parameters);
 
         while (reader.Read())
         {
             var values = GetValuesFromReader(reader);
 
-            var ring = values[ringIndex] as string ?? "";
-            var date = values[dateIndex] as DateTime? ?? DateTime.MinValue;
+            string ring = GetRing(ringIndex, values);
+            DateTime date = GetDate(dateIndex, values);
+            string species = GetSpecies(speciesIndex, values);
 
             yield return new Observation
             {
                 Ring = ring,
                 Date = date,
+                Species = species,
                 Headers = headers,
                 Values = values
             };
@@ -72,6 +75,28 @@ public class MdbAccessDatabase(AccessDatabaseParameters parameters, Cancellation
         }
 
         Log.Information("Zakończono odczyt danych z bazy danych Access.");
+    }
+
+    private static string GetSpecies(int speciesIndex, object?[] values)
+    {
+        return values[speciesIndex] as string ?? "";
+    }
+
+    private static DateTime GetDate(int dateIndex, object?[] values)
+    {
+        return values[dateIndex] as DateTime? ?? DateTime.MinValue;
+    }
+
+    private static string GetRing(int ringIndex, object?[] values)
+    {
+        return values[ringIndex] as string ?? "";
+    }
+
+    private static int GetSpeciesIndex(AccessDatabaseParameters parameters)
+    {
+        var dataColumns = GetDataColumns(parameters);
+        var speciesIndex = Array.IndexOf(dataColumns, parameters.SpeciesIdentifier);
+        return speciesIndex;
     }
 
     private void ThrowIfRingIdentifierIsInvalid()

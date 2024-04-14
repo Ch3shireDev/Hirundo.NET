@@ -7,7 +7,11 @@ namespace Hirundo.Processors.Observations;
 /// <summary>
 ///     Warunek sprawdzający, czy wartość obserwacji jest równa podanej wartości.
 /// </summary>
-[TypeDescription("IsEqual")]
+[TypeDescription(
+    "IsEqual",
+    "Czy wartość jest równa?",
+    "Warunek porównujący pole danych z podaną wartością."
+    )]
 public class IsEqualCondition : ICompareValueCondition, IObservationCondition
 {
     /// <summary>

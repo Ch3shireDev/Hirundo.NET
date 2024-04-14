@@ -26,11 +26,13 @@ public class MdbAccessDatabaseTests
         _accessDatabaseParameters.Columns.Add(new ColumnParameters("DATE", "DATE", DataValueType.DateTime));
         _accessDatabaseParameters.Columns.Add(new ColumnParameters("MASS", "WEIGHT", DataValueType.Numeric));
         _accessDatabaseParameters.Columns.Add(new ColumnParameters("FAT", "FAT", DataValueType.ShortInt));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("SPEC", "SPECIES", DataValueType.Text));
 
         _accessDatabaseParameters.Table = "TAB_RING_PODAB";
 
         _accessDatabaseParameters.RingIdentifier = "RING";
         _accessDatabaseParameters.DateIdentifier = "DATE";
+        _accessDatabaseParameters.SpeciesIdentifier = "SPECIES";
 
         // Act
         var data = _mdbAccessDatabase.GetObservations().ToList();
@@ -62,6 +64,7 @@ public class MdbAccessDatabaseTests
 
         _accessDatabaseParameters.RingIdentifier = "RING";
         _accessDatabaseParameters.DateIdentifier = "DATE";
+        _accessDatabaseParameters.SpeciesIdentifier = "SPECIES";
 
         _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
         _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataValueType.Text));
@@ -106,6 +109,7 @@ public class MdbAccessDatabaseTests
 
         _accessDatabaseParameters.RingIdentifier = "RING";
         _accessDatabaseParameters.DateIdentifier = "DATE";
+        _accessDatabaseParameters.SpeciesIdentifier = "SPECIES";
 
         _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
         _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataValueType.Text));
@@ -136,6 +140,7 @@ public class MdbAccessDatabaseTests
 
         _accessDatabaseParameters.RingIdentifier = "RING";
         _accessDatabaseParameters.DateIdentifier = "DATE";
+        _accessDatabaseParameters.SpeciesIdentifier = "SPECIES";
 
         _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
         _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataValueType.Text));
@@ -163,6 +168,7 @@ public class MdbAccessDatabaseTests
 
         _accessDatabaseParameters.RingIdentifier = "RING";
         _accessDatabaseParameters.DateIdentifier = "DATE";
+        _accessDatabaseParameters.SpeciesIdentifier = "SPECIES";
 
         _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
         _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataValueType.Text));
@@ -199,6 +205,7 @@ public class MdbAccessDatabaseTests
 
         _accessDatabaseParameters.RingIdentifier = "RING";
         _accessDatabaseParameters.DateIdentifier = "DATE";
+        _accessDatabaseParameters.SpeciesIdentifier = "SPECIES";
 
         _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
         _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataValueType.Text));
@@ -235,6 +242,7 @@ public class MdbAccessDatabaseTests
         _accessDatabaseParameters.Table = "TAB_RING_PODAB";
         _accessDatabaseParameters.RingIdentifier = "RING";
         _accessDatabaseParameters.DateIdentifier = "DATE";
+        _accessDatabaseParameters.SpeciesIdentifier = "SPECIES";
 
         _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
         _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataValueType.Text));
@@ -260,6 +268,7 @@ public class MdbAccessDatabaseTests
         _accessDatabaseParameters.Table = "example table";
         _accessDatabaseParameters.RingIdentifier = "RING";
         _accessDatabaseParameters.DateIdentifier = "DATE";
+        _accessDatabaseParameters.SpeciesIdentifier = "SPECIES";
         _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
         _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataValueType.Text));
         _accessDatabaseParameters.Columns.Add(new ColumnParameters("Species Code", "SPECIES", DataValueType.Text));
@@ -271,5 +280,28 @@ public class MdbAccessDatabaseTests
 
         // Assert
         Assert.That(data.Count, Is.EqualTo(0));
+    }
+
+    [Test]
+    public void GivenSpeciesConfig_WhenGetData_ReturnsObservationsWithSpeciesFilled()
+    {
+        _accessDatabaseParameters.Path = "./Assets/access_example_new_db.mdb";
+        _accessDatabaseParameters.Table = "example table";
+        _accessDatabaseParameters.RingIdentifier = "RING";
+        _accessDatabaseParameters.DateIdentifier = "DATE";
+        _accessDatabaseParameters.SpeciesIdentifier = "SPECIES";
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataValueType.Text));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("Species Code", "SPECIES", DataValueType.Text));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("DATE2", "DATE", DataValueType.DateTime));
+
+        // Act
+        var data = _mdbAccessDatabase.GetObservations().ToList();
+
+        // Assert
+        Assert.That(data.Count, Is.EqualTo(3));
+        Assert.That(data[0].Species, Is.EqualTo("REG.REG"));
+        Assert.That(data[1].Species, Is.EqualTo("CER.FAM"));
+        Assert.That(data[2].Species, Is.EqualTo("TRO.TRO"));
     }
 }

@@ -22,9 +22,9 @@ public class PopulationExplainer : ParametersExplainer<PopulationParameters>
     }
 }
 
-public class IsInSharedTimeWindowExplainer : ParametersExplainer<IsInSharedTimeWindowConditionBuilder>
+public class IsInSharedTimeWindowExplainer : ParametersExplainer<IsInSharedTimeWindowCondition>
 {
-    public override string Explain(IsInSharedTimeWindowConditionBuilder parameters)
+    public override string Explain(IsInSharedTimeWindowCondition parameters)
     {
         return $"Czy różnica dat między pierwszą obserwacją osobnika powracającego a pierwszą obserwacją osobnika jest mniejsza lub równa niż {parameters.MaxTimeDistanceInDays} dni?";
     }

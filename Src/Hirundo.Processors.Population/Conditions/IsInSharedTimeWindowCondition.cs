@@ -3,28 +3,32 @@ using Hirundo.Commons.Models;
 
 namespace Hirundo.Processors.Population.Conditions;
 
-[TypeDescription("IsInSharedTimeWindow")]
-public sealed class IsInSharedTimeWindowConditionBuilder : IPopulationConditionBuilder
+[TypeDescription(
+    "IsInSharedTimeWindow",
+    "Czy jest we współdzielonym oknie czasowym?",
+     "Warunek sprawdzający, czy osobnik z populacji jest w tym samym przedziale czasowym co osobnik powracający."
+    )]
+public sealed class IsInSharedTimeWindowCondition : IPopulationCondition
 {
-    public IsInSharedTimeWindowConditionBuilder()
+    public IsInSharedTimeWindowCondition()
     {
     }
 
-    public IsInSharedTimeWindowConditionBuilder(int maxTimeDistanceInDays)
+    public IsInSharedTimeWindowCondition(int maxTimeDistanceInDays)
     {
         MaxTimeDistanceInDays = maxTimeDistanceInDays;
     }
 
     public int MaxTimeDistanceInDays { get; set; } = 300;
 
-    public IPopulationCondition GetPopulationCondition(Specimen returningSpecimen)
+    public IPopulationConditionClosure GetPopulationConditionClosure(Specimen returningSpecimen)
     {
-        return new IsInSharedTimeWindowCondition(returningSpecimen, MaxTimeDistanceInDays);
+        return new IsInSharedTimeWindowConditionClosure(returningSpecimen, MaxTimeDistanceInDays);
     }
 
-    private sealed class IsInSharedTimeWindowCondition(
+    private sealed class IsInSharedTimeWindowConditionClosure(
         Specimen returningSpecimen,
-        int days) : IPopulationCondition
+        int days) : IPopulationConditionClosure
     {
         private readonly DateTime returningSpecimenFirstDate = returningSpecimen
             .Observations

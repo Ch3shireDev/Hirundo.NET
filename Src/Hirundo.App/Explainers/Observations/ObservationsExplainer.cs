@@ -87,3 +87,11 @@ public class IsInTimeBlockExplainer : ParametersExplainer<IsInTimeBlockCondition
         return $"Wartość {parameters.ValueName} musi być w przedziale godzin od {parameters.TimeBlock.StartHour} do {parameters.TimeBlock.EndHour}. Puste wartości {parameters.ValueName} są {acceptType}.";
     }
 }
+
+public class IsSpeciesEqualExplainer : ParametersExplainer<IsSpeciesEqualCondition>
+{
+    public override string Explain(IsSpeciesEqualCondition parameters)
+    {
+        return $"Osobniki muszą mieć identyfikator gatunku '{parameters.Species}'.";
+    }
+}

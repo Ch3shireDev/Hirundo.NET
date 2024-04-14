@@ -8,7 +8,7 @@ namespace Hirundo.Processors.Population;
 /// </summary>
 public class PopulationProcessorBuilder : IPopulationProcessorBuilder
 {
-    private readonly List<IPopulationConditionBuilder> _conditionBuilders = [];
+    private readonly List<IPopulationCondition> _conditionBuilders = [];
     private CancellationToken? _cancellationToken;
 
     /// <summary>
@@ -18,7 +18,7 @@ public class PopulationProcessorBuilder : IPopulationProcessorBuilder
     public IPopulationProcessor Build()
     {
         Log.Information("Budowanie procesora populacji. Liczba warunków: {_conditionsCount}.", _conditionBuilders.Count);
-        var conditionBuilder = new CompositePopulationConditionBuilder([.. _conditionBuilders]);
+        var conditionBuilder = new CompositePopulationCondition([.. _conditionBuilders]);
         return new PopulationProcessor(conditionBuilder, _cancellationToken);
     }
 
@@ -33,7 +33,7 @@ public class PopulationProcessorBuilder : IPopulationProcessorBuilder
         return this;
     }
 
-    public IPopulationProcessorBuilder WithPopulationConditions(IEnumerable<IPopulationConditionBuilder> populationConditions)
+    public IPopulationProcessorBuilder WithPopulationConditions(IEnumerable<IPopulationCondition> populationConditions)
     {
         _conditionBuilders.AddRange(populationConditions);
         return this;

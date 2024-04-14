@@ -9,7 +9,7 @@ namespace Hirundo.Commons.WPF;
 public partial class SpeciesComboBox : UserControl, INotifyPropertyChanged
 {
     public static readonly DependencyProperty SpeciesRepositoryProperty =
-        DependencyProperty.Register(nameof(SpeciesRepository), typeof(ISpeciesRepository), typeof(SpeciesComboBox), new PropertyMetadata(OnDataLabelRepositoryChanged));
+        DependencyProperty.Register(nameof(SpeciesRepository), typeof(ISpeciesRepository), typeof(SpeciesComboBox), new PropertyMetadata(OnSpeciesRepositoryChanged));
 
     public static readonly DependencyProperty SelectedSpeciesProperty =
         DependencyProperty.Register("SelectedSpecies", typeof(string), typeof(SpeciesComboBox), new PropertyMetadata(""));
@@ -37,7 +37,7 @@ public partial class SpeciesComboBox : UserControl, INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    private static void OnDataLabelRepositoryChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnSpeciesRepositoryChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not SpeciesComboBox comboBox) return;
 
@@ -53,11 +53,6 @@ public partial class SpeciesComboBox : UserControl, INotifyPropertyChanged
         }
     }
 
-    private static void OnValueNameChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        if (d is not SpeciesComboBox) return;
-    }
-
     private void OnSpeciesChanged(object? sender, EventArgs e)
     {
         OnSpeciesChanged();
@@ -68,7 +63,6 @@ public partial class SpeciesComboBox : UserControl, INotifyPropertyChanged
         if (SpeciesRepository is null) return;
         var selectedSpecies = SelectedSpecies;
         Species = [.. SpeciesRepository.GetSpecies()];
-        SelectedSpecies = Species.FirstOrDefault() ?? "";
         ComboBox.ItemsSource = Species;
         ComboBox.SelectedValue = SelectedSpecies;
         SelectedSpecies = selectedSpecies;
