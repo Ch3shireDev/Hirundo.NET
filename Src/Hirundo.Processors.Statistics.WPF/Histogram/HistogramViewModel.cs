@@ -8,9 +8,7 @@ namespace Hirundo.Processors.Statistics.WPF.Histogram;
 [ParametersData(
     typeof(HistogramOperation),
     typeof(HistogramModel),
-    typeof(HistogramView),
-    "Histogram",
-    "Oblicza histogram dla wybranej wartości."
+    typeof(HistogramView)
 )]
 public class HistogramViewModel(HistogramModel model) : ParametersViewModel(model)
 {
@@ -37,7 +35,7 @@ public class HistogramViewModel(HistogramModel model) : ParametersViewModel(mode
         }
     }
 
-    void UpdatePrefix(string value)
+    private void UpdatePrefix(string value)
     {
         ResultPrefix = model.ResultPrefix == model.ValueName ? value : model.ResultPrefix;
     }

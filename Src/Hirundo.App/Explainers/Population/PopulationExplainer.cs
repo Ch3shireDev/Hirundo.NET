@@ -26,6 +26,22 @@ public class IsInSharedTimeWindowExplainer : ParametersExplainer<IsInSharedTimeW
 {
     public override string Explain(IsInSharedTimeWindowCondition parameters)
     {
-        return $"Czy różnica dat między pierwszą obserwacją osobnika powracającego a pierwszą obserwacją osobnika jest mniejsza lub równa niż {parameters.MaxTimeDistanceInDays} dni?";
+        return $"Różnica dat między pierwszą obserwacją osobnika powracającego a pierwszą obserwacją osobnika musi być mniejsza lub równa niż {parameters.MaxTimeDistanceInDays} dni.";
+    }
+}
+
+public class IsEqualPopulationConditionExplainer : ParametersExplainer<IsEqualPopulationCondition>
+{
+    public override string Explain(IsEqualPopulationCondition parameters)
+    {
+        return $"Wartość pierwszej obserwacji osobnika w populacji z pola '{parameters.ValueName}' musi być równa '{parameters.Value}'.";
+    }
+}
+
+public class IsNotMainSpecimenPopulationConditionExplainer : ParametersExplainer<IsNotMainSpecimenPopulationCondition>
+{
+    public override string Explain(IsNotMainSpecimenPopulationCondition parameters)
+    {
+        return "Populacja dla wybranego osobnika nie zawiera w sobie tego osobnika.";
     }
 }

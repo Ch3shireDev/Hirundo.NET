@@ -4,7 +4,11 @@ using System.Globalization;
 
 namespace Hirundo.Processors.Statistics.Operations;
 
-[TypeDescription("Histogram")]
+[TypeDescription(
+    "Histogram",
+    "Histogram",
+    "Oblicza histogram dla wybranej wartości."
+    )]
 public class HistogramOperation : IStatisticalOperation
 {
     public HistogramOperation(string valueName, string resultName, decimal minValue, decimal maxValue, decimal interval = 1)

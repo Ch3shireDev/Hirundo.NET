@@ -7,7 +7,11 @@ namespace Hirundo.Processors.Statistics.Operations;
 /// <summary>
 ///     Zwraca wartość średnią po danej wartości w populacji. W przypadku napotkania wartości null pomija.
 /// </summary>
-[TypeDescription("AverageAndDeviation")]
+[TypeDescription(
+    "AverageAndDeviation",
+    "Wartość średnia i odchylenie standardowe",
+    "Oblicza wartość średnią i odchylenie standardowe dla wybranej wartości."
+    )]
 public class AverageOperation : IStatisticalOperation
 {
     public AverageOperation()
@@ -63,8 +67,11 @@ public class AverageOperation : IStatisticalOperation
 
         HashSet<string> calculatedPopulationIds;
 
+        var i = 0;
+
         do
         {
+            i += 1;
             var populationIds = GetPopulationIds(population, emptyValuesIds, outliersIds).ToHashSet();
             var values = GetValues(population, populationIds);
             calculatedPopulationIds = populationIds;
@@ -78,9 +85,7 @@ public class AverageOperation : IStatisticalOperation
 
             oldOutliersIds = outliersIds;
             outliersIds = [.. Outliers.GetOutliersIds(population, ValueName, averageValue, standardDeviationValue)];
-
-
-        } while (oldOutliersIds.Count != outliersIds.Count);
+        } while (i < 2);
 
         return GetResult([averageValue, standardDeviationValue], calculatedPopulationIds.ToArray(), emptyValuesIds.ToArray(), outliersIds.ToArray());
     }

@@ -3,7 +3,7 @@ using Hirundo.Processors.Statistics.Operations;
 using NUnit.Framework;
 using System.Collections;
 
-namespace Hirundo.Processors.Statistics.Tests.Operations;
+namespace Hirundo.Processors.Statistics.Tests;
 
 [TestFixture]
 public class HistogramOperationTests

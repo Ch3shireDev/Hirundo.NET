@@ -4,7 +4,7 @@ using Hirundo.Processors.Statistics.Operations.Outliers;
 using NUnit.Framework;
 using System.Collections;
 
-namespace Hirundo.Processors.Statistics.Tests.Operations;
+namespace Hirundo.Processors.Statistics.Tests;
 
 [TestFixture]
 public class AverageOperationTests
@@ -79,7 +79,7 @@ public class AverageOperationTests
         List<Specimen> populationData =
         [
             new Specimen("AAA111", [new Observation(["VALUE"], [10])]),
-            new Specimen("BBB222", [new Observation(["VALUE"], [14])]),
+            new Specimen("BBB221", [new Observation(["VALUE"], [14])]),
             new Specimen("CCC333", [new Observation(["VALUE"], [18])]),
             new Specimen("DDD444", [new Observation(["VALUE"], [9999])])
         ];
@@ -104,7 +104,7 @@ public class AverageOperationTests
             "PREFIX_OUTLIER_SIZE"
         }));
         Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 14, 4, 3, 0, 1 }));
-        Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList { "AAA111", "BBB222", "CCC333" }));
+        Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList { "AAA111", "BBB221", "CCC333" }));
         Assert.That(result.OutlierIds, Is.EquivalentTo(new ArrayList { "DDD444" }));
     }
 
@@ -157,5 +157,36 @@ public class AverageOperationTests
         Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList()));
         Assert.That(result.EmptyValueIds, Is.EquivalentTo(new ArrayList { "AAA111", "BBB222", "CCC333" }));
         Assert.That(result.OutlierIds, Is.EquivalentTo(new ArrayList()));
+        var populationSizeIndex = result.Names.IndexOf("PREFIX_POPULATION_SIZE");
+        var populationSize = result.Values[populationSizeIndex];
+        Assert.That(populationSize, Is.EqualTo(0));
+        var emptySizeIndex = result.Names.IndexOf("PREFIX_EMPTY_SIZE");
+        var emptySize = result.Values[emptySizeIndex];
+        Assert.That(emptySize, Is.EqualTo(3));
+        var outlierSizeIndex = result.Names.IndexOf("PREFIX_OUTLIER_SIZE");
+        var outlierSize = result.Values[outlierSizeIndex];
+        Assert.That(outlierSize, Is.EqualTo(0));
+    }
+
+    [Test]
+    public void GivenSomeEmptyValues_WhenCalculatingPopulation_ReturnsPopulationSizeOnlyOfNonEmptyValues()
+    {
+        // Arrange
+        var operation = new AverageOperation("VALUE", "PREFIX");
+
+        List<Specimen> population =
+        [
+            new Specimen("AAA111", [new Observation(["VALUE"], [1])]),
+            new Specimen("BBB222", [new Observation(["VALUE"], [2])]),
+            new Specimen("CCC333", [new Observation(["VALUE"], [null])])
+        ];
+
+        // Act
+        var result = operation.GetStatistics(population);
+
+        // Assert
+        var populationSizeIndex = result.Names.IndexOf("PREFIX_POPULATION_SIZE");
+        var populationSize = result.Values[populationSizeIndex];
+        Assert.That(populationSize, Is.EqualTo(2));
     }
 }
