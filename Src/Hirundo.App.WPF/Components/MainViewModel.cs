@@ -293,13 +293,7 @@ public sealed class MainViewModel : ObservableObject
         {
             var config = GetConfig();
             var json = JsonTools.Serialize(config);
-            var saveFileDialog = new SaveFileDialog
-            {
-                Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*",
-                FilterIndex = 1,
-                RestoreDirectory = true,
-                FileName = "config.json"
-            };
+            var saveFileDialog = FileDialogFactory.GetFileDialogForFilename("config.json");
 
             if (saveFileDialog.ShowDialog() == true)
             {
@@ -325,7 +319,7 @@ public sealed class MainViewModel : ObservableObject
         {
             var loadFileDialog = new OpenFileDialog
             {
-                Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*",
+                Filter = "Pliki JSON (*.json)|*.json",
                 FilterIndex = 1,
                 RestoreDirectory = true
             };
