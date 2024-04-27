@@ -11,9 +11,7 @@ namespace Hirundo.Processors.Returning.WPF.IsInSet;
 [ParametersData(
     typeof(IsInSetReturningCondition),
     typeof(IsInSetReturningModel),
-    typeof(IsInSetReturningView),
-    "Czy dane powracającego osobnika są w zbiorze?",
-    "Warunek sprawdzający, czy pole danych dla osobnika powracającego znajduje się w zbiorze wartości."
+    typeof(IsInSetReturningView)
 )]
 public class IsInSetReturningViewModel : ParametersViewModel
 {

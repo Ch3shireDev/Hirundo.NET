@@ -3,7 +3,11 @@ using Hirundo.Commons.Helpers;
 
 namespace Hirundo.Processors.Returning.Conditions;
 
-[TypeDescription("IsLowerThan")]
+[TypeDescription(
+    "IsLowerThan",
+    "Czy dane są mniejsze?",
+    "Osobnik zawiera obserwację z polem mniejszym od danej wartości."
+    )]
 public class IsLowerThanReturningCondition : CompareValuesReturningCondition
 {
     public IsLowerThanReturningCondition(string valueName, object? value) : base(valueName, value) { }

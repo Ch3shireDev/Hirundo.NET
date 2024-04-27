@@ -3,7 +3,11 @@ using Hirundo.Commons.Models;
 
 namespace Hirundo.Processors.Returning.Conditions;
 
-[TypeDescription("Alternative", true)]
+[TypeDescription(
+    "Alternative",
+    "Czy przynajmniej jeden z warunków został spełniony?",
+    "Aby osobnik był uznany za powracający, musi być spełniony co najmniej jeden z warunków.",
+    true)]
 public class AlternativeReturningCondition : IReturningSpecimenCondition
 {
     public IList<IReturningSpecimenCondition> Conditions { get; } = [];

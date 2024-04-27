@@ -8,7 +8,11 @@ namespace Hirundo.Processors.Returning.Conditions;
 ///     uznany za powracający, muszą istnieć co najmniej dwie sąsiednie obserwacje, których różnica
 ///     dat jest większa lub równa podanej liczbie dni.
 /// </summary>
-[TypeDescription("ReturnsAfterTimePeriod")]
+[TypeDescription(
+    "ReturnsAfterTimePeriod",
+    "Czy powrót nastąpił po określonym czasie?",
+    "Osobnik wraca nie wcześniej niż po określonej liczbie dni."
+    )]
 public class ReturnsAfterTimePeriodCondition : IReturningSpecimenCondition
 {
     /// <summary>

@@ -7,9 +7,7 @@ namespace Hirundo.Processors.Returning.WPF.Alternative;
 [ParametersData(
     typeof(AlternativeReturningCondition),
     typeof(AlternativeModel),
-    typeof(AlternativeView),
-    "Czy przynajmniej jeden z warunków został spełniony?",
-    "Aby osobnik był uznany za powracający, musi być spełniony co najmniej jeden z warunków."
+    typeof(AlternativeView)
 )]
 public class AlternativeViewModel(AlternativeModel model) : ParametersViewModel(model)
 {

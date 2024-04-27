@@ -7,8 +7,6 @@ namespace Hirundo.Processors.Returning.WPF.CompareValues;
     (
        typeof(IsNotEqualReturningCondition),
        typeof(CompareValuesReturningModel<IsNotEqualReturningCondition>),
-       typeof(CompareValuesReturningView),
-       "Czy dane nie są równe?",
-       "Osobnik zawiera obserwację z polem różnym od danej wartości."
+       typeof(CompareValuesReturningView)
     )]
 public class IsNotEqualReturningViewModel(CompareValuesReturningModel<IsNotEqualReturningCondition> model) : CompareValuesReturningViewModel<IsNotEqualReturningCondition>(model) { }

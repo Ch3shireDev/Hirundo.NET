@@ -7,9 +7,7 @@ namespace Hirundo.Processors.Returning.WPF.CompareValues;
                 (
                    typeof(IsGreaterThanReturningCondition),
                    typeof(CompareValuesReturningModel<IsGreaterThanReturningCondition>),
-                   typeof(CompareValuesReturningView),
-                   "Czy dane są większe?",
-                   "Osobnik zawiera obserwację z polem większym od danej wartości."
+                   typeof(CompareValuesReturningView)
                 )]
 public class IsGreaterReturningViewModel(CompareValuesReturningModel<IsGreaterThanReturningCondition> model) : CompareValuesReturningViewModel<IsGreaterThanReturningCondition>(model)
 {

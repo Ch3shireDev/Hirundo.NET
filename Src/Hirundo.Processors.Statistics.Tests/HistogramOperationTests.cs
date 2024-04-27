@@ -27,8 +27,8 @@ public class HistogramOperationTests
         // Assert
         Assert.That(result.Names, Is.EquivalentTo(new ArrayList
         {
-            "HISTOGRAM-1",
-            "HISTOGRAM-2"
+            "HISTOGRAM_1",
+            "HISTOGRAM_2"
         }));
         Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 1, 0 }));
         Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList { "ABC123" }));
@@ -55,15 +55,15 @@ public class HistogramOperationTests
         // Assert
         Assert.That(result.Names, Is.EquivalentTo(new ArrayList
         {
-            "HISTOGRAM-1",
-            "HISTOGRAM-2",
-            "HISTOGRAM-3",
-            "HISTOGRAM-4",
-            "HISTOGRAM-5",
-            "HISTOGRAM-6",
-            "HISTOGRAM-7",
-            "HISTOGRAM-8",
-            "HISTOGRAM-9"
+            "HISTOGRAM_1",
+            "HISTOGRAM_2",
+            "HISTOGRAM_3",
+            "HISTOGRAM_4",
+            "HISTOGRAM_5",
+            "HISTOGRAM_6",
+            "HISTOGRAM_7",
+            "HISTOGRAM_8",
+            "HISTOGRAM_9"
         }));
         Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 1, 0, 0, 0, 1, 0, 0, 0, 1 }));
         Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList { "ABC123", "DEF456", "GHI789" }));
@@ -83,13 +83,13 @@ public class HistogramOperationTests
 
         var specimen = new Specimen("XXX123", [new Observation(["FAT"], [6])]);
 
-        var operation = new HistogramOperation("FAT", "FAT-H", 1, 2);
+        var operation = new HistogramOperation("FAT", "FAT_H", 1, 2);
 
         // Act
         var result = operation.GetStatistics(specimen, populationData);
 
         // Assert
-        Assert.That(result.Names, Is.EquivalentTo(new ArrayList { "FAT-H-1", "FAT-H-2" }));
+        Assert.That(result.Names, Is.EquivalentTo(new ArrayList { "FAT_H_1", "FAT_H_2" }));
         Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 2, 1 }));
         Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList { "A1", "A2", "A3" }));
         Assert.That(result.EmptyValueIds, Is.EquivalentTo(new ArrayList { "B1" }));
@@ -109,13 +109,13 @@ public class HistogramOperationTests
 
         var specimen = new Specimen("XXX123", [new Observation(["FAT"], [6])]);
 
-        var operation = new HistogramOperation("FAT", "FAT-H", 1, 2);
+        var operation = new HistogramOperation("FAT", "FAT_H", 1, 2);
 
         // Act
         var result = operation.GetStatistics(specimen, populationData);
 
         // Assert
-        Assert.That(result.Names, Is.EquivalentTo(new ArrayList { "FAT-H-1", "FAT-H-2" }));
+        Assert.That(result.Names, Is.EquivalentTo(new ArrayList { "FAT_H_1", "FAT_H_2" }));
         Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 1, 0 }));
         Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList { "A1" }));
         Assert.That(result.EmptyValueIds, Is.Empty);
@@ -134,8 +134,8 @@ public class HistogramOperationTests
         // Assert
         Assert.That(result.Names, Is.EquivalentTo(new ArrayList
         {
-            "HISTOGRAM-1",
-            "HISTOGRAM-2"
+            "HISTOGRAM_1",
+            "HISTOGRAM_2"
         }));
         Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 0, 0 }));
         Assert.That(result.PopulationIds, Is.Empty);
@@ -165,11 +165,11 @@ public class HistogramOperationTests
         // Assert
         Assert.That(result.Names, Is.EquivalentTo(new ArrayList
         {
-            "HISTOGRAM-0.0",
-            "HISTOGRAM-0.5",
-            "HISTOGRAM-1.0",
-            "HISTOGRAM-1.5",
-            "HISTOGRAM-2.0"
+            "HISTOGRAM_0.0",
+            "HISTOGRAM_0.5",
+            "HISTOGRAM_1.0",
+            "HISTOGRAM_1.5",
+            "HISTOGRAM_2.0"
         }));
 
         Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 2, 2, 1, 1, 0 }));
@@ -195,11 +195,11 @@ public class HistogramOperationTests
         // Assert
         Assert.That(result.Names, Is.EquivalentTo(new ArrayList
         {
-            "HISTOGRAM-0.0",
-            "HISTOGRAM-0.5",
-            "HISTOGRAM-1.0",
-            "HISTOGRAM-1.5",
-            "HISTOGRAM-2.0"
+            "HISTOGRAM_0.0",
+            "HISTOGRAM_0.5",
+            "HISTOGRAM_1.0",
+            "HISTOGRAM_1.5",
+            "HISTOGRAM_2.0"
         }));
 
         Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 0, 0, 0, 0, 0 }));
@@ -207,5 +207,186 @@ public class HistogramOperationTests
         Assert.That(result.PopulationIds, Is.Empty);
         Assert.That(result.EmptyValueIds, Is.Empty);
         Assert.That(result.OutlierIds, Is.EquivalentTo(new ArrayList { "A001", "A002" }));
+    }
+
+    [Test]
+    public void GivenIncludePopulation_WhenGetStatistics_IncludesPopulation()
+    {
+        // Arrange
+        bool includePopulation = true;
+
+        var operation = new HistogramOperation("VALUE", "HISTOGRAM", 0.0m, 2.0m, 0.5m, includePopulation);
+
+
+        List<Specimen> populationData =
+        [
+            new Specimen("A001", [new Observation(["VALUE"], [0.1])]),
+            new Specimen("A002", [new Observation(["VALUE"], [0.3])]),
+            new Specimen("A003", [new Observation(["VALUE"], [0.5])]),
+            new Specimen("A004", [new Observation(["VALUE"], [0.7])]),
+            new Specimen("A005", [new Observation(["VALUE"], [1.1])]),
+            new Specimen("A006", [new Observation(["VALUE"], [1.6])]),
+            new Specimen("A007", [new Observation(["VALUE"], [2.5])]),
+            new Specimen("A008", [new Observation(["VALUE"], [null])]),
+        ];
+
+        var specimen = new Specimen("XXX123", [new Observation(["VALUE"], [6])]);
+
+        // Act
+        var result = operation.GetStatistics(specimen, populationData);
+
+        // Assert
+        Assert.That(result.Names, Is.EquivalentTo(new ArrayList
+        {
+            "HISTOGRAM_0.0",
+            "HISTOGRAM_0.5",
+            "HISTOGRAM_1.0",
+            "HISTOGRAM_1.5",
+            "HISTOGRAM_2.0",
+            "HISTOGRAM_POPULATION"
+        }));
+
+        Assert.That(operation.IncludePopulation, Is.True);
+        Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 2, 2, 1, 1, 0, 6 }));
+    }
+
+    [Test]
+    public void GivenIncludeDistribution_WhenGetStatistics_IncludesDistribution()
+    {
+        // Arrange
+        bool includePopulation = false;
+        bool includeDistribution = true;
+        var operation = new HistogramOperation("VALUE", "HISTOGRAM", 1, 3, 1, includePopulation, includeDistribution);
+
+        List<Specimen> population =
+        [
+            new Specimen("A001", [new Observation(["VALUE"], [1])]),
+            new Specimen("A002", [new Observation(["VALUE"], [1])]),
+            new Specimen("A003", [new Observation(["VALUE"], [1])]),
+            new Specimen("A004", [new Observation(["VALUE"], [2])]),
+            new Specimen("A005", [new Observation(["VALUE"], [2])]),
+            new Specimen("A006", [new Observation(["VALUE"], [2])]),
+            new Specimen("A007", [new Observation(["VALUE"], [2])]),
+            new Specimen("A008", [new Observation(["VALUE"], [2])]),
+            new Specimen("A009", [new Observation(["VALUE"], [3])]),
+            new Specimen("A010", [new Observation(["VALUE"], [3])]),
+            new Specimen("A011", [new Observation(["VALUE"], [3])]),
+        ];
+
+        var specimen = new Specimen("XXX123", [new Observation(["VALUE"], [2])]);
+
+        var returningSpecimen = new ReturningSpecimen(specimen, population);
+
+        // Act
+        var result = operation.GetStatistics(returningSpecimen);
+
+        // Assert
+        Assert.That(result.Names, Is.EquivalentTo(new ArrayList
+        {
+            "HISTOGRAM_1",
+            "HISTOGRAM_2",
+            "HISTOGRAM_3",
+            "HISTOGRAM_DISTRIBUTION"
+        }));
+
+        Assert.That(operation.IncludeDistribution, Is.True);
+        Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 3, 5, 3, 0.5m }));
+    }
+
+    [Test]
+    public void GivenOnlyOneValueDistribution_WhenGetStatistics_ReturnsHalf()
+    {
+        // Arrange
+        bool includePopulation = false;
+        bool includeDistribution = true;
+        var operation = new HistogramOperation("VALUE", "HISTOGRAM", 1, 3, 1, includePopulation, includeDistribution);
+
+        List<Specimen> population = [];
+
+        var specimen = new Specimen("XXX123", [new Observation(["VALUE"], [2])]);
+
+        var returningSpecimen = new ReturningSpecimen(specimen, population);
+
+        // Act
+        var result = operation.GetStatistics(returningSpecimen);
+
+        // Assert
+        Assert.That(result.Names, Is.EquivalentTo(new ArrayList
+        {
+            "HISTOGRAM_1",
+            "HISTOGRAM_2",
+            "HISTOGRAM_3",
+            "HISTOGRAM_DISTRIBUTION"
+        }));
+
+        Assert.That(operation.IncludeDistribution, Is.True);
+        Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 0, 0, 0, 0.5m }));
+    }
+
+    [Test]
+    public void GivenValueExceedingHistogram_WhenGetStatistics_ReturnsOne()
+    {
+        // Arrange
+        bool includePopulation = false;
+        bool includeDistribution = true;
+        var operation = new HistogramOperation("VALUE", "HISTOGRAM", 1, 3, 1, includePopulation, includeDistribution);
+
+        List<Specimen> population = [
+             new Specimen("A001", [new Observation(["VALUE"], [1])]),
+             new Specimen("A001", [new Observation(["VALUE"], [2])]),
+             new Specimen("A001", [new Observation(["VALUE"], [3])])
+        ];
+
+        var specimen = new Specimen("XXX123", [new Observation(["VALUE"], [4])]);
+
+        var returningSpecimen = new ReturningSpecimen(specimen, population);
+
+        // Act
+        var result = operation.GetStatistics(returningSpecimen);
+
+        // Assert
+        Assert.That(result.Names, Is.EquivalentTo(new ArrayList
+        {
+            "HISTOGRAM_1",
+            "HISTOGRAM_2",
+            "HISTOGRAM_3",
+            "HISTOGRAM_DISTRIBUTION"
+        }));
+
+        Assert.That(operation.IncludeDistribution, Is.True);
+        Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 1, 1, 1, 1m }));
+    }
+    [Test]
+    public void GivenValueBelowHistogram_WhenGetStatistics_ReturnsZero()
+    {
+        // Arrange
+        bool includePopulation = false;
+        bool includeDistribution = true;
+        var operation = new HistogramOperation("VALUE", "HISTOGRAM", 1, 3, 1, includePopulation, includeDistribution);
+
+        List<Specimen> population = [
+             new Specimen("A001", [new Observation(["VALUE"], [1])]),
+             new Specimen("A001", [new Observation(["VALUE"], [2])]),
+             new Specimen("A001", [new Observation(["VALUE"], [3])])
+        ];
+
+        var specimen = new Specimen("XXX123", [new Observation(["VALUE"], [0])]);
+
+        var returningSpecimen = new ReturningSpecimen(specimen, population);
+
+        // Act
+        var result = operation.GetStatistics(returningSpecimen);
+
+        // Assert
+        Assert.That(result.Names, Is.EquivalentTo(new ArrayList
+        {
+            "HISTOGRAM_1",
+            "HISTOGRAM_2",
+            "HISTOGRAM_3",
+            "HISTOGRAM_DISTRIBUTION"
+        }));
+
+        Assert.That(operation.IncludeDistribution, Is.True);
+        Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 1, 1, 1, 0m }));
     }
 }

@@ -84,6 +84,26 @@ public class HistogramViewModel(HistogramModel model) : ParametersViewModel(mode
         }
     }
 
+    public bool IncludePopulation
+    {
+        get => model.IncludePopulation;
+        set
+        {
+            model.IncludePopulation = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public bool IncludeDistribution
+    {
+        get => model.IncludeDistribution;
+        set
+        {
+            model.IncludeDistribution = value;
+            OnPropertyChanged();
+        }
+    }
+
     public string ErrorMessage => GetErrorMessage();
 
     private string GetErrorMessage()

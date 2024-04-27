@@ -3,7 +3,10 @@ using Hirundo.Commons.Models;
 
 namespace Hirundo.Processors.Returning.Conditions;
 
-[TypeDescription("ReturnsNotEarlierThanGivenDateNextYear")]
+[TypeDescription(
+    "ReturnsNotEarlierThanGivenDateNextYear",
+    "Czy powrót nastąpił po określonej dacie kolejnego roku?",
+    "Osobnik wraca nie wcześniej niż w określonej dacie w przyszłym roku.")]
 public class ReturnsNotEarlierThanGivenDateNextYearCondition : IReturningSpecimenCondition
 {
     public ReturnsNotEarlierThanGivenDateNextYearCondition()

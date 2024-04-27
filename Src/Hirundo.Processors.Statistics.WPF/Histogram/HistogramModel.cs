@@ -37,5 +37,17 @@ public class HistogramModel(HistogramOperation parameters, ILabelsRepository lab
         set => parameters.Interval = value;
     }
 
+    public bool IncludePopulation
+    {
+        get => parameters.IncludePopulation;
+        set => parameters.IncludePopulation = value;
+    }
+
+    public bool IncludeDistribution
+    {
+        get => parameters.IncludeDistribution;
+        set => parameters.IncludeDistribution = value;
+    }
+
     public DataType DataType { get; set; }
 }

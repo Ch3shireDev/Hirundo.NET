@@ -4,7 +4,9 @@ using Hirundo.Commons.Models;
 
 namespace Hirundo.Processors.Returning.Conditions;
 
-[TypeDescription("IsInSet")]
+[TypeDescription("IsInSet",
+    "Czy dane powracającego osobnika są w zbiorze?",
+    "Warunek sprawdzający, czy pole danych dla osobnika powracającego znajduje się w zbiorze wartości.")]
 public class IsInSetReturningCondition : IReturningSpecimenCondition
 {
     public IsInSetReturningCondition()

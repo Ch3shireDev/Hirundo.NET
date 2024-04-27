@@ -6,9 +6,7 @@ namespace Hirundo.Processors.Returning.WPF.NotEarlierThanGivenDateNextYear;
 [ParametersData(
     typeof(ReturnsNotEarlierThanGivenDateNextYearCondition),
     typeof(NotEarlierThanGivenDateNextYearModel),
-    typeof(NotEarlierThanGivenDateNextYearView),
-    "Czy powrót nastąpił po określonej dacie kolejnego roku?",
-    "Osobnik wraca nie wcześniej niż w określonej dacie w przyszłym roku."
+    typeof(NotEarlierThanGivenDateNextYearView)
 )]
 public class NotEarlierThanGivenDateNextYearViewModel(NotEarlierThanGivenDateNextYearModel model) : ParametersViewModel(model)
 {

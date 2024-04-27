@@ -30,6 +30,12 @@
             <Label>Szerokość przedziału</Label>
             <TextBox Text="{Binding Interval}" MinWidth="100"/>
         </WrapPanel>
+        <WrapPanel>
+            <CheckBox Margin="10" IsChecked="{Binding IncludePopulation}" Content="Dodaj całkowitą liczbę populacji" />
+        </WrapPanel>
+        <WrapPanel>
+            <CheckBox Margin="10" IsChecked="{Binding IncludeDistribution}" Content="Dodaj dystrybuantę" />
+        </WrapPanel>
         <TextBlock
             Margin="15"
             Text="{Binding ErrorMessage}" Foreground="Red" FontWeight="Bold"/>

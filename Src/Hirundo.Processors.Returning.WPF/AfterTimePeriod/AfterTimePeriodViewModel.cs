@@ -6,9 +6,7 @@ namespace Hirundo.Processors.Returning.WPF.AfterTimePeriod;
 [ParametersData(
     typeof(ReturnsAfterTimePeriodCondition),
     typeof(AfterTimePeriodModel),
-    typeof(AfterTimePeriodView),
-    "Czy powrót nastąpił po określonym czasie?",
-    "Osobnik wraca nie wcześniej niż po określonej liczbie dni."
+    typeof(AfterTimePeriodView)
 )]
 public class AfterTimePeriodViewModel(AfterTimePeriodModel model) : ParametersViewModel(model), IRemovable
 {

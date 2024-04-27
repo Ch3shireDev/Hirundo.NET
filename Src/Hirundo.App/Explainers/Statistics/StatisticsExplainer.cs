@@ -38,9 +38,11 @@ public class AverageOperationExplainer : ParametersExplainer<AverageOperation>
         sb.AppendLine("Wartości wynikowe:");
         sb.AppendLine($"- {parameters.ResultPrefix}_AVERAGE - wyliczona średnia.");
         sb.AppendLine($"- {parameters.ResultPrefix}_STANDARD_DEVIATION - wyliczone odchylenie standardowe (po odrzuceniu wartości odstających).");
-        sb.AppendLine($"- {parameters.ResultPrefix}_POPULATION_SIZE - liczba wartości z pominięciem wartości pustych oraz odstających. Osobnik powracający również nie jest wliczany w populację.");
+        sb.AppendLine($"- {parameters.ResultPrefix}_POPULATION_SIZE - liczba wartości z pominięciem wartości pustych oraz odstających. Osobnik powracający nie jest wliczany w populację.");
         sb.AppendLine($"- {parameters.ResultPrefix}_EMPTY_SIZE - liczba pustych wartości.");
         sb.AppendLine($"- {parameters.ResultPrefix}_OUTLIER_SIZE - liczba wartości odstających.");
+        sb.AppendLine($"- {parameters.ResultPrefix}_VALUE_DIFFERENCE - różnica pomiędzy wartością cechy osobnika powracającego a wartością średnią - dodatnia, jeśli wartość {parameters.ValueName} osobnika powracającego jest większa niż średnia.");
+        sb.AppendLine($"- {parameters.ResultPrefix}_STANDARD_DEVIATION_DIFFERENCE - różnica pomiędzy wartością cechy osobnika powracającego a wartością średnią, w odchyleniach standardowych.");
 
         return sb.ToString();
     }
@@ -59,12 +61,21 @@ public class HistogramOperationExplainer : ParametersExplainer<HistogramOperatio
         sb.AppendLine($"Wartości są grupowane w interwałach co {parameters.Interval}.");
         sb.AppendLine("Wartości wynikowe:");
 
-
         for (var x = parameters.MinValue; x <= parameters.MaxValue; x += parameters.Interval)
         {
             var valueStr = x.ToString(CultureInfo.InvariantCulture);
-            var label = $"{parameters.ResultPrefix}-{valueStr}";
+            var label = $"{parameters.ResultPrefix}_{valueStr}";
             sb.AppendLine($"- {label} - liczba wartości z przedziału [{x}, {x + parameters.Interval}).");
+        }
+
+        if (parameters.IncludePopulation)
+        {
+            sb.AppendLine($"- {parameters.ResultPrefix}_POPULATION - liczba populacji, bez osobnika powracającego.");
+        }
+
+        if (parameters.IncludeDistribution)
+        {
+            sb.AppendLine($"- {parameters.ResultPrefix}_DISTRIBUTION - część populacji (wraz z osobnikiem powracajacym) mająca wartości {parameters.ValueName} równe bądź niższe niż osobnik powracający. Słupek histogramu w który wlicza się wartość osobnika powracającego jest dodawany w połowie.");
         }
 
         return sb.ToString();
