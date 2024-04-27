@@ -19,8 +19,10 @@ public class HistogramOperationTests
 
         var operation = new HistogramOperation("VALUE", "HISTOGRAM", 1, 2);
 
+        var specimen = new Specimen("XXX123", [new Observation(["VALUE"], [6])]);
+
         // Act
-        var result = operation.GetStatistics(populationData);
+        var result = operation.GetStatistics(specimen, populationData);
 
         // Assert
         Assert.That(result.Names, Is.EquivalentTo(new ArrayList
@@ -43,10 +45,12 @@ public class HistogramOperationTests
             new Specimen("GHI789", [new Observation(["VALUE"], [9])])
         ];
 
+        var specimen = new Specimen("XXX123", [new Observation(["VALUE"], [6])]);
+
         var operation = new HistogramOperation("VALUE", "HISTOGRAM", 1, 9);
 
         // Act
-        var result = operation.GetStatistics(populationData);
+        var result = operation.GetStatistics(specimen, populationData);
 
         // Assert
         Assert.That(result.Names, Is.EquivalentTo(new ArrayList
@@ -77,10 +81,12 @@ public class HistogramOperationTests
             new Specimen("B1", [new Observation(["FAT"], [null])])
         ];
 
+        var specimen = new Specimen("XXX123", [new Observation(["FAT"], [6])]);
+
         var operation = new HistogramOperation("FAT", "FAT-H", 1, 2);
 
         // Act
-        var result = operation.GetStatistics(populationData);
+        var result = operation.GetStatistics(specimen, populationData);
 
         // Assert
         Assert.That(result.Names, Is.EquivalentTo(new ArrayList { "FAT-H-1", "FAT-H-2" }));
@@ -101,10 +107,12 @@ public class HistogramOperationTests
             ])
         ];
 
+        var specimen = new Specimen("XXX123", [new Observation(["FAT"], [6])]);
+
         var operation = new HistogramOperation("FAT", "FAT-H", 1, 2);
 
         // Act
-        var result = operation.GetStatistics(populationData);
+        var result = operation.GetStatistics(specimen, populationData);
 
         // Assert
         Assert.That(result.Names, Is.EquivalentTo(new ArrayList { "FAT-H-1", "FAT-H-2" }));
@@ -118,9 +126,10 @@ public class HistogramOperationTests
     {
         // Arrange
         var operation = new HistogramOperation("VALUE", "HISTOGRAM", 1, 2);
+        var specimen = new Specimen("XXX123", [new Observation(["VALUE"], [6])]);
 
         // Act
-        var result = operation.GetStatistics([]);
+        var result = operation.GetStatistics(specimen, []);
 
         // Assert
         Assert.That(result.Names, Is.EquivalentTo(new ArrayList
@@ -148,8 +157,10 @@ public class HistogramOperationTests
             new Specimen("A006", [new Observation(["VALUE"], [1.6])])
         ];
 
+        var specimen = new Specimen("XXX123", [new Observation(["VALUE"], [6])]);
+
         // Act
-        var result = operation.GetStatistics(populationData);
+        var result = operation.GetStatistics(specimen, populationData);
 
         // Assert
         Assert.That(result.Names, Is.EquivalentTo(new ArrayList
@@ -176,8 +187,10 @@ public class HistogramOperationTests
             new Specimen("A002", [new Observation(["VALUE"], [2.7])])
         ];
 
+        var specimen = new Specimen("XXX123", [new Observation(["VALUE"], [6])]);
+
         // Act
-        var result = operation.GetStatistics(populationData);
+        var result = operation.GetStatistics(specimen, populationData);
 
         // Assert
         Assert.That(result.Names, Is.EquivalentTo(new ArrayList

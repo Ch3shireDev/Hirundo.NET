@@ -5,7 +5,7 @@ namespace Hirundo.Writers;
 /// <summary>
 ///     Parametry dla <see cref="CsvSummaryWriter" />.
 /// </summary>
-[TypeDescription("Csv")]
+[TypeDescription("Csv", "Zapis wyników do pliku .csv", "Zapisuje wyniki do standardowego formatu pliku .csv.")]
 public class CsvSummaryWriterParameters : IWriterParameters
 {
     /// <summary>

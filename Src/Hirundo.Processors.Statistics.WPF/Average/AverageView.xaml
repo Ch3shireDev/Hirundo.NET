@@ -28,5 +28,11 @@
                 <TextBox Text="{Binding Threshold, Mode=TwoWay}" Width="30" HorizontalContentAlignment="Center" />
             </WrapPanel>
         </StackPanel>
+        <WrapPanel Margin="10">
+            <CheckBox IsChecked="{Binding AddValueDifference, Mode=TwoWay}">Czy dodać różnicę od wartości średniej?</CheckBox>
+        </WrapPanel>
+        <WrapPanel Margin="10">
+            <CheckBox IsChecked="{Binding AddValueDifference, Mode=TwoWay}">Czy dodać różnicę od wartości średniej w odchyleniach standardowych?</CheckBox>
+        </WrapPanel>
     </StackPanel>
 </UserControl>

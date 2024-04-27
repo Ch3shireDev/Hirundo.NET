@@ -14,11 +14,11 @@ public class StatisticsProcessor(IEnumerable<IStatisticalOperation> statisticalO
     /// </summary>
     /// <param name="populationData">Dane populacji.</param>
     /// <returns></returns>
-    public IEnumerable<StatisticalData> GetStatistics(IEnumerable<Specimen> populationData)
+    public IEnumerable<StatisticalData> GetStatistics(Specimen specimen, IEnumerable<Specimen> populationData)
     {
         ArgumentNullException.ThrowIfNull(populationData);
         token?.ThrowIfCancellationRequested();
-        var results = statisticalOperations.Select(operation => operation.GetStatistics(populationData));
+        var results = statisticalOperations.Select(operation => operation.GetStatistics(specimen, populationData));
         return results.SelectMany(result => result.Names.Zip(result.Values, (name, value) => new StatisticalData(name, value)));
     }
 }

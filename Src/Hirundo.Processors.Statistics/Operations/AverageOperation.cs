@@ -1,4 +1,5 @@
 ﻿using Hirundo.Commons;
+using Hirundo.Commons.Helpers;
 using Hirundo.Commons.Models;
 using Hirundo.Processors.Statistics.Operations.Outliers;
 
@@ -18,43 +19,41 @@ public class AverageOperation : IStatisticalOperation
     {
     }
 
-    /// <summary>
-    ///     Zwraca wartość średnią po danej wartości w populacji. W przypadku napotkania wartości null pomija.
-    /// </summary>
-    /// <param name="valueName">Nazwa parametru, po którym jest brana wartość średnia.</param>
-    /// <param name="prefixName">Nazwa prefiksu dla wyników.</param>
-    /// <param name="outliers"></param>
-    public AverageOperation(string valueName,
-        string prefixName,
-        StandardDeviationOutliersCondition outliers)
+    public AverageOperation(string valueName, string prefixName, bool addValueDifference = false, bool addStandardDeviationDifference = false)
     {
         ValueName = valueName;
         ResultPrefix = prefixName;
-        Outliers = outliers;
-    }
-
-
-    public AverageOperation(string valueName, string prefixName)
-    {
-        ValueName = valueName;
-        ResultPrefix = prefixName;
+        AddValueDifference = addValueDifference;
+        AddStandardDeviationDifference = addStandardDeviationDifference;
     }
 
     public string ValueName { get; set; } = null!;
     public string ResultPrefix { get; set; } = null!;
+    public bool AddValueDifference { get; set; } = true;
+    public bool AddStandardDeviationDifference { get; set; } = true;
 
     public StandardDeviationOutliersCondition Outliers { get; set; } = new() { RejectOutliers = false };
 
-    public StatisticalOperationResult GetStatistics(IEnumerable<Specimen> populationData)
+    public StatisticalOperationResult GetStatistics(ReturningSpecimen returningSpecimen)
     {
-        var population = populationData.ToArray();
+        ArgumentNullException.ThrowIfNull(returningSpecimen, nameof(returningSpecimen));
 
-        if (population.Length == 0)
+        return GetStatistics(returningSpecimen.Specimen, returningSpecimen.Population);
+    }
+
+    public StatisticalOperationResult GetStatistics(Specimen specimen, IEnumerable<Specimen> population)
+    {
+        ArgumentNullException.ThrowIfNull(specimen, nameof(specimen));
+        ArgumentNullException.ThrowIfNull(population, nameof(population));
+
+        var populationArray = population.ToArray();
+
+        if (populationArray.Length == 0)
         {
-            return GetResult([null, null], [], [], []);
+            return GetResult(specimen, [null, null], [], [], []);
         }
 
-        var emptyValuesIds = population
+        var emptyValuesIds = populationArray
             .Where(specimen => specimen.Observations.First().GetValue(ValueName) == null)
             .Select(specimen => specimen.Ring)
             .ToHashSet();
@@ -72,22 +71,22 @@ public class AverageOperation : IStatisticalOperation
         do
         {
             i += 1;
-            var populationIds = GetPopulationIds(population, emptyValuesIds, outliersIds).ToHashSet();
-            var values = GetValues(population, populationIds);
+            var populationIds = GetPopulationIds(populationArray, emptyValuesIds, outliersIds).ToHashSet();
+            var values = GetValues(populationArray, populationIds);
             calculatedPopulationIds = populationIds;
 
             (averageValue, standardDeviationValue) = GetValues(values);
 
             if (averageValue == null || standardDeviationValue == null)
             {
-                return GetResult([null, null], populationIds.ToArray(), emptyValuesIds.ToArray(), outliersIds.ToArray());
+                return GetResult(specimen, [null, null], populationIds.ToArray(), emptyValuesIds.ToArray(), outliersIds.ToArray());
             }
 
             oldOutliersIds = outliersIds;
-            outliersIds = [.. Outliers.GetOutliersIds(population, ValueName, averageValue, standardDeviationValue)];
+            outliersIds = [.. Outliers.GetOutliersIds(populationArray, ValueName, averageValue, standardDeviationValue)];
         } while (i < 2);
 
-        return GetResult([averageValue, standardDeviationValue], calculatedPopulationIds.ToArray(), emptyValuesIds.ToArray(), outliersIds.ToArray());
+        return GetResult(specimen, [averageValue, standardDeviationValue], calculatedPopulationIds.ToArray(), emptyValuesIds.ToArray(), outliersIds.ToArray());
     }
 
     private static string[] GetPopulationIds(Specimen[] population, HashSet<string> emptyValuesIds, HashSet<string> outliersIds)
@@ -110,9 +109,9 @@ public class AverageOperation : IStatisticalOperation
     }
 
 
-    private StatisticalOperationResult GetResult(object?[] values, object[] populationIds, object[] emptyValuesIds, object[] outliersIds)
+    private StatisticalOperationResult GetResult(Specimen specimen, object?[] values, object[] populationIds, object[] emptyValuesIds, object[] outliersIds)
     {
-        string[] names = [
+        List<string> names = [
             $"{ResultPrefix}_AVERAGE",
             $"{ResultPrefix}_STANDARD_DEVIATION",
             $"{ResultPrefix}_POPULATION_SIZE",
@@ -120,7 +119,27 @@ public class AverageOperation : IStatisticalOperation
             $"{ResultPrefix}_OUTLIER_SIZE"
             ];
 
-        object?[] valuesWithPopulation = [.. values, populationIds.Length, emptyValuesIds.Length, outliersIds.Length];
+        List<object?> valuesWithPopulation = [.. values, populationIds.Length, emptyValuesIds.Length, outliersIds.Length];
+
+        if (AddValueDifference)
+        {
+            names.Add($"{ResultPrefix}_VALUE_DIFFERENCE");
+            var average = values[0];
+            var value = specimen.Observations.First().GetValue(ValueName);
+            var difference = ComparisonHelpers.Difference(value, average);
+            valuesWithPopulation.Add(difference);
+        }
+
+        if (AddStandardDeviationDifference)
+        {
+            names.Add($"{ResultPrefix}_STANDARD_DEVIATION_DIFFERENCE");
+            var average = values[0];
+            var value = specimen.Observations.First().GetValue(ValueName);
+            var difference = ComparisonHelpers.Difference(value, average);
+            var standardDeviation = values[1];
+            var sdDifference = ComparisonHelpers.Division(difference, standardDeviation);
+            valuesWithPopulation.Add(sdDifference);
+        }
 
         return new StatisticalOperationResult(names, valuesWithPopulation, populationIds, emptyValuesIds, outliersIds);
     }
@@ -138,7 +157,7 @@ public class AverageOperation : IStatisticalOperation
         {
             var valuesInt = values.Cast<int>().ToArray();
             var average = valuesInt.Average();
-            var sd2 = valuesInt.Select(x => x - average).Select(x => x * x / (valuesInt.Length - 1)).Sum();
+            var sd2 = valuesInt.Select(x => x - average).Select(x => x * x / (valuesInt.Length)).Sum();
             var sd = Math.Sqrt(sd2);
             return (average, sd);
         }
@@ -147,7 +166,7 @@ public class AverageOperation : IStatisticalOperation
         {
             var valuesDouble = values.Cast<double>().ToArray();
             var average = valuesDouble.Average();
-            var sd2 = valuesDouble.Select(x => x - average).Select(x => x * x / (valuesDouble.Length - 1)).Sum();
+            var sd2 = valuesDouble.Select(x => x - average).Select(x => x * x / (valuesDouble.Length)).Sum();
             var sd = Math.Sqrt(sd2);
             return (average, sd);
         }
@@ -156,7 +175,7 @@ public class AverageOperation : IStatisticalOperation
         {
             var valuesFloat = values.Cast<float>().ToArray();
             var average = valuesFloat.Average();
-            var sd2 = valuesFloat.Select(x => x - average).Select(x => x * x / (valuesFloat.Length - 1)).Sum();
+            var sd2 = valuesFloat.Select(x => x - average).Select(x => x * x / (valuesFloat.Length)).Sum();
             var sd = Math.Sqrt(sd2);
             return (average, sd);
         }
@@ -165,7 +184,7 @@ public class AverageOperation : IStatisticalOperation
         {
             var valuesDecimal = values.Cast<decimal>().ToArray();
             var average = valuesDecimal.Average();
-            var sd2 = valuesDecimal.Select(x => x - average).Select(x => x * x / (valuesDecimal.Length - 1)).Sum();
+            var sd2 = valuesDecimal.Select(x => x - average).Select(x => x * x / (valuesDecimal.Length)).Sum();
             var sd = Convert.ToDecimal(Math.Sqrt((double)sd2));
             return (average, sd);
         }

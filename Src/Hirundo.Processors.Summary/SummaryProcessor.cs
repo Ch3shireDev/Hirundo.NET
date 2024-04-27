@@ -39,7 +39,7 @@ public class SummaryProcessor(
             Log.Warning("Osobnik {ring} ma zbyt dużą populację ({populationCount}). Należy zmienić warunki dobierania populacji.", returningSpecimen.Ring, population.Length);
         }
 
-        var statistics = statisticsProcessor.GetStatistics(population).ToArray();
+        var statistics = statisticsProcessor.GetStatistics(returningSpecimen, population).ToArray();
 
         var headers = GetHeadersInternal(returningSpecimen, statistics);
         var values = GetValuesInternal(returningSpecimen, statistics);

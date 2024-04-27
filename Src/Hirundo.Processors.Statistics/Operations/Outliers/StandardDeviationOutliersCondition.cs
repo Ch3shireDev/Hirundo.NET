@@ -1,10 +1,8 @@
-﻿using Hirundo.Commons;
-using Hirundo.Commons.Models;
+﻿using Hirundo.Commons.Models;
 using System.Globalization;
 
 namespace Hirundo.Processors.Statistics.Operations.Outliers;
 
-[TypeDescription("StandardDeviation")]
 public class StandardDeviationOutliersCondition : IOutliersCondition
 {
     public StandardDeviationOutliersCondition()

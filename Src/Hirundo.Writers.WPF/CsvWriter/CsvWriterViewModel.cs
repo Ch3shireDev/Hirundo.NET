@@ -2,13 +2,7 @@
 
 namespace Hirundo.Writers.WPF.CsvWriter;
 
-[ParametersData(
-    typeof(CsvSummaryWriterParameters),
-    typeof(CsvWriterModel),
-    typeof(CsvWriterView),
-    "Zapis wyników do pliku .csv",
-    "Zapisuje wyniki do standardowego formatu pliku .csv."
-    )]
+[ParametersData(typeof(CsvSummaryWriterParameters), typeof(CsvWriterModel), typeof(CsvWriterView))]
 public class CsvWriterViewModel(CsvWriterModel model) : ParametersViewModel(model)
 {
     public string Path

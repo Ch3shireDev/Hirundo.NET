@@ -5,9 +5,7 @@ namespace Hirundo.Writers.WPF.ExplanationWriter;
 [ParametersData(
     typeof(ExplanationWriterParameters),
     typeof(ExplanationWriterModel),
-    typeof(ExplanationWriterView),
-    "Zapis wyjaśnienia do pliku .txt",
-    "Zapisuje wyjaśnienia do standardowego formatu pliku .txt."
+    typeof(ExplanationWriterView)
     )]
 public class ExplanationWriterViewModel(ExplanationWriterModel model) : ParametersViewModel(model)
 {

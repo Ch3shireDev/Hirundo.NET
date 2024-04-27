@@ -66,4 +66,24 @@ public class AverageViewModel(AverageModel model) : ParametersViewModel(model)
             OnPropertyChanged();
         }
     }
+
+    public bool AddValueDifference
+    {
+        get => model.AddValueDifference;
+        set
+        {
+            model.AddValueDifference = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public bool AddStandardDeviationDifference
+    {
+        get => model.AddStandardDeviationDifference;
+        set
+        {
+            model.AddStandardDeviationDifference = value;
+            OnPropertyChanged();
+        }
+    }
 }

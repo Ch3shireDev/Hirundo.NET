@@ -8,5 +8,5 @@ namespace Hirundo.Processors.Statistics;
 /// </summary>
 public interface IStatisticsProcessor
 {
-    public IEnumerable<StatisticalData> GetStatistics(IEnumerable<Specimen> populationData);
+    public IEnumerable<StatisticalData> GetStatistics(Specimen specimen, IEnumerable<Specimen> populationData);
 }

@@ -29,11 +29,11 @@ public class StatisticsProcessorTests
     {
         // Arrange
         operation1
-            .Setup(x => x.GetStatistics(It.IsAny<IEnumerable<Specimen>>()))
+            .Setup(x => x.GetStatistics(It.IsAny<Specimen>(), It.IsAny<IEnumerable<Specimen>>()))
             .Returns(new StatisticalOperationResult("OPERATION1", 1));
 
         operation2
-            .Setup(x => x.GetStatistics(It.IsAny<IEnumerable<Specimen>>()))
+            .Setup(x => x.GetStatistics(It.IsAny<Specimen>(), It.IsAny<IEnumerable<Specimen>>()))
             .Returns(new StatisticalOperationResult("OPERATION2", 2));
 
         var population = new[]
@@ -42,8 +42,10 @@ public class StatisticsProcessorTests
             new Specimen("2", [new Observation(["OPERATION2"], [2])])
         };
 
+        var specimen = new Specimen("3", [new Observation(["OPERATION1"], [3])]);
+
         // Act
-        var result = processor.GetStatistics(population).ToArray();
+        var result = processor.GetStatistics(specimen, population).ToArray();
 
         // Assert
         Assert.That(result, Has.Length.EqualTo(2));

@@ -29,7 +29,7 @@ public class SummaryTests
         // Arrange
         _totalSpecimens.Clear();
         _populationProcessor.Setup(p => p.GetPopulation(It.IsAny<Specimen>(), It.IsAny<IEnumerable<Specimen>>())).Returns([]);
-        _statisticsProcessor.Setup(p => p.GetStatistics(It.IsAny<IEnumerable<Specimen>>())).Returns([]);
+        _statisticsProcessor.Setup(p => p.GetStatistics(It.IsAny<Specimen>(), It.IsAny<IEnumerable<Specimen>>())).Returns([]);
 
         var firstObservation = new Observation { Ring = "123", Date = new DateTime(2020, 06, 01) };
         var lastObservation = new Observation { Ring = "123", Date = new DateTime(2021, 06, 01) };
@@ -52,7 +52,7 @@ public class SummaryTests
         // Arrange
         _totalSpecimens.Clear();
         _populationProcessor.Setup(p => p.GetPopulation(It.IsAny<Specimen>(), It.IsAny<IEnumerable<Specimen>>())).Returns([]);
-        _statisticsProcessor.Setup(p => p.GetStatistics(It.IsAny<IEnumerable<Specimen>>())).Returns([
+        _statisticsProcessor.Setup(p => p.GetStatistics(It.IsAny<Specimen>(), It.IsAny<IEnumerable<Specimen>>())).Returns([
             new StatisticalData("STATISTICAL_DATA", 123.45M)
             ]);
 

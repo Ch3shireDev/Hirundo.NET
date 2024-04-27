@@ -31,11 +31,18 @@ public class HistogramOperation : IStatisticalOperation
     public decimal MaxValue { get; set; } = 9;
     public decimal Interval { get; set; } = 1;
 
-    public StatisticalOperationResult GetStatistics(IEnumerable<Specimen> populationData)
+    public StatisticalOperationResult GetStatistics(ReturningSpecimen returningSpecimen)
     {
-        var population = populationData.ToArray();
+        ArgumentNullException.ThrowIfNull(returningSpecimen, nameof(returningSpecimen));
 
-        var pairs = population
+        return GetStatistics(returningSpecimen.Specimen, returningSpecimen.Population);
+    }
+
+    public StatisticalOperationResult GetStatistics(Specimen specimen, IEnumerable<Specimen> population)
+    {
+        var populationArray = population.ToArray();
+
+        var pairs = populationArray
             .Select(specimen => (specimen, Value: GetValue(specimen)))
             .ToArray();
 

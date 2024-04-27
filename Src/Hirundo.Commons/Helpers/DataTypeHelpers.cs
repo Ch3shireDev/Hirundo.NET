@@ -39,6 +39,81 @@ public static class ComparisonHelpers
         if (DataTypeHelpers.IsLowerThanDate(value1, value2)) return true;
         return false;
     }
+
+    public static object? Difference(object? minuend, object? subtrahent)
+    {
+        if (minuend is null || subtrahent is null)
+        {
+            return null;
+        }
+
+        if (minuend is int intValue && subtrahent is int averageInt)
+        {
+            return intValue - averageInt;
+        }
+
+        if (minuend is double doubleValue && subtrahent is double averageDouble)
+        {
+            return doubleValue - averageDouble;
+        }
+
+        if (minuend is decimal decimalValue && subtrahent is decimal averageDecimal)
+        {
+            return decimalValue - averageDecimal;
+        }
+
+        if (minuend is DateTime dateValue && subtrahent is DateTime averageDate)
+        {
+            return dateValue - averageDate;
+        }
+
+        if (DataTypeHelpers.IsConvertableToNumber(minuend) && DataTypeHelpers.IsConvertableToNumber(subtrahent))
+        {
+            var minuendValue = DataTypeHelpers.ConvertValue<decimal>(minuend);
+            var subtrahentValue = DataTypeHelpers.ConvertValue<decimal>(subtrahent);
+            return minuendValue - subtrahentValue;
+        }
+
+        return null;
+    }
+
+    public static object? Division(object? difference, object? standardDeviation)
+    {
+        if (difference is null || standardDeviation is null)
+        {
+            return null;
+        }
+
+        if (difference is int intValue && standardDeviation is int standardDeviationInt)
+        {
+            return intValue / standardDeviationInt;
+        }
+
+        if (difference is double doubleValue && standardDeviation is double standardDeviationDouble)
+        {
+            return doubleValue / standardDeviationDouble;
+        }
+
+        if (difference is decimal decimalValue && standardDeviation is decimal standardDeviationDecimal)
+        {
+            return decimalValue / standardDeviationDecimal;
+        }
+
+        if (DataTypeHelpers.IsConvertableToNumber(difference) && DataTypeHelpers.IsConvertableToNumber(standardDeviation))
+        {
+            var differenceValue = DataTypeHelpers.ConvertValue<decimal>(difference);
+            var standardDeviationValue = DataTypeHelpers.ConvertValue<decimal>(standardDeviation);
+
+            if (standardDeviationValue == 0)
+            {
+                return null;
+            }
+
+            return differenceValue / standardDeviationValue;
+        }
+
+        return null;
+    }
 }
 
 public static class DataTypeHelpers

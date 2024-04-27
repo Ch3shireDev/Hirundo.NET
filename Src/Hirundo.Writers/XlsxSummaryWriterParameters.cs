@@ -2,7 +2,7 @@
 using Hirundo.Commons;
 namespace Hirundo.Writers;
 
-[TypeDescription("Xlsx")]
+[TypeDescription("Xlsx", "Zapis wyników do pliku .xlsx", "Zapisuje wyniki do pliku Excel .xlsx.")]
 public class XlsxSummaryWriterParameters : IWriterParameters
 {
     public string Path { get; set; } = null!;

@@ -38,7 +38,7 @@ public class AverageOperationExplainer : ParametersExplainer<AverageOperation>
         sb.AppendLine("Wartości wynikowe:");
         sb.AppendLine($"- {parameters.ResultPrefix}_AVERAGE - wyliczona średnia.");
         sb.AppendLine($"- {parameters.ResultPrefix}_STANDARD_DEVIATION - wyliczone odchylenie standardowe (po odrzuceniu wartości odstających).");
-        sb.AppendLine($"- {parameters.ResultPrefix}_POPULATION_SIZE - liczba wartości z pominięciem wartości pustych oraz odstających.");
+        sb.AppendLine($"- {parameters.ResultPrefix}_POPULATION_SIZE - liczba wartości z pominięciem wartości pustych oraz odstających. Osobnik powracający również nie jest wliczany w populację.");
         sb.AppendLine($"- {parameters.ResultPrefix}_EMPTY_SIZE - liczba pustych wartości.");
         sb.AppendLine($"- {parameters.ResultPrefix}_OUTLIER_SIZE - liczba wartości odstających.");
 

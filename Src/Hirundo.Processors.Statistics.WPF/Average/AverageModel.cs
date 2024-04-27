@@ -31,5 +31,17 @@ public class AverageModel(AverageOperation operation, ILabelsRepository labelsRe
         set => operation.Outliers.RejectOutliers = value;
     }
 
+    public bool AddValueDifference
+    {
+        get => operation.AddValueDifference;
+        set => operation.AddValueDifference = value;
+    }
+
+    public bool AddStandardDeviationDifference
+    {
+        get => operation.AddStandardDeviationDifference;
+        set => operation.AddStandardDeviationDifference = value;
+    }
+
     public DataType ValueType { get; set; }
 }

@@ -5,9 +5,7 @@ namespace Hirundo.Writers.WPF.XlsxWriter;
 [ParametersData(
     typeof(XlsxSummaryWriterParameters),
     typeof(XlsxWriterModel),
-    typeof(XlsxWriterView),
-    "Zapis wyników do pliku .xlsx",
-    "Zapisuje wyniki do pliku Excel .xlsx."
+    typeof(XlsxWriterView)
     )]
 public class XlsxWriterViewModel(XlsxWriterModel model) : ParametersViewModel(model)
 {

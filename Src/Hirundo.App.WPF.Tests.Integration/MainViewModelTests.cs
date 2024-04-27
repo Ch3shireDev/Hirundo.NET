@@ -289,7 +289,7 @@ public class MainViewModelTests
             {
                 Operations =
                 [
-                    new AverageOperation("WEIGHT", "WEIGHT_PREFIX", new StandardDeviationOutliersCondition(5))
+                    new AverageOperation("WEIGHT", "WEIGHT_PREFIX"){Outliers = new StandardDeviationOutliersCondition(5)}
                 ]
             }
         };
