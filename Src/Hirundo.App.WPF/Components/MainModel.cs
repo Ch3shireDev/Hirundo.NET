@@ -202,14 +202,11 @@ public class MainModel(
     {
         if (!data.Any()) return ["No data to display."];
         var first = data.First();
-        return ["RING", "DATE", "SPECIES", .. first.Headers];
+        return [.. first.Headers];
     }
 
     private static IEnumerable<object?[]> GetValues(IList<Observation> data)
     {
-        foreach (var row in data)
-        {
-            yield return [row.Ring, row.Date, row.Species, .. row.Values];
-        }
+        return data.Select(r => r.Values.ToArray());
     }
 }
