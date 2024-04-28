@@ -8,7 +8,7 @@ namespace Hirundo.Processors.Returning.Conditions;
     "Czy dane są mniejsze?",
     "Osobnik zawiera obserwację z polem mniejszym od danej wartości."
 )]
-public class IsLowerThanReturningCondition : CompareValuesReturningCondition
+public class IsLowerThanReturningCondition : CompareValuesReturningCondition, ISelfExplainer
 {
     public IsLowerThanReturningCondition(string valueName, object? value) : base(valueName, value)
     {
@@ -16,6 +16,11 @@ public class IsLowerThanReturningCondition : CompareValuesReturningCondition
 
     public IsLowerThanReturningCondition()
     {
+    }
+
+    public string Explain()
+    {
+        return $"Którakolwiek z obserwacji osobnika musi mieć wartość {ValueName} mniejszą niż {Value}.";
     }
 
     public override bool Compare(object? observationValue, object? value)

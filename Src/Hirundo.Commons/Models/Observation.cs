@@ -11,9 +11,8 @@ namespace Hirundo.Commons.Models;
 /// </summary>
 public class Observation
 {
-    private readonly IList<object?> _values = [];
-
     private readonly IList<string> _headers = [];
+    private readonly IList<object?> _values = [];
 
     /// <summary>
     ///     Konstruktor bezparametrowy.

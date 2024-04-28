@@ -1,7 +1,8 @@
-﻿using System.Globalization;
-using Hirundo.Commons;
+﻿using Hirundo.Commons;
 using Hirundo.Commons.Helpers;
 using Hirundo.Commons.Models;
+using System.Globalization;
+using System.Text;
 
 namespace Hirundo.Processors.Statistics.Operations;
 
@@ -10,7 +11,7 @@ namespace Hirundo.Processors.Statistics.Operations;
     "Histogram",
     "Oblicza histogram dla wybranej wartości."
 )]
-public class HistogramOperation : IStatisticalOperation
+public class HistogramOperation : IStatisticalOperation, ISelfExplainer
 {
     public HistogramOperation(
         string valueName,
@@ -43,6 +44,36 @@ public class HistogramOperation : IStatisticalOperation
 
     public bool IncludePopulation { get; set; } = true;
     public bool IncludeDistribution { get; set; } = true;
+
+    public string Explain()
+    {
+        var sb = new StringBuilder();
+
+        sb.AppendLine(CultureInfo.InvariantCulture, $"Operacja histogramu dla wartości {ValueName}. Wartości dla osobnika populacji są wyliczane na podstawie pierwszej obserwacji.");
+        sb.AppendLine(CultureInfo.InvariantCulture, $"Wartości muszą być w przedziale od {MinValue} do {MaxValue}, inaczej są kwalifikowane jako wartości odstajace.");
+        sb.AppendLine(CultureInfo.InvariantCulture, $"Wartości są grupowane w interwałach co {Interval}.");
+        sb.AppendLine("Wartości wynikowe:");
+
+        for (var x = MinValue; x <= MaxValue; x += Interval)
+        {
+            var valueStr = x.ToString(CultureInfo.InvariantCulture);
+            var label = $"{ResultPrefix}_{valueStr}";
+            sb.AppendLine(CultureInfo.InvariantCulture, $"- {label} - liczba wartości z przedziału [{x}, {x + Interval}).");
+        }
+
+        if (IncludePopulation)
+        {
+            sb.AppendLine(CultureInfo.InvariantCulture, $"- {ResultPrefix}_POPULATION - liczba populacji, bez osobnika powracającego.");
+        }
+
+        if (IncludeDistribution)
+        {
+            sb.AppendLine(CultureInfo.InvariantCulture,
+                $"- {ResultPrefix}_DISTRIBUTION - część populacji (wraz z osobnikiem powracającym) mająca wartości {ValueName} równe bądź niższe niż osobnik powracający. Słupek histogramu w który wlicza się wartość osobnika powracającego jest dodawany w połowie.");
+        }
+
+        return sb.ToString();
+    }
 
     public StatisticalOperationResult GetStatistics(ReturningSpecimen returningSpecimen)
     {
@@ -99,13 +130,9 @@ public class HistogramOperation : IStatisticalOperation
 
         for (var i = 0; i < n; i++)
         {
-            var start = MinValue + i * Interval;
-            var end = MinValue + (i + 1) * Interval;
-
             var count = nonEmptyDecimalValues
                     .Select(GetHistogramIndex)
-                    .Where(value => value == i)
-                    .Count()
+                    .Count(value => value == i)
                 ;
 
             intValues[i] = count;

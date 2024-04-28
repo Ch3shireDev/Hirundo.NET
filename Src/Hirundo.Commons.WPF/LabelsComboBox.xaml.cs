@@ -1,10 +1,9 @@
-﻿using System.ComponentModel;
+﻿using Hirundo.Commons.Models;
+using Hirundo.Commons.Repositories;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using Hirundo.Commons.Models;
-using Hirundo.Commons.Repositories;
-using Hirundo.Commons.Repositories.Labels;
 
 namespace Hirundo.Commons.WPF;
 

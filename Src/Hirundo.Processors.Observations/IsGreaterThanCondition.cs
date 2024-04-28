@@ -10,7 +10,7 @@ namespace Hirundo.Processors.Observations;
 [TypeDescription("IsGreaterThan",
     "Czy wartość jest większa niż?",
     "Warunek sprawdzający, czy pole danych jest większe niż podana wartość.\nDaty należy podawać w formacie YYYY-MM-DD.")]
-public class IsGreaterThanCondition : IObservationCondition, ICompareValueCondition
+public class IsGreaterThanCondition : IObservationCondition, ICompareValueCondition, ISelfExplainer
 {
     public IsGreaterThanCondition()
     {
@@ -30,5 +30,10 @@ public class IsGreaterThanCondition : IObservationCondition, ICompareValueCondit
         ArgumentNullException.ThrowIfNull(observation);
         var observationValue = observation.GetValue(ValueName);
         return ComparisonHelpers.IsGreater(observationValue, Value);
+    }
+
+    public string Explain()
+    {
+        return $"Wartość {ValueName} musi być większa niż {Value}";
     }
 }

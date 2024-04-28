@@ -1,6 +1,7 @@
-﻿using System.Globalization;
-using Hirundo.Commons;
+﻿using Hirundo.Commons;
+using Hirundo.Commons.Helpers;
 using Hirundo.Commons.Models;
+using System.Globalization;
 
 namespace Hirundo.Processors.Observations;
 
@@ -9,7 +10,7 @@ namespace Hirundo.Processors.Observations;
     "Czy dane są w przedziale godzinowym?",
     "Warunek sprawdzający godziny złapania osobnika."
 )]
-public class IsInTimeBlockCondition : IObservationCondition
+public class IsInTimeBlockCondition : IObservationCondition, ISelfExplainer
 {
     private readonly bool isThroughMidnight;
 
@@ -46,6 +47,13 @@ public class IsInTimeBlockCondition : IObservationCondition
         }
 
         throw new ArgumentException($"Wartość kolumny {ValueName} nie jest typem numerycznym.");
+    }
+
+    public string Explain()
+    {
+        var acceptType = RejectNullValues ? "odrzucane" : "zatwierdzane";
+
+        return $"Wartość {ValueName} musi być w przedziale godzin od {TimeBlock.StartHour} do {TimeBlock.EndHour}. Puste wartości {ValueName} są {acceptType}.";
     }
 
     private static bool IsNumeric(object hourValue)

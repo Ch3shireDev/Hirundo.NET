@@ -7,7 +7,7 @@ namespace Hirundo.Processors.Observations;
 [TypeDescription("IsNotEqual",
     "Czy wartość nie jest równa?",
     "Warunek porównujący pole danych z podaną wartością.")]
-public class IsNotEqualCondition : IObservationCondition, ICompareValueCondition
+public class IsNotEqualCondition : IObservationCondition, ICompareValueCondition, ISelfExplainer
 {
     public IsNotEqualCondition()
     {
@@ -27,5 +27,10 @@ public class IsNotEqualCondition : IObservationCondition, ICompareValueCondition
         ArgumentNullException.ThrowIfNull(observation);
         var observationValue = observation.GetValue(ValueName);
         return !ComparisonHelpers.IsEqual(Value, observationValue);
+    }
+
+    public string Explain()
+    {
+        return $"Wartość {ValueName} nie może być równa '{Value}'";
     }
 }

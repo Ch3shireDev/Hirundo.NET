@@ -1,6 +1,6 @@
 ﻿using System.Collections;
+using Hirundo.Commons.Models;
 using Hirundo.Commons.Repositories;
-using Hirundo.Commons.Repositories.Labels;
 using Moq;
 using NUnit.Framework;
 

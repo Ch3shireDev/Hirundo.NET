@@ -7,7 +7,7 @@ namespace Hirundo.Processors.Returning.Conditions;
 [TypeDescription("IsInSet",
     "Czy dane powracającego osobnika są w zbiorze?",
     "Warunek sprawdzający, czy pole danych dla osobnika powracającego znajduje się w zbiorze wartości.")]
-public class IsInSetReturningCondition : IReturningSpecimenCondition
+public class IsInSetReturningCondition : IReturningSpecimenCondition, ISelfExplainer
 {
     public IsInSetReturningCondition()
     {
@@ -25,6 +25,11 @@ public class IsInSetReturningCondition : IReturningSpecimenCondition
     public bool IsReturning(Specimen specimen)
     {
         return specimen.Observations.Any(IsInSet);
+    }
+
+    public string Explain()
+    {
+        return $"Którakolwiek z obserwacji osobnika musi mieć wartość {ValueName} z zestawu: {string.Join(", ", Values)}";
     }
 
     private bool IsInSet(Observation observation)

@@ -12,7 +12,7 @@ namespace Hirundo.Processors.Observations;
     "Czy wartość jest równa?",
     "Warunek porównujący pole danych z podaną wartością."
 )]
-public class IsEqualCondition : ICompareValueCondition, IObservationCondition
+public class IsEqualCondition : ICompareValueCondition, IObservationCondition, ISelfExplainer
 {
     /// <summary>
     ///     Domyślny konstruktor. Ustawia wartości domyślne jako pusty string.
@@ -55,5 +55,10 @@ public class IsEqualCondition : ICompareValueCondition, IObservationCondition
         ArgumentNullException.ThrowIfNull(observation);
         var observationValue = observation.GetValue(ValueName);
         return ComparisonHelpers.IsEqual(observationValue, Value);
+    }
+
+    public string Explain()
+    {
+        return $"Wartość {ValueName} musi być równa {Value}";
     }
 }

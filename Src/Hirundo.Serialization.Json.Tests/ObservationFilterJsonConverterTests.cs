@@ -1,4 +1,4 @@
-﻿using Hirundo.Commons;
+﻿using Hirundo.Commons.Models;
 using Hirundo.Processors.Observations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

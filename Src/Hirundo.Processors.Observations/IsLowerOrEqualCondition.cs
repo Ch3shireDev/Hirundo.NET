@@ -12,7 +12,7 @@ namespace Hirundo.Processors.Observations;
     "Czy wartość jest mniejsza lub równa?",
     "Warunek sprawdzający, czy pole danych jest mniejsze lub równe podanej wartości.\nW przypadku dat, wartości należy podawać w formacie YYYY-MM-DD."
 )]
-public class IsLowerOrEqualCondition : IObservationCondition, ICompareValueCondition
+public class IsLowerOrEqualCondition : IObservationCondition, ICompareValueCondition, ISelfExplainer
 {
     public IsLowerOrEqualCondition()
     {
@@ -32,5 +32,10 @@ public class IsLowerOrEqualCondition : IObservationCondition, ICompareValueCondi
         ArgumentNullException.ThrowIfNull(observation);
         var observationValue = observation.GetValue(ValueName);
         return ComparisonHelpers.IsLowerOrEqual(observationValue, Value);
+    }
+
+    public string Explain()
+    {
+        return $"Wartość {ValueName} musi być mniejsza lub równa {Value}";
     }
 }

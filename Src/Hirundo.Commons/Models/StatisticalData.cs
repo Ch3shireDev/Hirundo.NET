@@ -1,4 +1,4 @@
-﻿namespace Hirundo.Commons;
+﻿namespace Hirundo.Commons.Models;
 
 /// <summary>
 ///     Wartość statystyczna, wyznaczana poprzez operator na podstawie populacji.

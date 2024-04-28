@@ -1,4 +1,4 @@
-﻿namespace Hirundo.Commons;
+﻿namespace Hirundo.Commons.Models;
 
 /// <summary>
 ///     Klasa reprezentująca przedział czasowy, tj. okres od godziny początkowej do godziny końcowej.

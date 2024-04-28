@@ -1,6 +1,6 @@
-﻿using Hirundo.Commons.WPF;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows.Data;
+using Hirundo.Commons.WPF;
 
 namespace Hirundo.App.WPF.Helpers;
 

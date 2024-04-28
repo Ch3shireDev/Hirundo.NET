@@ -8,7 +8,7 @@ namespace Hirundo.Processors.Returning.Conditions;
     "Czy dane są większe lub równe?",
     "Osobnik zawiera obserwację z polem większym lub równym danej wartości."
 )]
-public class IsGreaterOrEqualReturningCondition : CompareValuesReturningCondition
+public class IsGreaterOrEqualReturningCondition : CompareValuesReturningCondition, ISelfExplainer
 {
     public IsGreaterOrEqualReturningCondition(string valueName, object? value) : base(valueName, value)
     {
@@ -16,6 +16,11 @@ public class IsGreaterOrEqualReturningCondition : CompareValuesReturningConditio
 
     public IsGreaterOrEqualReturningCondition()
     {
+    }
+
+    public string Explain()
+    {
+        return $"Którakolwiek z obserwacji osobnika musi mieć wartość {ValueName} większą lub równą {Value}.";
     }
 
     public override bool Compare(object? observationValue, object? value)

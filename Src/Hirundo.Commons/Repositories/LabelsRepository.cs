@@ -1,4 +1,4 @@
-﻿using Hirundo.Commons.Repositories.Labels;
+﻿using Hirundo.Commons.Models;
 
 namespace Hirundo.Commons.Repositories;
 

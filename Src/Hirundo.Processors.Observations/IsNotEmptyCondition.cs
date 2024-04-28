@@ -1,4 +1,5 @@
 ﻿using Hirundo.Commons;
+using Hirundo.Commons.Helpers;
 using Hirundo.Commons.Models;
 
 namespace Hirundo.Processors.Observations;
@@ -8,7 +9,7 @@ namespace Hirundo.Processors.Observations;
     "Czy dane nie są puste?",
     "Warunek sprawdzający, czy pole danych nie jest puste."
 )]
-public class IsNotEmptyCondition(string valueName) : IObservationCondition
+public class IsNotEmptyCondition(string valueName) : IObservationCondition, ISelfExplainer
 {
     public IsNotEmptyCondition() : this(string.Empty)
     {
@@ -27,5 +28,10 @@ public class IsNotEmptyCondition(string valueName) : IObservationCondition
             string str => !string.IsNullOrWhiteSpace(str),
             _ => true
         };
+    }
+
+    public string Explain()
+    {
+        return $"Pole {ValueName} nie może być puste.";
     }
 }

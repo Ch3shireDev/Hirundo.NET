@@ -1,4 +1,5 @@
 ﻿using Hirundo.Commons;
+using Hirundo.Commons.Helpers;
 using Hirundo.Commons.Models;
 
 namespace Hirundo.Processors.Returning.Conditions;
@@ -13,7 +14,7 @@ namespace Hirundo.Processors.Returning.Conditions;
     "Czy powrót nastąpił po określonym czasie?",
     "Osobnik wraca nie wcześniej niż po określonej liczbie dni."
 )]
-public class ReturnsAfterTimePeriodCondition : IReturningSpecimenCondition
+public class ReturnsAfterTimePeriodCondition : IReturningSpecimenCondition, ISelfExplainer
 {
     /// <summary>
     ///     Filtr zwracający osobniki, które powróciły po określonym czasie, liczonym w dniach. Aby osobnik został
@@ -51,5 +52,10 @@ public class ReturnsAfterTimePeriodCondition : IReturningSpecimenCondition
         var timePeriods = datesPairs.Select(pair => pair.Second - pair.First);
 
         return timePeriods.Any(period => period.Days >= TimePeriodInDays);
+    }
+
+    public string Explain()
+    {
+        return $"Osobnik powraca po upływie {TimePeriodInDays} od ostatniego wystąpienia - istnieje odstęp dat większy lub równy niż {TimePeriodInDays} dni.";
     }
 }

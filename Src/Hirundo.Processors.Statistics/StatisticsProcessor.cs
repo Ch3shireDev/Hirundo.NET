@@ -1,5 +1,4 @@
-﻿using Hirundo.Commons;
-using Hirundo.Commons.Models;
+﻿using Hirundo.Commons.Models;
 using Hirundo.Processors.Statistics.Operations;
 
 namespace Hirundo.Processors.Statistics;
@@ -12,6 +11,7 @@ public class StatisticsProcessor(IEnumerable<IStatisticalOperation> statisticalO
     /// <summary>
     ///     Zwraca dane statystyczne wyznaczone na podstawie danych populacji.
     /// </summary>
+    /// <param name="specimen">Dane osobnika powracającego.</param>
     /// <param name="populationData">Dane populacji.</param>
     /// <returns></returns>
     public IEnumerable<StatisticalData> GetStatistics(Specimen specimen, IEnumerable<Specimen> populationData)

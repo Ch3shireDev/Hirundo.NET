@@ -2,6 +2,8 @@
 using Hirundo.Commons.Helpers;
 using Hirundo.Commons.Models;
 using Hirundo.Processors.Statistics.Operations.Outliers;
+using System.Globalization;
+using System.Text;
 
 namespace Hirundo.Processors.Statistics.Operations;
 
@@ -13,7 +15,7 @@ namespace Hirundo.Processors.Statistics.Operations;
     "Wartość średnia i odchylenie standardowe",
     "Oblicza wartość średnią i odchylenie standardowe dla wybranej wartości."
 )]
-public class AverageOperation : IStatisticalOperation
+public class AverageOperation : IStatisticalOperation, ISelfExplainer
 {
     public AverageOperation()
     {
@@ -33,6 +35,25 @@ public class AverageOperation : IStatisticalOperation
     public bool AddStandardDeviationDifference { get; set; } = true;
 
     public StandardDeviationOutliersCondition Outliers { get; set; } = new() { RejectOutliers = false };
+
+    public string Explain()
+    {
+        var sb = new StringBuilder();
+
+        var accepted = Outliers.RejectOutliers ? "odrzucane" : "wliczane";
+
+        sb.AppendLine(CultureInfo.InvariantCulture, $"Operacja średniej z wartości {ValueName}. Wartości odstające są {accepted}. Wartości dla osobnika populacji są wyliczane na podstawie pierwszej obserwacji.");
+        sb.AppendLine("Wartości wynikowe:");
+        sb.AppendLine(CultureInfo.InvariantCulture, $"- {ResultPrefix}_AVERAGE - wyliczona średnia.");
+        sb.AppendLine(CultureInfo.InvariantCulture, $"- {ResultPrefix}_STANDARD_DEVIATION - wyliczone odchylenie standardowe (po odrzuceniu wartości odstających).");
+        sb.AppendLine(CultureInfo.InvariantCulture, $"- {ResultPrefix}_POPULATION_SIZE - liczba wartości z pominięciem wartości pustych oraz odstających. Osobnik powracający nie jest wliczany w populację.");
+        sb.AppendLine(CultureInfo.InvariantCulture, $"- {ResultPrefix}_EMPTY_SIZE - liczba pustych wartości.");
+        sb.AppendLine(CultureInfo.InvariantCulture, $"- {ResultPrefix}_OUTLIER_SIZE - liczba wartości odstających.");
+        sb.AppendLine(CultureInfo.InvariantCulture, $"- {ResultPrefix}_VALUE_DIFFERENCE - różnica pomiędzy wartością cechy osobnika powracającego a wartością średnią - dodatnia, jeśli wartość {ValueName} osobnika powracającego jest większa niż średnia.");
+        sb.AppendLine(CultureInfo.InvariantCulture, $"- {ResultPrefix}_STANDARD_DEVIATION_DIFFERENCE - różnica pomiędzy wartością cechy osobnika powracającego a wartością średnią, w odchyleniach standardowych.");
+
+        return sb.ToString();
+    }
 
     public StatisticalOperationResult GetStatistics(ReturningSpecimen returningSpecimen)
     {

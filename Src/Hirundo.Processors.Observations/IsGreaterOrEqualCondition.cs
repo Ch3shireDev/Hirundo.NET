@@ -10,7 +10,7 @@ namespace Hirundo.Processors.Observations;
 [TypeDescription("IsGreaterOrEqual",
     "Czy wartość jest większa lub równa?",
     "Warunek sprawdzający, czy pole danych jest większe lub równe podanej wartości.\nW przypadku dat, wartości należy podawać w formacie YYYY-MM-DD.")]
-public class IsGreaterOrEqualCondition : IObservationCondition, ICompareValueCondition
+public class IsGreaterOrEqualCondition : IObservationCondition, ICompareValueCondition, ISelfExplainer
 {
     public IsGreaterOrEqualCondition()
     {
@@ -30,5 +30,10 @@ public class IsGreaterOrEqualCondition : IObservationCondition, ICompareValueCon
         ArgumentNullException.ThrowIfNull(observation);
         var observationValue = observation.GetValue(ValueName);
         return ComparisonHelpers.IsGreaterOrEqual(observationValue, Value);
+    }
+
+    public string Explain()
+    {
+        return $"Wartość {ValueName} musi być większa lub równa {Value}";
     }
 }

@@ -5,16 +5,6 @@ namespace Hirundo.Commons.WPF;
 [AttributeUsage(AttributeTargets.Class)]
 public class ParametersDataAttribute : Attribute
 {
-    [Obsolete("Nazwa oraz opis powinny być przekazywane w konstruktorze warunku.")]
-    public ParametersDataAttribute(Type conditionType, Type modelType, Type viewType, string name, string description)
-    {
-        ConditionType = conditionType;
-        ModelType = modelType;
-        ViewType = viewType;
-        Name = name;
-        Description = description;
-    }
-
     public ParametersDataAttribute(Type conditionType, Type modelType, Type viewType)
     {
         ConditionType = conditionType;

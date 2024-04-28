@@ -1,4 +1,8 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.IO;
+using System.Windows;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Hirundo.App.WPF.Helpers;
 using Hirundo.Commons.Helpers;
@@ -9,10 +13,6 @@ using Hirundo.Writers.WPF;
 using Microsoft.Win32;
 using Serilog;
 using Serilog.Events;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Windows;
-using System.Windows.Input;
 
 namespace Hirundo.App.WPF.Components;
 

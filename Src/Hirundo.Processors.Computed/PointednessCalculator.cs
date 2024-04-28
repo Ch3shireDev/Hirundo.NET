@@ -1,5 +1,7 @@
 ﻿using Hirundo.Commons;
+using Hirundo.Commons.Helpers;
 using Hirundo.Commons.Models;
+using System.Text;
 
 namespace Hirundo.Processors.Computed;
 
@@ -8,7 +10,7 @@ namespace Hirundo.Processors.Computed;
     "Ostrość skrzydła",
     "Wartość ostrości wyliczana na podstawie parametrów skrzydła."
 )]
-public class PointednessCalculator : WingParametersBase, IComputedValuesCalculator
+public class PointednessCalculator : WingParametersBase, IComputedValuesCalculator, ISelfExplainer
 {
     public PointednessCalculator()
     {
@@ -21,9 +23,9 @@ public class PointednessCalculator : WingParametersBase, IComputedValuesCalculat
         WingName = wingName;
     }
 
-    public override string[] WingParameters { get; set; } = ["D2", "D3", "D4", "D5", "D6", "D7", "D8"];
-    public override string WingName { get; set; } = "WING";
-    public override string ResultName { get; set; } = "POINTEDNESS";
+    public sealed override string[] WingParameters { get; set; } = ["D2", "D3", "D4", "D5", "D6", "D7", "D8"];
+    public sealed override string WingName { get; set; } = "WING";
+    public sealed override string ResultName { get; set; } = "POINTEDNESS";
 
 
     public Observation Calculate(Observation observation)
@@ -32,6 +34,18 @@ public class PointednessCalculator : WingParametersBase, IComputedValuesCalculat
 
         observation.AddColumn(ResultName, pointedness);
         return observation;
+    }
+
+    public string Explain()
+    {
+        var sb = new StringBuilder();
+        sb.AppendLine("Konfiguracja wyliczania ostrości skrzydła (Pointedness):");
+
+        sb.AppendLine($"Wylicza wartości na podstawie parametrów: {string.Join(", ", WingParameters)} oraz {WingName}.");
+        sb.AppendLine($"Wynik jest obliczany ze wzoru {ResultName} = ({string.Join(" + ", WingParameters)}) / {WingName}");
+        sb.AppendLine($"Wynik jest zapisywany jako parametr: {ResultName}");
+
+        return sb.ToString();
     }
 
     private decimal? GetPointedness(Observation observation)

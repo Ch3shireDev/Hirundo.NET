@@ -4,11 +4,11 @@ namespace Hirundo.Processors.Returning.Conditions;
 
 public abstract class CompareValuesReturningCondition : IReturningSpecimenCondition
 {
-    public CompareValuesReturningCondition()
+    protected CompareValuesReturningCondition()
     {
     }
 
-    public CompareValuesReturningCondition(string valueName, object? value)
+    protected CompareValuesReturningCondition(string valueName, object? value)
     {
         ValueName = valueName;
         Value = value;

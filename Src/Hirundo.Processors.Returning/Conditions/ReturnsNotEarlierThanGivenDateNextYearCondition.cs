@@ -1,4 +1,5 @@
 ﻿using Hirundo.Commons;
+using Hirundo.Commons.Helpers;
 using Hirundo.Commons.Models;
 
 namespace Hirundo.Processors.Returning.Conditions;
@@ -7,7 +8,7 @@ namespace Hirundo.Processors.Returning.Conditions;
     "ReturnsNotEarlierThanGivenDateNextYear",
     "Czy powrót nastąpił po określonej dacie kolejnego roku?",
     "Osobnik wraca nie wcześniej niż w określonej dacie w przyszłym roku.")]
-public class ReturnsNotEarlierThanGivenDateNextYearCondition : IReturningSpecimenCondition
+public class ReturnsNotEarlierThanGivenDateNextYearCondition : IReturningSpecimenCondition, ISelfExplainer
 {
     public ReturnsNotEarlierThanGivenDateNextYearCondition()
     {
@@ -39,6 +40,11 @@ public class ReturnsNotEarlierThanGivenDateNextYearCondition : IReturningSpecime
         var datesPairs = dates.Zip(dates.Skip(1));
 
         return datesPairs.Any(pair => IsConditionForDatesMet(pair.First, pair.Second));
+    }
+
+    public string Explain()
+    {
+        return $"Osobnik powraca nie wcześniej niż w {Month:D2}.{Day:D2} następnego roku, obliczane na podstawie daty.";
     }
 
     private bool IsConditionForDatesMet(DateTime firstDate, DateTime lastDate)

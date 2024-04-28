@@ -1,5 +1,4 @@
-﻿using Hirundo.App.Explainers.Databases;
-using Hirundo.Commons.Helpers;
+﻿using Hirundo.Commons.Helpers;
 using Hirundo.Databases;
 using NUnit.Framework;
 
@@ -12,10 +11,8 @@ public class DatabaseParametersExplainerTests
     public void Initialize()
     {
         _config = new DatabaseParameters();
-        _explainer = new DatabaseParametersExplainer();
     }
 
-    private DatabaseParametersExplainer _explainer = null!;
     private DatabaseParameters _config = null!;
 
     [Test]
@@ -23,7 +20,6 @@ public class DatabaseParametersExplainerTests
     {
         // Arrange
         _config.Databases.Clear();
-        _explainer.Header = "Konfiguracja źródła danych";
 
         // Act
         var explanation = ExplainerHelpers.Explain(_config);
@@ -37,7 +33,6 @@ public class DatabaseParametersExplainerTests
     {
         // Arrange
         _config.Databases.Add(new AccessDatabaseParameters());
-        _explainer.SubheaderText = "Liczba źródeł danych: {0}.";
 
         // Act
         var explanation = ExplainerHelpers.Explain(_config);

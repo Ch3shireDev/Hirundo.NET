@@ -9,13 +9,18 @@ namespace Hirundo.Processors.Population.Conditions;
     "Czy wartość jest równa?",
     "Warunek sprawdzający, czy osobnik z populacji ma wartość pierwszej obserwacji równą zadanej wartości."
 )]
-public class IsEqualPopulationCondition : IPopulationCondition
+public class IsEqualPopulationCondition : IPopulationCondition, ISelfExplainer
 {
     public string ValueName { get; set; } = "";
     public object? Value { get; set; }
 
     public IPopulationConditionClosure GetPopulationConditionClosure(Specimen returningSpecimen)
     {
-        return new CustomClosure(specimen => { return ComparisonHelpers.IsEqual(specimen.Observations[0].GetValue(ValueName), Value); });
+        return new CustomClosure(specimen => ComparisonHelpers.IsEqual(specimen.Observations[0].GetValue(ValueName), Value));
+    }
+
+    public string Explain()
+    {
+        return $"Wartość pierwszej obserwacji osobnika w populacji z pola '{ValueName}' musi być równa '{Value}'.";
     }
 }

@@ -30,7 +30,9 @@ public static class FileHelpers
 
             return newFilename;
         }
+#pragma warning disable CA1031
         catch (Exception ex)
+#pragma warning restore CA1031
         {
             Log.Warning("Błąd podczas tworzenia nazwy pliku: {ex}.", ex.Message);
             return fileName;

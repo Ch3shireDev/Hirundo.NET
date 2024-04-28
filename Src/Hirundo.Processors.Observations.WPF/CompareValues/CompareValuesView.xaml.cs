@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Hirundo.Processors.Observations.WPF;
+namespace Hirundo.Processors.Observations.WPF.CompareValues;
 
 /// <summary>
 ///     Interaction logic for IsEqualView.xaml

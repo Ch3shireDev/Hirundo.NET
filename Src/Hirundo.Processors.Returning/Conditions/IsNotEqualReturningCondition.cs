@@ -7,7 +7,7 @@ namespace Hirundo.Processors.Returning.Conditions;
     "IsNotEqual",
     "Czy dane nie są równe?",
     "Osobnik zawiera obserwację z polem różnym od danej wartości.")]
-public class IsNotEqualReturningCondition : CompareValuesReturningCondition
+public class IsNotEqualReturningCondition : CompareValuesReturningCondition, ISelfExplainer
 {
     public IsNotEqualReturningCondition(string valueName, object? value) : base(valueName, value)
     {
@@ -15,6 +15,11 @@ public class IsNotEqualReturningCondition : CompareValuesReturningCondition
 
     public IsNotEqualReturningCondition()
     {
+    }
+
+    public string Explain()
+    {
+        return $"Którakolwiek z obserwacji osobnika musi mieć wartość {ValueName} różną od {Value}.";
     }
 
     public override bool Compare(object? observationValue, object? value)

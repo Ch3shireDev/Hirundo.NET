@@ -1,6 +1,5 @@
 ﻿using Hirundo.Commons.Models;
 using Hirundo.Commons.Repositories;
-using Hirundo.Commons.Repositories.Labels;
 using NUnit.Framework;
 
 namespace Hirundo.Repositories.DataLabels.Tests;

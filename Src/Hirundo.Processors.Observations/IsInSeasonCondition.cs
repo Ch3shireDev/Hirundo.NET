@@ -1,4 +1,5 @@
 ﻿using Hirundo.Commons;
+using Hirundo.Commons.Helpers;
 using Hirundo.Commons.Models;
 
 namespace Hirundo.Processors.Observations;
@@ -6,7 +7,7 @@ namespace Hirundo.Processors.Observations;
 [TypeDescription("IsInSeason",
     "Czy dane są w sezonie?",
     "Sprawdza, czy dana obserwacja zaszła w zadanym przedziale dat, dowolnego roku.")]
-public class IsInSeasonCondition : IObservationCondition
+public class IsInSeasonCondition : IObservationCondition, ISelfExplainer
 {
     public IsInSeasonCondition(Season season)
     {
@@ -24,6 +25,11 @@ public class IsInSeasonCondition : IObservationCondition
         ArgumentNullException.ThrowIfNull(observation);
 
         return IsInDateRange(observation.Date);
+    }
+
+    public string Explain()
+    {
+        return $"Wartość daty musi być w sezonie - w zakresie od {Season.StartMonth:D2}.{Season.StartDay:D2} do {Season.EndMonth:D2}.{Season.EndDay:D2}, dowolnego roku.";
     }
 
     private bool IsInDateRange(DateTime date)

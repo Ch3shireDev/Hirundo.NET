@@ -1,4 +1,5 @@
 ﻿using Hirundo.Commons;
+using Hirundo.Commons.Helpers;
 using Hirundo.Commons.Models;
 
 namespace Hirundo.Processors.Observations;
@@ -9,7 +10,7 @@ namespace Hirundo.Processors.Observations;
 [TypeDescription("IsInSet",
     "Czy dane są w zbiorze?",
     "Warunek sprawdzający, czy pole danych znajduje się w zbiorze wartości.")]
-public class IsInSetCondition : IObservationCondition
+public class IsInSetCondition : IObservationCondition, ISelfExplainer
 {
     /// <summary>
     ///     Konstruktor domyślny. Ustawia wartości domyślne jako pusty string i pustą listę.
@@ -51,5 +52,10 @@ public class IsInSetCondition : IObservationCondition
     {
         var value = observation.GetValue(ValueName);
         return value != null && Values.Contains(value);
+    }
+
+    public string Explain()
+    {
+        return $"Wartość {ValueName} musi być jedną z wartości: {string.Join(", ", Values)}";
     }
 }
