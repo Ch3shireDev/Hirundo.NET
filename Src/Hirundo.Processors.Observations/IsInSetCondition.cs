@@ -18,7 +18,7 @@ public class IsInSetCondition : IObservationCondition, ISelfExplainer
     public IsInSetCondition()
     {
         ValueName = string.Empty;
-        Values = new List<object>();
+        Values = [];
     }
 
     /// <summary>

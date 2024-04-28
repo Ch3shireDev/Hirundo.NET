@@ -4,7 +4,7 @@
 ///     Zbiór wyników zawierający listę osobników powracających wraz z wartościami kluczowymi,
 ///     wartościami pomiarowymi oraz wartościami statystycznymi.
 /// </summary>
-public class ReturningSpecimenSummary(string[] headers, object?[] values)
+public class ReturningSpecimenSummary(IReadOnlyList<string> headers, IReadOnlyList<object?> values)
 {
     public string Ring { get; set; } = "123";
     public DateTime DateFirstSeen { get; set; } = new(2020, 06, 01);

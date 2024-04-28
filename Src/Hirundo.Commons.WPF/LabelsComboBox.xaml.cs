@@ -40,8 +40,8 @@ public partial class LabelsComboBox : UserControl, INotifyPropertyChanged
     public LabelsComboBox()
     {
         InitializeComponent();
-        ComboBox.DisplayMemberPath = nameof(DataLabel.Name);
-        ComboBox.SelectedValue = SelectedLabel;
+        ComboBoxComponent.DisplayMemberPath = nameof(DataLabel.Name);
+        ComboBoxComponent.SelectedValue = SelectedLabel;
     }
 
     public string ValueLabel
@@ -95,7 +95,7 @@ public partial class LabelsComboBox : UserControl, INotifyPropertyChanged
         }
         else
         {
-            comboBox.ComboBox.ItemsSource = null;
+            comboBox.ComboBoxComponent.ItemsSource = null;
         }
     }
 
@@ -110,8 +110,8 @@ public partial class LabelsComboBox : UserControl, INotifyPropertyChanged
         var valueName = ValueName;
         Labels = [.. LabelsRepository.GetLabels()];
         SelectedLabel = Labels.FirstOrDefault(l => l.Name == valueName);
-        ComboBox.ItemsSource = Labels;
-        ComboBox.SelectedValue = SelectedLabel;
+        ComboBoxComponent.ItemsSource = Labels;
+        ComboBoxComponent.SelectedValue = SelectedLabel;
         ValueName = valueName;
     }
 
