@@ -3,7 +3,8 @@ using Hirundo.Commons.WPF;
 
 namespace Hirundo.Writers.WPF;
 
-public class WritersModel(ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository) : ParametersBrowserModel<ResultsParameters, IWriterParameters, WritersModel>(labelsRepository, speciesRepository)
+public class WritersModel(ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository)
+    : ParametersBrowserModel<ResultsParameters, IWriterParameters, WritersModel>(labelsRepository, speciesRepository)
 {
     public override string Header => "Wyniki";
     public override string Title => "Zapis wyników";

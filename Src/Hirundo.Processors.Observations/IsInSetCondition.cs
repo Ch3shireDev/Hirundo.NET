@@ -6,7 +6,9 @@ namespace Hirundo.Processors.Observations;
 /// <summary>
 ///     Warunek sprawdzający, czy wartość obserwacji z zadanego pola znajduje się w zbiorze wartości.
 /// </summary>
-[TypeDescription("IsInSet")]
+[TypeDescription("IsInSet",
+    "Czy dane są w zbiorze?",
+    "Warunek sprawdzający, czy pole danych znajduje się w zbiorze wartości.")]
 public class IsInSetCondition : IObservationCondition
 {
     /// <summary>

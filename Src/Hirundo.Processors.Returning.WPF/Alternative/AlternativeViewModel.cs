@@ -1,6 +1,6 @@
-﻿using Hirundo.Commons.WPF;
+﻿using System.Collections.ObjectModel;
+using Hirundo.Commons.WPF;
 using Hirundo.Processors.Returning.Conditions;
-using System.Collections.ObjectModel;
 
 namespace Hirundo.Processors.Returning.WPF.Alternative;
 
@@ -12,6 +12,7 @@ namespace Hirundo.Processors.Returning.WPF.Alternative;
 public class AlternativeViewModel(AlternativeModel model) : ParametersViewModel(model)
 {
     public IList<ParametersData> Options { get; } = new ObservableCollection<ParametersData>(model.AvailableParameters);
+
     public ParametersData? FirstParameter
     {
         get => model.FirstParameter;
@@ -24,6 +25,7 @@ public class AlternativeViewModel(AlternativeModel model) : ParametersViewModel(
     }
 
     public ParametersViewModel? FirstViewModel => model.FirstViewModel;
+
     public ParametersData? SecondParameter
     {
         get => model.SecondParameter;

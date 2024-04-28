@@ -1,6 +1,6 @@
-﻿using Hirundo.Commons.Models;
+﻿using System.Text;
+using Hirundo.Commons.Models;
 using NUnit.Framework;
-using System.Text;
 
 namespace Hirundo.Processors.Observations.Tests;
 
@@ -14,9 +14,11 @@ public class IsSpeciesEqualConditionTests
         var speciesBuilder = new StringBuilder();
         speciesBuilder.Append("REG").Append(".REG");
         var condition = new IsSpeciesEqualCondition { Species = speciesBuilder.ToString() };
-        Observation[] observations = [
-            new Observation { Species = "REG.REG"},
-            new Observation { Species = "PHY.LUS"},
+
+        Observation[] observations =
+        [
+            new Observation { Species = "REG.REG" },
+            new Observation { Species = "PHY.LUS" }
         ];
 
         // Act

@@ -9,12 +9,12 @@
              xmlns:components="clr-namespace:Hirundo.App.WPF.Components"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="1000" 
+             d:DesignHeight="600" d:DesignWidth="1000"
              Background="#efefef"
              d:DataContext="{d:DesignInstance components:MainViewModel}">
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">
-            <b:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+            <b:InvokeCommandAction Command="{Binding LoadedCommand}" />
         </b:EventTrigger>
     </b:Interaction.Triggers>
     <UserControl.Resources>
@@ -63,8 +63,7 @@
             <TabControl TabStripPlacement="Left"
                         Grid.Column="0"
                         ItemsSource="{Binding ViewModels}"
-                        SelectedValue="{Binding SelectedViewModel}"
-                        >
+                        SelectedValue="{Binding SelectedViewModel}">
                 <TabControl.ItemContainerStyle>
                     <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                         <Setter Property="Header"
@@ -96,9 +95,10 @@
                     </ListBox.ItemContainerStyle>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock TextWrapping="Wrap" Text="{Binding Converter={StaticResource LogEventConverter}}"
-                                   FontFamily="Consolas" Padding="0" Margin="0"
-                                   Foreground="{Binding Converter={StaticResource LogEventToColorConverter}}" />
+                            <TextBlock TextWrapping="Wrap"
+                                       Text="{Binding Converter={StaticResource LogEventConverter}}"
+                                       FontFamily="Consolas" Padding="0" Margin="0"
+                                       Foreground="{Binding Converter={StaticResource LogEventToColorConverter}}" />
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>

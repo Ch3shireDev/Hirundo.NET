@@ -4,10 +4,14 @@ using Hirundo.Commons.Models;
 
 namespace Hirundo.Processors.Observations;
 
-[TypeDescription("IsNotEqual")]
+[TypeDescription("IsNotEqual",
+    "Czy wartość nie jest równa?",
+    "Warunek porównujący pole danych z podaną wartością.")]
 public class IsNotEqualCondition : IObservationCondition, ICompareValueCondition
 {
-    public IsNotEqualCondition() { }
+    public IsNotEqualCondition()
+    {
+    }
 
     public IsNotEqualCondition(string valueName, object? value)
     {

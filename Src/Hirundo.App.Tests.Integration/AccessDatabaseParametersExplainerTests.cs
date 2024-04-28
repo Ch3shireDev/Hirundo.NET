@@ -7,14 +7,15 @@ namespace Hirundo.App.Tests.Integration;
 [TestFixture]
 public class AccessDatabaseParametersExplainerTests
 {
-    private AccessDatabaseParametersExplainer _explainer = null!;
-    private AccessDatabaseParameters _params = null!;
     [SetUp]
     public void Initialize()
     {
         _params = new AccessDatabaseParameters();
         _explainer = new AccessDatabaseParametersExplainer();
     }
+
+    private AccessDatabaseParametersExplainer _explainer = null!;
+    private AccessDatabaseParameters _params = null!;
 
     [Test]
     public void GivenEmptyConfig_WhenExplaining_ThenReturnSimpleText()

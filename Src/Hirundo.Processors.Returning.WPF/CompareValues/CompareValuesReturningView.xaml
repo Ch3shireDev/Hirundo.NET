@@ -7,16 +7,15 @@
              xmlns:labels="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance local:ICompareValuesReturningViewModel}"
-             d:Background="AliceBlue"
-             >
+             d:Background="AliceBlue">
     <StackPanel>
         <labels:LabelsComboBox
-                ValueLabel="Nazwa pola"
-                ValueName="{Binding ValueName}"
-                DataType="{Binding DataType}"
-                LabelsRepository="{Binding LabelsRepository}" />
+            ValueLabel="Nazwa pola"
+            ValueName="{Binding ValueName}"
+            DataType="{Binding DataType}"
+            LabelsRepository="{Binding LabelsRepository}" />
         <WrapPanel>
-            <Label Content="{Binding ValueDescription}"/>
+            <Label Content="{Binding ValueDescription}" />
             <TextBox Text="{Binding Value}" MinWidth="100" />
         </WrapPanel>
     </StackPanel>

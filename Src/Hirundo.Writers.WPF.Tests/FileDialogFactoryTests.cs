@@ -7,14 +7,14 @@ namespace Hirundo.Writers.WPF.Tests;
 [TestFixture]
 public class FileDialogFactoryTests
 {
-    private Mock<IFileDialogHelper> fileDialogHelper = null!;
-
     [SetUp]
     public void Initialize()
     {
         fileDialogHelper = new Mock<IFileDialogHelper>();
         FileHelpers.File = fileDialogHelper.Object;
     }
+
+    private Mock<IFileDialogHelper> fileDialogHelper = null!;
 
     [Test]
     public void GetFileDialogForWriter_GivenCsvWriter_ReturnsWriterDialog()

@@ -21,6 +21,7 @@ public class NotEarlierThanGivenDateNextYearViewModel(NotEarlierThanGivenDateNex
             OnPropertyChanged();
         }
     }
+
     public int Day
     {
         get => model.Day;

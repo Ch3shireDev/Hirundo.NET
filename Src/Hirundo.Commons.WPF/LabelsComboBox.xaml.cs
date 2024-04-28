@@ -1,21 +1,15 @@
-﻿using Hirundo.Commons.Models;
-using Hirundo.Commons.Repositories;
-using Hirundo.Commons.Repositories.Labels;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using Hirundo.Commons.Models;
+using Hirundo.Commons.Repositories;
+using Hirundo.Commons.Repositories.Labels;
 
 namespace Hirundo.Commons.WPF;
 
 public partial class LabelsComboBox : UserControl, INotifyPropertyChanged
 {
-    public string ValueLabel
-    {
-        get { return (string)GetValue(ValueLabelProperty); }
-        set { SetValue(ValueLabelProperty, value); }
-    }
-
     public static readonly DependencyProperty ValueLabelProperty =
         DependencyProperty.Register(nameof(ValueLabel), typeof(string), typeof(LabelsComboBox), new PropertyMetadata("Nazwa wartości"));
 
@@ -49,6 +43,12 @@ public partial class LabelsComboBox : UserControl, INotifyPropertyChanged
         InitializeComponent();
         ComboBox.DisplayMemberPath = nameof(DataLabel.Name);
         ComboBox.SelectedValue = SelectedLabel;
+    }
+
+    public string ValueLabel
+    {
+        get => (string)GetValue(ValueLabelProperty);
+        set => SetValue(ValueLabelProperty, value);
     }
 
     public DataType DataType

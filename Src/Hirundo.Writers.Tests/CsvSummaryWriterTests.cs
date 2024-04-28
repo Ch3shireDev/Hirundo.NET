@@ -6,10 +6,6 @@ namespace Hirundo.Writers.Tests;
 [TestFixture]
 public class CsvSummaryWriterTests
 {
-    private CsvSummaryWriterParameters _parameters = null!;
-    private StringWriter stringWriter = null!;
-    private CsvSummaryWriter writer = null!;
-
     [SetUp]
     public void Initialize()
     {
@@ -23,6 +19,10 @@ public class CsvSummaryWriterTests
         stringWriter = new StringWriter();
         writer = new CsvSummaryWriter(_parameters, stringWriter);
     }
+
+    private CsvSummaryWriterParameters _parameters = null!;
+    private StringWriter stringWriter = null!;
+    private CsvSummaryWriter writer = null!;
 
     [Test]
     public void GivenEmptyRecords_WhenWriteSummary_ReturnsEmptyDocument()

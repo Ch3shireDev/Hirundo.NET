@@ -5,7 +5,8 @@ using Hirundo.Commons.WPF;
 
 namespace Hirundo.Processors.Computed.WPF;
 
-public class WingParametersModel<T>(T parameters, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository) : ParametersModel(parameters, labelsRepository, speciesRepository) where T : WingParametersBase
+public class WingParametersModel<T>(T parameters, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository)
+    : ParametersModel(parameters, labelsRepository, speciesRepository) where T : WingParametersBase
 {
     private const int NumberOfParameters = 7;
 

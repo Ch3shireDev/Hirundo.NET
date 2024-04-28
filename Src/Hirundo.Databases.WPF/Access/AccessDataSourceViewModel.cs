@@ -1,9 +1,9 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Hirundo.Commons.WPF;
 using Hirundo.Databases.Conditions;
 using Serilog;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace Hirundo.Databases.WPF.Access;
 
@@ -188,6 +188,7 @@ public class AccessDataSourceViewModel(AccessDataSourceModel model, IAccessMetad
         if (columnData.DataType != DataValueType.Text) return;
         var speciesColumn = columnData.DatabaseColumn;
         if (string.IsNullOrEmpty(speciesColumn)) return;
+
         var speciesList = accessMetadataService.GetDistinctValues(Path, Table, speciesColumn)
             .Select(val => val?.ToString() ?? "")
             .Where(val => !string.IsNullOrWhiteSpace(val))

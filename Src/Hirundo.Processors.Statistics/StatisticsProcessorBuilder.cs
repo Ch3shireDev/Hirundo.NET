@@ -12,6 +12,7 @@ public class StatisticsProcessorBuilder : IStatisticsProcessorBuilder
     private readonly List<IStatisticalOperation> _statisticalOperations = [];
 
     private CancellationToken? _token;
+
     /// <summary>
     ///     Tworzy obiekt typu <see cref="IStatisticsProcessor" />.
     /// </summary>

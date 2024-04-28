@@ -5,11 +5,13 @@ namespace Hirundo.Commons.Helpers;
 public static class FileHelpers
 {
     public static IFileDialogHelper File { get; set; } = new FileDialogHelper();
+
     public static string GetUniqueFilename(string fileName, string directory)
     {
         try
         {
             var filepath = Path.Combine(directory, fileName);
+
             if (!File.Exists(filepath))
             {
                 return fileName;
@@ -18,6 +20,7 @@ public static class FileHelpers
             var newFilename = fileName;
 
             var i = 1;
+
             while (File.Exists(filepath))
             {
                 newFilename = $"{Path.GetFileNameWithoutExtension(fileName)} ({i}){Path.GetExtension(fileName)}";

@@ -4,15 +4,19 @@ namespace Hirundo.Processors.Computed;
 
 public class CompositeCalculator : IComputedValuesCalculator
 {
-    public IList<IComputedValuesCalculator> Calculators { get; }
-    public CancellationToken? CancellationToken { get; }
-    public CompositeCalculator(params IComputedValuesCalculator[] calculators) : this(calculators, null) { }
+    public CompositeCalculator(params IComputedValuesCalculator[] calculators) : this(calculators, null)
+    {
+    }
+
     public CompositeCalculator(IList<IComputedValuesCalculator> calculators, CancellationToken? cancellationToken = null)
     {
         ArgumentNullException.ThrowIfNull(calculators);
         Calculators = calculators;
         CancellationToken = cancellationToken;
     }
+
+    public IList<IComputedValuesCalculator> Calculators { get; }
+    public CancellationToken? CancellationToken { get; }
 
     public Observation Calculate(Observation observation)
     {

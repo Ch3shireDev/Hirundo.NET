@@ -12,7 +12,7 @@ namespace Hirundo.Processors.Returning.Conditions;
     "ReturnsAfterTimePeriod",
     "Czy powrót nastąpił po określonym czasie?",
     "Osobnik wraca nie wcześniej niż po określonej liczbie dni."
-    )]
+)]
 public class ReturnsAfterTimePeriodCondition : IReturningSpecimenCondition
 {
     /// <summary>
@@ -21,7 +21,6 @@ public class ReturnsAfterTimePeriodCondition : IReturningSpecimenCondition
     ///     dat jest większa lub równa podanej liczbie dni.
     /// </summary>
     /// <param name="timePeriodInDays">Minimalna liczba dni różnicy pomiędzy obserwacjami.</param>
-    /// 
     public ReturnsAfterTimePeriodCondition(int timePeriodInDays)
     {
         TimePeriodInDays = timePeriodInDays;

@@ -12,10 +12,10 @@
             <b:InvokeCommandAction Command="{Binding LoadCommand}" />
         </b:EventTrigger>
     </b:Interaction.Triggers>
-        <StackPanel>
+    <StackPanel>
         <WrapPanel>
             <Label>Nazwa wyniku</Label>
-            <TextBox Text="{Binding ResultName, Mode=TwoWay}" MinWidth="100" >
+            <TextBox Text="{Binding ResultName, Mode=TwoWay}" MinWidth="100">
                 <b:Interaction.Triggers>
                     <b:EventTrigger EventName="LostFocus">
                         <b:InvokeCommandAction Command="{Binding UpdateLabelCommand}" />
@@ -24,46 +24,46 @@
             </TextBox>
         </WrapPanel>
         <labels:LabelsComboBox
-                ValueLabel="Długość skrzydła"
-                ValueName="{Binding WingName}"
-                DataType="{Binding WingType}"
-                LabelsRepository="{Binding LabelsRepository}"
-                MinWidth="100" />
+            ValueLabel="Długość skrzydła"
+            ValueName="{Binding WingName}"
+            DataType="{Binding WingType}"
+            LabelsRepository="{Binding LabelsRepository}"
+            MinWidth="100" />
         <labels:LabelsComboBox
-                ValueLabel="Kolumna D2"
-                ValueName="{Binding D2Name}"
-                LabelsRepository="{Binding LabelsRepository}"
-                MinWidth="100" />
+            ValueLabel="Kolumna D2"
+            ValueName="{Binding D2Name}"
+            LabelsRepository="{Binding LabelsRepository}"
+            MinWidth="100" />
         <labels:LabelsComboBox
-                ValueLabel="Kolumna D3"
-                ValueName="{Binding D3Name}"
-                LabelsRepository="{Binding LabelsRepository}"
-                MinWidth="100" />
+            ValueLabel="Kolumna D3"
+            ValueName="{Binding D3Name}"
+            LabelsRepository="{Binding LabelsRepository}"
+            MinWidth="100" />
         <labels:LabelsComboBox
-                ValueLabel="Kolumna D4"
-                ValueName="{Binding D4Name}"
-                LabelsRepository="{Binding LabelsRepository}"
-                MinWidth="100" />
+            ValueLabel="Kolumna D4"
+            ValueName="{Binding D4Name}"
+            LabelsRepository="{Binding LabelsRepository}"
+            MinWidth="100" />
         <labels:LabelsComboBox
-                ValueLabel="Kolumna D5"
-                ValueName="{Binding D5Name}"
-                LabelsRepository="{Binding LabelsRepository}"
-                MinWidth="100" />
+            ValueLabel="Kolumna D5"
+            ValueName="{Binding D5Name}"
+            LabelsRepository="{Binding LabelsRepository}"
+            MinWidth="100" />
         <labels:LabelsComboBox
-                ValueLabel="Kolumna D6"
-                ValueName="{Binding D6Name}"
-                LabelsRepository="{Binding LabelsRepository}"
-                MinWidth="100" />
+            ValueLabel="Kolumna D6"
+            ValueName="{Binding D6Name}"
+            LabelsRepository="{Binding LabelsRepository}"
+            MinWidth="100" />
         <labels:LabelsComboBox
-                ValueLabel="Kolumna D7"
-                ValueName="{Binding D7Name}"
-                LabelsRepository="{Binding LabelsRepository}"
-                MinWidth="100" />
+            ValueLabel="Kolumna D7"
+            ValueName="{Binding D7Name}"
+            LabelsRepository="{Binding LabelsRepository}"
+            MinWidth="100" />
         <labels:LabelsComboBox
-                ValueLabel="Kolumna D8"
-                ValueName="{Binding D8Name}"
-                LabelsRepository="{Binding LabelsRepository}"
-                MinWidth="100" />
- 
+            ValueLabel="Kolumna D8"
+            ValueName="{Binding D8Name}"
+            LabelsRepository="{Binding LabelsRepository}"
+            MinWidth="100" />
+
     </StackPanel>
 </UserControl>

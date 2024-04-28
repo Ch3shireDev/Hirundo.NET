@@ -31,16 +31,16 @@ public class IsInSharedTimeWindowConditionTests
     {
         // Arrange
         var returningSpecimen = new Specimen("XX123", [
-                new Observation{Date = new DateTime(2020, 06, 01)},
-                new Observation{Date = new DateTime(2021, 06, 01)}
+                new Observation { Date = new DateTime(2020, 06, 01) },
+                new Observation { Date = new DateTime(2021, 06, 01) }
             ]
         );
 
         var days = 20;
 
         var specimen = new Specimen("ABC123", [
-            new Observation{Date = new DateTime(2020, 05, 05)}
-            ]);
+            new Observation { Date = new DateTime(2020, 05, 05) }
+        ]);
 
         var filterBuilder = new IsInSharedTimeWindowCondition(days);
         var filter = filterBuilder.GetPopulationConditionClosure(returningSpecimen);

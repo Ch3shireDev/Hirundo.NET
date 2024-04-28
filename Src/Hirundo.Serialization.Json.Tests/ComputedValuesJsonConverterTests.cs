@@ -27,7 +27,7 @@ public class ComputedValuesJsonConverterTests
 
         var config = new ApplicationParameters
         {
-            ComputedValues = new()
+            ComputedValues = new ComputedValuesParameters
             {
                 ComputedValues = [computedValue]
             }

@@ -22,12 +22,14 @@ public abstract class ParametersBrowserModel<TConditionContainer, TCondition, TB
     where TCondition : class
     where TBrowser : IParametersBrowserModel
 {
+    protected readonly ParametersFactory<TCondition, TBrowser> _factory;
+
     protected ParametersBrowserModel(ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository)
     {
         _factory = new ParametersFactory<TCondition, TBrowser>(labelsRepository, speciesRepository);
         ParametersDataList = _factory.GetParametersData().ToArray();
     }
-    protected readonly ParametersFactory<TCondition, TBrowser> _factory;
+
     public TConditionContainer ParametersContainer { get; set; } = new();
     public abstract IList<TCondition> Parameters { get; }
     public abstract string Header { get; }
@@ -38,6 +40,20 @@ public abstract class ParametersBrowserModel<TConditionContainer, TCondition, TB
     public virtual Action? Process { get; set; }
     public bool CanProcess => Process is not null;
     public virtual string ProcessLabel => "Przetwarzaj";
+
+    public void AddParameters(ParametersData parametersData)
+    {
+        var writer = _factory.CreateCondition(parametersData);
+        Parameters.Add(writer);
+    }
+
+    public virtual IEnumerable<ParametersViewModel> GetParametersViewModels()
+    {
+        return Parameters
+                .Select(_factory.CreateViewModel)
+                .Select(AddRemovedListener)
+            ;
+    }
 
     protected ParametersViewModel AddRemovedListener(ParametersViewModel viewModel)
     {
@@ -52,18 +68,5 @@ public abstract class ParametersBrowserModel<TConditionContainer, TCondition, TB
         };
 
         return viewModel;
-    }
-    public void AddParameters(ParametersData parametersData)
-    {
-        var writer = _factory.CreateCondition(parametersData);
-        Parameters.Add(writer);
-    }
-
-    public virtual IEnumerable<ParametersViewModel> GetParametersViewModels()
-    {
-        return Parameters
-                .Select(_factory.CreateViewModel)
-                .Select(AddRemovedListener)
-            ;
     }
 }

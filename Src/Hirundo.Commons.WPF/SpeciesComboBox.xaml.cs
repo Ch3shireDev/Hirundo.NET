@@ -1,8 +1,8 @@
-﻿using Hirundo.Commons.Repositories;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using Hirundo.Commons.Repositories;
 
 namespace Hirundo.Commons.WPF;
 
@@ -14,16 +14,16 @@ public partial class SpeciesComboBox : UserControl, INotifyPropertyChanged
     public static readonly DependencyProperty SelectedSpeciesProperty =
         DependencyProperty.Register("SelectedSpecies", typeof(string), typeof(SpeciesComboBox), new PropertyMetadata(""));
 
-    public string SelectedSpecies
-    {
-        get { return (string)GetValue(SelectedSpeciesProperty); }
-        set { SetValue(SelectedSpeciesProperty, value); }
-    }
-
     public SpeciesComboBox()
     {
         InitializeComponent();
         ComboBox.SelectedValue = SelectedSpecies;
+    }
+
+    public string SelectedSpecies
+    {
+        get => (string)GetValue(SelectedSpeciesProperty);
+        set => SetValue(SelectedSpeciesProperty, value);
     }
 
     public ISpeciesRepository? SpeciesRepository

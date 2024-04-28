@@ -7,7 +7,7 @@ namespace Hirundo.Processors.Population.WPF.IsInSharedTimeWindow;
     typeof(IsInSharedTimeWindowCondition),
     typeof(IsInSharedTimeWindowModel),
     typeof(IsInSharedTimeWindowView)
-    )]
+)]
 public class IsInSharedTimeWindowViewModel(IsInSharedTimeWindowModel model) : ParametersViewModel(model)
 {
     public int MaxTimeDistanceInDays

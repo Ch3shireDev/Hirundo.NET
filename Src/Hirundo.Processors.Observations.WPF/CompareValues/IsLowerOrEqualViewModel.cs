@@ -5,9 +5,7 @@ namespace Hirundo.Processors.Observations.WPF.CompareValues;
 [ParametersData(
     typeof(IsLowerOrEqualCondition),
     typeof(CompareValuesModel<IsLowerOrEqualCondition>),
-    typeof(CompareValuesView),
-    "Czy wartość jest mniejsza lub równa?",
-    "Warunek sprawdzający, czy pole danych jest mniejsze lub równe podanej wartości.\nW przypadku dat, wartości należy podawać w formacie YYYY-MM-DD."
+    typeof(CompareValuesView)
 )]
 public class IsLowerOrEqualViewModel(CompareValuesModel<IsLowerOrEqualCondition> model) : CompareValuesViewModel<IsLowerOrEqualCondition>(model)
 {

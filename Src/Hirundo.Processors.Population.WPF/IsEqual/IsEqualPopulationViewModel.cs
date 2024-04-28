@@ -7,7 +7,7 @@ namespace Hirundo.Processors.Population.WPF.IsEqual;
     typeof(IsEqualPopulationCondition),
     typeof(IsEqualPopulationModel),
     typeof(IsEqualPopulationView)
-    )]
+)]
 public class IsEqualPopulationViewModel(IsEqualPopulationModel model) : ParametersViewModel(model)
 {
     public string ValueName
@@ -15,7 +15,6 @@ public class IsEqualPopulationViewModel(IsEqualPopulationModel model) : Paramete
         get => model.ValueName;
         set
         {
-
             model.ValueName = value;
             OnPropertyChanged();
         }

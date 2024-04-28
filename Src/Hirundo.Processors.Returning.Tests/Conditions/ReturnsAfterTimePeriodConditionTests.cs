@@ -1,7 +1,7 @@
-﻿using Hirundo.Commons.Models;
+﻿using System.Globalization;
+using Hirundo.Commons.Models;
 using Hirundo.Processors.Returning.Conditions;
 using NUnit.Framework;
-using System.Globalization;
 
 namespace Hirundo.Processors.Returning.Tests.Conditions;
 
@@ -15,8 +15,8 @@ public class ReturnsAfterTimePeriodConditionTests
         var filter = new ReturnsAfterTimePeriodCondition(20);
 
         var specimen = new Specimen("AB123", [
-            new Observation{Date = new DateTime(2021, 06, 01)},
-            new Observation{Date = new DateTime(2021, 06, 21)}
+            new Observation { Date = new DateTime(2021, 06, 01) },
+            new Observation { Date = new DateTime(2021, 06, 21) }
         ]);
 
         // Act
@@ -33,9 +33,9 @@ public class ReturnsAfterTimePeriodConditionTests
         var filter = new ReturnsAfterTimePeriodCondition(20);
 
         var specimen = new Specimen("AB123", [
-            new Observation{Date = new DateTime(2021, 06, 01)},
-            new Observation{Date = new DateTime(2021, 06, 05)},
-            new Observation{Date = new DateTime(2021, 06, 27)},
+            new Observation { Date = new DateTime(2021, 06, 01) },
+            new Observation { Date = new DateTime(2021, 06, 05) },
+            new Observation { Date = new DateTime(2021, 06, 27) }
         ]);
 
         // Act
@@ -75,10 +75,9 @@ public class ReturnsAfterTimePeriodConditionTests
             //new Observation(["DATE"], ["2021-06-01"]),
             //new Observation(["DATE"], ["2021-06-05"]),
             //new Observation(["DATE"], ["2021-06-27"])
-            new Observation{Date = new DateTime(2021, 06, 01)},
-            new Observation{Date = new DateTime(2021, 06, 05)},
-            new Observation{Date = new DateTime(2021, 06, 27)},
-
+            new Observation { Date = new DateTime(2021, 06, 01) },
+            new Observation { Date = new DateTime(2021, 06, 05) },
+            new Observation { Date = new DateTime(2021, 06, 27) }
         ]);
 
         // Act
@@ -87,5 +86,4 @@ public class ReturnsAfterTimePeriodConditionTests
         // Assert
         Assert.That(result, Is.True);
     }
-
 }

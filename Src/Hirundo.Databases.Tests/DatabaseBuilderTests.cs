@@ -23,8 +23,8 @@ public class DatabaseBuilderTests
             Table = "example table",
             Columns =
             [
-                new("IDR_Podab", "ID", DataValueType.LongInt),
-                new("RING", "RING", DataValueType.Text)
+                new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt),
+                new ColumnParameters("RING", "RING", DataValueType.Text)
             ],
             Conditions =
             [
@@ -54,8 +54,8 @@ public class DatabaseBuilderTests
             Table = "example table",
             Columns =
             [
-                new("IDR_Podab", "ID", DataValueType.LongInt),
-                new("RING", "RING", DataValueType.Text)
+                new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt),
+                new ColumnParameters("RING", "RING", DataValueType.Text)
             ],
             Conditions =
             [

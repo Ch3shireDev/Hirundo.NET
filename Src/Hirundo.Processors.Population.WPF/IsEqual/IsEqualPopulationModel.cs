@@ -3,9 +3,10 @@ using Hirundo.Commons.WPF;
 using Hirundo.Processors.Population.Conditions;
 
 namespace Hirundo.Processors.Population.WPF.IsEqual;
-public class IsEqualPopulationModel(IsEqualPopulationCondition condition, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository) : ParametersModel(condition, labelsRepository, speciesRepository)
-{
 
+public class IsEqualPopulationModel(IsEqualPopulationCondition condition, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository)
+    : ParametersModel(condition, labelsRepository, speciesRepository)
+{
     public string ValueName
     {
         get => condition.ValueName;
@@ -17,6 +18,4 @@ public class IsEqualPopulationModel(IsEqualPopulationCondition condition, ILabel
         get => condition.Value?.ToString() ?? "";
         set => condition.Value = value;
     }
-
-
 }

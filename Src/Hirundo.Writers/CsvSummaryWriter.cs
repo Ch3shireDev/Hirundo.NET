@@ -1,10 +1,10 @@
-﻿using CsvHelper;
+﻿using System.Globalization;
+using System.Text;
+using CsvHelper;
 using CsvHelper.Configuration;
 using CsvHelper.TypeConversion;
 using Hirundo.Commons.Models;
 using Serilog;
-using System.Globalization;
-using System.Text;
 
 namespace Hirundo.Writers;
 
@@ -14,6 +14,12 @@ public sealed class CsvSummaryWriter(CsvSummaryWriterParameters parameters, Text
     public string Delimiter { get; set; } = ",";
     public Encoding Encoding { get; set; } = Encoding.UTF8;
     public bool IncludeExplanation { get; set; } = false;
+
+    public async ValueTask DisposeAsync()
+    {
+        await streamWriter.DisposeAsync().ConfigureAwait(false);
+        GC.SuppressFinalize(this);
+    }
 
     public void Write(ReturningSpecimensResults results)
     {
@@ -85,6 +91,12 @@ public sealed class CsvSummaryWriter(CsvSummaryWriterParameters parameters, Text
         }
     }
 
+    public void Dispose()
+    {
+        streamWriter.Dispose();
+        GC.SuppressFinalize(this);
+    }
+
     private static string[] GetDataHeaders(IReadOnlyCollection<ReturningSpecimenSummary> records)
     {
         if (records.Count == 0)
@@ -93,18 +105,6 @@ public sealed class CsvSummaryWriter(CsvSummaryWriterParameters parameters, Text
         }
 
         return [.. records.First().Headers];
-    }
-
-    public async ValueTask DisposeAsync()
-    {
-        await streamWriter.DisposeAsync().ConfigureAwait(false);
-        GC.SuppressFinalize(this);
-    }
-
-    public void Dispose()
-    {
-        streamWriter.Dispose();
-        GC.SuppressFinalize(this);
     }
 
     ~CsvSummaryWriter()

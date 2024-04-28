@@ -38,7 +38,7 @@ public class IsNotEqualConditionTests
         var isAccepted = condition.IsAccepted(observation);
 
         // Assert
-        Assert.That(isAccepted, Is.EqualTo(result), message: $"Compare {conditionValue} ({conditionValue?.GetType()?.Name}) to {observationValue} ({observationValue?.GetType()?.Name}))");
+        Assert.That(isAccepted, Is.EqualTo(result), $"Compare {conditionValue} ({conditionValue?.GetType()?.Name}) to {observationValue} ({observationValue?.GetType()?.Name}))");
     }
 
 
@@ -101,7 +101,7 @@ public class IsNotEqualConditionTests
     {
         // Arrange
         var valueName = "SPECIES";
-        string value = "";
+        var value = "";
 
         var filter = new IsNotEqualCondition(valueName, value);
 
@@ -184,6 +184,4 @@ public class IsNotEqualConditionTests
         // Assert
         Assert.That(result, Is.False);
     }
-
-
 }

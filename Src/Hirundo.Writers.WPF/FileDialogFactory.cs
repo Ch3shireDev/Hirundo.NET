@@ -1,8 +1,9 @@
-﻿using Hirundo.Commons.Helpers;
+﻿using System.IO;
+using Hirundo.Commons.Helpers;
 using Microsoft.Win32;
-using System.IO;
 
 namespace Hirundo.Writers.WPF;
+
 public static class FileDialogFactory
 {
     public static string DefaultResultsName { get; set; } = "wyniki";
@@ -11,7 +12,6 @@ public static class FileDialogFactory
 
     public static SaveFileDialog GetFileDialogForWriter(IWriterParameters writerParameters)
     {
-
         if (writerParameters is CsvSummaryWriterParameters)
         {
             return new SaveFileDialog
@@ -20,10 +20,11 @@ public static class FileDialogFactory
                 Title = "Zapisz wyniki",
                 DefaultExt = "csv",
                 FileName = GetDefaultFilename($"{DefaultResultsName}.csv"),
-                DefaultDirectory = DefaultDirectory,
+                DefaultDirectory = DefaultDirectory
             };
         }
-        else if (writerParameters is XlsxSummaryWriterParameters)
+
+        if (writerParameters is XlsxSummaryWriterParameters)
         {
             return new SaveFileDialog
             {
@@ -31,10 +32,11 @@ public static class FileDialogFactory
                 Title = "Zapisz wyniki",
                 DefaultExt = "xlsx",
                 FileName = GetDefaultFilename($"{DefaultResultsName}.xlsx"),
-                DefaultDirectory = DefaultDirectory,
+                DefaultDirectory = DefaultDirectory
             };
         }
-        else if (writerParameters is ExplanationWriterParameters)
+
+        if (writerParameters is ExplanationWriterParameters)
         {
             return new SaveFileDialog
             {
@@ -42,13 +44,11 @@ public static class FileDialogFactory
                 Title = "Zapisz wyjaśnienia",
                 DefaultExt = "txt",
                 FileName = GetDefaultFilename("wyjasnienia.txt"),
-                DefaultDirectory = DefaultDirectory,
+                DefaultDirectory = DefaultDirectory
             };
         }
-        else
-        {
-            throw new ArgumentException("Unsupported writer parameters type");
-        }
+
+        throw new ArgumentException("Unsupported writer parameters type");
     }
 
     public static SaveFileDialog GetFileDialogForFilename(string filename)
@@ -63,10 +63,11 @@ public static class FileDialogFactory
                 Title = "Zapisz wyniki",
                 DefaultExt = extension,
                 FileName = GetDefaultFilename($"{DefaultResultsName}{extension}"),
-                DefaultDirectory = DefaultDirectory,
+                DefaultDirectory = DefaultDirectory
             };
         }
-        else if (extension.Equals(".xlsx", StringComparison.InvariantCultureIgnoreCase))
+
+        if (extension.Equals(".xlsx", StringComparison.InvariantCultureIgnoreCase))
         {
             return new SaveFileDialog
             {
@@ -74,10 +75,11 @@ public static class FileDialogFactory
                 Title = "Zapisz wyniki",
                 DefaultExt = extension,
                 FileName = GetDefaultFilename($"{DefaultResultsName}{extension}"),
-                DefaultDirectory = DefaultDirectory,
+                DefaultDirectory = DefaultDirectory
             };
         }
-        else if (extension.Equals(".txt", StringComparison.InvariantCultureIgnoreCase))
+
+        if (extension.Equals(".txt", StringComparison.InvariantCultureIgnoreCase))
         {
             return new SaveFileDialog
             {
@@ -85,10 +87,11 @@ public static class FileDialogFactory
                 Title = "Zapisz wyjaśnienia",
                 DefaultExt = extension,
                 FileName = GetDefaultFilename("wyjasnienia.txt"),
-                DefaultDirectory = DefaultDirectory,
+                DefaultDirectory = DefaultDirectory
             };
         }
-        else if (extension.Equals(".json", StringComparison.InvariantCultureIgnoreCase))
+
+        if (extension.Equals(".json", StringComparison.InvariantCultureIgnoreCase))
         {
             return new SaveFileDialog
             {
@@ -96,13 +99,11 @@ public static class FileDialogFactory
                 Title = "Zapisz konfigurację",
                 DefaultExt = extension,
                 FileName = GetDefaultFilename($"{DefaultConfigName}{extension}"),
-                DefaultDirectory = DefaultDirectory,
+                DefaultDirectory = DefaultDirectory
             };
         }
-        else
-        {
-            throw new ArgumentException("Unsupported file extension");
-        }
+
+        throw new ArgumentException("Unsupported file extension");
     }
 
 

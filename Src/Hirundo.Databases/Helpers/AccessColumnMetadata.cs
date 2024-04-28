@@ -1,4 +1,4 @@
-﻿namespace Hirundo.Databases;
+﻿namespace Hirundo.Databases.Helpers;
 
 public class AccessColumnMetadata
 {

@@ -1,4 +1,5 @@
-﻿using Hirundo.App;
+﻿using System.Runtime.Serialization;
+using Hirundo.App;
 using Hirundo.Databases;
 using Hirundo.Processors.Observations;
 using Hirundo.Processors.Population.Conditions;
@@ -8,7 +9,6 @@ using Hirundo.Processors.Statistics.Operations.Outliers;
 using Hirundo.Writers;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using System.Runtime.Serialization;
 
 namespace Hirundo.Serialization.Json.Tests;
 

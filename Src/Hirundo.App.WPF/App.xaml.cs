@@ -1,9 +1,14 @@
-﻿using Autofac;
+﻿using System.IO;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Windows;
+using Autofac;
 using Hirundo.App.WPF.Components;
 using Hirundo.Commons.Repositories;
 using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
 using Hirundo.Databases;
+using Hirundo.Databases.Helpers;
 using Hirundo.Databases.WPF;
 using Hirundo.Processors.Computed.WPF;
 using Hirundo.Processors.Observations.WPF;
@@ -14,10 +19,6 @@ using Hirundo.Serialization.Json;
 using Hirundo.Writers.WPF;
 using Newtonsoft.Json;
 using Serilog;
-using System.IO;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Windows;
 
 namespace Hirundo.App.WPF;
 
@@ -89,13 +90,7 @@ public partial class App : Application
             WindowStartupLocation = WindowStartupLocation.CenterScreen
         };
 
-        viewModel.RefreshWindow = () =>
-        {
-            Current.Dispatcher.Invoke(() =>
-            {
-                view.InvalidateVisual();
-            });
-        };
+        viewModel.RefreshWindow = () => { Current.Dispatcher.Invoke(() => { view.InvalidateVisual(); }); };
 
         var viewModelTypes = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(a => a.GetTypes())

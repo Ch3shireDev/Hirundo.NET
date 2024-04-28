@@ -2,16 +2,22 @@
 using Hirundo.Commons.Models;
 
 namespace Hirundo.Writers;
+
 public class XlsxSummaryWriter(XlsxSummaryWriterParameters parameters, StreamWriter stream, CancellationToken? cancellationToken = null) : ISummaryWriter, IDisposable, IAsyncDisposable
 {
-    private readonly StreamWriter _streamWriter = stream;
+    private static readonly string[] separator = ["\r\n", "\n"];
     private readonly CancellationToken? _cancellationToken = cancellationToken;
+    private readonly StreamWriter _streamWriter = stream;
 
     public bool IncludeExplanation => parameters.IncludeExplanation;
     public string Title => parameters.SpreadsheetTitle;
     public string Subtitle => parameters.SpreadsheetSubtitle;
 
-    private static readonly string[] separator = ["\r\n", "\n"];
+    public async ValueTask DisposeAsync()
+    {
+        await _streamWriter.DisposeAsync().ConfigureAwait(false);
+        GC.SuppressFinalize(this);
+    }
 
     public void Write(ReturningSpecimensResults results)
     {
@@ -53,7 +59,7 @@ public class XlsxSummaryWriter(XlsxSummaryWriterParameters parameters, StreamWri
         }
         else
         {
-            string[] headers = GetHeaders(resultsRows);
+            var headers = GetHeaders(resultsRows);
 
             for (var i = 0; i < headers.Length; i++)
             {
@@ -65,7 +71,7 @@ public class XlsxSummaryWriter(XlsxSummaryWriterParameters parameters, StreamWri
             for (var i = 0; i < resultsRows.Count; i++)
             {
                 var resultsRow = resultsRows[i];
-                object?[] values = GetValues(resultsRow);
+                var values = GetValues(resultsRow);
 
                 for (var j = 0; j < headers.Length; j++)
                 {
@@ -89,16 +95,24 @@ public class XlsxSummaryWriter(XlsxSummaryWriterParameters parameters, StreamWri
 
             AutoFitColumns(summary);
         }
+
         workbook.SaveAs(_streamWriter.BaseStream);
+    }
+
+    public void Dispose()
+    {
+        _streamWriter.Dispose();
+        GC.SuppressFinalize(this);
     }
 
     private string[] GetHeaders(IList<ReturningSpecimenSummary> resultsRows)
     {
-        return [
+        return
+        [
             parameters.RingHeaderName,
-                parameters.DateFirstSeenHeaderName,
-                parameters.DateLastSeenHeaderName,
-                .. resultsRows[0].Headers
+            parameters.DateFirstSeenHeaderName,
+            parameters.DateLastSeenHeaderName,
+            .. resultsRows[0].Headers
         ];
     }
 
@@ -144,18 +158,6 @@ public class XlsxSummaryWriter(XlsxSummaryWriterParameters parameters, StreamWri
         };
 
         return cellValue;
-    }
-
-    public async ValueTask DisposeAsync()
-    {
-        await _streamWriter.DisposeAsync().ConfigureAwait(false);
-        GC.SuppressFinalize(this);
-    }
-
-    public void Dispose()
-    {
-        _streamWriter.Dispose();
-        GC.SuppressFinalize(this);
     }
 
     ~XlsxSummaryWriter()

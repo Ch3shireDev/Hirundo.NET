@@ -3,7 +3,11 @@ using Hirundo.Commons.Models;
 
 namespace Hirundo.Processors.Observations;
 
-[TypeDescription("IsNotEmpty")]
+[TypeDescription(
+    "IsNotEmpty",
+    "Czy dane nie są puste?",
+    "Warunek sprawdzający, czy pole danych nie jest puste."
+)]
 public class IsNotEmptyCondition(string valueName) : IObservationCondition
 {
     public IsNotEmptyCondition() : this(string.Empty)

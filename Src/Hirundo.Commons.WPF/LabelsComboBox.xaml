@@ -7,7 +7,8 @@
              mc:Ignorable="d"
              d:Background="AliceBlue">
     <WrapPanel>
-        <Label Content="{Binding ValueLabel, RelativeSource={RelativeSource AncestorType={x:Type local:LabelsComboBox}}, Mode=OneWay}"/>
+        <Label
+            Content="{Binding ValueLabel, RelativeSource={RelativeSource AncestorType={x:Type local:LabelsComboBox}}, Mode=OneWay}" />
         <ComboBox x:Name="ComboBox" MinWidth="100"
                   SelectedValue="{Binding SelectedLabel, RelativeSource={RelativeSource AncestorType={x:Type local:LabelsComboBox}}, Mode=TwoWay, NotifyOnSourceUpdated=True}" />
     </WrapPanel>

@@ -1,7 +1,7 @@
-﻿using Hirundo.Commons.Models;
+﻿using System.Collections;
+using Hirundo.Commons.Models;
 using Hirundo.Processors.Statistics.Operations;
 using NUnit.Framework;
-using System.Collections;
 
 namespace Hirundo.Processors.Statistics.Tests;
 
@@ -26,7 +26,8 @@ public class AverageOperationTests
         var result = operation.GetStatistics(specimen, populationData);
 
         // Assert
-        Assert.That(result.Names, Is.EquivalentTo(new ArrayList {
+        Assert.That(result.Names, Is.EquivalentTo(new ArrayList
+        {
             "VALUE_PREFIX_AVERAGE",
             "VALUE_PREFIX_STANDARD_DEVIATION",
             "VALUE_PREFIX_POPULATION_SIZE",
@@ -57,7 +58,8 @@ public class AverageOperationTests
         var result = operation.GetStatistics(specimen, populationData);
 
         // Assert
-        Assert.That(result.Names, Is.EquivalentTo(new ArrayList {
+        Assert.That(result.Names, Is.EquivalentTo(new ArrayList
+        {
             "PREFIX_AVERAGE",
             "PREFIX_STANDARD_DEVIATION",
             "PREFIX_POPULATION_SIZE",
@@ -91,7 +93,8 @@ public class AverageOperationTests
         var result = operation.GetStatistics(specimen, population);
 
         // Assert
-        Assert.That(result.Names, Is.EquivalentTo(new ArrayList {
+        Assert.That(result.Names, Is.EquivalentTo(new ArrayList
+        {
             "PREFIX_AVERAGE",
             "PREFIX_STANDARD_DEVIATION",
             "PREFIX_POPULATION_SIZE",
@@ -114,12 +117,13 @@ public class AverageOperationTests
         var result = operation.GetStatistics(specimen, []);
 
         // Assert
-        Assert.That(result.Names, Is.EquivalentTo(new ArrayList {
+        Assert.That(result.Names, Is.EquivalentTo(new ArrayList
+        {
             "PREFIX_AVERAGE",
             "PREFIX_STANDARD_DEVIATION",
             "PREFIX_POPULATION_SIZE",
             "PREFIX_EMPTY_SIZE",
-            "PREFIX_OUTLIER_SIZE",
+            "PREFIX_OUTLIER_SIZE"
         }));
         Assert.That(result.Values, Is.EquivalentTo(new ArrayList { null, null, 0, 0, 0 }));
         Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList()));
@@ -143,7 +147,8 @@ public class AverageOperationTests
         var result = operation.GetStatistics(specimen, population);
 
         // Assert
-        Assert.That(result.Names, Is.EquivalentTo(new ArrayList {
+        Assert.That(result.Names, Is.EquivalentTo(new ArrayList
+        {
             "PREFIX_AVERAGE",
             "PREFIX_STANDARD_DEVIATION",
             "PREFIX_POPULATION_SIZE",

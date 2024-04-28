@@ -9,10 +9,10 @@ namespace Hirundo.Processors.Summary.Tests;
 
 public class SummaryTests
 {
-    private SummaryProcessor _processor = null!;
-    private List<Specimen> _totalSpecimens = null!;
     private Mock<IPopulationProcessor> _populationProcessor = null!;
+    private SummaryProcessor _processor = null!;
     private Mock<IStatisticsProcessor> _statisticsProcessor = null!;
+    private List<Specimen> _totalSpecimens = null!;
 
     [SetUp]
     public void Setup()
@@ -52,9 +52,10 @@ public class SummaryTests
         // Arrange
         _totalSpecimens.Clear();
         _populationProcessor.Setup(p => p.GetPopulation(It.IsAny<Specimen>(), It.IsAny<IEnumerable<Specimen>>())).Returns([]);
+
         _statisticsProcessor.Setup(p => p.GetStatistics(It.IsAny<Specimen>(), It.IsAny<IEnumerable<Specimen>>())).Returns([
             new StatisticalData("STATISTICAL_DATA", 123.45M)
-            ]);
+        ]);
 
         var firstObservation = new Observation { Ring = "123", Date = new DateTime(2020, 06, 01), Headers = ["DATA"], Values = ["XYZ"] };
         var lastObservation = new Observation { Ring = "123", Date = new DateTime(2021, 06, 01), Headers = ["DATA"], Values = ["ABC"] };
@@ -67,7 +68,7 @@ public class SummaryTests
         Assert.That(summary.Ring, Is.EqualTo("123"));
         Assert.That(summary.DateFirstSeen, Is.EqualTo(new DateTime(2020, 06, 01)));
         Assert.That(summary.DateLastSeen, Is.EqualTo(new DateTime(2021, 06, 01)));
-        var expectedHeaders = new string[] { "DATA", "STATISTICAL_DATA" };
+        var expectedHeaders = new[] { "DATA", "STATISTICAL_DATA" };
         Assert.That(summary.Headers, Is.EquivalentTo(expectedHeaders));
         var expectedValues = new object?[] { "XYZ", 123.45M };
         Assert.That(summary.Values, Is.EquivalentTo(expectedValues));

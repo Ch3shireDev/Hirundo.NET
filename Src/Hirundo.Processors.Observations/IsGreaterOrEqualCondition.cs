@@ -7,7 +7,9 @@ namespace Hirundo.Processors.Observations;
 /// <summary>
 ///     Warunek sprawdzający, czy wartość obserwacji jest większa niż podana wartość.
 /// </summary>
-[TypeDescription("IsGreaterOrEqual")]
+[TypeDescription("IsGreaterOrEqual",
+    "Czy wartość jest większa lub równa?",
+    "Warunek sprawdzający, czy pole danych jest większe lub równe podanej wartości.\nW przypadku dat, wartości należy podawać w formacie YYYY-MM-DD.")]
 public class IsGreaterOrEqualCondition : IObservationCondition, ICompareValueCondition
 {
     public IsGreaterOrEqualCondition()

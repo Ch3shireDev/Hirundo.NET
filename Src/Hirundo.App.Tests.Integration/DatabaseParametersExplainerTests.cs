@@ -8,14 +8,15 @@ namespace Hirundo.App.Tests.Integration;
 [TestFixture]
 public class DatabaseParametersExplainerTests
 {
-    private DatabaseParametersExplainer _explainer = null!;
-    private DatabaseParameters _config = null!;
     [SetUp]
     public void Initialize()
     {
         _config = new DatabaseParameters();
         _explainer = new DatabaseParametersExplainer();
     }
+
+    private DatabaseParametersExplainer _explainer = null!;
+    private DatabaseParameters _config = null!;
 
     [Test]
     public void GivenEmptyConfig_WhenExplaining_ThenStartsWithHeader()

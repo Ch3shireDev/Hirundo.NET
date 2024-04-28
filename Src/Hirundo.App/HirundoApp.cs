@@ -14,8 +14,8 @@ namespace Hirundo.App;
 
 public class HirundoApp : IHirundoApp
 {
-    private readonly IDatabaseBuilder _databaseBuilder = new DatabaseBuilder();
     private readonly IComputedValuesCalculatorBuilder _calculatorBuilder = new ComputedValuesCalculatorBuilder();
+    private readonly IDatabaseBuilder _databaseBuilder = new DatabaseBuilder();
     private readonly IObservationConditionsBuilder _observationConditionsBuilder = new ObservationConditionsBuilder();
     private readonly IPopulationProcessorBuilder _populationProcessorBuilder = new PopulationProcessorBuilder();
     private readonly IReturningSpecimenConditionsBuilder _returningSpecimenConditionsBuilder = new ReturningSpecimenConditionsBuilder();
@@ -114,7 +114,7 @@ public class HirundoApp : IHirundoApp
 
         Log.Information("Łączenie obserwacji w osobniki...");
 
-        Specimen[] specimens = GetSpecimens(selectedObservations);
+        var specimens = GetSpecimens(selectedObservations);
 
         Log.Information($"Wybrano {specimens.Length} osobników.");
 
@@ -132,7 +132,7 @@ public class HirundoApp : IHirundoApp
             .WithTotalPopulation(specimens)
             .Build();
 
-        List<ReturningSpecimenSummary> summary = ProcessSummaries(returningSpecimens, summaryProcessor);
+        var summary = ProcessSummaries(returningSpecimens, summaryProcessor);
 
         var results = new ReturningSpecimensResults
         {

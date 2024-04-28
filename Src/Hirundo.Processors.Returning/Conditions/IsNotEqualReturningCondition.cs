@@ -9,8 +9,14 @@ namespace Hirundo.Processors.Returning.Conditions;
     "Osobnik zawiera obserwację z polem różnym od danej wartości.")]
 public class IsNotEqualReturningCondition : CompareValuesReturningCondition
 {
-    public IsNotEqualReturningCondition(string valueName, object? value) : base(valueName, value) { }
-    public IsNotEqualReturningCondition() : base() { }
+    public IsNotEqualReturningCondition(string valueName, object? value) : base(valueName, value)
+    {
+    }
+
+    public IsNotEqualReturningCondition()
+    {
+    }
+
     public override bool Compare(object? observationValue, object? value)
     {
         return observationValue != null && !ComparisonHelpers.IsEqual(observationValue, value);

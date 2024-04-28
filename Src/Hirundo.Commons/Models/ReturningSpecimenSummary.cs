@@ -7,8 +7,8 @@
 public class ReturningSpecimenSummary(string[] headers, object?[] values)
 {
     public string Ring { get; set; } = "123";
-    public DateTime DateFirstSeen { get; set; } = new DateTime(2020, 06, 01);
-    public DateTime DateLastSeen { get; set; } = new DateTime(2021, 06, 01);
+    public DateTime DateFirstSeen { get; set; } = new(2020, 06, 01);
+    public DateTime DateLastSeen { get; set; } = new(2021, 06, 01);
 
     public IReadOnlyList<string> Headers { get; } = headers;
     public IReadOnlyList<object?> Values { get; } = values;
@@ -21,6 +21,7 @@ public class ReturningSpecimenSummary(string[] headers, object?[] values)
         var allHeaders = Headers.ToArray();
 
         var output = new object?[headers.Count];
+
         foreach (var header in allHeaders)
         {
             if (!headers.Contains(header)) continue;

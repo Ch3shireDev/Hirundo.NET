@@ -1,9 +1,10 @@
-﻿using Hirundo.Commons.Helpers;
+﻿using System.Text;
+using Hirundo.Commons.Helpers;
 using Hirundo.Processors.Returning;
 using Hirundo.Processors.Returning.Conditions;
-using System.Text;
 
 namespace Hirundo.App.Explainers.Returning;
+
 public class ReturningExplainer : ParametersExplainer<ReturningParameters>
 {
     public override string Explain(ReturningParameters parameters)
@@ -12,10 +13,12 @@ public class ReturningExplainer : ParametersExplainer<ReturningParameters>
         sb.AppendLine("Konfiguracja powracających osobników:");
         sb.AppendLine($"Określanie powracających osobników jest przeprowadzane na podstawie {parameters.Conditions.Count} warunków.");
         sb.AppendLine("Warunki:");
+
         foreach (var condition in parameters.Conditions)
         {
             sb.AppendLine(ExplainerHelpers.Explain(condition));
         }
+
         sb.AppendLine();
         return sb.ToString();
     }
@@ -27,9 +30,11 @@ public class AlternativeReturningExplainer : ParametersExplainer<AlternativeRetu
     {
         var sb = new StringBuilder();
         sb.AppendLine("Warunki alternatywne (jeden lub drugi lub obydwa:");
+
         foreach (var condition in parameters.Conditions)
         {
             var results = ExplainerHelpers.Explain(condition).Split('\n');
+
             foreach (var result in results)
             {
                 sb.AppendLine("    " + result + "\n");

@@ -1,28 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows.Controls;
 
-namespace Hirundo.Processors.Returning.WPF.IsInSet
+namespace Hirundo.Processors.Returning.WPF.IsInSet;
+
+/// <summary>
+///     Interaction logic for IsInSetReturningView.xaml
+/// </summary>
+public partial class IsInSetReturningView : UserControl
 {
-    /// <summary>
-    /// Interaction logic for IsInSetReturningView.xaml
-    /// </summary>
-    public partial class IsInSetReturningView : UserControl
+    public IsInSetReturningView()
     {
-        public IsInSetReturningView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

@@ -1,3 +1,5 @@
+using Hirundo.Databases.Helpers;
+
 namespace Hirundo.Databases.Tests.Integration;
 
 [TestFixture]

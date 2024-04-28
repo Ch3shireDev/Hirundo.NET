@@ -3,7 +3,8 @@ using Hirundo.Commons.WPF;
 
 namespace Hirundo.Processors.Observations.WPF.IsInTimeBlock;
 
-public class IsInTimeBlockModel(IsInTimeBlockCondition condition, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository) : ParametersModel(condition, labelsRepository, speciesRepository)
+public class IsInTimeBlockModel(IsInTimeBlockCondition condition, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository)
+    : ParametersModel(condition, labelsRepository, speciesRepository)
 {
     public string ValueName
     {

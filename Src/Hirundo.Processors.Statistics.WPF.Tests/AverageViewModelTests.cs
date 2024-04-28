@@ -9,11 +9,6 @@ namespace Hirundo.Processors.Statistics.WPF.Tests;
 [TestFixture]
 public class AverageViewModelTests
 {
-    private AverageOperation _operation = null!;
-    private AverageModel _model = null!;
-    private AverageViewModel _viewModel = null!;
-    private Mock<ILabelsRepository> _repository = null!;
-
     [SetUp]
     public void Initialize()
     {
@@ -23,6 +18,11 @@ public class AverageViewModelTests
         _model = new AverageModel(_operation, _repository.Object, speciesRepository.Object);
         _viewModel = new AverageViewModel(_model);
     }
+
+    private AverageOperation _operation = null!;
+    private AverageModel _model = null!;
+    private AverageViewModel _viewModel = null!;
+    private Mock<ILabelsRepository> _repository = null!;
 
     [Test]
     public void GivenValueName_WhenSet_ValueNameIsChanged()
@@ -60,7 +60,11 @@ public class AverageViewModelTests
         _viewModel.ValueName = "VALUE";
         _viewModel.ResultPrefix = "VALUE";
         var isChanged = false;
-        _viewModel.PropertyChanged += (sender, args) => { if (args.PropertyName == nameof(AverageViewModel.ResultPrefix)) isChanged = true; };
+
+        _viewModel.PropertyChanged += (sender, args) =>
+        {
+            if (args.PropertyName == nameof(AverageViewModel.ResultPrefix)) isChanged = true;
+        };
 
         // Act
         _viewModel.ValueName = "VALUE2";

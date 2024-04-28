@@ -6,7 +6,7 @@ namespace Hirundo.Writers.WPF.XlsxWriter;
     typeof(XlsxSummaryWriterParameters),
     typeof(XlsxWriterModel),
     typeof(XlsxWriterView)
-    )]
+)]
 public class XlsxWriterViewModel(XlsxWriterModel model) : ParametersViewModel(model)
 {
     public bool IncludeExplanation

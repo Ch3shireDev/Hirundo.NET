@@ -1,5 +1,5 @@
-﻿using Hirundo.Commons.Models;
-using System.Globalization;
+﻿using System.Globalization;
+using Hirundo.Commons.Models;
 
 namespace Hirundo.Processors.Statistics.Operations.Outliers;
 

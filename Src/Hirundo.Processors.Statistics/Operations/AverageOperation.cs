@@ -12,7 +12,7 @@ namespace Hirundo.Processors.Statistics.Operations;
     "AverageAndDeviation",
     "Wartość średnia i odchylenie standardowe",
     "Oblicza wartość średnią i odchylenie standardowe dla wybranej wartości."
-    )]
+)]
 public class AverageOperation : IStatisticalOperation
 {
     public AverageOperation()
@@ -111,13 +111,14 @@ public class AverageOperation : IStatisticalOperation
 
     private StatisticalOperationResult GetResult(Specimen specimen, object?[] values, object[] populationIds, object[] emptyValuesIds, object[] outliersIds)
     {
-        List<string> names = [
+        List<string> names =
+        [
             $"{ResultPrefix}_AVERAGE",
             $"{ResultPrefix}_STANDARD_DEVIATION",
             $"{ResultPrefix}_POPULATION_SIZE",
             $"{ResultPrefix}_EMPTY_SIZE",
             $"{ResultPrefix}_OUTLIER_SIZE"
-            ];
+        ];
 
         List<object?> valuesWithPopulation = [.. values, populationIds.Length, emptyValuesIds.Length, outliersIds.Length];
 
@@ -157,7 +158,7 @@ public class AverageOperation : IStatisticalOperation
         {
             var valuesInt = values.Cast<int>().ToArray();
             var average = valuesInt.Average();
-            var sd2 = valuesInt.Select(x => x - average).Select(x => x * x / (valuesInt.Length)).Sum();
+            var sd2 = valuesInt.Select(x => x - average).Select(x => x * x / valuesInt.Length).Sum();
             var sd = Math.Sqrt(sd2);
             return (average, sd);
         }
@@ -166,7 +167,7 @@ public class AverageOperation : IStatisticalOperation
         {
             var valuesDouble = values.Cast<double>().ToArray();
             var average = valuesDouble.Average();
-            var sd2 = valuesDouble.Select(x => x - average).Select(x => x * x / (valuesDouble.Length)).Sum();
+            var sd2 = valuesDouble.Select(x => x - average).Select(x => x * x / valuesDouble.Length).Sum();
             var sd = Math.Sqrt(sd2);
             return (average, sd);
         }
@@ -175,7 +176,7 @@ public class AverageOperation : IStatisticalOperation
         {
             var valuesFloat = values.Cast<float>().ToArray();
             var average = valuesFloat.Average();
-            var sd2 = valuesFloat.Select(x => x - average).Select(x => x * x / (valuesFloat.Length)).Sum();
+            var sd2 = valuesFloat.Select(x => x - average).Select(x => x * x / valuesFloat.Length).Sum();
             var sd = Math.Sqrt(sd2);
             return (average, sd);
         }
@@ -184,7 +185,7 @@ public class AverageOperation : IStatisticalOperation
         {
             var valuesDecimal = values.Cast<decimal>().ToArray();
             var average = valuesDecimal.Average();
-            var sd2 = valuesDecimal.Select(x => x - average).Select(x => x * x / (valuesDecimal.Length)).Sum();
+            var sd2 = valuesDecimal.Select(x => x - average).Select(x => x * x / valuesDecimal.Length).Sum();
             var sd = Convert.ToDecimal(Math.Sqrt((double)sd2));
             return (average, sd);
         }

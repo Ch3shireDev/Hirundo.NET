@@ -6,11 +6,12 @@ using Hirundo.Databases.WPF.Access;
 
 namespace Hirundo.Databases.WPF;
 
-public class DataSourceModel(ILabelsRepository labelsRepository, IAccessMetadataService accessMetadataService, ISpeciesRepository speciesRepository) : ParametersBrowserModel<DatabaseParameters, IDatabaseParameters, DataSourceModel>(labelsRepository, speciesRepository)
+public class DataSourceModel(ILabelsRepository labelsRepository, IAccessMetadataService accessMetadataService, ISpeciesRepository speciesRepository)
+    : ParametersBrowserModel<DatabaseParameters, IDatabaseParameters, DataSourceModel>(labelsRepository, speciesRepository)
 {
+    private readonly IAccessMetadataService accessMetadataService = accessMetadataService;
     private readonly ILabelsRepository labelsRepository = labelsRepository;
     private readonly ISpeciesRepository speciesRepository = speciesRepository;
-    private readonly IAccessMetadataService accessMetadataService = accessMetadataService;
 
     public override string Header => "Źródła";
     public override string Title => "Źródła danych";
@@ -44,7 +45,8 @@ public class DataSourceModel(ILabelsRepository labelsRepository, IAccessMetadata
     {
         return parameters switch
         {
-            AccessDatabaseParameters accessDatabaseParameters => new AccessDataSourceViewModel(new AccessDataSourceModel(accessDatabaseParameters, labelsRepository, speciesRepository), accessMetadataService),
+            AccessDatabaseParameters accessDatabaseParameters => new AccessDataSourceViewModel(new AccessDataSourceModel(accessDatabaseParameters, labelsRepository, speciesRepository),
+                accessMetadataService),
             _ => throw new NotImplementedException()
         };
     }

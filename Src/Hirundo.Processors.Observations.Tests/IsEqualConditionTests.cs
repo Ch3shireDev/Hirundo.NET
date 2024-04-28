@@ -1,6 +1,6 @@
-﻿using Hirundo.Commons.Models;
+﻿using System.Text;
+using Hirundo.Commons.Models;
 using NUnit.Framework;
-using System.Text;
 
 namespace Hirundo.Processors.Observations.Tests;
 
@@ -107,7 +107,7 @@ public class IsEqualConditionTests
         var isAccepted = condition.IsAccepted(observation);
 
         // Assert
-        Assert.That(isAccepted, Is.EqualTo(result), message: $"Compare {conditionValue} ({conditionValue?.GetType()?.Name}) to {observationValue} ({observationValue?.GetType()?.Name}))");
+        Assert.That(isAccepted, Is.EqualTo(result), $"Compare {conditionValue} ({conditionValue?.GetType()?.Name}) to {observationValue} ({observationValue?.GetType()?.Name}))");
     }
 
     [Test]

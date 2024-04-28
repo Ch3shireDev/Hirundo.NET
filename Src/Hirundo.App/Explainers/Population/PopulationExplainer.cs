@@ -1,13 +1,15 @@
-﻿using Hirundo.Commons.Helpers;
+﻿using System.Text;
+using Hirundo.Commons.Helpers;
 using Hirundo.Processors.Population;
 using Hirundo.Processors.Population.Conditions;
 
 namespace Hirundo.App.Explainers.Population;
+
 public class PopulationExplainer : ParametersExplainer<PopulationParameters>
 {
     public override string Explain(PopulationParameters parameters)
     {
-        var sb = new System.Text.StringBuilder();
+        var sb = new StringBuilder();
         sb.AppendLine("Konfiguracja populacji:");
         sb.AppendLine($"Populacja jest dobierana do powracającego osobnika na podstawie {parameters.Conditions.Count} warunków.");
 

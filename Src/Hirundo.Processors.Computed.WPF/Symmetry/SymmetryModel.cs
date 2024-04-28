@@ -2,6 +2,7 @@
 
 namespace Hirundo.Processors.Computed.WPF.Symmetry;
 
-public class SymmetryModel(SymmetryCalculator parameters, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository) : WingParametersModel<SymmetryCalculator>(parameters, labelsRepository, speciesRepository)
+public class SymmetryModel(SymmetryCalculator parameters, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository)
+    : WingParametersModel<SymmetryCalculator>(parameters, labelsRepository, speciesRepository)
 {
 }

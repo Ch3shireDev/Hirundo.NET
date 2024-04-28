@@ -1,10 +1,10 @@
-﻿using Hirundo.Commons.Models;
+﻿using System.Globalization;
+using Hirundo.Commons.Models;
 using Hirundo.Commons.Repositories;
 using Hirundo.Processors.Returning.Conditions;
 using Hirundo.Processors.Returning.WPF.CompareValues;
 using Moq;
 using NUnit.Framework;
-using System.Globalization;
 
 namespace Hirundo.Processors.Returning.WPF.Tests;
 

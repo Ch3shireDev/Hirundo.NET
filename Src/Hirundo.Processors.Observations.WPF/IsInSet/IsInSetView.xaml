@@ -11,9 +11,9 @@
              d:DataContext="{d:DesignInstance local:IsInSetViewModel}">
     <StackPanel>
         <labels:LabelsComboBox
-                ValueName="{Binding ValueName}"
-                DataType="{Binding ValueType}"
-                LabelsRepository="{Binding LabelsRepository}" />
+            ValueName="{Binding ValueName}"
+            DataType="{Binding ValueType}"
+            LabelsRepository="{Binding LabelsRepository}" />
         <StackPanel Margin="10">
             <DataGrid
                 ItemsSource="{Binding Values}"

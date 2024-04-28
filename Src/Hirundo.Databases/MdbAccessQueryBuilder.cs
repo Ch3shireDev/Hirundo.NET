@@ -1,6 +1,6 @@
-﻿using Hirundo.Databases.Conditions;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text;
+using Hirundo.Databases.Conditions;
 
 namespace Hirundo.Databases;
 
@@ -17,7 +17,7 @@ public class MdbAccessQueryBuilder(string rowSeparator = " ")
     public string RowSeparator { get; } = rowSeparator;
 
     /// <summary>
-    ///     Ustalana jest nazwa tabeli, do której odwołuje się 
+    ///     Ustalana jest nazwa tabeli, do której odwołuje się
     ///     zapytanie SELECT. Nazwa tabeli nie powinna zawierać
     ///     nawiasów kwadratowych.
     /// </summary>
@@ -30,7 +30,7 @@ public class MdbAccessQueryBuilder(string rowSeparator = " ")
     }
 
     /// <summary>
-    ///     Dodawana jest lista kolumn (bądź wyrażeń) do 
+    ///     Dodawana jest lista kolumn (bądź wyrażeń) do
     ///     zapytania SELECT. Zależnie od podanego typu danych,
     ///     wartości są konwertowane na poziomie zapytania SQL.
     /// </summary>
@@ -43,7 +43,7 @@ public class MdbAccessQueryBuilder(string rowSeparator = " ")
     }
 
     /// <summary>
-    ///     Dodawana jest pojedyncza kolumna (bądź wyrażenie) do 
+    ///     Dodawana jest pojedyncza kolumna (bądź wyrażenie) do
     ///     zapytania SELECT. Zależnie od podanego typu danych,
     ///     wartość jest konwertowana na poziomie zapytania SQL.
     /// </summary>

@@ -35,11 +35,6 @@ public class HistogramViewModel(HistogramModel model) : ParametersViewModel(mode
         }
     }
 
-    private void UpdatePrefix(string value)
-    {
-        ResultPrefix = model.ResultPrefix == model.ValueName ? value : model.ResultPrefix;
-    }
-
     public decimal Interval
     {
         get => model.Interval;
@@ -105,6 +100,11 @@ public class HistogramViewModel(HistogramModel model) : ParametersViewModel(mode
     }
 
     public string ErrorMessage => GetErrorMessage();
+
+    private void UpdatePrefix(string value)
+    {
+        ResultPrefix = model.ResultPrefix == model.ValueName ? value : model.ResultPrefix;
+    }
 
     private string GetErrorMessage()
     {

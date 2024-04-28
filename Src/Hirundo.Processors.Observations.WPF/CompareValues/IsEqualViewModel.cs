@@ -7,4 +7,6 @@ namespace Hirundo.Processors.Observations.WPF.CompareValues;
     typeof(CompareValuesModel<IsEqualCondition>),
     typeof(CompareValuesView)
 )]
-public class IsEqualViewModel(CompareValuesModel<IsEqualCondition> model) : CompareValuesViewModel<IsEqualCondition>(model) { }
+public class IsEqualViewModel(CompareValuesModel<IsEqualCondition> model) : CompareValuesViewModel<IsEqualCondition>(model)
+{
+}

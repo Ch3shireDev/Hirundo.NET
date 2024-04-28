@@ -7,7 +7,11 @@ namespace Hirundo.Processors.Computed;
 ///     Kalkulator symetrii, opisywany jako suma wartości na prawo minus suma wartości na lewo od pierwszego znalezionego
 ///     zera w parametrach skrzydła, podzielona przez sumę wszystkich wartości.
 /// </summary>
-[TypeDescription("Symmetry")]
+[TypeDescription(
+    "Symmetry",
+    "Skośność skrzydła",
+    "Wartość skośności wyliczana na podstawie parametrów skrzydła."
+)]
 public class SymmetryCalculator : WingParametersBase, IComputedValuesCalculator
 {
     /// <summary>

@@ -8,10 +8,6 @@ namespace Hirundo.Writers.WPF.Tests;
 [TestFixture]
 public class CsvWriterViewModelTests
 {
-    private CsvSummaryWriterParameters _parameters = null!;
-    private CsvWriterModel _model = null!;
-    private CsvWriterViewModel _viewModel = null!;
-
     [SetUp]
     public void SetUp()
     {
@@ -21,6 +17,10 @@ public class CsvWriterViewModelTests
         _model = new CsvWriterModel(_parameters, labelsRepository.Object, speciesRepository.Object);
         _viewModel = new CsvWriterViewModel(_model);
     }
+
+    private CsvSummaryWriterParameters _parameters = null!;
+    private CsvWriterModel _model = null!;
+    private CsvWriterViewModel _viewModel = null!;
 
     [Test]
     public void GivenEmptyParameters_WhenSetPath_ParametersAreChanged()

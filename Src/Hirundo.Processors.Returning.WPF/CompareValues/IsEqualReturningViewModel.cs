@@ -8,4 +8,6 @@ namespace Hirundo.Processors.Returning.WPF.CompareValues;
     typeof(CompareValuesReturningModel<IsEqualReturningCondition>),
     typeof(CompareValuesReturningView)
 )]
-public class IsEqualReturningViewModel(CompareValuesReturningModel<IsEqualReturningCondition> model) : CompareValuesReturningViewModel<IsEqualReturningCondition>(model) { }
+public class IsEqualReturningViewModel(CompareValuesReturningModel<IsEqualReturningCondition> model) : CompareValuesReturningViewModel<IsEqualReturningCondition>(model)
+{
+}

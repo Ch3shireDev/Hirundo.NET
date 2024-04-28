@@ -12,5 +12,6 @@ public interface ISummaryWriterBuilder
     /// </summary>
     /// <returns></returns>
     ISummaryWriterBuilder NewBuilder();
+
     ISummaryWriter Build();
 }

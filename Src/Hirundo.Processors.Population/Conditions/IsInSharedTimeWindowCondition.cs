@@ -6,8 +6,8 @@ namespace Hirundo.Processors.Population.Conditions;
 [TypeDescription(
     "IsInSharedTimeWindow",
     "Czy jest we współdzielonym oknie czasowym?",
-     "Warunek sprawdzający, czy osobnik z populacji jest w tym samym przedziale czasowym co osobnik powracający."
-    )]
+    "Warunek sprawdzający, czy osobnik z populacji jest w tym samym przedziale czasowym co osobnik powracający."
+)]
 public sealed class IsInSharedTimeWindowCondition : IPopulationCondition
 {
     public IsInSharedTimeWindowCondition()

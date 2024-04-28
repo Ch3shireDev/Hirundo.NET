@@ -10,6 +10,7 @@ public interface ILabelsRepository
     void AddAdditionalLabel(DataLabel label);
     void RemoveAdditionalLabel(DataLabel label);
 }
+
 public class LabelsRepository : ILabelsRepository
 {
     private readonly List<DataLabel> _additionalLabels = [];

@@ -14,8 +14,8 @@ public interface IPopulationCondition
     /// <param name="returningSpecimen">Powracający osobnik, dla którego będziemy znajdywać osobniki należące do populacji.</param>
     /// <returns></returns>
     public IPopulationConditionClosure GetPopulationConditionClosure(Specimen returningSpecimen);
-
 }
+
 public interface IPopulationConditionClosure
 {
     /// <summary>

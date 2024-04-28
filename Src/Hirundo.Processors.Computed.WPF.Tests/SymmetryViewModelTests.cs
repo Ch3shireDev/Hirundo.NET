@@ -1,8 +1,8 @@
-﻿using Hirundo.Commons.Repositories;
+﻿using System.Collections;
+using Hirundo.Commons.Repositories;
 using Hirundo.Commons.Repositories.Labels;
 using Moq;
 using NUnit.Framework;
-using System.Collections;
 
 namespace Hirundo.Processors.Computed.WPF.Tests;
 

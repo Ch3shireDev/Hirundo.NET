@@ -57,8 +57,8 @@ public class MdbAccessQueryBuilderTests
     }
 
     /// <summary>
-    ///     Ze względu na błąd w starych bazach danych Access, 
-    ///     nie mamy możliwości używania funkcji CDEC, która 
+    ///     Ze względu na błąd w starych bazach danych Access,
+    ///     nie mamy możliwości używania funkcji CDEC, która
     ///     konwertuje element na liczbę zmiennoprzecinkową.
     /// </summary>
     [Test]

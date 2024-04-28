@@ -7,7 +7,11 @@ namespace Hirundo.Processors.Observations;
 /// <summary>
 ///     Warunek sprawdzający, czy wartość obserwacji jest mniejsza niż podana wartość.
 /// </summary>
-[TypeDescription("IsLowerThan")]
+[TypeDescription(
+    "IsLowerThan",
+    "Czy wartość jest mniejsza niż?",
+    "Warunek sprawdzający, czy pole danych jest mniejsze niż podana wartość.\nDaty należy podawać w formacie YYYY-MM-DD."
+)]
 public class IsLowerThanCondition : IObservationCondition, ICompareValueCondition
 {
     public IsLowerThanCondition()

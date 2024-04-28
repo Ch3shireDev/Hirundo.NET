@@ -9,7 +9,6 @@ public class ObservationConditionsBuilderTests
     public void SetUp()
     {
         _builder = new ObservationConditionsBuilder();
-
     }
 
     private ObservationConditionsBuilder _builder = null!;

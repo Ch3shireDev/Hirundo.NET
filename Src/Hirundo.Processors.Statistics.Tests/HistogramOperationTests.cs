@@ -1,7 +1,7 @@
-﻿using Hirundo.Commons.Models;
+﻿using System.Collections;
+using Hirundo.Commons.Models;
 using Hirundo.Processors.Statistics.Operations;
 using NUnit.Framework;
-using System.Collections;
 
 namespace Hirundo.Processors.Statistics.Tests;
 
@@ -213,7 +213,7 @@ public class HistogramOperationTests
     public void GivenIncludePopulation_WhenGetStatistics_IncludesPopulation()
     {
         // Arrange
-        bool includePopulation = true;
+        var includePopulation = true;
 
         var operation = new HistogramOperation("VALUE", "HISTOGRAM", 0.0m, 2.0m, 0.5m, includePopulation);
 
@@ -227,7 +227,7 @@ public class HistogramOperationTests
             new Specimen("A005", [new Observation(["VALUE"], [1.1])]),
             new Specimen("A006", [new Observation(["VALUE"], [1.6])]),
             new Specimen("A007", [new Observation(["VALUE"], [2.5])]),
-            new Specimen("A008", [new Observation(["VALUE"], [null])]),
+            new Specimen("A008", [new Observation(["VALUE"], [null])])
         ];
 
         var specimen = new Specimen("XXX123", [new Observation(["VALUE"], [6])]);
@@ -254,8 +254,8 @@ public class HistogramOperationTests
     public void GivenIncludeDistribution_WhenGetStatistics_IncludesDistribution()
     {
         // Arrange
-        bool includePopulation = false;
-        bool includeDistribution = true;
+        var includePopulation = false;
+        var includeDistribution = true;
         var operation = new HistogramOperation("VALUE", "HISTOGRAM", 1, 3, 1, includePopulation, includeDistribution);
 
         List<Specimen> population =
@@ -270,7 +270,7 @@ public class HistogramOperationTests
             new Specimen("A008", [new Observation(["VALUE"], [2])]),
             new Specimen("A009", [new Observation(["VALUE"], [3])]),
             new Specimen("A010", [new Observation(["VALUE"], [3])]),
-            new Specimen("A011", [new Observation(["VALUE"], [3])]),
+            new Specimen("A011", [new Observation(["VALUE"], [3])])
         ];
 
         var specimen = new Specimen("XXX123", [new Observation(["VALUE"], [2])]);
@@ -297,8 +297,8 @@ public class HistogramOperationTests
     public void GivenOnlyOneValueDistribution_WhenGetStatistics_ReturnsHalf()
     {
         // Arrange
-        bool includePopulation = false;
-        bool includeDistribution = true;
+        var includePopulation = false;
+        var includeDistribution = true;
         var operation = new HistogramOperation("VALUE", "HISTOGRAM", 1, 3, 1, includePopulation, includeDistribution);
 
         List<Specimen> population = [];
@@ -327,14 +327,15 @@ public class HistogramOperationTests
     public void GivenValueExceedingHistogram_WhenGetStatistics_ReturnsOne()
     {
         // Arrange
-        bool includePopulation = false;
-        bool includeDistribution = true;
+        var includePopulation = false;
+        var includeDistribution = true;
         var operation = new HistogramOperation("VALUE", "HISTOGRAM", 1, 3, 1, includePopulation, includeDistribution);
 
-        List<Specimen> population = [
-             new Specimen("A001", [new Observation(["VALUE"], [1])]),
-             new Specimen("A001", [new Observation(["VALUE"], [2])]),
-             new Specimen("A001", [new Observation(["VALUE"], [3])])
+        List<Specimen> population =
+        [
+            new Specimen("A001", [new Observation(["VALUE"], [1])]),
+            new Specimen("A001", [new Observation(["VALUE"], [2])]),
+            new Specimen("A001", [new Observation(["VALUE"], [3])])
         ];
 
         var specimen = new Specimen("XXX123", [new Observation(["VALUE"], [4])]);
@@ -356,18 +357,20 @@ public class HistogramOperationTests
         Assert.That(operation.IncludeDistribution, Is.True);
         Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 1, 1, 1, 1m }));
     }
+
     [Test]
     public void GivenValueBelowHistogram_WhenGetStatistics_ReturnsZero()
     {
         // Arrange
-        bool includePopulation = false;
-        bool includeDistribution = true;
+        var includePopulation = false;
+        var includeDistribution = true;
         var operation = new HistogramOperation("VALUE", "HISTOGRAM", 1, 3, 1, includePopulation, includeDistribution);
 
-        List<Specimen> population = [
-             new Specimen("A001", [new Observation(["VALUE"], [1])]),
-             new Specimen("A001", [new Observation(["VALUE"], [2])]),
-             new Specimen("A001", [new Observation(["VALUE"], [3])])
+        List<Specimen> population =
+        [
+            new Specimen("A001", [new Observation(["VALUE"], [1])]),
+            new Specimen("A001", [new Observation(["VALUE"], [2])]),
+            new Specimen("A001", [new Observation(["VALUE"], [3])])
         ];
 
         var specimen = new Specimen("XXX123", [new Observation(["VALUE"], [0])]);

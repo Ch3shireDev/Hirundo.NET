@@ -1,7 +1,8 @@
-﻿using Hirundo.Commons.WPF;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using Hirundo.Commons.WPF;
 
 namespace Hirundo.Processors.Observations.WPF.IsSpeciesEqual;
+
 [ParametersData(
     typeof(IsSpeciesEqualCondition),
     typeof(IsSpeciesEqualModel),

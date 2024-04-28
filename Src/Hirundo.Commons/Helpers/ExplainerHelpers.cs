@@ -46,7 +46,10 @@ public static class ExplainerHelpers
                 if (type.BaseType == null) continue;
 
                 if (type.BaseType.Name != typeof(ParametersExplainer<>).Name)
+                {
                     continue;
+                }
+
                 var typeArguments = type.BaseType.GetGenericArguments();
 
                 if (typeArguments.Length != 1) continue;

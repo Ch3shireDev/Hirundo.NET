@@ -7,15 +7,15 @@ namespace Hirundo.App.Tests.Integration;
 [TestFixture]
 public class ApplicationParametersExplainerTests
 {
-    private ApplicationParametersExplainer _explainer = null!;
-    private ApplicationParameters _parameters = null!;
-
     [SetUp]
     public void Initialize()
     {
         _parameters = new ApplicationParameters();
         _explainer = new ApplicationParametersExplainer();
     }
+
+    private ApplicationParametersExplainer _explainer = null!;
+    private ApplicationParameters _parameters = null!;
 
     [Test]
     public void GivenEmptyParameters_WhenExplain_ReturnsNotEmptyString()

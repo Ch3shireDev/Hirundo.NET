@@ -5,9 +5,7 @@ namespace Hirundo.Processors.Computed.WPF.Pointedness;
 [ParametersData(
     typeof(PointednessCalculator),
     typeof(PointednessModel),
-    typeof(PointednessView),
-    "Ostrość skrzydła",
-    "Wartość ostrości wyliczana na podstawie parametrów skrzydła."
+    typeof(PointednessView)
 )]
 public class PointednessViewModel(WingParametersModel<PointednessCalculator> model) : WingParametersViewModel<PointednessCalculator>(model)
 {

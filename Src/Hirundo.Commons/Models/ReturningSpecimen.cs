@@ -1,14 +1,8 @@
 ﻿namespace Hirundo.Commons.Models;
-public class ReturningSpecimen
+
+public class ReturningSpecimen(Specimen specimen, IEnumerable<Specimen> population)
 {
     public string Ring => Specimen.Ring;
-    public Specimen Specimen { get; }
-    public IEnumerable<Specimen> Population { get; }
-
-    public ReturningSpecimen(Specimen specimen, IEnumerable<Specimen> population)
-    {
-        Specimen = specimen;
-        Population = population;
-    }
-
+    public Specimen Specimen { get; } = specimen;
+    public IEnumerable<Specimen> Population { get; } = population;
 }

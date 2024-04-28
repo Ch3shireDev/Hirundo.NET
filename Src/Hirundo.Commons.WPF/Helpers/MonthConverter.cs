@@ -20,7 +20,9 @@ public class MonthConverter : IValueConverter
         "Listopad",
         "Grudzień"
     ];
+
     public IList<int> Months { get; } = Enumerable.Range(1, 12).ToList();
+
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is not int month) return string.Empty;

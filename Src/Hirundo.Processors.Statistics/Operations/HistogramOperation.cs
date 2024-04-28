@@ -1,7 +1,7 @@
-﻿using Hirundo.Commons;
+﻿using System.Globalization;
+using Hirundo.Commons;
 using Hirundo.Commons.Helpers;
 using Hirundo.Commons.Models;
-using System.Globalization;
 
 namespace Hirundo.Processors.Statistics.Operations;
 
@@ -9,7 +9,7 @@ namespace Hirundo.Processors.Statistics.Operations;
     "Histogram",
     "Histogram",
     "Oblicza histogram dla wybranej wartości."
-    )]
+)]
 public class HistogramOperation : IStatisticalOperation
 {
     public HistogramOperation(
@@ -97,15 +97,15 @@ public class HistogramOperation : IStatisticalOperation
 
         var intValues = new int[n].ToList();
 
-        for (int i = 0; i < n; i++)
+        for (var i = 0; i < n; i++)
         {
             var start = MinValue + i * Interval;
             var end = MinValue + (i + 1) * Interval;
 
             var count = nonEmptyDecimalValues
-                .Select(GetHistogramIndex)
-                .Where(value => value == i)
-                .Count()
+                    .Select(GetHistogramIndex)
+                    .Where(value => value == i)
+                    .Count()
                 ;
 
             intValues[i] = count;
@@ -123,7 +123,7 @@ public class HistogramOperation : IStatisticalOperation
         if (IncludeDistribution)
         {
             valueLabels.Add($"{ResultPrefix}_DISTRIBUTION");
-            object? result = GetValueDistribution(specimen, intValues);
+            var result = GetValueDistribution(specimen, intValues);
 
             nullableValues.Add(result);
         }

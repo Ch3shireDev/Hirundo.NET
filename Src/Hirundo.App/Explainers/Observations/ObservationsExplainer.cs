@@ -3,6 +3,7 @@ using Hirundo.Processors.Observations;
 using System.Text;
 
 namespace Hirundo.App.Explainers.Observations;
+
 public class ObservationsExplainer : ParametersExplainer<ObservationsParameters>
 {
     public override string Explain(ObservationsParameters parameters)

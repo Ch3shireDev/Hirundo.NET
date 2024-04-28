@@ -16,6 +16,7 @@ public class StatisticsProcessorTests
     {
         operation1 = new Mock<IStatisticalOperation>();
         operation2 = new Mock<IStatisticalOperation>();
+
         processor = new StatisticsProcessor(
             [
                 operation1.Object,

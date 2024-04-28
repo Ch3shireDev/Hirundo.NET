@@ -23,5 +23,5 @@ public class StatisticalData
     /// <summary>
     ///     Wartość statystyczna.
     /// </summary>
-    public object? Value { get; set; } = null!;
+    public object? Value { get; set; }
 }

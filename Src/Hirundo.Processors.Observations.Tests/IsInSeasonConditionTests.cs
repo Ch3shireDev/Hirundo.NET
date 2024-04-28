@@ -12,6 +12,7 @@ public class IsInSeasonConditionTests
         // Arrange
         var season = new Season(06, 01, 08, 31);
         var filter = new IsInSeasonCondition(season);
+
         var observation = new Observation
         {
             Date = new DateTime(2021, 06, 01)
@@ -30,6 +31,7 @@ public class IsInSeasonConditionTests
         // Arrange
         var season = new Season(06, 15, 08, 15);
         var filter = new IsInSeasonCondition(season);
+
         var observation = new Observation
         {
             Date = new DateTime(2021, 05, 16)

@@ -10,8 +10,6 @@ namespace Hirundo.Processors.Returning.Conditions;
     true)]
 public class AlternativeReturningCondition : IReturningSpecimenCondition
 {
-    public IList<IReturningSpecimenCondition> Conditions { get; } = [];
-
     public AlternativeReturningCondition(params IReturningSpecimenCondition[] conditions)
     {
         Conditions = conditions;
@@ -22,7 +20,11 @@ public class AlternativeReturningCondition : IReturningSpecimenCondition
         Conditions = conditions;
     }
 
-    public AlternativeReturningCondition() { }
+    public AlternativeReturningCondition()
+    {
+    }
+
+    public IList<IReturningSpecimenCondition> Conditions { get; } = [];
 
     public bool IsReturning(Specimen specimen)
     {

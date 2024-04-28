@@ -7,8 +7,8 @@ namespace Hirundo.Writers;
 /// </summary>
 public class SummaryWriterBuilder : ISummaryWriterBuilder
 {
-    private CancellationToken? _cancellationToken;
     private readonly IList<Func<ISummaryWriter>> writers = [];
+    private CancellationToken? _cancellationToken;
 
     public ISummaryWriterBuilder NewBuilder()
     {
@@ -46,6 +46,18 @@ public class SummaryWriterBuilder : ISummaryWriterBuilder
         return this;
     }
 
+    public ISummaryWriterBuilder WithCancellationToken(CancellationToken? cancellationToken)
+    {
+        _cancellationToken = cancellationToken;
+        return this;
+    }
+
+    public ISummaryWriter Build()
+    {
+        var writers = this.writers.Select(writer => writer()).ToArray();
+        return new CompositeSummaryWriter(writers);
+    }
+
     public ISummaryWriterBuilder WithExplanationWriterParameters(ExplanationWriterParameters parameters)
     {
         ArgumentNullException.ThrowIfNull(parameters);
@@ -68,15 +80,12 @@ public class SummaryWriterBuilder : ISummaryWriterBuilder
         {
             Log.Information("Budowanie zapisywacza podsumowań do pliku: {filename}.", filename);
             var streamWriter = new StreamWriter(filename);
+
             try
             {
                 var resultsWriter = build(streamWriter, _cancellationToken);
                 streamWriter = null;
                 return resultsWriter;
-            }
-            catch
-            {
-                throw;
             }
             finally
             {
@@ -84,17 +93,4 @@ public class SummaryWriterBuilder : ISummaryWriterBuilder
             }
         };
     }
-
-    public ISummaryWriterBuilder WithCancellationToken(CancellationToken? cancellationToken)
-    {
-        _cancellationToken = cancellationToken;
-        return this;
-    }
-
-    public ISummaryWriter Build()
-    {
-        var writers = this.writers.Select(writer => writer()).ToArray();
-        return new CompositeSummaryWriter(writers);
-    }
-
 }

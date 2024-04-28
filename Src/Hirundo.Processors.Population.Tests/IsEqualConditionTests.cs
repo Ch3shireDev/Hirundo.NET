@@ -15,8 +15,8 @@ public class IsEqualConditionTests
 
         var specimens = new[]
         {
-            new Specimen("AB123",[ new Observation(["STATUS"], ["O"]) ]),
-            new Specimen("CD456",[ new Observation(["STATUS"], ["X"]) ]),
+            new Specimen("AB123", [new Observation(["STATUS"], ["O"])]),
+            new Specimen("CD456", [new Observation(["STATUS"], ["X"])])
         };
 
         var returningSpecimen = new Specimen("EF789", [new Observation(["STATUS"], ["O"])]);

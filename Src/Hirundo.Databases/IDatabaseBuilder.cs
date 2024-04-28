@@ -1,5 +1,4 @@
-﻿
-namespace Hirundo.Databases;
+﻿namespace Hirundo.Databases;
 
 public interface IDatabaseBuilder
 {

@@ -5,9 +5,7 @@ namespace Hirundo.Processors.Observations.WPF.IsInSeason;
 [ParametersData(
     typeof(IsInSeasonCondition),
     typeof(IsInSeasonModel),
-    typeof(IsInSeasonView),
-    "Czy dane są w sezonie?",
-    "Sprawdza, czy dana obserwacja zaszła w zadanym przedziale dat, dowolnego roku.")
+    typeof(IsInSeasonView))
 ]
 public class IsInSeasonViewModel(IsInSeasonModel model) : ParametersViewModel(model)
 {

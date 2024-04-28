@@ -9,9 +9,6 @@ namespace Hirundo.Processors.Observations;
 /// <param name="observations"></param>
 public class CompositeObservationCondition : IObservationCondition
 {
-    public IList<IObservationCondition> Observations { get; }
-    public CancellationToken? CancellationToken { get; }
-
     public CompositeObservationCondition(IObservationCondition[] observations, CancellationToken? token = null)
     {
         ArgumentNullException.ThrowIfNull(observations);
@@ -19,7 +16,12 @@ public class CompositeObservationCondition : IObservationCondition
         CancellationToken = token;
     }
 
-    public CompositeObservationCondition(params IObservationCondition[] observations) : this(observations, null) { }
+    public CompositeObservationCondition(params IObservationCondition[] observations) : this(observations, null)
+    {
+    }
+
+    public IList<IObservationCondition> Observations { get; }
+    public CancellationToken? CancellationToken { get; }
 
     public bool IsAccepted(Observation observation)
     {

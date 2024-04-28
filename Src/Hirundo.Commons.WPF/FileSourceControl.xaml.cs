@@ -1,11 +1,12 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using Microsoft.Win32;
-using Serilog;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
+using Microsoft.Win32;
+using Serilog;
 
 namespace Hirundo.Commons.WPF;
 
@@ -58,7 +59,7 @@ public partial class FileSourceControl : UserControl, INotifyPropertyChanged
     {
         try
         {
-            string initialDirectory = GetInitialDirectory();
+            var initialDirectory = GetInitialDirectory();
 
             var dialog = new OpenFileDialog
             {
@@ -86,7 +87,7 @@ public partial class FileSourceControl : UserControl, INotifyPropertyChanged
     {
         var initialDirectory = System.IO.Path.GetDirectoryName(Path) ?? string.Empty;
 
-        if (!System.IO.Directory.Exists(initialDirectory))
+        if (!Directory.Exists(initialDirectory))
         {
             initialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         }

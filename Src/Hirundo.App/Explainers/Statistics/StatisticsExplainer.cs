@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Text;
 
 namespace Hirundo.App.Explainers.Statistics;
+
 public class StatisticsExplainer : ParametersExplainer<StatisticsParameters>
 {
     public override string Explain(StatisticsParameters parameters)
@@ -15,6 +16,7 @@ public class StatisticsExplainer : ParametersExplainer<StatisticsParameters>
         sb.AppendLine("Konfiguracja statystyk:");
         sb.AppendLine($"Liczba operacji statystycznych: {parameters.Operations.Count}.");
         sb.AppendLine();
+
         foreach (var statistic in parameters.Operations)
         {
             sb.AppendLine(ExplainerHelpers.Explain(statistic));
@@ -41,6 +43,7 @@ public class AverageOperationExplainer : ParametersExplainer<AverageOperation>
         sb.AppendLine($"- {parameters.ResultPrefix}_POPULATION_SIZE - liczba wartości z pominięciem wartości pustych oraz odstających. Osobnik powracający nie jest wliczany w populację.");
         sb.AppendLine($"- {parameters.ResultPrefix}_EMPTY_SIZE - liczba pustych wartości.");
         sb.AppendLine($"- {parameters.ResultPrefix}_OUTLIER_SIZE - liczba wartości odstających.");
+
         sb.AppendLine($"- {parameters.ResultPrefix}_VALUE_DIFFERENCE - różnica pomiędzy wartością cechy osobnika powracającego a wartością średnią - dodatnia, jeśli wartość {parameters.ValueName} osobnika powracającego jest większa niż średnia.");
         sb.AppendLine($"- {parameters.ResultPrefix}_STANDARD_DEVIATION_DIFFERENCE - różnica pomiędzy wartością cechy osobnika powracającego a wartością średnią, w odchyleniach standardowych.");
 
@@ -75,7 +78,7 @@ public class HistogramOperationExplainer : ParametersExplainer<HistogramOperatio
 
         if (parameters.IncludeDistribution)
         {
-            sb.AppendLine($"- {parameters.ResultPrefix}_DISTRIBUTION - część populacji (wraz z osobnikiem powracajacym) mająca wartości {parameters.ValueName} równe bądź niższe niż osobnik powracający. Słupek histogramu w który wlicza się wartość osobnika powracającego jest dodawany w połowie.");
+            sb.AppendLine($"- {parameters.ResultPrefix}_DISTRIBUTION - część populacji (wraz z osobnikiem powracającym) mająca wartości {parameters.ValueName} równe bądź niższe niż osobnik powracający. Słupek histogramu w który wlicza się wartość osobnika powracającego jest dodawany w połowie.");
         }
 
         return sb.ToString();

@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using System.Collections;
+using Autofac;
 using Hirundo.App.WPF.Components;
 using Hirundo.Commons.Models;
 using Hirundo.Commons.Repositories;
@@ -20,7 +21,6 @@ using Hirundo.Processors.Statistics.Operations.Outliers;
 using Hirundo.Writers;
 using Moq;
 using NUnit.Framework;
-using System.Collections;
 
 namespace Hirundo.App.WPF.Tests.Integration;
 
@@ -70,35 +70,35 @@ public class MainViewModelTests
         // Arrange
         var config = new ApplicationParameters
         {
-            Databases = new()
+            Databases = new DatabaseParameters
             {
                 Databases =
-            [
-                new AccessDatabaseParameters
-                {
-                    Path = "abc.mdb",
-                    Table = "table",
-                    Conditions =
-                    [
-                        new DatabaseCondition
-                        {
-                            DatabaseColumn = "AAA",
-                            Type = DatabaseConditionType.IsEqual,
-                            Value = "XXX",
-                            ConditionOperator = DatabaseConditionOperator.And
-                        }
-                    ],
-                    Columns =
-                    [
-                        new ColumnParameters
-                        {
-                            DatabaseColumn = "AAA",
-                            ValueName = "XXX",
-                            DataType = DataValueType.LongInt
-                        }
-                    ]
-                }
-            ]
+                [
+                    new AccessDatabaseParameters
+                    {
+                        Path = "abc.mdb",
+                        Table = "table",
+                        Conditions =
+                        [
+                            new DatabaseCondition
+                            {
+                                DatabaseColumn = "AAA",
+                                Type = DatabaseConditionType.IsEqual,
+                                Value = "XXX",
+                                ConditionOperator = DatabaseConditionOperator.And
+                            }
+                        ],
+                        Columns =
+                        [
+                            new ColumnParameters
+                            {
+                                DatabaseColumn = "AAA",
+                                ValueName = "XXX",
+                                DataType = DataValueType.LongInt
+                            }
+                        ]
+                    }
+                ]
             }
         };
 
@@ -138,34 +138,35 @@ public class MainViewModelTests
         // Arrange
         var config = new ApplicationParameters
         {
-            Databases = new()
+            Databases = new DatabaseParameters
             {
-                Databases = [
-                new AccessDatabaseParameters
-                {
-                    Path = "abc.mdb",
-                    Table = "table",
-                    Conditions =
-                    [
-                        new DatabaseCondition
-                        {
-                            DatabaseColumn = "AAA",
-                            Type = DatabaseConditionType.IsEqual,
-                            Value = "XXX",
-                            ConditionOperator = DatabaseConditionOperator.And
-                        }
-                    ],
-                    Columns =
-                    [
-                        new ColumnParameters
-                        {
-                            DatabaseColumn = "AAA",
-                            ValueName = "XXX",
-                            DataType = DataValueType.LongInt
-                        }
-                    ]
-                }
-            ]
+                Databases =
+                [
+                    new AccessDatabaseParameters
+                    {
+                        Path = "abc.mdb",
+                        Table = "table",
+                        Conditions =
+                        [
+                            new DatabaseCondition
+                            {
+                                DatabaseColumn = "AAA",
+                                Type = DatabaseConditionType.IsEqual,
+                                Value = "XXX",
+                                ConditionOperator = DatabaseConditionOperator.And
+                            }
+                        ],
+                        Columns =
+                        [
+                            new ColumnParameters
+                            {
+                                DatabaseColumn = "AAA",
+                                ValueName = "XXX",
+                                DataType = DataValueType.LongInt
+                            }
+                        ]
+                    }
+                ]
             }
         };
 
@@ -289,7 +290,7 @@ public class MainViewModelTests
             {
                 Operations =
                 [
-                    new AverageOperation("WEIGHT", "WEIGHT_PREFIX"){Outliers = new StandardDeviationOutliersCondition(5)}
+                    new AverageOperation("WEIGHT", "WEIGHT_PREFIX") { Outliers = new StandardDeviationOutliersCondition(5) }
                 ]
             }
         };
@@ -320,10 +321,13 @@ public class MainViewModelTests
         {
             Results = new ResultsParameters
             {
-                Writers = [ new CsvSummaryWriterParameters
-                {
-                    Path = "abc.csv"
-                }]
+                Writers =
+                [
+                    new CsvSummaryWriterParameters
+                    {
+                        Path = "abc.csv"
+                    }
+                ]
             }
         };
 

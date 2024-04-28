@@ -1,18 +1,16 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Hirundo.Commons.Models;
 using Hirundo.Commons.WPF;
 using Serilog;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace Hirundo.Processors.Observations.WPF.IsInSet;
 
 [ParametersData(
     typeof(IsInSetCondition),
     typeof(IsInSetModel),
-    typeof(IsInSetView),
-    "Czy dane są w zbiorze?",
-    "Warunek sprawdzający, czy pole danych znajduje się w zbiorze wartości."
+    typeof(IsInSetView)
 )]
 public class IsInSetViewModel : ParametersViewModel
 {

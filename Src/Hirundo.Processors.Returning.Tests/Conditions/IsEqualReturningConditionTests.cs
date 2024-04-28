@@ -1,5 +1,4 @@
-﻿using Hirundo.Commons;
-using Hirundo.Commons.Models;
+﻿using Hirundo.Commons.Models;
 using Hirundo.Processors.Returning.Conditions;
 using NUnit.Framework;
 
@@ -75,7 +74,7 @@ public class IsEqualReturningConditionTests
 
         var specimen = new Specimen("AB123", [
             new Observation(["DATA"], [observationValueA]),
-            new Observation(["DATA"], [observationValueB]),
+            new Observation(["DATA"], [observationValueB])
         ]);
 
         // Act

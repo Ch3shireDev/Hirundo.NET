@@ -51,6 +51,7 @@ public class HistogramViewModelTests
     {
         // Arrange
         var listener = new object();
+
         _viewModel.Removed += (sender, args) =>
         {
             if (sender == _viewModel) listener = args.Parameters;

@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:wpf1="clr-namespace:Hirundo.Commons.WPF"
              mc:Ignorable="d"
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance ParametersBrowserViewModel}">
@@ -28,7 +27,7 @@
         </WrapPanel>
         <StackPanel Grid.Row="3" Visibility="{Binding ProcessVisibility}">
             <WrapPanel Margin="10">
-                <Button Command="{Binding ProcessCommand}" Content="{Binding ProcessLabel}"/>
+                <Button Command="{Binding ProcessCommand}" Content="{Binding ProcessLabel}" />
             </WrapPanel>
         </StackPanel>
         <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="4">

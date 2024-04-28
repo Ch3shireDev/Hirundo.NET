@@ -12,6 +12,7 @@ public class SpeciesRepository : ISpeciesRepository
     private readonly HashSet<string> _species = [];
 
     public event EventHandler? SpeciesChanged;
+
     public IList<string> GetSpecies()
     {
         return [.. _species];

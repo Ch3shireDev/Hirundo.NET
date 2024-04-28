@@ -16,6 +16,7 @@ public abstract class CompareValuesReturningCondition : IReturningSpecimenCondit
 
     public string ValueName { get; set; } = string.Empty;
     public object? Value { get; set; }
+
     public bool IsReturning(Specimen specimen)
     {
         return specimen.Observations.Any(o => Compare(o.GetValue(ValueName), Value));

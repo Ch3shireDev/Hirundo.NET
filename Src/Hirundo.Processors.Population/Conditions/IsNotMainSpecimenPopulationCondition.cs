@@ -10,6 +10,6 @@ public class IsNotMainSpecimenPopulationCondition : IPopulationCondition
     {
         ArgumentNullException.ThrowIfNull(returningSpecimen, nameof(returningSpecimen));
         var ring = returningSpecimen.Ring;
-        return new CustomClosure((specimen) => specimen.Ring?.Equals(ring, StringComparison.OrdinalIgnoreCase) == false);
+        return new CustomClosure(specimen => specimen.Ring?.Equals(ring, StringComparison.OrdinalIgnoreCase) == false);
     }
 }

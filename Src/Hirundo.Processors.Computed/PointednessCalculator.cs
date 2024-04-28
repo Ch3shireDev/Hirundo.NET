@@ -3,10 +3,17 @@ using Hirundo.Commons.Models;
 
 namespace Hirundo.Processors.Computed;
 
-[TypeDescription("Pointedness")]
+[TypeDescription(
+    "Pointedness",
+    "Ostrość skrzydła",
+    "Wartość ostrości wyliczana na podstawie parametrów skrzydła."
+)]
 public class PointednessCalculator : WingParametersBase, IComputedValuesCalculator
 {
-    public PointednessCalculator() { }
+    public PointednessCalculator()
+    {
+    }
+
     public PointednessCalculator(string resultName, string[] wingParameters, string wingName)
     {
         ResultName = resultName;

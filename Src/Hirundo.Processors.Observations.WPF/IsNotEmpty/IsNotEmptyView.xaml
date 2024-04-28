@@ -9,6 +9,7 @@
              d:DataContext="{d:DesignInstance local:IsNotEmptyViewModel}"
              d:Background="AliceBlue">
     <StackPanel>
-        <labels:LabelsComboBox ValueName="{Binding ValueName, Mode=TwoWay}" LabelsRepository="{Binding LabelsRepository}" />
+        <labels:LabelsComboBox ValueName="{Binding ValueName, Mode=TwoWay}"
+                               LabelsRepository="{Binding LabelsRepository}" />
     </StackPanel>
 </UserControl>

@@ -15,6 +15,7 @@ public interface IPopulationProcessorBuilder
     /// </summary>
     /// <returns></returns>
     IPopulationProcessorBuilder NewBuilder();
+
     IPopulationProcessorBuilder WithCancellationToken(CancellationToken? token);
     IPopulationProcessorBuilder WithPopulationConditions(IEnumerable<IPopulationCondition> populationConditions);
 }

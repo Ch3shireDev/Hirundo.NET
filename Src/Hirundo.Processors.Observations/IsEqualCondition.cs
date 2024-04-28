@@ -11,7 +11,7 @@ namespace Hirundo.Processors.Observations;
     "IsEqual",
     "Czy wartość jest równa?",
     "Warunek porównujący pole danych z podaną wartością."
-    )]
+)]
 public class IsEqualCondition : ICompareValueCondition, IObservationCondition
 {
     /// <summary>

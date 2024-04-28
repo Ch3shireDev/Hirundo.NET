@@ -9,7 +9,7 @@
              xmlns:access="clr-namespace:Hirundo.Databases.WPF.Access"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:wpf="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
-             xmlns:helpers="clr-namespace:Hirundo.Databases.WPF.Helpers" 
+             xmlns:helpers="clr-namespace:Hirundo.Databases.WPF.Helpers"
              xmlns:helpers2="clr-namespace:Hirundo.Commons.WPF.Helpers;assembly=Hirundo.Commons.WPF"
              mc:Ignorable="d"
              d:Background="AliceBlue"
@@ -72,13 +72,15 @@
                 </b:Interaction.Triggers>
             </ComboBox>
         </WrapPanel>
-        <wpf:LabelsComboBox ValueLabel="Nazwa pola gatunku" ValueName="{Binding SpeciesIdentifier}" LabelsRepository="{Binding LabelsRepository}"/>
-        <wpf:LabelsComboBox ValueLabel="Nazwa pola obrączki" ValueName="{Binding RingIdentifier}" LabelsRepository="{Binding LabelsRepository}"/>
-        <wpf:LabelsComboBox ValueLabel="Nazwa pola daty" ValueName="{Binding DateIdentifier}" LabelsRepository="{Binding LabelsRepository}"/>
+        <wpf:LabelsComboBox ValueLabel="Nazwa pola gatunku" ValueName="{Binding SpeciesIdentifier}"
+                            LabelsRepository="{Binding LabelsRepository}" />
+        <wpf:LabelsComboBox ValueLabel="Nazwa pola obrączki" ValueName="{Binding RingIdentifier}"
+                            LabelsRepository="{Binding LabelsRepository}" />
+        <wpf:LabelsComboBox ValueLabel="Nazwa pola daty" ValueName="{Binding DateIdentifier}"
+                            LabelsRepository="{Binding LabelsRepository}" />
         <WrapPanel>
             <Button
-                Command="{Binding GetSpeciesCommand}"
-                >
+                Command="{Binding GetSpeciesCommand}">
                 Pobierz gatunki
             </Button>
             <Button
@@ -164,7 +166,7 @@
                                     Margin="2,0"
                                     ItemsSource="{Binding Source={StaticResource DatabaseConditionOperatorTypeListProvider}}"
                                     SelectedValue="{Binding ConditionOperator, UpdateSourceTrigger=PropertyChanged}"
-                                    Style="{DynamicResource MaterialDesignDataGridComboBox}" >
+                                    Style="{DynamicResource MaterialDesignDataGridComboBox}">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock
@@ -194,7 +196,7 @@
                                     Margin="2,0"
                                     ItemsSource="{Binding Source={StaticResource DatabaseConditionTypeListProvider}}"
                                     SelectedValue="{Binding Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                    Style="{DynamicResource MaterialDesignDataGridComboBox}" >
+                                    Style="{DynamicResource MaterialDesignDataGridComboBox}">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock

@@ -7,7 +7,9 @@ namespace Hirundo.Processors.Returning.Conditions;
 /// </summary>
 public class CompositeReturningSpecimenCondition : IReturningSpecimenCondition
 {
-    public CompositeReturningSpecimenCondition(params IReturningSpecimenCondition[] conditions) : this(conditions, null) { }
+    public CompositeReturningSpecimenCondition(params IReturningSpecimenCondition[] conditions) : this(conditions, null)
+    {
+    }
 
     public CompositeReturningSpecimenCondition(IList<IReturningSpecimenCondition> conditions, CancellationToken? cancellationToken = null)
     {

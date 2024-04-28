@@ -9,12 +9,6 @@ namespace Hirundo.App.Tests.Integration;
 [TestFixture]
 public class HirundoAppTests
 {
-    private HirundoApp _app = null!;
-    private Mock<IDatabase> _database = null!;
-    private Mock<IDatabaseBuilder> _databaseBuilder = null!;
-    private Mock<ISummaryWriterBuilder> _summaryWriterBuilder = null!;
-    private Mock<ISummaryWriter> _summaryWriter = null!;
-
     [SetUp]
     public void Initialize()
     {
@@ -63,6 +57,12 @@ public class HirundoAppTests
 
         _app = new HirundoApp(_databaseBuilder.Object, _summaryWriterBuilder.Object);
     }
+
+    private HirundoApp _app = null!;
+    private Mock<IDatabase> _database = null!;
+    private Mock<IDatabaseBuilder> _databaseBuilder = null!;
+    private Mock<ISummaryWriterBuilder> _summaryWriterBuilder = null!;
+    private Mock<ISummaryWriter> _summaryWriter = null!;
 
     [Test]
     public void GivenEmptyObservationsList_WhenRun_ResultsInEmptySummary()

@@ -1,9 +1,9 @@
-﻿using Hirundo.Commons;
+﻿using System.Collections;
+using System.Reflection;
+using Hirundo.Commons;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using System.Collections;
-using System.Reflection;
 
 namespace Hirundo.Serialization.Json;
 
@@ -53,6 +53,7 @@ internal sealed class DynamicPolymorphicJsonConverter(Type interfaceType, params
     private void ConvertListElements(JArray jArray, IList conditions)
     {
         if (conditions == null) return;
+
         for (var i = 0; i < jArray.Count; i++)
         {
             if (jArray[i] is not JObject jObjectCondition) continue;
@@ -91,15 +92,13 @@ internal sealed class DynamicPolymorphicJsonConverter(Type interfaceType, params
 
             if (polymorphicAttribute.ContainsChildren)
             {
-                ArrayList resultConditions = DeserializeConditions(jobject, givenType);
-                object? result = DeserializeWithoutConditionsList(jobject, givenType);
+                var resultConditions = DeserializeConditions(jobject, givenType);
+                var result = DeserializeWithoutConditionsList(jobject, givenType);
                 AddElementsToResult(result, givenType, resultConditions);
                 return result;
             }
-            else
-            {
-                return JsonConvert.DeserializeObject(jobject.ToString(), givenType, _settings);
-            }
+
+            return JsonConvert.DeserializeObject(jobject.ToString(), givenType, _settings);
         }
 
 
@@ -108,7 +107,7 @@ internal sealed class DynamicPolymorphicJsonConverter(Type interfaceType, params
 
     private object? DeserializeWithoutConditionsList(JObject jobject, Type givenType)
     {
-        string? conditionsListName = GetConditionsListName(givenType);
+        var conditionsListName = GetConditionsListName(givenType);
         if (conditionsListName != null) jobject.Remove(conditionsListName);
         return JsonConvert.DeserializeObject(jobject.ToString(), givenType, _settings);
     }
@@ -116,7 +115,7 @@ internal sealed class DynamicPolymorphicJsonConverter(Type interfaceType, params
     private void AddElementsToResult(object? result, Type givenType, ArrayList resultConditions)
     {
         if (result == null) return;
-        string? conditionsListName = GetConditionsListName(givenType);
+        var conditionsListName = GetConditionsListName(givenType);
         if (conditionsListName == null) return;
 
         if (result.GetType().GetProperty(conditionsListName)?.GetValue(result) is IList elementConditionsList)
@@ -130,7 +129,7 @@ internal sealed class DynamicPolymorphicJsonConverter(Type interfaceType, params
 
     private ArrayList DeserializeConditions(JObject jobject, Type givenType)
     {
-        string? conditionsListName = GetConditionsListName(givenType);
+        var conditionsListName = GetConditionsListName(givenType);
         if (conditionsListName == null) return [];
 
         var resultConditions = new ArrayList();

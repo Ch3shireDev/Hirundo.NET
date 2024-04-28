@@ -5,7 +5,8 @@ using Hirundo.Commons.WPF;
 
 namespace Hirundo.Processors.Observations.WPF.CompareValues;
 
-public class CompareValuesModel<TCondition>(TCondition condition, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository) : ParametersModel(condition, labelsRepository, speciesRepository) where TCondition : ICompareValueCondition
+public class CompareValuesModel<TCondition>(TCondition condition, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository)
+    : ParametersModel(condition, labelsRepository, speciesRepository) where TCondition : ICompareValueCondition
 {
     public string ValueName
     {

@@ -11,11 +11,6 @@ namespace Hirundo.Processors.Returning.WPF.Tests;
 [TestFixture]
 public class IsInSetReturningViewModelTests
 {
-    private Mock<ILabelsRepository> _repository = null!;
-    private IsInSetReturningCondition _parameters = null!;
-    private IsInSetReturningModel _model = null!;
-    private IsInSetReturningViewModel _viewModel = null!;
-
     [SetUp]
     public void Initialize()
     {
@@ -25,6 +20,11 @@ public class IsInSetReturningViewModelTests
         _model = new IsInSetReturningModel(_parameters, _repository.Object, speciesRepository.Object);
         _viewModel = new IsInSetReturningViewModel(_model);
     }
+
+    private Mock<ILabelsRepository> _repository = null!;
+    private IsInSetReturningCondition _parameters = null!;
+    private IsInSetReturningModel _model = null!;
+    private IsInSetReturningViewModel _viewModel = null!;
 
     [Test]
     public void GivenSelectedColumnAndIntDataType_WhenSetValue_CastsToIntegerType()

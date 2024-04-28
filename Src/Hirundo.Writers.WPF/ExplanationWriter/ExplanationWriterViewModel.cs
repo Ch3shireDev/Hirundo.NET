@@ -6,7 +6,7 @@ namespace Hirundo.Writers.WPF.ExplanationWriter;
     typeof(ExplanationWriterParameters),
     typeof(ExplanationWriterModel),
     typeof(ExplanationWriterView)
-    )]
+)]
 public class ExplanationWriterViewModel(ExplanationWriterModel model) : ParametersViewModel(model)
 {
     public string Path

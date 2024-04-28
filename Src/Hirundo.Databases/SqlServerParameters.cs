@@ -2,7 +2,7 @@
 
 namespace Hirundo.Databases;
 
-[TypeDescription("SqlServer")]
+[TypeDescription("SqlServer", "SQL Server", "Pobiera dane z serwera SQL Server.")]
 public class SqlServerParameters : IDatabaseParameters
 {
     public string ConnectionString { get; set; } = null!;

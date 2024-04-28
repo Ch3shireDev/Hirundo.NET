@@ -2,7 +2,9 @@
 using Hirundo.Commons.WPF;
 
 namespace Hirundo.Writers.WPF.XlsxWriter;
-public class XlsxWriterModel(XlsxSummaryWriterParameters parameters, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository) : ParametersModel(parameters, labelsRepository, speciesRepository)
+
+public class XlsxWriterModel(XlsxSummaryWriterParameters parameters, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository)
+    : ParametersModel(parameters, labelsRepository, speciesRepository)
 {
     private XlsxSummaryWriterParameters XlsxParameters { get; } = parameters;
 
@@ -11,11 +13,13 @@ public class XlsxWriterModel(XlsxSummaryWriterParameters parameters, ILabelsRepo
         get => XlsxParameters.SpreadsheetTitle;
         set => XlsxParameters.SpreadsheetTitle = value;
     }
+
     public string Subtitle
     {
         get => XlsxParameters.SpreadsheetSubtitle;
         set => XlsxParameters.SpreadsheetSubtitle = value;
     }
+
     public bool IncludeExplanation
     {
         get => XlsxParameters.IncludeExplanation;

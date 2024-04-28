@@ -1,18 +1,17 @@
 ﻿<UserControl x:Class="Hirundo.Processors.Returning.WPF.Alternative.AlternativeView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Hirundo.Processors.Returning.WPF.Alternative" 
-             xmlns:aftertimeperiod="clr-namespace:Hirundo.Processors.Returning.WPF.AfterTimePeriod" 
-             xmlns:isinset="clr-namespace:Hirundo.Processors.Returning.WPF.IsInSet" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Hirundo.Processors.Returning.WPF.Alternative"
+             xmlns:aftertimeperiod="clr-namespace:Hirundo.Processors.Returning.WPF.AfterTimePeriod"
+             xmlns:isinset="clr-namespace:Hirundo.Processors.Returning.WPF.IsInSet"
              xmlns:notearlierthangivendatenextyear="clr-namespace:Hirundo.Processors.Returning.WPF.NotEarlierThanGivenDateNextYear"
              xmlns:comparevalues="clr-namespace:Hirundo.Processors.Returning.WPF.CompareValues"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800"
              d:Background="AliceBlue"
-             d:DataContext="{d:DesignInstance local:AlternativeViewModel}"
-             >
+             d:DataContext="{d:DesignInstance local:AlternativeViewModel}">
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type aftertimeperiod:AfterTimePeriodViewModel}">
             <aftertimeperiod:AfterTimePeriodView />
@@ -23,26 +22,26 @@
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type notearlierthangivendatenextyear:NotEarlierThanGivenDateNextYearViewModel}">
-            <notearlierthangivendatenextyear:NotEarlierThanGivenDateNextYearView/>
+            <notearlierthangivendatenextyear:NotEarlierThanGivenDateNextYearView />
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type comparevalues:IsEqualReturningViewModel}">
-            <comparevalues:CompareValuesReturningView/>
+            <comparevalues:CompareValuesReturningView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type comparevalues:IsNotEqualReturningViewModel}">
-            <comparevalues:CompareValuesReturningView/>
+            <comparevalues:CompareValuesReturningView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type comparevalues:IsGreaterReturningViewModel}">
-            <comparevalues:CompareValuesReturningView/>
+            <comparevalues:CompareValuesReturningView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type comparevalues:IsGreaterOrEqualReturningViewModel}">
-            <comparevalues:CompareValuesReturningView/>
+            <comparevalues:CompareValuesReturningView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type comparevalues:IsLowerReturningViewModel}">
-            <comparevalues:CompareValuesReturningView/>
+            <comparevalues:CompareValuesReturningView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type comparevalues:IsLowerOrEqualReturningViewModel}">
-            <comparevalues:CompareValuesReturningView/>
+            <comparevalues:CompareValuesReturningView />
         </DataTemplate>
 
     </UserControl.Resources>
@@ -50,33 +49,34 @@
         <Border BorderBrush="Gray" BorderThickness="1" Margin="10" Padding="5,5,5,20">
             <StackPanel>
                 <ComboBox
-                Margin="10,5"
-                FontWeight="Bold"
-                ItemsSource="{Binding Options}" 
-                SelectedItem="{Binding FirstParameter}" 
-                DisplayMemberPath="Title" 
-            />
+                    Margin="10,5"
+                    FontWeight="Bold"
+                    ItemsSource="{Binding Options}"
+                    SelectedItem="{Binding FirstParameter}"
+                    DisplayMemberPath="Title" />
                 <WrapPanel>
-                    <TextBlock MaxWidth="400" Margin="10,5,5,20" TextWrapping="Wrap" Text="{Binding FirstViewModel.Description}"/>
+                    <TextBlock MaxWidth="400" Margin="10,5,5,20" TextWrapping="Wrap"
+                               Text="{Binding FirstViewModel.Description}" />
                 </WrapPanel>
                 <WrapPanel>
-                    <ContentControl Content="{Binding FirstViewModel}" d:Content="{d:DesignInstance aftertimeperiod:AfterTimePeriodViewModel}"/>
+                    <ContentControl Content="{Binding FirstViewModel}"
+                                    d:Content="{d:DesignInstance aftertimeperiod:AfterTimePeriodViewModel}" />
                 </WrapPanel>
             </StackPanel>
         </Border>
         <Border BorderBrush="Gray" BorderThickness="1" Margin="10" Padding="5,5,5,5">
             <StackPanel>
-                <ComboBox 
+                <ComboBox
                     Margin="10,5"
                     FontWeight="Bold"
-                    ItemsSource="{Binding Options}" 
-                    SelectedItem="{Binding SecondParameter}" 
-                    DisplayMemberPath="Title" 
-                />
+                    ItemsSource="{Binding Options}"
+                    SelectedItem="{Binding SecondParameter}"
+                    DisplayMemberPath="Title" />
                 <WrapPanel>
-                    <TextBlock MaxWidth="400" Margin="10,5,5,20" TextWrapping="Wrap" Text="{Binding SecondViewModel.Description}"/>
+                    <TextBlock MaxWidth="400" Margin="10,5,5,20" TextWrapping="Wrap"
+                               Text="{Binding SecondViewModel.Description}" />
                 </WrapPanel>
-                <ContentControl Content="{Binding SecondViewModel}"/>
+                <ContentControl Content="{Binding SecondViewModel}" />
             </StackPanel>
         </Border>
     </StackPanel>

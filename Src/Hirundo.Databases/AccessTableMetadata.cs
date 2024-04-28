@@ -1,4 +1,6 @@
-﻿namespace Hirundo.Databases;
+﻿using Hirundo.Databases.Helpers;
+
+namespace Hirundo.Databases;
 
 public class AccessTableMetadata
 {

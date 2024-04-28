@@ -1,5 +1,4 @@
-﻿
-using Serilog;
+﻿using Serilog;
 
 namespace Hirundo.Databases;
 
@@ -26,10 +25,8 @@ public class DatabaseBuilder : IDatabaseBuilder
         {
             return _builders[0]();
         }
-        else
-        {
-            return new CompositeDatabase([.. _builders.Select(x => x())]);
-        }
+
+        return new CompositeDatabase([.. _builders.Select(x => x())]);
     }
 
     public IDatabaseBuilder NewBuilder()
@@ -81,5 +78,4 @@ public class DatabaseBuilder : IDatabaseBuilder
         _token = cancellationToken;
         return this;
     }
-
 }

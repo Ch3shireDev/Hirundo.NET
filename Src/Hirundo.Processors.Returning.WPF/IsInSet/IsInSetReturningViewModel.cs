@@ -1,10 +1,10 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Hirundo.Commons.Models;
 using Hirundo.Commons.WPF;
 using Hirundo.Processors.Returning.Conditions;
 using Serilog;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace Hirundo.Processors.Returning.WPF.IsInSet;
 

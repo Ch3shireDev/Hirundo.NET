@@ -193,9 +193,9 @@ public class ReturningSpecimenJsonSerializerTests
     {
         // Arrange
         var condition = new AlternativeReturningCondition(
-                        new ReturnsAfterTimePeriodCondition(20),
-                        new ReturnsNotEarlierThanGivenDateNextYearCondition(07, 15)
-                    );
+            new ReturnsAfterTimePeriodCondition(20),
+            new ReturnsNotEarlierThanGivenDateNextYearCondition(07, 15)
+        );
         var parameters = new ReturningParameters([condition]);
 
         // Act
@@ -216,9 +216,9 @@ public class ReturningSpecimenJsonSerializerTests
     {
         // Arrange
         var condition = new AlternativeReturningCondition(
-                        new ReturnsAfterTimePeriodCondition(20),
-                        new ReturnsNotEarlierThanGivenDateNextYearCondition(07, 15)
-                    );
+            new ReturnsAfterTimePeriodCondition(20),
+            new ReturnsNotEarlierThanGivenDateNextYearCondition(07, 15)
+        );
         var parameters = new ReturningParameters([condition]);
 
         // Act

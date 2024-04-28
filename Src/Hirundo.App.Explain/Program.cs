@@ -1,7 +1,7 @@
-﻿using Hirundo.Commons.Helpers;
+﻿using System.Runtime.Serialization;
+using Hirundo.Commons.Helpers;
 using Hirundo.Serialization.Json;
 using Newtonsoft.Json;
-using System.Runtime.Serialization;
 
 namespace Hirundo.App.Explain;
 

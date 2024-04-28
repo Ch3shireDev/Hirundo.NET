@@ -11,22 +11,9 @@ namespace Hirundo.Commons.Models;
 /// </summary>
 public class Observation
 {
-    public string Ring { get; init; } = string.Empty;
-    public DateTime Date { get; init; } = DateTime.MinValue;
-    public string Species { get; set; } = string.Empty;
-
-    private IList<string> _headers = [];
     private readonly IList<object?> _values = [];
-    public IList<string> Headers
-    {
-        get => _headers;
-        init => _headers = [.. value];
-    }
-    public IList<object?> Values
-    {
-        get => _values;
-        init => _values = [.. value];
-    }
+
+    private readonly IList<string> _headers = [];
 
     /// <summary>
     ///     Konstruktor bezparametrowy.
@@ -46,6 +33,22 @@ public class Observation
         Headers = names.ToList();
         Values = values.ToList();
 #pragma warning restore IDE0305
+    }
+
+    public string Ring { get; init; } = string.Empty;
+    public DateTime Date { get; init; } = DateTime.MinValue;
+    public string Species { get; set; } = string.Empty;
+
+    public IList<string> Headers
+    {
+        get => _headers;
+        init => _headers = [.. value];
+    }
+
+    public IList<object?> Values
+    {
+        get => _values;
+        init => _values = [.. value];
     }
 
     /// <summary>
@@ -108,7 +111,6 @@ public class Observation
 
         return -1;
     }
-
 
 
     /// <summary>

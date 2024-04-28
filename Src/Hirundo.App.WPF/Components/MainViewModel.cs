@@ -23,9 +23,6 @@ public sealed class MainViewModel : ObservableObject
 
     private bool isProcessing;
 
-    public ICommand LoadedCommand => new RelayCommand(() => IsLoaded = true);
-
-    public bool IsLoaded { get; private set; }
     public MainViewModel(MainModel model)
     {
         ArgumentNullException.ThrowIfNull(model);
@@ -55,6 +52,7 @@ public sealed class MainViewModel : ObservableObject
         model.WriterModel.Process = () => Task.Run(ProcessAndSaveAsync);
     }
 
+    public bool IsLoaded { get; private set; }
     public Action RefreshWindow { get; set; } = () => { };
     public ParametersBrowserViewModel DataSourceViewModel { get; }
     public ParametersBrowserViewModel ComputedValuesViewModel { get; }
@@ -64,6 +62,7 @@ public sealed class MainViewModel : ObservableObject
     public ParametersBrowserViewModel StatisticsViewModel { get; }
     public ParametersBrowserViewModel WriterViewModel { get; }
     public ObservableCollection<LogEvent> LogEventsItems { get; } = [];
+    public ICommand LoadedCommand => new RelayCommand(() => IsLoaded = true);
     public ICommand PreviousCommand => new RelayCommand(Previous, CanGoPrevious);
     public ICommand NextCommand => new RelayCommand(Next, CanGoNext);
     public ICommand BreakCommand => new AsyncRelayCommand(BreakAsync, CanBreak);

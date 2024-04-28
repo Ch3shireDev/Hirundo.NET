@@ -1,6 +1,6 @@
-﻿using Hirundo.Commons.Models;
+﻿using System.Data.Odbc;
+using Hirundo.Commons.Models;
 using Serilog;
-using System.Data.Odbc;
 
 namespace Hirundo.Databases;
 
@@ -50,17 +50,17 @@ public class MdbAccessDatabase(AccessDatabaseParameters parameters, Cancellation
         Log.Information($"Odczytywanie danych z tabeli {parameters.Table}.");
 
         var headers = GetDataColumns(parameters);
-        int ringIndex = GetRingIndex(parameters);
-        int dateIndex = GetDateIndex(parameters);
-        int speciesIndex = GetSpeciesIndex(parameters);
+        var ringIndex = GetRingIndex(parameters);
+        var dateIndex = GetDateIndex(parameters);
+        var speciesIndex = GetSpeciesIndex(parameters);
 
         while (reader.Read())
         {
             var values = GetValuesFromReader(reader);
 
-            string ring = GetRing(ringIndex, values);
-            DateTime date = GetDate(dateIndex, values);
-            string species = GetSpecies(speciesIndex, values);
+            var ring = GetRing(ringIndex, values);
+            var date = GetDate(dateIndex, values);
+            var species = GetSpecies(speciesIndex, values);
 
             yield return new Observation
             {
@@ -114,6 +114,7 @@ public class MdbAccessDatabase(AccessDatabaseParameters parameters, Cancellation
             throw new ArgumentException("Należy podać nazwę pola danych z datą obserwacji.");
         }
     }
+
     private static int GetDateIndex(AccessDatabaseParameters parameters)
     {
         var dataColumns2 = GetDataColumns(parameters);

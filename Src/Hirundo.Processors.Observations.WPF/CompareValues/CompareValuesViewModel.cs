@@ -2,6 +2,7 @@
 using Hirundo.Commons.WPF;
 
 namespace Hirundo.Processors.Observations.WPF.CompareValues;
+
 public class CompareValuesViewModel<TCondition>(CompareValuesModel<TCondition> model) : ParametersViewModel(model), ICompareValuesViewModel
     where TCondition : ICompareValueCondition
 {

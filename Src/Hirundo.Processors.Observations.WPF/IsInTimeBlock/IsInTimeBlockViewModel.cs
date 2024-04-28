@@ -5,9 +5,7 @@ namespace Hirundo.Processors.Observations.WPF.IsInTimeBlock;
 [ParametersData(
     typeof(IsInTimeBlockCondition),
     typeof(IsInTimeBlockModel),
-    typeof(IsInTimeBlockView),
-    "Czy dane są w przedziale godzinowym?",
-    "Warunek sprawdzający godziny złapania osobnika."
+    typeof(IsInTimeBlockView)
 )]
 public class IsInTimeBlockViewModel(IsInTimeBlockModel model) : ParametersViewModel(model), IRemovable
 {

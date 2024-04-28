@@ -14,8 +14,8 @@ public class ReturnsNotEarlierThanGivenDateNextYearConditionTests
         var filter = new ReturnsNotEarlierThanGivenDateNextYearCondition(06, 01);
 
         var specimen = new Specimen("AB123", [
-            new Observation{Date = new DateTime(2021, 06, 20)},
-            new Observation{Date = new DateTime(2022, 06, 01)}
+            new Observation { Date = new DateTime(2021, 06, 20) },
+            new Observation { Date = new DateTime(2022, 06, 01) }
         ]);
 
         // Act
@@ -32,8 +32,8 @@ public class ReturnsNotEarlierThanGivenDateNextYearConditionTests
         var filter = new ReturnsNotEarlierThanGivenDateNextYearCondition(06, 15);
 
         var specimen = new Specimen("AB123", [
-            new Observation{Date = new DateTime(2021, 06, 01)},
-            new Observation{Date = new DateTime(2022, 06, 01)}
+            new Observation { Date = new DateTime(2021, 06, 01) },
+            new Observation { Date = new DateTime(2022, 06, 01) }
         ]);
 
         // Act
@@ -50,9 +50,9 @@ public class ReturnsNotEarlierThanGivenDateNextYearConditionTests
         var filter = new ReturnsNotEarlierThanGivenDateNextYearCondition(06, 15);
 
         var specimen = new Specimen("AB123", [
-            new Observation{Date = new DateTime(2021, 06, 01)},
-            new Observation{Date = new DateTime(2022, 06, 05)},
-            new Observation{Date = new DateTime(2023, 06, 15)}
+            new Observation { Date = new DateTime(2021, 06, 01) },
+            new Observation { Date = new DateTime(2022, 06, 05) },
+            new Observation { Date = new DateTime(2023, 06, 15) }
         ]);
 
         // Act
@@ -69,9 +69,9 @@ public class ReturnsNotEarlierThanGivenDateNextYearConditionTests
         var filter = new ReturnsNotEarlierThanGivenDateNextYearCondition(06, 15);
 
         var specimen = new Specimen("AB123", [
-            new Observation{Date = new DateTime(2021, 06, 01)},
-            new Observation{Date = new DateTime(2022, 06, 05)},
-            new Observation{Date = new DateTime(2022, 06, 20)}
+            new Observation { Date = new DateTime(2021, 06, 01) },
+            new Observation { Date = new DateTime(2022, 06, 05) },
+            new Observation { Date = new DateTime(2022, 06, 20) }
         ]);
 
         // Act

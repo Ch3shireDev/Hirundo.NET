@@ -9,10 +9,9 @@
              d:Background="AliceBlue"
              d:DataContext="{d:DesignInstance isInTimeBlock:IsInTimeBlockViewModel}">
     <StackPanel>
-        <labels:LabelsComboBox 
-                ValueName="{Binding ValueName, Mode=TwoWay}" 
-                LabelsRepository="{Binding LabelsRepository}" 
-                />
+        <labels:LabelsComboBox
+            ValueName="{Binding ValueName, Mode=TwoWay}"
+            LabelsRepository="{Binding LabelsRepository}" />
         <WrapPanel>
             <Label>Godzina początkowa</Label>
             <TextBox Text="{Binding StartHour}" MinWidth="100" />

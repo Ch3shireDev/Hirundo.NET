@@ -1,8 +1,9 @@
-﻿using Hirundo.Commons.Helpers;
+﻿using System.Text;
+using Hirundo.Commons.Helpers;
 using Hirundo.Writers;
-using System.Text;
 
 namespace Hirundo.App.Explainers.Writers;
+
 public class ResultsExplainer : ParametersExplainer<ResultsParameters>
 {
     public override string Explain(ResultsParameters parameters)
@@ -51,10 +52,12 @@ public class XlsxWriterExplainer : ParametersExplainer<XlsxSummaryWriterParamete
     {
         var sb = new StringBuilder();
         sb.AppendLine($"Zapis do pliku Excel: {parameters.Path}.");
+
         if (parameters.IncludeExplanation)
         {
             sb.AppendLine("Do pliku dodano wyjaśnienia.");
         }
+
         return sb.ToString();
     }
 }

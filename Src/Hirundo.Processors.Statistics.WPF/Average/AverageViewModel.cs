@@ -22,11 +22,6 @@ public class AverageViewModel(AverageModel model) : ParametersViewModel(model)
         }
     }
 
-    private void UpdatePrefix(string value)
-    {
-        ResultPrefix = model.ResultPrefix == model.ValueName ? value : model.ResultPrefix;
-    }
-
     public DataType DataType
     {
         get => model.ValueType;
@@ -85,5 +80,10 @@ public class AverageViewModel(AverageModel model) : ParametersViewModel(model)
             model.AddStandardDeviationDifference = value;
             OnPropertyChanged();
         }
+    }
+
+    private void UpdatePrefix(string value)
+    {
+        ResultPrefix = model.ResultPrefix == model.ValueName ? value : model.ResultPrefix;
     }
 }

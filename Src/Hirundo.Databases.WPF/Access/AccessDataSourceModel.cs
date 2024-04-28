@@ -4,7 +4,8 @@ using Hirundo.Databases.Conditions;
 
 namespace Hirundo.Databases.WPF.Access;
 
-public class AccessDataSourceModel(AccessDatabaseParameters parameters, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository) : ParametersModel(parameters, labelsRepository, speciesRepository)
+public class AccessDataSourceModel(AccessDatabaseParameters parameters, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository)
+    : ParametersModel(parameters, labelsRepository, speciesRepository)
 {
     public string Path
     {
@@ -17,6 +18,7 @@ public class AccessDataSourceModel(AccessDatabaseParameters parameters, ILabelsR
         get => parameters.Table;
         set => parameters.Table = value;
     }
+
     public string SpeciesIdentifier
     {
         get => parameters.SpeciesIdentifier;
@@ -37,5 +39,4 @@ public class AccessDataSourceModel(AccessDatabaseParameters parameters, ILabelsR
 
     public IList<ColumnParameters> Columns => parameters.Columns;
     public IList<DatabaseCondition> Conditions => parameters.Conditions;
-
 }

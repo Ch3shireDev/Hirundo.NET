@@ -5,9 +5,7 @@ namespace Hirundo.Processors.Observations.WPF.IsNotEmpty;
 [ParametersData(
     typeof(IsNotEmptyCondition),
     typeof(IsNotEmptyModel),
-    typeof(IsNotEmptyView),
-    "Czy dane nie są puste?",
-    "Warunek sprawdzający, czy pole danych nie jest puste."
+    typeof(IsNotEmptyView)
 )]
 public class IsNotEmptyViewModel(IsNotEmptyModel model) : ParametersViewModel(model)
 {

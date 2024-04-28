@@ -10,11 +10,10 @@
              d:DataContext="{d:DesignInstance average:AverageViewModel}">
     <StackPanel>
         <labels:LabelsComboBox
-                ValueLabel="Nazwa wartości wejściowej"
-                ValueName="{Binding ValueName}"
-                DataType="{Binding DataType}"
-                LabelsRepository="{Binding LabelsRepository}"
-                />
+            ValueLabel="Nazwa wartości wejściowej"
+            ValueName="{Binding ValueName}"
+            DataType="{Binding DataType}"
+            LabelsRepository="{Binding LabelsRepository}" />
         <WrapPanel>
             <Label>Przedrostek wartości wyjściowych</Label>
             <TextBox Text="{Binding ResultPrefix, Mode=TwoWay}" Width="100" />

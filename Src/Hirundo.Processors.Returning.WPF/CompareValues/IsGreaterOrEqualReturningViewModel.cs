@@ -7,7 +7,7 @@ namespace Hirundo.Processors.Returning.WPF.CompareValues;
     typeof(IsGreaterOrEqualReturningCondition),
     typeof(CompareValuesReturningModel<IsGreaterOrEqualReturningCondition>),
     typeof(CompareValuesReturningView)
-    )]
+)]
 public class IsGreaterOrEqualReturningViewModel(CompareValuesReturningModel<IsGreaterOrEqualReturningCondition> model) : CompareValuesReturningViewModel<IsGreaterOrEqualReturningCondition>(model)
 {
     public override string ValueDescription => "Wartość większa lub równa";

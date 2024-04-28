@@ -7,12 +7,6 @@ namespace Hirundo.Writers.Tests;
 [TestFixture]
 public class XlsxSummaryWriterTests
 {
-    private MemoryStream _stream = null!;
-    private StreamWriter _streamWriter = null!;
-    private XlsxSummaryWriter _writer = null!;
-    private CancellationToken _cancellationToken;
-    private XlsxSummaryWriterParameters _parameters = null!;
-
     [SetUp]
     public void Initialize()
     {
@@ -22,6 +16,12 @@ public class XlsxSummaryWriterTests
         _streamWriter = new StreamWriter(_stream);
         _writer = new XlsxSummaryWriter(_parameters, _streamWriter, _cancellationToken);
     }
+
+    private MemoryStream _stream = null!;
+    private StreamWriter _streamWriter = null!;
+    private XlsxSummaryWriter _writer = null!;
+    private CancellationToken _cancellationToken;
+    private XlsxSummaryWriterParameters _parameters = null!;
 
     [Test]
     public void GivenEmptyData_WhenWrite_CreatesEmptyXlsx()

@@ -3,7 +3,9 @@ using Hirundo.Commons.Models;
 
 namespace Hirundo.Processors.Observations;
 
-[TypeDescription("IsInSeason")]
+[TypeDescription("IsInSeason",
+    "Czy dane są w sezonie?",
+    "Sprawdza, czy dana obserwacja zaszła w zadanym przedziale dat, dowolnego roku.")]
 public class IsInSeasonCondition : IObservationCondition
 {
     public IsInSeasonCondition(Season season)

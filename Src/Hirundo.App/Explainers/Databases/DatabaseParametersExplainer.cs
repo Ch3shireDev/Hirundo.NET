@@ -10,8 +10,6 @@ public class DatabaseParametersExplainer : ParametersExplainer<DatabaseParameter
     public string Header { get; set; } = "Konfiguracja źródła danych:";
     public string SubheaderText { get; set; } = "Liczba źródeł danych: {0}.";
 
-    public string DataSourceInfo { get; set; } = "Pobiera dane z pliku {0}, z tabeli {1}.";
-
     public override string Explain(DatabaseParameters parameters)
     {
         ArgumentNullException.ThrowIfNull(parameters, nameof(parameters));

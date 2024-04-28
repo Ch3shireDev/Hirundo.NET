@@ -8,11 +8,12 @@ namespace Hirundo.Writers;
 [TypeDescription("Csv", "Zapis wyników do pliku .csv", "Zapisuje wyniki do standardowego formatu pliku .csv.")]
 public class CsvSummaryWriterParameters : IWriterParameters
 {
+    public string RingHeaderName { get; set; } = "Ring";
+    public string DateFirstSeenHeaderName { get; set; } = "DateFirstSeen";
+    public string DateLastSeenHeaderName { get; set; } = "DateLastSeen";
+
     /// <summary>
     ///     Lokalizacja pliku wynikowego z danymi.
     /// </summary>
     public string Path { get; set; } = null!;
-    public string RingHeaderName { get; set; } = "Ring";
-    public string DateFirstSeenHeaderName { get; set; } = "DateFirstSeen";
-    public string DateLastSeenHeaderName { get; set; } = "DateLastSeen";
 }

@@ -22,6 +22,7 @@ public class MainModel(
     ComputedValuesModel computedValuesModel
 )
 {
+    private CancellationTokenSource? _cancellationTokenSource;
     private bool _isProcessing;
     public DataSourceModel DatabasesBrowserModel { get; set; } = dataSourceModel;
     public ObservationsModel ObservationParametersBrowserModel { get; set; } = observationParametersBrowserModel;
@@ -68,8 +69,6 @@ public class MainModel(
         };
     }
 
-    private CancellationTokenSource? _cancellationTokenSource;
-
     public async Task RunAsync()
     {
         if (_isProcessing)
@@ -87,9 +86,8 @@ public class MainModel(
         }
         catch (OperationCanceledException)
         {
-            Log.Information($"Przerwano obliczenia z polecenia użytkownika.");
+            Log.Information("Przerwano obliczenia z polecenia użytkownika.");
             IsProcessed = false;
-            return;
         }
         catch (Exception e)
         {
@@ -117,8 +115,7 @@ public class MainModel(
         }
         catch (OperationCanceledException)
         {
-            Log.Information($"Przerwano działanie aplikacji z polecenia użytkownika.");
-            return;
+            Log.Information("Przerwano działanie aplikacji z polecenia użytkownika.");
         }
         catch (Exception e)
         {

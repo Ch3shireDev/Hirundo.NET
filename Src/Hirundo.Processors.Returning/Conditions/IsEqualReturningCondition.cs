@@ -7,10 +7,19 @@ namespace Hirundo.Processors.Returning.Conditions;
     "IsEqual",
     "Czy dane są równe?",
     "Osobnik zawiera obserwację z polem równym danej wartości."
-    )]
+)]
 public class IsEqualReturningCondition : CompareValuesReturningCondition
 {
-    public IsEqualReturningCondition(string valueName, object? value) : base(valueName, value) { }
-    public IsEqualReturningCondition() : base() { }
-    public override bool Compare(object? observationValue, object? value) => ComparisonHelpers.IsEqual(observationValue, value);
+    public IsEqualReturningCondition(string valueName, object? value) : base(valueName, value)
+    {
+    }
+
+    public IsEqualReturningCondition()
+    {
+    }
+
+    public override bool Compare(object? observationValue, object? value)
+    {
+        return ComparisonHelpers.IsEqual(observationValue, value);
+    }
 }

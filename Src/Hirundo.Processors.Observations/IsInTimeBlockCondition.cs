@@ -1,10 +1,14 @@
-﻿using Hirundo.Commons;
+﻿using System.Globalization;
+using Hirundo.Commons;
 using Hirundo.Commons.Models;
-using System.Globalization;
 
 namespace Hirundo.Processors.Observations;
 
-[TypeDescription("IsInTimeBlock")]
+[TypeDescription(
+    "IsInTimeBlock",
+    "Czy dane są w przedziale godzinowym?",
+    "Warunek sprawdzający godziny złapania osobnika."
+)]
 public class IsInTimeBlockCondition : IObservationCondition
 {
     private readonly bool isThroughMidnight;

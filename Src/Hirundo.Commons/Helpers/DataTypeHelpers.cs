@@ -264,6 +264,7 @@ public static class DataTypeHelpers
 
         return date1 > date2;
     }
+
     public static bool IsLowerThanDate(object? value1, object? value2)
     {
         if (!IsConvertableToDate(value1)) return false;
@@ -279,11 +280,12 @@ public static class DataTypeHelpers
     {
         if (value == null) return false;
         if (value is DateTime) return true;
+
         if (value is string valueStr)
         {
             return DateTime.TryParse(valueStr, CultureInfo.InvariantCulture, DateTimeStyles.None, out _);
-
         }
+
         return false;
     }
 
@@ -297,10 +299,12 @@ public static class DataTypeHelpers
     {
         if (value == null) return false;
         if (value is int || value is double || value is float || value is decimal) return true;
+
         if (value is string valueStr)
         {
             return double.TryParse(valueStr, out _);
         }
+
         return false;
     }
 
@@ -317,7 +321,8 @@ public static class DataTypeHelpers
                     {
                         return stringValue;
                     }
-                    else if (type == typeof(DateTime))
+
+                    if (type == typeof(DateTime))
                     {
                         if (DateTime.TryParse(stringValue, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dateValue))
                         {
@@ -368,7 +373,6 @@ public static class DataTypeHelpers
             default:
                 return Convert.ChangeType(value, type, CultureInfo.InvariantCulture);
         }
-
     }
 
     public static T? ConvertValue<T>(object? value) where T : struct

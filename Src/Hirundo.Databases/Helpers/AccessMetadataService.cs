@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using System.Data.Odbc;
 
-namespace Hirundo.Databases;
+namespace Hirundo.Databases.Helpers;
 
 public class AccessMetadataService : IAccessMetadataService
 {
@@ -34,6 +34,7 @@ public class AccessMetadataService : IAccessMetadataService
 
         return result;
     }
+
     public IEnumerable<object?> GetDistinctValues(string path, string table, string columnName)
     {
         // Replace with your actual database file path and connection string details
@@ -102,5 +103,4 @@ public class AccessMetadataService : IAccessMetadataService
             };
         }
     }
-
 }

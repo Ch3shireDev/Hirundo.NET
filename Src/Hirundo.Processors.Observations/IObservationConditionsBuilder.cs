@@ -13,6 +13,7 @@ public interface IObservationConditionsBuilder
     /// </summary>
     /// <returns></returns>
     IObservationConditionsBuilder NewBuilder();
+
     IObservationConditionsBuilder WithCancellationToken(CancellationToken? cancellationToken);
     IObservationConditionsBuilder WithObservationConditions(IEnumerable<IObservationCondition> observationsConditions);
 }

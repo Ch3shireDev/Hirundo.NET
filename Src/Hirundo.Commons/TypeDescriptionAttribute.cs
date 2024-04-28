@@ -3,11 +3,6 @@
 [AttributeUsage(AttributeTargets.Class)]
 public sealed class TypeDescriptionAttribute : Attribute
 {
-    public string Type { get; }
-    public string DisplayName { get; } = "";
-    public string Description { get; } = "";
-    public bool ContainsChildren { get; }
-
     [Obsolete("Należy tworzyć TypeDescription z wyświetlaną nazwą oraz opisem.")]
     public TypeDescriptionAttribute(string type, bool containsChildren = false)
     {
@@ -22,4 +17,9 @@ public sealed class TypeDescriptionAttribute : Attribute
         Description = description;
         ContainsChildren = containsChildren;
     }
+
+    public string Type { get; }
+    public string DisplayName { get; } = "";
+    public string Description { get; } = "";
+    public bool ContainsChildren { get; }
 }
