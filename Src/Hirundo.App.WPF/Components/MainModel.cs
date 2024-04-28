@@ -1,12 +1,16 @@
-﻿using Hirundo.Commons.Repositories;
+﻿using ClosedXML.Excel;
+using Hirundo.Commons.Models;
+using Hirundo.Commons.Repositories;
 using Hirundo.Databases.WPF;
 using Hirundo.Processors.Computed.WPF;
 using Hirundo.Processors.Observations.WPF;
 using Hirundo.Processors.Population.WPF;
 using Hirundo.Processors.Returning.WPF;
 using Hirundo.Processors.Statistics.WPF;
+using Hirundo.Writers;
 using Hirundo.Writers.WPF;
 using Serilog;
+using System.IO;
 
 namespace Hirundo.App.WPF.Components;
 
@@ -38,13 +42,7 @@ public class MainModel(
     {
         ArgumentNullException.ThrowIfNull(config);
 
-        DatabasesBrowserModel.Parameters.Clear();
-
-        foreach (var database in config.Databases.Databases)
-        {
-            DatabasesBrowserModel.Parameters.Add(database);
-        }
-
+        DatabasesBrowserModel.ParametersContainer = config.Databases;
         DatabasesBrowserModel.UpdateRepository();
 
         ComputedValuesModel.ParametersContainer = config.ComputedValues;
@@ -71,6 +69,13 @@ public class MainModel(
 
     public async Task RunAsync()
     {
+        var config = GetConfigFromViewModels();
+        Action<CancellationToken> action = (token) => app.Run(config, token);
+        await RunInternal(action);
+    }
+
+    private async Task RunInternal(Action<CancellationToken> action)
+    {
         if (_isProcessing)
         {
             return;
@@ -79,10 +84,10 @@ public class MainModel(
         try
         {
             _isProcessing = true;
-            var config = GetConfigFromViewModels();
             _cancellationTokenSource = new CancellationTokenSource();
-            await Task.Run(() => app.Run(config, _cancellationTokenSource.Token), _cancellationTokenSource.Token);
+            await Task.Run(() => action(_cancellationTokenSource.Token), _cancellationTokenSource.Token);
             IsProcessed = true;
+            Log.Information("Zakończono przetwarzanie.");
         }
         catch (OperationCanceledException)
         {
@@ -157,6 +162,54 @@ public class MainModel(
             await Task.Delay(100).ConfigureAwait(false);
             _cancellationTokenSource.Dispose();
             _cancellationTokenSource = null;
+        }
+    }
+
+    public async Task ExportAsync(string filename)
+    {
+        Action<CancellationToken> action = (token) =>
+        {
+            var workbook = GetXlsx(token);
+            using var stream = new FileStream(filename, FileMode.Create, FileAccess.Write);
+            workbook.SaveAs(stream);
+            stream.Close();
+        };
+
+        await RunInternal(action);
+    }
+
+    public XLWorkbook GetXlsx(CancellationToken token)
+    {
+        var data = GetRawData(token);
+
+        var headers = GetHeaders(data);
+        var values = GetValues(data);
+
+        var xlsx = new XlsxBuilder()
+            .WithHeaders(headers)
+            .WithValues(values)
+            .Build();
+
+        return xlsx;
+    }
+
+    public IList<Observation> GetRawData(CancellationToken? token = null)
+    {
+        return DatabasesBrowserModel.ParametersContainer.BuildDataSource(token).GetObservations().ToList();
+    }
+
+    private static string[] GetHeaders(IList<Observation> data)
+    {
+        if (!data.Any()) return ["No data to display."];
+        var first = data.First();
+        return ["RING", "DATE", "SPECIES", .. first.Headers];
+    }
+
+    private static IEnumerable<object?[]> GetValues(IList<Observation> data)
+    {
+        foreach (var row in data)
+        {
+            yield return [row.Ring, row.Date, row.Species, .. row.Values];
         }
     }
 }

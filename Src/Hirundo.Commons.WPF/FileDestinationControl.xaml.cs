@@ -1,10 +1,10 @@
-﻿using System.ComponentModel;
+﻿using CommunityToolkit.Mvvm.Input;
+using Microsoft.Win32;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
-using Microsoft.Win32;
 
 namespace Hirundo.Commons.WPF;
 
@@ -21,7 +21,6 @@ public partial class FileDestinationControl : UserControl, INotifyPropertyChange
     {
         InitializeComponent();
     }
-
 
     public ICommand? Command
     {

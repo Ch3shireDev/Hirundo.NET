@@ -1,6 +1,4 @@
-﻿using Hirundo.Commons.Helpers;
-using Hirundo.Commons.Models;
-using Hirundo.Databases;
+﻿using Hirundo.Commons.Models;
 using Hirundo.Processors.Computed;
 using Hirundo.Processors.Observations;
 using Hirundo.Processors.Population;
@@ -15,7 +13,6 @@ namespace Hirundo.App;
 public class HirundoApp : IHirundoApp
 {
     private readonly IComputedValuesCalculatorBuilder _calculatorBuilder = new ComputedValuesCalculatorBuilder();
-    private readonly IDatabaseBuilder _databaseBuilder = new DatabaseBuilder();
     private readonly IObservationConditionsBuilder _observationConditionsBuilder = new ObservationConditionsBuilder();
     private readonly IPopulationProcessorBuilder _populationProcessorBuilder = new PopulationProcessorBuilder();
     private readonly IReturningSpecimenConditionsBuilder _returningSpecimenConditionsBuilder = new ReturningSpecimenConditionsBuilder();
@@ -27,14 +24,7 @@ public class HirundoApp : IHirundoApp
     {
     }
 
-    public HirundoApp(IDatabaseBuilder databaseBuilder, ISummaryWriterBuilder summaryWriterBuilder)
-    {
-        _databaseBuilder = databaseBuilder;
-        _summaryWriterBuilder = summaryWriterBuilder;
-    }
-
     public HirundoApp(
-        IDatabaseBuilder databaseBuilder,
         IComputedValuesCalculatorBuilder calculatorBuilder,
         IObservationConditionsBuilder observationsBuilder,
         IReturningSpecimenConditionsBuilder returningBuilder,
@@ -43,7 +33,6 @@ public class HirundoApp : IHirundoApp
         ISummaryWriterBuilder summaryWriterBuilder
     )
     {
-        _databaseBuilder = databaseBuilder;
         _calculatorBuilder = calculatorBuilder;
         _observationConditionsBuilder = observationsBuilder;
         _returningSpecimenConditionsBuilder = returningBuilder;
@@ -56,11 +45,6 @@ public class HirundoApp : IHirundoApp
     {
         ArgumentNullException.ThrowIfNull(applicationConfig);
 
-        var database = _databaseBuilder
-            .NewBuilder()
-            .WithDatabaseParameters([.. applicationConfig.Databases.Databases])
-            .WithCancellationToken(token)
-            .Build();
 
         var observationConditions = _observationConditionsBuilder
             .NewBuilder()
@@ -98,7 +82,7 @@ public class HirundoApp : IHirundoApp
             .WithCancellationToken(token)
             .Build();
 
-        var observations = database.GetObservations().ToArray();
+        var observations = applicationConfig.Databases.BuildDataSource(token).GetObservations().ToArray();
 
         Log.Information($"Odczytano {observations.Length} obserwacji. Wyliczanie dodatkowych wartości...");
 
@@ -137,7 +121,7 @@ public class HirundoApp : IHirundoApp
         var results = new ReturningSpecimensResults
         {
             Results = summary,
-            Explanation = ExplainerHelpers.Explain(applicationConfig)
+            Explanation = applicationConfig.Explain()
         };
 
         Log.Information($"Przygotowano {summary.Count} wierszy danych wynikowych.");

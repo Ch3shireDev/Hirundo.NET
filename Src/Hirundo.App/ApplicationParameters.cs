@@ -23,13 +23,13 @@ public class ApplicationParameters : ISelfExplainer
     public string Explain()
     {
         var sb = new StringBuilder();
-        sb.AppendLine(ExplainerHelpers.Explain(Databases));
-        sb.AppendLine(ExplainerHelpers.Explain(ComputedValues));
-        sb.AppendLine(ExplainerHelpers.Explain(Observations));
-        sb.AppendLine(ExplainerHelpers.Explain(ReturningSpecimens));
-        sb.AppendLine(ExplainerHelpers.Explain(Population));
-        sb.AppendLine(ExplainerHelpers.Explain(Statistics));
-        sb.AppendLine(ExplainerHelpers.Explain(Results));
+        sb.AppendLine(Databases.Explain());
+        sb.AppendLine(ComputedValues.Explain());
+        sb.AppendLine(Observations.Explain());
+        sb.AppendLine(ReturningSpecimens.Explain());
+        sb.AppendLine(Population.Explain());
+        sb.AppendLine(Statistics.Explain());
+        sb.AppendLine(Results.Explain());
         return sb.ToString();
     }
 }

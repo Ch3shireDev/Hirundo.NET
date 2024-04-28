@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using Autofac;
+﻿using Autofac;
 using Hirundo.App.WPF.Components;
 using Hirundo.Commons.Models;
 using Hirundo.Commons.Repositories;
@@ -20,9 +19,11 @@ using Hirundo.Processors.Statistics.Operations.Outliers;
 using Hirundo.Writers;
 using Moq;
 using NUnit.Framework;
+using System.Collections;
 
 namespace Hirundo.App.WPF.Tests.Integration;
 
+[TestFixture]
 public class MainViewModelTests
 {
     private Mock<IHirundoApp> _hirundoApp = null!;

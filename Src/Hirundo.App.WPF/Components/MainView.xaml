@@ -52,6 +52,7 @@
                 <MenuItem Header="Nowy" Command="{Binding CreateNewConfigCommand}" />
                 <MenuItem Header="Otwórz" Command="{Binding LoadNewConfigCommand}" />
                 <MenuItem Header="Zapisz" Command="{Binding SaveCurrentConfigCommand}" />
+                <MenuItem Header="Eksportuj dane" Command="{Binding ExportCommand}" />
             </MenuItem>
         </Menu>
 

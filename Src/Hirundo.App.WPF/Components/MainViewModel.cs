@@ -1,8 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.IO;
-using System.Windows;
-using System.Windows.Input;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Hirundo.App.WPF.Helpers;
 using Hirundo.Commons.Helpers;
@@ -13,6 +9,10 @@ using Hirundo.Writers.WPF;
 using Microsoft.Win32;
 using Serilog;
 using Serilog.Events;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Windows;
+using System.Windows.Input;
 
 namespace Hirundo.App.WPF.Components;
 
@@ -69,6 +69,7 @@ public sealed class MainViewModel : ObservableObject
     public ICommand ProcessAndSaveCommand => new AsyncRelayCommand(ProcessAndSaveAsync, CanProcessAndSave);
     public ICommand SaveCurrentConfigCommand => new RelayCommand(SaveCurrentConfig);
     public ICommand LoadNewConfigCommand => new RelayCommand(LoadNewConfig);
+    public ICommand ExportCommand => new AsyncRelayCommand(ExportAsync);
 
     public IList<ObservableObject> ViewModels { get; }
 
@@ -358,5 +359,24 @@ public sealed class MainViewModel : ObservableObject
         }
 
         return config;
+    }
+
+    public async Task ExportAsync()
+    {
+        var fileDialog = FileDialogFactory.GetFileDialogForFilename("ringer.xlsx");
+        if (fileDialog.ShowDialog() != true) return;
+        try
+        {
+            IsProcessing = true;
+            var filename = fileDialog.FileName;
+            await _model.ExportAsync(filename);
+            Log.Information("Zapisano dane do pliku {filename}.", filename);
+            IsProcessing = false;
+            MessageBox.Show("Dane zostały zapisane pomyślnie.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        finally
+        {
+            IsProcessing = false;
+        }
     }
 }

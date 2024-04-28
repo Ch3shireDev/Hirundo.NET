@@ -10,6 +10,14 @@ public class DatabaseParameters : ISelfExplainer
     private readonly string SubheaderText = "Liczba źródeł danych: {0}.";
     public IList<IDatabaseParameters> Databases { get; init; } = [];
 
+    public IDatabase BuildDataSource(CancellationToken? token = null)
+    {
+        return new DatabaseBuilder()
+            .WithDatabaseParameters([.. Databases])
+            .WithCancellationToken(token)
+            .Build();
+    }
+
     public string Explain()
     {
         var sb = new StringBuilder();

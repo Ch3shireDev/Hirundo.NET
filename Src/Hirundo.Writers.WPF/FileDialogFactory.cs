@@ -1,6 +1,6 @@
-﻿using System.IO;
-using Hirundo.Commons.Helpers;
+﻿using Hirundo.Commons.Helpers;
 using Microsoft.Win32;
+using System.IO;
 
 namespace Hirundo.Writers.WPF;
 
@@ -54,6 +54,7 @@ public static class FileDialogFactory
     public static SaveFileDialog GetFileDialogForFilename(string filename)
     {
         var extension = Path.GetExtension(filename);
+        var filenameWithoutExtension = Path.GetFileNameWithoutExtension(filename);
 
         if (extension.Equals(".csv", StringComparison.InvariantCultureIgnoreCase))
         {
@@ -62,7 +63,7 @@ public static class FileDialogFactory
                 Filter = "Pliki CSV (*.csv)|*.csv",
                 Title = "Zapisz wyniki",
                 DefaultExt = extension,
-                FileName = GetDefaultFilename($"{DefaultResultsName}{extension}"),
+                FileName = GetDefaultFilename($"{filenameWithoutExtension}{extension}"),
                 DefaultDirectory = DefaultDirectory
             };
         }
@@ -74,7 +75,7 @@ public static class FileDialogFactory
                 Filter = "Pliki Excel (*.xlsx)|*.xlsx",
                 Title = "Zapisz wyniki",
                 DefaultExt = extension,
-                FileName = GetDefaultFilename($"{DefaultResultsName}{extension}"),
+                FileName = GetDefaultFilename($"{filenameWithoutExtension}{extension}"),
                 DefaultDirectory = DefaultDirectory
             };
         }
@@ -86,7 +87,7 @@ public static class FileDialogFactory
                 Filter = "Pliki tekstowe (*.txt)|*.txt",
                 Title = "Zapisz wyjaśnienia",
                 DefaultExt = extension,
-                FileName = GetDefaultFilename("wyjasnienia.txt"),
+                FileName = GetDefaultFilename($"{filenameWithoutExtension}{extension}"),
                 DefaultDirectory = DefaultDirectory
             };
         }
@@ -98,7 +99,7 @@ public static class FileDialogFactory
                 Filter = "Pliki JSON (*.json)|*.json",
                 Title = "Zapisz konfigurację",
                 DefaultExt = extension,
-                FileName = GetDefaultFilename($"{DefaultConfigName}{extension}"),
+                FileName = GetDefaultFilename($"{filenameWithoutExtension}{extension}"),
                 DefaultDirectory = DefaultDirectory
             };
         }
