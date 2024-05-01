@@ -124,7 +124,7 @@ public static class DataTypeHelpers
         {
             DataType.Text => value as string ?? string.Empty,
             DataType.Number => value is int intValue ? intValue.ToString(CultureInfo.InvariantCulture) : string.Empty,
-            DataType.Numeric => value is double doubleValue ? doubleValue.ToString(CultureInfo.InvariantCulture) : string.Empty,
+            DataType.Numeric => value is decimal doubleValue ? doubleValue.ToString(CultureInfo.InvariantCulture) : string.Empty,
             DataType.Date => value is DateTime dateValue ? dateValue.ToString(CultureInfo.InvariantCulture) : string.Empty,
             DataType.Boolean => value is bool boolValue ? boolValue.ToString(CultureInfo.InvariantCulture) : string.Empty,
             DataType.Undefined => ConvertToString(value),
@@ -154,7 +154,7 @@ public static class DataTypeHelpers
             DataType.Text => value,
             DataType.Number when int.TryParse(value, out var intValue) => intValue,
             DataType.Number => value,
-            DataType.Numeric when double.TryParse(value, out var doubleValue) => doubleValue,
+            DataType.Numeric when decimal.TryParse(value, out var doubleValue) => doubleValue,
             DataType.Numeric => value,
             DataType.Date when DateTime.TryParse(value, out var dateValue) => dateValue,
             DataType.Date => value,
@@ -173,7 +173,7 @@ public static class DataTypeHelpers
         {
             DataType.Text => ConvertToString(value),
             DataType.Number => ConvertValue<int>(value) ?? 0,
-            DataType.Numeric => ConvertValue<double>(value) ?? 0,
+            DataType.Numeric => ConvertValue<decimal>(value) ?? 0,
             DataType.Date => ConvertValue<DateTime>(value) ?? DateTime.MinValue,
             DataType.Boolean => ConvertValue<bool>(value) ?? false,
             DataType.Undefined => value,
@@ -228,8 +228,8 @@ public static class DataTypeHelpers
         if (!IsConvertableToNumber(value1)) return false;
         if (!IsConvertableToNumber(value2)) return false;
 
-        var number1 = Convert.ToDouble(value1, CultureInfo.InvariantCulture);
-        var number2 = Convert.ToDouble(value2, CultureInfo.InvariantCulture);
+        var number1 = Convert.ToDecimal(value1, CultureInfo.InvariantCulture);
+        var number2 = Convert.ToDecimal(value2, CultureInfo.InvariantCulture);
 
         return Equals(number1, number2);
     }
@@ -239,8 +239,8 @@ public static class DataTypeHelpers
         if (!IsConvertableToNumber(value1)) return false;
         if (!IsConvertableToNumber(value2)) return false;
 
-        var number1 = Convert.ToDouble(value1, CultureInfo.InvariantCulture);
-        var number2 = Convert.ToDouble(value2, CultureInfo.InvariantCulture);
+        var number1 = Convert.ToDecimal(value1, CultureInfo.InvariantCulture);
+        var number2 = Convert.ToDecimal(value2, CultureInfo.InvariantCulture);
 
         return number1 > number2;
     }
@@ -250,8 +250,8 @@ public static class DataTypeHelpers
         if (!IsConvertableToNumber(value1)) return false;
         if (!IsConvertableToNumber(value2)) return false;
 
-        var number1 = Convert.ToDouble(value1, CultureInfo.InvariantCulture);
-        var number2 = Convert.ToDouble(value2, CultureInfo.InvariantCulture);
+        var number1 = Convert.ToDecimal(value1, CultureInfo.InvariantCulture);
+        var number2 = Convert.ToDecimal(value2, CultureInfo.InvariantCulture);
 
         return number1 < number2;
     }
@@ -304,7 +304,7 @@ public static class DataTypeHelpers
 
         if (value is string valueStr)
         {
-            return double.TryParse(valueStr, out _);
+            return decimal.TryParse(valueStr, out _);
         }
 
         return false;
