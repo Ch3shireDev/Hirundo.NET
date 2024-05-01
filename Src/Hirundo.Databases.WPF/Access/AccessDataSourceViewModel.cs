@@ -1,9 +1,9 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using Hirundo.Commons.WPF;
 using Hirundo.Databases.Conditions;
 using Serilog;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Hirundo.Databases.WPF.Access;
 
@@ -197,9 +197,14 @@ public class AccessDataSourceViewModel(AccessDataSourceModel model, IAccessMetad
         SpeciesRepository.UpdateSpecies(speciesList);
     }
 
-    #region commands
+    public void Loaded()
+    {
+        LoadMetadata(true);
+        GetSpecies();
+    }
 
-    public ICommand LoadedCommand => new RelayCommand(() => LoadMetadata());
+    #region commands
+    public ICommand LoadedCommand => new RelayCommand(Loaded);
     public ICommand AfterFileCommand => new RelayCommand(() => LoadMetadata(true));
     public ICommand UpdateLabelsCommand => new RelayCommand(UpdateLabels);
     public ICommand RemoveValuesCommand => new RelayCommand(RemoveValues);
@@ -209,7 +214,6 @@ public class AccessDataSourceViewModel(AccessDataSourceModel model, IAccessMetad
     public ICommand AddConditionCommand => new RelayCommand(AddCondition);
     public ICommand RemoveConditionCommand => new RelayCommand(RemoveCondition);
     public ICommand GetSpeciesCommand => new RelayCommand(GetSpecies);
-
     #endregion
 
     #region collections
