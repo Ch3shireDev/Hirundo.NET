@@ -1,3 +1,4 @@
+using Hirundo.Commons.Models;
 using Hirundo.Databases.Conditions;
 
 namespace Hirundo.Databases.Tests.Integration;
@@ -21,12 +22,12 @@ public class MdbAccessDatabaseTests
         // Arrange
         _accessDatabaseParameters.Path = "./Assets/access_example_old_db.mdb";
 
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataValueType.Text));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("DATE", "DATE", DataValueType.DateTime));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("MASS", "WEIGHT", DataValueType.Numeric));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("FAT", "FAT", DataValueType.ShortInt));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("SPEC", "SPECIES", DataValueType.Text));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataType.Number));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataType.Text));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("DATE", "DATE", DataType.Date));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("MASS", "WEIGHT", DataType.Numeric));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("FAT", "FAT", DataType.Number));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("SPEC", "SPECIES", DataType.Text));
 
         _accessDatabaseParameters.Table = "TAB_RING_PODAB";
 
@@ -66,10 +67,10 @@ public class MdbAccessDatabaseTests
         _accessDatabaseParameters.DateIdentifier = "DATE";
         _accessDatabaseParameters.SpeciesIdentifier = "SPECIES";
 
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataValueType.Text));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("Date2", "DATE", DataValueType.DateTime));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("Species Code", "SPECIES", DataValueType.Text));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataType.Number));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataType.Text));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("Date2", "DATE", DataType.Date));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("Species Code", "SPECIES", DataType.Text));
 
         // Act
         var data = _mdbAccessDatabase.GetObservations().ToList();
@@ -111,10 +112,10 @@ public class MdbAccessDatabaseTests
         _accessDatabaseParameters.DateIdentifier = "DATE";
         _accessDatabaseParameters.SpeciesIdentifier = "SPECIES";
 
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataValueType.Text));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("DATE2", "DATE", DataValueType.DateTime));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("Species Code", "SPECIES", DataValueType.Text));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataType.Number));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataType.Text));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("DATE2", "DATE", DataType.Date));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("Species Code", "SPECIES", DataType.Text));
 
         _accessDatabaseParameters.Conditions.Add(new DatabaseCondition("Species Code", "REG.REG", DatabaseConditionType.IsEqual));
 
@@ -142,10 +143,10 @@ public class MdbAccessDatabaseTests
         _accessDatabaseParameters.DateIdentifier = "DATE";
         _accessDatabaseParameters.SpeciesIdentifier = "SPECIES";
 
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataValueType.Text));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("DATE2", "DATE", DataValueType.DateTime));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("Species Code", "SPECIES", DataValueType.Text));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataType.Number));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataType.Text));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("DATE2", "DATE", DataType.Date));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("Species Code", "SPECIES", DataType.Text));
 
         _accessDatabaseParameters.Conditions.Add(new DatabaseCondition("IDR_Podab", 1924534, DatabaseConditionType.IsEqual));
 
@@ -170,10 +171,10 @@ public class MdbAccessDatabaseTests
         _accessDatabaseParameters.DateIdentifier = "DATE";
         _accessDatabaseParameters.SpeciesIdentifier = "SPECIES";
 
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataValueType.Text));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("Date2", "DATE", DataValueType.DateTime));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("Species Code", "SPECIES", DataValueType.Text));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataType.Number));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataType.Text));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("Date2", "DATE", DataType.Date));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("Species Code", "SPECIES", DataType.Text));
 
         _accessDatabaseParameters.Conditions.Add(new DatabaseCondition("DATE2", "2017-03-26", DatabaseConditionType.IsEqual));
 
@@ -207,10 +208,10 @@ public class MdbAccessDatabaseTests
         _accessDatabaseParameters.DateIdentifier = "DATE";
         _accessDatabaseParameters.SpeciesIdentifier = "SPECIES";
 
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataValueType.Text));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("DATE2", "DATE", DataValueType.DateTime));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("Species Code", "SPECIES", DataValueType.Text));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataType.Number));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataType.Text));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("DATE2", "DATE", DataType.Date));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("Species Code", "SPECIES", DataType.Text));
 
         _accessDatabaseParameters.Conditions.Add(new DatabaseCondition("DATE2", "2017-03-25", DatabaseConditionType.IsGreaterThan));
         _accessDatabaseParameters.Conditions.Add(new DatabaseCondition("DATE2", "2017-03-27", DatabaseConditionType.IsLowerThan));
@@ -244,10 +245,10 @@ public class MdbAccessDatabaseTests
         _accessDatabaseParameters.DateIdentifier = "DATE";
         _accessDatabaseParameters.SpeciesIdentifier = "SPECIES";
 
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataValueType.Text));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("SPEC", "SPECIES", DataValueType.Text));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("DATE", "DATE", DataValueType.DateTime));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataType.Number));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataType.Text));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("SPEC", "SPECIES", DataType.Text));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("DATE", "DATE", DataType.Date));
 
         _accessDatabaseParameters.Conditions.Add(new DatabaseCondition("DATE", "1967-08-15", DatabaseConditionType.IsGreaterThan));
         _accessDatabaseParameters.Conditions.Add(new DatabaseCondition("DATE", "1967-08-17", DatabaseConditionType.IsLowerThan));
@@ -269,10 +270,10 @@ public class MdbAccessDatabaseTests
         _accessDatabaseParameters.RingIdentifier = "RING";
         _accessDatabaseParameters.DateIdentifier = "DATE";
         _accessDatabaseParameters.SpeciesIdentifier = "SPECIES";
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataValueType.Text));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("Species Code", "SPECIES", DataValueType.Text));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("DATE2", "DATE", DataValueType.DateTime));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataType.Number));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataType.Text));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("Species Code", "SPECIES", DataType.Text));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("DATE2", "DATE", DataType.Date));
         _accessDatabaseParameters.Conditions.Add(new DatabaseCondition("DATE2", "2017-03-25", DatabaseConditionType.IsLowerThan));
 
         // Act
@@ -290,10 +291,10 @@ public class MdbAccessDatabaseTests
         _accessDatabaseParameters.RingIdentifier = "RING";
         _accessDatabaseParameters.DateIdentifier = "DATE";
         _accessDatabaseParameters.SpeciesIdentifier = "SPECIES";
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataValueType.Text));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("Species Code", "SPECIES", DataValueType.Text));
-        _accessDatabaseParameters.Columns.Add(new ColumnParameters("DATE2", "DATE", DataValueType.DateTime));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataType.Number));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataType.Text));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("Species Code", "SPECIES", DataType.Text));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("DATE2", "DATE", DataType.Date));
 
         // Act
         var data = _mdbAccessDatabase.GetObservations().ToList();

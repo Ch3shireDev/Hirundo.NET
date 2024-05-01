@@ -8,7 +8,7 @@
         {
           "DatabaseColumn": "IDR_Podab",
           "ValueName": "ID",
-          "DataType": "LongInt"
+          "DataType": "Number"
         },
         {
           "DatabaseColumn": "RING",
@@ -23,12 +23,12 @@
         {
           "DatabaseColumn": "DATE",
           "ValueName": "DATE",
-          "DataType": "DateTime"
+          "DataType": "Date"
         },
         {
           "DatabaseColumn": "HOUR",
           "ValueName": "HOUR",
-          "DataType": "ShortInt"
+          "DataType": "Number"
         },
         {
           "DatabaseColumn": "SEX",
@@ -58,37 +58,37 @@
         {
           "DatabaseColumn": "D2",
           "ValueName": "D2",
-          "DataType": "ShortInt"
+          "DataType": "Number"
         },
         {
           "DatabaseColumn": "D3",
           "ValueName": "D3",
-          "DataType": "ShortInt"
+          "DataType": "Number"
         },
         {
           "DatabaseColumn": "D4",
           "ValueName": "D4",
-          "DataType": "ShortInt"
+          "DataType": "Number"
         },
         {
           "DatabaseColumn": "D5",
           "ValueName": "D5",
-          "DataType": "ShortInt"
+          "DataType": "Number"
         },
         {
           "DatabaseColumn": "D6",
           "ValueName": "D6",
-          "DataType": "ShortInt"
+          "DataType": "Number"
         },
         {
           "DatabaseColumn": "D7",
           "ValueName": "D7",
-          "DataType": "ShortInt"
+          "DataType": "Number"
         },
         {
           "DatabaseColumn": "D8",
           "ValueName": "D8",
-          "DataType": "ShortInt"
+          "DataType": "Number"
         }
       ],
       "Conditions": [
@@ -117,7 +117,7 @@
         {
           "DatabaseColumn": "IDR_Podab",
           "ValueName": "ID",
-          "DataType": "LongInt"
+          "DataType": "Number"
         },
         {
           "DatabaseColumn": "RING",
@@ -132,12 +132,12 @@
         {
           "DatabaseColumn": "DATE2",
           "ValueName": "DATE",
-          "DataType": "DateTime"
+          "DataType": "Date"
         },
         {
           "DatabaseColumn": "HOUR",
           "ValueName": "HOUR",
-          "DataType": "ShortInt"
+          "DataType": "Number"
         },
         {
           "DatabaseColumn": "SEX",
@@ -167,37 +167,37 @@
         {
           "DatabaseColumn": "D2",
           "ValueName": "D2",
-          "DataType": "ShortInt"
+          "DataType": "Number"
         },
         {
           "DatabaseColumn": "D3",
           "ValueName": "D3",
-          "DataType": "ShortInt"
+          "DataType": "Number"
         },
         {
           "DatabaseColumn": "D4",
           "ValueName": "D4",
-          "DataType": "ShortInt"
+          "DataType": "Number"
         },
         {
           "DatabaseColumn": "D5",
           "ValueName": "D5",
-          "DataType": "ShortInt"
+          "DataType": "Number"
         },
         {
           "DatabaseColumn": "D6",
           "ValueName": "D6",
-          "DataType": "ShortInt"
+          "DataType": "Number"
         },
         {
           "DatabaseColumn": "D7",
           "ValueName": "D7",
-          "DataType": "ShortInt"
+          "DataType": "Number"
         },
         {
           "DatabaseColumn": "D8",
           "ValueName": "D8",
-          "DataType": "ShortInt"
+          "DataType": "Number"
         }
       ],
       "Conditions": [

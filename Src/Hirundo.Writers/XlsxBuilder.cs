@@ -4,7 +4,7 @@ namespace Hirundo.Writers;
 
 public class XlsxBuilder
 {
-    private static readonly string[] separator = ["\r\n", "\n"];
+    private static readonly string[] separator = ["" + Environment.NewLine, "\n"];
     private string Title { get; set; } = "";
     private string Subtitle { get; set; } = "";
     private string[] Headers { get; set; } = [];

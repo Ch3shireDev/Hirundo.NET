@@ -10,7 +10,7 @@ namespace Hirundo.Writers;
 
 public sealed class CsvSummaryWriter(CsvSummaryWriterParameters parameters, TextWriter streamWriter, CancellationToken? token = null) : ISummaryWriter, IDisposable, IAsyncDisposable
 {
-    public string NewLine { get; set; } = "\r\n";
+    public string NewLine { get; set; } = "" + Environment.NewLine;
     public string Delimiter { get; set; } = ",";
     public Encoding Encoding { get; set; } = Encoding.UTF8;
     public bool IncludeExplanation { get; set; } = false;

@@ -1,6 +1,7 @@
-﻿using System.Globalization;
-using System.Text;
+﻿using Hirundo.Commons.Models;
 using Hirundo.Databases.Conditions;
+using System.Globalization;
+using System.Text;
 
 namespace Hirundo.Databases;
 
@@ -183,12 +184,11 @@ public class MdbAccessQueryBuilder(string rowSeparator = " ")
     {
         return columnMapping.DataType switch
         {
-            DataValueType.Undefined => $"[{columnMapping.DatabaseColumn}]",
-            DataValueType.Text => $"IIF(IsNull([{columnMapping.DatabaseColumn}]), Null, CSTR([{columnMapping.DatabaseColumn}]))",
-            DataValueType.ShortInt => $"IIF(IsNull([{columnMapping.DatabaseColumn}]), Null, CINT([{columnMapping.DatabaseColumn}]))",
-            DataValueType.LongInt => $"IIF(IsNull([{columnMapping.DatabaseColumn}]), Null, CLNG([{columnMapping.DatabaseColumn}]))",
-            DataValueType.Numeric => $"IIF(IsNull([{columnMapping.DatabaseColumn}]), Null, CDBL([{columnMapping.DatabaseColumn}]))",
-            DataValueType.DateTime => $"IIF(IsNull([{columnMapping.DatabaseColumn}]), Null, CDATE([{columnMapping.DatabaseColumn}]))",
+            DataType.Undefined => $"[{columnMapping.DatabaseColumn}]",
+            DataType.Text => $"IIF(IsNull([{columnMapping.DatabaseColumn}]), Null, CSTR([{columnMapping.DatabaseColumn}]))",
+            DataType.Number => $"IIF(IsNull([{columnMapping.DatabaseColumn}]), Null, CLNG([{columnMapping.DatabaseColumn}]))",
+            DataType.Numeric => $"IIF(IsNull([{columnMapping.DatabaseColumn}]), Null, CDBL([{columnMapping.DatabaseColumn}]))",
+            DataType.Date => $"IIF(IsNull([{columnMapping.DatabaseColumn}]), Null, CDATE([{columnMapping.DatabaseColumn}]))",
             _ => throw new ArgumentOutOfRangeException(nameof(columnMapping), columnMapping.DataType, null)
         };
     }

@@ -1,6 +1,6 @@
-﻿using System.Globalization;
+﻿using Hirundo.Commons.Models;
+using System.Globalization;
 using System.Windows.Data;
-using Hirundo.Databases;
 
 namespace Hirundo.Commons.WPF.Helpers;
 
@@ -8,12 +8,11 @@ public class DataTypeConverter : IValueConverter
 {
     private static readonly Dictionary<object, string> valueDictionary = new()
     {
-        { DataValueType.Text, "Tekst" },
-        { DataValueType.LongInt, "Duża liczba całkowita" },
-        { DataValueType.ShortInt, "Mała liczba całkowita" },
-        { DataValueType.Numeric, "Liczba zmiennoprzecinkowa" },
-        { DataValueType.DateTime, "Data i czas" },
-        { DataValueType.Undefined, "Nieokreślony" }
+        { DataType.Text, "Tekst" },
+        { DataType.Number, "Liczba całkowita" },
+        { DataType.Numeric, "Liczba zmiennoprzecinkowa" },
+        { DataType.Date, "Data" },
+        { DataType.Undefined, "Nieokreślony" }
     };
 
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)

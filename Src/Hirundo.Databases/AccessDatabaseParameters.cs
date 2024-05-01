@@ -94,16 +94,15 @@ public class AccessDatabaseParameters : IDatabaseParameters, IFileSource, ISelfE
         };
     }
 
-    private static string ExplainDataType(DataValueType dataType)
+    private static string ExplainDataType(DataType dataType)
     {
         return dataType switch
         {
-            DataValueType.LongInt => "duża liczba całkowita",
-            DataValueType.Text => "tekst",
-            DataValueType.ShortInt => "mała liczba całkowita",
-            DataValueType.Undefined => "nieokreślony",
-            DataValueType.DateTime => "data",
-            DataValueType.Numeric => "liczba wymierna",
+            DataType.Number => "liczba całkowita",
+            DataType.Text => "tekst",
+            DataType.Undefined => "nieokreślony",
+            DataType.Date => "data",
+            DataType.Numeric => "liczba wymierna",
             _ => throw new NotImplementedException()
         };
     }

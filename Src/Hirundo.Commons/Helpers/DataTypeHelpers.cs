@@ -1,5 +1,5 @@
-﻿using System.Globalization;
-using Hirundo.Commons.Models;
+﻿using Hirundo.Commons.Models;
+using System.Globalization;
 
 namespace Hirundo.Commons.Helpers;
 
@@ -165,8 +165,10 @@ public static class DataTypeHelpers
         };
     }
 
-    public static object ConvertValueToDataType(object value, DataType dataType)
+    public static object? ConvertValueToDataType(object? value, DataType dataType)
     {
+        if (value is null) return value;
+
         return dataType switch
         {
             DataType.Text => ConvertToString(value),
@@ -316,60 +318,60 @@ public static class DataTypeHelpers
             case string stringValue when string.IsNullOrEmpty(stringValue):
                 return null;
             case string stringValue:
-            {
-                if (type == typeof(string))
                 {
-                    return stringValue;
-                }
+                    if (type == typeof(string))
+                    {
+                        return stringValue;
+                    }
 
-                if (type == typeof(DateTime))
-                {
-                    if (DateTime.TryParse(stringValue, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dateValue))
+                    if (type == typeof(DateTime))
                     {
-                        return dateValue;
+                        if (DateTime.TryParse(stringValue, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dateValue))
+                        {
+                            return dateValue;
+                        }
                     }
-                }
-                else if (type == typeof(decimal))
-                {
-                    if (decimal.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var decimalValue))
+                    else if (type == typeof(decimal))
                     {
-                        return decimalValue;
+                        if (decimal.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var decimalValue))
+                        {
+                            return decimalValue;
+                        }
                     }
-                }
 
-                else if (type == typeof(int))
-                {
-                    if (int.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var intValue))
+                    else if (type == typeof(int))
                     {
-                        return intValue;
+                        if (int.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var intValue))
+                        {
+                            return intValue;
+                        }
                     }
-                }
-                else if (type == typeof(long))
-                {
-                    if (long.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var intValue))
+                    else if (type == typeof(long))
                     {
-                        return intValue;
+                        if (long.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var intValue))
+                        {
+                            return intValue;
+                        }
                     }
-                }
 
-                else if (type == typeof(double))
-                {
-                    if (double.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var doubleValue))
+                    else if (type == typeof(double))
                     {
-                        return doubleValue;
+                        if (double.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var doubleValue))
+                        {
+                            return doubleValue;
+                        }
                     }
-                }
 
-                else if (type == typeof(bool))
-                {
-                    if (bool.TryParse(stringValue, out var boolValue))
+                    else if (type == typeof(bool))
                     {
-                        return boolValue;
+                        if (bool.TryParse(stringValue, out var boolValue))
+                        {
+                            return boolValue;
+                        }
                     }
-                }
 
-                return null;
-            }
+                    return null;
+                }
             default:
                 return Convert.ChangeType(value, type, CultureInfo.InvariantCulture);
         }

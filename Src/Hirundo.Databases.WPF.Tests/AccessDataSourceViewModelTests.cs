@@ -1,3 +1,4 @@
+using Hirundo.Commons.Models;
 using Hirundo.Commons.Repositories;
 using Hirundo.Databases.WPF.Access;
 using Moq;
@@ -44,8 +45,8 @@ public class AccessDataSourceViewModelTests
     {
         // Arrange
         _parameters.Columns.Clear();
-        _parameters.Columns.Add(new ColumnParameters("Column1", "Text1", DataValueType.Text));
-        _parameters.Columns.Add(new ColumnParameters("Column2", "Text2", DataValueType.Text));
+        _parameters.Columns.Add(new ColumnParameters("Column1", "Text1", DataType.Text));
+        _parameters.Columns.Add(new ColumnParameters("Column2", "Text2", DataType.Text));
         _viewModel.Columns.Add(_parameters.Columns[0]);
         _viewModel.Columns.Add(_parameters.Columns[1]);
 

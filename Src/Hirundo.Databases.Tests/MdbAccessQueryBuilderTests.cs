@@ -1,4 +1,5 @@
-﻿using Hirundo.Databases.Conditions;
+﻿using Hirundo.Commons.Models;
+using Hirundo.Databases.Conditions;
 
 namespace Hirundo.Databases.Tests;
 
@@ -18,7 +19,7 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table");
-        _builder.WithColumn(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
+        _builder.WithColumn(new ColumnParameters("IDR_Podab", "ID", DataType.Number));
 
         // Act
         var query = _builder.Build();
@@ -32,8 +33,8 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table 2");
-        _builder.WithColumn(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
-        _builder.WithColumn(new ColumnParameters("RING", "RING", DataValueType.Text));
+        _builder.WithColumn(new ColumnParameters("IDR_Podab", "ID", DataType.Number));
+        _builder.WithColumn(new ColumnParameters("RING", "RING", DataType.Text));
 
         // Act
         var query = _builder.Build();
@@ -47,13 +48,13 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table 3");
-        _builder.WithColumn(new ColumnParameters("HOUR", "HOUR", DataValueType.ShortInt));
+        _builder.WithColumn(new ColumnParameters("HOUR", "HOUR", DataType.Number));
 
         // Act
         var query = _builder.Build();
 
         // Assert
-        Assert.That(query, Is.EqualTo("SELECT IIF(IsNull([HOUR]), Null, CINT([HOUR])) FROM [example table 3]"));
+        Assert.That(query, Is.EqualTo("SELECT IIF(IsNull([HOUR]), Null, CLNG([HOUR])) FROM [example table 3]"));
     }
 
     /// <summary>
@@ -66,7 +67,7 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table 4");
-        _builder.WithColumn(new ColumnParameters("WEIGHT", "WEIGHT", DataValueType.Numeric));
+        _builder.WithColumn(new ColumnParameters("WEIGHT", "WEIGHT", DataType.Numeric));
 
         // Act
         var query = _builder.Build();
@@ -80,7 +81,7 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table 5");
-        _builder.WithColumn(new ColumnParameters("DATE", "DATE", DataValueType.DateTime));
+        _builder.WithColumn(new ColumnParameters("DATE", "DATE", DataType.Date));
 
         // Act
         var query = _builder.Build();
@@ -94,7 +95,7 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table 6");
-        _builder.WithColumn(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
+        _builder.WithColumn(new ColumnParameters("IDR_Podab", "ID", DataType.Number));
         _builder.WithCondition(new DatabaseCondition("SPECIES", "REG.REG", DatabaseConditionType.IsEqual));
 
         // Act
@@ -109,7 +110,7 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table 7");
-        _builder.WithColumn(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
+        _builder.WithColumn(new ColumnParameters("IDR_Podab", "ID", DataType.Number));
         _builder.WithCondition(new DatabaseCondition("SPECIES", "REG.REG", DatabaseConditionType.IsEqual));
         _builder.WithCondition(new DatabaseCondition("RING", "J634038", DatabaseConditionType.IsEqual));
 
@@ -125,7 +126,7 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table 8");
-        _builder.WithColumn(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
+        _builder.WithColumn(new ColumnParameters("IDR_Podab", "ID", DataType.Number));
         _builder.WithCondition(new DatabaseCondition("SPECIES", "REG.REG", DatabaseConditionType.IsEqual));
         _builder.WithCondition(new DatabaseCondition("RING", "J634038", DatabaseConditionType.IsEqual, DatabaseConditionOperator.Or));
 
@@ -141,7 +142,7 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table 9");
-        _builder.WithColumn(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
+        _builder.WithColumn(new ColumnParameters("IDR_Podab", "ID", DataType.Number));
         _builder.WithCondition(new DatabaseCondition("SPECIES", "REG.REG", DatabaseConditionType.IsEqual));
         _builder.WithCondition(new DatabaseCondition("RING", "J634038", DatabaseConditionType.IsEqual, DatabaseConditionOperator.Or));
         _builder.WithCondition(new DatabaseCondition("RING", "J664040", DatabaseConditionType.IsEqual));
@@ -158,7 +159,7 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table 10");
-        _builder.WithColumn(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
+        _builder.WithColumn(new ColumnParameters("IDR_Podab", "ID", DataType.Number));
         _builder.WithCondition(new DatabaseCondition("DATE", new DateTime(1967, 08, 16), DatabaseConditionType.IsGreaterThan));
         _builder.WithCondition(new DatabaseCondition("DATE", new DateTime(1967, 08, 17), DatabaseConditionType.IsLowerThan));
 
@@ -174,7 +175,7 @@ public class MdbAccessQueryBuilderTests
     {
         // Arrange
         _builder.WithTable("example table 11");
-        _builder.WithColumn(new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt));
+        _builder.WithColumn(new ColumnParameters("IDR_Podab", "ID", DataType.Number));
         _builder.WithCondition(new DatabaseCondition("SPECIES", "REG.REG", DatabaseConditionType.IsNotEqual));
 
         // Act

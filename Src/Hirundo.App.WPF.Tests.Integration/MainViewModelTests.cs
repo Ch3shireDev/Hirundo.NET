@@ -94,7 +94,7 @@ public class MainViewModelTests
                             {
                                 DatabaseColumn = "AAA",
                                 ValueName = "XXX",
-                                DataType = DataValueType.LongInt
+                                DataType = DataType.Number
                             }
                         ]
                     }
@@ -124,7 +124,7 @@ public class MainViewModelTests
         Assert.That(accessDatabaseParameters.Columns.Count, Is.EqualTo(1));
         Assert.That(accessDatabaseParameters.Columns[0].DatabaseColumn, Is.EqualTo("AAA"));
         Assert.That(accessDatabaseParameters.Columns[0].ValueName, Is.EqualTo("XXX"));
-        Assert.That(accessDatabaseParameters.Columns[0].DataType, Is.EqualTo(DataValueType.LongInt));
+        Assert.That(accessDatabaseParameters.Columns[0].DataType, Is.EqualTo(DataType.Number));
 
         var dataSourceViewModel = _viewModel.ViewModels.OfType<ParametersBrowserViewModel>().First();
         Assert.That(dataSourceViewModel, Is.Not.Null);
@@ -162,7 +162,7 @@ public class MainViewModelTests
                             {
                                 DatabaseColumn = "AAA",
                                 ValueName = "XXX",
-                                DataType = DataValueType.LongInt
+                                DataType = DataType.Number
                             }
                         ]
                     }

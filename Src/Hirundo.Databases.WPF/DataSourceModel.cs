@@ -2,6 +2,7 @@
 using Hirundo.Commons.Repositories;
 using Hirundo.Commons.WPF;
 using Hirundo.Databases.WPF.Access;
+using Hirundo.Databases.WPF.Excel;
 
 namespace Hirundo.Databases.WPF;
 
@@ -46,6 +47,7 @@ public class DataSourceModel(ILabelsRepository labelsRepository, IAccessMetadata
         {
             AccessDatabaseParameters accessDatabaseParameters => new AccessDataSourceViewModel(new AccessDataSourceModel(accessDatabaseParameters, labelsRepository, speciesRepository),
                 accessMetadataService),
+            XlsxDatabaseParameters xlsxDatabaseParameters => new ExcelDataSourceViewModel(new ExcelDataSourceModel(xlsxDatabaseParameters, labelsRepository, speciesRepository), accessMetadataService),
             _ => throw new NotImplementedException()
         };
     }
@@ -72,12 +74,11 @@ public class DataSourceModel(ILabelsRepository labelsRepository, IAccessMetadata
     {
         var dataType = columnMapping.DataType switch
         {
-            DataValueType.ShortInt => DataType.Number,
-            DataValueType.Numeric => DataType.Numeric,
-            DataValueType.Undefined => DataType.Undefined,
-            DataValueType.LongInt => DataType.Number,
-            DataValueType.Text => DataType.Text,
-            DataValueType.DateTime => DataType.Date,
+            DataType.Number => DataType.Number,
+            DataType.Numeric => DataType.Numeric,
+            DataType.Undefined => DataType.Undefined,
+            DataType.Text => DataType.Text,
+            DataType.Date => DataType.Date,
             _ => DataType.Undefined
         };
 

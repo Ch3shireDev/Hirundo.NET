@@ -43,10 +43,10 @@ public class DatabaseBuilder : IDatabaseBuilder
             switch (databaseParameters)
             {
                 case AccessDatabaseParameters accessDatabaseParameters:
-
-                    _builders.Add(() => new MdbAccessDatabase(accessDatabaseParameters, _token)
-                    );
-
+                    _builders.Add(() => new MdbAccessDatabase(accessDatabaseParameters, _token));
+                    break;
+                case XlsxDatabaseParameters xlsxDatabaseParameters:
+                    _builders.Add(() => new XlsxDatabase(xlsxDatabaseParameters, _token));
                     break;
                 default:
                     throw new ArgumentException($"Unknown database type: {databaseParameters.GetType()}");

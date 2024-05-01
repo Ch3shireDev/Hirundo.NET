@@ -1,3 +1,5 @@
+using Hirundo.Commons.Models;
+
 namespace Hirundo.Databases.Tests.Integration;
 
 [TestFixture]
@@ -16,11 +18,11 @@ public class CompositeDatabaseTests
             SpeciesIdentifier = "SPECIES",
             Columns =
             [
-                new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt),
-                new ColumnParameters("RING", "RING", DataValueType.Text),
-                new ColumnParameters("SPEC", "SPECIES", DataValueType.Text),
-                new ColumnParameters("DATE", "DATE", DataValueType.DateTime),
-                new ColumnParameters("MASS", "WEIGHT", DataValueType.Numeric)
+                new ColumnParameters("IDR_Podab", "ID", DataType.Number),
+                new ColumnParameters("RING", "RING", DataType.Text),
+                new ColumnParameters("SPEC", "SPECIES", DataType.Text),
+                new ColumnParameters("DATE", "DATE", DataType.Date),
+                new ColumnParameters("MASS", "WEIGHT", DataType.Numeric)
             ]
         };
 
@@ -33,11 +35,11 @@ public class CompositeDatabaseTests
             SpeciesIdentifier = "SPECIES",
             Columns =
             [
-                new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt),
-                new ColumnParameters("RING", "RING", DataValueType.Text),
-                new ColumnParameters("Species Code", "SPECIES", DataValueType.Text),
-                new ColumnParameters("DATE2", "DATE", DataValueType.DateTime),
-                new ColumnParameters("WEIGHT", "WEIGHT", DataValueType.Numeric)
+                new ColumnParameters("IDR_Podab", "ID", DataType.Number),
+                new ColumnParameters("RING", "RING", DataType.Text),
+                new ColumnParameters("Species Code", "SPECIES", DataType.Text),
+                new ColumnParameters("DATE2", "DATE", DataType.Date),
+                new ColumnParameters("WEIGHT", "WEIGHT", DataType.Numeric)
             ]
         };
 

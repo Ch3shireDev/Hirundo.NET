@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using Hirundo.Commons.Models;
 using Hirundo.Commons.WPF;
 using Hirundo.Databases.Conditions;
 using Serilog;
@@ -7,7 +8,7 @@ using System.Windows.Input;
 
 namespace Hirundo.Databases.WPF.Access;
 
-[ParametersData(typeof(AccessDatabaseParameters), typeof(AccessDataSourceModel), typeof(AccessDataSourceView))]
+[ParametersData(typeof(AccessDatabaseParameters), typeof(AccessDataSourceModel), typeof(ExcelDataSourceView))]
 public class AccessDataSourceViewModel(AccessDataSourceModel model, IAccessMetadataService accessMetadataService) : ParametersViewModel(model), ILabelsUpdater
 {
     public override string Name => "Źródło danych Access";
@@ -185,7 +186,7 @@ public class AccessDataSourceViewModel(AccessDataSourceModel model, IAccessMetad
         if (string.IsNullOrEmpty(Table)) return;
         var columnData = Columns.FirstOrDefault(c => c.ValueName == SpeciesIdentifier);
         if (columnData == null) return;
-        if (columnData.DataType != DataValueType.Text) return;
+        if (columnData.DataType != DataType.Text) return;
         var speciesColumn = columnData.DatabaseColumn;
         if (string.IsNullOrEmpty(speciesColumn)) return;
 
@@ -193,7 +194,10 @@ public class AccessDataSourceViewModel(AccessDataSourceModel model, IAccessMetad
             .Select(val => val?.ToString() ?? "")
             .Where(val => !string.IsNullOrWhiteSpace(val))
             .ToArray();
-        Log.Information("Pobrano listę gatunków: {species}", string.Join(", ", speciesList));
+
+        Log.Information("Pobrano listę gatunków.");
+        Log.Debug("Lista gatunków: {species}", string.Join(", ", speciesList));
+
         SpeciesRepository.UpdateSpecies(speciesList);
     }
 

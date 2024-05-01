@@ -52,7 +52,7 @@ public class CsvSummaryWriterTests
         // Assert
         var result = stringWriter.ToString();
         Assert.That(result, Is.Not.Null);
-        Assert.That(result, Is.EqualTo("Ring,DateFirstSeen,DateLastSeen,ID\r\n123,2020-06-01,2021-06-01,123\r\n"));
+        Assert.That(result, Is.EqualTo("Ring,DateFirstSeen,DateLastSeen,ID\r\n123,2020-06-01,2021-06-01,123" + Environment.NewLine));
     }
 
     [Test]
@@ -67,6 +67,6 @@ public class CsvSummaryWriterTests
         // Assert
         var result = stringWriter.ToString();
         Assert.That(result, Is.Not.Null);
-        Assert.That(result, Is.EqualTo("Ring,DateFirstSeen,DateLastSeen,PID,MEAN_WEIGHT\r\n123,2020-06-01,2021-06-01,123,22.5\r\n"));
+        Assert.That(result, Is.EqualTo("Ring,DateFirstSeen,DateLastSeen,PID,MEAN_WEIGHT\r\n123,2020-06-01,2021-06-01,123,22.5" + Environment.NewLine));
     }
 }

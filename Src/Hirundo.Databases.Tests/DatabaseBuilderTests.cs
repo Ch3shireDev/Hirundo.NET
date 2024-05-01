@@ -1,4 +1,5 @@
-﻿using Hirundo.Databases.Conditions;
+﻿using Hirundo.Commons.Models;
+using Hirundo.Databases.Conditions;
 
 namespace Hirundo.Databases.Tests;
 
@@ -23,8 +24,8 @@ public class DatabaseBuilderTests
             Table = "example table",
             Columns =
             [
-                new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt),
-                new ColumnParameters("RING", "RING", DataValueType.Text)
+                new ColumnParameters("IDR_Podab", "ID", DataType.Number),
+                new ColumnParameters("RING", "RING", DataType.Text)
             ],
             Conditions =
             [
@@ -54,8 +55,8 @@ public class DatabaseBuilderTests
             Table = "example table",
             Columns =
             [
-                new ColumnParameters("IDR_Podab", "ID", DataValueType.LongInt),
-                new ColumnParameters("RING", "RING", DataValueType.Text)
+                new ColumnParameters("IDR_Podab", "ID", DataType.Number),
+                new ColumnParameters("RING", "RING", DataType.Text)
             ],
             Conditions =
             [

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0-windows</TargetFramework>
@@ -23,6 +23,12 @@
 
   <ItemGroup>
     <Compile Update="Access\AccessDataSourceView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Excel\ExcelDataSourceView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Excel\ExcelDataSourceView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="DataSourceView.xaml.cs">

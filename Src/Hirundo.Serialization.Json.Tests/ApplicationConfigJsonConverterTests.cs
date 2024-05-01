@@ -1,5 +1,5 @@
-﻿using System.Runtime.Serialization;
-using Hirundo.App;
+﻿using Hirundo.App;
+using Hirundo.Commons.Models;
 using Hirundo.Databases;
 using Hirundo.Processors.Observations;
 using Hirundo.Processors.Population.Conditions;
@@ -9,6 +9,7 @@ using Hirundo.Processors.Statistics.Operations.Outliers;
 using Hirundo.Writers;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using System.Runtime.Serialization;
 
 namespace Hirundo.Serialization.Json.Tests;
 
@@ -47,7 +48,7 @@ public class ApplicationConfigJsonConverterTests
                     {
                       ""DatabaseColumn"": ""IDR_Podab"",
                       ""ValueName"": ""ID"",
-                      ""DataType"": ""LongInt""
+                      ""DataType"": ""Number""
                     },
                     {
                       ""DatabaseColumn"": ""RING"",
@@ -57,7 +58,7 @@ public class ApplicationConfigJsonConverterTests
                     {
                       ""DatabaseColumn"": ""DATE"",
                       ""ValueName"": ""DATE"",
-                      ""DataType"": ""DateTime""
+                      ""DataType"": ""Date""
                     }
                   ]
                 },
@@ -69,7 +70,7 @@ public class ApplicationConfigJsonConverterTests
                     {
                       ""DatabaseColumn"": ""IDR_Podab"",
                       ""ValueName"": ""ID"",
-                      ""DataType"": ""LongInt""
+                      ""DataType"": ""Number""
                     },
                     {
                       ""DatabaseColumn"": ""RING"",
@@ -79,7 +80,7 @@ public class ApplicationConfigJsonConverterTests
                     {
                       ""DatabaseColumn"": ""DATE2"",
                       ""ValueName"": ""DATE"",
-                      ""DataType"": ""DateTime""
+                      ""DataType"": ""Date""
                     },
                   ]
                 }
@@ -102,13 +103,13 @@ public class ApplicationConfigJsonConverterTests
         Assert.That(databaseParameters0.Columns, Has.Count.EqualTo(3));
         Assert.That(databaseParameters0.Columns[0].DatabaseColumn, Is.EqualTo("IDR_Podab"));
         Assert.That(databaseParameters0.Columns[0].ValueName, Is.EqualTo("ID"));
-        Assert.That(databaseParameters0.Columns[0].DataType, Is.EqualTo(DataValueType.LongInt));
+        Assert.That(databaseParameters0.Columns[0].DataType, Is.EqualTo(DataType.Number));
         Assert.That(databaseParameters0.Columns[1].DatabaseColumn, Is.EqualTo("RING"));
         Assert.That(databaseParameters0.Columns[1].ValueName, Is.EqualTo("RING"));
-        Assert.That(databaseParameters0.Columns[1].DataType, Is.EqualTo(DataValueType.Text));
+        Assert.That(databaseParameters0.Columns[1].DataType, Is.EqualTo(DataType.Text));
         Assert.That(databaseParameters0.Columns[2].DatabaseColumn, Is.EqualTo("DATE"));
         Assert.That(databaseParameters0.Columns[2].ValueName, Is.EqualTo("DATE"));
-        Assert.That(databaseParameters0.Columns[2].DataType, Is.EqualTo(DataValueType.DateTime));
+        Assert.That(databaseParameters0.Columns[2].DataType, Is.EqualTo(DataType.Date));
 
         var databaseParameters1 = (SqlServerParameters)config.Databases.Databases[1];
         Assert.That(databaseParameters1.ConnectionString, Is.EqualTo("Server=localhost;Database=DB"));
@@ -116,13 +117,13 @@ public class ApplicationConfigJsonConverterTests
         Assert.That(databaseParameters1.Columns, Has.Count.EqualTo(3));
         Assert.That(databaseParameters1.Columns[0].DatabaseColumn, Is.EqualTo("IDR_Podab"));
         Assert.That(databaseParameters1.Columns[0].ValueName, Is.EqualTo("ID"));
-        Assert.That(databaseParameters1.Columns[0].DataType, Is.EqualTo(DataValueType.LongInt));
+        Assert.That(databaseParameters1.Columns[0].DataType, Is.EqualTo(DataType.Number));
         Assert.That(databaseParameters1.Columns[1].DatabaseColumn, Is.EqualTo("RING"));
         Assert.That(databaseParameters1.Columns[1].ValueName, Is.EqualTo("RING"));
-        Assert.That(databaseParameters1.Columns[1].DataType, Is.EqualTo(DataValueType.Text));
+        Assert.That(databaseParameters1.Columns[1].DataType, Is.EqualTo(DataType.Text));
         Assert.That(databaseParameters1.Columns[2].DatabaseColumn, Is.EqualTo("DATE2"));
         Assert.That(databaseParameters1.Columns[2].ValueName, Is.EqualTo("DATE"));
-        Assert.That(databaseParameters1.Columns[2].DataType, Is.EqualTo(DataValueType.DateTime));
+        Assert.That(databaseParameters1.Columns[2].DataType, Is.EqualTo(DataType.Date));
     }
 
     [Test]

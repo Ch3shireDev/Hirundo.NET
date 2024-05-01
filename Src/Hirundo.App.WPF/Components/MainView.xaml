@@ -77,33 +77,36 @@
                     </DataTemplate>
                 </TabControl.ItemTemplate>
             </TabControl>
-            <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Visible">
-                <ListBox SelectionMode="Single" ItemsSource="{Binding LogEventsItems}">
-                    <ListBox.Resources>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="Padding" Value="0" />
-                            <Setter Property="Margin" Value="0" />
-                        </Style>
-                    </ListBox.Resources>
-                    <b:Interaction.Behaviors>
-                        <wpf11:AutoScrollBehavior />
-                    </b:Interaction.Behaviors>
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="Padding" Value="2,0" />
-                            <Setter Property="Margin" Value="2,0" />
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock TextWrapping="Wrap"
+            <ListBox Grid.Column="1" SelectionMode="Single" Margin="5" ItemsSource="{Binding LogEventsItems}">
+                <ListBox.Resources>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Padding" Value="0" />
+                        <Setter Property="Margin" Value="0" />
+                        <Setter Property="IsHitTestVisible" Value="False" />
+                    </Style>
+                    <Style TargetType="ListBox">
+                        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+                        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible"/>
+                    </Style>
+                </ListBox.Resources>
+                <b:Interaction.Behaviors>
+                    <wpf11:AutoScrollBehavior />
+                </b:Interaction.Behaviors>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Padding" Value="2,0" />
+                        <Setter Property="Margin" Value="2,0" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock TextWrapping="Wrap"
                                        Text="{Binding Converter={StaticResource LogEventConverter}}"
                                        FontFamily="Consolas" Padding="0" Margin="0"
                                        Foreground="{Binding Converter={StaticResource LogEventToColorConverter}}" />
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </ScrollViewer>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
         <DockPanel Grid.Row="2">
             <WrapPanel HorizontalAlignment="Left">
