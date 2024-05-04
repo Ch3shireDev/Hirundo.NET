@@ -1,13 +1,8 @@
-﻿using System.IO;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Windows;
-using Autofac;
+﻿using Autofac;
 using Hirundo.App.WPF.Components;
 using Hirundo.Commons.Repositories;
 using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
-using Hirundo.Databases;
 using Hirundo.Databases.Helpers;
 using Hirundo.Databases.WPF;
 using Hirundo.Processors.Computed.WPF;
@@ -19,6 +14,10 @@ using Hirundo.Serialization.Json;
 using Hirundo.Writers.WPF;
 using Newtonsoft.Json;
 using Serilog;
+using System.IO;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Windows;
 
 namespace Hirundo.App.WPF;
 
@@ -45,6 +44,7 @@ public partial class App : Application
 
         builder.RegisterType<HirundoApp>().As<IHirundoApp>();
         builder.RegisterType<AccessMetadataService>().As<IAccessMetadataService>();
+        builder.RegisterType<ExcelMetadataService>().As<IExcelMetadataService>();
 
         builder.RegisterType<DataSourceModel>().AsSelf().SingleInstance();
 

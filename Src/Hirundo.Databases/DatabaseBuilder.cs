@@ -45,7 +45,7 @@ public class DatabaseBuilder : IDatabaseBuilder
                 case AccessDatabaseParameters accessDatabaseParameters:
                     _builders.Add(() => new MdbAccessDatabase(accessDatabaseParameters, _token));
                     break;
-                case XlsxDatabaseParameters xlsxDatabaseParameters:
+                case ExcelDatabaseParameters xlsxDatabaseParameters:
                     _builders.Add(() => new XlsxDatabase(xlsxDatabaseParameters, _token));
                     break;
                 default:

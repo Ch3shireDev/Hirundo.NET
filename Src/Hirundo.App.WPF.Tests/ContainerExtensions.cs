@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using Hirundo.App.WPF.Components;
 using Hirundo.Commons.Repositories;
-using Hirundo.Databases;
+using Hirundo.Databases.Helpers;
 using Hirundo.Databases.WPF;
 using Hirundo.Processors.Computed.WPF;
 using Hirundo.Processors.Observations.WPF;
@@ -29,6 +29,9 @@ internal static class ContainerExtensions
 
         var accessMetadataService = new Mock<IAccessMetadataService>();
         builder.RegisterInstance(accessMetadataService.Object).As<IAccessMetadataService>().SingleInstance();
+
+        var excelMetadataService = new Mock<IExcelMetadataService>();
+        builder.RegisterInstance(excelMetadataService.Object).As<IExcelMetadataService>().SingleInstance();
 
         builder.RegisterType<DataSourceModel>().AsSelf().SingleInstance();
         builder.RegisterType<ObservationsModel>().AsSelf().SingleInstance();

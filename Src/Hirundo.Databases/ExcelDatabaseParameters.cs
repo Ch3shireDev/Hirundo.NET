@@ -7,7 +7,7 @@ using System.Text;
 namespace Hirundo.Databases;
 
 [TypeDescription("Xlsx", "Źródło danych Excel", "Źródło danych z pliku arkusza Excel (.xlsx).")]
-public class XlsxDatabaseParameters : IDatabaseParameters, IFileSource, ISelfExplainer
+public class ExcelDatabaseParameters : IDatabaseParameters, IFileSource, ISelfExplainer
 {
     public string Path { get; set; } = string.Empty;
     public string RingIdentifier { get; set; } = string.Empty;

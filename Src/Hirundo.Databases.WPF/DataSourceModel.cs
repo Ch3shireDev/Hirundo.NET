@@ -1,12 +1,13 @@
 ﻿using Hirundo.Commons.Models;
 using Hirundo.Commons.Repositories;
 using Hirundo.Commons.WPF;
+using Hirundo.Databases.Helpers;
 using Hirundo.Databases.WPF.Access;
 using Hirundo.Databases.WPF.Excel;
 
 namespace Hirundo.Databases.WPF;
 
-public class DataSourceModel(ILabelsRepository labelsRepository, IAccessMetadataService accessMetadataService, ISpeciesRepository speciesRepository)
+public class DataSourceModel(ILabelsRepository labelsRepository, IAccessMetadataService accessMetadataService, ISpeciesRepository speciesRepository, IExcelMetadataService excelMetadataService)
     : ParametersBrowserModel<DatabaseParameters, IDatabaseParameters, DataSourceModel>(labelsRepository, speciesRepository)
 {
     private readonly IAccessMetadataService accessMetadataService = accessMetadataService;
@@ -47,7 +48,7 @@ public class DataSourceModel(ILabelsRepository labelsRepository, IAccessMetadata
         {
             AccessDatabaseParameters accessDatabaseParameters => new AccessDataSourceViewModel(new AccessDataSourceModel(accessDatabaseParameters, labelsRepository, speciesRepository),
                 accessMetadataService),
-            XlsxDatabaseParameters xlsxDatabaseParameters => new ExcelDataSourceViewModel(new ExcelDataSourceModel(xlsxDatabaseParameters, labelsRepository, speciesRepository), accessMetadataService),
+            ExcelDatabaseParameters xlsxDatabaseParameters => new ExcelDataSourceViewModel(new ExcelDataSourceModel(xlsxDatabaseParameters, labelsRepository, speciesRepository), excelMetadataService),
             _ => throw new NotImplementedException()
         };
     }

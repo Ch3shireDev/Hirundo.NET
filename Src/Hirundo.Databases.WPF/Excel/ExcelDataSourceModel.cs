@@ -3,7 +3,7 @@ using Hirundo.Commons.WPF;
 
 namespace Hirundo.Databases.WPF.Excel;
 
-public class ExcelDataSourceModel(XlsxDatabaseParameters parameters, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository)
+public class ExcelDataSourceModel(ExcelDatabaseParameters parameters, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository)
     : ParametersModel(parameters, labelsRepository, speciesRepository)
 {
     public string Path

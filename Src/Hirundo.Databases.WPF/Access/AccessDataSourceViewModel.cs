@@ -2,6 +2,7 @@
 using Hirundo.Commons.Models;
 using Hirundo.Commons.WPF;
 using Hirundo.Databases.Conditions;
+using Hirundo.Databases.Helpers;
 using Serilog;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -133,7 +134,7 @@ public class AccessDataSourceViewModel(AccessDataSourceModel model, IAccessMetad
         }
         catch (Exception e)
         {
-            Log.Error(e, $"Błąd podczas ładowania metadanych z pliku {Path}.");
+            Log.Error(e, "Błąd podczas ładowania metadanych z pliku {path}.", Path);
 
             Log.Debug("Informacja o błędzie: {error}", e.Message);
 
@@ -209,7 +210,7 @@ public class AccessDataSourceViewModel(AccessDataSourceModel model, IAccessMetad
 
     #region commands
     public ICommand LoadedCommand => new RelayCommand(Loaded);
-    public ICommand AfterFileCommand => new RelayCommand(() => LoadMetadata(true));
+    public ICommand LoadFileCommand => new RelayCommand(() => LoadMetadata(true));
     public ICommand UpdateLabelsCommand => new RelayCommand(UpdateLabels);
     public ICommand RemoveValuesCommand => new RelayCommand(RemoveValues);
     public ICommand TableSelectionChangedCommand => new RelayCommand(TableSelectionChanged);

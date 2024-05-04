@@ -5,7 +5,7 @@ using System.Globalization;
 
 namespace Hirundo.Databases;
 
-public class XlsxDatabase(XlsxDatabaseParameters parameters, CancellationToken? token = null) : IDatabase
+public class XlsxDatabase(ExcelDatabaseParameters parameters, CancellationToken? token = null) : IDatabase
 {
     public string Path { get; } = parameters.Path;
     public string RingIdentifier { get; } = parameters.RingIdentifier;
@@ -43,7 +43,7 @@ public class XlsxDatabase(XlsxDatabaseParameters parameters, CancellationToken? 
         }
     }
 
-    private static IEnumerable<object?> GetValues(XlsxDatabaseParameters parameters, IXLRow? row)
+    private static IEnumerable<object?> GetValues(ExcelDatabaseParameters parameters, IXLRow? row)
     {
         for (var i = 0; i < parameters.Columns.Count; i++)
         {

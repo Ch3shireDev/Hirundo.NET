@@ -5,13 +5,13 @@ namespace Hirundo.Databases.Tests.Integration;
 [TestFixture]
 public class XlsxDatabaseIntegrationTests
 {
-    private XlsxDatabaseParameters parameters = null!;
+    private ExcelDatabaseParameters parameters = null!;
     private DatabaseParameters databaseParameters = null!;
 
     [SetUp]
     public void Initialize()
     {
-        parameters = new XlsxDatabaseParameters
+        parameters = new ExcelDatabaseParameters
         {
             Path = "./Assets/example-data.xlsx",
             RingIdentifier = "RING",
