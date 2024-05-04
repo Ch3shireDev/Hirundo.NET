@@ -27,7 +27,6 @@ public class ExcelDataSourceViewModel(ExcelDataSourceModel model, IExcelMetadata
 
     public event EventHandler<EventArgs>? LabelsUpdated;
 
-
     public override string RemoveText => "Usuń źródło danych";
 
     public string Path
@@ -70,7 +69,6 @@ public class ExcelDataSourceViewModel(ExcelDataSourceModel model, IExcelMetadata
         }
     }
 
-
     private void RemoveValues()
     {
         model.Columns.Clear();
@@ -85,7 +83,6 @@ public class ExcelDataSourceViewModel(ExcelDataSourceModel model, IExcelMetadata
     {
         LabelsUpdated?.Invoke(this, EventArgs.Empty);
     }
-
 
     public void TableSelectionChanged()
     {
@@ -138,43 +135,27 @@ public class ExcelDataSourceViewModel(ExcelDataSourceModel model, IExcelMetadata
         try
         {
             if (string.IsNullOrWhiteSpace(Path)) return;
-            //    if (!force && Tables.Any()) return;
             var columns = excelMetadataService.GetColumns(Path);
-            //    Log.Debug($"Załadowano metadane: {metadata.Length} tabel.");
-
-            //    var selectedTable = Table;
 
             Columns.Clear();
+            model.Columns.Clear();
 
             foreach (var column in columns)
             {
                 Columns.Add(column);
                 DataColumns.Add(column.DatabaseColumn);
+                model.Columns.Add(column);
             }
 
-            //    Tables.Clear();
+            LabelsUpdated?.Invoke(this, EventArgs.Empty);
 
-            //    foreach (var table in metadata)
-            //    {
-            //        MetadatataTables.Add(table);
-            //        Tables.Add(table.TableName);
-            //    }
-
-            //    Table = Tables
-            //        .FirstOrDefault(
-            //            t => string.Equals(t, selectedTable, StringComparison.InvariantCultureIgnoreCase)
-            //        ) ?? string.Empty;
+            LabelsRepository.SetLabels(Columns.Select(c => new DataLabel(c.ValueName, c.DataType)));
         }
         catch (Exception e)
         {
             Log.Error(e, "Błąd podczas ładowania metadanych z pliku {path}.", Path);
 
             Log.Debug("Informacja o błędzie: {error}", e.Message);
-
-            //if (!string.IsNullOrEmpty(Table))
-            //{
-            //    Tables.Add(Table);
-            //}
         }
     }
 
