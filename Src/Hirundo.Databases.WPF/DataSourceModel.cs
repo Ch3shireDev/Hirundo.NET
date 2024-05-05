@@ -23,12 +23,16 @@ public class DataSourceModel(ILabelsRepository labelsRepository, IAccessMetadata
 
     public override IEnumerable<ParametersViewModel> GetParametersViewModels()
     {
-        return ParametersContainer
-                .Databases
-                .Select(AsParametersViewModel)
-                .Select(AddUpdaterListener)
-                .Select(AddRemovedListener)
-            ;
+        foreach (var condition in ParametersContainer.Databases)
+        {
+            var viewModel = AsParametersViewModel(condition);
+            viewModel = AddUpdaterListener(viewModel);
+            viewModel = AddRemovedListener(viewModel);
+            viewModel = _factory.AddLabelsToViewModel(viewModel, condition);
+            yield return viewModel;
+        }
+
+        //return Parameters.Select(_factory.CreateViewModel).Select(AddUpdaterListener);
     }
 
 

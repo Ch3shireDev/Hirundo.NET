@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	<UseWPF>true</UseWPF>
+	<PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="8.0.0" />
+    <PackageReference Include="Moq" Version="4.20.70" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hirundo.App.WPF\Hirundo.App.WPF.csproj" />
+    <ProjectReference Include="..\Hirundo.Databases.WPF\Hirundo.Databases.WPF.csproj" />
+    <ProjectReference Include="..\Hirundo.Processors.Computed.WPF\Hirundo.Processors.Computed.WPF.csproj" />
+    <ProjectReference Include="..\Hirundo.Processors.Observations.WPF\Hirundo.Processors.Observations.WPF.csproj" />
+    <ProjectReference Include="..\Hirundo.Processors.Population.WPF\Hirundo.Processors.Population.WPF.csproj" />
+    <ProjectReference Include="..\Hirundo.Processors.Returning.WPF\Hirundo.Processors.Returning.WPF.csproj" />
+    <ProjectReference Include="..\Hirundo.Processors.Statistics.WPF\Hirundo.Processors.Statistics.WPF.csproj" />
+    <ProjectReference Include="..\Hirundo.Writers.WPF\Hirundo.Writers.WPF.csproj" />
+  </ItemGroup>
+
+</Project>

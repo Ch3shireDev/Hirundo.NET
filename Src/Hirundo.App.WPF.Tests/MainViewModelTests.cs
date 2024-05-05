@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Hirundo.App.Tests.Library;
 using Hirundo.App.WPF.Components;
 using Hirundo.Commons.WPF;
 using NUnit.Framework;

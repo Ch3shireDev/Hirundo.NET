@@ -16,6 +16,7 @@
 		<Title>Hirundo.NET</Title>
 		<Copyright>Igor Nowicki, 2024</Copyright>
 		<Description>Program do obliczeń wędrówek ptaków.</Description>
+		<PlatformTarget>AnyCPU</PlatformTarget>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

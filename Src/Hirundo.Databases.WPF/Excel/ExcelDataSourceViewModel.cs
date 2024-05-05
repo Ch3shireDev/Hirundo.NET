@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace Hirundo.Databases.WPF.Excel;
 
-//[ParametersData(typeof(ExcelDatabaseParameters), typeof(ExcelDataSourceModel), typeof(ExcelDataSourceView))]
+[ParametersData(typeof(ExcelDatabaseParameters), typeof(ExcelDataSourceModel), typeof(ExcelDataSourceView))]
 public class ExcelDataSourceViewModel(ExcelDataSourceModel model, IExcelMetadataService excelMetadataService) : ParametersViewModel(model), ILabelsUpdater
 {
     public ICommand LoadedCommand => new RelayCommand(Loaded);

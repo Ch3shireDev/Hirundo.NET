@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Hirundo.App.Tests.Library\Hirundo.App.Tests.Library.csproj" />
     <ProjectReference Include="..\Hirundo.App.WPF\Hirundo.App.WPF.csproj" />
     <ProjectReference Include="..\Hirundo.App\Hirundo.App.csproj" />
   </ItemGroup>

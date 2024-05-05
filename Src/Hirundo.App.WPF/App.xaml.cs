@@ -43,24 +43,21 @@ public partial class App : Application
         var builder = new ContainerBuilder();
 
         builder.RegisterType<HirundoApp>().As<IHirundoApp>();
-        builder.RegisterType<AccessMetadataService>().As<IAccessMetadataService>();
-        builder.RegisterType<ExcelMetadataService>().As<IExcelMetadataService>();
+        builder.RegisterType<SpeciesRepository>().As<ISpeciesRepository>().SingleInstance();
+        builder.RegisterType<LabelsRepository>().As<ILabelsRepository>().SingleInstance();
+        builder.RegisterType<AccessMetadataService>().As<IAccessMetadataService>().SingleInstance();
+        builder.RegisterType<ExcelMetadataService>().As<IExcelMetadataService>().SingleInstance();
 
         builder.RegisterType<DataSourceModel>().AsSelf().SingleInstance();
-
+        builder.RegisterType<ComputedValuesModel>().AsSelf().SingleInstance();
         builder.RegisterType<ObservationsModel>().AsSelf().SingleInstance();
-
         builder.RegisterType<PopulationModel>().AsSelf().SingleInstance();
         builder.RegisterType<ReturningSpecimensModel>().AsSelf().SingleInstance();
         builder.RegisterType<StatisticsModel>().AsSelf().SingleInstance();
         builder.RegisterType<WritersModel>().AsSelf().SingleInstance();
 
-        builder.RegisterType<ComputedValuesModel>().AsSelf().SingleInstance();
-
         builder.RegisterType<MainModel>().AsSelf().SingleInstance();
         builder.RegisterType<MainViewModel>().AsSelf().SingleInstance();
-        builder.RegisterType<LabelsRepository>().As<ILabelsRepository>().SingleInstance();
-        builder.RegisterType<SpeciesRepository>().As<ISpeciesRepository>().SingleInstance();
 
         var container = builder.Build();
 

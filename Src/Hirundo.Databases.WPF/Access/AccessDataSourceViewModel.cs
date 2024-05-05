@@ -12,8 +12,6 @@ namespace Hirundo.Databases.WPF.Access;
 [ParametersData(typeof(AccessDatabaseParameters), typeof(AccessDataSourceModel), typeof(ExcelDataSourceView))]
 public class AccessDataSourceViewModel(AccessDataSourceModel model, IAccessMetadataService accessMetadataService) : ParametersViewModel(model), ILabelsUpdater
 {
-    public override string Name => "Źródło danych Access";
-    public override string Description => "Źródło danych z pliku Access.";
     public override string RemoveText => "Usuń źródło danych";
 
     public string Path

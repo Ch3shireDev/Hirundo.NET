@@ -1,5 +1,5 @@
-﻿using System.Reflection;
-using Hirundo.Commons.Repositories;
+﻿using Hirundo.Commons.Repositories;
+using System.Reflection;
 
 namespace Hirundo.Commons.WPF;
 
@@ -29,8 +29,14 @@ public class ParametersFactory<TCondition, TBrowserModel>(ILabelsRepository labe
 
     public ParametersViewModel CreateViewModel(TCondition condition)
     {
-        var attribute = GetConditionAttribute(condition);
         var viewModel = GetViewModelFromCondition(condition);
+        viewModel = AddLabelsToViewModel(viewModel, condition);
+        return viewModel;
+    }
+
+    public ParametersViewModel AddLabelsToViewModel(ParametersViewModel viewModel, TCondition condition)
+    {
+        var attribute = GetConditionAttribute(condition);
         viewModel.Name = attribute.Name;
         viewModel.Description = attribute.Description;
         return viewModel;

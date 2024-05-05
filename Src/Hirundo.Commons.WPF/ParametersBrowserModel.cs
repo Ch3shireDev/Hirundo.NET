@@ -43,8 +43,8 @@ public abstract class ParametersBrowserModel<TConditionContainer, TCondition, TB
 
     public void AddParameters(ParametersData parametersData)
     {
-        var writer = _factory.CreateCondition(parametersData);
-        Parameters.Add(writer);
+        var parameters = _factory.CreateCondition(parametersData);
+        Parameters.Add(parameters);
     }
 
     public virtual IEnumerable<ParametersViewModel> GetParametersViewModels()

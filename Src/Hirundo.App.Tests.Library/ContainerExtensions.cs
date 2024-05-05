@@ -11,13 +11,15 @@ using Hirundo.Processors.Statistics.WPF;
 using Hirundo.Writers.WPF;
 using Moq;
 
-namespace Hirundo.App.WPF.Tests;
+namespace Hirundo.App.Tests.Library;
 
-internal static class ContainerExtensions
+public static class ContainerExtensions
 {
-    internal static void AddViewModel(this ContainerBuilder builder)
+    public static void AddViewModel(this ContainerBuilder builder)
     {
         var repository = new Mock<ILabelsRepository>();
+
+        builder.RegisterInstance(repository).As<Mock<ILabelsRepository>>();
         builder.RegisterInstance(repository.Object).As<ILabelsRepository>().SingleInstance();
 
         var speciesRepository = new Mock<ISpeciesRepository>();
@@ -25,12 +27,18 @@ internal static class ContainerExtensions
         builder.RegisterInstance(speciesRepository.Object).As<ISpeciesRepository>().SingleInstance();
 
         var hirundoApp = new Mock<IHirundoApp>();
+
+        builder.RegisterInstance(hirundoApp).As<Mock<IHirundoApp>>().SingleInstance();
         builder.RegisterInstance(hirundoApp.Object).As<IHirundoApp>().SingleInstance();
 
         var accessMetadataService = new Mock<IAccessMetadataService>();
+
+        builder.RegisterInstance(accessMetadataService).As<Mock<IAccessMetadataService>>().SingleInstance();
         builder.RegisterInstance(accessMetadataService.Object).As<IAccessMetadataService>().SingleInstance();
 
         var excelMetadataService = new Mock<IExcelMetadataService>();
+
+        builder.RegisterInstance(excelMetadataService).As<Mock<IExcelMetadataService>>().SingleInstance();
         builder.RegisterInstance(excelMetadataService.Object).As<IExcelMetadataService>().SingleInstance();
 
         builder.RegisterType<DataSourceModel>().AsSelf().SingleInstance();
