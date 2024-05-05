@@ -1,25 +1,27 @@
 ﻿
+using ClosedXML.Excel;
+using System.Globalization;
+
 namespace Hirundo.Databases.Helpers;
 
 public class ExcelMetadataService : IExcelMetadataService
 {
     public IList<ColumnParameters> GetColumns(string path)
     {
-        var columnNames = new[] { "ID", "RING", "SPECIES", "DATE", "HOUR", "SEX", "AGE", "WEIGHT", "STATUS", "FAT" };
+        using var workbook = new XLWorkbook(path);
+        var worksheet = workbook.Worksheet(1);
 
-        return [
+        var headerRow = worksheet.Row(1);
 
-                new ColumnParameters { DatabaseColumn = "ID", ValueName = "ID" },
-                new ColumnParameters { DatabaseColumn = "RING", ValueName = "RING" },
-                new ColumnParameters { DatabaseColumn = "SPECIES", ValueName = "SPECIES" },
-                new ColumnParameters { DatabaseColumn = "DATE", ValueName = "DATE" },
-                new ColumnParameters { DatabaseColumn = "HOUR", ValueName = "HOUR" },
-                new ColumnParameters { DatabaseColumn = "SEX", ValueName="SEX"},
-                new ColumnParameters { DatabaseColumn = "AGE", ValueName="AGE"},
-                new ColumnParameters { DatabaseColumn = "WEIGHT", ValueName="WEIGHT"},
-                new ColumnParameters { DatabaseColumn = "STATUS", ValueName="STATUS"},
-                new ColumnParameters { DatabaseColumn = "FAT", ValueName="FAT"}
+        return headerRow.CellsUsed().Select(GetColumnParameters).ToList();
+    }
 
-            ];
+    private static ColumnParameters GetColumnParameters(IXLCell cell)
+    {
+        return new ColumnParameters
+        {
+            DatabaseColumn = cell?.Value.ToString(CultureInfo.InvariantCulture) ?? "",
+            ValueName = cell?.Value.ToString(CultureInfo.InvariantCulture) ?? ""
+        };
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Hirundo.Writers;
 
-[TypeDescription("Xlsx", "Zapis wyników do pliku .xlsx", "Zapisuje wyniki do pliku Excel .xlsx.")]
+[TypeDescription("Xlsx", "Zapis wyników do pliku Excel (.xlsx)", "Zapisuje wyniki do pliku Excel (.xlsx).")]
 public class XlsxSummaryWriterParameters : IWriterParameters, ISelfExplainer
 {
     public bool IncludeExplanation { get; set; } = true;
