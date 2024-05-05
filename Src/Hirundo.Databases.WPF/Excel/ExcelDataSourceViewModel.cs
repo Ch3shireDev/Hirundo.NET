@@ -29,6 +29,9 @@ public class ExcelDataSourceViewModel(ExcelDataSourceModel model, IExcelMetadata
 
     public override string RemoveText => "Usuń źródło danych";
 
+    public string Title { get; set; } = "Wybierz plik Excel (.xlsx)";
+    public string Filter { get; set; } = "Pliki Excel (*.xlsx)|*.xlsx";
+
     public string Path
     {
         get => model.Path;
@@ -110,19 +113,18 @@ public class ExcelDataSourceViewModel(ExcelDataSourceModel model, IExcelMetadata
         if (string.IsNullOrEmpty(SpeciesIdentifier)) return;
         var columnData = Columns.FirstOrDefault(c => c.ValueName == SpeciesIdentifier);
         if (columnData == null) return;
-        if (columnData.DataType != DataType.Text) return;
         var speciesColumn = columnData.DatabaseColumn;
         if (string.IsNullOrEmpty(speciesColumn)) return;
 
-        //var speciesList = accessMetadataService.GetDistinctValues(Path, Table, speciesColumn)
-        //    .Select(val => val?.ToString() ?? "")
-        //    .Where(val => !string.IsNullOrWhiteSpace(val))
-        //    .ToArray();
+        var speciesList = excelMetadataService.GetDistinctValues(Path, speciesColumn)
+            .Select(val => val?.ToString() ?? "")
+            .Where(val => !string.IsNullOrWhiteSpace(val))
+            .ToArray();
 
-        //Log.Information("Pobrano listę gatunków.");
-        //Log.Debug("Lista gatunków: {species}", string.Join(", ", speciesList));
+        Log.Information("Pobrano listę gatunków.");
+        Log.Debug("Lista gatunków: {species}", string.Join(", ", speciesList));
 
-        //SpeciesRepository.UpdateSpecies(speciesList);
+        SpeciesRepository.UpdateSpecies(speciesList);
     }
 
     public void Loaded()

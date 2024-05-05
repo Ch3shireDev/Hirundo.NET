@@ -103,10 +103,10 @@ public class XlsxDatabaseIntegrationTests
         var expectedHeaders = new[] { "ID", "RING", "SPECIES", "DATE", "HOUR", "SEX", "AGE", "WEIGHT", "STATUS", "FAT" };
 
         Assert.That(result[0].Ring, Is.EqualTo("H137652"));
-        Assert.That(result[0].Species, Is.EqualTo("ERI.RUB"));
+        Assert.That(result[0].Species, Is.EqualTo("RUB.RUB"));
         Assert.That(result[0].Date, Is.EqualTo(new DateTime(1967, 08, 17)));
         Assert.That(result[0].Headers, Is.EquivalentTo(expectedHeaders));
-        object?[] expectedValues1 = [4610, "H137652", "ERI.RUB", new DateTime(1967, 08, 17), 6, "F", "J", 15.3, "O", 1];
+        object?[] expectedValues1 = [4610, "H137652", "RUB.RUB", new DateTime(1967, 08, 17), 6, "F", "J", 15.3, "O", 1];
         Assert.That(result[0].Values, Is.EquivalentTo(expectedValues1));
 
         Assert.That(result[1].Ring, Is.EqualTo("H137674"));

@@ -93,4 +93,32 @@ public class ExcelDataSourceViewModelTests
         Assert.That(arguments, Is.InstanceOf<IEnumerable<DataLabel>>());
         Assert.That(arguments!.Select(l => l.Name), Is.EquivalentTo(columns.Select(c => c.ValueName)));
     }
+
+    [Test]
+    public void WhenGetSpecies_ReturnsSpeciesFromRepository()
+    {
+        // Arrange
+        var speciesColumn = "Species";
+        var species = new[] { "Species1", "Species2" };
+
+        _viewModel.Columns.Add(new ColumnParameters
+        {
+            DatabaseColumn = speciesColumn,
+            ValueName = "Species",
+            DataType = DataType.Text
+        });
+
+        _metadataLoader.Setup(x => x.GetDistinctValues(It.IsAny<string>(), It.IsAny<string>())).Returns(species);
+
+        _viewModel.SpeciesIdentifier = speciesColumn;
+
+        // Act
+        _viewModel.GetSpeciesCommand.Execute(null);
+
+        // Assert
+        _metadataLoader.Verify(x => x.GetDistinctValues(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+        _speciesRepository.Verify(x => x.UpdateSpecies(It.IsAny<IList<string>>()), Times.Once);
+        var arguments = _speciesRepository.Invocations[0].Arguments[0] as IList<string>;
+        Assert.That(arguments, Is.EquivalentTo(species));
+    }
 }

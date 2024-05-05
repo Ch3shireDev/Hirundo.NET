@@ -22,14 +22,14 @@ public class ParametersBrowserViewModel(IParametersBrowserModel parametersBrowse
     public string ProcessLabel => parametersBrowserModel.ProcessLabel;
     public Visibility ProcessVisibility => CanProcess ? Visibility.Visible : Visibility.Collapsed;
 
-    private ParametersViewModel SetRefreshOnUpdate(ParametersViewModel viewModelBase)
+    private ParametersViewModel SetRefreshOnUpdate(ParametersViewModel viewModel)
     {
-        if (viewModelBase is IRemovable removable)
+        if (viewModel is IRemovable removable)
         {
             removable.Removed += (_, _) => OnPropertyChanged(nameof(ParametersViewModels));
         }
 
-        return viewModelBase;
+        return viewModel;
     }
 
     public void AddParameters()

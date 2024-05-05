@@ -23,7 +23,7 @@ public class DataSourceModelTests
         _speciesRepository = new Mock<ISpeciesRepository>();
         _excelMetadataService = new Mock<IExcelMetadataService>();
 
-        _model = new DataSourceModel(_labelsRepository.Object, _accessMetadataService.Object, _speciesRepository.Object, _excelMetadataService.Object);
+        _model = new DataSourceModel(_labelsRepository.Object, _speciesRepository.Object, _accessMetadataService.Object, _excelMetadataService.Object);
     }
 
     [Test]

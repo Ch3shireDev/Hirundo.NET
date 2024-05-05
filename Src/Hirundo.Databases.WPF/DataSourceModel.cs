@@ -7,12 +7,12 @@ using Hirundo.Databases.WPF.Excel;
 
 namespace Hirundo.Databases.WPF;
 
-public class DataSourceModel(ILabelsRepository labelsRepository, IAccessMetadataService accessMetadataService, ISpeciesRepository speciesRepository, IExcelMetadataService excelMetadataService)
-    : ParametersBrowserModel<DatabaseParameters, IDatabaseParameters, DataSourceModel>(labelsRepository, speciesRepository)
+public class DataSourceModel(ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository, IAccessMetadataService accessMetadataService, IExcelMetadataService excelMetadataService) : ParametersBrowserModel<DatabaseParameters, IDatabaseParameters, DataSourceModel>(labelsRepository, speciesRepository)
 {
-    private readonly IAccessMetadataService accessMetadataService = accessMetadataService;
     private readonly ILabelsRepository labelsRepository = labelsRepository;
+    private readonly IAccessMetadataService accessMetadataService = accessMetadataService;
     private readonly ISpeciesRepository speciesRepository = speciesRepository;
+    private readonly IExcelMetadataService excelMetadataService = excelMetadataService;
 
     public override string Header => "Źródła";
     public override string Title => "Źródła danych";
@@ -40,7 +40,7 @@ public class DataSourceModel(ILabelsRepository labelsRepository, IAccessMetadata
     {
         if (viewModel is ILabelsUpdater labelsUpdater)
         {
-            labelsUpdater.LabelsUpdated += (_, _) => { UpdateRepository(); };
+            labelsUpdater.LabelsUpdated += (_, _) => UpdateRepository();
         }
 
         return viewModel;
@@ -50,8 +50,7 @@ public class DataSourceModel(ILabelsRepository labelsRepository, IAccessMetadata
     {
         return parameters switch
         {
-            AccessDatabaseParameters accessDatabaseParameters => new AccessDataSourceViewModel(new AccessDataSourceModel(accessDatabaseParameters, labelsRepository, speciesRepository),
-                accessMetadataService),
+            AccessDatabaseParameters accessDatabaseParameters => new AccessDataSourceViewModel(new AccessDataSourceModel(accessDatabaseParameters, labelsRepository, speciesRepository), accessMetadataService),
             ExcelDatabaseParameters xlsxDatabaseParameters => new ExcelDataSourceViewModel(new ExcelDataSourceModel(xlsxDatabaseParameters, labelsRepository, speciesRepository), excelMetadataService),
             _ => throw new NotImplementedException()
         };

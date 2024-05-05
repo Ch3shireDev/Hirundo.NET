@@ -56,7 +56,7 @@
     <StackPanel Margin="10">
         <WrapPanel>
             <Label VerticalContentAlignment="Center">Ścieżka</Label>
-            <wpf:FileSourceControl Path="{Binding Path}" Command="{Binding LoadFileCommand}" />
+            <wpf:FileSourceControl Path="{Binding Path}" Command="{Binding LoadFileCommand}" Filter="{Binding Filter}" Title="{Binding Title}" />
         </WrapPanel>
         <wpf:LabelsComboBox ValueLabel="Nazwa pola gatunku" ValueName="{Binding SpeciesIdentifier}"
                             LabelsRepository="{Binding LabelsRepository}" />

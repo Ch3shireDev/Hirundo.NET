@@ -1,12 +1,12 @@
-﻿using System.ComponentModel;
+﻿using CommunityToolkit.Mvvm.Input;
+using Microsoft.Win32;
+using Serilog;
+using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
-using Microsoft.Win32;
-using Serilog;
 
 namespace Hirundo.Commons.WPF;
 
@@ -18,6 +18,16 @@ public partial class FileSourceControl : UserControl, INotifyPropertyChanged
     public static readonly DependencyProperty PathProperty =
         DependencyProperty.Register(nameof(Path), typeof(string), typeof(FileSourceControl),
             new FrameworkPropertyMetadata("", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnPathChanged));
+
+    public static readonly DependencyProperty FilterProperty =
+        DependencyProperty.Register(nameof(Filter), typeof(string), typeof(FileSourceControl), new PropertyMetadata("Wszystkie pliki (*.*)|*.*"));
+
+    public static readonly DependencyProperty TitleProperty =
+        DependencyProperty.Register(nameof(Title), typeof(string), typeof(FileSourceControl), new PropertyMetadata("Wybierz plik"));
+
+    public string Filter { get; set; } = "Wszystkie pliki (*.*)|*.*";
+
+    public string Title { get; set; } = "Wybierz plik";
 
     public FileSourceControl()
     {
@@ -63,10 +73,10 @@ public partial class FileSourceControl : UserControl, INotifyPropertyChanged
 
             var dialog = new OpenFileDialog
             {
-                Filter = "Access files (*.mdb)|*.mdb|All files (*.*)|*.*",
+                Filter = Filter,
                 InitialDirectory = initialDirectory,
                 Multiselect = false,
-                Title = "Wybierz plik bazy danych Access."
+                Title = Title
             };
 
             if (dialog.ShowDialog() == true)

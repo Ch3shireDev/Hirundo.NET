@@ -56,7 +56,7 @@
     <StackPanel Margin="10">
         <WrapPanel>
             <Label VerticalContentAlignment="Center">Ścieżka</Label>
-            <wpf:FileSourceControl Path="{Binding Path}" Command="{Binding LoadFileCommand}" />
+            <wpf:FileSourceControl Path="{Binding Path}" Command="{Binding LoadFileCommand}" Title="{Binding Title}" Filter="{Binding Filter}" />
         </WrapPanel>
         <WrapPanel>
             <Label>Nazwa tabeli</Label>

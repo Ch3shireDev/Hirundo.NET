@@ -12,6 +12,8 @@ namespace Hirundo.Databases.WPF.Access;
 [ParametersData(typeof(AccessDatabaseParameters), typeof(AccessDataSourceModel), typeof(ExcelDataSourceView))]
 public class AccessDataSourceViewModel(AccessDataSourceModel model, IAccessMetadataService accessMetadataService) : ParametersViewModel(model), ILabelsUpdater
 {
+    public string Title { get; set; } = "Wybierz plik Access (.mdb, .accdb)";
+    public string Filter { get; set; } = "Pliki Access (*.mdb, *.accdb)|*.mdb;*.accdb";
     public override string RemoveText => "Usuń źródło danych";
 
     public string Path
