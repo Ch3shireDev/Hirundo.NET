@@ -1,4 +1,5 @@
-﻿using Hirundo.Databases.Helpers;
+﻿using Hirundo.Commons.Models;
+using Hirundo.Databases.Helpers;
 
 namespace Hirundo.Databases.Tests.Integration;
 
@@ -27,6 +28,19 @@ public class ExcelMetadataServiceTests
         var columnNames = new[] { "ID", "RING", "SPECIES", "DATE", "HOUR", "SEX", "AGE", "WEIGHT", "STATUS", "FAT" };
         Assert.That(columns.Select(c => c.DatabaseColumn), Is.EquivalentTo(columnNames));
         Assert.That(columns.Select(c => c.ValueName), Is.EquivalentTo(columnNames));
+        DataType[] columnTypes = [
+            DataType.Number,
+            DataType.Text,
+            DataType.Text,
+            DataType.Date,
+            DataType.Number,
+            DataType.Text,
+            DataType.Text,
+            DataType.Numeric,
+            DataType.Text,
+            DataType.Number
+        ];
+        Assert.That(columns.Select(c => c.DataType), Is.EquivalentTo(columnTypes));
     }
 
     [Test]

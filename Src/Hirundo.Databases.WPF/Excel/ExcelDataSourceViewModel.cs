@@ -137,7 +137,10 @@ public class ExcelDataSourceViewModel(ExcelDataSourceModel model, IExcelMetadata
         try
         {
             if (string.IsNullOrWhiteSpace(Path)) return;
+            Mouse.OverrideCursor = Cursors.Wait;
             var columns = excelMetadataService.GetColumns(Path);
+            Mouse.OverrideCursor = null;
+
 
             Columns.Clear();
             model.Columns.Clear();
