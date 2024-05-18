@@ -4,6 +4,7 @@ using Hirundo.App.WPF.Helpers;
 using Hirundo.Commons.Helpers;
 using Hirundo.Commons.Models;
 using Hirundo.Commons.WPF;
+using Hirundo.Commons.WPF.Helpers;
 using Hirundo.Writers;
 using Hirundo.Writers.WPF;
 using Microsoft.Win32;
@@ -130,15 +131,7 @@ public sealed class MainViewModel : ObservableObject
 
     private static void SetMouseCursor(Cursor? cursor = null)
     {
-        try
-        {
-            Application.Current?.Dispatcher?.Invoke(() => { Mouse.OverrideCursor = cursor; });
-        }
-        catch (Exception e)
-        {
-            Log.Error($"Błąd ustawiania kursora. Informacja o błędzie: {e.Message}", e);
-            throw;
-        }
+        WindowHelpers.SetMouseCursor(cursor);
     }
 
     public void ProcessAndSave()

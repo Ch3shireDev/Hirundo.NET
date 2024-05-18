@@ -7,7 +7,7 @@ namespace Hirundo.Databases.Helpers;
 
 
 
-public class ExcelMetadataService : IExcelMetadataService
+public partial class ExcelMetadataService : IExcelMetadataService
 {
     public IList<ColumnParameters> GetColumns(string path)
     {
@@ -74,7 +74,7 @@ public class ExcelMetadataService : IExcelMetadataService
     private static bool IsNumeric(IXLCell cell)
     {
         var value = cell.Value.ToString(CultureInfo.InvariantCulture);
-        return Regex.IsMatch(value, @"^\d+\.\d+$");
+        return IsNumericRegex().IsMatch(value);
     }
 
     private static List<string> GetHeaders(string path)
@@ -104,4 +104,7 @@ public class ExcelMetadataService : IExcelMetadataService
 
         return worksheet.Column(headersIndex + 1).CellsUsed().Skip(1).Select(GetCellValue).Distinct().ToList();
     }
+
+    [GeneratedRegex(@"^\d+\.\d+$")]
+    private static partial Regex IsNumericRegex();
 }

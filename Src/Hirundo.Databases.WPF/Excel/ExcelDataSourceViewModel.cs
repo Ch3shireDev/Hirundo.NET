@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Hirundo.Commons.Models;
 using Hirundo.Commons.WPF;
+using Hirundo.Commons.WPF.Helpers;
 using Hirundo.Databases.Helpers;
 using Serilog;
 using System.Collections.ObjectModel;
@@ -137,9 +138,10 @@ public class ExcelDataSourceViewModel(ExcelDataSourceModel model, IExcelMetadata
         try
         {
             if (string.IsNullOrWhiteSpace(Path)) return;
-            Mouse.OverrideCursor = Cursors.Wait;
+
+            WindowHelpers.SetMouseCursor(Cursors.Wait);
+
             var columns = excelMetadataService.GetColumns(Path);
-            Mouse.OverrideCursor = null;
 
 
             Columns.Clear();
@@ -161,6 +163,10 @@ public class ExcelDataSourceViewModel(ExcelDataSourceModel model, IExcelMetadata
             Log.Error(e, "Błąd podczas ładowania metadanych z pliku {path}.", Path);
 
             Log.Debug("Informacja o błędzie: {error}", e.Message);
+        }
+        finally
+        {
+            WindowHelpers.SetMouseCursor();
         }
     }
 
