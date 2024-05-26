@@ -16,7 +16,7 @@ public class IsInSetReturningConditionTests
         };
         var specimen = new Specimen("R123", observations);
 
-        var condition = new IsInSetReturningCondition("ABC", new List<object> { "1", "2", "3" });
+        var condition = new IsInSetReturningCondition("ABC", ["1", "2", "3"]);
 
         // Act
         var result = condition.IsReturning(specimen);
@@ -35,7 +35,7 @@ public class IsInSetReturningConditionTests
         };
         var specimen = new Specimen("R123", observations);
 
-        var condition = new IsInSetReturningCondition("D2", new List<object> { 3, 4, 5 });
+        var condition = new IsInSetReturningCondition("D2", [3, 4, 5]);
 
         // Act
         var result = condition.IsReturning(specimen);
@@ -58,7 +58,7 @@ public class IsInSetReturningConditionTests
 
         var specimen = new Specimen("R123", observations);
 
-        var condition = new IsInSetReturningCondition("D2", new List<object> { 5, 6, 7 });
+        var condition = new IsInSetReturningCondition("D2", [5, 6, 7]);
 
         // Act
         var result = condition.IsReturning(specimen);

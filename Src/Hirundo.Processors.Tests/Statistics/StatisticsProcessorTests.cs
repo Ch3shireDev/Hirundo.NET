@@ -50,9 +50,12 @@ public class StatisticsProcessorTests
 
         // Assert
         Assert.That(result, Has.Length.EqualTo(2));
-        Assert.That(result[0].Name, Is.EqualTo("OPERATION1"));
-        Assert.That(result[0].Value, Is.EqualTo(1));
-        Assert.That(result[1].Name, Is.EqualTo("OPERATION2"));
-        Assert.That(result[1].Value, Is.EqualTo(2));
+        Assert.Multiple(() =>
+        {
+            Assert.That(result[0].Name, Is.EqualTo("OPERATION1"));
+            Assert.That(result[0].Value, Is.EqualTo(1));
+            Assert.That(result[1].Name, Is.EqualTo("OPERATION2"));
+            Assert.That(result[1].Value, Is.EqualTo(2));
+        });
     }
 }

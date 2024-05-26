@@ -24,13 +24,16 @@ public class HistogramOperationTests
         var result = operation.GetStatistics(specimen, populationData);
 
         // Assert
-        Assert.That(result.Names, Is.EquivalentTo(new ArrayList
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.Names, Is.EquivalentTo(new ArrayList
         {
             "HISTOGRAM_1",
             "HISTOGRAM_2"
         }));
-        Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 1, 0 }));
-        Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList { "ABC123" }));
+            Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 1, 0 }));
+            Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList { "ABC123" }));
+        });
     }
 
     [Test]
@@ -52,7 +55,9 @@ public class HistogramOperationTests
         var result = operation.GetStatistics(specimen, populationData);
 
         // Assert
-        Assert.That(result.Names, Is.EquivalentTo(new ArrayList
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.Names, Is.EquivalentTo(new ArrayList
         {
             "HISTOGRAM_1",
             "HISTOGRAM_2",
@@ -64,8 +69,9 @@ public class HistogramOperationTests
             "HISTOGRAM_8",
             "HISTOGRAM_9"
         }));
-        Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 1, 0, 0, 0, 1, 0, 0, 0, 1 }));
-        Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList { "ABC123", "DEF456", "GHI789" }));
+            Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 1, 0, 0, 0, 1, 0, 0, 0, 1 }));
+            Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList { "ABC123", "DEF456", "GHI789" }));
+        });
     }
 
     [Test]
@@ -88,10 +94,13 @@ public class HistogramOperationTests
         var result = operation.GetStatistics(specimen, populationData);
 
         // Assert
-        Assert.That(result.Names, Is.EquivalentTo(new ArrayList { "FAT_H_1", "FAT_H_2" }));
-        Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 2, 1 }));
-        Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList { "A1", "A2", "A3" }));
-        Assert.That(result.EmptyValueIds, Is.EquivalentTo(new ArrayList { "B1" }));
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.Names, Is.EquivalentTo(new ArrayList { "FAT_H_1", "FAT_H_2" }));
+            Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 2, 1 }));
+            Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList { "A1", "A2", "A3" }));
+            Assert.That(result.EmptyValueIds, Is.EquivalentTo(new ArrayList { "B1" }));
+        });
     }
 
     [Test]
@@ -114,10 +123,13 @@ public class HistogramOperationTests
         var result = operation.GetStatistics(specimen, populationData);
 
         // Assert
-        Assert.That(result.Names, Is.EquivalentTo(new ArrayList { "FAT_H_1", "FAT_H_2" }));
-        Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 1, 0 }));
-        Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList { "A1" }));
-        Assert.That(result.EmptyValueIds, Is.Empty);
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.Names, Is.EquivalentTo(new ArrayList { "FAT_H_1", "FAT_H_2" }));
+            Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 1, 0 }));
+            Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList { "A1" }));
+            Assert.That(result.EmptyValueIds, Is.Empty);
+        });
     }
 
     [Test]
@@ -131,13 +143,16 @@ public class HistogramOperationTests
         var result = operation.GetStatistics(specimen, []);
 
         // Assert
-        Assert.That(result.Names, Is.EquivalentTo(new ArrayList
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.Names, Is.EquivalentTo(new ArrayList
         {
             "HISTOGRAM_1",
             "HISTOGRAM_2"
         }));
-        Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 0, 0 }));
-        Assert.That(result.PopulationIds, Is.Empty);
+            Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 0, 0 }));
+            Assert.That(result.PopulationIds, Is.Empty);
+        });
     }
 
     [Test]
@@ -162,7 +177,9 @@ public class HistogramOperationTests
         var result = operation.GetStatistics(specimen, populationData);
 
         // Assert
-        Assert.That(result.Names, Is.EquivalentTo(new ArrayList
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.Names, Is.EquivalentTo(new ArrayList
         {
             "HISTOGRAM_0.0",
             "HISTOGRAM_0.5",
@@ -171,7 +188,8 @@ public class HistogramOperationTests
             "HISTOGRAM_2.0"
         }));
 
-        Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 2, 2, 1, 1, 0 }));
+            Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 2, 2, 1, 1, 0 }));
+        });
     }
 
     [Test]
@@ -192,7 +210,9 @@ public class HistogramOperationTests
         var result = operation.GetStatistics(specimen, populationData);
 
         // Assert
-        Assert.That(result.Names, Is.EquivalentTo(new ArrayList
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.Names, Is.EquivalentTo(new ArrayList
         {
             "HISTOGRAM_0.0",
             "HISTOGRAM_0.5",
@@ -201,11 +221,12 @@ public class HistogramOperationTests
             "HISTOGRAM_2.0"
         }));
 
-        Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 0, 0, 0, 0, 0 }));
+            Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 0, 0, 0, 0, 0 }));
 
-        Assert.That(result.PopulationIds, Is.Empty);
-        Assert.That(result.EmptyValueIds, Is.Empty);
-        Assert.That(result.OutlierIds, Is.EquivalentTo(new ArrayList { "A001", "A002" }));
+            Assert.That(result.PopulationIds, Is.Empty);
+            Assert.That(result.EmptyValueIds, Is.Empty);
+            Assert.That(result.OutlierIds, Is.EquivalentTo(new ArrayList { "A001", "A002" }));
+        });
     }
 
     [Test]
@@ -235,7 +256,9 @@ public class HistogramOperationTests
         var result = operation.GetStatistics(specimen, populationData);
 
         // Assert
-        Assert.That(result.Names, Is.EquivalentTo(new ArrayList
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.Names, Is.EquivalentTo(new ArrayList
         {
             "HISTOGRAM_0.0",
             "HISTOGRAM_0.5",
@@ -245,8 +268,9 @@ public class HistogramOperationTests
             "HISTOGRAM_POPULATION"
         }));
 
-        Assert.That(operation.IncludePopulation, Is.True);
-        Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 2, 2, 1, 1, 0, 6 }));
+            Assert.That(operation.IncludePopulation, Is.True);
+            Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 2, 2, 1, 1, 0, 6 }));
+        });
     }
 
     [Test]
@@ -280,7 +304,9 @@ public class HistogramOperationTests
         var result = operation.GetStatistics(returningSpecimen);
 
         // Assert
-        Assert.That(result.Names, Is.EquivalentTo(new ArrayList
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.Names, Is.EquivalentTo(new ArrayList
         {
             "HISTOGRAM_1",
             "HISTOGRAM_2",
@@ -288,8 +314,9 @@ public class HistogramOperationTests
             "HISTOGRAM_DISTRIBUTION"
         }));
 
-        Assert.That(operation.IncludeDistribution, Is.True);
-        Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 3, 5, 3, 0.5m }));
+            Assert.That(operation.IncludeDistribution, Is.True);
+            Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 3, 5, 3, 0.5m }));
+        });
     }
 
     [Test]
@@ -310,7 +337,9 @@ public class HistogramOperationTests
         var result = operation.GetStatistics(returningSpecimen);
 
         // Assert
-        Assert.That(result.Names, Is.EquivalentTo(new ArrayList
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.Names, Is.EquivalentTo(new ArrayList
         {
             "HISTOGRAM_1",
             "HISTOGRAM_2",
@@ -318,8 +347,9 @@ public class HistogramOperationTests
             "HISTOGRAM_DISTRIBUTION"
         }));
 
-        Assert.That(operation.IncludeDistribution, Is.True);
-        Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 0, 0, 0, 0.5m }));
+            Assert.That(operation.IncludeDistribution, Is.True);
+            Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 0, 0, 0, 0.5m }));
+        });
     }
 
     [Test]
@@ -345,7 +375,9 @@ public class HistogramOperationTests
         var result = operation.GetStatistics(returningSpecimen);
 
         // Assert
-        Assert.That(result.Names, Is.EquivalentTo(new ArrayList
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.Names, Is.EquivalentTo(new ArrayList
         {
             "HISTOGRAM_1",
             "HISTOGRAM_2",
@@ -353,8 +385,9 @@ public class HistogramOperationTests
             "HISTOGRAM_DISTRIBUTION"
         }));
 
-        Assert.That(operation.IncludeDistribution, Is.True);
-        Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 1, 1, 1, 1m }));
+            Assert.That(operation.IncludeDistribution, Is.True);
+            Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 1, 1, 1, 1m }));
+        });
     }
 
     [Test]
@@ -380,7 +413,9 @@ public class HistogramOperationTests
         var result = operation.GetStatistics(returningSpecimen);
 
         // Assert
-        Assert.That(result.Names, Is.EquivalentTo(new ArrayList
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.Names, Is.EquivalentTo(new ArrayList
         {
             "HISTOGRAM_1",
             "HISTOGRAM_2",
@@ -388,7 +423,8 @@ public class HistogramOperationTests
             "HISTOGRAM_DISTRIBUTION"
         }));
 
-        Assert.That(operation.IncludeDistribution, Is.True);
-        Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 1, 1, 1, 0m }));
+            Assert.That(operation.IncludeDistribution, Is.True);
+            Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 1, 1, 1, 0m }));
+        });
     }
 }

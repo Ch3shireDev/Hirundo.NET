@@ -1,16 +1,16 @@
 ﻿using Hirundo.Commons.Models;
 using Hirundo.Processors.Population;
 using Hirundo.Processors.Statistics;
+using Hirundo.Processors.Summary;
 using Moq;
-using NUnit.Framework;
 
-namespace Hirundo.Processors.Summary.Tests;
+namespace Hirundo.Processors.Tests.Summary;
 
 public class SummaryTests
 {
     private Mock<IPopulationProcessor> _populationProcessor = null!;
-    private SummaryProcessor _processor = null!;
     private Mock<IStatisticsProcessor> _statisticsProcessor = null!;
+    private SummaryProcessor _processor = null!;
     private List<Specimen> _totalSpecimens = null!;
 
     [SetUp]
@@ -38,11 +38,14 @@ public class SummaryTests
         var summary = _processor.GetSummary(specimen);
 
         // Assert
-        Assert.That(summary.Ring, Is.EqualTo("123"));
-        Assert.That(summary.DateFirstSeen, Is.EqualTo(new DateTime(2020, 06, 01)));
-        Assert.That(summary.DateLastSeen, Is.EqualTo(new DateTime(2021, 06, 01)));
-        Assert.That(summary.Headers, Is.Empty);
-        Assert.That(summary.Values, Is.Empty);
+        Assert.Multiple(() =>
+        {
+            Assert.That(summary.Ring, Is.EqualTo("123"));
+            Assert.That(summary.DateFirstSeen, Is.EqualTo(new DateTime(2020, 06, 01)));
+            Assert.That(summary.DateLastSeen, Is.EqualTo(new DateTime(2021, 06, 01)));
+            Assert.That(summary.Headers, Is.Empty);
+            Assert.That(summary.Values, Is.Empty);
+        });
     }
 
     [Test]
@@ -64,9 +67,12 @@ public class SummaryTests
         var summary = _processor.GetSummary(specimen);
 
         // Assert
-        Assert.That(summary.Ring, Is.EqualTo("123"));
-        Assert.That(summary.DateFirstSeen, Is.EqualTo(new DateTime(2020, 06, 01)));
-        Assert.That(summary.DateLastSeen, Is.EqualTo(new DateTime(2021, 06, 01)));
+        Assert.Multiple(() =>
+        {
+            Assert.That(summary.Ring, Is.EqualTo("123"));
+            Assert.That(summary.DateFirstSeen, Is.EqualTo(new DateTime(2020, 06, 01)));
+            Assert.That(summary.DateLastSeen, Is.EqualTo(new DateTime(2021, 06, 01)));
+        });
         var expectedHeaders = new[] { "DATA", "STATISTICAL_DATA" };
         Assert.That(summary.Headers, Is.EquivalentTo(expectedHeaders));
         var expectedValues = new object?[] { "XYZ", 123.45M };

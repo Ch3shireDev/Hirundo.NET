@@ -32,7 +32,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Hirundo.App\Hirundo.App.csproj" />
 		<ProjectReference Include="..\Hirundo.Databases\Hirundo.Databases.csproj" />
-		<ProjectReference Include="..\Hirundo.Processors.Summary\Hirundo.Processors.Summary.csproj" />
 		<ProjectReference Include="..\Hirundo.Serialization.Json\Hirundo.Serialization.Json.csproj" />
 	</ItemGroup>
 

@@ -24,8 +24,10 @@ public class AverageOperationTests
         // Act
         var result = operation.GetStatistics(specimen, populationData);
 
-        // Assert
-        Assert.That(result.Names, Is.EquivalentTo(new ArrayList
+        Assert.Multiple(() =>
+        {
+            // Assert
+            Assert.That(result.Names, Is.EquivalentTo(new ArrayList
         {
             "VALUE_PREFIX_AVERAGE",
             "VALUE_PREFIX_STANDARD_DEVIATION",
@@ -33,8 +35,9 @@ public class AverageOperationTests
             "VALUE_PREFIX_EMPTY_SIZE",
             "VALUE_PREFIX_OUTLIER_SIZE"
         }));
-        Assert.That(result.Values, Is.EqualTo(new ArrayList { 5, 4, 2, 0, 0 }));
-        Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList { "ABC123", "GHI789" }));
+            Assert.That(result.Values, Is.EqualTo(new ArrayList { 5, 4, 2, 0, 0 }));
+            Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList { "ABC123", "GHI789" }));
+        });
     }
 
     [Test]
@@ -57,7 +60,9 @@ public class AverageOperationTests
         var result = operation.GetStatistics(specimen, populationData);
 
         // Assert
-        Assert.That(result.Names, Is.EquivalentTo(new ArrayList
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.Names, Is.EquivalentTo(new ArrayList
         {
             "PREFIX_AVERAGE",
             "PREFIX_STANDARD_DEVIATION",
@@ -65,9 +70,10 @@ public class AverageOperationTests
             "PREFIX_EMPTY_SIZE",
             "PREFIX_OUTLIER_SIZE"
         }));
-        Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 3, 2, 2, 1, 0 }));
-        Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList { "ABC123", "GHI789" }));
-        Assert.That(result.EmptyValueIds, Is.EquivalentTo(new ArrayList { "JKL012" }));
+            Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 3, 2, 2, 1, 0 }));
+            Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList { "ABC123", "GHI789" }));
+            Assert.That(result.EmptyValueIds, Is.EquivalentTo(new ArrayList { "JKL012" }));
+        });
     }
 
     [Test]
@@ -92,7 +98,9 @@ public class AverageOperationTests
         var result = operation.GetStatistics(specimen, population);
 
         // Assert
-        Assert.That(result.Names, Is.EquivalentTo(new ArrayList
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.Names, Is.EquivalentTo(new ArrayList
         {
             "PREFIX_AVERAGE",
             "PREFIX_STANDARD_DEVIATION",
@@ -100,9 +108,10 @@ public class AverageOperationTests
             "PREFIX_EMPTY_SIZE",
             "PREFIX_OUTLIER_SIZE"
         }));
-        Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 14, 4, 2, 0, 1 }));
-        Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList { "AAA111", "CCC333" }));
-        Assert.That(result.OutlierIds, Is.EquivalentTo(new ArrayList { "DDD444" }));
+            Assert.That(result.Values, Is.EquivalentTo(new ArrayList { 14, 4, 2, 0, 1 }));
+            Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList { "AAA111", "CCC333" }));
+            Assert.That(result.OutlierIds, Is.EquivalentTo(new ArrayList { "DDD444" }));
+        });
     }
 
     [Test]
@@ -116,7 +125,9 @@ public class AverageOperationTests
         var result = operation.GetStatistics(specimen, []);
 
         // Assert
-        Assert.That(result.Names, Is.EquivalentTo(new ArrayList
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.Names, Is.EquivalentTo(new ArrayList
         {
             "PREFIX_AVERAGE",
             "PREFIX_STANDARD_DEVIATION",
@@ -124,8 +135,9 @@ public class AverageOperationTests
             "PREFIX_EMPTY_SIZE",
             "PREFIX_OUTLIER_SIZE"
         }));
-        Assert.That(result.Values, Is.EquivalentTo(new ArrayList { null, null, 0, 0, 0 }));
-        Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList()));
+            Assert.That(result.Values, Is.EquivalentTo(new ArrayList { null, null, 0, 0, 0 }));
+            Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList()));
+        });
     }
 
     [Test]
@@ -146,7 +158,9 @@ public class AverageOperationTests
         var result = operation.GetStatistics(specimen, population);
 
         // Assert
-        Assert.That(result.Names, Is.EquivalentTo(new ArrayList
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.Names, Is.EquivalentTo(new ArrayList
         {
             "PREFIX_AVERAGE",
             "PREFIX_STANDARD_DEVIATION",
@@ -154,10 +168,11 @@ public class AverageOperationTests
             "PREFIX_EMPTY_SIZE",
             "PREFIX_OUTLIER_SIZE"
         }));
-        Assert.That(result.Values, Is.EquivalentTo(new ArrayList { null, null, 0, 3, 0 }));
-        Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList()));
-        Assert.That(result.EmptyValueIds, Is.EquivalentTo(new ArrayList { "AAA111", "BBB222", "CCC333" }));
-        Assert.That(result.OutlierIds, Is.EquivalentTo(new ArrayList()));
+            Assert.That(result.Values, Is.EquivalentTo(new ArrayList { null, null, 0, 3, 0 }));
+            Assert.That(result.PopulationIds, Is.EquivalentTo(new ArrayList()));
+            Assert.That(result.EmptyValueIds, Is.EquivalentTo(new ArrayList { "AAA111", "BBB222", "CCC333" }));
+            Assert.That(result.OutlierIds, Is.EquivalentTo(new ArrayList()));
+        });
         var populationSizeIndex = result.Names.IndexOf("PREFIX_POPULATION_SIZE");
         var populationSize = result.Values[populationSizeIndex];
         Assert.That(populationSize, Is.EqualTo(0));
