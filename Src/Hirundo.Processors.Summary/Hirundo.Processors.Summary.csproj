@@ -24,8 +24,8 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Hirundo.Commons\Hirundo.Commons.csproj" />
-		<ProjectReference Include="..\Hirundo.Processors.Population\Hirundo.Processors.Population.csproj" />
 		<ProjectReference Include="..\Hirundo.Processors.Statistics\Hirundo.Processors.Statistics.csproj" />
+		<ProjectReference Include="..\Hirundo.Processors\Hirundo.Processors.csproj" />
 	</ItemGroup>
 
 </Project>

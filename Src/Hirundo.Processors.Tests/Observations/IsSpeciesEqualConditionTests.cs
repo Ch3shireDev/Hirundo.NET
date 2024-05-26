@@ -25,7 +25,7 @@ public class IsSpeciesEqualConditionTests
         var result = observations.Where(condition.IsAccepted).ToArray();
 
         // Assert
-        Assert.That(result.Length, Is.EqualTo(1));
+        Assert.That(result, Has.Length.EqualTo(1));
         Assert.That(result[0].Species, Is.EqualTo("REG.REG"));
     }
 }

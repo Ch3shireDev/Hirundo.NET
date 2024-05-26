@@ -1,8 +1,7 @@
 ﻿using Hirundo.Commons.Models;
 using Hirundo.Processors.Population.Conditions;
-using NUnit.Framework;
 
-namespace Hirundo.Processors.Population.Tests;
+namespace Hirundo.Processors.Tests.Population;
 
 public class IsEqualConditionTests
 {
@@ -27,7 +26,7 @@ public class IsEqualConditionTests
         var result = specimens.Where(conditionClosure.IsAccepted).ToArray();
 
         // Assert
-        Assert.That(result.Length, Is.EqualTo(1));
+        Assert.That(result, Has.Length.EqualTo(1));
         Assert.That(result[0].Ring, Is.EqualTo("AB123"));
     }
 }

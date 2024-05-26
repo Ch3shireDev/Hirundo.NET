@@ -1,8 +1,7 @@
 ﻿using Hirundo.Commons.Models;
 using Hirundo.Processors.Population.Conditions;
-using NUnit.Framework;
 
-namespace Hirundo.Processors.Population.Tests;
+namespace Hirundo.Processors.Tests.Population;
 
 [TestFixture]
 public class IsInSharedTimeWindowConditionTests

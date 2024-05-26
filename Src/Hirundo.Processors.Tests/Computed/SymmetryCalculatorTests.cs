@@ -26,10 +26,13 @@ public class SymmetryCalculatorTests
         // Assert
         Assert.That(result, Is.Not.Null);
         var columns = result.Headers;
-        Assert.That(columns, Contains.Item("SYMMETRY"));
-        Assert.That(result.GetValue("SYMMETRY"), Is.EqualTo(0));
-        Assert.That(result, Is.SameAs(observation));
-        Assert.That(result.Headers.Count, Is.EqualTo(9));
+        Assert.Multiple(() =>
+        {
+            Assert.That(columns, Contains.Item("SYMMETRY"));
+            Assert.That(result.GetValue("SYMMETRY"), Is.EqualTo(0));
+            Assert.That(result, Is.SameAs(observation));
+        });
+        Assert.That(result.Headers, Has.Count.EqualTo(9));
     }
 
     [Test]

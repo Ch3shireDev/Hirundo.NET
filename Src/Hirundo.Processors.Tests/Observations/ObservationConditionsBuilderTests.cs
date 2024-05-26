@@ -26,8 +26,11 @@ public class ObservationConditionsBuilderTests
         Assert.That(result, Is.TypeOf<CompositeObservationCondition>());
         var composite = result as CompositeObservationCondition;
         Assert.That(composite?.Observations?.Count, Is.EqualTo(1));
-        Assert.That(composite?.Observations?[0], Is.EqualTo(condition));
-        Assert.That(composite?.CancellationToken, Is.Null);
+        Assert.Multiple(() =>
+        {
+            Assert.That(composite?.Observations?[0], Is.EqualTo(condition));
+            Assert.That(composite?.CancellationToken, Is.Null);
+        });
     }
 
     [Test]
