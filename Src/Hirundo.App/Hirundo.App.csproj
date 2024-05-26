@@ -9,12 +9,12 @@
   <ItemGroup>
     <ProjectReference Include="..\Hirundo.Commons\Hirundo.Commons.csproj" />
     <ProjectReference Include="..\Hirundo.Databases\Hirundo.Databases.csproj" />
-    <ProjectReference Include="..\Hirundo.Processors.Computed\Hirundo.Processors.Computed.csproj" />
     <ProjectReference Include="..\Hirundo.Processors.Observations\Hirundo.Processors.Observations.csproj" />
     <ProjectReference Include="..\Hirundo.Processors.Population\Hirundo.Processors.Population.csproj" />
     <ProjectReference Include="..\Hirundo.Processors.Returning\Hirundo.Processors.Returning.csproj" />
     <ProjectReference Include="..\Hirundo.Processors.Statistics\Hirundo.Processors.Statistics.csproj" />
     <ProjectReference Include="..\Hirundo.Processors.Summary\Hirundo.Processors.Summary.csproj" />
+    <ProjectReference Include="..\Hirundo.Processors\Hirundo.Processors.csproj" />
     <ProjectReference Include="..\Hirundo.Writers\Hirundo.Writers.csproj" />
   </ItemGroup>
 

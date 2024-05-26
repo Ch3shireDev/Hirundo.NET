@@ -70,7 +70,7 @@ public class MainModel(
     public async Task RunAsync()
     {
         var config = GetConfigFromViewModels();
-        Action<CancellationToken> action = (token) => app.Run(config, token);
+        void action(CancellationToken token) => app.Run(config, token);
         await RunInternal(action);
     }
 
@@ -167,13 +167,13 @@ public class MainModel(
 
     public async Task ExportAsync(string filename)
     {
-        Action<CancellationToken> action = (token) =>
+        void action(CancellationToken token)
         {
             var workbook = GetXlsx(token);
             using var stream = new FileStream(filename, FileMode.Create, FileAccess.Write);
             workbook.SaveAs(stream);
             stream.Close();
-        };
+        }
 
         await RunInternal(action);
     }

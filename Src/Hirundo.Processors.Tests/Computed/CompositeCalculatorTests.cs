@@ -1,8 +1,8 @@
 ﻿using Hirundo.Commons.Models;
+using Hirundo.Processors.Computed;
 using Moq;
-using NUnit.Framework;
 
-namespace Hirundo.Processors.Computed.Tests;
+namespace Hirundo.Processors.Tests.Computed;
 
 [TestFixture]
 public class CompositeCalculatorTests
