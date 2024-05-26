@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="Hirundo.Processors.WPF.Observations.IsNotEmpty.IsNotEmptyView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:labels="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
+             mc:Ignorable="d"
+             d:Background="AliceBlue">
+    <StackPanel>
+        <labels:LabelsComboBox ValueName="{Binding ValueName, Mode=TwoWay}"
+                               LabelsRepository="{Binding LabelsRepository}" />
+    </StackPanel>
+</UserControl>

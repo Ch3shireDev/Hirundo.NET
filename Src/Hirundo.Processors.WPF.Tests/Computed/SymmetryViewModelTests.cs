@@ -1,7 +1,7 @@
 ﻿using Hirundo.Commons.Models;
 using Hirundo.Commons.Repositories;
 using Hirundo.Processors.Computed;
-using Hirundo.WPF.Processors.Computed;
+using Hirundo.Processors.WPF.Computed;
 using Moq;
 using System.Collections;
 

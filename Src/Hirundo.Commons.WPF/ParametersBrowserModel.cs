@@ -27,7 +27,7 @@ public abstract class ParametersBrowserModel<TConditionContainer, TCondition, TB
     protected ParametersBrowserModel(ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository)
     {
         _factory = new ParametersFactory<TCondition, TBrowser>(labelsRepository, speciesRepository);
-        ParametersDataList = _factory.GetParametersData().ToArray();
+        ParametersDataList = _factory.GetAvailableParameters().ToArray();
     }
 
     public TConditionContainer ParametersContainer { get; set; } = new();

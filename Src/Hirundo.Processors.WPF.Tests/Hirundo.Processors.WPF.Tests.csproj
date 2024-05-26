@@ -23,8 +23,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Hirundo.Commons\Hirundo.Commons.csproj" />
+    <ProjectReference Include="..\Hirundo.Processors.WPF\Hirundo.Processors.WPF.csproj" />
     <ProjectReference Include="..\Hirundo.Processors\Hirundo.Processors.csproj" />
-    <ProjectReference Include="..\Hirundo.WPF.Processors\Hirundo.WPF.Processors.csproj" />
   </ItemGroup>
 
   <ItemGroup>

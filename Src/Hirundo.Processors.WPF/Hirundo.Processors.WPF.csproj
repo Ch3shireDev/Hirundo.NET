@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hirundo.Commons.WPF\Hirundo.Commons.WPF.csproj" />
+    <ProjectReference Include="..\Hirundo.Commons\Hirundo.Commons.csproj" />
+    <ProjectReference Include="..\Hirundo.Processors\Hirundo.Processors.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Observations\CompareValues\CompareValuesView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Observations\IsInTimeBlock\IsInTimeBlockView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Observations\IsSpeciesEqual\IsSpeciesEqualView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Population\IsEqual\IsEqualPopulationView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Population\IsInSharedTimeWindow\IsInSharedTimeWindowView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Population\IsNotMainSpecimen\IsNotMainSpecimenView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Returning\AfterTimePeriod\AfterTimePeriodView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Returning\NotEarlierThanGivenDateNextYear\NotEarlierThanGivenDateNextYearView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+</Project>

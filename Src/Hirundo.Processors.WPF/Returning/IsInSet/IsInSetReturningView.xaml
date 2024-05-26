@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="Hirundo.Processors.WPF.Returning.IsInSet.IsInSetReturningView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:labels="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
+             mc:Ignorable="d"
+             d:Background="AliceBlue"
+             >
+    <StackPanel>
+        <labels:LabelsComboBox
+            ValueName="{Binding ValueName}"
+            DataType="{Binding ValueType}"
+            LabelsRepository="{Binding LabelsRepository}" />
+        <StackPanel Margin="10">
+            <DataGrid
+                ItemsSource="{Binding Values}"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                AutoGenerateColumns="False">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="CellEditEnding" />
+                </b:Interaction.Triggers>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Lista wartości"
+                                        Binding="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <WrapPanel>
+                <Button
+                    Command="{Binding AddValueCommand}">
+                    Dodaj wartość
+                </Button>
+                <Button
+                    Background="DarkRed"
+                    Foreground="White"
+                    BorderBrush="DarkRed"
+                    Command="{Binding RemoveValueCommand}">
+                    Usuń wartość
+                </Button>
+            </WrapPanel>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

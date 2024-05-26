@@ -5,7 +5,7 @@ namespace Hirundo.Commons.WPF;
 
 public interface IParametersFactory<TCondition>
 {
-    IEnumerable<ParametersData> GetParametersData();
+    IEnumerable<ParametersData> GetAvailableParameters();
     ParametersViewModel CreateViewModel(TCondition condition);
     TCondition CreateCondition(ParametersData parametersData);
 }
@@ -22,7 +22,7 @@ public class ParametersFactory<TCondition, TBrowserModel>(ILabelsRepository labe
         return condition;
     }
 
-    public IEnumerable<ParametersData> GetParametersData()
+    public IEnumerable<ParametersData> GetAvailableParameters()
     {
         return GetAssemblyAttributes().Select(attribute => new ParametersData(attribute.ConditionType, attribute.Name, attribute.Description));
     }
@@ -92,12 +92,22 @@ public class ParametersFactory<TCondition, TBrowserModel>(ILabelsRepository labe
 
         foreach (var viewModelType in viewModelTypes)
         {
+
             var attribute = viewModelType.GetCustomAttribute<ParametersDataAttribute>();
 
-            if (attribute is not null)
+            if (attribute is null)
             {
-                yield return attribute;
+                continue;
             }
+
+            var conditionType = attribute.ConditionType;
+
+            if (!typeof(TCondition).IsAssignableFrom(conditionType))
+            {
+                continue;
+            }
+
+            yield return attribute;
         }
     }
 

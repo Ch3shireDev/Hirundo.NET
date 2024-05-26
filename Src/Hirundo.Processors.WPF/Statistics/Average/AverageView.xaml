@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="Hirundo.Processors.WPF.Statistics.Average.AverageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:average="clr-namespace:Hirundo.Processors.WPF.Statistics.Average"
+             xmlns:labels="clr-namespace:Hirundo.Commons.WPF;assembly=Hirundo.Commons.WPF"
+             mc:Ignorable="d"
+             d:Background="AliceBlue"
+             d:DataContext="{d:DesignInstance average:AverageViewModel}">
+    <StackPanel>
+        <labels:LabelsComboBox
+            ValueLabel="Nazwa wartości wejściowej"
+            ValueName="{Binding ValueName}"
+            DataType="{Binding DataType}"
+            LabelsRepository="{Binding LabelsRepository}" />
+        <WrapPanel>
+            <Label>Przedrostek wartości wyjściowych</Label>
+            <TextBox Text="{Binding ResultPrefix, Mode=TwoWay}" Width="100" />
+        </WrapPanel>
+        <WrapPanel Margin="10">
+            <CheckBox IsChecked="{Binding RejectOutliers, Mode=TwoWay}">Czy odrzucać wartości skrajne?</CheckBox>
+        </WrapPanel>
+        <StackPanel IsEnabled="{Binding RejectOutliers}">
+            <WrapPanel>
+                <Label>Próg odrzucania (odchylenia standardowe)</Label>
+                <TextBox Text="{Binding Threshold, Mode=TwoWay}" Width="30" HorizontalContentAlignment="Center" />
+            </WrapPanel>
+        </StackPanel>
+        <WrapPanel Margin="10">
+            <CheckBox IsChecked="{Binding AddValueDifference, Mode=TwoWay}">Czy dodać różnicę od wartości średniej?</CheckBox>
+        </WrapPanel>
+        <WrapPanel Margin="10">
+            <CheckBox IsChecked="{Binding AddValueDifference, Mode=TwoWay}">Czy dodać różnicę od wartości średniej w odchyleniach standardowych?</CheckBox>
+        </WrapPanel>
+    </StackPanel>
+</UserControl>

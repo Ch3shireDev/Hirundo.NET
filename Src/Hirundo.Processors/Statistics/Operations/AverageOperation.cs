@@ -100,14 +100,14 @@ public class AverageOperation : IStatisticalOperation, ISelfExplainer
 
             if (averageValue == null || standardDeviationValue == null)
             {
-                return GetResult(specimen, [null, null], populationIds.ToArray(), emptyValuesIds.ToArray(), outliersIds.ToArray());
+                return GetResult(specimen, [null, null], [.. populationIds], [.. emptyValuesIds], [.. outliersIds]);
             }
 
             oldOutliersIds = outliersIds;
             outliersIds = [.. Outliers.GetOutliersIds(populationArray, ValueName, averageValue, standardDeviationValue)];
         } while (i < 2);
 
-        return GetResult(specimen, [averageValue, standardDeviationValue], calculatedPopulationIds.ToArray(), emptyValuesIds.ToArray(), outliersIds.ToArray());
+        return GetResult(specimen, [averageValue, standardDeviationValue], [.. calculatedPopulationIds], [.. emptyValuesIds], [.. outliersIds]);
     }
 
     private static string[] GetPopulationIds(Specimen[] population, HashSet<string> emptyValuesIds, HashSet<string> outliersIds)
