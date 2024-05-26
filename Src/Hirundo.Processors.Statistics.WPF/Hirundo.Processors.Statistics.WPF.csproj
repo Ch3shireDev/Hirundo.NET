@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Hirundo.Commons.WPF\Hirundo.Commons.WPF.csproj" />
-    <ProjectReference Include="..\Hirundo.Processors.Statistics\Hirundo.Processors.Statistics.csproj" />
   </ItemGroup>
 
 </Project>

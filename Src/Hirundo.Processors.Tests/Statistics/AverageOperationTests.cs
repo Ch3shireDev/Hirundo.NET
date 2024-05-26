@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using Hirundo.Commons.Models;
+﻿using Hirundo.Commons.Models;
 using Hirundo.Processors.Statistics.Operations;
-using NUnit.Framework;
+using System.Collections;
 
-namespace Hirundo.Processors.Statistics.Tests;
+namespace Hirundo.Processors.Tests.Statistics;
 
 [TestFixture]
 public class AverageOperationTests

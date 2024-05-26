@@ -10,4 +10,8 @@
     <ProjectReference Include="..\Hirundo.Commons\Hirundo.Commons.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Summary\" />
+  </ItemGroup>
+
 </Project>

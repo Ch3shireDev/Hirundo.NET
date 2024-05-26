@@ -25,7 +25,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Hirundo.Commons\Hirundo.Commons.csproj" />
 		<ProjectReference Include="..\Hirundo.Databases\Hirundo.Databases.csproj" />
-		<ProjectReference Include="..\Hirundo.Processors.Statistics\Hirundo.Processors.Statistics.csproj" />
 		<ProjectReference Include="..\Hirundo.Processors\Hirundo.Processors.csproj" />
 		<ProjectReference Include="..\Hirundo.Writers\Hirundo.Writers.csproj" />
 	</ItemGroup>

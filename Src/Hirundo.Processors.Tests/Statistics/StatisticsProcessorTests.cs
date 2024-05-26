@@ -1,9 +1,9 @@
 ﻿using Hirundo.Commons.Models;
+using Hirundo.Processors.Statistics;
 using Hirundo.Processors.Statistics.Operations;
 using Moq;
-using NUnit.Framework;
 
-namespace Hirundo.Processors.Statistics.Tests;
+namespace Hirundo.Processors.Tests.Statistics;
 
 public class StatisticsProcessorTests
 {
