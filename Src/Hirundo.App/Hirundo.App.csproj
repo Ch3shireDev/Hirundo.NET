@@ -9,7 +9,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Hirundo.Commons\Hirundo.Commons.csproj" />
     <ProjectReference Include="..\Hirundo.Databases\Hirundo.Databases.csproj" />
-    <ProjectReference Include="..\Hirundo.Processors.Returning\Hirundo.Processors.Returning.csproj" />
     <ProjectReference Include="..\Hirundo.Processors.Statistics\Hirundo.Processors.Statistics.csproj" />
     <ProjectReference Include="..\Hirundo.Processors.Summary\Hirundo.Processors.Summary.csproj" />
     <ProjectReference Include="..\Hirundo.Processors\Hirundo.Processors.csproj" />

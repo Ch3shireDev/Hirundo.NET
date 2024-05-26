@@ -24,10 +24,13 @@ public class IsNotMainSpecimenPopulationConditionTests
         var returningSpecimenResult2 = internal2.IsAccepted(returningSpecimen);
         var otherSpecimenResult2 = internal2.IsAccepted(specimen);
 
-        // Assert
-        Assert.That(returningSpecimenResult1, Is.EqualTo(false));
-        Assert.That(otherSpecimenResult1, Is.EqualTo(true));
-        Assert.That(returningSpecimenResult2, Is.EqualTo(true));
-        Assert.That(otherSpecimenResult2, Is.EqualTo(false));
+        Assert.Multiple(() =>
+        {
+            // Assert
+            Assert.That(returningSpecimenResult1, Is.EqualTo(false));
+            Assert.That(otherSpecimenResult1, Is.EqualTo(true));
+            Assert.That(returningSpecimenResult2, Is.EqualTo(true));
+            Assert.That(otherSpecimenResult2, Is.EqualTo(false));
+        });
     }
 }

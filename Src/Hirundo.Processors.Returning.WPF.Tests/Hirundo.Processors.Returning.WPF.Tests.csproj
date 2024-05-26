@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Hirundo.Processors.Returning.WPF\Hirundo.Processors.Returning.WPF.csproj" />
-    <ProjectReference Include="..\Hirundo.Processors.Returning\Hirundo.Processors.Returning.csproj" />
   </ItemGroup>
 
 </Project>
