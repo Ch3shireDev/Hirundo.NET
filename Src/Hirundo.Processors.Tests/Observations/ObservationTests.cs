@@ -1,7 +1,6 @@
 ﻿using Hirundo.Commons.Models;
-using NUnit.Framework;
 
-namespace Hirundo.Processors.Observations.Tests;
+namespace Hirundo.Processors.Tests.Observations;
 
 [TestFixture]
 public class ObservationTests

@@ -1,7 +1,7 @@
 ﻿using Hirundo.Commons.Models;
-using NUnit.Framework;
+using Hirundo.Processors.Computed;
 
-namespace Hirundo.Processors.Computed.Tests;
+namespace Hirundo.Processors.Tests.Computed;
 
 [TestFixture]
 public class PointednessCalculatorTests

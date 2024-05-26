@@ -25,7 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Hirundo.Commons.WPF\Hirundo.Commons.WPF.csproj" />
-    <ProjectReference Include="..\Hirundo.Processors.Observations\Hirundo.Processors.Observations.csproj" />
+    <ProjectReference Include="..\Hirundo.Processors\Hirundo.Processors.csproj" />
   </ItemGroup>
 
   <ItemGroup>

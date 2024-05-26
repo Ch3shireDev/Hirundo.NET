@@ -1,8 +1,8 @@
-﻿using System.Text;
-using Hirundo.Commons.Models;
-using NUnit.Framework;
+﻿using Hirundo.Commons.Models;
+using Hirundo.Processors.Observations;
+using System.Text;
 
-namespace Hirundo.Processors.Observations.Tests;
+namespace Hirundo.Processors.Tests.Observations;
 
 [TestFixture]
 public class IsEqualConditionTests

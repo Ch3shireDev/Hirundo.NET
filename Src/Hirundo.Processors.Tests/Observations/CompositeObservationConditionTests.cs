@@ -1,8 +1,8 @@
 ﻿using Hirundo.Commons.Models;
+using Hirundo.Processors.Observations;
 using Moq;
-using NUnit.Framework;
 
-namespace Hirundo.Processors.Observations.Tests;
+namespace Hirundo.Processors.Tests.Observations;
 
 [TestFixture]
 public class CompositeObservationConditionTests
