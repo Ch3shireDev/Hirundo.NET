@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:wpf="clr-namespace:Hirundo.Commons.WPF"
              mc:Ignorable="d"
              d:Background="AliceBlue"
-             d:DataContext="{d:DesignInstance ParametersBrowserViewModel}">
+             d:DataContext="{d:DesignInstance wpf:ParametersBrowserViewModel}">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
