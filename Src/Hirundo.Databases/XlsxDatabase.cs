@@ -17,6 +17,7 @@ public class XlsxDatabase(ExcelDatabaseParameters parameters, CancellationToken?
         using var workbook = new XLWorkbook(Path);
         var worksheet = workbook.Worksheets.First();
         var headers = worksheet.Row(1).Cells().Select(c => c.Value.ToString(CultureInfo.InvariantCulture)).ToList();
+        var types = GetTypes(parameters).ToArray();
 
         var ringIndex = headers.IndexOf(RingIdentifier);
         var speciesIndex = headers.IndexOf(SpeciesIdentifier);
@@ -39,8 +40,14 @@ public class XlsxDatabase(ExcelDatabaseParameters parameters, CancellationToken?
                 Date = date,
                 Headers = headers,
                 Values = values,
+                Types = types,
             };
         }
+    }
+
+    private static IEnumerable<DataType> GetTypes(ExcelDatabaseParameters parameters)
+    {
+        return parameters.Columns.Select(c => c.DataType);
     }
 
     private static IEnumerable<object?> GetValues(ExcelDatabaseParameters parameters, IXLRow? row)

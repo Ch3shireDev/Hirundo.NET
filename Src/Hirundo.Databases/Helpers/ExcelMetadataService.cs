@@ -1,17 +1,19 @@
 ﻿using ClosedXML.Excel;
 using Hirundo.Commons.Models;
 using System.Globalization;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 
 namespace Hirundo.Databases.Helpers;
-
-
 
 public partial class ExcelMetadataService : IExcelMetadataService
 {
     public IList<ColumnParameters> GetColumns(string path)
     {
         using var workbook = new XLWorkbook(path);
+
+        if (IsMetadataStoredInComments(workbook, out var metadata)) return metadata;
+
         IXLWorksheet worksheet = workbook.Worksheet(1);
 
         var headers = GetHeaders(worksheet);
@@ -24,6 +26,43 @@ public partial class ExcelMetadataService : IExcelMetadataService
             header.DataType = type;
             return header;
         }).ToList();
+    }
+
+    private static bool IsMetadataStoredInComments(XLWorkbook workbook, out IList<ColumnParameters> columnParameters)
+    {
+        try
+        {
+            var comments = workbook.Properties.Comments;
+
+            if (string.IsNullOrWhiteSpace(comments))
+            {
+                columnParameters = [];
+                return false;
+            }
+
+            var data = JsonSerializer.Deserialize<MetdataColumns>(comments);
+
+            if (data == null)
+            {
+                columnParameters = [];
+                return false;
+            }
+
+            columnParameters = data.Headers.Zip(data.Types, (header, type) => new ColumnParameters { DatabaseColumn = header, ValueName = header, DataType = type }).ToList();
+
+            return true;
+        }
+        catch (Exception)
+        {
+            columnParameters = [];
+            return false;
+        }
+    }
+
+    private class MetdataColumns
+    {
+        public string[] Headers { get; set; } = [];
+        public DataType[] Types { get; set; } = [];
     }
 
     private static List<string> GetHeaders(IXLWorksheet worksheet)

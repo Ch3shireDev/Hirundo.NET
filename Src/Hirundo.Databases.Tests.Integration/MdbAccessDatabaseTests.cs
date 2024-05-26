@@ -102,6 +102,32 @@ public class MdbAccessDatabaseTests
     }
 
     [Test]
+    public void GivenNewExampleDatabase_WhenGetData_ReadsTypesCorrectly()
+    {
+        // Arrange
+        _accessDatabaseParameters.Path = "./Assets/access_example_new_db.mdb";
+        _accessDatabaseParameters.Table = "example table";
+
+        _accessDatabaseParameters.RingIdentifier = "RING";
+        _accessDatabaseParameters.DateIdentifier = "DATE";
+        _accessDatabaseParameters.SpeciesIdentifier = "SPECIES";
+
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("IDR_Podab", "ID", DataType.Number));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("RING", "RING", DataType.Text));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("Date2", "DATE", DataType.Date));
+        _accessDatabaseParameters.Columns.Add(new ColumnParameters("Species Code", "SPECIES", DataType.Text));
+
+        // Act
+        var data = _mdbAccessDatabase.GetObservations().ToList();
+
+        // Assert
+        Assert.That(data.Count, Is.EqualTo(3));
+        Assert.That(data[0].Types, Is.EquivalentTo(new[] { DataType.Number, DataType.Text, DataType.Date, DataType.Text }));
+        Assert.That(data[1].Types, Is.EquivalentTo(new[] { DataType.Number, DataType.Text, DataType.Date, DataType.Text }));
+        Assert.That(data[2].Types, Is.EquivalentTo(new[] { DataType.Number, DataType.Text, DataType.Date, DataType.Text }));
+    }
+
+    [Test]
     public void GivenNewExampleDatabaseWithSpeciesClause_WhenGetData_ReturnsOnlyRegReg()
     {
         // Arrange

@@ -123,4 +123,21 @@ public class XlsxDatabaseIntegrationTests
         object?[] expectedValues3 = [4655, "H137674", "ERI.RUB", new DateTime(1967, 08, 18), 9, null, "L", null, "R", null];
         Assert.That(result[2].Values, Is.EquivalentTo(expectedValues3));
     }
+
+    [Test]
+    public void Datasource_ReturnsCorrectTypes()
+    {
+        // Arrange
+        var datasource = databaseParameters.BuildDataSource();
+
+        // Act
+        var result = datasource.GetObservations().ToArray();
+
+        // Assert
+        Assert.That(result, Is.Not.Null);
+        Assert.That(result.Length, Is.EqualTo(3));
+        Assert.That(result[0].Types, Is.EquivalentTo(new DataType[] { DataType.Number, DataType.Text, DataType.Text, DataType.Date, DataType.Number, DataType.Text, DataType.Text, DataType.Numeric, DataType.Text, DataType.Number }));
+        Assert.That(result[1].Types, Is.EquivalentTo(new DataType[] { DataType.Number, DataType.Text, DataType.Text, DataType.Date, DataType.Number, DataType.Text, DataType.Text, DataType.Numeric, DataType.Text, DataType.Number }));
+        Assert.That(result[2].Types, Is.EquivalentTo(new DataType[] { DataType.Number, DataType.Text, DataType.Text, DataType.Date, DataType.Number, DataType.Text, DataType.Text, DataType.Numeric, DataType.Text, DataType.Number }));
+    }
 }

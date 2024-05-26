@@ -26,11 +26,12 @@ public class Observation
     /// </summary>
     /// <param name="names">Nazwy kolumn danych.</param>
     /// <param name="values">Wartości.</param>
-    public Observation(IList<string> names, IList<object?> values)
+    public Observation(IList<string> names, IList<object?> values, IList<DataType>? types = null)
     {
 #pragma warning disable IDE0305
         Headers = names.ToList();
         Values = values.ToList();
+        Types = types ?? [];
 #pragma warning restore IDE0305
     }
 
@@ -49,6 +50,8 @@ public class Observation
         get => _values;
         init => _values = [.. value];
     }
+
+    public IList<DataType> Types { get; init; } = [];
 
     /// <summary>
     ///     Zwraca wartość dla podanej nazwy kolumny. Case insensitive.
@@ -109,16 +112,6 @@ public class Observation
         }
 
         return -1;
-    }
-
-
-    /// <summary>
-    ///     Zwraca listę typów.
-    /// </summary>
-    /// <returns></returns>
-    public Type?[] GetTypes()
-    {
-        return Values.Select(x => x?.GetType()).ToArray();
     }
 
     public object?[] SelectValues(string[] columnNames)

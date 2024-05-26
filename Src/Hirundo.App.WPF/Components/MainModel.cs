@@ -11,6 +11,7 @@ using Hirundo.Writers;
 using Hirundo.Writers.WPF;
 using Serilog;
 using System.IO;
+using System.Text.Json;
 
 namespace Hirundo.App.WPF.Components;
 
@@ -184,13 +185,27 @@ public class MainModel(
 
         var headers = GetHeaders(data);
         var values = GetValues(data);
+        var comments = GetComments(data);
 
         var xlsx = new XlsxBuilder()
             .WithHeaders(headers)
             .WithValues(values)
+            .WithComments(comments)
             .Build();
 
         return xlsx;
+    }
+
+    private readonly JsonSerializerOptions metadataOptions = new() { WriteIndented = true };
+
+    private string GetComments(IList<Observation> data)
+    {
+        var headers = data.First().Headers;
+        var types = data.First().Types;
+
+        var metadata = new { Headers = headers, Types = types };
+
+        return JsonSerializer.Serialize(metadata, metadataOptions);
     }
 
     public IList<Observation> GetRawData(CancellationToken? token = null)
@@ -209,4 +224,9 @@ public class MainModel(
     {
         return data.Select(r => r.Values.ToArray());
     }
+}
+
+public class XlsxExporter
+{
+
 }

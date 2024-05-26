@@ -1,6 +1,6 @@
-﻿using System.Data.Odbc;
-using Hirundo.Commons.Models;
+﻿using Hirundo.Commons.Models;
 using Serilog;
+using System.Data.Odbc;
 
 namespace Hirundo.Databases;
 
@@ -50,6 +50,7 @@ public class MdbAccessDatabase(AccessDatabaseParameters parameters, Cancellation
         Log.Information($"Odczytywanie danych z tabeli {parameters.Table}.");
 
         var headers = GetDataColumns(parameters);
+        var types = GetDataTypes(parameters);
         var ringIndex = GetRingIndex(parameters);
         var dateIndex = GetDateIndex(parameters);
         var speciesIndex = GetSpeciesIndex(parameters);
@@ -68,7 +69,8 @@ public class MdbAccessDatabase(AccessDatabaseParameters parameters, Cancellation
                 Date = date,
                 Species = species,
                 Headers = headers,
-                Values = values
+                Values = values,
+                Types = types,
             };
 
             token?.ThrowIfCancellationRequested();
@@ -132,6 +134,11 @@ public class MdbAccessDatabase(AccessDatabaseParameters parameters, Cancellation
     private static string[] GetDataColumns(AccessDatabaseParameters parameters)
     {
         return parameters.Columns.Select(x => x.ValueName).ToArray();
+    }
+
+    private static DataType[] GetDataTypes(AccessDatabaseParameters parameters)
+    {
+        return parameters.Columns.Select(x => x.DataType).ToArray();
     }
 
     /// <summary>

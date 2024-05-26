@@ -6,6 +6,7 @@ public class XlsxBuilder
 {
     private static readonly string[] separator = ["" + Environment.NewLine, "\n"];
     private string Title { get; set; } = "";
+    private string Comments { get; set; } = "";
     private string Subtitle { get; set; } = "";
     private string[] Headers { get; set; } = [];
     private object?[][] Values { get; set; } = [];
@@ -52,6 +53,12 @@ public class XlsxBuilder
     public XlsxBuilder WithExplanationName(string explanationName)
     {
         ExplanationName = explanationName;
+        return this;
+    }
+
+    public XlsxBuilder WithComments(string comments)
+    {
+        Comments = comments;
         return this;
     }
 
@@ -119,8 +126,11 @@ public class XlsxBuilder
             AutoFitColumns(secondWorksheet);
         }
 
+        workbook.Properties.Comments = Comments;
+
         return workbook;
     }
+
 
     private static void MergeWholeRow(int startingRow, IXLWorksheet summary, string[] headers)
     {
