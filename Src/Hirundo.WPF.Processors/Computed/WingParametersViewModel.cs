@@ -1,10 +1,11 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using Hirundo.Commons.Models;
 using Hirundo.Commons.WPF;
+using Hirundo.Processors.Computed;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
-namespace Hirundo.Processors.Computed.WPF;
+namespace Hirundo.WPF.Processors.Computed;
 
 public class WingParametersViewModel<T> : ParametersViewModel where T : WingParametersBase
 {

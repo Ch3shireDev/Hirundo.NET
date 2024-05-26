@@ -1,6 +1,7 @@
 ﻿using Hirundo.Commons.WPF;
+using Hirundo.Processors.Computed;
 
-namespace Hirundo.Processors.Computed.WPF.Symmetry;
+namespace Hirundo.WPF.Processors.Computed.Symmetry;
 
 [ParametersData(
     typeof(SymmetryCalculator),

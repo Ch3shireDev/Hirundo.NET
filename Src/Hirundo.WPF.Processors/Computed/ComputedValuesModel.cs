@@ -1,7 +1,8 @@
 ﻿using Hirundo.Commons.Repositories;
 using Hirundo.Commons.WPF;
+using Hirundo.Processors.Computed;
 
-namespace Hirundo.Processors.Computed.WPF;
+namespace Hirundo.WPF.Processors.Computed;
 
 public class ComputedValuesModel(ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository)
     : ParametersBrowserModel<ComputedValuesParameters, IComputedValuesCalculator, ComputedValuesModel>(labelsRepository, speciesRepository)

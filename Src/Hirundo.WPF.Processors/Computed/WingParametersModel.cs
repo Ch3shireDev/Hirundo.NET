@@ -1,8 +1,9 @@
 ﻿using Hirundo.Commons.Models;
 using Hirundo.Commons.Repositories;
 using Hirundo.Commons.WPF;
+using Hirundo.Processors.Computed;
 
-namespace Hirundo.Processors.Computed.WPF;
+namespace Hirundo.WPF.Processors.Computed;
 
 public class WingParametersModel<T>(T parameters, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository)
     : ParametersModel(parameters, labelsRepository, speciesRepository) where T : WingParametersBase

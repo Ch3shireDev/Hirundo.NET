@@ -1,6 +1,7 @@
 ﻿using Hirundo.Commons.WPF;
+using Hirundo.Processors.Computed;
 
-namespace Hirundo.Processors.Computed.WPF.Pointedness;
+namespace Hirundo.WPF.Processors.Computed.Pointedness;
 
 [ParametersData(
     typeof(PointednessCalculator),

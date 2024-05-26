@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using Hirundo.Commons.Models;
+﻿using Hirundo.Commons.Models;
 using Hirundo.Commons.Repositories;
+using Hirundo.Processors.Computed;
+using Hirundo.WPF.Processors.Computed;
 using Moq;
-using NUnit.Framework;
+using System.Collections;
 
-namespace Hirundo.Processors.Computed.WPF.Tests;
+namespace Hirundo.Processors.WPF.Tests.Computed;
 
 public class SymmetryViewModelTests
 {
@@ -43,9 +44,12 @@ public class SymmetryViewModelTests
         _viewModel.D8Name = "D8";
 
         // Assert
-        Assert.That(_parameters.ResultName, Is.EqualTo("SYMMETRY"));
-        Assert.That(_parameters.WingName, Is.EqualTo("WING"));
-        Assert.That(_parameters.WingParameters, Is.EquivalentTo(new ArrayList { "D2", "D3", "D4", "D5", "D6", "D7", "D8" }));
+        Assert.Multiple(() =>
+        {
+            Assert.That(_parameters.ResultName, Is.EqualTo("SYMMETRY"));
+            Assert.That(_parameters.WingName, Is.EqualTo("WING"));
+            Assert.That(_parameters.WingParameters, Is.EquivalentTo(new ArrayList { "D2", "D3", "D4", "D5", "D6", "D7", "D8" }));
+        });
     }
 
     [Test]

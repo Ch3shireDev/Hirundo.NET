@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Hirundo.Processors.Computed.WPF;
+namespace Hirundo.WPF.Processors.Computed;
 
 /// <summary>
 ///     Interaction logic for SymmetryView.xaml

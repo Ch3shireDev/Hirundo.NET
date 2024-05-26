@@ -2,11 +2,11 @@
 using Hirundo.Commons.Models;
 using Hirundo.Commons.Repositories;
 using Hirundo.Databases.WPF;
-using Hirundo.Processors.Computed.WPF;
 using Hirundo.Processors.Observations.WPF;
 using Hirundo.Processors.Population.WPF;
 using Hirundo.Processors.Returning.WPF;
 using Hirundo.Processors.Statistics.WPF;
+using Hirundo.WPF.Processors.Computed;
 using Hirundo.Writers;
 using Hirundo.Writers.WPF;
 using Serilog;
