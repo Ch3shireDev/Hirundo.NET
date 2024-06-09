@@ -26,11 +26,18 @@
             <ComboBox ItemsSource="{Binding Options}" SelectedValue="{Binding SelectedParameter}"
                       DisplayMemberPath="Title" MinWidth="200" />
         </WrapPanel>
-        <StackPanel Grid.Row="3" Visibility="{Binding ProcessVisibility}">
-            <WrapPanel Margin="10">
-                <Button Command="{Binding ProcessCommand}" Content="{Binding ProcessLabel}" />
-            </WrapPanel>
-        </StackPanel>
+        <ItemsControl Grid.Row="3" ItemsSource="{Binding CommandList}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Content="{Binding CommandName}" Command="{Binding CommandProcess}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
         <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="4">
             <ItemsControl ItemsSource="{Binding ParametersViewModels}" HorizontalAlignment="Left">
                 <ItemsControl.ItemsPanel>

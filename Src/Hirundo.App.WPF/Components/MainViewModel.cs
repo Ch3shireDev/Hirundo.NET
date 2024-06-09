@@ -50,7 +50,7 @@ public sealed class MainViewModel : ObservableObject
 
         SelectedViewModel = DataSourceViewModel;
 
-        model.WriterModel.Process = () => Task.Run(ProcessAndSaveAsync);
+        model.WriterModel.AddProcess("Zapisz wyniki do pliku", () => Task.Run(ProcessAndSaveAsync));
     }
 
     public bool IsLoaded { get; private set; }

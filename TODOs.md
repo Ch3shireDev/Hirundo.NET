@@ -1,6 +1,5 @@
 # Zadania / pomysły do dodania
 
-1.  [ ] Zmienić formę ładowania danych na proste ładowanie pliku i automatyczną decyzję programu, jaki rodzaj loadera wybrać dla tych danych.
 2.  [ ] W polu osobniki dodać informację o liczbie osobników w bazie danych, maksymalnej liczbie obserwacji przypadającej na osobnika.
 3.  [ ] Dodać przeglądanie rozkładu wartości w Obserwacje.
 4.  [ ] DatabaseConditionType powinien spełniać regułę OCP.

@@ -11,6 +11,4 @@ public class WritersModel(ILabelsRepository labelsRepository, ISpeciesRepository
     public override string Description => "W tym panelu wybierasz sposób zapisu wyników.";
     public override string AddParametersCommandText => "Dodaj nowy sposób zapisu";
     public override IList<IWriterParameters> Parameters => ParametersContainer.Writers;
-    public override Action? Process { get; set; }
-    public override string ProcessLabel => "Zapisz wyniki do pliku";
 }
