@@ -45,19 +45,6 @@ public class HirundoApp : IHirundoApp
     {
         ArgumentNullException.ThrowIfNull(applicationConfig);
 
-
-        var observationConditions = _observationConditionsBuilder
-            .NewBuilder()
-            .WithObservationConditions(applicationConfig.Observations.Conditions)
-            .WithCancellationToken(token)
-            .Build();
-
-        var computedValuesCalculator = _calculatorBuilder
-            .NewBuilder()
-            .WithComputedValues(applicationConfig.ComputedValues.ComputedValues)
-            .WithCancellationToken(token)
-            .Build();
-
         var returningSpecimenConditions = _returningSpecimenConditionsBuilder
             .NewBuilder()
             .WithReturningSpecimensConditions(applicationConfig.ReturningSpecimens.Conditions)
@@ -82,23 +69,12 @@ public class HirundoApp : IHirundoApp
             .WithCancellationToken(token)
             .Build();
 
-        var observations = applicationConfig.Databases.BuildDataSource(token).GetObservations().ToArray();
-
-        Log.Information($"Odczytano {observations.Length} obserwacji. Wyliczanie dodatkowych wartości...");
-
-        observations = observations
-            .Select(computedValuesCalculator.Calculate)
-            .ToArray();
-
-        Log.Information("Filtrowanie obserwacji po warunkach...");
-
-        var selectedObservations = observations.Where(observationConditions.IsAccepted).ToArray();
-
-        Log.Information($"Wybrano {selectedObservations.Length} obserwacji.");
+        var observations = GetObservations(applicationConfig, token);
+        Log.Information($"Wybrano {observations.Length} obserwacji.");
 
         Log.Information("Łączenie obserwacji w osobniki...");
 
-        var specimens = GetSpecimens(selectedObservations);
+        var specimens = GetSpecimens(observations);
 
         Log.Information($"Wybrano {specimens.Length} osobników.");
 
@@ -132,6 +108,34 @@ public class HirundoApp : IHirundoApp
         {
             Log.Information($"Zapisano dane wynikowe do pliku {writer.Path}.");
         }
+    }
+
+    private Observation[] GetObservations(ApplicationParameters applicationConfig, CancellationToken? token)
+    {
+        var observationConditions = _observationConditionsBuilder
+            .NewBuilder()
+            .WithObservationConditions(applicationConfig.Observations.Conditions)
+            .WithCancellationToken(token)
+            .Build();
+
+        var computedValuesCalculator = _calculatorBuilder
+            .NewBuilder()
+            .WithComputedValues(applicationConfig.ComputedValues.ComputedValues)
+            .WithCancellationToken(token)
+            .Build();
+
+        var observations = applicationConfig.Databases.BuildDataSource(token).GetObservations().ToArray();
+
+        Log.Information($"Odczytano {observations.Length} obserwacji. Wyliczanie dodatkowych wartości...");
+
+        observations = observations
+            .Select(computedValuesCalculator.Calculate)
+            .ToArray();
+
+        Log.Information("Filtrowanie obserwacji po warunkach...");
+
+        var selectedObservations = observations.Where(observationConditions.IsAccepted).ToArray();
+        return selectedObservations;
     }
 
     private static List<ReturningSpecimenSummary> ProcessSummaries(Specimen[] returningSpecimens, ISummaryProcessor summaryProcessor)

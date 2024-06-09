@@ -15,7 +15,7 @@ public class Specimen(string ring, IList<Observation> observations)
     /// <summary>
     ///     Lista obserwacji osobnika.
     /// </summary>
-    public IList<Observation> Observations { get; } = observations;
+    public IList<Observation> Observations { get; } = [.. observations.OrderBy(o => o.Date)];
 
     public string[] GetHeaders()
     {
