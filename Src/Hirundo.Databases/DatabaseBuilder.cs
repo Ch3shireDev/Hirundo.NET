@@ -34,9 +34,9 @@ public class DatabaseBuilder : IDatabaseBuilder
         return new DatabaseBuilder();
     }
 
-    public IDatabaseBuilder WithDatabaseParameters(params IDatabaseParameters[] appConfigDatabases)
+    public IDatabaseBuilder WithDatabaseParameters(IList<IDatabaseParameters> appConfigDatabases)
     {
-        ArgumentNullException.ThrowIfNull(appConfigDatabases);
+        ArgumentNullException.ThrowIfNull(appConfigDatabases, nameof(appConfigDatabases));
 
         foreach (var databaseParameters in appConfigDatabases)
         {

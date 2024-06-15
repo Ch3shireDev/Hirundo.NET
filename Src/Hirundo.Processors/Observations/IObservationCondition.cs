@@ -14,4 +14,9 @@ public interface IObservationCondition
     /// <param name="observation">Obserwacja.</param>
     /// <returns>Odpowiedź, czy obserwacja spełnia zadany warunek.</returns>
     public bool IsAccepted(Observation observation);
+
+    public IList<Observation> Filter(IList<Observation> observations)
+    {
+        return observations.Where(IsAccepted).ToList();
+    }
 }

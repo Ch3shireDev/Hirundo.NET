@@ -2,7 +2,7 @@
 
 public interface IDatabaseBuilder
 {
-    IDatabaseBuilder WithDatabaseParameters(params IDatabaseParameters[] appConfigDatabases);
+    IDatabaseBuilder WithDatabaseParameters(IList<IDatabaseParameters> appConfigDatabases);
 
     /// <summary>
     ///     Dodaje parametry bazy danych Access.

@@ -1,6 +1,7 @@
 ﻿using ClosedXML.Excel;
 using Hirundo.Commons.Models;
 using System.Globalization;
+using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
@@ -40,26 +41,20 @@ public partial class ExcelMetadataService : IExcelMetadataService
                 return false;
             }
 
-            var data = JsonSerializer.Deserialize<MetdataColumns>(comments);
-
-            if (data == null)
-            {
-                columnParameters = [];
-                return false;
-            }
+            var data = JsonSerializer.Deserialize<MetdataColumns>(comments) ?? throw new SerializationException();
 
             columnParameters = data.Headers.Zip(data.Types, (header, type) => new ColumnParameters { DatabaseColumn = header, ValueName = header, DataType = type }).ToList();
 
             return true;
         }
-        catch (Exception)
+        catch (SerializationException)
         {
             columnParameters = [];
             return false;
         }
     }
 
-    private class MetdataColumns
+    private sealed class MetdataColumns
     {
         public string[] Headers { get; set; } = [];
         public DataType[] Types { get; set; } = [];

@@ -1,10 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Hirundo.App.WPF.Helpers;
 using Hirundo.Commons.Helpers;
 using Hirundo.Commons.Models;
 using Hirundo.Commons.WPF;
 using Hirundo.Commons.WPF.Helpers;
+using Hirundo.Serialization.Json;
 using Hirundo.Writers;
 using Hirundo.Writers.WPF;
 using Microsoft.Win32;
@@ -320,8 +320,7 @@ public sealed class MainViewModel : ObservableObject
             if (loadFileDialog.ShowDialog() == true)
             {
                 var json = File.ReadAllText(loadFileDialog.FileName);
-                var config = JsonTools.Deserialize(json);
-
+                var config = JsonTools.Deserialize<ApplicationParameters>(json);
 
                 UpdateConfig(config);
 

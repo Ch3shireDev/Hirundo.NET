@@ -80,7 +80,7 @@ public class XlsxDatabaseIntegrationTests
         var builder = new DatabaseBuilder();
 
         // Act
-        var result = builder.WithDatabaseParameters(parameters).Build();
+        var result = builder.WithDatabaseParameters([parameters]).Build();
 
         // Assert
         Assert.That(result, Is.InstanceOf<IDatabase>());

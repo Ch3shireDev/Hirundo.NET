@@ -147,4 +147,14 @@ public class Observation
         Headers.Add(columnName);
         Values.Add(columnValue);
     }
+
+    public Observation Copy()
+    {
+        return new Observation([.. Headers], [.. Values], [.. Types])
+        {
+            Ring = Ring,
+            Date = Date,
+            Species = Species
+        };
+    }
 }

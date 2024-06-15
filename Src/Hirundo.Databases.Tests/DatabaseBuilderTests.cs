@@ -34,7 +34,7 @@ public class DatabaseBuilderTests
         };
 
         // Act
-        var result = _builder.WithDatabaseParameters(parameters).Build();
+        var result = _builder.WithDatabaseParameters([parameters]).Build();
 
         // Assert
         Assert.That(result, Is.Not.Null);
@@ -67,7 +67,7 @@ public class DatabaseBuilderTests
         var cancellationToken = new CancellationToken();
 
         // Act
-        var result = _builder.WithDatabaseParameters(parameters).WithCancellationToken(cancellationToken).Build();
+        var result = _builder.WithDatabaseParameters([parameters]).WithCancellationToken(cancellationToken).Build();
 
         // Assert
         Assert.That(result, Is.Not.Null);

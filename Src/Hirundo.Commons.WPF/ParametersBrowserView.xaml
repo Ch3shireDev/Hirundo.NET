@@ -21,23 +21,25 @@
         <WrapPanel Margin="10" Grid.Row="1">
             <Label FontWeight="Bold" Content="{Binding Title}" />
         </WrapPanel>
-        <WrapPanel Margin="10" Grid.Row="2">
-            <Button Command="{Binding AddParametersCommand}" Content="{Binding AddParametersCommandText}" />
-            <ComboBox ItemsSource="{Binding Options}" SelectedValue="{Binding SelectedParameter}"
-                      DisplayMemberPath="Title" MinWidth="200" />
-        </WrapPanel>
-        <ItemsControl Grid.Row="3" ItemsSource="{Binding CommandList}">
+        <ItemsControl Grid.Row="2" ItemsSource="{Binding CommandList}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel/>
+                    <StackPanel/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Content="{Binding CommandName}" Command="{Binding CommandProcess}" />
+                    <WrapPanel>
+                        <Button Content="{Binding CommandName}" Command="{Binding CommandProcess}" /> <Label Content="{Binding CommandResult}"/>
+                    </WrapPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+        <WrapPanel Margin="10" Grid.Row="3">
+            <Button Command="{Binding AddParametersCommand}" Content="{Binding AddParametersCommandText}" />
+            <ComboBox ItemsSource="{Binding Options}" SelectedValue="{Binding SelectedParameter}"
+                      DisplayMemberPath="Title" MinWidth="200" />
+        </WrapPanel>
         <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="4">
             <ItemsControl ItemsSource="{Binding ParametersViewModels}" HorizontalAlignment="Left">
                 <ItemsControl.ItemsPanel>

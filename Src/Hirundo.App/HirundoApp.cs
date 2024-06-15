@@ -1,6 +1,4 @@
 ﻿using Hirundo.Commons.Models;
-using Hirundo.Processors.Computed;
-using Hirundo.Processors.Observations;
 using Hirundo.Processors.Population;
 using Hirundo.Processors.Returning;
 using Hirundo.Processors.Statistics;
@@ -12,8 +10,8 @@ namespace Hirundo.App;
 
 public class HirundoApp : IHirundoApp
 {
-    private readonly IComputedValuesCalculatorBuilder _calculatorBuilder = new ComputedValuesCalculatorBuilder();
-    private readonly IObservationConditionsBuilder _observationConditionsBuilder = new ObservationConditionsBuilder();
+    private readonly ObservationsProcessor observationsProcessor = new();
+
     private readonly IPopulationProcessorBuilder _populationProcessorBuilder = new PopulationProcessorBuilder();
     private readonly IReturningSpecimenConditionsBuilder _returningSpecimenConditionsBuilder = new ReturningSpecimenConditionsBuilder();
     private readonly IStatisticsProcessorBuilder _statisticsProcessorBuilder = new StatisticsProcessorBuilder();
@@ -25,16 +23,12 @@ public class HirundoApp : IHirundoApp
     }
 
     public HirundoApp(
-        IComputedValuesCalculatorBuilder calculatorBuilder,
-        IObservationConditionsBuilder observationsBuilder,
         IReturningSpecimenConditionsBuilder returningBuilder,
         IPopulationProcessorBuilder populationProcessorBuilder,
         IStatisticsProcessorBuilder statisticsProcessorBuilder,
         ISummaryWriterBuilder summaryWriterBuilder
     )
     {
-        _calculatorBuilder = calculatorBuilder;
-        _observationConditionsBuilder = observationsBuilder;
         _returningSpecimenConditionsBuilder = returningBuilder;
         _populationProcessorBuilder = populationProcessorBuilder;
         _statisticsProcessorBuilder = statisticsProcessorBuilder;
@@ -69,7 +63,7 @@ public class HirundoApp : IHirundoApp
             .WithCancellationToken(token)
             .Build();
 
-        var observations = GetObservations(applicationConfig, token);
+        var observations = observationsProcessor.GetObservations(applicationConfig, token);
         Log.Information($"Wybrano {observations.Length} obserwacji.");
 
         Log.Information("Łączenie obserwacji w osobniki...");
@@ -110,33 +104,6 @@ public class HirundoApp : IHirundoApp
         }
     }
 
-    private Observation[] GetObservations(ApplicationParameters applicationConfig, CancellationToken? token)
-    {
-        var observationConditions = _observationConditionsBuilder
-            .NewBuilder()
-            .WithObservationConditions(applicationConfig.Observations.Conditions)
-            .WithCancellationToken(token)
-            .Build();
-
-        var computedValuesCalculator = _calculatorBuilder
-            .NewBuilder()
-            .WithComputedValues(applicationConfig.ComputedValues.ComputedValues)
-            .WithCancellationToken(token)
-            .Build();
-
-        var observations = applicationConfig.Databases.BuildDataSource(token).GetObservations().ToArray();
-
-        Log.Information($"Odczytano {observations.Length} obserwacji. Wyliczanie dodatkowych wartości...");
-
-        observations = observations
-            .Select(computedValuesCalculator.Calculate)
-            .ToArray();
-
-        Log.Information("Filtrowanie obserwacji po warunkach...");
-
-        var selectedObservations = observations.Where(observationConditions.IsAccepted).ToArray();
-        return selectedObservations;
-    }
 
     private static List<ReturningSpecimenSummary> ProcessSummaries(Specimen[] returningSpecimens, ISummaryProcessor summaryProcessor)
     {

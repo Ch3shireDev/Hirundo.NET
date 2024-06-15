@@ -15,13 +15,19 @@ public interface IParametersBrowserModel
 
     void AddParameters(ParametersData parametersData);
     IEnumerable<ParametersViewModel> GetParametersViewModels();
-    IList<CommandData> CommandList { get; }
+    ObservableCollection<CommandData> CommandList { get; }
 }
 
 public class CommandData(string commandName, Action commandProcess)
 {
     public string CommandName { get; } = commandName;
-    public ICommand CommandProcess { get; } = new RelayCommand(commandProcess);
+    public ICommand CommandProcess => new RelayCommand(Command);
+    public string CommandResult { get; set; } = string.Empty;
+
+    private void Command()
+    {
+        commandProcess.Invoke();
+    }
 }
 
 public abstract class ParametersBrowserModel<TConditionContainer, TCondition, TBrowser> : IParametersBrowserModel
@@ -45,7 +51,7 @@ public abstract class ParametersBrowserModel<TConditionContainer, TCondition, TB
     public abstract string AddParametersCommandText { get; }
     public virtual IList<ParametersData> ParametersDataList { get; }
 
-    public IList<CommandData> CommandList { get; } = new ObservableCollection<CommandData>();
+    public ObservableCollection<CommandData> CommandList { get; } = [];
 
     public void AddProcess(string label, Action process)
     {
