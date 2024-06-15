@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Hirundo.Commons.Repositories;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace Hirundo.Commons.WPF;
@@ -15,7 +14,7 @@ public interface IParametersBrowserModel
 
     void AddParameters(ParametersData parametersData);
     IEnumerable<ParametersViewModel> GetParametersViewModels();
-    ObservableCollection<CommandData> CommandList { get; }
+    IList<CommandData> CommandList { get; }
 }
 
 public class CommandData(string commandName, Action commandProcess)
@@ -51,7 +50,7 @@ public abstract class ParametersBrowserModel<TConditionContainer, TCondition, TB
     public abstract string AddParametersCommandText { get; }
     public virtual IList<ParametersData> ParametersDataList { get; }
 
-    public ObservableCollection<CommandData> CommandList { get; } = [];
+    public virtual IList<CommandData> CommandList { get; } = [];
 
     public void AddProcess(string label, Action process)
     {

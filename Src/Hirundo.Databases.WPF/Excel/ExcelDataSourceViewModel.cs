@@ -123,7 +123,6 @@ public class ExcelDataSourceViewModel(ExcelDataSourceModel model, IExcelMetadata
             .ToArray();
 
         Log.Information("Pobrano listę gatunków.");
-        Log.Debug("Lista gatunków: {species}", string.Join(", ", speciesList));
 
         SpeciesRepository.UpdateSpecies(speciesList);
     }
@@ -142,7 +141,6 @@ public class ExcelDataSourceViewModel(ExcelDataSourceModel model, IExcelMetadata
             WindowHelpers.SetMouseCursor(Cursors.Wait);
 
             var columns = excelMetadataService.GetColumns(Path);
-
 
             Columns.Clear();
             model.Columns.Clear();

@@ -1,6 +1,7 @@
 ﻿using Hirundo.Commons.Repositories;
 using Hirundo.Commons.WPF;
 using Hirundo.Processors.Observations;
+using Serilog;
 
 namespace Hirundo.Processors.WPF.Observations;
 
@@ -12,4 +13,10 @@ public class ObservationsModel(ILabelsRepository labelsRepository, ISpeciesRepos
     public override string Header => "Obserwacje";
     public override string Title => "Warunki obserwacji";
     public override IList<IObservationCondition> Parameters => ParametersContainer.Conditions;
+    public override IList<CommandData> CommandList { get; } = [new CommandData("Abc", SayHello)];
+
+    public static void SayHello()
+    {
+        Log.Information("hello");
+    }
 }

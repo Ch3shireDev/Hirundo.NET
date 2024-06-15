@@ -197,7 +197,6 @@ public class AccessDataSourceViewModel(AccessDataSourceModel model, IAccessMetad
             .ToArray();
 
         Log.Information("Pobrano listę gatunków.");
-        Log.Debug("Lista gatunków: {species}", string.Join(", ", speciesList));
 
         SpeciesRepository.UpdateSpecies(speciesList);
     }
