@@ -42,7 +42,7 @@ public static class ContainerExtensions
         builder.RegisterInstance(excelMetadataService.Object).As<IExcelMetadataService>().SingleInstance();
 
         builder.RegisterType<DataSourceModel>().AsSelf().SingleInstance();
-        builder.RegisterType<ObservationsModel>().AsSelf().SingleInstance();
+        builder.RegisterType<ConditionsBrowser>().AsSelf().SingleInstance();
         builder.RegisterType<PopulationModel>().AsSelf().SingleInstance();
         builder.RegisterType<ReturningSpecimensModel>().AsSelf().SingleInstance();
         builder.RegisterType<StatisticsModel>().AsSelf().SingleInstance();

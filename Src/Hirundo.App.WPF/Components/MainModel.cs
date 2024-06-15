@@ -18,7 +18,7 @@ namespace Hirundo.App.WPF.Components;
 public class MainModel(
     IHirundoApp app,
     DataSourceModel dataSourceModel,
-    ObservationsModel observationParametersBrowserModel,
+    ConditionsBrowser observationParametersBrowserModel,
     PopulationModel populationModel,
     ReturningSpecimensModel returningSpecimensModel,
     StatisticsModel statisticsModel,
@@ -30,7 +30,7 @@ public class MainModel(
     private CancellationTokenSource? _cancellationTokenSource;
     private bool _isProcessing;
     public DataSourceModel DatabasesBrowserModel { get; set; } = dataSourceModel;
-    public ObservationsModel ObservationParametersBrowserModel { get; set; } = observationParametersBrowserModel;
+    public ConditionsBrowser ObservationParametersBrowserModel { get; set; } = observationParametersBrowserModel;
     public PopulationModel PopulationModel { get; set; } = populationModel;
     public ReturningSpecimensModel ReturningSpecimensModel { get; set; } = returningSpecimensModel;
     public StatisticsModel StatisticsModel { get; set; } = statisticsModel;

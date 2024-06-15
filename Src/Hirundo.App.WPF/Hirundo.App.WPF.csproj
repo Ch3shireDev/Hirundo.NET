@@ -46,9 +46,9 @@
 	<ItemGroup>
 		<PackageReference Include="Autofac" Version="8.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-		<PackageReference Include="MaterialDesignColors" Version="2.1.4" />
+		<PackageReference Include="MaterialDesignColors" Version="3.0.0" />
 		<PackageReference Include="MaterialDesignExtensions" Version="3.3.0" />
-		<PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
+		<PackageReference Include="MaterialDesignThemes" Version="5.0.0" />
 		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

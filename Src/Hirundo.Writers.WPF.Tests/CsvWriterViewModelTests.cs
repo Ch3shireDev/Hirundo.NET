@@ -25,12 +25,15 @@ public class CsvWriterViewModelTests
     [Test]
     public void GivenEmptyParameters_WhenSetPath_ParametersAreChanged()
     {
-        string? raisedPropertyName = null;
-        _viewModel.PropertyChanged += (sender, args) => raisedPropertyName = args.PropertyName;
+        // Arrange
+        List<string?> raisedPropertyNames = [];
+        _viewModel.PropertyChanged += (sender, args) => raisedPropertyNames.Add(args?.PropertyName);
 
+        // Act
         _viewModel.Path = "test.csv";
 
-        Assert.That(raisedPropertyName, Is.EqualTo(nameof(_viewModel.Path)));
+        // Assert
+        Assert.That(raisedPropertyNames.Contains(nameof(_viewModel.Path)), Is.True);
         Assert.That(_parameters.Path, Is.EqualTo("test.csv"));
     }
 }
