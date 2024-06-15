@@ -49,32 +49,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border Margin="10" Background="LightGray" CornerRadius="5" ToolTip="{Binding Explanation, NotifyOnSourceUpdated=True}" ToolTipService.InitialShowDelay="500">
-                            <Grid MinHeight="150" MinWidth="300">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Margin="15,15,15,0" HorizontalAlignment="Left">
-                                    <TextBlock DockPanel.Dock="Left" FontWeight="Bold" Text="{Binding Name}" MaxWidth="300"
-                                               TextWrapping="WrapWithOverflow" />
-                                    <TextBlock Margin="0,15" Text="{Binding Description}"
-                                               TextWrapping="WrapWithOverflow" MaxWidth="300" />
-                                </StackPanel>
-                                <ContentControl Grid.Row="1" Content="{Binding}" DataContext="{Binding}" Margin="0,10" />
-                                <Button
-                                    Grid.Row="3"
-                                    Margin="10"
-                                    Background="DarkRed"
-                                    Foreground="White"
-                                    BorderBrush="DarkRed"
-                                    Command="{Binding RemoveCommand}"
-                                    Content="{Binding RemoveText}"
-                                    d:Content="Usuń warunek" />
-                            </Grid>
-                        </Border>
+                        <wpf:ParametersView/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
