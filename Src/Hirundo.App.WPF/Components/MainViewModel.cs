@@ -29,6 +29,9 @@ public sealed class MainViewModel : ObservableObject
         ArgumentNullException.ThrowIfNull(model);
 
         _model = model;
+
+        _model.SetIsProcessing = (value) => { IsProcessing = value; };
+
         DataSourceViewModel = new ParametersBrowserViewModel(model.DatabasesBrowserModel);
         ComputedValuesViewModel = new ParametersBrowserViewModel(model.ComputedValuesModel);
         ObservationsViewModel = new ParametersBrowserViewModel(model.ObservationParametersBrowserModel);
@@ -50,7 +53,7 @@ public sealed class MainViewModel : ObservableObject
 
         SelectedViewModel = DataSourceViewModel;
 
-        model.WriterModel.AddProcess("Zapisz wyniki do pliku", () => Task.Run(ProcessAndSaveAsync));
+        model.WriterModel.AddProcess("Zapisz wyniki do pliku", (commandData) => Task.Run(ProcessAndSaveAsync));
     }
 
     public bool IsLoaded { get; private set; }
@@ -190,10 +193,6 @@ public sealed class MainViewModel : ObservableObject
             IsProcessing = false;
             MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             throw;
-        }
-        finally
-        {
-            IsProcessing = false;
         }
     }
 

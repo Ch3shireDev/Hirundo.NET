@@ -16,28 +16,48 @@ using System.Text.Json;
 
 namespace Hirundo.App.WPF.Components;
 
-public class MainModel(
-    IHirundoApp app,
-    ILabelsRepository labelsRepository,
-    ISpeciesRepository speciesRepository,
-    IAccessMetadataService accessMetadataService,
-    IExcelMetadataService excelMetadataService
-)
+public class MainModel
 {
     private CancellationTokenSource? _cancellationTokenSource;
     private bool _isProcessing;
     public bool IsProcessed { get; internal set; }
     private readonly JsonSerializerOptions metadataOptions = new() { WriteIndented = true };
+    private readonly IHirundoApp _app;
 
-    public DataSourceModel DatabasesBrowserModel { get; } = new DataSourceModel(labelsRepository, speciesRepository, accessMetadataService, excelMetadataService);
-    public ComputedValuesModel ComputedValuesModel { get; } = new ComputedValuesModel(labelsRepository, speciesRepository);
-    public ConditionsBrowser ObservationParametersBrowserModel { get; } = new ConditionsBrowser(labelsRepository, speciesRepository);
-    public PopulationModel PopulationModel { get; } = new PopulationModel(labelsRepository, speciesRepository);
-    public ReturningSpecimensModel ReturningSpecimensModel { get; } = new ReturningSpecimensModel(labelsRepository, speciesRepository);
-    public StatisticsModel StatisticsModel { get; } = new StatisticsModel(labelsRepository, speciesRepository);
-    public WritersModel WriterModel { get; } = new WritersModel(labelsRepository, speciesRepository);
-    public ILabelsRepository LabelsRepository { get; } = labelsRepository;
-    public ISpeciesRepository SpeciesRepository { get; } = speciesRepository;
+    public MainModel(
+        IHirundoApp app,
+        ILabelsRepository labelsRepository,
+        ISpeciesRepository speciesRepository,
+        IAccessMetadataService accessMetadataService,
+        IExcelMetadataService excelMetadataService
+)
+    {
+
+
+        _app = app;
+
+        DatabasesBrowserModel = new DataSourceModel(labelsRepository, speciesRepository, accessMetadataService, excelMetadataService);
+        ComputedValuesModel = new ComputedValuesModel(labelsRepository, speciesRepository);
+        PopulationModel = new PopulationModel(labelsRepository, speciesRepository);
+        ReturningSpecimensModel = new ReturningSpecimensModel(labelsRepository, speciesRepository);
+        StatisticsModel = new StatisticsModel(labelsRepository, speciesRepository);
+        WriterModel = new WritersModel(labelsRepository, speciesRepository);
+        LabelsRepository = labelsRepository;
+        SpeciesRepository = speciesRepository;
+
+        ObservationParametersBrowserModel = new ConditionsBrowser(labelsRepository, speciesRepository, new ObservationsSourceAsync(GetObservations));
+    }
+
+    public DataSourceModel DatabasesBrowserModel { get; }
+    public ComputedValuesModel ComputedValuesModel { get; }
+    public ConditionsBrowser ObservationParametersBrowserModel { get; }
+    public PopulationModel PopulationModel { get; }
+    public ReturningSpecimensModel ReturningSpecimensModel { get; }
+    public StatisticsModel StatisticsModel { get; }
+    public WritersModel WriterModel { get; }
+    public ILabelsRepository LabelsRepository { get; }
+    public ISpeciesRepository SpeciesRepository { get; }
+    public Action<bool>? SetIsProcessing { get; internal set; } = null;
 
     public void UpdateConfig(ApplicationParameters config)
     {
@@ -71,8 +91,31 @@ public class MainModel(
     public async Task RunAsync()
     {
         var config = GetConfigFromViewModels();
-        void action(CancellationToken token) => app.Run(config, token);
+        void action(CancellationToken token) => _app.Run(config, token);
         await RunInternal(action);
+    }
+
+    public async Task<IList<Observation>> GetObservations()
+    {
+        SetIsProcessing?.Invoke(true);
+        try
+        {
+            _cancellationTokenSource = new CancellationTokenSource();
+            var config = GetConfigFromViewModels();
+
+            var observations = await Task.Run(() => _app.GetObservations(config, _cancellationTokenSource.Token), _cancellationTokenSource.Token);
+            return observations;
+        }
+        catch (OperationCanceledException)
+        {
+            Log.Information("Przerwano pobieranie obserwacji z polecenia użytkownika.");
+            throw;
+        }
+        finally
+        {
+            SetIsProcessing?.Invoke(false);
+        }
+
     }
 
     private async Task RunInternal(Action<CancellationToken> action)
@@ -117,7 +160,7 @@ public class MainModel(
         {
             _isProcessing = true;
             var config = GetConfigFromViewModels();
-            app.Run(config);
+            _app.Run(config);
         }
         catch (OperationCanceledException)
         {

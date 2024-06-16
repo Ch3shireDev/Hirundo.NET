@@ -111,4 +111,26 @@ public class MainViewModelTests
         // Assert
         Assert.That(selected, Is.EqualTo(_viewModel.ViewModels[startingIndex - 1]));
     }
+
+    [Test]
+    public async Task ProcessAndSaveAsync_OnStart_IsProcessingShouldBeChanged()
+    {
+        // Arrange
+        var isProcessingStates = new List<bool>();
+
+        _viewModel.PropertyChanged += (sender, args) =>
+        {
+            if (args.PropertyName == nameof(_viewModel.IsProcessing))
+            {
+                isProcessingStates.Add(_viewModel.IsProcessing);
+            }
+        };
+
+        // Act
+        await _viewModel.ProcessAndSaveAsync();
+
+        // Assert
+        bool[] expected = [true, false];
+        Assert.That(isProcessingStates, Is.EquivalentTo(expected));
+    }
 }

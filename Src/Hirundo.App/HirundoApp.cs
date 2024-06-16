@@ -63,7 +63,8 @@ public class HirundoApp : IHirundoApp
             .WithCancellationToken(token)
             .Build();
 
-        var observations = observationsProcessor.GetObservations(applicationConfig, token);
+        var observations = GetObservations(applicationConfig, token).ToArray();
+
         Log.Information($"Wybrano {observations.Length} obserwacji.");
 
         Log.Information("Łączenie obserwacji w osobniki...");
@@ -104,6 +105,10 @@ public class HirundoApp : IHirundoApp
         }
     }
 
+    public IList<Observation> GetObservations(ApplicationParameters config, CancellationToken? cancellationToken = null)
+    {
+        return observationsProcessor.GetObservations(config, cancellationToken);
+    }
 
     private static List<ReturningSpecimenSummary> ProcessSummaries(Specimen[] returningSpecimens, ISummaryProcessor summaryProcessor)
     {
@@ -133,4 +138,5 @@ public class HirundoApp : IHirundoApp
             .Select(group => new Specimen(group.Key, [.. group.OrderBy(o => o.Date)]))
             .ToArray();
     }
+
 }

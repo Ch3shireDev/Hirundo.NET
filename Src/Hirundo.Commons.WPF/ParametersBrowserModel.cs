@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Hirundo.Commons.Repositories;
 using System.Windows.Input;
 
@@ -17,15 +18,25 @@ public interface IParametersBrowserModel
     IList<CommandData> CommandList { get; }
 }
 
-public class CommandData(string commandName, Action commandProcess)
+public class CommandData(string commandName, Func<CommandData, Task> commandProcess) : ObservableObject
 {
     public string CommandName { get; } = commandName;
     public ICommand CommandProcess => new RelayCommand(Command);
-    public string CommandResult { get; set; } = string.Empty;
+
+    private string _commandResult = string.Empty;
+    public string CommandResult
+    {
+        get => _commandResult;
+        set
+        {
+            _commandResult = value;
+            OnPropertyChanged();
+        }
+    }
 
     private void Command()
     {
-        commandProcess.Invoke();
+        commandProcess.Invoke(this);
     }
 }
 
@@ -52,9 +63,9 @@ public abstract class ParametersBrowserModel<TConditionContainer, TCondition, TB
 
     public virtual IList<CommandData> CommandList { get; } = [];
 
-    public void AddProcess(string label, Action process)
+    public void AddProcess(string label, Action<CommandData> process)
     {
-        CommandList.Add(new CommandData(label, process));
+        CommandList.Add(new CommandData(label, (x) => { process(x); return Task.CompletedTask; }));
     }
 
     public void AddParameters(ParametersData parametersData)
