@@ -114,8 +114,14 @@
                 <Button HorizontalAlignment="Right" Command="{Binding NextCommand}">Następny</Button>
             </WrapPanel>
             <WrapPanel HorizontalAlignment="Right">
-                <Button HorizontalAlignment="Right" Command="{Binding ProcessAndSaveCommand}">Przetwarzaj dane</Button>
-                <Button HorizontalAlignment="Right" Command="{Binding BreakCommand}">Przerwij</Button>
+                <Button HorizontalAlignment="Right" Command="{Binding ProcessCommand}" Visibility="{Binding ProcessCommandVisibility}">Przetwarzaj dane</Button>
+                <Button 
+                    HorizontalAlignment="Right"
+                    Command="{Binding BreakCommand}"
+                    Visibility="{Binding BreakCommandVisibility}"
+                    Background="DarkRed"
+                    Foreground="White"
+                    BorderBrush="DarkRed">Przerwij</Button>
             </WrapPanel>
         </DockPanel>
     </Grid>

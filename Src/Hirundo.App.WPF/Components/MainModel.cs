@@ -1,6 +1,7 @@
 ﻿using ClosedXML.Excel;
 using Hirundo.Commons.Models;
 using Hirundo.Commons.Repositories;
+using Hirundo.Databases.Helpers;
 using Hirundo.Databases.WPF;
 using Hirundo.Processors.WPF.Computed;
 using Hirundo.Processors.WPF.Observations;
@@ -17,27 +18,26 @@ namespace Hirundo.App.WPF.Components;
 
 public class MainModel(
     IHirundoApp app,
-    DataSourceModel dataSourceModel,
-    ConditionsBrowser observationParametersBrowserModel,
-    PopulationModel populationModel,
-    ReturningSpecimensModel returningSpecimensModel,
-    StatisticsModel statisticsModel,
-    WritersModel writerModel,
     ILabelsRepository labelsRepository,
-    ComputedValuesModel computedValuesModel
+    ISpeciesRepository speciesRepository,
+    IAccessMetadataService accessMetadataService,
+    IExcelMetadataService excelMetadataService
 )
 {
     private CancellationTokenSource? _cancellationTokenSource;
     private bool _isProcessing;
-    public DataSourceModel DatabasesBrowserModel { get; set; } = dataSourceModel;
-    public ConditionsBrowser ObservationParametersBrowserModel { get; set; } = observationParametersBrowserModel;
-    public PopulationModel PopulationModel { get; set; } = populationModel;
-    public ReturningSpecimensModel ReturningSpecimensModel { get; set; } = returningSpecimensModel;
-    public StatisticsModel StatisticsModel { get; set; } = statisticsModel;
-    public WritersModel WriterModel { get; set; } = writerModel;
-    public ILabelsRepository Repository { get; set; } = labelsRepository;
-    public ComputedValuesModel ComputedValuesModel { get; set; } = computedValuesModel;
     public bool IsProcessed { get; internal set; }
+    private readonly JsonSerializerOptions metadataOptions = new() { WriteIndented = true };
+
+    public DataSourceModel DatabasesBrowserModel { get; } = new DataSourceModel(labelsRepository, speciesRepository, accessMetadataService, excelMetadataService);
+    public ComputedValuesModel ComputedValuesModel { get; } = new ComputedValuesModel(labelsRepository, speciesRepository);
+    public ConditionsBrowser ObservationParametersBrowserModel { get; } = new ConditionsBrowser(labelsRepository, speciesRepository);
+    public PopulationModel PopulationModel { get; } = new PopulationModel(labelsRepository, speciesRepository);
+    public ReturningSpecimensModel ReturningSpecimensModel { get; } = new ReturningSpecimensModel(labelsRepository, speciesRepository);
+    public StatisticsModel StatisticsModel { get; } = new StatisticsModel(labelsRepository, speciesRepository);
+    public WritersModel WriterModel { get; } = new WritersModel(labelsRepository, speciesRepository);
+    public ILabelsRepository LabelsRepository { get; } = labelsRepository;
+    public ISpeciesRepository SpeciesRepository { get; } = speciesRepository;
 
     public void UpdateConfig(ApplicationParameters config)
     {
@@ -196,8 +196,6 @@ public class MainModel(
         return xlsx;
     }
 
-    private readonly JsonSerializerOptions metadataOptions = new() { WriteIndented = true };
-
     private string GetComments(IList<Observation> data)
     {
         var headers = data.First().Headers;
@@ -224,9 +222,4 @@ public class MainModel(
     {
         return data.Select(r => r.Values.ToArray());
     }
-}
-
-public class XlsxExporter
-{
-
 }

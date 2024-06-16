@@ -29,7 +29,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel>
+                    <WrapPanel Margin="10">
                         <Button Content="{Binding CommandName}" Command="{Binding CommandProcess}" /> <Label Content="{Binding CommandResult}"/>
                     </WrapPanel>
                 </DataTemplate>

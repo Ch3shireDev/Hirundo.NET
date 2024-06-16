@@ -32,7 +32,7 @@ public class Season
     /// <summary>
     ///     Miesiąc, od którego obowiązuje sezon, liczony od 1 (styczeń) do 12 (grudzień).
     /// </summary>
-    public int StartMonth { get; set; }
+    public int StartMonth { get; set; } = 6;
 
     /// <summary>
     ///     Dzień miesiąca, od którego obowiązuje sezon, liczony od 1 do 31.
@@ -42,7 +42,7 @@ public class Season
     /// <summary>
     ///     Miesiąc, do którego obowiązuje sezon, liczony od 1 (styczeń) do 12 (grudzień).
     /// </summary>
-    public int EndMonth { get; set; }
+    public int EndMonth { get; set; } = 9;
 
     /// <summary>
     ///     Dzień miesiąca, do którego obowiązuje sezon, liczony od 1 do 31.

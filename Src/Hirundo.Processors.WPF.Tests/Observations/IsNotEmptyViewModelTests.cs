@@ -1,9 +1,9 @@
 using Hirundo.Commons.Repositories;
+using Hirundo.Processors.Observations;
 using Hirundo.Processors.WPF.Observations.IsNotEmpty;
 using Moq;
-using NUnit.Framework;
 
-namespace Hirundo.Processors.Observations.WPF.Tests;
+namespace Hirundo.Processors.WPF.Tests.Observations;
 
 [TestFixture]
 public class IsNotEmptyViewModelTests

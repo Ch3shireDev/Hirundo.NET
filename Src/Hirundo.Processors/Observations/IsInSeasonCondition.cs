@@ -29,7 +29,7 @@ public class IsInSeasonCondition : IObservationCondition, ISelfExplainer
 
     public string Explain()
     {
-        return $"Wartość daty musi być w sezonie - w zakresie od {Season.StartMonth:D2}.{Season.StartDay:D2} do {Season.EndMonth:D2}.{Season.EndDay:D2}, dowolnego roku.";
+        return $"Wartość daty musi być w sezonie, tj. w zakresie od {Season.StartMonth}.{Season.StartDay:D2} do {Season.EndMonth}.{Season.EndDay:D2} (w formacie miesiac.dzień), dowolnego roku. Obserwacja będzie traktowana jako w sezonie, gdy jej dzień i miesiąc będą większe lub równe {Season.StartMonth}.{Season.StartDay:D2}, oraz mniejsze lub równe {Season.EndMonth}.{Season.EndDay:D2}.";
     }
 
     private bool IsInDateRange(DateTime date)

@@ -67,7 +67,9 @@ public sealed class MainViewModel : ObservableObject
     public ICommand PreviousCommand => new RelayCommand(Previous, CanGoPrevious);
     public ICommand NextCommand => new RelayCommand(Next, CanGoNext);
     public ICommand BreakCommand => new AsyncRelayCommand(BreakAsync, CanBreak);
-    public ICommand ProcessAndSaveCommand => new AsyncRelayCommand(ProcessAndSaveAsync, CanProcessAndSave);
+    public Visibility BreakCommandVisibility => IsProcessing ? Visibility.Visible : Visibility.Collapsed;
+    public ICommand ProcessCommand => new AsyncRelayCommand(ProcessAndSaveAsync, CanProcessAndSave);
+    public Visibility ProcessCommandVisibility => IsProcessing ? Visibility.Collapsed : Visibility.Visible;
     public ICommand SaveCurrentConfigCommand => new RelayCommand(SaveCurrentConfig);
     public ICommand LoadNewConfigCommand => new RelayCommand(LoadNewConfig);
     public ICommand ExportCommand => new AsyncRelayCommand(ExportAsync);
@@ -83,7 +85,7 @@ public sealed class MainViewModel : ObservableObject
             OnPropertyChanged();
             OnPropertyChanged(nameof(PreviousCommand));
             OnPropertyChanged(nameof(NextCommand));
-            OnPropertyChanged(nameof(ProcessAndSaveCommand));
+            OnPropertyChanged(nameof(ProcessCommand));
         }
     }
 
@@ -104,7 +106,10 @@ public sealed class MainViewModel : ObservableObject
             }
 
             OnPropertyChanged();
-            OnPropertyChanged(nameof(ProcessAndSaveCommand));
+            OnPropertyChanged(nameof(ProcessCommand));
+            OnPropertyChanged(nameof(ProcessCommandVisibility));
+            OnPropertyChanged(nameof(BreakCommand));
+            OnPropertyChanged(nameof(BreakCommandVisibility));
         }
     }
 
@@ -166,8 +171,6 @@ public sealed class MainViewModel : ObservableObject
             }
 
             IsProcessing = true;
-            OnPropertyChanged(nameof(ProcessAndSaveCommand));
-            OnPropertyChanged(nameof(BreakCommand));
             _model.IsProcessed = false;
             await _model.RunAsync().ConfigureAwait(false);
             IsProcessing = false;

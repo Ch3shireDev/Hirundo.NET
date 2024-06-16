@@ -9,8 +9,8 @@ namespace Hirundo.Processors.WPF.Tests.Observations;
 public class ConditionsBrowserTests
 {
     private ConditionsBrowser browser = null!;
-    private Mock<ILabelsRepository> labelsRepository = new Mock<ILabelsRepository>();
-    private Mock<ISpeciesRepository> speciesRepository = new Mock<ISpeciesRepository>();
+    private Mock<ILabelsRepository> labelsRepository = null!;
+    private Mock<ISpeciesRepository> speciesRepository = null!;
 
     [SetUp]
     public void SetUp()
