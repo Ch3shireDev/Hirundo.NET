@@ -29,9 +29,16 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel Margin="10">
-                        <Button Content="{Binding CommandName}" Command="{Binding CommandProcess}" /> <TextBlock Text="{Binding CommandResult}" TextWrapping="Wrap" />
-                    </WrapPanel>
+                    <Grid Margin="10" MaxHeight="100">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Content="{Binding CommandName}" Command="{Binding CommandProcess}"  />
+                        <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                            <TextBlock Text="{Binding CommandResult}" TextWrapping="Wrap" />
+                        </ScrollViewer>
+                    </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
