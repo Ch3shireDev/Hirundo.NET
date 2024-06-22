@@ -9,6 +9,8 @@ namespace Hirundo.App;
 
 public class ObservationsProcessor(IDatabaseBuilder databaseBuilder, IComputedValuesCalculatorBuilder computedValuesCalculatorBuilder, IObservationConditionsBuilder observationConditionsBuilder)
 {
+    public bool RequireNonEmptyRing { get; set; }
+
     public ObservationsProcessor() : this(new DatabaseBuilder(), new ComputedValuesCalculatorBuilder(), new ObservationConditionsBuilder())
     {
 
@@ -75,11 +77,16 @@ public class ObservationsProcessor(IDatabaseBuilder databaseBuilder, IComputedVa
             .WithCancellationToken(token)
             .Build();
 
-        var observations = dataSource.GetObservations().ToArray();
+        var observations = dataSource.GetObservations();
+
+        if (RequireNonEmptyRing)
+        {
+            observations = observations.Where(o => !string.IsNullOrWhiteSpace(o.Ring)).ToArray();
+        }
 
         _dataSourceCache = [.. observations.Select(o => o.Copy())];
         _dataSourceHash = dataSourceHash;
 
-        return observations;
+        return [.. observations];
     }
 }

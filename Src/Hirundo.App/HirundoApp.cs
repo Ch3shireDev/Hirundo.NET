@@ -10,7 +10,7 @@ namespace Hirundo.App;
 
 public class HirundoApp : IHirundoApp
 {
-    private readonly ObservationsProcessor observationsProcessor = new();
+    private readonly ObservationsProcessor observationsProcessor = new() { RequireNonEmptyRing = true };
 
     private readonly IPopulationProcessorBuilder _populationProcessorBuilder = new PopulationProcessorBuilder();
     private readonly IReturningSpecimenConditionsBuilder _returningSpecimenConditionsBuilder = new ReturningSpecimenConditionsBuilder();

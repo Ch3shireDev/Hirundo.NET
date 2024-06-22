@@ -173,5 +173,36 @@ namespace Hirundo.App.Tests
                 Assert.That(acceptedValues, Is.EquivalentTo(expectedValues));
             });
         }
+
+        [Test]
+        public void GetObservations_GivenNotEmptyRingRequirement_ReturnsOnlyValidRings()
+        {
+            // Arrange
+            processor.RequireNonEmptyRing = true;
+
+            Observation[] observations1 = [new(["x"], [1]) { Ring = "ABC" }, new(["x"], [2]),];
+            Observation[] observations2 = [new(["y"], [2])];
+            Observation[] observations3 = [new(["z"], [3])];
+
+            var acceptedValues = new List<object?>();
+
+            database.Setup(x => x.GetObservations()).Returns(observations1);
+            calculator.Setup(x => x.Calculate(It.IsAny<Observation[]>())).Returns(observations2);
+            conditions.Setup(x => x.Filter(It.IsAny<Observation[]>())).Returns(observations3);
+
+            // Act
+            var config = new ApplicationParameters();
+            var results = processor.GetObservations(config);
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                database.Verify(x => x.GetObservations(), Times.Once);
+                calculator.Verify(x => x.Calculate(It.IsAny<Observation[]>()), Times.Once);
+                var givenObservations = calculator.Invocations[0].Arguments[0] as Observation[];
+                Assert.That(givenObservations, Has.Length.EqualTo(1));
+                Assert.That(givenObservations![0].Ring, Is.EqualTo("ABC"));
+            });
+        }
     }
 }
