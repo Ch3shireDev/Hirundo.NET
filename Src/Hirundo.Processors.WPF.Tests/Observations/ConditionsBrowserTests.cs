@@ -225,4 +225,120 @@ public class ConditionsBrowserTests
         // Assert
         Assert.That(specimenStatistics.SpecimenWithMostObservations, Is.EqualTo("AB123"));
     }
+
+    [Test]
+    public async Task GetDistinctValues_GivenNoObservations_ReturnsEmptyList()
+    {
+        // Arrange
+        IList<Observation> observations = [];
+
+        observationsSource.Setup(o => o.GetObservations()).Returns(Task.FromResult(observations));
+
+        // Act
+        var distinctValues = await browser.GetDistinctValues();
+
+        // Assert
+        Assert.That(distinctValues, Is.Empty);
+    }
+
+    [Test]
+    public async Task GetDistinctValues_GivenNullList_ReturnsEmptyList()
+    {
+        // Arrange
+        IList<Observation> observations = [];
+
+        observationsSource.Setup(o => o.GetObservations()).Returns(Task.FromResult(observations));
+
+        // Act
+        var distinctValues = await browser.GetDistinctValues();
+
+        // Assert
+        Assert.That(distinctValues, Is.Empty);
+    }
+
+    [Test]
+    public async Task GetDistinctValues_GivenObservations_ShowsDistinctValues()
+    {
+        // Arrange
+        IList<Observation> observations = [
+            new Observation{
+                Ring = "AB123",
+                Date = new DateTime(2021, 06, 01),
+                Species = "REG.REG",
+                Headers = ["DATA"],
+                Values = [1]
+            },
+            new Observation{
+                Ring = "AB123",
+                Date = new DateTime(2021, 06, 01),
+                Species = "REG.REG",
+                Headers = ["DATA"],
+                Values = [2]
+            },
+            new Observation{
+                Ring = "XY222",
+                Date = new DateTime(2021, 06, 01),
+                Species = "REG.REG",
+                Headers = ["DATA"],
+                Values = [2]
+            }
+        ];
+
+        observationsSource.Setup(o => o.GetObservations()).Returns(Task.FromResult(observations));
+
+        // Act
+        var distinctValues = await browser.GetDistinctValues();
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(distinctValues.Count, Is.EqualTo(1));
+            Assert.That(distinctValues[0].Header, Is.EqualTo("DATA"));
+            Assert.That(distinctValues[0].Values, Is.EquivalentTo(new object?[] { 1, 2 }));
+        });
+    }
+
+    [Test]
+    public async Task GetDistinctValues_GivenObservationsWithTwoHeaders_ShowsTwoValuesOfDistinctValues()
+    {
+        // Arrange
+        IList<Observation> observations = [
+            new Observation{
+                Ring = "AB123",
+                Date = new DateTime(2021, 06, 01),
+                Species = "REG.REG",
+                Headers = ["DATA1", "DATA2"],
+                Values = [1,2]
+            },
+            new Observation{
+                Ring = "AB123",
+                Date = new DateTime(2021, 06, 01),
+                Species = "REG.REG",
+                Headers = ["DATA1", "DATA2"],
+                Values = [2,3]
+            },
+            new Observation{
+                Ring = "XY222",
+                Date = new DateTime(2021, 06, 01),
+                Species = "REG.REG",
+                Headers = ["DATA1", "DATA2"],
+                Values = [3,4]
+            }
+        ];
+
+        observationsSource.Setup(o => o.GetObservations()).Returns(Task.FromResult(observations));
+
+        // Act
+        var distinctValues = await browser.GetDistinctValues();
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(distinctValues.Count, Is.EqualTo(2));
+            Assert.That(distinctValues[0].Header, Is.EqualTo("DATA1"));
+            Assert.That(distinctValues[0].Values, Is.EquivalentTo(new object?[] { 1, 2, 3 }));
+            Assert.That(distinctValues[1].Header, Is.EqualTo("DATA2"));
+            Assert.That(distinctValues[1].Values, Is.EquivalentTo(new object?[] { 2, 3, 4 }));
+        });
+    }
 }

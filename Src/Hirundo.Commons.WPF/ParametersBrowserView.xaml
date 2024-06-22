@@ -30,7 +30,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Margin="10">
-                        <Button Content="{Binding CommandName}" Command="{Binding CommandProcess}" /> <Label Content="{Binding CommandResult}"/>
+                        <Button Content="{Binding CommandName}" Command="{Binding CommandProcess}" /> <TextBlock Text="{Binding CommandResult}" TextWrapping="Wrap" />
                     </WrapPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
