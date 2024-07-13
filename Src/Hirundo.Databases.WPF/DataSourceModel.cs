@@ -25,7 +25,7 @@ public class DataSourceModel(ILabelsRepository labelsRepository, ISpeciesReposit
     {
         foreach (var condition in ParametersContainer.Databases)
         {
-            var viewModel = AsParametersViewModel(condition);
+            var viewModel = AsParametersViewModel(condition, ParametersContainer);
             viewModel = AddUpdaterListener(viewModel);
             viewModel = AddRemovedListener(viewModel);
             viewModel = _factory.AddLabelsToViewModel(viewModel, condition);
@@ -46,12 +46,12 @@ public class DataSourceModel(ILabelsRepository labelsRepository, ISpeciesReposit
         return viewModel;
     }
 
-    private ParametersViewModel AsParametersViewModel(IDatabaseParameters parameters)
+    private ParametersViewModel AsParametersViewModel(IDatabaseParameters parameters, DatabaseParameters container)
     {
         return parameters switch
         {
-            AccessDatabaseParameters accessDatabaseParameters => new AccessDataSourceViewModel(new AccessDataSourceModel(accessDatabaseParameters, labelsRepository, speciesRepository), accessMetadataService),
-            ExcelDatabaseParameters xlsxDatabaseParameters => new ExcelDataSourceViewModel(new ExcelDataSourceModel(xlsxDatabaseParameters, labelsRepository, speciesRepository), excelMetadataService),
+            AccessDatabaseParameters accessDatabaseParameters => new AccessDataSourceViewModel(new AccessDataSourceModel(accessDatabaseParameters, labelsRepository, speciesRepository, container), accessMetadataService),
+            ExcelDatabaseParameters xlsxDatabaseParameters => new ExcelDataSourceViewModel(new ExcelDataSourceModel(xlsxDatabaseParameters, labelsRepository, speciesRepository, container), excelMetadataService),
             _ => throw new NotImplementedException()
         };
     }

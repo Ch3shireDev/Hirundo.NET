@@ -153,8 +153,42 @@ public class AccessDataSourceViewModel(AccessDataSourceModel model, IAccessMetad
     public void AddColumn()
     {
         var newColumnMapping = new ColumnParameters();
+
+        if (!IsFirstDataSource())
+        {
+            var index = model.Columns.Count;
+            newColumnMapping.ValueName = GetValueName(index);
+            newColumnMapping.DataType = GetDataType(index);
+        }
+
+
         model.Columns.Add(newColumnMapping);
         Columns.Add(newColumnMapping);
+    }
+
+    private bool IsFirstDataSource()
+    {
+        if (model.Parameters is IDatabaseParameters dbParameters)
+        {
+            return model.Container.Databases.IndexOf(dbParameters) == 0;
+        }
+        return true;
+    }
+
+    private string GetValueName(int index)
+    {
+        if (model.Container.Databases.Count == 0) return string.Empty;
+        var firstColumn = model.Container.Databases[0];
+        if (firstColumn.Columns.Count <= index) return string.Empty;
+        return firstColumn.Columns[index].ValueName;
+    }
+
+    private DataType GetDataType(int index)
+    {
+        if (model.Container.Databases.Count == 0) return DataType.Text;
+        var firstColumn = model.Container.Databases[0];
+        if (firstColumn.Columns.Count <= index) return DataType.Text;
+        return firstColumn.Columns[index].DataType;
     }
 
     public void RemoveColumn()

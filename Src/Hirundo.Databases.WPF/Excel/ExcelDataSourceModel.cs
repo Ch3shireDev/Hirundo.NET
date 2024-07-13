@@ -3,9 +3,11 @@ using Hirundo.Commons.WPF;
 
 namespace Hirundo.Databases.WPF.Excel;
 
-public class ExcelDataSourceModel(ExcelDatabaseParameters parameters, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository)
+public class ExcelDataSourceModel(ExcelDatabaseParameters parameters, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository, DatabaseParameters container)
     : ParametersModel(parameters, labelsRepository, speciesRepository)
 {
+    public DatabaseParameters Container => container;
+
     public string Path
     {
         get => parameters.Path;

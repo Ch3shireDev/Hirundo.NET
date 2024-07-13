@@ -27,7 +27,12 @@ public class ExcelDataSourceViewModelTests
         _labelsRepository = new Mock<ILabelsRepository>();
         _speciesRepository = new Mock<ISpeciesRepository>();
 
-        _model = new ExcelDataSourceModel(_parameters, _labelsRepository.Object, _speciesRepository.Object);
+        var container = new DatabaseParameters
+        {
+            Databases = [_parameters]
+        };
+
+        _model = new ExcelDataSourceModel(_parameters, _labelsRepository.Object, _speciesRepository.Object, container);
         _viewModel = new ExcelDataSourceViewModel(_model, _metadataLoader.Object);
     }
 

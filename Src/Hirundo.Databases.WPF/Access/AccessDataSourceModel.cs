@@ -4,9 +4,11 @@ using Hirundo.Databases.Conditions;
 
 namespace Hirundo.Databases.WPF.Access;
 
-public class AccessDataSourceModel(AccessDatabaseParameters parameters, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository)
+public class AccessDataSourceModel(AccessDatabaseParameters parameters, ILabelsRepository labelsRepository, ISpeciesRepository speciesRepository, DatabaseParameters container)
     : ParametersModel(parameters, labelsRepository, speciesRepository)
 {
+    public DatabaseParameters Container => container;
+
     public string Path
     {
         get => parameters.Path;
