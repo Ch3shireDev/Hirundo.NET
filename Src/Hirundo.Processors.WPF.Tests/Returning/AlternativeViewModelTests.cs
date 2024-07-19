@@ -183,4 +183,35 @@ public class AlternativeViewModelTests
             Assert.That(secondCondition.Value, Is.EqualTo(456));
         });
     }
+
+    [Test]
+    public void GivenEmptyConditions_WhenSetFirstCondition_ThenFirstConditionIsSet()
+    {
+        // Arrange
+        _condition.Conditions.Clear();
+
+        var isGreaterParameter = _viewModel.Options.First(o => o.ConditionType == typeof(IsGreaterThanReturningCondition));
+
+        // Act
+        _viewModel.FirstParameter = isGreaterParameter;
+
+        // Assert
+        Assert.That(_condition.Conditions, Has.Count.EqualTo(1));
+        Assert.That(_condition.Conditions[0], Is.InstanceOf<IsGreaterThanReturningCondition>());
+    }
+    [Test]
+    public void GivenEmptyConditions_WhenSetSecondCondition_ThenFirstConditionIsSet()
+    {
+        // Arrange
+        _condition.Conditions.Clear();
+
+        var isGreaterParameter = _viewModel.Options.First(o => o.ConditionType == typeof(IsGreaterThanReturningCondition));
+
+        // Act
+        _viewModel.SecondParameter = isGreaterParameter;
+
+        // Assert
+        Assert.That(_condition.Conditions, Has.Count.EqualTo(1));
+        Assert.That(_condition.Conditions[0], Is.InstanceOf<IsGreaterThanReturningCondition>());
+    }
 }

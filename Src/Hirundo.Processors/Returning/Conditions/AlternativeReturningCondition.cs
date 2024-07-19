@@ -26,7 +26,7 @@ public class AlternativeReturningCondition : IReturningSpecimenCondition, ISelfE
     {
     }
 
-    public IList<IReturningSpecimenCondition> Conditions { get; } = [];
+    public IList<IReturningSpecimenCondition> Conditions { get; init; } = [];
 
     public bool IsReturning(Specimen specimen)
     {

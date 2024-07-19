@@ -19,8 +19,10 @@ public class AlternativeViewModel(AlternativeModel model) : ParametersViewModel(
         set
         {
             model.FirstParameter = value;
-            OnPropertyChanged();
+            OnPropertyChanged(nameof(FirstParameter));
+            OnPropertyChanged(nameof(SecondParameter));
             OnPropertyChanged(nameof(FirstViewModel));
+            OnPropertyChanged(nameof(SecondViewModel));
         }
     }
 
@@ -32,7 +34,9 @@ public class AlternativeViewModel(AlternativeModel model) : ParametersViewModel(
         set
         {
             model.SecondParameter = value;
-            OnPropertyChanged();
+            OnPropertyChanged(nameof(FirstParameter));
+            OnPropertyChanged(nameof(SecondParameter));
+            OnPropertyChanged(nameof(FirstViewModel));
             OnPropertyChanged(nameof(SecondViewModel));
         }
     }
