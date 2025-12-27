@@ -4,5 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d">
-    <Grid />
+    <StackPanel>
+        <WrapPanel>
+            <Label>Miesiąc początkowy</Label>
+            <TextBox Text="{Binding MonthFrom}" MinWidth="100" />
+        </WrapPanel>
+        <WrapPanel>
+            <Label>Dzień początkowy</Label>
+            <TextBox Text="{Binding DayFrom}" MinWidth="100" />
+        </WrapPanel>
+        <WrapPanel>
+            <Label>Miesiąc końcowy</Label>
+            <TextBox Text="{Binding MonthTo}" MinWidth="100" />
+        </WrapPanel>
+        <WrapPanel>
+            <Label>Dzień końcowy</Label>
+            <TextBox Text="{Binding DayTo}" MinWidth="100" />
+        </WrapPanel>
+    </StackPanel>
 </UserControl>
