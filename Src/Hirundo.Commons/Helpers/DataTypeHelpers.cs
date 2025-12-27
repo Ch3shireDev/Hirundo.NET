@@ -27,8 +27,8 @@ public static class ComparisonHelpers
 
     public static bool IsLowerOrEqual(object? value1, object? value2)
     {
-        if (DataTypeHelpers.IsGreaterThanNumeric(value1, value2)) return true;
-        if (DataTypeHelpers.IsGreaterThanDate(value1, value2)) return true;
+        if (DataTypeHelpers.IsLowerThanNumeric(value1, value2)) return true;
+        if (DataTypeHelpers.IsLowerThanDate(value1, value2)) return true;
         if (DataTypeHelpers.IsSoftEqual(value1, value2)) return true;
         return false;
     }

@@ -22,7 +22,7 @@ public class IsPopulationInDateRangeCondition : IPopulationCondition, ISelfExpla
             ComparisonHelpers.IsGreaterOrEqual(specimen.Observations[0].Date.Month, MonthFrom) && 
             ComparisonHelpers.IsGreaterOrEqual(specimen.Observations[0].Date.Day, DayFrom) && 
             ComparisonHelpers.IsLowerOrEqual(specimen.Observations[0].Date.Month, MonthTo) && 
-            ComparisonHelpers.IsLowerOrEqual(specimen.Observations[0].Date.Month, DayTo) 
+            ComparisonHelpers.IsLowerOrEqual(specimen.Observations[0].Date.Day, DayTo) 
         );
     }
 
